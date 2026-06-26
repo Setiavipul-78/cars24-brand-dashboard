@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="en"><head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /></meta></head><body><style>
+                    @font-face {
+                        font-family: &#x27;Conv_montefiore-condensed-bold&#x27;;
+                        src: url(&#x27;https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap); /* IE9 Compat Modes */
+                        src: url(&#x27;https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap&#x27;), /* Pretty Modern Browsers */
+                             url(&#x27;https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap&#x27;), /* Safari, Android, iOS */
+                             url(&#x27;https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap&#x27;); /* Legacy iOS */
+                      }
+                    .c24-errorWrap {
+                        padding-top: 43px;
+                        height: 100vh;
+                        width: 100%;
+                        text-align: center;
+                    }
+                    .c24-logoImage {
+                        display: block;
+                        margin-bottom: 11px;
+                        text-align: left;
+                        padding-left: 44px;
+                    }
+                    .c24-logoImage img {
+                        width: 106px;
+                        height: 48px;
+                    }
+                    .c24-errorTitle {
+                        font-size: 46px;
+                        font-weight: bold;
+                        line-height: 55px;
+                        letter-spacing: 3px;
+                        text-transform: uppercase;
+                        color: #0061a8;
+                        margin: 0 0 10px;
+                    }
+                    .c24-errorPara {
+                        font-size: 16px;
+                        font-weight: 500;
+                        line-height: 22px;
+                        color: #b8c0cc;
+                        margin-bottom: 38px;
+                        padding: 0 16px;
+                    }
+                    .c24-errorPara span {
+                        display: block;
+                    }
+                    .c24-graphic {
+                        width: 100%;
+                    }
+                    .c24-errorLastText {
+                        font-size: 16px;
+                        line-height: 21px;
+                        color: #465166;
+                        padding: 0 16px;
+                    }
+                    .c24-errorLastText a {
+                        color: #ed6c0d;
+                        text-decoration: none;
+                        outline: none;
+                    }
+
+                    @media only screen and (max-width: 767px) {
+                        .c24-errorWrap {
+                            padding-top: 24px;
+                            text-align: center;
+                        }
+                        .c24-logoImage {
+                            padding-left: 16px;
+                            margin-bottom: 40px;
+                        }
+                        .c24-logoImage img {
+                            width: 84px;
+                            height: auto;
+                        }
+                        .c24-errorTitle {
+                            font-size: 24px;
+                            line-height: 35px;
+                            letter-spacing: 1px;
+                        }
+                        .c24-errorPara {
+                            font-size: 14px;
+                            line-height: 19px;
+                            margin-bottom: 24px;
+                        }
+                        .c24-errorPara span {
+                            display: inline;
+                        }
+                        .c24-graphic {
+                            margin-bottom: 24px;
+                        }
+                        .c24-errorLastText {
+                            font-size: 14px;
+                            line-height: 19px;
+                        }
+                    }</style><div class="c24-errorWrap" style="font-family:Roboto,sans-serif"><span class="c24-logoImage"><img width="80" height="39" style="width:80;height:39" src="https://static-cdn.cars24.com/prod/cms/2026/01/22/244d7828-5929-4f98-a068-7b2113c83339blue-brand-logo.svg" alt="Cars24"/></span><h1 class="c24-errorTitle">We&#x27;ll be right back!</h1><p class="c24-errorPara">Unfortunately, the site is down for a bit of maintenance right now. <span>But soon we&#x27;ll be up and running again.</span></p><img class="c24-graphic" src="https://assets.cars24.com/production/c2b-website/260513105520/js/60a121db3ae8bf9226da107b98611e36.svg"/><p class="c24-errorLastText">Need Help?<a href="tel:1800 258 5656"> 1800 258 5656</a> (9 AM to 9 PM)</p></div><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"ac1a6c609dcd497e9e71fe29cb2e7fa5","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body></html>
