@@ -3,189 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cars24 · Brand Key Metrics</title>
+<title>Cars24 &#183; Brand tracker</title>
 <link rel="icon" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
-/* ── Reset & Tokens ──────────────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --blue:#4736FE; --blue-lt:#EEF0FF; --blue-dk:#2B2098;
-  --green:#00C951; --red:#FB2C36; --orange:#FF4F01;
-  --grey:#6B7280; --black:#020618; --bg:#F4F3FF;
-  --border:#E3E1FF; --card:#FFFFFF; --shadow:0 1px 4px rgba(0,0,0,.07);
+  --blue:#4736FE; --blue-dk:#2B2098; --blue-lt:#EEF0FF; --light:#E3E1FF;
+  --mint:#63FFB1; --orange:#FF4F01; --ink:#020618;
+  --green:#00A63E; --red:#E7000B; --grey:#6B7280; --grey-2:#9AA0AB;
+  --bg:#F6F6FB; --border:#E7E5F4; --border-2:#EFEDF8; --card:#FFFFFF;
+  --shadow:0 1px 2px rgba(16,12,60,.05),0 1px 3px rgba(16,12,60,.04);
   --spinny:#E91E8C; --carwale:#FF6B6B; --cardekho:#FFA500;
-  --mfc:#9B59B6; --mtv:#2ECC71; --olx:#3498DB;
-  --r:12px; --font:'Inter',system-ui,sans-serif;
+  --r:14px; --font:'Geist','Inter',system-ui,-apple-system,sans-serif;
 }
-body{font-family:var(--font);background:var(--bg);color:var(--black);font-size:14px;line-height:1.5;min-height:100vh}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased}
 a{color:var(--blue);text-decoration:none}
 table{border-collapse:collapse;width:100%}
 th,td{text-align:left;padding:9px 12px;font-size:13px}
-
-/* ── Header ──────────────────────────────────────────────────────────────── */
-.site-header{background:linear-gradient(135deg,#020618 0%,#1D1160 100%);padding:0 32px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
-.site-header .inner{max-width:1400px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between}
-.logo-wrap{display:flex;align-items:center;gap:12px}
-.logo-wrap img{height:22px;filter:brightness(0) invert(1)}
-.site-title{color:rgba(255,255,255,.85);font-size:15px;font-weight:600;letter-spacing:.3px}
-.title-sep{color:rgba(255,255,255,.3);font-size:18px}
-.freshness{font-size:11px;color:rgba(255,255,255,.45);font-variant-numeric:tabular-nums}
-
-/* ── Layout ──────────────────────────────────────────────────────────────── */
-.dashboard{max-width:1400px;margin:0 auto;padding:24px 32px 48px}
-
-/* ── Tabs ────────────────────────────────────────────────────────────────── */
-.tab-nav{display:flex;gap:2px;border-bottom:2px solid var(--border);margin-bottom:20px;overflow-x:auto;scrollbar-width:none}
-.tab-nav::-webkit-scrollbar{display:none}
-.tab-btn{background:none;border:none;padding:10px 16px;font:500 13px/1 var(--font);color:var(--grey);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-2px;border-radius:6px 6px 0 0;transition:color .15s,border-color .15s}
-.tab-btn:hover{color:var(--black);background:var(--blue-lt)}
-.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:700}
-.ctab-pane,.mtab-pane{display:none}
-.ctab-pane.active,.mtab-pane.active{display:block}
-
-/* ── Cards ───────────────────────────────────────────────────────────────── */
-.card{background:var(--card);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow);padding:20px 24px;margin-bottom:16px}
+.site-header{background:var(--card);border-bottom:1px solid var(--border);padding:0 28px;position:sticky;top:0;z-index:100}
+.site-header .inner{max-width:1360px;margin:0 auto;height:60px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .mark{width:32px;height:32px;display:block}
+.brand .title{font-size:15px;font-weight:600;color:var(--ink);letter-spacing:-.1px}
+.brand .title b{font-weight:700}
+.brand .sub{font-size:12px;color:var(--grey-2);font-weight:500}
+.freshness{font-size:12px;color:var(--grey-2);font-variant-numeric:tabular-nums;font-weight:500}
+.wrap{max-width:1360px;margin:0 auto;padding:22px 28px 56px}
+.seg{display:inline-flex;background:var(--card);border:1px solid var(--border);border-radius:30px;padding:4px;gap:2px;margin-bottom:22px;box-shadow:var(--shadow)}
+.seg-btn{border:none;background:none;padding:9px 22px;border-radius:24px;font:600 14px/1 var(--font);color:var(--grey);cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .15s,color .15s}
+.seg-btn .flag{font-size:15px;line-height:1}
+.seg-btn:not(.active):hover{color:var(--ink);background:var(--blue-lt)}
+.seg-btn.active{background:var(--blue);color:#fff;box-shadow:0 1px 3px rgba(71,54,254,.35)}
+.country{display:none}.country.active{display:block}
+.tabset{display:block}
+.tabs{display:flex;gap:1px;border-bottom:1px solid var(--border);margin-bottom:20px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{background:none;border:none;padding:11px 16px;font:600 13.5px/1 var(--font);color:var(--grey);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s;border-radius:6px 6px 0 0}
+.tab:hover{color:var(--ink)}
+.tab.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:700}
+.tabs.pills{border-bottom:none;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.tabs.pills .tab{background:var(--blue-lt);border-radius:24px;padding:7px 15px;color:var(--blue);border:none;margin:0;font-size:12.5px;font-weight:600}
+.tabs.pills .tab:hover:not(.active){background:var(--light);color:var(--blue-dk)}
+.tabs.pills .tab.active{background:var(--blue);color:#fff}
+.tabpane{display:none}.tabpane.active{display:block}
+.card{background:var(--card);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow);padding:20px 22px;margin-bottom:16px}
 .card-grid{display:grid;gap:14px;margin-bottom:16px}
 .card-grid.col3{grid-template-columns:repeat(3,1fr)}
 .card-grid.col4{grid-template-columns:repeat(4,1fr)}
 .card-grid.col2{grid-template-columns:repeat(2,1fr)}
 @media(max-width:900px){.card-grid.col3,.card-grid.col4{grid-template-columns:1fr 1fr}.card-grid.col2{grid-template-columns:1fr}}
 @media(max-width:600px){.card-grid.col3,.card-grid.col4,.card-grid.col2{grid-template-columns:1fr}}
-
-/* ── Overview Strip ──────────────────────────────────────────────────────── */
-.overview-strip{background:linear-gradient(135deg,#020618 0%,#1D1160 100%);border-radius:var(--r);padding:20px 24px;margin-bottom:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:0}
-.ov-metric{padding:0 24px;border-right:1px solid rgba(255,255,255,.12)}
+.overview-strip{background:linear-gradient(120deg,#2B2098 0%,#4736FE 100%);border-radius:var(--r);padding:20px 24px;margin-bottom:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:0;box-shadow:0 6px 20px rgba(43,32,152,.22)}
+.ov-metric{padding:0 26px;border-right:1px solid rgba(255,255,255,.14)}
 .ov-metric:first-child{padding-left:0}
 .ov-metric:last-child{border-right:none}
-.ov-label{font-size:11px;font-weight:600;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
-.ov-value{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.5px;line-height:1.1}
-.ov-sub{font-size:12px;color:rgba(255,255,255,.45);margin-top:2px}
-
-/* ── KPI Cards ───────────────────────────────────────────────────────────── */
-.kpi{padding:18px 20px}
-.kpi-label{font-size:11px;font-weight:600;color:var(--grey);text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px}
-.kpi-value{font-size:24px;font-weight:800;color:var(--black);line-height:1.1;margin-bottom:4px}
+.ov-label{font-size:11px;font-weight:600;color:rgba(255,255,255,.62);text-transform:uppercase;letter-spacing:.7px;margin-bottom:7px}
+.ov-value{font-size:27px;font-weight:800;color:#fff;letter-spacing:-.6px;line-height:1.05}
+.ov-sub{font-size:12px;color:rgba(255,255,255,.55);margin-top:5px}
+@media(max-width:600px){.overview-strip{grid-template-columns:1fr;gap:14px}.ov-metric{border-right:none;border-bottom:1px solid rgba(255,255,255,.14);padding:0 0 12px}.ov-metric:last-child{border-bottom:none;padding-bottom:0}}
+.kpi{padding:17px 19px}
+.kpi-label{font-size:11px;font-weight:600;color:var(--grey);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+.kpi-value{font-size:23px;font-weight:800;color:var(--ink);line-height:1.05;margin-bottom:4px;letter-spacing:-.4px}
 .kpi-sub{font-size:12px;color:var(--grey)}
-
-/* ── Badges ──────────────────────────────────────────────────────────────── */
-.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;vertical-align:middle}
+.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;vertical-align:middle}
 .badge-up{background:#DCFCE7;color:#15803D}
 .badge-down{background:#FEE2E2;color:#B91C1C}
-.badge-flat{background:#F3F4F6;color:var(--grey)}
-
-/* ── Section header ──────────────────────────────────────────────────────── */
+.badge-flat{background:#F1F0F7;color:var(--grey)}
 .sec-hdr{margin-bottom:16px}
-.sec-kicker{font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:2px}
-.sec-title{font-size:17px;font-weight:700;color:var(--black)}
-
-/* ── Data table ──────────────────────────────────────────────────────────── */
+.sec-kicker{font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:3px}
+.sec-title{font-size:16px;font-weight:700;color:var(--ink);letter-spacing:-.2px}
 .data-table{width:100%;border-collapse:collapse;font-size:13px}
-.data-table thead th{background:#F8F8FC;font-size:11px;font-weight:700;color:var(--grey);text-transform:uppercase;letter-spacing:.6px;padding:8px 12px;border-bottom:2px solid var(--border);white-space:nowrap;position:sticky;top:0}
-.data-table tbody tr{border-bottom:1px solid var(--border)}
-.data-table tbody tr:hover{background:#FAFAFE}
-.data-table tbody td{padding:8px 12px;vertical-align:middle}
+.data-table thead th{background:#FAFAFE;font-size:11px;font-weight:700;color:var(--grey);text-transform:uppercase;letter-spacing:.5px;padding:9px 12px;border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0}
+.data-table tbody tr{border-bottom:1px solid var(--border-2)}
+.data-table tbody tr:hover{background:#FBFBFE}
+.data-table tbody td{padding:9px 12px;vertical-align:middle}
 .data-table .c24-col{background:#F5F4FF;font-weight:700;color:var(--blue)}
 .data-table .latest-row td{background:#EEF0FF}
 .data-table .num{text-align:right;font-variant-numeric:tabular-nums}
-.tbl-wrap{max-height:440px;overflow-y:auto;border-radius:8px;border:1px solid var(--border)}
-
-/* ── Hero Banner (Tab 3) ─────────────────────────────────────────────────── */
-.sos-hero{background:linear-gradient(135deg,#020618 0%,#1D1160 100%);border-radius:var(--r);padding:28px 32px;margin-bottom:16px;color:#fff}
-.sos-hero-eyebrow{font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-.sos-hero-value{font-size:64px;font-weight:800;color:#fff;line-height:1;letter-spacing:-2px;margin-bottom:8px}
-.sos-hero-text{font-size:15px;color:rgba(255,255,255,.7);max-width:560px;line-height:1.6;margin-bottom:14px}
-.sos-hero-text strong{color:rgba(255,255,255,.9)}
-
-/* ── Chart wrapper ───────────────────────────────────────────────────────── */
+.tbl-wrap{max-height:440px;overflow-y:auto;border-radius:10px;border:1px solid var(--border)}
+.sos-hero{background:linear-gradient(120deg,#2B2098 0%,#4736FE 100%);border-radius:var(--r);padding:28px 30px;margin-bottom:16px;color:#fff;box-shadow:0 6px 20px rgba(43,32,152,.22)}
+.sos-hero-eyebrow{font-size:11px;font-weight:700;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.sos-hero-value{font-size:62px;font-weight:800;color:#fff;line-height:1;letter-spacing:-2px;margin-bottom:8px}
+.sos-hero-text{font-size:14.5px;color:rgba(255,255,255,.72);max-width:580px;line-height:1.6;margin-bottom:14px}
+.sos-hero-text strong{color:#fff}
 .chart-wrap{position:relative;height:280px}
 .chart-wrap.tall{height:340px}
-
-/* ── Placeholder ─────────────────────────────────────────────────────────── */
-.placeholder{background:#F8F8FC;border:2px dashed var(--border);border-radius:var(--r);padding:40px 32px;text-align:center;color:var(--grey)}
-.placeholder-icon{font-size:36px;margin-bottom:12px}
-.placeholder-title{font-size:16px;font-weight:700;color:#374151;margin-bottom:8px}
-.placeholder-body{font-size:13px;line-height:1.7;max-width:480px;margin:0 auto}
-.data-note{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-top:12px;text-align:left}
-.data-note-title{font-size:13px;font-weight:700;color:#374151;margin-bottom:8px}
-.data-note ul{font-size:12px;color:var(--grey);line-height:2;padding-left:18px}
-
-/* ── Rank chip ───────────────────────────────────────────────────────────── */
+.placeholder{background:#FBFBFE;border:1.5px dashed var(--border);border-radius:var(--r);padding:38px 32px;text-align:center;color:var(--grey)}
+.ph-mark{width:42px;height:42px;border-radius:12px;background:var(--blue-lt);color:var(--blue);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.ph-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:7px}
+.ph-body{font-size:13px;line-height:1.65;max-width:480px;margin:0 auto;color:var(--grey)}
+.data-note{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:15px 18px;margin:14px auto 0;text-align:left;max-width:520px}
+.data-note-title{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.data-note ul{font-size:12px;color:var(--grey);line-height:1.95;padding-left:18px}
 .rank-chip{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
-
-/* ── Trend cell ──────────────────────────────────────────────────────────── */
 .trend-up{color:var(--green);font-weight:700}
 .trend-dn{color:var(--red);font-weight:700}
 .trend-flat{color:var(--grey)}
-
-/* ── City deep-dive selectors ────────────────────────────────────────────── */
 .controls{display:flex;gap:12px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
-.controls select{padding:7px 12px;border:1px solid var(--border);border-radius:8px;font:14px var(--font);color:var(--black);background:#fff;cursor:pointer;outline:none}
+.controls select{padding:8px 12px;border:1px solid var(--border);border-radius:9px;font:14px var(--font);color:var(--ink);background:#fff;cursor:pointer;outline:none}
 .controls select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(71,54,254,.15)}
-.controls label{font-size:12px;font-weight:600;color:var(--grey);text-transform:uppercase;letter-spacing:.6px}
-
-/* ── Tab 2 Donut ─────────────────────────────────────────────────────────── */
+.controls label{font-size:12px;font-weight:600;color:var(--grey);text-transform:uppercase;letter-spacing:.5px}
 .donut-wrap{position:relative;height:220px}
-
-/* ── Scrollable inner tabs (city sub-tabs etc) ───────────────────────────── */
-.inner-tab-nav{display:flex;gap:4px;margin-bottom:12px}
-.inner-tab-btn{background:var(--blue-lt);border:none;padding:6px 14px;border-radius:20px;font:600 12px var(--font);color:var(--blue);cursor:pointer;transition:background .15s,color .15s}
-.inner-tab-btn.active{background:var(--blue);color:#fff}
-.inner-tab-pane{display:none}
-.inner-tab-pane.active{display:block}
 </style>
 </head>
 <body>
-
 <header class="site-header">
   <div class="inner">
-    <div class="logo-wrap">
-      <img src="assets/cars24-logo-white.png" alt="Cars24">
-      <span class="title-sep">·</span>
-      <span class="site-title">Brand Key Metrics</span>
+    <div class="brand">
+      <span class="mark"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Cars24">
+        <rect width="100" height="100" rx="26" fill="#4736FE"/>
+        <path d="M70 31 A27 27 0 1 0 70 69" fill="none" stroke="#fff" stroke-width="13" stroke-linecap="round"/>
+      </svg></span>
+      <span class="title"><b>Cars24</b> &nbsp;&#183;&nbsp; Brand tracker</span>
+      <span class="sub">India &#183; Australia &#183; UAE</span>
     </div>
     <div class="freshness" id="freshness"></div>
   </div>
 </header>
 
-<main class="dashboard">
-
-  <!-- ── Country / Channel tabs ────────────────────────────────────────── -->
-  <div class="tab-nav" id="ctab-nav">
-    <button class="tab-btn active" data-ctab="india">🇮🇳&nbsp; India</button>
-    <button class="tab-btn" data-ctab="au">🇦🇺&nbsp; Australia</button>
-    <button class="tab-btn" data-ctab="uae">🇦🇪&nbsp; UAE</button>
-    <button class="tab-btn" data-ctab="yt">📺&nbsp; YouTube</button>
-    <button class="tab-btn" data-ctab="ig">📸&nbsp; Instagram</button>
-    <button class="tab-btn" data-ctab="inf">👥&nbsp; Influencers</button>
-    <button class="tab-btn" data-ctab="li">💼&nbsp; LinkedIn</button>
+<main class="wrap">
+  <div class="seg" role="tablist" aria-label="Country">
+    <button class="seg-btn active" data-seg="india"><span class="flag">&#127470;&#127475;</span> India</button>
+    <button class="seg-btn" data-seg="au"><span class="flag">&#127462;&#127482;</span> Australia</button>
+    <button class="seg-btn" data-seg="uae"><span class="flag">&#127462;&#127466;</span> UAE</button>
   </div>
-
-  <!-- ══════════════════════════════════════════════════════════════════════
-       INDIA
-  ══════════════════════════════════════════════════════════════════════════ -->
-  <div class="ctab-pane active" id="c-india">
-
-    <!-- Overview strip -->
+<div class="country active" id="country-india"><!-- Overview strip -->
     <div class="overview-strip" id="overview-strip">
       <div class="ov-metric"><div class="ov-label">Brand Search Impressions</div><div class="ov-value" id="ov-imp">—</div><div class="ov-sub" id="ov-imp-sub"></div></div>
       <div class="ov-metric"><div class="ov-label">Cars24 Share of Searches</div><div class="ov-value" id="ov-sos">—</div><div class="ov-sub" id="ov-sos-sub"></div></div>
       <div class="ov-metric"><div class="ov-label">Cars24 vs Spinny SoS</div><div class="ov-value" id="ov-ratio">—</div><div class="ov-sub" id="ov-ratio-sub"></div></div>
     </div>
 
-    <!-- Metric sub-tabs -->
-    <div class="tab-nav" id="mtab-nav">
-      <button class="tab-btn active" data-mtab="search">📊&nbsp; Search Impressions</button>
-      <button class="tab-btn" data-mtab="keywords">🔑&nbsp; Keywords</button>
-      <button class="tab-btn" data-mtab="bsos">🆚&nbsp; Share of Searches</button>
-      <button class="tab-btn" data-mtab="indexed">📡&nbsp; Google Indexed</button>
-      <button class="tab-btn" data-mtab="impsos">📈&nbsp; Impressions × SoS</button>
-    </div>
-
-    <!-- ── Tab 1: Search Impressions ──────────────────────────────────── -->
-    <div class="mtab-pane active" id="m-search">
+    <div class="tabset"><nav class="tabs"><button class="tab active" data-target="m-search">Brand search impressions</button><button class="tab" data-target="m-keywords" data-lazy="keywords">Keyword impressions volume</button><button class="tab" data-target="m-bsos" data-lazy="bsos">Brand share of searches</button><button class="tab" data-target="m-indexed" data-lazy="indexed">Google indexed data</button><button class="tab" data-target="m-impsos" data-lazy="impsos">Impressions vs SoS vs indexed</button><button class="tab" data-target="in-inf">Influencers</button><button class="tab" data-target="in-yt">YouTube</button><button class="tab" data-target="in-ig">Instagram</button><button class="tab" data-target="in-li">LinkedIn</button></nav><div class="tabpanes"><section class="tabpane active" id="m-search"><!-- ── Tab 1: Search Impressions ──────────────────────────────────── -->
+    <div class="tabpane active" id="m-search">
       <div class="card-grid col3" id="imp-kpis"></div>
       <div class="card">
         <div class="sec-hdr"><span class="sec-kicker">Monthly trend</span><span class="sec-title">Brand Search Impressions</span></div>
@@ -202,8 +156,8 @@ th,td{text-align:left;padding:9px 12px;font-size:13px}
       </div>
     </div>
 
-    <!-- ── Tab 2: Keywords ────────────────────────────────────────────── -->
-    <div class="mtab-pane" id="m-keywords">
+    </section><section class="tabpane" id="m-keywords"><!-- ── Tab 2: Keywords ────────────────────────────────────────────── -->
+    <div class="tabpane" id="m-keywords">
       <div class="card">
         <div class="sec-hdr"><span class="sec-kicker">Monthly</span><span class="sec-title">Keyword Search Volume</span></div>
         <div class="tbl-wrap" id="tbl-kw-monthly"></div>
@@ -224,8 +178,8 @@ th,td{text-align:left;padding:9px 12px;font-size:13px}
       </div>
     </div>
 
-    <!-- ── Tab 3: Share of Searches ───────────────────────────────────── -->
-    <div class="mtab-pane" id="m-bsos">
+    </section><section class="tabpane" id="m-bsos"><!-- ── Tab 3: Share of Searches ───────────────────────────────────── -->
+    <div class="tabpane active" id="m-bsos">
       <!-- Hero -->
       <div class="sos-hero">
         <div class="sos-hero-eyebrow">Cars24 · Share of Searches · All-India</div>
@@ -272,140 +226,20 @@ th,td{text-align:left;padding:9px 12px;font-size:13px}
       </div>
     </div>
 
-    <!-- ── Tab 4: Google Indexed ───────────────────────────────────────── -->
-    <div class="mtab-pane" id="m-indexed">
+    </section><section class="tabpane" id="m-indexed"><!-- ── Tab 4: Google Indexed ───────────────────────────────────────── -->
+    <div class="tabpane" id="m-indexed">
       <div id="indexed-content"></div>
     </div>
 
-    <!-- ── Tab 5: Impressions × SoS ───────────────────────────────────── -->
-    <div class="mtab-pane" id="m-impsos">
+    </section><section class="tabpane" id="m-impsos"><!-- ── Tab 5: Impressions × SoS ───────────────────────────────────── -->
+    <div class="tabpane" id="m-impsos">
       <div id="impsos-content"></div>
     </div>
 
-  </div><!-- /c-india -->
-
-  <!-- ══════════════════════════════════════════════════════════════════════
-       AUSTRALIA
-  ══════════════════════════════════════════════════════════════════════════ -->
-  <div class="ctab-pane" id="c-au">
-    <div class="tab-nav">
-      <button class="tab-btn active" data-itab="au-search">📊&nbsp; Search Impressions</button>
-      <button class="tab-btn" data-itab="au-bsos">🆚&nbsp; Share of Searches</button>
-      <button class="tab-btn" data-itab="au-city">🏙&nbsp; City Level</button>
-    </div>
-    <div class="inner-tab-pane active" id="i-au-search">
-      <div class="placeholder"><div class="placeholder-icon">📂</div><div class="placeholder-title">Australia · Search Impressions</div><div class="placeholder-body">Share AU Google Search Console export to populate.<br>Metrics: monthly impressions, MoM growth, top keywords.</div></div>
-    </div>
-    <div class="inner-tab-pane" id="i-au-bsos">
-      <div class="placeholder"><div class="placeholder-icon">📂</div><div class="placeholder-title">Australia · Share of Searches</div><div class="placeholder-body">Share AU Brandstack BSOS data to populate.<br>Metrics: Cars24 SoS% vs Carsales, Drive, MoM trend.</div></div>
-    </div>
-    <div class="inner-tab-pane" id="i-au-city">
-      <div class="placeholder"><div class="placeholder-icon">📂</div><div class="placeholder-title">Australia · City Level</div><div class="placeholder-body">Share AU city-level BSOS data (Sydney, Melbourne, Brisbane…) to populate.</div></div>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════════════════════════
-       UAE
-  ══════════════════════════════════════════════════════════════════════════ -->
-  <div class="ctab-pane" id="c-uae">
-    <div class="tab-nav">
-      <button class="tab-btn active" data-itab="uae-search">📊&nbsp; Search Impressions</button>
-      <button class="tab-btn" data-itab="uae-bsos">🆚&nbsp; Share of Searches</button>
-      <button class="tab-btn" data-itab="uae-city">🏙&nbsp; City Level</button>
-    </div>
-    <div class="inner-tab-pane active" id="i-uae-search">
-      <div class="placeholder"><div class="placeholder-icon">📂</div><div class="placeholder-title">UAE · Search Impressions</div><div class="placeholder-body">Share UAE Google Search Console export to populate.</div></div>
-    </div>
-    <div class="inner-tab-pane" id="i-uae-bsos">
-      <div class="placeholder"><div class="placeholder-icon">📂</div><div class="placeholder-title">UAE · Share of Searches</div><div class="placeholder-body">Share UAE Brandstack BSOS data to populate.<br>Metrics: Cars24 SoS% vs Dubizzle, Dubicars.</div></div>
-    </div>
-    <div class="inner-tab-pane" id="i-uae-city">
-      <div class="placeholder"><div class="placeholder-icon">📂</div><div class="placeholder-title">UAE · City Level</div><div class="placeholder-body">Share UAE city-level BSOS data (Dubai, Abu Dhabi, Sharjah…) to populate.</div></div>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════════════════════════
-       YOUTUBE
-  ══════════════════════════════════════════════════════════════════════════ -->
-  <div class="ctab-pane" id="c-yt">
-    <div class="tab-nav">
-      <button class="tab-btn active" data-itab="yt-in">🇮🇳&nbsp; India</button>
-      <button class="tab-btn" data-itab="yt-au">🇦🇺&nbsp; Australia</button>
-      <button class="tab-btn" data-itab="yt-uae">🇦🇪&nbsp; UAE</button>
-    </div>
-    <div class="inner-tab-pane active" id="i-yt-in">
-      <div class="tab-nav" style="margin-top:8px">
-        <button class="tab-btn active" data-itab="yt-in-c24">🎬 Cars24</button>
-        <button class="tab-btn" data-itab="yt-in-insider">🎙 Cars24 Insider</button>
-        <button class="tab-btn" data-itab="yt-in-tbhp">🏎 TeamBHP</button>
-      </div>
-      <div class="inner-tab-pane active" id="i-yt-in-c24"><div class="placeholder"><div class="placeholder-icon">▶️</div><div class="placeholder-title">YouTube · Cars24 India</div><div class="placeholder-body">Share YouTube Studio analytics CSV (monthly).<br>Metrics: Subscribers, Views, Watch Time, CTR, Likes, Comments.</div><div class="data-note" style="max-width:480px;margin:12px auto 0"><div class="data-note-title">📋 What to share</div><ul><li>YouTube Studio → Analytics → Export (monthly)</li><li>Columns: Month, Subscribers, Views, Watch time, Impressions, CTR, Likes, Comments</li><li>Date range: Jan 2024 onwards preferred</li></ul></div></div></div>
-      <div class="inner-tab-pane" id="i-yt-in-insider"><div class="placeholder"><div class="placeholder-icon">▶️</div><div class="placeholder-title">YouTube · Cars24 Insider</div><div class="placeholder-body">Share Cars24 Insider YouTube Studio analytics CSV to populate.</div></div></div>
-      <div class="inner-tab-pane" id="i-yt-in-tbhp"><div class="placeholder"><div class="placeholder-icon">▶️</div><div class="placeholder-title">YouTube · TeamBHP</div><div class="placeholder-body">Share TeamBHP YouTube Studio analytics CSV to populate.</div></div></div>
-    </div>
-    <div class="inner-tab-pane" id="i-yt-au"><div class="placeholder"><div class="placeholder-icon">▶️</div><div class="placeholder-title">YouTube · Cars24 Australia</div><div class="placeholder-body">Share Cars24 AU YouTube analytics CSV to populate.</div></div></div>
-    <div class="inner-tab-pane" id="i-yt-uae"><div class="placeholder"><div class="placeholder-icon">▶️</div><div class="placeholder-title">YouTube · Cars24 UAE</div><div class="placeholder-body">Share Cars24 UAE YouTube analytics CSV to populate.</div></div></div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════════════════════════
-       INSTAGRAM
-  ══════════════════════════════════════════════════════════════════════════ -->
-  <div class="ctab-pane" id="c-ig">
-    <div class="tab-nav">
-      <button class="tab-btn active" data-itab="ig-in">🇮🇳&nbsp; India</button>
-      <button class="tab-btn" data-itab="ig-au">🇦🇺&nbsp; Australia</button>
-      <button class="tab-btn" data-itab="ig-uae">🇦🇪&nbsp; UAE</button>
-    </div>
-    <div class="inner-tab-pane active" id="i-ig-in">
-      <div class="tab-nav" style="margin-top:8px">
-        <button class="tab-btn active" data-itab="ig-in-c24">📷 Cars24</button>
-        <button class="tab-btn" data-itab="ig-in-tbhp">📷 TeamBHP</button>
-      </div>
-      <div class="inner-tab-pane active" id="i-ig-in-c24"><div class="placeholder"><div class="placeholder-icon">📸</div><div class="placeholder-title">Instagram · Cars24 India</div><div class="placeholder-body">Share Instagram Insights / Meta Business Suite export to populate.<br>Metrics: Followers, Reach, Impressions, Engagement Rate, Story Views.</div><div class="data-note" style="max-width:480px;margin:12px auto 0"><div class="data-note-title">📋 What to share</div><ul><li>Instagram Insights → Export (or Meta Business Suite)</li><li>Columns: Month, Followers, Reach, Impressions, Posts, Likes, Comments, Saves, Story Views</li><li>Date range: Jan 2024 onwards preferred</li></ul></div></div></div>
-      <div class="inner-tab-pane" id="i-ig-in-tbhp"><div class="placeholder"><div class="placeholder-icon">📸</div><div class="placeholder-title">Instagram · TeamBHP</div><div class="placeholder-body">Share TeamBHP Instagram analytics to populate.</div></div></div>
-    </div>
-    <div class="inner-tab-pane" id="i-ig-au"><div class="placeholder"><div class="placeholder-icon">📸</div><div class="placeholder-title">Instagram · Cars24 Australia</div><div class="placeholder-body">Share Cars24 AU Instagram analytics to populate.</div></div></div>
-    <div class="inner-tab-pane" id="i-ig-uae"><div class="placeholder"><div class="placeholder-icon">📸</div><div class="placeholder-title">Instagram · Cars24 UAE</div><div class="placeholder-body">Share Cars24 UAE Instagram analytics to populate.</div></div></div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════════════════════════
-       INFLUENCERS
-  ══════════════════════════════════════════════════════════════════════════ -->
-  <div class="ctab-pane" id="c-inf">
-    <div class="tab-nav">
-      <button class="tab-btn active" data-itab="inf-overview">📊&nbsp; Overview</button>
-      <button class="tab-btn" data-itab="inf-yt">▶&nbsp; YouTube Collabs</button>
-      <button class="tab-btn" data-itab="inf-ig">📸&nbsp; Instagram Collabs</button>
-    </div>
-    <div class="inner-tab-pane active" id="i-inf-overview">
-      <div class="placeholder"><div class="placeholder-icon">👥</div><div class="placeholder-title">Influencer Campaign Tracker</div><div class="placeholder-body">Share influencer campaign data to populate.</div><div class="data-note" style="max-width:560px;margin:12px auto 0"><div class="data-note-title">📋 Columns to include</div><ul><li>Month · Influencer Name · Platform (YouTube / Instagram)</li><li>Content Type (Dedicated / Integration / Story)</li><li>Views / Reach · Likes · Comments · Shares / Saves</li><li>Budget (₹) · CPV (Cost Per View) · Category · Post link</li></ul></div></div>
-    </div>
-    <div class="inner-tab-pane" id="i-inf-yt"><div class="placeholder"><div class="placeholder-icon">▶️</div><div class="placeholder-title">YouTube Influencer Campaigns</div><div class="placeholder-body">Share YouTube influencer campaign data to populate.<br>Views, CPV, Watch Time, Engagement by influencer and month.</div></div></div>
-    <div class="inner-tab-pane" id="i-inf-ig"><div class="placeholder"><div class="placeholder-icon">📸</div><div class="placeholder-title">Instagram Influencer Campaigns</div><div class="placeholder-body">Share Instagram influencer data to populate.<br>Reach, CPR (Cost Per Reach), Saves, Story Views by influencer and month.</div></div></div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════════════════════════
-       LINKEDIN
-  ══════════════════════════════════════════════════════════════════════════ -->
-  <div class="ctab-pane" id="c-li">
-    <div class="tab-nav">
-      <button class="tab-btn active" data-itab="li-in">🏢&nbsp; Cars24 India</button>
-      <button class="tab-btn" data-itab="li-au">🏢&nbsp; Cars24 Australia</button>
-      <button class="tab-btn" data-itab="li-uae">🏢&nbsp; Cars24 UAE</button>
-      <button class="tab-btn" data-itab="li-careers">🎓&nbsp; Careers</button>
-      <button class="tab-btn" data-itab="li-all">📦&nbsp; Combined</button>
-    </div>
-    <div class="inner-tab-pane active" id="i-li-in"><div class="placeholder"><div class="placeholder-icon">💼</div><div class="placeholder-title">LinkedIn · Cars24 India</div><div class="placeholder-body">Share Cars24 India LinkedIn Page analytics to populate.</div><div class="data-note" style="max-width:480px;margin:12px auto 0"><div class="data-note-title">📋 What to share</div><ul><li>LinkedIn Page Admin → Analytics → Followers → Export</li><li>LinkedIn Page Admin → Analytics → Content → Export</li><li>Columns: Month, Followers, New Followers, Impressions, Unique Visitors, Engagement Rate</li><li>Date range: Jan 2024 onwards preferred</li></ul></div></div></div>
-    <div class="inner-tab-pane" id="i-li-au"><div class="placeholder"><div class="placeholder-icon">💼</div><div class="placeholder-title">LinkedIn · Cars24 Australia</div><div class="placeholder-body">Share Cars24 AU LinkedIn analytics to populate.</div></div></div>
-    <div class="inner-tab-pane" id="i-li-uae"><div class="placeholder"><div class="placeholder-icon">💼</div><div class="placeholder-title">LinkedIn · Cars24 UAE</div><div class="placeholder-body">Share Cars24 UAE LinkedIn analytics to populate.</div></div></div>
-    <div class="inner-tab-pane" id="i-li-careers"><div class="placeholder"><div class="placeholder-icon">💼</div><div class="placeholder-title">LinkedIn · Cars24 Careers</div><div class="placeholder-body">Share Cars24 Careers LinkedIn analytics to populate.</div></div></div>
-    <div class="inner-tab-pane" id="i-li-all"><div class="placeholder"><div class="placeholder-icon">📦</div><div class="placeholder-title">LinkedIn · All Pages Combined</div><div class="placeholder-body">Once individual page data is shared, this view will show total followers across all Cars24 LinkedIn pages, best performing content, and cross-page growth trends.</div></div></div>
-  </div>
-
+  </section><section class="tabpane" id="in-inf"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="in-inf-ov">Overview</button><button class="tab" data-target="in-inf-yt">YouTube collabs</button><button class="tab" data-target="in-inf-ig">Instagram collabs</button></nav><div class="tabpanes"><section class="tabpane active" id="in-inf-ov"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Influencer campaign tracker</div><div class="ph-body">Views, CPV, reach and engagement by influencer and month, across YouTube and Instagram.</div><div class="data-note"><div class="data-note-title">Columns to include</div><ul><li>Month · influencer name · platform (YouTube / Instagram)</li><li>Content type (dedicated / integration / story)</li><li>Views / reach · likes · comments · shares / saves</li><li>Budget (Rs) · CPV · category · post link</li></ul></div></div></section><section class="tabpane" id="in-inf-yt"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">YouTube influencer campaigns</div><div class="ph-body">Views, CPV, watch time and engagement by influencer and month.</div></div></section><section class="tabpane" id="in-inf-ig"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Instagram influencer campaigns</div><div class="ph-body">Reach, CPR, saves and story views by influencer and month.</div></div></section></div></div></section><section class="tabpane" id="in-yt"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="in-yt-c24">Cars24</button><button class="tab" data-target="in-yt-tbhp">Team BHP</button><button class="tab" data-target="in-yt-insider">Cars24 Insider</button></nav><div class="tabpanes"><section class="tabpane active" id="in-yt-c24"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">YouTube · Cars24 India</div><div class="ph-body">Subscriber growth, views, watch time, CTR and engagement, month on month.</div><div class="data-note"><div class="data-note-title">What to share</div><ul><li>YouTube Studio -> Analytics -> Export (monthly)</li><li>Columns: month, subscribers, views, watch time, impressions, CTR, likes, comments</li><li>Date range: Jan 2024 onwards preferred</li></ul></div></div></section><section class="tabpane" id="in-yt-tbhp"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">YouTube · Team BHP</div><div class="ph-body">Share the Team BHP YouTube Studio export to populate.</div></div></section><section class="tabpane" id="in-yt-insider"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">YouTube · Cars24 Insider</div><div class="ph-body">Share the Cars24 Insider YouTube Studio export to populate.</div></div></section></div></div></section><section class="tabpane" id="in-ig"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="in-ig-c24">Cars24 India</button><button class="tab" data-target="in-ig-tbhp">Team BHP</button></nav><div class="tabpanes"><section class="tabpane active" id="in-ig-c24"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Instagram · Cars24 India</div><div class="ph-body">Followers, reach, impressions, engagement rate and story views, month on month.</div><div class="data-note"><div class="data-note-title">What to share</div><ul><li>Instagram Insights -> Export (or Meta Business Suite)</li><li>Columns: month, followers, reach, impressions, posts, likes, comments, saves, story views</li><li>Date range: Jan 2024 onwards preferred</li></ul></div></div></section><section class="tabpane" id="in-ig-tbhp"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Instagram · Team BHP</div><div class="ph-body">Share the Team BHP Instagram export to populate.</div></div></section></div></div></section><section class="tabpane" id="in-li"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="in-li-c24">Cars24</button><button class="tab" data-target="in-li-careers">Careers</button><button class="tab" data-target="in-li-all">All pages</button></nav><div class="tabpanes"><section class="tabpane active" id="in-li-c24"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">LinkedIn · Cars24 India</div><div class="ph-body">Followers, new followers, impressions, unique visitors and engagement rate, month on month.</div><div class="data-note"><div class="data-note-title">What to share</div><ul><li>LinkedIn Page admin -> Analytics -> Followers -> Export</li><li>LinkedIn Page admin -> Analytics -> Content -> Export</li><li>Columns: month, followers, new followers, impressions, unique visitors, engagement rate</li></ul></div></div></section><section class="tabpane" id="in-li-careers"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">LinkedIn · Cars24 Careers</div><div class="ph-body">Share the Cars24 Careers LinkedIn export to populate.</div></div></section><section class="tabpane" id="in-li-all"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">LinkedIn · all Cars24 pages</div><div class="ph-body">Rolls up total followers, best content and cross-page growth once the individual pages are in.</div></div></section></div></div></section></div></div></div><div class="country" id="country-au"><div class="tabset"><nav class="tabs"><button class="tab active" data-target="au-search">Brand search impressions</button><button class="tab" data-target="au-sos">Brand share of searches</button><button class="tab" data-target="au-city">City level</button><button class="tab" data-target="au-inf">Influencers</button><button class="tab" data-target="au-yt-w">YouTube</button><button class="tab" data-target="au-ig-w">Instagram</button><button class="tab" data-target="au-li-w">LinkedIn</button></nav><div class="tabpanes"><section class="tabpane active" id="au-search"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Australia · brand search impressions</div><div class="ph-body">Share the Google Search Console export to populate. Monthly impressions, MoM growth, top keywords.</div></div></section><section class="tabpane" id="au-sos"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Australia · brand share of searches</div><div class="ph-body">Share the Brandstack BSOS data to populate. Cars24 SoS% vs Carsales, Drive, MoM trend.</div></div></section><section class="tabpane" id="au-city"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Australia · city level</div><div class="ph-body">Share city-level BSOS data (Sydney, Melbourne, Brisbane) to populate.</div></div></section><section class="tabpane" id="au-inf"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Influencer campaigns · Australia</div><div class="ph-body">Share Australia influencer campaign data to populate.</div></div></section><section class="tabpane" id="au-yt-w"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="au-yt">Cars24</button></nav><div class="tabpanes"><section class="tabpane active" id="au-yt"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">YouTube · Cars24 Australia</div><div class="ph-body">Share the Cars24 Australia YouTube Studio export to populate.</div></div></section></div></div></section><section class="tabpane" id="au-ig-w"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="au-ig">Cars24</button></nav><div class="tabpanes"><section class="tabpane active" id="au-ig"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Instagram · Cars24 Australia</div><div class="ph-body">Share the Cars24 Australia Instagram export to populate.</div></div></section></div></div></section><section class="tabpane" id="au-li-w"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="au-li">Cars24</button></nav><div class="tabpanes"><section class="tabpane active" id="au-li"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">LinkedIn · Cars24 Australia</div><div class="ph-body">Share the Cars24 Australia LinkedIn export to populate.</div></div></section></div></div></section></div></div></div><div class="country" id="country-uae"><div class="tabset"><nav class="tabs"><button class="tab active" data-target="uae-search">Brand search impressions</button><button class="tab" data-target="uae-sos">Brand share of searches</button><button class="tab" data-target="uae-city">City level</button><button class="tab" data-target="uae-inf">Influencers</button><button class="tab" data-target="uae-yt-w">YouTube</button><button class="tab" data-target="uae-ig-w">Instagram</button><button class="tab" data-target="uae-li-w">LinkedIn</button></nav><div class="tabpanes"><section class="tabpane active" id="uae-search"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">UAE · brand search impressions</div><div class="ph-body">Share the Google Search Console export to populate. Monthly impressions, MoM growth, top keywords.</div></div></section><section class="tabpane" id="uae-sos"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">UAE · brand share of searches</div><div class="ph-body">Share the Brandstack BSOS data to populate. Cars24 SoS% vs Dubizzle, Dubicars, MoM trend.</div></div></section><section class="tabpane" id="uae-city"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">UAE · city level</div><div class="ph-body">Share city-level BSOS data (Dubai, Abu Dhabi, Sharjah) to populate.</div></div></section><section class="tabpane" id="uae-inf"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Influencer campaigns · UAE</div><div class="ph-body">Share UAE influencer campaign data to populate.</div></div></section><section class="tabpane" id="uae-yt-w"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="uae-yt">Cars24</button></nav><div class="tabpanes"><section class="tabpane active" id="uae-yt"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">YouTube · Cars24 UAE</div><div class="ph-body">Share the Cars24 UAE YouTube Studio export to populate.</div></div></section></div></div></section><section class="tabpane" id="uae-ig-w"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="uae-ig">Cars24</button></nav><div class="tabpanes"><section class="tabpane active" id="uae-ig"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Instagram · Cars24 UAE</div><div class="ph-body">Share the Cars24 UAE Instagram export to populate.</div></div></section></div></div></section><section class="tabpane" id="uae-li-w"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="uae-li">Cars24</button></nav><div class="tabpanes"><section class="tabpane active" id="uae-li"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">LinkedIn · Cars24 UAE</div><div class="ph-body">Share the Cars24 UAE LinkedIn export to populate.</div></div></section></div></div></section></div></div></div>
 </main>
 
 <script>
-/* ── Constants ────────────────────────────────────────────────────────────── */
 const BC = {
   Cars24:'#4736FE', Spinny:'#E91E8C', CarWale:'#FF6B6B',
   Cardekho:'#FFA500', MFC:'#9B59B6', MTV:'#2ECC71', OLX:'#3498DB'
@@ -465,44 +299,29 @@ let D = null;
 const charts = {};
 const tabInited = {};
 
-/* ── Tab management ───────────────────────────────────────────────────────── */
+
+/* tab management: country -> metric tabs, nested handle pills */
 function initTabs() {
-  // Country tabs
-  document.querySelectorAll('[data-ctab]').forEach(btn => {
+  document.querySelectorAll('[data-seg]').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('[data-ctab]').forEach(b => b.classList.toggle('active', b===btn));
-      document.querySelectorAll('.ctab-pane').forEach(p => p.classList.toggle('active', p.id==='c-'+btn.dataset.ctab));
+      const tgt = btn.dataset.seg;
+      document.querySelectorAll('[data-seg]').forEach(b => b.classList.toggle('active', b===btn));
+      document.querySelectorAll('.country').forEach(p => p.classList.toggle('active', p.id==='country-'+tgt));
     });
   });
-
-  // India metric tabs
-  document.querySelectorAll('[data-mtab]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('[data-mtab]').forEach(b => b.classList.toggle('active', b===btn));
-      document.querySelectorAll('.mtab-pane').forEach(p => p.classList.toggle('active', p.id==='m-'+btn.dataset.mtab));
-      const tid = btn.dataset.mtab;
-      if (!tabInited[tid]) { lazyInit[tid]?.(); tabInited[tid]=true; }
-    });
-  });
-
-  // Generic inner tabs (AU/UAE/social)
-  document.querySelectorAll('[data-itab]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const nav = btn.closest('.tab-nav');
-      nav.querySelectorAll('[data-itab]').forEach(b => b.classList.toggle('active', b===btn));
-      // find sibling inner-tab-panes
-      const panes = btn.closest('.ctab-pane') || btn.closest('.inner-tab-pane') || document;
-      // look inside the tab-nav's parent
-      const container = btn.closest('.ctab-pane');
-      if (container) {
-        container.querySelectorAll('.inner-tab-pane').forEach(p => {
-          p.classList.toggle('active', p.id==='i-'+btn.dataset.itab);
-        });
-      }
-    });
+  document.querySelectorAll('.tabs .tab').forEach(btn => {
+    btn.addEventListener('click', () => activateTab(btn));
   });
 }
-
+function activateTab(btn) {
+  const set = btn.closest('.tabset');
+  const nav = btn.closest('.tabs');
+  nav.querySelectorAll(':scope > .tab').forEach(b => b.classList.toggle('active', b===btn));
+  const host = set.querySelector(':scope > .tabpanes');
+  if (host) host.querySelectorAll(':scope > .tabpane').forEach(p => p.classList.toggle('active', p.id===btn.dataset.target));
+  const key = btn.dataset.lazy;
+  if (key && !tabInited[key]) { lazyInit[key]?.(); tabInited[key]=true; }
+}
 /* ── Overview strip ───────────────────────────────────────────────────────── */
 function renderOverview() {
   const k = D.kpis;
@@ -1000,30 +819,25 @@ const lazyInit = {
   impsos:   initTab5,
 };
 
-/* ── Main ─────────────────────────────────────────────────────────────────── */
+
+/* main */
 async function main() {
   try {
     const res = await fetch('data.json');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     D = await res.json();
+    Chart.defaults.font.family = "'Geist','Inter',system-ui,sans-serif";
+    Chart.defaults.color = '#6B7280';
     renderOverview();
     initTabs();
     initTab1();
     tabInited['search'] = true;
-
-    // Wire Chart.js defaults
-    Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
-    Chart.defaults.color = '#6B7280';
   } catch(e) {
-    document.querySelector('.dashboard').innerHTML = `
-      <div class="placeholder" style="margin-top:48px">
-        <div class="placeholder-icon">⚠️</div>
-        <div class="placeholder-title">Could not load dashboard data</div>
-        <div class="placeholder-body">${e.message}<br><br>Run <code>python3 build_data.py</code> to regenerate data.json, then serve with <code>python3 -m http.server 8080</code></div>
-      </div>`;
+    document.querySelector('.wrap').innerHTML =
+      '<div class="placeholder" style="margin-top:48px"><div class="ph-title">Could not load dashboard data</div>'+
+      '<div class="ph-body">'+e.message+'<br><br>Run <code>python3 build_data.py</code> to regenerate data.json, then serve the folder.</div></div>';
   }
 }
-
 document.addEventListener('DOMContentLoaded', main);
 </script>
 </body>
