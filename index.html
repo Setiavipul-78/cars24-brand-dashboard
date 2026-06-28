@@ -820,157 +820,127 @@ function initInf(){
   const allRows=inf.rows||[];
   const allMonthly=(inf.monthly||[]).slice().sort((a,b)=>a.monthOrder-b.monthOrder);
 
-  // Formatters — all values in Lacs / Crores for easy reading
+  // Formatters
   const fv=v=>{if(v==null||isNaN(v))return'—';if(v>=1e7)return(v/1e7).toFixed(2)+'Cr';if(v>=1e5)return(v/1e5).toFixed(2)+'L';if(v>=1e3)return(v/1e3).toFixed(1)+'K';return Math.round(v).toLocaleString();};
   const fc=v=>{if(v==null||isNaN(v))return'—';if(v>=1e7)return'₹'+(v/1e7).toFixed(2)+'Cr';if(v>=1e5)return'₹'+(v/1e5).toFixed(2)+'L';if(v>=1e3)return'₹'+(v/1e3).toFixed(1)+'K';return'₹'+Math.round(v).toLocaleString();};
   const fcpv=v=>v==null||isNaN(v)?'—':'₹'+Number(v).toFixed(2);
 
-  // Sorted unique months (asc monthOrder)
   const uniqMO=[...new Set(allRows.map(r=>r.monthOrder))].sort((a,b)=>a-b);
-  // Map monthOrder → liveMonth label
   const moLabel={};allRows.forEach(r=>{moLabel[r.monthOrder]=r.liveMonth;});
-  // Months newest-first for dropdown
   const monthsDesc=[...uniqMO].reverse();
+  const latestMO=monthsDesc[0];  // default = latest month
 
   // Build skeleton HTML once
   el.innerHTML=`
-    <!-- Prominent external link -->
     <div class="inf-ext-banner">
       <div class="inf-ext-txt"><strong>Cars24 Influencer Dashboard</strong> &nbsp;·&nbsp; Full campaign analytics, creator profiles, agency breakdown &amp; daily refresh</div>
       <a class="inf-ext-link" href="https://cars24-influencer-dashboard.pages.dev/" target="_blank">Open Full Dashboard ↗</a>
     </div>
 
-    <!-- Global period filter — dropdown style -->
+    <!-- Period filter → controls KPI tiles only -->
     <div class="inf-period-bar" style="gap:12px">
       <span class="fl">PERIOD</span>
       <div style="position:relative;display:inline-block">
         <select id="inf-sel-period" style="appearance:none;-webkit-appearance:none;background:var(--card);border:2px solid var(--blue);border-radius:8px;padding:7px 36px 7px 14px;font:700 13px var(--font);color:var(--ink);cursor:pointer;min-width:160px;outline:none">
           <option value="all">All Time</option>
           <option value="mom">Month on Month</option>
-          ${monthsDesc.map(mo=>`<option value="mo:${mo}">${moLabel[mo]||mo}</option>`).join('')}
+          ${monthsDesc.map(mo=>`<option value="mo:${mo}"${mo===latestMO?' selected':''}>${moLabel[mo]||mo}</option>`).join('')}
         </select>
         <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--blue);font-size:10px">▼</span>
       </div>
-      <span style="font-size:11px;color:var(--grey)" id="inf-period-label"></span>
     </div>
 
-    <!-- KPI tiles -->
+    <!-- KPI tiles (period-filtered) -->
     <div class="inf-kpi-strip" id="inf-kpis"></div>
 
-    <!-- Trend chart -->
-    <div class="card" id="inf-card-trend">
-      <div class="sh"><span class="kicker">📈 Monthly trend</span><span class="title">Views &amp; Live Influencers Over Time</span><span class="desc">Total views (bars, left axis) and live influencer count (line, right axis) per month.</span></div>
+    <!-- Trend chart — always all-time -->
+    <div class="card">
+      <div class="sh"><span class="kicker">📈 Monthly trend</span><span class="title">Views Over Time</span><span class="desc">Total influencer video views per month across all campaigns.</span></div>
       <div class="cw tall"><canvas id="inf-chart-trend"></canvas></div>
     </div>
 
-    <!-- MoM table -->
+    <!-- MoM table — always all-time -->
     <div class="card">
-      <div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance Table</span><span class="desc">Views, spend, blended CPV and engagement rate per month.</span></div>
+      <div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance Table</span><span class="desc">Views, likes, comments, spend and blended CPV per month.</span></div>
       <div class="tw" id="inf-mom-tbl"></div>
     </div>
 
-    <!-- Top 10 by views + Blended CPV by month -->
+    <!-- Top 10 by views + Blended CPV chart — always all-time -->
     <div class="g2" style="margin-bottom:0">
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">🏆 Top creators</span><span class="title">Top 10 by Views</span><span class="desc">Highest-performing influencers by total views in the selected period.</span></div>
+        <div class="sh"><span class="kicker">🏆 Top creators</span><span class="title">Top 10 by Views</span><span class="desc">Highest-performing influencers by views across all time.</span></div>
         <div class="tw" id="inf-top-views-tbl"></div>
       </div>
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">📉 Cost efficiency</span><span class="title">Blended CPV by Month</span><span class="desc">Blended cost-per-view each month. Lower = more efficient spend.</span></div>
+        <div class="sh"><span class="kicker">📉 Cost efficiency</span><span class="title">Blended CPV by Month</span><span class="desc">Total spend ÷ total views each month. Lower = more efficient.</span></div>
         <div class="cw tall" style="height:260px"><canvas id="inf-chart-cpv"></canvas></div>
       </div>
     </div>
 
-    <!-- Engagement (left) + Lowest CPV (right) -->
+    <!-- Engagement + Lowest CPV — always all-time -->
     <div class="g2" style="margin-top:14px">
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">⚡ Best engagement</span><span class="title">Top 10 by Engagement Rate</span><span class="desc">Highest engagement rate — (likes + comments + saves) ÷ views.</span></div>
+        <div class="sh"><span class="kicker">⚡ Best engagement</span><span class="title">Top 10 by Engagement Rate</span><span class="desc">Highest (likes + comments + saves) ÷ views.</span></div>
         <div class="tw" id="inf-top-eng-tbl"></div>
       </div>
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">💰 Lowest CPV</span><span class="title">Top 10 Most Efficient Creators</span><span class="desc">Lowest blended CPV — best value-for-money campaigns in the period.</span></div>
+        <div class="sh"><span class="kicker">💰 Lowest CPV</span><span class="title">Top 10 Most Efficient Creators</span><span class="desc">Lowest blended CPV (min 5K views).</span></div>
         <div class="tw" id="inf-low-cpv-tbl"></div>
       </div>
     </div>`;
 
-  // Local chart refs
-  const ic={};
-  function destroyIC(){Object.values(ic).forEach(ch=>{try{ch.destroy();}catch(e){}});Object.keys(ic).forEach(k=>delete ic[k]);}
-
-  function render(val){
-    // Resolve row/month sets from dropdown value
-    let rows,mons,isSingleMonth=false;
-    if(val==='all'){
-      rows=allRows;mons=allMonthly;
-    } else if(val==='mom'){
-      rows=allRows;mons=allMonthly;
-    } else {
-      // val = "mo:12" style
-      const mo=parseInt(val.replace('mo:',''),10);
-      rows=allRows.filter(r=>r.monthOrder===mo);
-      mons=allMonthly.filter(m=>m.monthOrder===mo);
-      isSingleMonth=true;
-    }
-
-    // ── KPI tiles ──────────────────────────────────────────────────────────
+  // ── renderKPIs — only the 6 tiles respond to the period dropdown ────────
+  function renderKPIs(val){
+    let rows;
+    if(val==='all'||val==='mom'){rows=allRows;}
+    else{const mo=parseInt(val.replace('mo:',''),10);rows=allRows.filter(r=>r.monthOrder===mo);}
     const totalViews=rows.reduce((s,r)=>s+(r.views||0),0);
     const totalCost =rows.reduce((s,r)=>s+(r.cost||0),0);
-    const validCPV  =rows.filter(r=>r.cpv>0).map(r=>r.cpv);
     const validEng  =rows.filter(r=>r.engRate>0).map(r=>r.engRate);
     const blendedCPV=totalViews>0?(totalCost/totalViews):null;
     const avgEng=validEng.length?(validEng.reduce((a,b)=>a+b)/validEng.length):null;
     const uniqCreators=new Set(rows.map(r=>r.name)).size;
     const activeMonths=new Set(rows.map(r=>r.monthOrder)).size;
-
     document.getElementById('inf-kpis').innerHTML=`
       <div class="ink"><span class="ink-icon">📅</span><div class="ink-lbl">Active Months</div><div class="ink-val">${activeMonths}</div><div class="ink-sub">months with live creators</div></div>
       <div class="ink mint"><span class="ink-icon">👥</span><div class="ink-lbl">Creators</div><div class="ink-val">${uniqCreators}</div><div class="ink-sub">total across campaign</div></div>
-      <div class="ink grn"><span class="ink-icon">👁️</span><div class="ink-lbl">Total Views</div><div class="ink-val">${fv(totalViews)}</div><div class="ink-sub">all-time plays</div></div>
-      <div class="ink or"><span class="ink-icon">💸</span><div class="ink-lbl">Total Spend</div><div class="ink-val">${fc(totalCost)}</div><div class="ink-sub">all-time budget</div></div>
-      <div class="ink pur"><span class="ink-icon">📉</span><div class="ink-lbl">Blended CPV</div><div class="ink-val">${fcpv(blendedCPV)}</div><div class="ink-sub">blended cost per view</div></div>
+      <div class="ink grn"><span class="ink-icon">👁️</span><div class="ink-lbl">Total Views</div><div class="ink-val">${fv(totalViews)}</div><div class="ink-sub">plays in period</div></div>
+      <div class="ink or"><span class="ink-icon">💸</span><div class="ink-lbl">Total Spend</div><div class="ink-val">${fc(totalCost)}</div><div class="ink-sub">budget in period</div></div>
+      <div class="ink pur"><span class="ink-icon">📉</span><div class="ink-lbl">Blended CPV</div><div class="ink-val">${fcpv(blendedCPV)}</div><div class="ink-sub">spend ÷ views</div></div>
       <div class="ink"><span class="ink-icon">⚡</span><div class="ink-lbl">Engagement</div><div class="ink-val">${avgEng!=null?avgEng.toFixed(2)+'%':'—'}</div><div class="ink-sub">(likes+cmts+saves)/views</div></div>`;
+  }
 
-    // Period label
-    const mLabels=[...new Set(rows.map(r=>r.liveMonth))];
-    document.getElementById('inf-period-label').textContent=
-      isSingleMonth?`${mLabels[0]||''} · ${rows.length} videos · ${uniqCreators} creators`
-      :`${mLabels.length} months · ${rows.length} videos · ${uniqCreators} creators`;
+  // ── renderStatic — all sections below tiles, always use allRows/allMonthly ─
+  function renderStatic(){
+    const rows=allRows;
+    const mons=allMonthly;
 
-    // ── Trend chart (hidden for single-month) ─────────────────────────────
-    const trendCard=document.getElementById('inf-card-trend');
-    trendCard.style.display=isSingleMonth?'none':'block';
-    destroyIC();
-    if(!isSingleMonth){
-      const tc=document.getElementById('inf-chart-trend').getContext('2d');
-      ic.trend=new Chart(tc,{type:'bar',data:{
-        labels:mons.map(m=>m.month),
-        datasets:[
-          {type:'bar',label:'Total Views',data:mons.map(m=>m.views_lakh),backgroundColor:'rgba(71,54,254,.22)',yAxisID:'y',borderRadius:5},
-          {type:'line',label:'Live Influencers',data:mons.map(m=>m.campaigns),borderColor:'#E91E8C',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,tension:0.3,pointRadius:4,pointBackgroundColor:'#E91E8C'},
-        ]
-      },options:{responsive:true,maintainAspectRatio:false,
-        plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},
-        scales:{
-          y:{type:'linear',position:'left',title:{display:true,text:'Views (L)'},ticks:{callback:v=>v.toFixed(1)+'L'},grid:{color:'#E5E3F8'}},
-          y1:{type:'linear',position:'right',title:{display:true,text:'Live Influencers'},ticks:{stepSize:1},grid:{display:false}},
-          x:{grid:{display:false}}
-        }
-      }});
-    }
+    // Trend chart — views bars only
+    const tc=document.getElementById('inf-chart-trend').getContext('2d');
+    new Chart(tc,{type:'bar',data:{
+      labels:mons.map(m=>m.month),
+      datasets:[{label:'Total Views',data:mons.map(m=>m.views_lakh),backgroundColor:mons.map((_,i)=>i===mons.length-1?'rgba(71,54,254,.75)':'rgba(71,54,254,.22)'),borderRadius:6}]
+    },options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.parsed.y?.toFixed(2)}L views`}}},
+      scales:{y:{title:{display:true,text:'Views (L)'},ticks:{callback:v=>v.toFixed(1)+'L'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}
+    }});
 
-    // ── MoM table ──────────────────────────────────────────────────────────
-    const mth=`<th>Month</th><th class="nr ch">Live Videos</th><th class="nr">Creators</th><th class="nr">Total Views</th><th class="nr ch">Total Spend</th><th class="nr ch">Blended CPV</th><th class="nr">Avg Eng %</th>`;
+    // MoM table — no Creators col, add Likes + Comments cumulative
+    const mth=`<th>Month</th><th class="nr ch">Live Videos</th><th class="nr">Total Views</th><th class="nr">Likes</th><th class="nr">Comments</th><th class="nr ch">Total Spend</th><th class="nr ch">Blended CPV</th><th class="nr">Avg Eng %</th>`;
     const sortedMons=[...mons].reverse();
     const momRows=sortedMons.map((m,i)=>{
-      const creatorsInMonth=new Set(rows.filter(r=>r.monthOrder===m.monthOrder).map(r=>r.name)).size;
-      const mViews=rows.filter(r=>r.monthOrder===m.monthOrder).reduce((s,r)=>s+(r.views||0),0);
-      const mCost =rows.filter(r=>r.monthOrder===m.monthOrder).reduce((s,r)=>s+(r.cost||0),0);
-      const mBcpv =mViews>0?(mCost/mViews):null;
+      const mRows=rows.filter(r=>r.monthOrder===m.monthOrder);
+      const mViews   =mRows.reduce((s,r)=>s+(r.views||0),0);
+      const mLikes   =mRows.reduce((s,r)=>s+(r.likes||0),0);
+      const mComments=mRows.reduce((s,r)=>s+(r.comments||0),0);
+      const mCost    =mRows.reduce((s,r)=>s+(r.cost||0),0);
+      const mBcpv    =mViews>0?(mCost/mViews):null;
       return`<tr class="${i===0?'lat':''}">
         <td><strong>${m.month}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td>
         <td class="nr cc"><strong>${m.campaigns}</strong></td>
-        <td class="nr">${creatorsInMonth}</td>
         <td class="nr">${fv(mViews)}</td>
+        <td class="nr">${fv(mLikes)}</td>
+        <td class="nr">${fv(mComments)}</td>
         <td class="nr cc">${fc(mCost)}</td>
         <td class="nr cc">${fcpv(mBcpv)}</td>
         <td class="nr">${m.avg_eng!=null?m.avg_eng.toFixed(2)+'%':'—'}</td>
@@ -978,7 +948,7 @@ function initInf(){
     }).join('');
     document.getElementById('inf-mom-tbl').innerHTML=tbl(mth,momRows);
 
-    // ── Top 10 by Views ────────────────────────────────────────────────────
+    // Top 10 by Views
     const top10V=[...rows].sort((a,b)=>(b.views||0)-(a.views||0)).slice(0,10);
     const vth=`<th>#</th><th>Creator</th><th class="nr ch">Views</th><th class="nr">Spend</th><th class="nr ch">CPV</th><th class="nr">Eng %</th>`;
     const vrows=top10V.map((r,i)=>`<tr class="${i===0?'lat':''}">
@@ -991,14 +961,15 @@ function initInf(){
     </tr>`).join('');
     document.getElementById('inf-top-views-tbl').innerHTML=tbl(vth,vrows);
 
-    // ── Blended CPV by Month chart ─────────────────────────────────────────
+    // Blended CPV by Month chart
     const cc=document.getElementById('inf-chart-cpv').getContext('2d');
     const bcpvData=mons.map(m=>{
-      const mv=rows.filter(r=>r.monthOrder===m.monthOrder).reduce((s,r)=>s+(r.views||0),0);
-      const mc=rows.filter(r=>r.monthOrder===m.monthOrder).reduce((s,r)=>s+(r.cost||0),0);
+      const mRows=rows.filter(r=>r.monthOrder===m.monthOrder);
+      const mv=mRows.reduce((s,r)=>s+(r.views||0),0);
+      const mc=mRows.reduce((s,r)=>s+(r.cost||0),0);
       return mv>0?parseFloat((mc/mv).toFixed(2)):null;
     });
-    ic.cpv=new Chart(cc,{type:'bar',data:{
+    new Chart(cc,{type:'bar',data:{
       labels:mons.map(m=>m.month),
       datasets:[{label:'Blended CPV (₹)',data:bcpvData,backgroundColor:bcpvData.map((_,i)=>i===mons.length-1?'rgba(71,54,254,.85)':'rgba(71,54,254,.28)'),borderRadius:6}]
     },options:{responsive:true,maintainAspectRatio:false,
@@ -1006,7 +977,7 @@ function initInf(){
       scales:{y:{title:{display:true,text:'Blended CPV (₹)'},ticks:{callback:v=>'₹'+v},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}
     }});
 
-    // ── Top 10 by Engagement Rate ──────────────────────────────────────────
+    // Top 10 by Engagement Rate
     const top10E=[...rows].filter(r=>r.engRate>0).sort((a,b)=>(b.engRate||0)-(a.engRate||0)).slice(0,10);
     const eth=`<th>#</th><th>Creator</th><th class="nr ch">Eng Rate</th><th class="nr">Views</th><th class="nr">Likes</th><th class="nr">Comments</th>`;
     const erows=top10E.map((r,i)=>`<tr class="${i===0?'lat':''}">
@@ -1019,7 +990,7 @@ function initInf(){
     </tr>`).join('');
     document.getElementById('inf-top-eng-tbl').innerHTML=tbl(eth,erows);
 
-    // ── Top 10 Lowest CPV ─────────────────────────────────────────────────
+    // Top 10 Lowest CPV
     const top10L=[...rows].filter(r=>r.cpv>0&&r.views>=5000).sort((a,b)=>(a.cpv||999)-(b.cpv||999)).slice(0,10);
     const lth=`<th>#</th><th>Creator</th><th class="nr ch">CPV</th><th class="nr">Views</th><th class="nr">Spend</th><th class="nr">Eng %</th>`;
     const lrows=top10L.map((r,i)=>`<tr class="${i===0?'lat':''}">
@@ -1030,13 +1001,15 @@ function initInf(){
       <td class="nr">${fc(r.cost)}</td>
       <td class="nr">${r.engRate!=null?r.engRate.toFixed(2)+'%':'—'}</td>
     </tr>`).join('');
-    document.getElementById('inf-low-cpv-tbl').innerHTML=top10L.length?tbl(lth,lrows):'<p style="padding:20px;color:var(--grey);font-size:13px">No campaigns with ≥5K views in this period.</p>';
+    document.getElementById('inf-low-cpv-tbl').innerHTML=top10L.length?tbl(lth,lrows):'<p style="padding:20px;color:var(--grey);font-size:13px">No campaigns with ≥5K views.</p>';
   }
 
-  // Wire dropdown
-  document.getElementById('inf-sel-period').addEventListener('change',function(){render(this.value);});
+  // Wire dropdown → KPIs only
+  document.getElementById('inf-sel-period').addEventListener('change',function(){renderKPIs(this.value);});
 
-  render('all');
+  // Init: default to latest month for KPIs, static sections always all-time
+  renderKPIs('mo:'+latestMO);
+  renderStatic();
 }
 
 function initYT(){
