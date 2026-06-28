@@ -35,11 +35,12 @@ jobs:
           GOOGLE_CLIENT_ID:             ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET:         ${{ secrets.GOOGLE_CLIENT_SECRET }}
           YT_REFRESH_TOKEN:             ${{ secrets.YT_REFRESH_TOKEN }}
-          YT_CHANNEL_ID_CARS24_INDIA:   ${{ secrets.YT_CHANNEL_ID_CARS24_INDIA }}
-          YT_CHANNEL_ID_TEAMBHP:        ${{ secrets.YT_CHANNEL_ID_TEAMBHP }}
-          YT_CHANNEL_ID_INSIDER:        ${{ secrets.YT_CHANNEL_ID_INSIDER }}
-          YT_CHANNEL_ID_AU:             ${{ secrets.YT_CHANNEL_ID_AU }}
-          YT_CHANNEL_ID_UAE:            ${{ secrets.YT_CHANNEL_ID_UAE }}
+          YT_CHANNEL_ID_CARS24_INDIA:      ${{ secrets.YT_CHANNEL_ID_CARS24_INDIA }}
+          YT_CHANNEL_ID_TEAMBHP:           ${{ secrets.YT_CHANNEL_ID_TEAMBHP }}
+          YT_CHANNEL_ID_INSIDER:           ${{ secrets.YT_CHANNEL_ID_INSIDER }}
+          YT_CHANNEL_ID_CARS24_MALAYALAM:  ${{ secrets.YT_CHANNEL_ID_CARS24_MALAYALAM }}
+          YT_CHANNEL_ID_AU:                ${{ secrets.YT_CHANNEL_ID_AU }}
+          YT_CHANNEL_ID_UAE:               ${{ secrets.YT_CHANNEL_ID_UAE }}
           IG_ACCESS_TOKEN:              ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID_CARS24_INDIA:      ${{ secrets.IG_USER_ID_CARS24_INDIA }}
           IG_USER_ID_TEAMBHP:           ${{ secrets.IG_USER_ID_TEAMBHP }}

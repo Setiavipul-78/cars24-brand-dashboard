@@ -45,11 +45,12 @@ def write_csv(path: Path, rows: list[dict]) -> None:
 
 # ── YouTube Analytics API ─────────────────────────────────────────────────────
 YT_CHANNELS = {
-    "cars24_india":   os.getenv("YT_CHANNEL_ID_CARS24_INDIA"),
-    "teambhp":        os.getenv("YT_CHANNEL_ID_TEAMBHP"),
-    "cars24_insider": os.getenv("YT_CHANNEL_ID_INSIDER"),
-    "cars24_au":      os.getenv("YT_CHANNEL_ID_AU"),
-    "cars24_uae":     os.getenv("YT_CHANNEL_ID_UAE"),
+    "cars24_india":     os.getenv("YT_CHANNEL_ID_CARS24_INDIA"),
+    "teambhp":          os.getenv("YT_CHANNEL_ID_TEAMBHP"),
+    "cars24_insider":   os.getenv("YT_CHANNEL_ID_INSIDER"),
+    "cars24_malayalam": os.getenv("YT_CHANNEL_ID_CARS24_MALAYALAM"),
+    "cars24_au":        os.getenv("YT_CHANNEL_ID_AU"),
+    "cars24_uae":       os.getenv("YT_CHANNEL_ID_UAE"),
 }
 
 def get_yt_credentials():
