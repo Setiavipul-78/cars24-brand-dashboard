@@ -346,6 +346,98 @@ def build_kpis(monthly, bsos_monthly):
         "c24_vs_carwale":     sf(pp_ch(c24_sos, carwale_sos)),
     }
 
+# ── Influencers ───────────────────────────────────────────────────────────────
+INFLUENCER_URL = "https://cars24-influencer-dashboard.pages.dev/live_data.json"
+
+def build_influencers():
+    """Fetch live influencer data from the Cars24 influencer dashboard."""
+    raw = None
+    # Try requests first (better SSL handling), fall back to urllib with certifi
+    try:
+        import requests
+        resp = requests.get(INFLUENCER_URL, timeout=20, headers={"User-Agent": "Cars24-Dashboard/1.0"})
+        resp.raise_for_status()
+        raw = resp.json()
+    except ImportError:
+        pass
+    except Exception as e:
+        print(f"  ⚠ Influencer fetch (requests) failed: {e}")
+
+    if raw is None:
+        import urllib.request, ssl
+        try:
+            import certifi
+            ctx = ssl.create_default_context(cafile=certifi.where())
+        except ImportError:
+            ctx = ssl.create_default_context()
+            ctx.check_hostname = False
+            ctx.verify_mode = ssl.CERT_NONE
+        try:
+            req = urllib.request.Request(INFLUENCER_URL, headers={"User-Agent": "Cars24-Dashboard/1.0"})
+            with urllib.request.urlopen(req, timeout=20, context=ctx) as resp:
+                raw = json.loads(resp.read())
+        except Exception as e:
+            print(f"  ⚠ Influencer fetch failed: {e}"); return {}
+
+    rows = raw.get("rows", [])
+    if not rows:
+        print("  ⚠ Influencer dashboard: 0 rows"); return {}
+
+    # Platform detection from link URL
+    for r in rows:
+        lnk = (r.get("link") or "") + (r.get("videoLink") or "")
+        if "instagram.com" in lnk:
+            r["platform"] = "Instagram"
+        elif "youtube.com" in lnk or "youtu.be" in lnk:
+            r["platform"] = "YouTube"
+        else:
+            r["platform"] = "Other"
+
+    # Summary KPIs
+    total_views = sum(r.get("views") or 0 for r in rows)
+    total_cost  = sum(r.get("cost")  or 0 for r in rows)
+    valid_cpv   = [r["cpv"]     for r in rows if r.get("cpv")     and r["cpv"] > 0]
+    valid_eng   = [r["engRate"] for r in rows if r.get("engRate") and r["engRate"] > 0]
+
+    # Monthly aggregates
+    from collections import defaultdict
+    monthly = defaultdict(lambda: {"views":0,"cost":0,"campaigns":0,"cpvs":[],"engs":[]})
+    for r in rows:
+        key = (r.get("liveMonth","Unknown"), r.get("monthOrder", 999999))
+        monthly[key]["views"]     += r.get("views") or 0
+        monthly[key]["cost"]      += r.get("cost")  or 0
+        monthly[key]["campaigns"] += 1
+        if r.get("cpv"):     monthly[key]["cpvs"].append(r["cpv"])
+        if r.get("engRate"): monthly[key]["engs"].append(r["engRate"])
+
+    monthly_rows = []
+    for (m, mo), v in sorted(monthly.items(), key=lambda x: x[0][1]):
+        monthly_rows.append({
+            "month":      m,
+            "monthOrder": mo,
+            "campaigns":  v["campaigns"],
+            "views":      v["views"],
+            "views_lakh": round(v["views"] / 1e5, 2),
+            "cost":       v["cost"],
+            "avg_cpv":    round(sum(v["cpvs"]) / len(v["cpvs"]), 3) if v["cpvs"] else None,
+            "avg_eng":    round(sum(v["engs"]) / len(v["engs"]), 2) if v["engs"] else None,
+        })
+
+    print(f"  ✓ Influencers: {len(rows)} campaigns · {len(monthly_rows)} months")
+    return {
+        "kpis": {
+            "total_campaigns":  len(rows),
+            "total_views":      total_views,
+            "total_views_lakh": round(total_views / 1e5, 2),
+            "total_cost":       total_cost,
+            "avg_cpv":          round(sum(valid_cpv)/len(valid_cpv), 3) if valid_cpv else None,
+            "avg_eng":          round(sum(valid_eng)/len(valid_eng), 2) if valid_eng else None,
+        },
+        "monthly":      monthly_rows,
+        "rows":         rows,
+        "refreshed_at": raw.get("refreshedAt", ""),
+    }
+
 # ── YouTube ───────────────────────────────────────────────────────────────────
 YT_CHANNEL_KEYS = [
     "cars24_india", "teambhp", "cars24_insider", "cars24_au", "cars24_uae",
@@ -475,6 +567,7 @@ if __name__ == "__main__":
     kpis           = build_kpis(monthly, bsos_monthly)
     youtube        = build_youtube()
     instagram      = build_instagram()
+    influencers    = build_influencers()
 
     payload = {
         "_meta": {
@@ -493,6 +586,7 @@ if __name__ == "__main__":
         "keywords":           keywords,
         "youtube":            youtube,
         "instagram":          instagram,
+        "influencers":        influencers,
     }
 
     with open(OUT, "w") as f:
@@ -502,4 +596,6 @@ if __name__ == "__main__":
     print(f"\n✅ data.json written — {sz:.0f} KB")
     print(f"   Impressions: {len(monthly)} months | BSOS: {len(bsos_monthly)} months | Cities: {len(bsos_cities)}")
     print(f"   YouTube: {len(youtube)} channels | Instagram: {len(instagram)} accounts")
+    inf_count = influencers.get("kpis", {}).get("total_campaigns", 0)
+    print(f"   Influencers: {inf_count} campaigns")
     print(f"   KPIs: {kpis.get('curr_imp_fmt')} impressions · {kpis.get('c24_sos')}% SoS")

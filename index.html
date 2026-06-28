@@ -179,6 +179,23 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
 .ctrl-sel:focus{border-color:var(--blue)}
 .dw{position:relative;height:220px}
 .spark{vertical-align:middle;opacity:.8}
+
+/* Influencer-specific */
+.tier-chip{display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:800;white-space:nowrap}
+.tier-nano{background:#F1F0F7;color:#6B7280}
+.tier-micro{background:#EEF0FF;color:#4736FE}
+.tier-macro{background:#EDE9FE;color:#7C3AED}
+.tier-mega{background:#FEF3C7;color:#92400E}
+.plat-chip{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:10px;font-size:11px;font-weight:700}
+.plat-ig{background:#FCE7F3;color:#831843}
+.plat-yt{background:#FEE2E2;color:#92000A}
+.plat-ot{background:#F1F0F7;color:#6B7280}
+.biz-sell{background:#DCFCE7;color:#15803D;padding:2px 7px;border-radius:10px;font-size:11px;font-weight:700}
+.biz-buy{background:#EEF0FF;color:#4736FE;padding:2px 7px;border-radius:10px;font-size:11px;font-weight:700}
+.inf-filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.inf-sel{padding:6px 10px;border:1.5px solid var(--border);border-radius:9px;font:600 12px var(--font);color:var(--ink);background:var(--card);cursor:pointer;outline:none}
+.inf-sel:focus{border-color:var(--blue)}
+.inf-count{font-size:12px;color:var(--grey);margin-left:auto}
 </style>
 </head>
 <body>
@@ -233,7 +250,7 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
         <button class="tab" data-target="m-bsos" data-lazy="bsos"><span class="ti">🆚</span>Share of searches</button>
         <button class="tab" data-target="m-gi" data-lazy="gi"><span class="ti">📡</span>Google indexed</button>
         <button class="tab" data-target="m-impsos" data-lazy="impsos"><span class="ti">📈</span>Impressions × SoS</button>
-        <button class="tab" data-target="in-inf"><span class="ti">👥</span>Influencers</button>
+        <button class="tab" data-target="in-inf" data-lazy="inf"><span class="ti">👥</span>Influencers</button>
         <button class="tab" data-target="in-yt" data-lazy="yt"><span class="ti">📺</span>YouTube</button>
         <button class="tab" data-target="in-ig" data-lazy="ig"><span class="ti">📸</span>Instagram</button>
         <button class="tab" data-target="in-li"><span class="ti">💼</span>LinkedIn</button>
@@ -408,16 +425,8 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
         <section class="tabpane" id="m-impsos"><div id="impsos-content"></div></section>
 
         <!-- INFLUENCERS -->
-        <section class="tabpane" id="in-inf">
-          <div class="tabset"><nav class="tabs pills">
-            <button class="tab active" data-target="inf-ov">Overview</button>
-            <button class="tab" data-target="inf-yt">YouTube collabs</button>
-            <button class="tab" data-target="inf-ig">Instagram collabs</button>
-          </nav><div class="tabpanes">
-            <section class="tabpane active" id="inf-ov"><div class="ph"><div class="ph-mark">👥</div><div class="ph-title">Influencer campaign tracker</div><div class="ph-body">Views, CPV, reach and engagement by influencer and month, across YouTube and Instagram.</div><div class="dn-card"><h4>Data columns needed</h4><ul><li>Month · influencer · platform (YouTube / Instagram)</li><li>Content type · views / reach · likes · comments · saves</li><li>Budget ₹ · CPV · category · post link</li></ul></div></div></section>
-            <section class="tabpane" id="inf-yt"><div class="ph"><div class="ph-mark">📹</div><div class="ph-title">YouTube influencer campaigns</div><div class="ph-body">Views, CPV, watch time per influencer campaign.</div></div></section>
-            <section class="tabpane" id="inf-ig"><div class="ph"><div class="ph-mark">📸</div><div class="ph-title">Instagram influencer campaigns</div><div class="ph-body">Reach, CPR, saves and story views per influencer campaign.</div></div></section>
-          </div></div>
+        <section class="tabpane" id="in-inf" data-lazy="inf">
+          <div id="inf-content"></div>
         </section>
 
         <!-- YOUTUBE -->
@@ -771,6 +780,105 @@ function renderIG(containerId,key,handleName){
   document.getElementById(`ig-tbl-${key}`).innerHTML=tbl(th,[...ig.monthly].reverse().map((r,i)=>{const p2=ig.monthly.length>i+1?ig.monthly[ig.monthly.length-i-2]:null;const mf=p2&&r.followers&&p2.followers?((r.followers-p2.followers)/p2.followers*100):null;return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(mf)}</td><td class="nr cc"><strong>${numFmt(r.followers)}</strong></td><td class="nr cc">${r.followers_gained!=null?'+'+numFmt(r.followers_gained):'—'}</td><td class="nr">${numFmt(r.reach)}</td><td class="nr">${numFmt(r.impressions)}</td><td class="nr">${numFmt(r.profile_views)}</td><td class="nr">${numFmt(r.website_clicks)}</td></tr>`;}).join(''));
 }
 
+/* ── Influencer renderer ── */
+function initInf(){
+  const el=document.getElementById('inf-content');if(!el)return;
+  const inf=D.influencers;
+  if(!inf||!inf.rows?.length){
+    el.innerHTML=`<div class="ph"><div class="ph-mark">👥</div><div class="ph-title">Influencer data loading…</div><div class="ph-body">Run <code>python3 build_data.py</code> to pull live data from the influencer dashboard.</div></div>`;return;
+  }
+
+  const k=inf.kpis||{};
+  const allRows=inf.rows||[];
+  const monthly=inf.monthly||[];
+
+  // Helper formatters
+  const rupee=v=>v==null?'—':v>=1e5?`₹${(v/1e5).toFixed(2)}L`:v>=1e3?`₹${(v/1e3).toFixed(1)}K`:`₹${v.toLocaleString()}`;
+  const tierChip=t=>{const lc=(t||'').toLowerCase();const cls=lc==='mega'?'tier-mega':lc==='macro'?'tier-macro':lc==='micro'?'tier-micro':'tier-nano';return`<span class="tier-chip ${cls}">${t||'—'}</span>`;};
+  const platChip=p=>{if(p==='Instagram')return`<span class="plat-chip plat-ig">📸 IG</span>`;if(p==='YouTube')return`<span class="plat-chip plat-yt">📺 YT</span>`;return`<span class="plat-chip plat-ot">${p}</span>`;};
+  const bizChip=b=>(b||'').toLowerCase()==='sell'?`<span class="biz-sell">Sell</span>`:`<span class="biz-buy">Buy</span>`;
+
+  // Unique filter values
+  const uniq=arr=>[...new Set(arr.filter(Boolean))].sort();
+  const months=uniq(allRows.map(r=>r.liveMonth)).sort((a,b)=>(allRows.find(r=>r.liveMonth===b)?.monthOrder||0)-(allRows.find(r=>r.liveMonth===a)?.monthOrder||0));
+  const tiers=uniq(allRows.map(r=>r.tier));
+  const cats=uniq(allRows.map(r=>r.category));
+  const plats=uniq(allRows.map(r=>r.platform));
+  const bizs=uniq(allRows.map(r=>r.business));
+
+  el.innerHTML=`
+    <div class="g4">
+      <div class="kh kh-blue"><div class="kl"><span class="ki">📣</span>Total Campaigns</div><div class="kv">${k.total_campaigns||0}</div><div class="ks">Across all months</div></div>
+      <div class="kh kh-red"><div class="kl"><span class="ki">👀</span>Total Views</div><div class="kv">${k.total_views_lakh!=null?(k.total_views_lakh).toFixed(2)+'L':'—'}</div><div class="ks">Across all influencer content</div></div>
+      <div class="kh kh-amber"><div class="kl"><span class="ki">💰</span>Total Spend</div><div class="kv">${rupee(k.total_cost)}</div><div class="ks">All campaigns combined</div></div>
+      <div class="kh kh-green"><div class="kl"><span class="ki">🎯</span>Avg CPV</div><div class="kv">${k.avg_cpv!=null?'₹'+k.avg_cpv.toFixed(2):'—'}</div><div class="ks">Avg eng rate: ${k.avg_eng!=null?k.avg_eng.toFixed(1)+'%':'—'}</div></div>
+    </div>
+
+    <div class="card">
+      <div class="sh"><span class="kicker">📅 Monthly summary</span><span class="title">Influencer Campaigns by Month</span><span class="desc">Total campaigns, views and cost per month. Data live from influencer dashboard.</span></div>
+      <div class="tw" id="inf-monthly-tbl"></div>
+    </div>
+
+    <div class="card">
+      <div class="sh"><span class="kicker">📋 All campaigns</span><span class="title">Influencer Campaign Details</span><span class="desc">Every campaign with performance metrics. Filter by month, tier, platform or business type.</span></div>
+      <div class="inf-filter-row">
+        <select class="inf-sel" id="inf-f-month"><option value="">All months</option>${months.map(m=>`<option>${m}</option>`).join('')}</select>
+        <select class="inf-sel" id="inf-f-tier"><option value="">All tiers</option>${tiers.map(t=>`<option>${t}</option>`).join('')}</select>
+        <select class="inf-sel" id="inf-f-plat"><option value="">All platforms</option>${plats.map(p=>`<option>${p}</option>`).join('')}</select>
+        <select class="inf-sel" id="inf-f-biz"><option value="">Sell + Buy</option>${bizs.map(b=>`<option>${b}</option>`).join('')}</select>
+        <select class="inf-sel" id="inf-f-cat"><option value="">All categories</option>${cats.map(c=>`<option>${c}</option>`).join('')}</select>
+        <span class="inf-count" id="inf-row-count"></span>
+      </div>
+      <div class="tw" id="inf-rows-tbl"></div>
+    </div>`;
+
+  // Render monthly summary
+  const mth=`<th>Month</th><th class="nr ch">Campaigns</th><th class="nr">Total Views</th><th class="nr ch">Total Cost</th><th class="nr">Avg CPV</th><th class="nr">Avg Eng %</th>`;
+  const mr=monthly.map((r,i)=>`<tr class="${i===monthly.length-1?'lat':''}">
+    <td><strong>${r.month}</strong>${i===monthly.length-1?' <span class="badge bb">Latest</span>':''}</td>
+    <td class="nr cc"><strong>${r.campaigns}</strong></td>
+    <td class="nr">${r.views_lakh!=null?r.views_lakh.toFixed(2)+'L':'—'}</td>
+    <td class="nr cc">${rupee(r.cost)}</td>
+    <td class="nr">${r.avg_cpv!=null?'₹'+r.avg_cpv.toFixed(2):'—'}</td>
+    <td class="nr">${r.avg_eng!=null?r.avg_eng.toFixed(1)+'%':'—'}</td>
+  </tr>`).reverse().join('');
+  document.getElementById('inf-monthly-tbl').innerHTML=tbl(mth,mr);
+
+  // Render rows table with filter
+  function renderRows(){
+    const fm=document.getElementById('inf-f-month').value;
+    const ft=document.getElementById('inf-f-tier').value;
+    const fp=document.getElementById('inf-f-plat').value;
+    const fb=document.getElementById('inf-f-biz').value;
+    const fc=document.getElementById('inf-f-cat').value;
+    const filtered=allRows.filter(r=>
+      (!fm||r.liveMonth===fm)&&(!ft||r.tier===ft)&&(!fp||r.platform===fp)&&
+      (!fb||r.business===fb)&&(!fc||r.category===fc)
+    ).sort((a,b)=>(b.views||0)-(a.views||0));
+    const totalV=filtered.reduce((s,r)=>s+(r.views||0),0);
+    const totalC=filtered.reduce((s,r)=>s+(r.cost||0),0);
+    document.getElementById('inf-row-count').textContent=`${filtered.length} campaigns · ${(totalV/1e5).toFixed(2)}L views · ${rupee(totalC)} spend`;
+
+    const rth=`<th>Influencer</th><th>Tier</th><th>Platform</th><th>Category</th><th>Month</th><th>Business</th><th class="nr ch">Views</th><th class="nr">Likes</th><th class="nr ch">CPV</th><th class="nr">Eng %</th><th class="nr">Cost</th>`;
+    const rrows=filtered.slice(0,200).map(r=>`<tr>
+      <td><a href="${r.link||r.videoLink||'#'}" target="_blank" style="color:var(--blue);font-weight:600;text-decoration:none">${r.name}</a></td>
+      <td>${tierChip(r.tier)}</td>
+      <td>${platChip(r.platform)}</td>
+      <td style="font-size:12px;color:var(--grey)">${r.category||'—'}</td>
+      <td style="font-size:12px">${r.liveMonth||'—'}</td>
+      <td>${bizChip(r.business)}</td>
+      <td class="nr cc"><strong>${numFmt(r.views)}</strong></td>
+      <td class="nr">${numFmt(r.likes)}</td>
+      <td class="nr cc">${r.cpv!=null?'₹'+r.cpv.toFixed(2):'—'}</td>
+      <td class="nr">${r.engRate!=null?r.engRate.toFixed(1)+'%':'—'}</td>
+      <td class="nr">${rupee(r.cost)}</td>
+    </tr>`).join('');
+    document.getElementById('inf-rows-tbl').innerHTML=tbl(rth,rrows);
+  }
+  ['inf-f-month','inf-f-tier','inf-f-plat','inf-f-biz','inf-f-cat'].forEach(id=>document.getElementById(id)?.addEventListener('change',renderRows));
+  renderRows();
+}
+
 function initYT(){
   renderYT('ytc-c24','cars24_india','Cars24 India');
   renderYT('ytc-tbhp','teambhp','TeamBHP');
@@ -785,7 +893,7 @@ function initIG(){
   renderIG('igc-uae','cars24_uae','Cars24 UAE');
 }
 
-const lazyInit={kw:initTab2,bsos:initTab3,gi:initTab4,impsos:initTab5,yt:initYT,ig:initIG};
+const lazyInit={kw:initTab2,bsos:initTab3,gi:initTab4,impsos:initTab5,inf:initInf,yt:initYT,ig:initIG};
 
 async function main(){
   try{
