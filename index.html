@@ -3,842 +3,803 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cars24 &#183; Brand tracker</title>
-<link rel="icon" href="assets/favicon.png">
+<title>Cars24 · Brand Tracker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --blue:#4736FE; --blue-dk:#2B2098; --blue-lt:#EEF0FF; --light:#E3E1FF;
-  --mint:#63FFB1; --orange:#FF4F01; --ink:#020618;
-  --green:#00A63E; --red:#E7000B; --grey:#6B7280; --grey-2:#9AA0AB;
-  --bg:#F6F6FB; --border:#E7E5F4; --border-2:#EFEDF8; --card:#FFFFFF;
-  --shadow:0 1px 2px rgba(16,12,60,.05),0 1px 3px rgba(16,12,60,.04);
-  --spinny:#E91E8C; --carwale:#FF6B6B; --cardekho:#FFA500;
-  --r:14px; --font:'Geist','Inter',system-ui,-apple-system,sans-serif;
+  --blue:#4736FE;--blue-dk:#2B2098;--blue-lt:#EEF0FF;--blue-mid:#6257FF;
+  --mint:#00C951;--mint-lt:#DCFCE7;--red:#E7000B;--red-lt:#FEE2E2;
+  --amber:#F59E0B;--amber-lt:#FEF3C7;--purple:#7C3AED;--purple-lt:#EDE9FE;
+  --ink:#0F0D2A;--ink-2:#374151;--grey:#6B7280;--grey-2:#9CA3AF;--grey-bg:#F6F6FB;
+  --border:#E5E3F8;--border-2:#EEEDF8;--card:#FFFFFF;
+  --spinny:#E91E8C;--carwale:#FF6B6B;--cardekho:#F97316;--mfc:#7C3AED;--mtv:#059669;--olx:#0EA5E9;
+  --sh-sm:0 1px 3px rgba(15,13,42,.06),0 1px 2px rgba(15,13,42,.04);
+  --sh-md:0 4px 14px rgba(15,13,42,.08),0 1px 4px rgba(15,13,42,.05);
+  --sh-lg:0 8px 28px rgba(71,54,254,.16),0 2px 8px rgba(71,54,254,.08);
+  --r:14px;--font:'Geist',system-ui,-apple-system,sans-serif;
 }
-body{font-family:var(--font);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased}
-a{color:var(--blue);text-decoration:none}
+body{font-family:var(--font);background:var(--grey-bg);color:var(--ink);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
 table{border-collapse:collapse;width:100%}
-th,td{text-align:left;padding:9px 12px;font-size:13px}
-.site-header{background:var(--card);border-bottom:1px solid var(--border);padding:0 28px;position:sticky;top:0;z-index:100}
-.site-header .inner{max-width:1360px;margin:0 auto;height:60px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:12px}
-.brand .mark{width:32px;height:32px;display:block}
-.brand .title{font-size:15px;font-weight:600;color:var(--ink);letter-spacing:-.1px}
-.brand .title b{font-weight:700}
-.brand .sub{font-size:12px;color:var(--grey-2);font-weight:500}
-.freshness{font-size:12px;color:var(--grey-2);font-variant-numeric:tabular-nums;font-weight:500}
-.wrap{max-width:1360px;margin:0 auto;padding:22px 28px 56px}
-.seg{display:inline-flex;background:var(--card);border:1px solid var(--border);border-radius:30px;padding:4px;gap:2px;margin-bottom:22px;box-shadow:var(--shadow)}
-.seg-btn{border:none;background:none;padding:9px 22px;border-radius:24px;font:600 14px/1 var(--font);color:var(--grey);cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .15s,color .15s}
-.seg-btn .flag{font-size:15px;line-height:1}
-.seg-btn:not(.active):hover{color:var(--ink);background:var(--blue-lt)}
-.seg-btn.active{background:var(--blue);color:#fff;box-shadow:0 1px 3px rgba(71,54,254,.35)}
+code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padding:1px 6px;border-radius:4px;color:var(--blue-dk)}
+
+/* Header */
+.hdr{background:var(--card);border-bottom:1.5px solid var(--border);padding:0 28px;position:sticky;top:0;z-index:200}
+.hdr .in{max-width:1380px;margin:0 auto;height:58px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px}
+.bmark{width:30px;height:30px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.bmark svg{width:17px;height:17px}
+.btxt .t1{font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-.3px;line-height:1.1}
+.btxt .t2{font-size:11px;font-weight:500;color:var(--grey-2)}
+.fresh{font-size:11.5px;color:var(--grey-2);font-weight:500;display:flex;align-items:center;gap:5px}
+.fresh::before{content:'';width:6px;height:6px;background:var(--mint);border-radius:50%;display:inline-block}
+
+/* Layout */
+.wrap{max-width:1380px;margin:0 auto;padding:22px 28px 80px}
+
+/* Country segment */
+.seg{display:inline-flex;background:var(--card);border:1.5px solid var(--border);border-radius:30px;padding:4px;gap:3px;margin-bottom:20px;box-shadow:var(--sh-sm)}
+.seg-btn{border:none;background:none;padding:8px 20px;border-radius:24px;font:600 13px/1 var(--font);color:var(--grey);cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .18s}
+.seg-btn.active{background:var(--blue);color:#fff;box-shadow:0 2px 8px rgba(71,54,254,.35)}
+.seg-btn:hover:not(.active){color:var(--ink);background:var(--blue-lt)}
 .country{display:none}.country.active{display:block}
-.tabset{display:block}
-.tabs{display:flex;gap:1px;border-bottom:1px solid var(--border);margin-bottom:20px;overflow-x:auto;scrollbar-width:none}
+
+/* Tabs */
+.tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:20px;overflow-x:auto;scrollbar-width:none;gap:0}
 .tabs::-webkit-scrollbar{display:none}
-.tab{background:none;border:none;padding:11px 16px;font:600 13.5px/1 var(--font);color:var(--grey);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s;border-radius:6px 6px 0 0}
-.tab:hover{color:var(--ink)}
+.tab{background:none;border:none;border-bottom:2.5px solid transparent;margin-bottom:-2px;padding:11px 16px;font:600 13px/1 var(--font);color:var(--grey);cursor:pointer;white-space:nowrap;border-radius:6px 6px 0 0;display:flex;align-items:center;gap:5px;transition:all .14s}
+.tab .ti{font-size:13px;opacity:.75}
+.tab:hover{color:var(--ink);background:rgba(71,54,254,.03)}
 .tab.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:700}
-.tabs.pills{border-bottom:none;gap:8px;margin-bottom:18px;flex-wrap:wrap}
-.tabs.pills .tab{background:var(--blue-lt);border-radius:24px;padding:7px 15px;color:var(--blue);border:none;margin:0;font-size:12.5px;font-weight:600}
-.tabs.pills .tab:hover:not(.active){background:var(--light);color:var(--blue-dk)}
+.tab.active .ti{opacity:1}
+.tabs.pills{border-bottom:none;gap:5px;margin-bottom:14px}
+.tabs.pills .tab{background:var(--blue-lt);border-radius:20px;padding:5px 13px;color:var(--blue);border:none;margin:0;font-size:12px}
 .tabs.pills .tab.active{background:var(--blue);color:#fff}
 .tabpane{display:none}.tabpane.active{display:block}
-.card{background:var(--card);border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--shadow);padding:20px 22px;margin-bottom:16px}
-.card-grid{display:grid;gap:14px;margin-bottom:16px}
-.card-grid.col3{grid-template-columns:repeat(3,1fr)}
-.card-grid.col4{grid-template-columns:repeat(4,1fr)}
-.card-grid.col2{grid-template-columns:repeat(2,1fr)}
-@media(max-width:900px){.card-grid.col3,.card-grid.col4{grid-template-columns:1fr 1fr}.card-grid.col2{grid-template-columns:1fr}}
-@media(max-width:600px){.card-grid.col3,.card-grid.col4,.card-grid.col2{grid-template-columns:1fr}}
-.overview-strip{background:linear-gradient(120deg,#2B2098 0%,#4736FE 100%);border-radius:var(--r);padding:20px 24px;margin-bottom:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:0;box-shadow:0 6px 20px rgba(43,32,152,.22)}
-.ov-metric{padding:0 26px;border-right:1px solid rgba(255,255,255,.14)}
-.ov-metric:first-child{padding-left:0}
-.ov-metric:last-child{border-right:none}
-.ov-label{font-size:11px;font-weight:600;color:rgba(255,255,255,.62);text-transform:uppercase;letter-spacing:.7px;margin-bottom:7px}
-.ov-value{font-size:27px;font-weight:800;color:#fff;letter-spacing:-.6px;line-height:1.05}
-.ov-sub{font-size:12px;color:rgba(255,255,255,.55);margin-top:5px}
-@media(max-width:600px){.overview-strip{grid-template-columns:1fr;gap:14px}.ov-metric{border-right:none;border-bottom:1px solid rgba(255,255,255,.14);padding:0 0 12px}.ov-metric:last-child{border-bottom:none;padding-bottom:0}}
-.kpi{padding:17px 19px}
-.kpi-label{font-size:11px;font-weight:600;color:var(--grey);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
-.kpi-value{font-size:23px;font-weight:800;color:var(--ink);line-height:1.05;margin-bottom:4px;letter-spacing:-.4px}
-.kpi-sub{font-size:12px;color:var(--grey)}
-.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;vertical-align:middle}
-.badge-up{background:#DCFCE7;color:#15803D}
-.badge-down{background:#FEE2E2;color:#B91C1C}
-.badge-flat{background:#F1F0F7;color:var(--grey)}
-.sec-hdr{margin-bottom:16px}
-.sec-kicker{font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:3px}
-.sec-title{font-size:16px;font-weight:700;color:var(--ink);letter-spacing:-.2px}
-.data-table{width:100%;border-collapse:collapse;font-size:13px}
-.data-table thead th{background:#FAFAFE;font-size:11px;font-weight:700;color:var(--grey);text-transform:uppercase;letter-spacing:.5px;padding:9px 12px;border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0}
-.data-table tbody tr{border-bottom:1px solid var(--border-2)}
-.data-table tbody tr:hover{background:#FBFBFE}
-.data-table tbody td{padding:9px 12px;vertical-align:middle}
-.data-table .c24-col{background:#F5F4FF;font-weight:700;color:var(--blue)}
-.data-table .latest-row td{background:#EEF0FF}
-.data-table .num{text-align:right;font-variant-numeric:tabular-nums}
-.tbl-wrap{max-height:440px;overflow-y:auto;border-radius:10px;border:1px solid var(--border)}
-.sos-hero{background:linear-gradient(120deg,#2B2098 0%,#4736FE 100%);border-radius:var(--r);padding:28px 30px;margin-bottom:16px;color:#fff;box-shadow:0 6px 20px rgba(43,32,152,.22)}
-.sos-hero-eyebrow{font-size:11px;font-weight:700;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-.sos-hero-value{font-size:62px;font-weight:800;color:#fff;line-height:1;letter-spacing:-2px;margin-bottom:8px}
-.sos-hero-text{font-size:14.5px;color:rgba(255,255,255,.72);max-width:580px;line-height:1.6;margin-bottom:14px}
-.sos-hero-text strong{color:#fff}
-.chart-wrap{position:relative;height:280px}
-.chart-wrap.tall{height:340px}
-.placeholder{background:#FBFBFE;border:1.5px dashed var(--border);border-radius:var(--r);padding:38px 32px;text-align:center;color:var(--grey)}
-.ph-mark{width:42px;height:42px;border-radius:12px;background:var(--blue-lt);color:var(--blue);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
-.ph-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:7px}
-.ph-body{font-size:13px;line-height:1.65;max-width:480px;margin:0 auto;color:var(--grey)}
-.data-note{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:15px 18px;margin:14px auto 0;text-align:left;max-width:520px}
-.data-note-title{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:8px}
-.data-note ul{font-size:12px;color:var(--grey);line-height:1.95;padding-left:18px}
-.rank-chip{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
-.trend-up{color:var(--green);font-weight:700}
-.trend-dn{color:var(--red);font-weight:700}
-.trend-flat{color:var(--grey)}
-.controls{display:flex;gap:12px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
-.controls select{padding:8px 12px;border:1px solid var(--border);border-radius:9px;font:14px var(--font);color:var(--ink);background:#fff;cursor:pointer;outline:none}
-.controls select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(71,54,254,.15)}
-.controls label{font-size:12px;font-weight:600;color:var(--grey);text-transform:uppercase;letter-spacing:.5px}
-.donut-wrap{position:relative;height:220px}
+
+/* Cards */
+.card{background:var(--card);border-radius:var(--r);border:1.5px solid var(--border);box-shadow:var(--sh-sm);padding:20px 22px;margin-bottom:16px;transition:box-shadow .15s}
+.card:hover{box-shadow:var(--sh-md)}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+@media(max-width:900px){.g3,.g4{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.g3,.g4,.g2{grid-template-columns:1fr}}
+
+/* Gradient KPI hero cards */
+.kh{border-radius:var(--r);padding:20px 22px;color:#fff;position:relative;overflow:hidden}
+.kh::after{content:'';position:absolute;top:-20px;right:-16px;width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.07)}
+.kh-blue{background:linear-gradient(135deg,#2B2098,#4736FE);box-shadow:0 4px 14px rgba(71,54,254,.32)}
+.kh-green{background:linear-gradient(135deg,#065F46,#00A63E);box-shadow:0 4px 14px rgba(0,166,62,.28)}
+.kh-red{background:linear-gradient(135deg,#92000A,#E7000B);box-shadow:0 4px 14px rgba(231,0,11,.22)}
+.kh-purple{background:linear-gradient(135deg,#4C1D95,#7C3AED);box-shadow:0 4px 14px rgba(124,58,237,.25)}
+.kh-amber{background:linear-gradient(135deg,#92400E,#D97706);box-shadow:0 4px 14px rgba(217,119,6,.24)}
+.kh-teal{background:linear-gradient(135deg,#0C4A6E,#0EA5E9);box-shadow:0 4px 14px rgba(14,165,233,.28)}
+.kh-pink{background:linear-gradient(135deg,#831843,#E91E8C);box-shadow:0 4px 14px rgba(233,30,140,.28)}
+.kh .kl{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.kh .ki{font-size:14px}
+.kh .kv{font-size:26px;font-weight:900;letter-spacing:-.7px;line-height:1;margin-bottom:5px}
+.kh .ks{font-size:12px;color:rgba(255,255,255,.6);margin-top:2px}
+
+/* Overview strip */
+.ov-strip{background:linear-gradient(120deg,#1D0E7A,#2B2098 45%,#4736FE);border-radius:var(--r);padding:22px 26px;margin-bottom:22px;display:grid;grid-template-columns:repeat(3,1fr);box-shadow:var(--sh-lg);position:relative;overflow:hidden}
+.ov-strip::before{content:'';position:absolute;top:-50px;right:80px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.04)}
+.ovm{padding:0 24px;border-right:1px solid rgba(255,255,255,.12);position:relative;z-index:1}
+.ovm:first-child{padding-left:0}
+.ovm:last-child{border-right:none}
+.ovl{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.9px;margin-bottom:7px}
+.ovv{font-size:28px;font-weight:900;color:#fff;letter-spacing:-.8px;line-height:1.05}
+.ovs{font-size:12px;color:rgba(255,255,255,.5);margin-top:5px}
+
+/* Section header */
+.sh{margin-bottom:14px;border-left:3px solid var(--blue);padding-left:12px}
+.sh .kicker{font-size:10px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:1.2px;display:block;margin-bottom:2px}
+.sh .title{font-size:15.5px;font-weight:800;color:var(--ink);letter-spacing:-.3px;display:block;margin-bottom:4px}
+.sh .desc{font-size:12.5px;color:var(--grey);line-height:1.55}
+
+/* Filter bar */
+.fb{display:flex;align-items:center;gap:10px;margin-bottom:13px;flex-wrap:wrap}
+.fl{font-size:10.5px;font-weight:700;color:var(--grey);text-transform:uppercase;letter-spacing:.5px}
+.pp-wrap{display:flex;gap:4px}
+.pp{border:1.5px solid var(--border);background:var(--card);padding:5px 12px;border-radius:20px;font:600 12px var(--font);color:var(--grey);cursor:pointer;transition:all .14s}
+.pp:hover{border-color:var(--blue);color:var(--blue)}
+.pp.active{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 2px 6px rgba(71,54,254,.3)}
+.cr{display:none;align-items:center;gap:7px;background:var(--blue-lt);border:1.5px solid var(--border);border-radius:10px;padding:6px 12px}
+.cr.open{display:flex}
+.cr input[type=month]{border:1.5px solid var(--border);border-radius:7px;padding:4px 9px;font:600 12px var(--font);color:var(--ink);background:var(--card);outline:none}
+.cr input[type=month]:focus{border-color:var(--blue)}
+.cr .sep{font-size:12px;color:var(--grey)}
+.apply-btn{background:var(--blue);color:#fff;border:none;border-radius:7px;padding:5px 11px;font:700 12px var(--font);cursor:pointer}
+.apply-btn:hover{background:var(--blue-dk)}
+
+/* Badges */
+.badge{display:inline-flex;align-items:center;gap:2px;padding:2px 7px;border-radius:20px;font-size:11px;font-weight:700;vertical-align:middle}
+.bu{background:#DCFCE7;color:#15803D}
+.bd{background:#FEE2E2;color:#B91C1C}
+.bf{background:#F1F0F7;color:var(--grey)}
+.bb{background:var(--blue-lt);color:var(--blue)}
+.ba{background:var(--amber-lt);color:#92400E}
+
+/* Data tables */
+.dt{width:100%;border-collapse:collapse;font-size:13px}
+.dt thead th{background:#FAFAFE;font-size:10.5px;font-weight:800;color:var(--grey);text-transform:uppercase;letter-spacing:.6px;padding:9px 13px;border-bottom:2px solid var(--border);white-space:nowrap;position:sticky;top:0;z-index:1}
+.dt thead th.ch{background:#F0EEFF;color:var(--blue)}
+.dt tbody tr{border-bottom:1px solid var(--border-2);transition:background .1s}
+.dt tbody tr:hover{background:#FAFAFE}
+.dt tbody tr.lat td{background:#EEF0FF}
+.dt tbody td{padding:9px 13px;vertical-align:middle}
+.dt .cc{background:#F5F4FF;font-weight:700;color:var(--blue)}
+.dt .nr{text-align:right;font-variant-numeric:tabular-nums}
+.tw{max-height:460px;overflow-y:auto;border-radius:10px;border:1.5px solid var(--border)}
+
+/* Table icons */
+.tia{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;font-size:11px}
+.tia-up{background:#DCFCE7;color:#15803D}
+.tia-dn{background:#FEE2E2;color:#B91C1C}
+.tia-fl{background:#F1F0F7;color:var(--grey)}
+.bdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle;flex-shrink:0}
+.rchip{display:inline-block;min-width:24px;padding:2px 7px;border-radius:6px;font-size:11px;font-weight:800;text-align:center}
+.r1{background:#FEF3C7;color:#92400E}
+.r2{background:#F1F5F9;color:#475569}
+.r3{background:#FFF7ED;color:#C2410C}
+.rn{background:#F1F0F7;color:var(--grey)}
+
+/* SoS hero */
+.sos-hero{background:linear-gradient(120deg,#1D0E7A,#2B2098 40%,#4736FE);border-radius:var(--r);padding:28px 32px;margin-bottom:16px;color:#fff;box-shadow:var(--sh-lg);position:relative;overflow:hidden}
+.sos-hero::after{content:'';position:absolute;bottom:-30px;right:50px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.05)}
+.sos-eyebrow{font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:10px}
+.sos-val{font-size:70px;font-weight:900;letter-spacing:-3px;line-height:1;margin-bottom:10px;position:relative;z-index:1}
+.sos-txt{font-size:14.5px;color:rgba(255,255,255,.72);max-width:600px;line-height:1.65;margin-bottom:14px;position:relative;z-index:1}
+.sos-txt strong{color:#fff}
+.sos-badges{display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:1}
+
+/* Charts */
+.cw{position:relative;height:280px}
+.cw.tall{height:340px}
+
+/* Placeholder */
+.ph{background:#FAFAFE;border:2px dashed var(--border);border-radius:var(--r);padding:40px 32px;text-align:center}
+.ph-mark{width:44px;height:44px;border-radius:12px;background:var(--blue-lt);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:20px;margin:0 auto 14px}
+.ph-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:7px}
+.ph-body{font-size:13px;line-height:1.7;max-width:480px;margin:0 auto;color:var(--grey)}
+.setup-steps{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:16px 20px;margin:16px auto 0;text-align:left;max-width:560px}
+.setup-steps h4{font-size:11px;font-weight:800;color:var(--ink);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px}
+.setup-steps ol{font-size:12.5px;color:var(--ink-2);line-height:2.1;padding-left:18px}
+.dn-card{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:14px 18px;margin:12px auto 0;max-width:520px;text-align:left}
+.dn-card h4{font-size:11px;font-weight:700;color:var(--ink);margin-bottom:7px;text-transform:uppercase;letter-spacing:.4px}
+.dn-card ul{font-size:12px;color:var(--grey);line-height:2;padding-left:16px}
+
+/* Controls */
+.ctrl-wrap{display:flex;gap:12px;align-items:center;margin-bottom:15px;flex-wrap:wrap}
+.ctrl-lbl{font-size:11px;font-weight:700;color:var(--grey);text-transform:uppercase;letter-spacing:.5px}
+.ctrl-sel{padding:8px 12px;border:1.5px solid var(--border);border-radius:9px;font:600 13px var(--font);color:var(--ink);background:var(--card);cursor:pointer;outline:none}
+.ctrl-sel:focus{border-color:var(--blue)}
+.dw{position:relative;height:220px}
+.spark{vertical-align:middle;opacity:.8}
 </style>
 </head>
 <body>
-<header class="site-header">
-  <div class="inner">
+
+<header class="hdr">
+  <div class="in">
     <div class="brand">
-      <span class="mark"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Cars24">
-        <rect width="100" height="100" rx="26" fill="#4736FE"/>
-        <path d="M70 31 A27 27 0 1 0 70 69" fill="none" stroke="#fff" stroke-width="13" stroke-linecap="round"/>
-      </svg></span>
-      <span class="title"><b>Cars24</b> &nbsp;&#183;&nbsp; Brand tracker</span>
-      <span class="sub">India &#183; Australia &#183; UAE</span>
+      <div class="bmark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z" stroke="#fff" stroke-width="1.8"/><path d="M8 12l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="btxt">
+        <div class="t1">Cars24 · Brand Tracker</div>
+        <div class="t2">India · Australia · UAE</div>
+      </div>
     </div>
-    <div class="freshness" id="freshness"></div>
+    <div class="fresh" id="freshness">Loading…</div>
   </div>
 </header>
 
 <main class="wrap">
-  <div class="seg" role="tablist" aria-label="Country">
-    <button class="seg-btn active" data-seg="india"><span class="flag">&#127470;&#127475;</span> India</button>
-    <button class="seg-btn" data-seg="au"><span class="flag">&#127462;&#127482;</span> Australia</button>
-    <button class="seg-btn" data-seg="uae"><span class="flag">&#127462;&#127466;</span> UAE</button>
+
+  <div class="seg">
+    <button class="seg-btn active" data-seg="india"><span>🇮🇳</span> India</button>
+    <button class="seg-btn" data-seg="au"><span>🇦🇺</span> Australia</button>
+    <button class="seg-btn" data-seg="uae"><span>🇦🇪</span> UAE</button>
   </div>
-<div class="country active" id="country-india"><!-- Overview strip -->
-    <div class="overview-strip" id="overview-strip">
-      <div class="ov-metric"><div class="ov-label">Brand Search Impressions</div><div class="ov-value" id="ov-imp">—</div><div class="ov-sub" id="ov-imp-sub"></div></div>
-      <div class="ov-metric"><div class="ov-label">Cars24 Share of Searches</div><div class="ov-value" id="ov-sos">—</div><div class="ov-sub" id="ov-sos-sub"></div></div>
-      <div class="ov-metric"><div class="ov-label">Cars24 vs Spinny SoS</div><div class="ov-value" id="ov-ratio">—</div><div class="ov-sub" id="ov-ratio-sub"></div></div>
-    </div>
 
-    <div class="tabset"><nav class="tabs"><button class="tab active" data-target="m-search">Brand search impressions</button><button class="tab" data-target="m-keywords" data-lazy="keywords">Keyword impressions volume</button><button class="tab" data-target="m-bsos" data-lazy="bsos">Brand share of searches</button><button class="tab" data-target="m-indexed" data-lazy="indexed">Google indexed data</button><button class="tab" data-target="m-impsos" data-lazy="impsos">Impressions vs SoS vs indexed</button><button class="tab" data-target="in-inf">Influencers</button><button class="tab" data-target="in-yt">YouTube</button><button class="tab" data-target="in-ig">Instagram</button><button class="tab" data-target="in-li">LinkedIn</button></nav><div class="tabpanes"><section class="tabpane active" id="m-search"><!-- ── Tab 1: Search Impressions ──────────────────────────────────── -->
-    <div class="tabpane active" id="m-search">
-      <div class="card-grid col3" id="imp-kpis"></div>
-      <div class="card">
-        <div class="sec-hdr"><span class="sec-kicker">Monthly trend</span><span class="sec-title">Brand Search Impressions</span></div>
-        <div class="chart-wrap tall"><canvas id="chart-imp"></canvas></div>
+  <!-- ═══════════════════ INDIA ═══════════════════ -->
+  <div class="country active" id="country-india">
+    <div class="ov-strip">
+      <div class="ovm">
+        <div class="ovl">📊 Brand Search Impressions</div>
+        <div class="ovv" id="ov-imp">—</div>
+        <div class="ovs" id="ov-imp-sub"></div>
       </div>
-      <div class="card">
-        <div class="sec-hdr"><span class="sec-kicker">Month-on-Month</span><span class="sec-title">Impression History</span></div>
-        <div class="tbl-wrap" id="tbl-monthly"></div>
+      <div class="ovm">
+        <div class="ovl">🆚 Cars24 Share of Searches</div>
+        <div class="ovv" id="ov-sos">—</div>
+        <div class="ovs" id="ov-sos-sub"></div>
       </div>
-      <div class="card">
-        <div class="sec-hdr"><span class="sec-kicker">Week-on-Week</span><span class="sec-title">Weekly Brand Demand Index</span></div>
-        <div class="chart-wrap"><canvas id="chart-wow"></canvas></div>
-        <div class="tbl-wrap" style="margin-top:16px" id="tbl-weekly"></div>
+      <div class="ovm">
+        <div class="ovl">⚡ Cars24 ÷ Spinny</div>
+        <div class="ovv" id="ov-ratio">—</div>
+        <div class="ovs" id="ov-ratio-sub"></div>
       </div>
     </div>
 
-    </section><section class="tabpane" id="m-keywords"><!-- ── Tab 2: Keywords ────────────────────────────────────────────── -->
-    <div class="tabpane" id="m-keywords">
-      <div class="card">
-        <div class="sec-hdr"><span class="sec-kicker">Monthly</span><span class="sec-title">Keyword Search Volume</span></div>
-        <div class="tbl-wrap" id="tbl-kw-monthly"></div>
-      </div>
-      <div class="card-grid col2">
-        <div class="card" style="margin:0">
-          <div class="sec-hdr"><span class="sec-kicker">Latest month</span><span class="sec-title">Category Breakdown</span></div>
-          <div class="donut-wrap"><canvas id="chart-donut"></canvas></div>
-        </div>
-        <div class="card" style="margin:0">
-          <div class="sec-hdr"><span class="sec-kicker">By category</span><span class="sec-title">Volume &amp; Share</span></div>
-          <div class="tbl-wrap" id="tbl-categories"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="sec-hdr"><span class="sec-kicker">Trends · last 12 months</span><span class="sec-title">Category Impressions Over Time</span></div>
-        <div class="chart-wrap tall"><canvas id="chart-cat-trends"></canvas></div>
+    <div class="tabset">
+      <nav class="tabs" id="india-tabs">
+        <button class="tab active" data-target="m-search"><span class="ti">📊</span>Brand search impressions</button>
+        <button class="tab" data-target="m-kw" data-lazy="kw"><span class="ti">🔑</span>Keyword impressions</button>
+        <button class="tab" data-target="m-bsos" data-lazy="bsos"><span class="ti">🆚</span>Share of searches</button>
+        <button class="tab" data-target="m-gi" data-lazy="gi"><span class="ti">📡</span>Google indexed</button>
+        <button class="tab" data-target="m-impsos" data-lazy="impsos"><span class="ti">📈</span>Impressions × SoS</button>
+        <button class="tab" data-target="in-inf"><span class="ti">👥</span>Influencers</button>
+        <button class="tab" data-target="in-yt" data-lazy="yt"><span class="ti">📺</span>YouTube</button>
+        <button class="tab" data-target="in-ig" data-lazy="ig"><span class="ti">📸</span>Instagram</button>
+        <button class="tab" data-target="in-li"><span class="ti">💼</span>LinkedIn</button>
+      </nav>
+
+      <div class="tabpanes">
+
+        <!-- TAB 1: SEARCH IMPRESSIONS -->
+        <section class="tabpane active" id="m-search">
+          <div class="g3" id="imp-kpis"></div>
+
+          <div class="card">
+            <div class="sh"><span class="kicker">📈 Monthly trend</span><span class="title">Brand Search Impressions</span><span class="desc">Total times Cars24-related searches appeared on Google, India. Higher = more brand awareness.</span></div>
+            <div class="cw tall"><canvas id="chart-imp"></canvas></div>
+          </div>
+
+          <div class="card">
+            <div class="sh"><span class="kicker">📅 History</span><span class="title">Month-on-Month Table</span><span class="desc">Impressions, MoM % and YoY % change per month. Green badge = grew, Red = declined.</span></div>
+            <div class="fb">
+              <span class="fl">Show</span>
+              <div class="pp-wrap" id="pp-imp">
+                <button class="pp active" data-p="all">All time</button>
+                <button class="pp" data-p="12m">12 months</button>
+                <button class="pp" data-p="6m">6 months</button>
+                <button class="pp" data-p="3m">3 months</button>
+                <button class="pp" data-p="custom">Custom ▾</button>
+              </div>
+              <div class="cr" id="cr-imp">
+                <input type="month" id="imp-from"><span class="sep">to</span>
+                <input type="month" id="imp-to">
+                <button class="apply-btn" onclick="applyFilter('imp')">Apply</button>
+              </div>
+            </div>
+            <div class="tw" id="tbl-monthly"></div>
+          </div>
+
+          <div class="card">
+            <div class="sh"><span class="kicker">📆 Week-on-Week</span><span class="title">Weekly Brand Demand Index</span><span class="desc">Cars24's average share of all used-car searches each week. Blue = grew, red = shrank.</span></div>
+            <div class="fb">
+              <span class="fl">Show</span>
+              <div class="pp-wrap" id="pp-wow">
+                <button class="pp active" data-p="all">All weeks</button>
+                <button class="pp" data-p="26w">26W</button>
+                <button class="pp" data-p="12w">12W</button>
+                <button class="pp" data-p="8w">8W</button>
+              </div>
+            </div>
+            <div class="cw"><canvas id="chart-wow"></canvas></div>
+            <div class="tw" style="margin-top:14px" id="tbl-weekly"></div>
+          </div>
+        </section>
+
+        <!-- TAB 2: KEYWORDS -->
+        <section class="tabpane" id="m-kw">
+          <div class="card">
+            <div class="sh"><span class="kicker">📅 Monthly volume</span><span class="title">Keyword Search Volume</span><span class="desc">Total keyword impressions across all Cars24 search terms per month.</span></div>
+            <div class="fb">
+              <span class="fl">Show</span>
+              <div class="pp-wrap" id="pp-kw">
+                <button class="pp active" data-p="all">All time</button>
+                <button class="pp" data-p="12m">12M</button>
+                <button class="pp" data-p="6m">6M</button>
+                <button class="pp" data-p="3m">3M</button>
+                <button class="pp" data-p="custom">Custom ▾</button>
+              </div>
+              <div class="cr" id="cr-kw">
+                <input type="month" id="kw-from"><span class="sep">to</span>
+                <input type="month" id="kw-to">
+                <button class="apply-btn" onclick="applyFilter('kw')">Apply</button>
+              </div>
+            </div>
+            <div class="tw" id="tbl-kw"></div>
+          </div>
+
+          <div class="g2">
+            <div class="card" style="margin:0">
+              <div class="sh"><span class="kicker">🍩 Latest month</span><span class="title">Category Breakdown</span><span class="desc">How impressions split across intent categories this month.</span></div>
+              <div class="dw"><canvas id="chart-donut"></canvas></div>
+            </div>
+            <div class="card" style="margin:0">
+              <div class="sh"><span class="kicker">📋 Categories</span><span class="title">Volume, Share & MoM</span><span class="desc">Volume, share %, and MoM change per search category.</span></div>
+              <div class="tw" id="tbl-cats"></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="sh"><span class="kicker">📊 Last 12 months</span><span class="title">Category Trends Over Time</span><span class="desc">How each search category has grown or shrunk over the past year.</span></div>
+            <div class="cw tall"><canvas id="chart-cat-trends"></canvas></div>
+          </div>
+        </section>
+
+        <!-- TAB 3: BSOS -->
+        <section class="tabpane" id="m-bsos">
+          <div class="sos-hero">
+            <div class="sos-eyebrow">🏆 Cars24 · Share of Searches · All-India</div>
+            <div class="sos-val" id="sos-val">—</div>
+            <div class="sos-txt" id="sos-txt"></div>
+            <div class="sos-badges" id="sos-badges"></div>
+          </div>
+
+          <div class="g4" id="sos-kpis"></div>
+
+          <div class="card">
+            <div class="sh"><span class="kicker">📈 All brands · Monthly</span><span class="title">Share of Searches — Trend</span><span class="desc">What % of all used-car searches each brand captured, month by month. Cars24 line is thicker.</span></div>
+            <div class="fb">
+              <span class="fl">Show</span>
+              <div class="pp-wrap" id="pp-sos">
+                <button class="pp active" data-p="all">All time</button>
+                <button class="pp" data-p="12m">12M</button>
+                <button class="pp" data-p="6m">6M</button>
+                <button class="pp" data-p="3m">3M</button>
+                <button class="pp" data-p="custom">Custom ▾</button>
+              </div>
+              <div class="cr" id="cr-sos">
+                <input type="month" id="sos-from"><span class="sep">to</span>
+                <input type="month" id="sos-to">
+                <button class="apply-btn" onclick="applyFilter('sos')">Apply</button>
+              </div>
+            </div>
+            <div class="cw tall"><canvas id="chart-sos"></canvas></div>
+          </div>
+
+          <div class="card">
+            <div class="sh"><span class="kicker">🆚 Competitor table</span><span class="title">SoS — All Brands by Month</span><span class="desc">Blue column = Cars24. Gap column = Cars24 pp minus Spinny pp. Green = Cars24 leads.</span></div>
+            <div class="fb">
+              <span class="fl">Show</span>
+              <div class="pp-wrap" id="pp-comp">
+                <button class="pp active" data-p="12m">12M</button>
+                <button class="pp" data-p="6m">6M</button>
+                <button class="pp" data-p="3m">3M</button>
+                <button class="pp" data-p="all">All time</button>
+                <button class="pp" data-p="custom">Custom ▾</button>
+              </div>
+              <div class="cr" id="cr-comp">
+                <input type="month" id="comp-from"><span class="sep">to</span>
+                <input type="month" id="comp-to">
+                <button class="apply-btn" onclick="applyFilter('comp')">Apply</button>
+              </div>
+            </div>
+            <div class="tw" id="tbl-comp"></div>
+          </div>
+
+          <div class="card">
+            <div class="sh"><span class="kicker">🏙 City snapshot</span><span class="title">SoS by City — Latest Month</span><span class="desc">Gap = Cars24 % minus competitor %. Green = Cars24 higher. Rank = Cars24's position in that city.</span></div>
+            <div class="fb">
+              <span class="fl">Month</span>
+              <select class="ctrl-sel" id="city-month-pick" style="margin-left:4px"></select>
+            </div>
+            <div class="tw" id="tbl-city-snap"></div>
+          </div>
+
+          <div class="card">
+            <div class="sh"><span class="kicker">📅 Last 6 months</span><span class="title">Cars24 SoS Growth — All Cities</span><span class="desc">Blue = latest month. Green cell = higher than 6 months ago. Trend arrow shows direction.</span></div>
+            <div class="tw" id="tbl-city-growth"></div>
+          </div>
+
+          <div class="card">
+            <div class="sh"><span class="kicker">🔍 Deep-dive</span><span class="title">All Brands · Select a City</span><span class="desc">Pick any city to see every brand's SoS month by month.</span></div>
+            <div class="ctrl-wrap">
+              <span class="ctrl-lbl">City</span>
+              <select class="ctrl-sel" id="city-pick"></select>
+            </div>
+            <div class="tw" id="tbl-city-dd"></div>
+            <div class="cw" style="margin-top:14px"><canvas id="chart-city-dd"></canvas></div>
+          </div>
+        </section>
+
+        <!-- TAB 4: GOOGLE INDEXED -->
+        <section class="tabpane" id="m-gi"><div id="gi-content"></div></section>
+
+        <!-- TAB 5: IMP × SoS -->
+        <section class="tabpane" id="m-impsos"><div id="impsos-content"></div></section>
+
+        <!-- INFLUENCERS -->
+        <section class="tabpane" id="in-inf">
+          <div class="tabset"><nav class="tabs pills">
+            <button class="tab active" data-target="inf-ov">Overview</button>
+            <button class="tab" data-target="inf-yt">YouTube collabs</button>
+            <button class="tab" data-target="inf-ig">Instagram collabs</button>
+          </nav><div class="tabpanes">
+            <section class="tabpane active" id="inf-ov"><div class="ph"><div class="ph-mark">👥</div><div class="ph-title">Influencer campaign tracker</div><div class="ph-body">Views, CPV, reach and engagement by influencer and month, across YouTube and Instagram.</div><div class="dn-card"><h4>Data columns needed</h4><ul><li>Month · influencer · platform (YouTube / Instagram)</li><li>Content type · views / reach · likes · comments · saves</li><li>Budget ₹ · CPV · category · post link</li></ul></div></div></section>
+            <section class="tabpane" id="inf-yt"><div class="ph"><div class="ph-mark">📹</div><div class="ph-title">YouTube influencer campaigns</div><div class="ph-body">Views, CPV, watch time per influencer campaign.</div></div></section>
+            <section class="tabpane" id="inf-ig"><div class="ph"><div class="ph-mark">📸</div><div class="ph-title">Instagram influencer campaigns</div><div class="ph-body">Reach, CPR, saves and story views per influencer campaign.</div></div></section>
+          </div></div>
+        </section>
+
+        <!-- YOUTUBE -->
+        <section class="tabpane" id="in-yt">
+          <div class="tabset"><nav class="tabs pills">
+            <button class="tab active" data-target="yt-c24">Cars24 India</button>
+            <button class="tab" data-target="yt-tbhp">TeamBHP</button>
+            <button class="tab" data-target="yt-insider">Cars24 Insider</button>
+          </nav><div class="tabpanes">
+            <section class="tabpane active" id="yt-c24"><div id="ytc-c24"></div></section>
+            <section class="tabpane" id="yt-tbhp"><div id="ytc-tbhp"></div></section>
+            <section class="tabpane" id="yt-insider"><div id="ytc-insider"></div></section>
+          </div></div>
+        </section>
+
+        <!-- INSTAGRAM -->
+        <section class="tabpane" id="in-ig">
+          <div class="tabset"><nav class="tabs pills">
+            <button class="tab active" data-target="ig-c24">Cars24 India</button>
+            <button class="tab" data-target="ig-tbhp">TeamBHP</button>
+          </nav><div class="tabpanes">
+            <section class="tabpane active" id="ig-c24"><div id="igc-c24"></div></section>
+            <section class="tabpane" id="ig-tbhp"><div id="igc-tbhp"></div></section>
+          </div></div>
+        </section>
+
+        <!-- LINKEDIN -->
+        <section class="tabpane" id="in-li">
+          <div class="tabset"><nav class="tabs pills">
+            <button class="tab active" data-target="li-c24">Cars24</button>
+            <button class="tab" data-target="li-careers">Careers</button>
+          </nav><div class="tabpanes">
+            <section class="tabpane active" id="li-c24"><div class="ph"><div class="ph-mark">💼</div><div class="ph-title">LinkedIn · Cars24 India</div><div class="ph-body">Followers, new followers, impressions, unique visitors and engagement rate, month on month.</div><div class="dn-card"><h4>What to share</h4><ul><li>LinkedIn Page admin → Analytics → Followers → Export</li><li>LinkedIn Page admin → Analytics → Content → Export</li></ul></div></div></section>
+            <section class="tabpane" id="li-careers"><div class="ph"><div class="ph-mark">💼</div><div class="ph-title">LinkedIn · Cars24 Careers</div><div class="ph-body">Share the Cars24 Careers LinkedIn export to populate.</div></div></section>
+          </div></div>
+        </section>
+
       </div>
     </div>
+  </div>
 
-    </section><section class="tabpane" id="m-bsos"><!-- ── Tab 3: Share of Searches ───────────────────────────────────── -->
-    <div class="tabpane active" id="m-bsos">
-      <!-- Hero -->
-      <div class="sos-hero">
-        <div class="sos-hero-eyebrow">Cars24 · Share of Searches · All-India</div>
-        <div id="sos-hero-value" class="sos-hero-value">—</div>
-        <div class="sos-hero-text" id="sos-hero-text"></div>
-        <div id="sos-hero-badges"></div>
-      </div>
+  <!-- ═══════════════════ AUSTRALIA ═══════════════════ -->
+  <div class="country" id="country-au">
+    <div class="tabset"><nav class="tabs">
+      <button class="tab active" data-target="au-s">📊 Brand impressions</button>
+      <button class="tab" data-target="au-sos">🆚 Share of searches</button>
+      <button class="tab" data-target="au-city">🏙 City level</button>
+      <button class="tab" data-target="au-yt">📺 YouTube</button>
+      <button class="tab" data-target="au-ig">📸 Instagram</button>
+      <button class="tab" data-target="au-li">💼 LinkedIn</button>
+    </nav><div class="tabpanes">
+      <section class="tabpane active" id="au-s"><div class="ph"><div class="ph-mark">📊</div><div class="ph-title">Australia · Brand impressions</div><div class="ph-body">Share the Google Search Console export for Australia to populate.</div></div></section>
+      <section class="tabpane" id="au-sos"><div class="ph"><div class="ph-mark">🆚</div><div class="ph-title">Australia · Share of searches</div><div class="ph-body">Share Brandstack BSOS data (Cars24 vs Carsales, Drive, AutoTrader AU).</div></div></section>
+      <section class="tabpane" id="au-city"><div class="ph"><div class="ph-mark">🏙</div><div class="ph-title">Australia · City level</div><div class="ph-body">Share city-level BSOS data (Sydney, Melbourne, Brisbane) to populate.</div></div></section>
+      <section class="tabpane" id="au-yt"><div id="ytc-au"></div></section>
+      <section class="tabpane" id="au-ig"><div id="igc-au"></div></section>
+      <section class="tabpane" id="au-li"><div class="ph"><div class="ph-mark">💼</div><div class="ph-title">LinkedIn · Cars24 Australia</div><div class="ph-body">Share the Cars24 Australia LinkedIn export to populate.</div></div></section>
+    </div></div>
+  </div>
 
-      <!-- 4 KPI cards -->
-      <div class="card-grid col4" id="sos-kpis"></div>
+  <!-- ═══════════════════ UAE ═══════════════════ -->
+  <div class="country" id="country-uae">
+    <div class="tabset"><nav class="tabs">
+      <button class="tab active" data-target="uae-s">📊 Brand impressions</button>
+      <button class="tab" data-target="uae-sos">🆚 Share of searches</button>
+      <button class="tab" data-target="uae-city">🏙 City level</button>
+      <button class="tab" data-target="uae-yt">📺 YouTube</button>
+      <button class="tab" data-target="uae-ig">📸 Instagram</button>
+      <button class="tab" data-target="uae-li">💼 LinkedIn</button>
+    </nav><div class="tabpanes">
+      <section class="tabpane active" id="uae-s"><div class="ph"><div class="ph-mark">📊</div><div class="ph-title">UAE · Brand impressions</div><div class="ph-body">Share the Google Search Console export for UAE to populate.</div></div></section>
+      <section class="tabpane" id="uae-sos"><div class="ph"><div class="ph-mark">🆚</div><div class="ph-title">UAE · Share of searches</div><div class="ph-body">Share Brandstack BSOS data (Cars24 vs Dubizzle, Dubicars, YallaMotor).</div></div></section>
+      <section class="tabpane" id="uae-city"><div class="ph"><div class="ph-mark">🏙</div><div class="ph-title">UAE · City level</div><div class="ph-body">Share city-level BSOS data (Dubai, Abu Dhabi, Sharjah) to populate.</div></div></section>
+      <section class="tabpane" id="uae-yt"><div id="ytc-uae"></div></section>
+      <section class="tabpane" id="uae-ig"><div id="igc-uae"></div></section>
+      <section class="tabpane" id="uae-li"><div class="ph"><div class="ph-mark">💼</div><div class="ph-title">LinkedIn · Cars24 UAE</div><div class="ph-body">Share the Cars24 UAE LinkedIn export to populate.</div></div></section>
+    </div></div>
+  </div>
 
-      <!-- SoS Trend Chart -->
-      <div class="card">
-        <div class="sec-hdr"><span class="sec-kicker">All-India · Monthly</span><span class="sec-title">Share of Searches — Brand Trend</span></div>
-        <div class="chart-wrap tall"><canvas id="chart-sos"></canvas></div>
-      </div>
-
-      <!-- Competitor Table -->
-      <div class="card">
-        <div class="sec-hdr"><span class="sec-kicker">Competitor comparison · Month-on-Month</span><span class="sec-title">Share of Searches — All Brands</span></div>
-        <div class="tbl-wrap" id="tbl-competitor"></div>
-      </div>
-
-      <!-- City snapshot + growth side by side -->
-      <div class="card">
-        <div class="sec-hdr"><span class="sec-kicker">Latest month average · sorted by Cars24 share</span><span class="sec-title">Cars24 Share of Searches — by City</span></div>
-        <p style="font-size:12px;color:var(--grey);margin-bottom:12px">Gap columns = Cars24 % minus competitor % · <span style="color:var(--green);font-weight:600">green = Cars24 higher</span> · <span style="color:var(--red);font-weight:600">red = competitor higher</span></p>
-        <div class="tbl-wrap" id="tbl-city-snap"></div>
-      </div>
-
-      <div class="card">
-        <div class="sec-hdr"><span class="sec-kicker">Last 6 months · all cities</span><span class="sec-title">Cars24 Share of Searches — Growth by City</span></div>
-        <div class="tbl-wrap" id="tbl-city-growth"></div>
-      </div>
-
-      <!-- City Deep Dive -->
-      <div class="card">
-        <div class="sec-hdr"><span class="sec-kicker">City deep-dive</span><span class="sec-title">All Brands — Select City</span></div>
-        <div class="controls">
-          <div><label>City</label><br><select id="city-picker"></select></div>
-        </div>
-        <div class="tbl-wrap" id="tbl-city-dd"></div>
-        <div class="chart-wrap" style="margin-top:16px"><canvas id="chart-city-dd"></canvas></div>
-      </div>
-    </div>
-
-    </section><section class="tabpane" id="m-indexed"><!-- ── Tab 4: Google Indexed ───────────────────────────────────────── -->
-    <div class="tabpane" id="m-indexed">
-      <div id="indexed-content"></div>
-    </div>
-
-    </section><section class="tabpane" id="m-impsos"><!-- ── Tab 5: Impressions × SoS ───────────────────────────────────── -->
-    <div class="tabpane" id="m-impsos">
-      <div id="impsos-content"></div>
-    </div>
-
-  </section><section class="tabpane" id="in-inf"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="in-inf-ov">Overview</button><button class="tab" data-target="in-inf-yt">YouTube collabs</button><button class="tab" data-target="in-inf-ig">Instagram collabs</button></nav><div class="tabpanes"><section class="tabpane active" id="in-inf-ov"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Influencer campaign tracker</div><div class="ph-body">Views, CPV, reach and engagement by influencer and month, across YouTube and Instagram.</div><div class="data-note"><div class="data-note-title">Columns to include</div><ul><li>Month · influencer name · platform (YouTube / Instagram)</li><li>Content type (dedicated / integration / story)</li><li>Views / reach · likes · comments · shares / saves</li><li>Budget (Rs) · CPV · category · post link</li></ul></div></div></section><section class="tabpane" id="in-inf-yt"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">YouTube influencer campaigns</div><div class="ph-body">Views, CPV, watch time and engagement by influencer and month.</div></div></section><section class="tabpane" id="in-inf-ig"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Instagram influencer campaigns</div><div class="ph-body">Reach, CPR, saves and story views by influencer and month.</div></div></section></div></div></section><section class="tabpane" id="in-yt"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="in-yt-c24">Cars24</button><button class="tab" data-target="in-yt-tbhp">Team BHP</button><button class="tab" data-target="in-yt-insider">Cars24 Insider</button></nav><div class="tabpanes"><section class="tabpane active" id="in-yt-c24"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">YouTube · Cars24 India</div><div class="ph-body">Subscriber growth, views, watch time, CTR and engagement, month on month.</div><div class="data-note"><div class="data-note-title">What to share</div><ul><li>YouTube Studio -> Analytics -> Export (monthly)</li><li>Columns: month, subscribers, views, watch time, impressions, CTR, likes, comments</li><li>Date range: Jan 2024 onwards preferred</li></ul></div></div></section><section class="tabpane" id="in-yt-tbhp"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">YouTube · Team BHP</div><div class="ph-body">Share the Team BHP YouTube Studio export to populate.</div></div></section><section class="tabpane" id="in-yt-insider"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">YouTube · Cars24 Insider</div><div class="ph-body">Share the Cars24 Insider YouTube Studio export to populate.</div></div></section></div></div></section><section class="tabpane" id="in-ig"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="in-ig-c24">Cars24 India</button><button class="tab" data-target="in-ig-tbhp">Team BHP</button></nav><div class="tabpanes"><section class="tabpane active" id="in-ig-c24"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Instagram · Cars24 India</div><div class="ph-body">Followers, reach, impressions, engagement rate and story views, month on month.</div><div class="data-note"><div class="data-note-title">What to share</div><ul><li>Instagram Insights -> Export (or Meta Business Suite)</li><li>Columns: month, followers, reach, impressions, posts, likes, comments, saves, story views</li><li>Date range: Jan 2024 onwards preferred</li></ul></div></div></section><section class="tabpane" id="in-ig-tbhp"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Instagram · Team BHP</div><div class="ph-body">Share the Team BHP Instagram export to populate.</div></div></section></div></div></section><section class="tabpane" id="in-li"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="in-li-c24">Cars24</button><button class="tab" data-target="in-li-careers">Careers</button><button class="tab" data-target="in-li-all">All pages</button></nav><div class="tabpanes"><section class="tabpane active" id="in-li-c24"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">LinkedIn · Cars24 India</div><div class="ph-body">Followers, new followers, impressions, unique visitors and engagement rate, month on month.</div><div class="data-note"><div class="data-note-title">What to share</div><ul><li>LinkedIn Page admin -> Analytics -> Followers -> Export</li><li>LinkedIn Page admin -> Analytics -> Content -> Export</li><li>Columns: month, followers, new followers, impressions, unique visitors, engagement rate</li></ul></div></div></section><section class="tabpane" id="in-li-careers"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">LinkedIn · Cars24 Careers</div><div class="ph-body">Share the Cars24 Careers LinkedIn export to populate.</div></div></section><section class="tabpane" id="in-li-all"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">LinkedIn · all Cars24 pages</div><div class="ph-body">Rolls up total followers, best content and cross-page growth once the individual pages are in.</div></div></section></div></div></section></div></div></div><div class="country" id="country-au"><div class="tabset"><nav class="tabs"><button class="tab active" data-target="au-search">Brand search impressions</button><button class="tab" data-target="au-sos">Brand share of searches</button><button class="tab" data-target="au-city">City level</button><button class="tab" data-target="au-inf">Influencers</button><button class="tab" data-target="au-yt-w">YouTube</button><button class="tab" data-target="au-ig-w">Instagram</button><button class="tab" data-target="au-li-w">LinkedIn</button></nav><div class="tabpanes"><section class="tabpane active" id="au-search"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Australia · brand search impressions</div><div class="ph-body">Share the Google Search Console export to populate. Monthly impressions, MoM growth, top keywords.</div></div></section><section class="tabpane" id="au-sos"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Australia · brand share of searches</div><div class="ph-body">Share the Brandstack BSOS data to populate. Cars24 SoS% vs Carsales, Drive, MoM trend.</div></div></section><section class="tabpane" id="au-city"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Australia · city level</div><div class="ph-body">Share city-level BSOS data (Sydney, Melbourne, Brisbane) to populate.</div></div></section><section class="tabpane" id="au-inf"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Influencer campaigns · Australia</div><div class="ph-body">Share Australia influencer campaign data to populate.</div></div></section><section class="tabpane" id="au-yt-w"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="au-yt">Cars24</button></nav><div class="tabpanes"><section class="tabpane active" id="au-yt"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">YouTube · Cars24 Australia</div><div class="ph-body">Share the Cars24 Australia YouTube Studio export to populate.</div></div></section></div></div></section><section class="tabpane" id="au-ig-w"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="au-ig">Cars24</button></nav><div class="tabpanes"><section class="tabpane active" id="au-ig"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Instagram · Cars24 Australia</div><div class="ph-body">Share the Cars24 Australia Instagram export to populate.</div></div></section></div></div></section><section class="tabpane" id="au-li-w"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="au-li">Cars24</button></nav><div class="tabpanes"><section class="tabpane active" id="au-li"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">LinkedIn · Cars24 Australia</div><div class="ph-body">Share the Cars24 Australia LinkedIn export to populate.</div></div></section></div></div></section></div></div></div><div class="country" id="country-uae"><div class="tabset"><nav class="tabs"><button class="tab active" data-target="uae-search">Brand search impressions</button><button class="tab" data-target="uae-sos">Brand share of searches</button><button class="tab" data-target="uae-city">City level</button><button class="tab" data-target="uae-inf">Influencers</button><button class="tab" data-target="uae-yt-w">YouTube</button><button class="tab" data-target="uae-ig-w">Instagram</button><button class="tab" data-target="uae-li-w">LinkedIn</button></nav><div class="tabpanes"><section class="tabpane active" id="uae-search"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">UAE · brand search impressions</div><div class="ph-body">Share the Google Search Console export to populate. Monthly impressions, MoM growth, top keywords.</div></div></section><section class="tabpane" id="uae-sos"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">UAE · brand share of searches</div><div class="ph-body">Share the Brandstack BSOS data to populate. Cars24 SoS% vs Dubizzle, Dubicars, MoM trend.</div></div></section><section class="tabpane" id="uae-city"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">UAE · city level</div><div class="ph-body">Share city-level BSOS data (Dubai, Abu Dhabi, Sharjah) to populate.</div></div></section><section class="tabpane" id="uae-inf"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Influencer campaigns · UAE</div><div class="ph-body">Share UAE influencer campaign data to populate.</div></div></section><section class="tabpane" id="uae-yt-w"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="uae-yt">Cars24</button></nav><div class="tabpanes"><section class="tabpane active" id="uae-yt"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">YouTube · Cars24 UAE</div><div class="ph-body">Share the Cars24 UAE YouTube Studio export to populate.</div></div></section></div></div></section><section class="tabpane" id="uae-ig-w"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="uae-ig">Cars24</button></nav><div class="tabpanes"><section class="tabpane active" id="uae-ig"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">Instagram · Cars24 UAE</div><div class="ph-body">Share the Cars24 UAE Instagram export to populate.</div></div></section></div></div></section><section class="tabpane" id="uae-li-w"><div class="tabset"><nav class="tabs pills"><button class="tab active" data-target="uae-li">Cars24</button></nav><div class="tabpanes"><section class="tabpane active" id="uae-li"><div class="placeholder"><div class="ph-mark"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/></svg></div><div class="ph-title">LinkedIn · Cars24 UAE</div><div class="ph-body">Share the Cars24 UAE LinkedIn export to populate.</div></div></section></div></div></section></div></div></div>
 </main>
-
 <script>
-const BC = {
-  Cars24:'#4736FE', Spinny:'#E91E8C', CarWale:'#FF6B6B',
-  Cardekho:'#FFA500', MFC:'#9B59B6', MTV:'#2ECC71', OLX:'#3498DB'
-};
-const BN = {
-  Cars24:'Cars24', Spinny:'Spinny', CarWale:'CarWale',
-  Cardekho:'CarDekho', MFC:'Mahindra First Choice', MTV:'Maruti True Value', OLX:'OLX Auto'
-};
-const CAT_COLORS = [
-  '#4736FE','#00C951','#FF4F01','#E91E8C','#FFA500',
-  '#9B59B6','#3498DB','#2ECC71','#FF6B6B','#6B7280'
-];
+const BC={Cars24:'#4736FE',Spinny:'#E91E8C',CarWale:'#FF6B6B',Cardekho:'#F97316',MFC:'#7C3AED',MTV:'#059669',OLX:'#0EA5E9'};
+const BN={Cars24:'Cars24',Spinny:'Spinny',CarWale:'CarWale',Cardekho:'CarDekho',MFC:'Mahindra First Choice',MTV:'Maruti True Value',OLX:'OLX Auto'};
+const CC=['#4736FE','#00C951','#FF4F01','#E91E8C','#F59E0B','#7C3AED','#0EA5E9','#059669','#FF6B6B','#9CA3AF'];
 
-/* ── Helpers ──────────────────────────────────────────────────────────────── */
-const sf  = v => (v == null || isNaN(v)) ? null : v;
-const fL  = v => v == null ? '—' : `${(v/1e5).toFixed(2)}L`;
-const fP  = v => v == null ? '—' : `${v.toFixed(1)}%`;
-const fPp = v => v == null ? '—' : `${v>0?'+':''}${v.toFixed(1)}pp`;
-const fM  = v => v == null ? '—' : `${v>0?'+':''}${v.toFixed(1)}%`;
+const sf=v=>{if(v==null)return null;try{const f=parseFloat(v);return isNaN(f)?null:f;}catch{return null;}};
+const fP=v=>v==null?'—':`${v.toFixed(1)}%`;
+const fM=v=>v==null?'—':`${v>0?'+':''}${v.toFixed(1)}%`;
+function numFmt(n){if(n==null)return'—';if(n>=1e7)return(n/1e7).toFixed(1)+'Cr';if(n>=1e5)return(n/1e5).toFixed(2)+'L';if(n>=1e3)return(n/1e3).toFixed(1)+'K';return n.toLocaleString();}
 
-function badge(v, isPp=false, opts={}) {
-  if (v == null) return '<span class="badge badge-flat">—</span>';
-  const abs = Math.abs(v), sym = isPp ? 'pp' : '%';
-  const sign = v > 0 ? '+' : '', arrow = abs < 0.05 ? '→' : (v > 0 ? '▲' : '▼');
-  const cls = abs < 0.05 ? 'badge-flat' : (v > 0 ? 'badge-up' : 'badge-down');
-  return `<span class="badge ${cls}">${arrow} ${sign}${abs.toFixed(1)}${sym}</span>`;
+function badge(v,isPp=false){
+  if(v==null)return'<span class="badge bf">—</span>';
+  const a=Math.abs(v),sym=isPp?'pp':'%',sign=v>0?'+':'';
+  const arrow=a<0.05?'→':(v>0?'▲':'▼');
+  const cls=a<0.05?'bf':(v>0?'bu':'bd');
+  return`<span class="badge ${cls}">${arrow} ${sign}${a.toFixed(1)}${sym}</span>`;
+}
+function tia(v){if(v==null)return'<span class="tia tia-fl">→</span>';return v>0.05?'<span class="tia tia-up">↑</span>':v<-0.05?'<span class="tia tia-dn">↓</span>':'<span class="tia tia-fl">→</span>';}
+function bdot(b){return`<span class="bdot" style="background:${BC[b]||'#aaa'}"></span>`;}
+function rchip(r){const c=r===1?'r1':r===2?'r2':r===3?'r3':'rn';return`<span class="rchip ${c}">#${r}</span>`;}
+function gapCell(gap){if(gap==null)return'<td class="nr">—</td>';const c=gap>0.05?'var(--mint)':gap<-0.05?'var(--red)':'var(--grey)';const ic=gap>0.05?'↑':gap<-0.05?'↓':'→';return`<td class="nr" style="color:${c};font-weight:700">${ic} ${gap>0?'+':''}${gap.toFixed(1)}pp</td>`;}
+function spark(vals,color='#4736FE',w=56,h=18){const cl=vals.filter(v=>v!=null);if(cl.length<2)return'';const mn=Math.min(...cl),mx=Math.max(...cl),rng=mx-mn||1;const pts=vals.map((v,i)=>{if(v==null)return null;const x=(i/(vals.length-1))*w,y=h-((v-mn)/rng)*h;return`${x.toFixed(1)},${y.toFixed(1)}`;}).filter(Boolean).join(' ');return`<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round"/></svg>`;}
+function trendTxt(vals){let u=0,d=0;for(let i=1;i<vals.length;i++){if(vals[i]!=null&&vals[i-1]!=null){const dv=vals[i]-vals[i-1];if(dv>0.1)u++;else if(dv<-0.1)d++;}}if(u>d)return`<span style="color:var(--mint);font-weight:800">▲${u}</span>`;if(d>u)return`<span style="color:var(--red);font-weight:800">▼${d}</span>`;return`<span style="color:var(--grey)">→</span>`;}
+function tbl(thead,rows){return`<table class="dt"><thead><tr>${thead}</tr></thead><tbody>${rows||'<tr><td colspan="20" style="text-align:center;padding:24px;color:var(--grey)">No data</td></tr>'}</tbody></table>`;}
+
+function filterPeriod(data,period,from,to){
+  if(!data||!data.length)return data;
+  if(period==='all')return data;
+  if(period==='custom')return data.filter(r=>(!from||r.month>=from)&&(!to||r.month<=to));
+  const n=new Date(),offs={};
+  if(period==='3m')offs.m=3;else if(period==='6m')offs.m=6;else if(period==='12m')offs.m=12;
+  else if(period==='8w')offs.d=56;else if(period==='12w')offs.d=84;else if(period==='26w')offs.d=182;
+  if(offs.m){const c=new Date(n.getFullYear(),n.getMonth()-offs.m,1);const cs=`${c.getFullYear()}-${String(c.getMonth()+1).padStart(2,'0')}`;return data.filter(r=>r.month>=cs);}
+  if(offs.d){const cs=new Date(n-offs.d*864e5).toISOString().slice(0,10);return data.filter(r=>(r.week_start||r.date||r.month)>=cs);}
+  return data;
+}
+const fcbs={},fstate={};
+function wirePills(id,key,cb){const el=document.getElementById(id);if(!el)return;el.querySelectorAll('.pp').forEach(btn=>btn.addEventListener('click',()=>{el.querySelectorAll('.pp').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const p=btn.dataset.p;fstate[key]={p,from:null,to:null};const cr=document.getElementById('cr-'+key);if(cr){p==='custom'?cr.classList.add('open'):cr.classList.remove('open');}cb(p,null,null);}));}
+function applyFilter(key){const from=document.getElementById(key+'-from')?.value||null,to=document.getElementById(key+'-to')?.value||null;fstate[key]={p:'custom',from,to};fcbs[key]?.('custom',from,to);}
+
+let D=null;
+const charts={},inited={};
+
+function initTabs(){
+  document.querySelectorAll('[data-seg]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-seg]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.country').forEach(p=>p.classList.toggle('active',p.id==='country-'+b.dataset.seg));}));
+  document.querySelectorAll('.tabs .tab').forEach(btn=>btn.addEventListener('click',()=>activateTab(btn)));
+}
+function activateTab(btn){
+  const nav=btn.closest('.tabs');
+  const set=btn.closest('.tabset');
+  nav.querySelectorAll(':scope>.tab').forEach(b=>b.classList.toggle('active',b===btn));
+  const host=set.querySelector(':scope>.tabpanes');
+  if(host)host.querySelectorAll(':scope>.tabpane').forEach(p=>p.classList.toggle('active',p.id===btn.dataset.target));
+  const key=btn.dataset.lazy;
+  if(key&&!inited[key]){lazyInit[key]?.();inited[key]=true;}
 }
 
-function gapCell(gap) {
-  if (gap == null) return '<td class="num">—</td>';
-  const c = gap > 0.05 ? 'var(--green)' : (gap < -0.05 ? 'var(--red)' : 'var(--grey)');
-  return `<td class="num" style="color:${c};font-weight:600">${gap>0?'+':''}${gap.toFixed(1)}pp</td>`;
+function renderOv(){
+  const k=D.kpis;
+  document.getElementById('ov-imp').textContent=k.curr_imp_fmt||'—';
+  document.getElementById('ov-imp-sub').innerHTML=`${badge(k.mom_imp)} MoM &nbsp;·&nbsp; ${badge(k.yoy_imp)} YoY`;
+  document.getElementById('ov-sos').textContent=k.c24_sos!=null?`${k.c24_sos.toFixed(1)}%`:'—';
+  document.getElementById('ov-sos-sub').innerHTML=`${badge(k.c24_sos_mom,true)} MoM`;
+  document.getElementById('ov-ratio').textContent=k.sos_ratio!=null?`${k.sos_ratio.toFixed(0)}%`:'—';
+  document.getElementById('ov-ratio-sub').textContent=`Cars24÷Spinny · ${k.latest_month_label}`;
+  document.getElementById('freshness').textContent=`Updated ${D._meta.built}`;
 }
 
-function trendText(vals) {
-  let up=0, dn=0;
-  for (let i=1;i<vals.length;i++) {
-    if (vals[i]!=null && vals[i-1]!=null) {
-      const d = vals[i]-vals[i-1];
-      if (d>0.1) up++; else if (d<-0.1) dn++;
-    }
-  }
-  if (up>dn) return `<span class="trend-up">▲${up}</span>`;
-  if (dn>up) return `<span class="trend-dn">▼${dn}</span>`;
-  return `<span class="trend-flat">→</span>`;
-}
+function initTab1(){
+  const k=D.kpis,mon=D.monthly_impressions||[];
+  const mC=(k.mom_imp||0)>=0?'kh-green':'kh-red',yC=(k.yoy_imp||0)>=0?'kh-green':'kh-red';
+  document.getElementById('imp-kpis').innerHTML=`
+    <div class="kh kh-blue"><div class="kl"><span class="ki">📊</span>Brand Impressions · ${k.latest_month_label}</div><div class="kv">${k.curr_imp_fmt}</div><div class="ks">${badge(k.mom_imp)} MoM &nbsp; ${badge(k.yoy_imp)} YoY ${k.is_ath?'&nbsp;<span class="badge ba">⭐ ATH</span>':''}</div></div>
+    <div class="kh ${mC}"><div class="kl"><span class="ki">${(k.mom_imp||0)>=0?'📈':'📉'}</span>Month-on-Month</div><div class="kv">${fM(k.mom_imp)}</div><div class="ks">vs ${mon.length>=2?mon[mon.length-2].label:'—'}</div></div>
+    <div class="kh ${yC}"><div class="kl"><span class="ki">${(k.yoy_imp||0)>=0?'📈':'📉'}</span>Year-on-Year</div><div class="kv">${fM(k.yoy_imp)}</div><div class="ks">Peak ${k.peak_imp_fmt} in ${k.peak_month_label}</div></div>`;
 
-function buildTable(thead, rows, cls='') {
-  return `<table class="data-table ${cls}">
-    <thead><tr>${thead}</tr></thead>
-    <tbody>${rows}</tbody>
-  </table>`;
-}
-
-/* ── Global data ──────────────────────────────────────────────────────────── */
-let D = null;
-const charts = {};
-const tabInited = {};
-
-
-/* tab management: country -> metric tabs, nested handle pills */
-function initTabs() {
-  document.querySelectorAll('[data-seg]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tgt = btn.dataset.seg;
-      document.querySelectorAll('[data-seg]').forEach(b => b.classList.toggle('active', b===btn));
-      document.querySelectorAll('.country').forEach(p => p.classList.toggle('active', p.id==='country-'+tgt));
-    });
-  });
-  document.querySelectorAll('.tabs .tab').forEach(btn => {
-    btn.addEventListener('click', () => activateTab(btn));
-  });
-}
-function activateTab(btn) {
-  const set = btn.closest('.tabset');
-  const nav = btn.closest('.tabs');
-  nav.querySelectorAll(':scope > .tab').forEach(b => b.classList.toggle('active', b===btn));
-  const host = set.querySelector(':scope > .tabpanes');
-  if (host) host.querySelectorAll(':scope > .tabpane').forEach(p => p.classList.toggle('active', p.id===btn.dataset.target));
-  const key = btn.dataset.lazy;
-  if (key && !tabInited[key]) { lazyInit[key]?.(); tabInited[key]=true; }
-}
-/* ── Overview strip ───────────────────────────────────────────────────────── */
-function renderOverview() {
-  const k = D.kpis;
-  document.getElementById('ov-imp').textContent   = k.curr_imp_fmt || '—';
-  document.getElementById('ov-imp-sub').innerHTML = `${badge(k.mom_imp)} MoM &nbsp;·&nbsp; ${badge(k.yoy_imp)} YoY &nbsp;·&nbsp; <span style="color:rgba(255,255,255,.5)">${k.latest_month_label}</span>`;
-  document.getElementById('ov-sos').textContent   = k.c24_sos != null ? `${k.c24_sos.toFixed(1)}%` : '—';
-  document.getElementById('ov-sos-sub').innerHTML = `${badge(k.c24_sos_mom, true)} MoM &nbsp;·&nbsp; <span style="color:rgba(255,255,255,.5)">${k.latest_month_label}</span>`;
-  const ratio = k.sos_ratio;
-  document.getElementById('ov-ratio').textContent   = ratio != null ? `${ratio.toFixed(0)}%` : '—';
-  document.getElementById('ov-ratio-sub').innerHTML = `Cars24 ÷ Spinny · <span style="color:rgba(255,255,255,.5)">${k.latest_month_label}</span>`;
-  document.getElementById('freshness').textContent = `Updated ${D._meta.built}`;
-}
-
-/* ══════════════════════════════════════════════════════════════════════════
-   TAB 1 — SEARCH IMPRESSIONS
-══════════════════════════════════════════════════════════════════════════ */
-function initTab1() {
-  const k = D.kpis;
-  const mon = D.monthly_impressions;
-
-  // KPI cards
-  document.getElementById('imp-kpis').innerHTML = `
-    <div class="card kpi">
-      <div class="kpi-label">Brand Search Impressions · ${k.latest_month_label}</div>
-      <div class="kpi-value">${k.curr_imp_fmt}</div>
-      <div class="kpi-sub">${badge(k.mom_imp)} MoM &nbsp; ${badge(k.yoy_imp)} YoY ${k.is_ath ? '&nbsp;<span class="badge badge-up">⭐ All-time high</span>' : ''}</div>
-    </div>
-    <div class="card kpi">
-      <div class="kpi-label">Month-on-Month Growth</div>
-      <div class="kpi-value" style="color:${(k.mom_imp||0)>=0?'var(--green)':'var(--red)'}">${fM(k.mom_imp)}</div>
-      <div class="kpi-sub">vs ${mon.length>=2 ? mon[mon.length-2].label : '—'}</div>
-    </div>
-    <div class="card kpi">
-      <div class="kpi-label">Year-on-Year Growth</div>
-      <div class="kpi-value" style="color:${(k.yoy_imp||0)>=0?'var(--green)':'var(--red)'}">${fM(k.yoy_imp)}</div>
-      <div class="kpi-sub">Peak: ${k.peak_imp_fmt} in ${k.peak_month_label}</div>
-    </div>`;
-
-  // Monthly trend line chart
-  const ctx1 = document.getElementById('chart-imp').getContext('2d');
-  charts.imp = new Chart(ctx1, {
-    type:'line',
-    data:{
-      labels: mon.map(r=>r.label),
-      datasets:[{
-        label:'Impressions (Lakh)',
-        data: mon.map(r=>r.imp_lakh),
-        borderColor:'#4736FE', backgroundColor:'rgba(71,54,254,0.08)',
-        fill:true, tension:0.3, borderWidth:3, pointRadius:3,
-        pointBackgroundColor:'#4736FE',
-      }]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      plugins:{legend:{display:false}, tooltip:{callbacks:{label:c=>`${c.parsed.y.toFixed(2)}L`}}},
-      scales:{
-        y:{title:{display:true,text:'Impressions (Lakh)'},ticks:{callback:v=>v+'L'},grid:{color:'#E3E1FF'}},
-        x:{grid:{display:false},ticks:{maxTicksLimit:12}}
-      }
-    }
-  });
-
-  // Monthly table
-  const thead = `<th>Month</th><th class="num">Impressions</th><th class="num">MoM</th><th class="num">YoY</th>`;
-  const rows = [...mon].reverse().map((r,i) => {
-    const isLatest = i===0;
-    return `<tr class="${isLatest?'latest-row':''}">
-      <td>${r.label}${isLatest?' <span class="badge badge-up" style="font-size:10px">Latest</span>':''}</td>
-      <td class="num">${r.imp_lakh.toFixed(2)}L</td>
-      <td class="num">${badge(r.mom)}</td>
-      <td class="num">${badge(r.yoy)}</td>
-    </tr>`;
-  }).join('');
-  document.getElementById('tbl-monthly').innerHTML = buildTable(thead, rows);
-
-  // WoW chart + table
-  const ww = D.bsos_weekly;
-  if (ww && ww.length > 0) {
-    const ctx2 = document.getElementById('chart-wow').getContext('2d');
-    charts.wow = new Chart(ctx2, {
-      type:'bar',
-      data:{
-        labels: ww.map(r=>r.week.split('–')[0].trim()),
-        datasets:[{
-          label:'Cars24 SoS % (weekly avg)',
-          data: ww.map(r=>r.Cars24),
-          backgroundColor: ww.map(r=>(r.Cars24_wow||0)>=0?'rgba(71,54,254,0.7)':'rgba(251,44,54,0.7)'),
-          borderRadius:4,
-        }]
-      },
-      options:{
-        responsive:true, maintainAspectRatio:false,
-        plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.parsed.y?.toFixed(1)}%`}}},
-        scales:{
-          y:{ticks:{callback:v=>v+'%'},grid:{color:'#E3E1FF'}},
-          x:{grid:{display:false},ticks:{maxTicksLimit:13,maxRotation:45}}
-        }
-      }
-    });
-
-    const wth = `<th>Week</th><th class="num">Cars24 SoS</th><th class="num">WoW Δ</th>`;
-    const wr = [...ww].reverse().slice(0,12).map((r,i)=>`<tr class="${i===0?'latest-row':''}">
-      <td style="font-size:12px">${r.week}</td>
-      <td class="num c24-col">${fP(r.Cars24)}</td>
-      <td class="num">${badge(r.Cars24_wow,true)}</td>
-    </tr>`).join('');
-    document.getElementById('tbl-weekly').innerHTML = buildTable(wth, wr);
-  } else {
-    document.getElementById('chart-wow').closest('.card').style.display='none';
-  }
-}
-
-/* ══════════════════════════════════════════════════════════════════════════
-   TAB 2 — KEYWORDS
-══════════════════════════════════════════════════════════════════════════ */
-function initTab2() {
-  const kw = D.keywords;
-  if (!kw || !kw.monthly || kw.monthly.length===0) {
-    document.getElementById('m-keywords').innerHTML = '<div class="card"><div class="placeholder"><div class="placeholder-icon">📂</div><div class="placeholder-title">Keyword Data Not Available</div></div></div>';
-    return;
+  if(mon.length){
+    const c=document.getElementById('chart-imp').getContext('2d');
+    charts.imp=new Chart(c,{type:'line',data:{labels:mon.map(r=>r.label),datasets:[{label:'Impressions (L)',data:mon.map(r=>r.imp_lakh),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.35,borderWidth:3,pointRadius:3,pointBackgroundColor:'#4736FE',pointHoverRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'L'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:12}}}}});
   }
 
-  // Monthly table
-  const kth = `<th>Month</th><th class="num">Volume (Lakh)</th><th class="num">MoM</th><th class="num">YoY</th>`;
-  const kr = [...kw.monthly].reverse().map((r,i)=>`<tr class="${i===0?'latest-row':''}">
-    <td>${r.label}${i===0?' <span class="badge badge-up" style="font-size:10px">Latest</span>':''}</td>
-    <td class="num">${r.imp_lakh.toFixed(2)}L</td>
-    <td class="num">${badge(r.mom)}</td>
-    <td class="num">${badge(r.yoy)}</td>
-  </tr>`).join('');
-  document.getElementById('tbl-kw-monthly').innerHTML = buildTable(kth, kr);
-
-  // Category donut
-  const cats = kw.categories || [];
-  const ctx3 = document.getElementById('chart-donut').getContext('2d');
-  charts.donut = new Chart(ctx3, {
-    type:'doughnut',
-    data:{
-      labels: cats.map(c=>c.category),
-      datasets:[{data:cats.map(c=>c.impressions), backgroundColor:CAT_COLORS.slice(0,cats.length), borderWidth:2, borderColor:'#fff'}]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false, cutout:'62%',
-      plugins:{
-        legend:{position:'right',labels:{boxWidth:10,font:{size:11}}},
-        tooltip:{callbacks:{label:c=>`${c.label}: ${(c.raw/1e5).toFixed(2)}L (${cats[c.dataIndex]?.share?.toFixed(1)}%)`}}
-      }
-    }
-  });
-
-  // Category table
-  const cth = `<th>Category</th><th class="num">Volume</th><th class="num">Share</th><th class="num">MoM</th><th class="num">Share Δ</th>`;
-  const cr = cats.map((c,i)=>`<tr>
-    <td><span style="display:inline-block;width:10px;height:10px;background:${CAT_COLORS[i]};border-radius:2px;margin-right:6px;vertical-align:middle"></span>${c.category}</td>
-    <td class="num">${c.imp_lakh.toFixed(2)}L</td>
-    <td class="num">${c.share.toFixed(1)}%</td>
-    <td class="num">${badge(c.mom_imp)}</td>
-    <td class="num">${badge(c.mom_share,true)}</td>
-  </tr>`).join('');
-  document.getElementById('tbl-categories').innerHTML = buildTable(cth, cr);
-
-  // Category trends line chart
-  const matrix = kw.cat_matrix || [];
-  const months  = kw.cat_months || [];
-  const ctx4 = document.getElementById('chart-cat-trends').getContext('2d');
-  const topCats = cats.slice(0,6).map(c=>c.category);
-  charts.catTrends = new Chart(ctx4, {
-    type:'line',
-    data:{
-      labels: months.map(m=>{try{return m.slice(0,7);}catch{return m;}}),
-      datasets: topCats.map((cat,i)=>{
-        const row = matrix.find(r=>r.category===cat)||{};
-        return {
-          label:cat, data:months.map(m=>row[m]!=null?(row[m]/1e5):null),
-          borderColor:CAT_COLORS[i], backgroundColor:'transparent',
-          borderWidth:2, tension:0.3, pointRadius:3, spanGaps:true,
-        };
-      })
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y?.toFixed(2)}L`}}},
-      scales:{y:{ticks:{callback:v=>v.toFixed(1)+'L'},grid:{color:'#E3E1FF'}},x:{grid:{display:false}}}
-    }
-  });
-}
-
-/* ══════════════════════════════════════════════════════════════════════════
-   TAB 3 — SHARE OF SEARCHES
-══════════════════════════════════════════════════════════════════════════ */
-function initTab3() {
-  const k  = D.kpis;
-  const bm = D.bsos_monthly || [];
-  const bc = D.bsos_cities  || {};
-
-  // Hero
-  const sosVal = k.c24_sos;
-  document.getElementById('sos-hero-value').textContent = sosVal != null ? `${sosVal.toFixed(1)}%` : '—';
-  const sosInt = sosVal != null ? Math.round(sosVal) : null;
-  document.getElementById('sos-hero-text').innerHTML = sosInt != null
-    ? `Out of every <strong>100</strong> people searching for a used car online, <strong>${sosInt}</strong> searched for Cars24 &nbsp;·&nbsp; Brandstack BSOS · ${k.latest_month_label}`
-    : '';
-  document.getElementById('sos-hero-badges').innerHTML = badge(k.c24_sos_mom, true) + ' vs last month';
-
-  // KPI cards
-  const leader = Object.entries(k.brand_sos||{}).sort((a,b)=>b[1]-a[1])[0];
-  document.getElementById('sos-kpis').innerHTML = `
-    <div class="card kpi">
-      <div class="kpi-label">Cars24 SoS · ${k.latest_month_label}</div>
-      <div class="kpi-value" style="color:var(--blue)">${fP(k.c24_sos)}</div>
-      <div class="kpi-sub">${badge(k.c24_sos_mom,true)} vs last month</div>
-    </div>
-    <div class="card kpi">
-      <div class="kpi-label">Our Rank · ${k.latest_month_label}</div>
-      <div class="kpi-value">${k.c24_rank!=null?`#${k.c24_rank}`:'—'}</div>
-      <div class="kpi-sub">${leader?`Leader: ${BN[leader[0]]||leader[0]} at ${leader[1].toFixed(1)}%`:''}</div>
-    </div>
-    <div class="card kpi">
-      <div class="kpi-label">vs Spinny Gap</div>
-      <div class="kpi-value" style="color:${(k.c24_vs_spinny||0)>0?'var(--green)':'var(--red)'}">
-        ${k.c24_vs_spinny!=null?`${k.c24_vs_spinny>0?'+':''}${k.c24_vs_spinny.toFixed(1)}pp`:'—'}</div>
-      <div class="kpi-sub">${k.c24_vs_spinny!=null&&k.c24_vs_spinny>0?'Cars24 leads ✅':'Spinny leads ⚠️'}</div>
-    </div>
-    <div class="card kpi">
-      <div class="kpi-label">vs CarWale Gap</div>
-      <div class="kpi-value" style="color:${(k.c24_vs_carwale||0)>0?'var(--green)':'var(--red)'}">
-        ${k.c24_vs_carwale!=null?`${k.c24_vs_carwale>0?'+':''}${k.c24_vs_carwale.toFixed(1)}pp`:'—'}</div>
-      <div class="kpi-sub">${k.c24_vs_carwale!=null&&k.c24_vs_carwale>0?'Cars24 leads ✅':'CarWale leads ⚠️'}</div>
-    </div>`;
-
-  // SoS trend line chart
-  const brands = ['Cars24','Spinny','CarWale','Cardekho','MFC','MTV'].filter(b=>bm.some(r=>r[b]!=null));
-  const ctxSos = document.getElementById('chart-sos').getContext('2d');
-  charts.sos = new Chart(ctxSos, {
-    type:'line',
-    data:{
-      labels: bm.map(r=>r.label),
-      datasets: brands.map(b=>({
-        label: BN[b]||b,
-        data: bm.map(r=>r[b]),
-        borderColor: BC[b], backgroundColor: b==='Cars24'?'rgba(71,54,254,0.06)':'transparent',
-        fill: b==='Cars24', tension:0.3, spanGaps:true,
-        borderWidth: b==='Cars24'?3:(b==='Spinny'?2:1.5),
-        pointRadius: b==='Cars24'?3:2,
-      }))
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      plugins:{
-        legend:{position:'top',labels:{boxWidth:12,font:{size:11}}},
-        tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y?.toFixed(1)}%`}}
-      },
-      scales:{
-        y:{min:0,ticks:{callback:v=>v+'%'},grid:{color:'#E3E1FF'}},
-        x:{grid:{display:false},ticks:{maxTicksLimit:14}}
-      }
-    }
-  });
-
-  // Competitor table (last 12 months)
-  const compBrands = brands.filter(b=>b!=='Cars24');
-  const recentBm = bm.slice(-12);
-  const cth = `<th>Month</th>
-    <th class="num c24-col">Cars24</th>
-    <th class="num c24-col">MoM Δ</th>
-    ${compBrands.map(b=>`<th class="num" style="color:${BC[b]}">${b==='MFC'?'Mahindra<br>First Choice':b==='MTV'?'Maruti<br>True Value':BN[b]||b}</th>`).join('')}
-    ${bm.some(r=>r.Spinny!=null)?'<th class="num">C24÷Spinny</th>':''}`;
-  const cr2 = [...recentBm].reverse().map((r,i)=>{
-    const spinny = sf(r.Spinny);
-    const ratio  = (r.Cars24!=null&&spinny&&spinny>0) ? (r.Cars24/spinny).toFixed(2)+'x' : '—';
-    return `<tr class="${i===0?'latest-row':''}">
-      <td><strong>${r.label}</strong></td>
-      <td class="num c24-col">${fP(r.Cars24)}</td>
-      <td class="num c24-col">${badge(r.Cars24_mom,true)}</td>
-      ${compBrands.map(b=>`<td class="num" style="color:${BC[b]}">${fP(r[b])}</td>`).join('')}
-      ${bm.some(x=>x.Spinny!=null)?`<td class="num" style="color:var(--grey);font-size:12px">${ratio}</td>`:''}
-    </tr>`;
-  }).join('');
-  document.getElementById('tbl-competitor').innerHTML = buildTable(cth, cr2);
-
-  // City snapshot — latest month
-  const cities = Object.keys(bc);
-  if (cities.length > 0) {
-    // find latest common month
-    const latestMonths = cities.map(c => bc[c].length > 0 ? bc[c][bc[c].length-1].month : null).filter(Boolean);
-    const snapMonth = latestMonths.sort().pop();
-    const prevMonth = cities.length > 0 && bc[cities[0]].length >= 2 ? bc[cities[0]][bc[cities[0]].length-2].month : null;
-
-    const snapRows = cities.map(city => {
-      const cityData = bc[city];
-      const latRow   = cityData.find(r=>r.month===snapMonth);
-      if (!latRow || latRow.Cars24==null) return null;
-      const prevRow  = prevMonth ? cityData.find(r=>r.month===prevMonth) : null;
-      return {city, latRow, prevRow};
-    }).filter(Boolean).sort((a,b)=>(b.latRow.Cars24||0)-(a.latRow.Cars24||0));
-
-    const compCity = ['Spinny','CarWale','Cardekho','MFC','MTV'].filter(b=>snapRows.some(r=>r.latRow[b]!=null));
-    const sth = `<th>City</th>
-      <th class="num c24-col">Cars24</th>
-      <th class="num c24-col">MoM Δ</th>
-      ${compCity.map(b=>`<th class="num">vs ${b==='MFC'?'MFC':b==='MTV'?'MTV':b}</th>`).join('')}`;
-    const sr = snapRows.map((row,i)=>{
-      const {city,latRow,prevRow} = row;
-      const momDelta = (latRow.Cars24_mom!=null) ? badge(latRow.Cars24_mom,true) : '—';
-      return `<tr class="${i===0?'latest-row':''}">
-        <td><strong>${city}</strong></td>
-        <td class="num c24-col">${fP(latRow.Cars24)}</td>
-        <td class="num">${momDelta}</td>
-        ${compCity.map(b=>{
-          const gap = (latRow.Cars24!=null&&latRow[b]!=null) ? latRow.Cars24-latRow[b] : null;
-          return gapCell(gap);
-        }).join('')}
-      </tr>`;
+  function renderMonthlyTable(p,from,to){
+    const fd=filterPeriod(mon,p,from,to);
+    const sv=mon.map(r=>r.imp_lakh);
+    const th=`<th>Month</th><th></th><th class="nr ch">Impressions</th><th class="nr ch">MoM</th><th class="nr">YoY</th><th>Trend</th>`;
+    const rows=[...fd].reverse().map((r,i)=>{
+      const idx=mon.indexOf(r);const sl=sv.slice(Math.max(0,idx-4),idx+1);
+      return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(r.mom)}</td><td class="nr cc"><strong>${r.imp_lakh.toFixed(2)}L</strong></td><td class="nr cc">${badge(r.mom)}</td><td class="nr">${badge(r.yoy)}</td><td>${spark(sl)}</td></tr>`;
     }).join('');
-    document.getElementById('tbl-city-snap').innerHTML = buildTable(sth, sr);
+    document.getElementById('tbl-monthly').innerHTML=tbl(th,rows);
+  }
+  fcbs['imp']=renderMonthlyTable;wirePills('pp-imp','imp',renderMonthlyTable);renderMonthlyTable('all');
 
-    // City growth table — last 6 months
-    const allMonths = [...new Set(Object.values(bc).flatMap(rows=>rows.map(r=>r.month)))].sort();
-    const growthMonths = allMonths.slice(-6);
-    const gth = `<th>City</th>
-      ${growthMonths.map((m,i)=>`<th class="num${i===growthMonths.length-1?' c24-col':''}">${m.slice(0,7)}</th>`).join('')}
-      <th class="num">MoM Δ</th>
-      <th>Trend</th>`;
-    const first6 = growthMonths[0];
-    const gr = cities.map(city=>{
-      const vals = growthMonths.map(m=>{const r=bc[city].find(x=>x.month===m);return r?r.Cars24:null;});
-      const latVal = vals[vals.length-1];
-      const momDelta = vals.length>=2&&vals[vals.length-1]!=null&&vals[vals.length-2]!=null ? vals[vals.length-1]-vals[vals.length-2] : null;
-      const firstVal = vals[0];
-      return `<tr>
-        <td><strong>${city}</strong></td>
-        ${vals.map((v,i)=>{
-          const isLast = i===vals.length-1;
-          const style  = isLast ? 'color:var(--blue);font-weight:700;background:#F5F4FF' :
-                         (v!=null&&firstVal!=null&&v>firstVal+0.2?'color:var(--green)':
-                          v!=null&&firstVal!=null&&v<firstVal-0.2?'color:var(--red)':'');
-          return `<td class="num" style="${style}">${fP(v)}</td>`;
-        }).join('')}
-        <td class="num">${momDelta!=null?badge(momDelta,true):'—'}</td>
-        <td>${trendText(vals)}</td>
-      </tr>`;
-    }).join('');
-    document.getElementById('tbl-city-growth').innerHTML = buildTable(gth, gr);
+  const ww=D.bsos_weekly||[];
+  function renderWoW(p){
+    const fd=filterPeriod(ww,p);if(!fd.length)return;
+    if(charts.wow)charts.wow.destroy();
+    const c=document.getElementById('chart-wow').getContext('2d');
+    charts.wow=new Chart(c,{type:'bar',data:{labels:fd.map(r=>r.week.split('–')[0].trim()),datasets:[{label:'Cars24 SoS %',data:fd.map(r=>r.Cars24),backgroundColor:fd.map(r=>(r.Cars24_wow||0)>=0?'rgba(71,54,254,.78)':'rgba(231,0,11,.72)'),borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:13,maxRotation:45}}}}});
+    const th=`<th>Week</th><th></th><th class="nr ch">Cars24 SoS</th><th class="nr">WoW Δ</th>`;
+    const rows=[...fd].reverse().slice(0,14).map((r,i)=>`<tr class="${i===0?'lat':''}"><td style="font-size:12px">${r.week}</td><td>${tia(r.Cars24_wow)}</td><td class="nr cc">${fP(r.Cars24)}</td><td class="nr">${badge(r.Cars24_wow,true)}</td></tr>`).join('');
+    document.getElementById('tbl-weekly').innerHTML=tbl(th,rows);
+  }
+  wirePills('pp-wow','wow',p=>renderWoW(p));renderWoW('all');
+}
 
-    // City deep-dive
-    const picker = document.getElementById('city-picker');
-    cities.sort().forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;picker.appendChild(o);});
-    function renderCityDD(city) {
-      const cdata = bc[city]||[];
-      const cbrands = ['Cars24','Spinny','CarWale','Cardekho','MFC','MTV','OLX'].filter(b=>cdata.some(r=>r[b]!=null));
-      const cbth = `<th>Month</th>${cbrands.map(b=>`<th class="num${b==='Cars24'?' c24-col':''}">${BN[b]||b}</th>`).join('')}<th class="num">MoM Δ</th>`;
-      const cbr  = [...cdata].reverse().slice(0,14).map((r,i)=>`<tr class="${i===0?'latest-row':''}">
-        <td><strong>${r.label}</strong></td>
-        ${cbrands.map(b=>`<td class="num${b==='Cars24'?' c24-col':''}">${fP(r[b])}</td>`).join('')}
-        <td class="num">${badge(r.Cars24_mom,true)}</td>
-      </tr>`).join('');
-      document.getElementById('tbl-city-dd').innerHTML = buildTable(cbth, cbr);
+function initTab2(){
+  const kw=D.keywords;
+  if(!kw||!kw.monthly?.length){document.getElementById('m-kw').innerHTML='<div class="card"><div class="ph"><div class="ph-title">Keyword data not available</div></div></div>';return;}
+  function renderKwTable(p,from,to){
+    const fd=filterPeriod(kw.monthly,p,from,to);
+    const th=`<th>Month</th><th></th><th class="nr ch">Volume</th><th class="nr ch">MoM</th><th class="nr">YoY</th>`;
+    const rows=[...fd].reverse().map((r,i)=>`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(r.mom)}</td><td class="nr cc"><strong>${r.imp_lakh.toFixed(2)}L</strong></td><td class="nr cc">${badge(r.mom)}</td><td class="nr">${badge(r.yoy)}</td></tr>`).join('');
+    document.getElementById('tbl-kw').innerHTML=tbl(th,rows);
+  }
+  fcbs['kw']=renderKwTable;wirePills('pp-kw','kw',renderKwTable);renderKwTable('all');
 
-      // Chart
-      if (charts.cityDD) charts.cityDD.destroy();
-      const ctxC = document.getElementById('chart-city-dd').getContext('2d');
-      charts.cityDD = new Chart(ctxC, {
-        type:'line',
-        data:{
-          labels: cdata.map(r=>r.label),
-          datasets: cbrands.map(b=>({
-            label:BN[b]||b, data:cdata.map(r=>r[b]),
-            borderColor:BC[b], backgroundColor:'transparent',
-            borderWidth:b==='Cars24'?3:1.5, tension:0.3, spanGaps:true, pointRadius:2,
-          }))
-        },
-        options:{
-          responsive:true, maintainAspectRatio:false,
-          plugins:{
-            legend:{position:'top',labels:{boxWidth:10,font:{size:11}}},
-            tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y?.toFixed(1)}%`}}
-          },
-          scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E3E1FF'}},x:{grid:{display:false}}}
-        }
-      });
-    }
-    renderCityDD(cities[0]);
-    picker.addEventListener('change', e=>renderCityDD(e.target.value));
-  } else {
-    document.getElementById('tbl-city-snap').innerHTML  = '<p style="color:var(--grey);padding:12px">City data not available.</p>';
-    document.getElementById('tbl-city-growth').innerHTML = '<p style="color:var(--grey);padding:12px">City data not available.</p>';
-    document.getElementById('city-picker').closest('.card').style.display='none';
+  const cats=kw.categories||[];
+  if(cats.length){
+    const c3=document.getElementById('chart-donut').getContext('2d');
+    charts.donut=new Chart(c3,{type:'doughnut',data:{labels:cats.map(c=>c.category),datasets:[{data:cats.map(c=>c.impressions),backgroundColor:CC.slice(0,cats.length),borderWidth:3,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:11},padding:8}}}}});
+  }
+  const cth=`<th>Category</th><th class="nr">Volume</th><th class="nr">Share</th><th class="nr ch">MoM</th><th class="nr">Share Δ</th>`;
+  document.getElementById('tbl-cats').innerHTML=tbl(cth,cats.map((c,i)=>`<tr><td><span class="bdot" style="background:${CC[i]}"></span>${c.category}</td><td class="nr">${c.imp_lakh.toFixed(2)}L</td><td class="nr">${c.share.toFixed(1)}%</td><td class="nr">${badge(c.mom_imp)}</td><td class="nr">${badge(c.mom_share,true)}</td></tr>`).join(''));
+
+  const matrix=kw.cat_matrix||[],months=kw.cat_months||[];
+  const topCats=cats.slice(0,6).map(c=>c.category);
+  if(topCats.length&&months.length){
+    const c4=document.getElementById('chart-cat-trends').getContext('2d');
+    charts.catTr=new Chart(c4,{type:'line',data:{labels:months,datasets:topCats.map((cat,i)=>{const row=matrix.find(r=>r.category===cat)||{};return{label:cat,data:months.map(m=>row[m]!=null?(row[m]/1e5):null),borderColor:CC[i],backgroundColor:'transparent',borderWidth:2,tension:0.3,pointRadius:2,spanGaps:true};})},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{ticks:{callback:v=>v.toFixed(1)+'L'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
   }
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   TAB 4 — GOOGLE INDEXED
-══════════════════════════════════════════════════════════════════════════ */
-function initTab4() {
-  const gi = D.google_indexed;
-  if (!gi || gi.length===0) {
-    document.getElementById('indexed-content').innerHTML = `
-      <div class="placeholder">
-        <div class="placeholder-icon">📡</div>
-        <div class="placeholder-title">Google Indexed — Data Not Yet Loaded</div>
-        <div class="placeholder-body">The Brandstack Google-universe BSOS data hasn't been exported yet.<br>Once available, this tab will show Cars24 share vs Spinny, CarWale, CarDekho in the Google keyword universe (which uses a slightly broader keyword set than the Brandstack universe in Tab 3).</div>
-      </div>`;
-    return;
+function initTab3(){
+  const k=D.kpis,bm=D.bsos_monthly||[],bc=D.bsos_cities||{};
+  document.getElementById('sos-val').textContent=k.c24_sos!=null?`${k.c24_sos.toFixed(1)}%`:'—';
+  const si=k.c24_sos!=null?Math.round(k.c24_sos):null;
+  document.getElementById('sos-txt').innerHTML=si!=null?`Out of every <strong>100</strong> people searching for a used car, <strong>${si}</strong> searched for Cars24 &nbsp;·&nbsp; ${k.latest_month_label}`:'';
+  document.getElementById('sos-badges').innerHTML=badge(k.c24_sos_mom,true)+' vs last month';
+
+  const leader=Object.entries(k.brand_sos||{}).sort((a,b)=>b[1]-a[1])[0];
+  document.getElementById('sos-kpis').innerHTML=`
+    <div class="kh kh-blue"><div class="kl"><span class="ki">🆚</span>Cars24 SoS · ${k.latest_month_label}</div><div class="kv">${fP(k.c24_sos)}</div><div class="ks">${badge(k.c24_sos_mom,true)} vs last month</div></div>
+    <div class="kh kh-purple"><div class="kl"><span class="ki">🏆</span>Our Rank · ${k.latest_month_label}</div><div class="kv">${k.c24_rank!=null?'#'+k.c24_rank:'—'}</div><div class="ks">${leader?`Leader: ${BN[leader[0]]||leader[0]} at ${leader[1].toFixed(1)}%`:''}</div></div>
+    <div class="kh ${(k.c24_vs_spinny||0)>0?'kh-green':'kh-red'}"><div class="kl"><span class="ki">${(k.c24_vs_spinny||0)>0?'✅':'⚠️'}</span>vs Spinny Gap</div><div class="kv">${k.c24_vs_spinny!=null?`${k.c24_vs_spinny>0?'+':''}${k.c24_vs_spinny.toFixed(1)}pp`:'—'}</div><div class="ks">${(k.c24_vs_spinny||0)>0?'Cars24 leads':'Spinny leads'}</div></div>
+    <div class="kh ${(k.c24_vs_carwale||0)>0?'kh-green':'kh-red'}"><div class="kl"><span class="ki">${(k.c24_vs_carwale||0)>0?'✅':'⚠️'}</span>vs CarWale Gap</div><div class="kv">${k.c24_vs_carwale!=null?`${k.c24_vs_carwale>0?'+':''}${k.c24_vs_carwale.toFixed(1)}pp`:'—'}</div><div class="ks">${(k.c24_vs_carwale||0)>0?'Cars24 leads':'CarWale leads'}</div></div>`;
+
+  const brands=['Cars24','Spinny','CarWale','Cardekho','MFC','MTV'].filter(b=>bm.some(r=>r[b]!=null));
+  function renderSoS(p,from,to){
+    const fd=filterPeriod(bm,p,from,to);
+    if(charts.sos)charts.sos.destroy();
+    const c=document.getElementById('chart-sos').getContext('2d');
+    charts.sos=new Chart(c,{type:'line',data:{labels:fd.map(r=>r.label),datasets:brands.map(b=>({label:BN[b]||b,data:fd.map(r=>r[b]),borderColor:BC[b],backgroundColor:b==='Cars24'?'rgba(71,54,254,.07)':'transparent',fill:b==='Cars24',tension:0.3,spanGaps:true,borderWidth:b==='Cars24'?3:1.8,pointRadius:b==='Cars24'?3:2}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,font:{size:11},padding:10}}},scales:{y:{min:0,ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14}}}}});
   }
-  // Build if data exists
-  const brands = ['Cars24','Spinny','CarWale','Cardekho'].filter(b=>gi.some(r=>r[b]!=null));
-  document.getElementById('indexed-content').innerHTML = `
-    <div class="card">
-      <div class="sec-hdr"><span class="sec-kicker">Google Brandstack universe</span><span class="sec-title">Share of Searches — Google Indexed</span></div>
-      <div class="chart-wrap tall"><canvas id="chart-gi"></canvas></div>
+  fcbs['sos']=renderSoS;wirePills('pp-sos','sos',renderSoS);renderSoS('all');
+
+  const compBrands=brands.filter(b=>b!=='Cars24');
+  function renderComp(p,from,to){
+    const fd=filterPeriod(bm,p,from,to);
+    const th=`<th>Month</th><th></th><th class="nr ch">Cars24</th><th class="nr ch">MoM Δ</th>${compBrands.map(b=>`<th class="nr" style="color:${BC[b]}">${bdot(b)}${b==='MFC'?'MFC':b==='MTV'?'MTV':BN[b]}</th>`).join('')}<th class="nr">C24÷Spinny</th>`;
+    const rows=[...fd].reverse().map((r,i)=>{const sp=sf(r.Spinny);const ratio=(r.Cars24!=null&&sp&&sp>0)?(r.Cars24/sp).toFixed(2)+'x':'—';return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(r.Cars24_mom)}</td><td class="nr cc"><strong>${fP(r.Cars24)}</strong></td><td class="nr cc">${badge(r.Cars24_mom,true)}</td>${compBrands.map(b=>`<td class="nr" style="color:${BC[b]}">${fP(r[b])}</td>`).join('')}<td class="nr" style="color:var(--grey);font-size:12px;font-weight:600">${ratio}</td></tr>`;}).join('');
+    document.getElementById('tbl-comp').innerHTML=tbl(th,rows);
+  }
+  fcbs['comp']=renderComp;wirePills('pp-comp','comp',renderComp);renderComp('12m');
+
+  const cities=Object.keys(bc);
+  if(!cities.length){['tbl-city-snap','tbl-city-growth'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='<div style="padding:24px;text-align:center;color:var(--grey)">City data not available.</div>';});return;}
+  const allM=[...new Set(Object.values(bc).flatMap(r=>r.map(x=>x.month)))].sort();
+  const mp=document.getElementById('city-month-pick');
+  allM.slice().reverse().forEach((m,i)=>{const o=document.createElement('option');o.value=m;o.textContent=m+(i===0?' (latest)':'');mp.appendChild(o);});
+
+  function renderCitySnap(snapM){
+    const rows=cities.map(city=>{const r=bc[city].find(x=>x.month===snapM);return r&&r.Cars24!=null?{city,r}:null;}).filter(Boolean).sort((a,b)=>(b.r.Cars24||0)-(a.r.Cars24||0));
+    const cmp=['Spinny','CarWale','Cardekho','MFC','MTV'].filter(b=>rows.some(x=>x.r[b]!=null));
+    const th=`<th>City</th><th>Rank</th><th class="nr ch">Cars24</th><th class="nr ch">MoM Δ</th>${cmp.map(b=>`<th class="nr">vs ${b==='MFC'?'MFC':b==='MTV'?'MTV':b}</th>`).join('')}`;
+    const tr=rows.map((x,i)=>{const allV=[x.r.Cars24,...cmp.map(b=>x.r[b])].filter(v=>v!=null);const rank=[...allV].sort((a,b)=>b-a).indexOf(x.r.Cars24)+1;return`<tr class="${i===0?'lat':''}"><td><strong>${x.city}</strong></td><td>${rchip(rank)}</td><td class="nr cc"><strong>${fP(x.r.Cars24)}</strong></td><td class="nr">${badge(x.r.Cars24_mom,true)}</td>${cmp.map(b=>{const g=(x.r.Cars24!=null&&x.r[b]!=null)?x.r.Cars24-x.r[b]:null;return gapCell(g);}).join('')}</tr>`;}).join('');
+    document.getElementById('tbl-city-snap').innerHTML=tbl(th,tr);
+  }
+  renderCitySnap(allM[allM.length-1]);
+  mp.addEventListener('change',e=>renderCitySnap(e.target.value));
+
+  const gm=allM.slice(-6);
+  const gth=`<th>City</th>${gm.map((m,i)=>`<th class="nr${i===gm.length-1?' ch':''}">${m.slice(0,7)}</th>`).join('')}<th class="nr ch">MoM Δ</th><th>Trend</th>`;
+  const gr=cities.map(city=>{const vals=gm.map(m=>{const r=bc[city].find(x=>x.month===m);return r?r.Cars24:null;});const mom=(vals.length>=2&&vals[vals.length-1]!=null&&vals[vals.length-2]!=null)?vals[vals.length-1]-vals[vals.length-2]:null;return{city,vals,last:vals[vals.length-1],mom};}).sort((a,b)=>(b.last||0)-(a.last||0));
+  document.getElementById('tbl-city-growth').innerHTML=tbl(gth,gr.map(({city,vals,mom})=>`<tr><td><strong>${city}</strong></td>${vals.map((v,i)=>{const il=i===vals.length-1;const s=il?'color:var(--blue);font-weight:800;background:#F5F4FF':(v!=null&&vals[0]!=null&&v>vals[0]+0.2?'color:var(--mint);font-weight:600':v!=null&&vals[0]!=null&&v<vals[0]-0.2?'color:var(--red);font-weight:600':'');return`<td class="nr" style="${s}">${fP(v)}</td>`;}).join('')}<td class="nr">${badge(mom,true)}</td><td>${trendTxt(vals)}</td></tr>`).join(''));
+
+  const pick=document.getElementById('city-pick');
+  cities.sort().forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;pick.appendChild(o);});
+  function renderCityDD(city){
+    const cd=bc[city]||[];
+    const cb=['Cars24','Spinny','CarWale','Cardekho','MFC','MTV','OLX'].filter(b=>cd.some(r=>r[b]!=null));
+    const th=`<th>Month</th><th></th>${cb.map(b=>`<th class="nr${b==='Cars24'?' ch':''}">${bdot(b)}${BN[b]||b}</th>`).join('')}<th class="nr ch">MoM Δ</th>`;
+    const rows=[...cd].reverse().slice(0,14).map((r,i)=>`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(r.Cars24_mom)}</td>${cb.map(b=>`<td class="nr${b==='Cars24'?' cc':''}">${fP(r[b])}</td>`).join('')}<td class="nr cc">${badge(r.Cars24_mom,true)}</td></tr>`).join('');
+    document.getElementById('tbl-city-dd').innerHTML=tbl(th,rows);
+    if(charts.cdd)charts.cdd.destroy();
+    const ctx=document.getElementById('chart-city-dd').getContext('2d');
+    charts.cdd=new Chart(ctx,{type:'line',data:{labels:cd.map(r=>r.label),datasets:cb.map(b=>({label:BN[b]||b,data:cd.map(r=>r[b]),borderColor:BC[b],backgroundColor:'transparent',borderWidth:b==='Cars24'?3:1.5,tension:0.3,spanGaps:true,pointRadius:2}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+  }
+  renderCityDD(cities[0]);pick.addEventListener('change',e=>renderCityDD(e.target.value));
+}
+
+function initTab4(){
+  const gi=D.google_indexed;
+  if(!gi||!gi.length){document.getElementById('gi-content').innerHTML=`<div class="ph"><div class="ph-mark">📡</div><div class="ph-title">Google Indexed data not loaded</div><div class="ph-body">Share the Brandstack Google-universe BSOS export to populate this tab.</div></div>`;return;}
+  const gb=['Cars24','Spinny','CarWale','Cardekho'].filter(b=>gi.some(r=>r[b]!=null));
+  document.getElementById('gi-content').innerHTML=`<div class="card"><div class="sh"><span class="kicker">📡 Google universe</span><span class="title">Share of Searches — Google Indexed</span><span class="desc">Cars24 share in Google's broader keyword universe. Slightly higher than Brandstack.</span></div><div class="cw tall"><canvas id="chart-gi"></canvas></div></div><div class="card"><div class="sh"><span class="kicker">📅 Monthly</span><span class="title">Google Indexed — History</span></div><div class="tw" id="tbl-gi"></div></div>`;
+  const c=document.getElementById('chart-gi').getContext('2d');
+  charts.gi=new Chart(c,{type:'line',data:{labels:gi.map(r=>r.label),datasets:gb.map(b=>({label:BN[b]||b,data:gi.map(r=>r[b]),borderColor:BC[b],backgroundColor:'transparent',borderWidth:b==='Cars24'?3:1.5,tension:0.3,spanGaps:true,pointRadius:3}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+  const gith=`<th>Month</th><th></th>${gb.map(b=>`<th class="nr${b==='Cars24'?' ch':''}">${bdot(b)}${BN[b]||b}</th>`).join('')}<th class="nr ch">MoM Δ</th>`;
+  document.getElementById('tbl-gi').innerHTML=tbl(gith,[...gi].reverse().map((r,i)=>`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong></td><td>${tia(r.Cars24_mom)}</td>${gb.map(b=>`<td class="nr${b==='Cars24'?' cc':''}">${fP(r[b])}</td>`).join('')}<td class="nr cc">${badge(r.Cars24_mom,true)}</td></tr>`).join(''));
+}
+
+function initTab5(){
+  const gi=D.google_indexed,mon=D.monthly_impressions;
+  if(!gi||!gi.length){document.getElementById('impsos-content').innerHTML=`<div class="ph"><div class="ph-mark">📈</div><div class="ph-title">Impressions × SoS — needs Google Indexed data</div><div class="ph-body">Once Tab 4 is populated this shows dual-axis correlation between GSC impressions and Google SoS%.</div></div>`;return;}
+  const merged=mon.map(m=>{const g=gi.find(r=>r.month===m.month);return g?{...m,g_sos:g.Cars24}:null;}).filter(Boolean);
+  document.getElementById('impsos-content').innerHTML=`<div class="card"><div class="sh"><span class="kicker">📊 Correlation</span><span class="title">Monthly Impressions × Cars24 SoS %</span><span class="desc">Bars = GSC impressions (left). Line = Google SoS % (right). Both up = strong brand momentum.</span></div><div class="cw tall"><canvas id="chart-is"></canvas></div></div>`;
+  const c=document.getElementById('chart-is').getContext('2d');
+  charts.is=new Chart(c,{type:'bar',data:{labels:merged.map(r=>r.label),datasets:[{type:'bar',label:'Impressions (L)',data:merged.map(r=>r.imp_lakh),backgroundColor:'rgba(71,54,254,.22)',yAxisID:'y',borderRadius:5},{type:'line',label:'Cars24 SoS %',data:merged.map(r=>r.g_sos),borderColor:'#4736FE',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,pointRadius:3,tension:0.3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Impressions (L)'},ticks:{callback:v=>v+'L'},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'SoS %'},ticks:{callback:v=>v+'%'},grid:{display:false}},x:{grid:{display:false}}}}});
+}
+
+/* ── YouTube renderer ── */
+function renderYT(containerId,key,channelName){
+  const el=document.getElementById(containerId);if(!el)return;
+  const yt=D.youtube?.[key];
+  if(!yt||!yt.monthly?.length){
+    el.innerHTML=`<div class="ph"><div class="ph-mark">📺</div><div class="ph-title">YouTube · ${channelName}</div><div class="ph-body">Connect your YouTube channel to pull live metrics automatically.</div><div class="setup-steps"><h4>How to connect · one-time setup</h4><ol><li>Run <code>python3 setup_youtube_auth.py</code> — opens Google OAuth in browser</li><li>Select the Google account that owns the <strong>${channelName}</strong> channel</li><li>Refresh token is saved to <code>.env</code> automatically</li><li>Add channel ID to <code>.env</code> — see <code>.env.example</code></li><li>Run <code>python3 fetch_social.py</code> then <code>python3 build_data.py</code></li><li>Refresh this page</li></ol></div></div>`;return;
+  }
+  const snap=yt.snapshot||{},lat=yt.monthly[yt.monthly.length-1],prev=yt.monthly.length>=2?yt.monthly[yt.monthly.length-2]:null;
+  const momV=prev&&lat.views&&prev.views?((lat.views-prev.views)/prev.views*100):null;
+  el.innerHTML=`
+    <div class="g4">
+      <div class="kh kh-red"><div class="kl"><span class="ki">📺</span>Total Subscribers</div><div class="kv">${numFmt(snap.subscribers)}</div><div class="ks">${lat.net_subs!=null?(lat.net_subs>0?'+':'')+numFmt(lat.net_subs)+' net in '+lat.label:channelName}</div></div>
+      <div class="kh ${(momV||0)>=0?'kh-blue':'kh-red'}"><div class="kl"><span class="ki">👀</span>Views · ${lat.label}</div><div class="kv">${numFmt(lat.views)}</div><div class="ks">${badge(momV)} MoM</div></div>
+      <div class="kh kh-teal"><div class="kl"><span class="ki">⏱</span>Watch Time · ${lat.label}</div><div class="kv">${numFmt(lat.watch_time_hours)}h</div><div class="ks">Avg: ${lat.avg_view_duration?Math.floor(lat.avg_view_duration/60)+'m '+Math.floor(lat.avg_view_duration%60)+'s':'—'}</div></div>
+      <div class="kh kh-amber"><div class="kl"><span class="ki">🎯</span>CTR · ${lat.label}</div><div class="kv">${lat.ctr!=null?lat.ctr.toFixed(1)+'%':'—'}</div><div class="ks">Impressions: ${numFmt(lat.impressions)}</div></div>
     </div>
-    <div class="card">
-      <div class="sec-hdr"><span class="sec-kicker">Monthly</span><span class="sec-title">Google Indexed — History</span></div>
-      <div class="tbl-wrap" id="tbl-gi"></div>
-    </div>`;
-  const ctxGi = document.getElementById('chart-gi').getContext('2d');
-  charts.gi = new Chart(ctxGi, {
-    type:'line',
-    data:{
-      labels:gi.map(r=>r.label),
-      datasets:brands.map(b=>({
-        label:BN[b]||b, data:gi.map(r=>r[b]),
-        borderColor:BC[b], backgroundColor:'transparent',
-        borderWidth:b==='Cars24'?3:1.5, tension:0.3, spanGaps:true, pointRadius:3,
-      }))
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},
-      scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E3E1FF'}},x:{grid:{display:false}}}
-    }
-  });
-  const gith = `<th>Month</th>${brands.map(b=>`<th class="num${b==='Cars24'?' c24-col':''}">${BN[b]||b}</th>`).join('')}<th class="num c24-col">MoM Δ</th>`;
-  const gitr = [...gi].reverse().map((r,i)=>`<tr class="${i===0?'latest-row':''}">
-    <td><strong>${r.label}</strong></td>
-    ${brands.map(b=>`<td class="num${b==='Cars24'?' c24-col':''}">${fP(r[b])}</td>`).join('')}
-    <td class="num c24-col">${badge(r.Cars24_mom,true)}</td>
-  </tr>`).join('');
-  document.getElementById('tbl-gi').innerHTML = buildTable(gith, gitr);
+    <div class="card"><div class="sh"><span class="kicker">📈 Monthly</span><span class="title">Views & Subscribers — ${channelName}</span><span class="desc">Bars = views (left axis). Line = net subscribers gained (right axis).</span></div><div class="cw tall"><canvas id="yt-chart-${key}"></canvas></div></div>
+    <div class="card"><div class="sh"><span class="kicker">📅 History</span><span class="title">Monthly Metrics — ${channelName}</span></div><div class="tw" id="yt-tbl-${key}"></div></div>`;
+
+  const ctx=document.getElementById(`yt-chart-${key}`).getContext('2d');
+  charts[`yt_${key}`]=new Chart(ctx,{type:'bar',data:{labels:yt.monthly.map(r=>r.label),datasets:[{type:'bar',label:'Views',data:yt.monthly.map(r=>r.views),backgroundColor:'rgba(231,0,11,.18)',yAxisID:'y',borderRadius:5},{type:'line',label:'Net Subscribers',data:yt.monthly.map(r=>r.net_subs),borderColor:'#E7000B',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Views'},ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'Net Subs'},ticks:{callback:v=>numFmt(v)},grid:{display:false}},x:{grid:{display:false}}}}});
+
+  const th=`<th>Month</th><th></th><th class="nr ch">Views</th><th class="nr ch">MoM</th><th class="nr">Watch Time</th><th class="nr">Net Subs</th><th class="nr">CTR</th>`;
+  document.getElementById(`yt-tbl-${key}`).innerHTML=tbl(th,[...yt.monthly].reverse().map((r,i)=>{const p2=yt.monthly.length>i+1?yt.monthly[yt.monthly.length-i-2]:null;const mv=p2&&r.views&&p2.views?((r.views-p2.views)/p2.views*100):null;return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(mv)}</td><td class="nr cc"><strong>${numFmt(r.views)}</strong></td><td class="nr cc">${badge(mv)}</td><td class="nr">${r.watch_time_hours!=null?numFmt(r.watch_time_hours)+'h':'—'}</td><td class="nr">${r.net_subs!=null?`${r.net_subs>0?'+':''}${numFmt(r.net_subs)}`:'—'}</td><td class="nr">${r.ctr!=null?r.ctr.toFixed(1)+'%':'—'}</td></tr>`;}).join(''));
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   TAB 5 — IMPRESSIONS × SoS
-══════════════════════════════════════════════════════════════════════════ */
-function initTab5() {
-  const gi  = D.google_indexed;
-  const mon = D.monthly_impressions;
-  if (!gi || gi.length===0) {
-    document.getElementById('impsos-content').innerHTML = `
-      <div class="placeholder">
-        <div class="placeholder-icon">📈</div>
-        <div class="placeholder-title">Impressions × SoS — Needs Google Indexed Data</div>
-        <div class="placeholder-body">This tab correlates GSC monthly impressions with Google Brandstack SoS %.<br>Once Google Indexed data is available (Tab 4), this tab will auto-populate with the dual-axis chart and direction-match analysis.</div>
-      </div>`;
-    return;
+/* ── Instagram renderer ── */
+function renderIG(containerId,key,handleName){
+  const el=document.getElementById(containerId);if(!el)return;
+  const ig=D.instagram?.[key];
+  if(!ig||!ig.monthly?.length){
+    el.innerHTML=`<div class="ph"><div class="ph-mark">📸</div><div class="ph-title">Instagram · ${handleName}</div><div class="ph-body">Connect your Instagram account to pull live metrics automatically.</div><div class="setup-steps"><h4>How to connect · one-time setup</h4><ol><li>Go to <a href="https://developers.facebook.com" target="_blank" style="color:var(--blue)">Meta for Developers</a> → My Apps → Create App</li><li>Add Instagram Graph API product</li><li>Connect your Instagram Business Account via Facebook Page</li><li>Graph API Explorer → GET /me → copy your Instagram user ID</li><li>Generate a User Access Token → Exchange for Long-Lived Token (60 days)</li><li>Add to <code>.env</code>: <code>IG_USER_ID_${key.toUpperCase()}</code> and <code>IG_ACCESS_TOKEN</code></li><li>Run <code>python3 fetch_social.py</code> then <code>python3 build_data.py</code></li></ol></div></div>`;return;
   }
-  // Merge
-  const merged = mon.map(m=>{
-    const g = gi.find(r=>r.month===m.month);
-    return g ? {...m, g_sos:g.Cars24} : null;
-  }).filter(Boolean);
+  const snap=ig.snapshot||{},lat=ig.monthly[ig.monthly.length-1],prev=ig.monthly.length>=2?ig.monthly[ig.monthly.length-2]:null;
+  const momF=prev&&lat.followers&&prev.followers?((lat.followers-prev.followers)/prev.followers*100):null;
+  el.innerHTML=`
+    <div class="g4">
+      <div class="kh kh-pink"><div class="kl"><span class="ki">👥</span>Total Followers</div><div class="kv">${numFmt(snap.followers||lat.followers)}</div><div class="ks">${lat.followers_gained!=null?`+${numFmt(lat.followers_gained)} in ${lat.label}`:handleName}</div></div>
+      <div class="kh kh-purple"><div class="kl"><span class="ki">👁</span>Reach · ${lat.label}</div><div class="kv">${numFmt(lat.reach)}</div><div class="ks">Impressions: ${numFmt(lat.impressions)}</div></div>
+      <div class="kh kh-teal"><div class="kl"><span class="ki">🏠</span>Profile Views · ${lat.label}</div><div class="kv">${numFmt(lat.profile_views)}</div><div class="ks">Website clicks: ${numFmt(lat.website_clicks)}</div></div>
+      <div class="kh kh-blue"><div class="kl"><span class="ki">💬</span>Engaged Accounts · ${lat.label}</div><div class="kv">${numFmt(lat.accounts_engaged)}</div><div class="ks">${badge(momF)} follower growth MoM</div></div>
+    </div>
+    <div class="card"><div class="sh"><span class="kicker">📈 Monthly</span><span class="title">Reach & Follower Growth — ${handleName}</span><span class="desc">Bars = monthly reach (left). Line = total followers (right).</span></div><div class="cw tall"><canvas id="ig-chart-${key}"></canvas></div></div>
+    <div class="card"><div class="sh"><span class="kicker">📅 History</span><span class="title">Monthly Metrics — ${handleName}</span></div><div class="tw" id="ig-tbl-${key}"></div></div>`;
 
-  document.getElementById('impsos-content').innerHTML = `
-    <div class="card">
-      <div class="sec-hdr"><span class="sec-kicker">Correlation</span><span class="sec-title">Monthly Impressions vs Cars24 SoS %</span></div>
-      <div class="chart-wrap tall"><canvas id="chart-impsos"></canvas></div>
-    </div>`;
-  const ctxIS = document.getElementById('chart-impsos').getContext('2d');
-  charts.impsos = new Chart(ctxIS, {
-    type:'bar',
-    data:{
-      labels:merged.map(r=>r.label),
-      datasets:[
-        {type:'bar',label:'Impressions (Lakh)',data:merged.map(r=>r.imp_lakh),backgroundColor:'rgba(71,54,254,0.25)',yAxisID:'y',borderRadius:4},
-        {type:'line',label:'Cars24 SoS %',data:merged.map(r=>r.g_sos),borderColor:'#4736FE',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,pointRadius:4,tension:0.3},
-      ]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},
-      scales:{
-        y:{type:'linear',position:'left',title:{display:true,text:'Impressions (Lakh)'},ticks:{callback:v=>v+'L'},grid:{color:'#E3E1FF'}},
-        y1:{type:'linear',position:'right',title:{display:true,text:'SoS %'},ticks:{callback:v=>v+'%'},grid:{display:false}},
-        x:{grid:{display:false}}
-      }
-    }
-  });
+  const ctx=document.getElementById(`ig-chart-${key}`).getContext('2d');
+  charts[`ig_${key}`]=new Chart(ctx,{type:'bar',data:{labels:ig.monthly.map(r=>r.label),datasets:[{type:'bar',label:'Reach',data:ig.monthly.map(r=>r.reach),backgroundColor:'rgba(233,30,140,.18)',yAxisID:'y',borderRadius:5},{type:'line',label:'Followers',data:ig.monthly.map(r=>r.followers),borderColor:'#E91E8C',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Reach'},ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'Followers'},ticks:{callback:v=>numFmt(v)},grid:{display:false}},x:{grid:{display:false}}}}});
+
+  const th=`<th>Month</th><th></th><th class="nr ch">Followers</th><th class="nr ch">Gained</th><th class="nr">Reach</th><th class="nr">Impressions</th><th class="nr">Profile Views</th><th class="nr">Website Clicks</th>`;
+  document.getElementById(`ig-tbl-${key}`).innerHTML=tbl(th,[...ig.monthly].reverse().map((r,i)=>{const p2=ig.monthly.length>i+1?ig.monthly[ig.monthly.length-i-2]:null;const mf=p2&&r.followers&&p2.followers?((r.followers-p2.followers)/p2.followers*100):null;return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(mf)}</td><td class="nr cc"><strong>${numFmt(r.followers)}</strong></td><td class="nr cc">${r.followers_gained!=null?'+'+numFmt(r.followers_gained):'—'}</td><td class="nr">${numFmt(r.reach)}</td><td class="nr">${numFmt(r.impressions)}</td><td class="nr">${numFmt(r.profile_views)}</td><td class="nr">${numFmt(r.website_clicks)}</td></tr>`;}).join(''));
 }
 
-/* ── Lazy tab initializers ────────────────────────────────────────────────── */
-const lazyInit = {
-  keywords: initTab2,
-  bsos:     initTab3,
-  indexed:  initTab4,
-  impsos:   initTab5,
-};
+function initYT(){
+  renderYT('ytc-c24','cars24_india','Cars24 India');
+  renderYT('ytc-tbhp','teambhp','TeamBHP');
+  renderYT('ytc-insider','cars24_insider','Cars24 Insider');
+  renderYT('ytc-au','cars24_au','Cars24 Australia');
+  renderYT('ytc-uae','cars24_uae','Cars24 UAE');
+}
+function initIG(){
+  renderIG('igc-c24','cars24_india','Cars24 India');
+  renderIG('igc-tbhp','teambhp','TeamBHP');
+  renderIG('igc-au','cars24_au','Cars24 Australia');
+  renderIG('igc-uae','cars24_uae','Cars24 UAE');
+}
 
+const lazyInit={kw:initTab2,bsos:initTab3,gi:initTab4,impsos:initTab5,yt:initYT,ig:initIG};
 
-/* main */
-async function main() {
-  try {
-    const res = await fetch('data.json');
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    D = await res.json();
-    Chart.defaults.font.family = "'Geist','Inter',system-ui,sans-serif";
-    Chart.defaults.color = '#6B7280';
-    renderOverview();
-    initTabs();
-    initTab1();
-    tabInited['search'] = true;
-  } catch(e) {
-    document.querySelector('.wrap').innerHTML =
-      '<div class="placeholder" style="margin-top:48px"><div class="ph-title">Could not load dashboard data</div>'+
-      '<div class="ph-body">'+e.message+'<br><br>Run <code>python3 build_data.py</code> to regenerate data.json, then serve the folder.</div></div>';
+async function main(){
+  try{
+    const r=await fetch('data.json');
+    if(!r.ok)throw new Error(`HTTP ${r.status}`);
+    D=await r.json();
+    Chart.defaults.font.family="'Geist',system-ui,sans-serif";
+    Chart.defaults.color='#6B7280';
+    renderOv();initTabs();initTab1();inited.search=true;
+  }catch(e){
+    document.querySelector('.wrap').innerHTML=`<div class="ph" style="margin-top:48px"><div class="ph-title">Could not load dashboard data</div><div class="ph-body">${e.message}<br><br>Run <code>python3 build_data.py</code> then serve with <code>python3 -m http.server 8080</code></div></div>`;
   }
 }
-document.addEventListener('DOMContentLoaded', main);
+document.addEventListener('DOMContentLoaded',main);
 </script>
 </body>
 </html>

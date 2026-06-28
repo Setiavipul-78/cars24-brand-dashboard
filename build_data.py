@@ -346,6 +346,121 @@ def build_kpis(monthly, bsos_monthly):
         "c24_vs_carwale":     sf(pp_ch(c24_sos, carwale_sos)),
     }
 
+# ── YouTube ───────────────────────────────────────────────────────────────────
+YT_CHANNEL_KEYS = [
+    "cars24_india", "teambhp", "cars24_insider", "cars24_au", "cars24_uae",
+]
+YT_CHANNEL_NAMES = {
+    "cars24_india":   "Cars24 India",
+    "teambhp":        "TeamBHP",
+    "cars24_insider": "Cars24 Insider",
+    "cars24_au":      "Cars24 Australia",
+    "cars24_uae":     "Cars24 UAE",
+}
+
+def build_youtube():
+    result = {}
+    for key in YT_CHANNEL_KEYS:
+        p = DATA / f"youtube_{key}.csv"
+        if not p.exists():
+            continue
+        try:
+            df = pd.read_csv(p)
+            if df.empty:
+                continue
+            df = df.sort_values("month").reset_index(drop=True)
+
+            snap = {}
+            if "total_subscribers" in df.columns:
+                snap["subscribers"] = int(df["total_subscribers"].iloc[-1])
+            if "total_views" in df.columns:
+                snap["total_views"] = int(df["total_views"].iloc[-1])
+            if "total_videos" in df.columns:
+                snap["videos"] = int(df["total_videos"].iloc[-1])
+
+            rows = []
+            for _, row in df.iterrows():
+                r = {
+                    "month":             str(row["month"])[:7],
+                    "label":             mlabel(str(row["month"])[:7]),
+                    "views":             int(row.get("views", 0)),
+                    "watch_time_hours":  sf(row.get("watch_time_hours")),
+                    "avg_view_duration": sf(row.get("avg_view_duration")),
+                    "subscribers_gained": int(row.get("subscribers_gained", 0)),
+                    "subscribers_lost":  int(row.get("subscribers_lost", 0)),
+                    "net_subs":          int(row.get("net_subs", 0)),
+                    "likes":             int(row.get("likes", 0)),
+                    "comments":          int(row.get("comments", 0)),
+                    "shares":            int(row.get("shares", 0)),
+                    "impressions":       int(row.get("impressions", 0)),
+                    "ctr":               sf(row.get("ctr")),
+                }
+                rows.append(r)
+
+            result[key] = {
+                "channel_name": YT_CHANNEL_NAMES.get(key, key),
+                "snapshot":     snap,
+                "monthly":      rows,
+            }
+            print(f"  ✓ YouTube {key}: {len(rows)} months")
+        except Exception as e:
+            print(f"  ⚠ YouTube {key}: {e}")
+    return result
+
+# ── Instagram ─────────────────────────────────────────────────────────────────
+IG_KEYS = ["cars24_india", "teambhp", "cars24_au", "cars24_uae"]
+IG_HANDLES = {
+    "cars24_india": "@cars24india",
+    "teambhp":      "@teambhp",
+    "cars24_au":    "@cars24australia",
+    "cars24_uae":   "@cars24uae",
+}
+
+def build_instagram():
+    result = {}
+    for key in IG_KEYS:
+        p = DATA / f"instagram_{key}.csv"
+        if not p.exists():
+            continue
+        try:
+            df = pd.read_csv(p)
+            if df.empty:
+                continue
+            df = df.sort_values("month").reset_index(drop=True)
+
+            snap = {}
+            if "total_followers" in df.columns:
+                snap["followers"] = int(df["total_followers"].iloc[-1])
+            if "total_media" in df.columns:
+                snap["media"] = int(df["total_media"].iloc[-1])
+
+            rows = []
+            for _, row in df.iterrows():
+                r = {
+                    "month":             str(row["month"])[:7],
+                    "label":             mlabel(str(row["month"])[:7]),
+                    "followers":         int(row.get("followers", 0)),
+                    "followers_gained":  int(row.get("followers_gained", 0)),
+                    "reach":             int(row.get("reach", 0)),
+                    "impressions":       int(row.get("impressions", 0)),
+                    "profile_views":     int(row.get("profile_views", 0)),
+                    "website_clicks":    int(row.get("website_clicks", 0)),
+                    "accounts_engaged":  int(row.get("accounts_engaged", 0)),
+                    "email_contacts":    int(row.get("email_contacts", 0)),
+                    "phone_clicks":      int(row.get("phone_clicks", 0)),
+                }
+                rows.append(r)
+
+            result[key] = {
+                "handle":  IG_HANDLES.get(key, key),
+                "snapshot": snap,
+                "monthly": rows,
+            }
+            print(f"  ✓ Instagram {key}: {len(rows)} months")
+        except Exception as e:
+            print(f"  ⚠ Instagram {key}: {e}")
+    return result
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     print("Building data.json …")
@@ -358,6 +473,8 @@ if __name__ == "__main__":
     google_indexed = build_google_indexed()
     keywords       = build_keywords()
     kpis           = build_kpis(monthly, bsos_monthly)
+    youtube        = build_youtube()
+    instagram      = build_instagram()
 
     payload = {
         "_meta": {
@@ -374,6 +491,8 @@ if __name__ == "__main__":
         "gsc_daily":          gsc_daily,
         "google_indexed":     google_indexed,
         "keywords":           keywords,
+        "youtube":            youtube,
+        "instagram":          instagram,
     }
 
     with open(OUT, "w") as f:
@@ -382,4 +501,5 @@ if __name__ == "__main__":
     sz = OUT.stat().st_size / 1024
     print(f"\n✅ data.json written — {sz:.0f} KB")
     print(f"   Impressions: {len(monthly)} months | BSOS: {len(bsos_monthly)} months | Cities: {len(bsos_cities)}")
+    print(f"   YouTube: {len(youtube)} channels | Instagram: {len(instagram)} accounts")
     print(f"   KPIs: {kpis.get('curr_imp_fmt')} impressions · {kpis.get('c24_sos')}% SoS")
