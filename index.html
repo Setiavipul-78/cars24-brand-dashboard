@@ -905,10 +905,10 @@ function renderYT(containerId,key,channelName){
       <div class="ink grn"><span class="ink-icon">⚡</span><div class="ink-lbl">Engagement</div><div class="ink-val">${engRate.toFixed(2)}%</div><div class="ink-sub">(likes+cmts+shares)÷views</div></div>`;
   }
 
-  // ── Monthly table (always all months, latest row highlighted) ──
-  (()=>{
+  // ── Monthly table (period-filtered) ──
+  function renderYTTable(period){
     const latestMonth=monthsDesc[0]?.month||'';
-    const rows=[...monthly].reverse();
+    const rows=period==='all'?[...monthly].reverse():monthly.filter(r=>r.month===period.replace('m:',''));
     const th=`<th>Month</th><th class="nr ch">👀 Views</th><th class="nr ch">MoM</th><th class="nr ch">YoY</th><th class="nr">⏱ Watch Time</th><th class="nr">MoM</th><th class="nr">⏰ Avg Duration</th><th class="nr">🔄 Retention</th><th class="nr">👥 New Subs</th><th class="nr">YoY Subs</th><th class="nr">👍 Likes</th><th class="nr">💬 Comments</th><th class="nr">↗ Shares</th><th class="nr">⚡ Eng%</th>`;
     const tbRows=rows.map(r=>`<tr class="${r.month===latestMonth?'lat':''}">
       <td><strong>${r.label}</strong>${r.month===latestMonth?' <span class="badge bb">Latest</span>':''}</td>
@@ -926,14 +926,15 @@ function renderYT(containerId,key,channelName){
       <td class="nr">${numFmt(r.shares)||'—'}</td>
       <td class="nr">${r.engagement_rate>0?r.engagement_rate.toFixed(2)+'%':'—'}</td>
     </tr>`).join('');
-    document.getElementById(`yt-mom-tbl-${key}`).innerHTML=tbl(th,tbRows);
-  })();
+    document.getElementById(`yt-mom-tbl-${key}`).innerHTML=rows.length?tbl(th,tbRows):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
+  }
 
-  // Period filter — controls KPI tiles only, defaults to latest month
+  // Period filter — controls KPI tiles + monthly table, defaults to latest month
   const sel=document.getElementById(`yt-sel-${key}`);
   sel.value=`m:${monthsDesc[0]?.month||''}`;
-  sel.addEventListener('change',e=>renderKPIs(e.target.value));
+  sel.addEventListener('change',e=>{renderKPIs(e.target.value);renderYTTable(e.target.value);});
   renderKPIs(sel.value);
+  renderYTTable(sel.value);
 
   // ── Trend chart ──
   const ck=`yt_${key}_trend`;if(charts[ck])charts[ck].destroy();
@@ -1020,6 +1021,7 @@ function renderIG(containerId,key,handleName){
       <span class="fl">PERIOD</span>
       <div style="position:relative;display:inline-block">
         <select id="ig-sel-${key}" style="appearance:none;-webkit-appearance:none;background:var(--card);border:2px solid var(--blue);border-radius:8px;padding:7px 36px 7px 14px;font:700 13px var(--font);color:var(--ink);cursor:pointer;min-width:160px;outline:none">
+          <option value="all">All Time</option>
           ${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}
         </select>
         <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--blue);font-size:10px">▼</span>
@@ -1097,18 +1099,12 @@ function renderIG(containerId,key,handleName){
   }
   const sel=document.getElementById(`ig-sel-${key}`);
   sel.value=`m:${latestM}`;
-  sel.addEventListener('change',e=>renderIGKPIs(e.target.value));
-  renderIGKPIs(`m:${latestM}`);
 
-  // ── Trend chart ──
-  const ck=`ig_${key}_trend`;if(charts[ck])charts[ck].destroy();
-  const tc=document.getElementById(`ig-trend-${key}`);
-  if(tc) charts[ck]=new Chart(tc.getContext('2d'),{type:'bar',data:{labels:monthly.map(r=>r.label),datasets:[{type:'bar',label:'Reach',data:monthly.map(r=>r.reach),backgroundColor:'rgba(233,30,140,.18)',yAxisID:'y',borderRadius:5},{type:'line',label:'Total Interactions',data:monthly.map(r=>r.total_interactions||0),borderColor:'#E91E8C',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Reach'},ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'Interactions'},ticks:{callback:v=>numFmt(v)},grid:{display:false}},x:{grid:{display:false}}}}});
-
-  // ── Monthly table with MoM ──
-  (()=>{
+  // ── Monthly table (period-filtered) ──
+  function renderIGTable(period){
+    const filtered=period==='all'?monthsDesc:monthly.filter(r=>r.month===period.replace('m:','')).reverse();
     const th=`<th>Month</th><th class="nr ch">👁 Reach</th><th class="nr ch">MoM</th><th class="nr">🏠 Profile Views</th><th class="nr">🔗 Web Clicks</th><th class="nr">💬 Accts Engaged</th><th class="nr">❤️ Likes</th><th class="nr">💬 Comments</th><th class="nr ch">⚡ Interactions</th><th class="nr ch">MoM</th>`;
-    const rows=monthsDesc.map(r=>{
+    const rows=filtered.map(r=>{
       const idx2=monthly.findIndex(x=>x.month===r.month);
       const p=idx2>0?monthly[idx2-1]:null;
       const mR=p&&p.reach?((r.reach-p.reach)/p.reach*100):null;
@@ -1126,8 +1122,19 @@ function renderIG(containerId,key,handleName){
         <td class="nr cc">${badge(mI)}</td>
       </tr>`;
     }).join('');
-    document.getElementById(`ig-mom-tbl-${key}`).innerHTML=tbl(th,rows);
-  })();
+    document.getElementById(`ig-mom-tbl-${key}`).innerHTML=filtered.length?tbl(th,rows):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
+  }
+
+  sel.addEventListener('change',e=>{renderIGKPIs(e.target.value);renderIGTable(e.target.value);});
+  renderIGKPIs(`m:${latestM}`);
+
+  // ── Trend chart ──
+  const ck=`ig_${key}_trend`;if(charts[ck])charts[ck].destroy();
+  const tc=document.getElementById(`ig-trend-${key}`);
+  if(tc) charts[ck]=new Chart(tc.getContext('2d'),{type:'bar',data:{labels:monthly.map(r=>r.label),datasets:[{type:'bar',label:'Reach',data:monthly.map(r=>r.reach),backgroundColor:'rgba(233,30,140,.18)',yAxisID:'y',borderRadius:5},{type:'line',label:'Total Interactions',data:monthly.map(r=>r.total_interactions||0),borderColor:'#E91E8C',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Reach'},ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'Interactions'},ticks:{callback:v=>numFmt(v)},grid:{display:false}},x:{grid:{display:false}}}}});
+
+  // ── Monthly table (rendered by renderIGTable, called via period filter) ──
+  renderIGTable(`m:${latestM}`);
 
   // ── Top posts tables ──
   if(posts.length){
@@ -1163,34 +1170,82 @@ function renderLI(containerId,key,pageName){
   if(!li||!li.monthly?.length){
     el.innerHTML=`<div class="ph"><div class="ph-mark">💼</div><div class="ph-title">LinkedIn · ${pageName}</div><div class="ph-body">Export analytics from LinkedIn Page Admin and save as CSV in the <code>data/</code> folder.</div><div class="setup-steps"><h4>How to set up (one-time)</h4><ol><li>Go to your <strong>LinkedIn Page</strong> → click <strong>Analytics</strong> in the left nav</li><li><strong>Followers</strong> tab → click <strong>Export</strong> → save as <code>data/linkedin_${key}_followers.csv</code></li><li><strong>Visitors</strong> tab → click <strong>Export</strong> → save as <code>data/linkedin_${key}_visitors.csv</code></li><li><strong>Content</strong> tab → click <strong>Export</strong> (top right) → save as <code>data/linkedin_${key}_content.csv</code></li><li>Run <code>python3 build_data.py</code> and refresh</li></ol><p style="margin-top:12px;font-size:12px;color:#6B7280">Tip: LinkedIn exports cover the past 365 days. Re-export monthly to keep the dashboard current.</p></div></div>`;return;
   }
-  const snap=li.snapshot||{},monthly=li.monthly,lat=monthly[monthly.length-1],prev=monthly.length>=2?monthly[monthly.length-2]:null;
-  const momFol=prev&&lat.new_followers?`+${numFmt(lat.new_followers)} new in ${lat.label}`:pageName;
-  const momEng=lat.eng_rate!=null?`${lat.eng_rate.toFixed(2)}% eng rate`:'—';
-  const momImp=prev&&prev.impressions&&lat.impressions?((lat.impressions-prev.impressions)/prev.impressions*100):null;
+  const snap=li.snapshot||{},liMonthly=li.monthly;
+  const liDesc=[...liMonthly].reverse();
+  const liLatest=liDesc[0]?.month||liDesc[0]?.label||'';
+
   el.innerHTML=`
-    <div class="g4">
-      <div class="kh kh-blue"><div class="kl"><span class="ki">👥</span>Total Followers</div><div class="kv">${numFmt(snap.followers||lat.followers)}</div><div class="ks">${momFol}</div></div>
-      <div class="kh kh-teal"><div class="kl"><span class="ki">📢</span>Impressions · ${lat.label}</div><div class="kv">${numFmt(lat.impressions)}</div><div class="ks">${badge(momImp)} vs prior month</div></div>
-      <div class="kh kh-purple"><div class="kl"><span class="ki">🏠</span>Page Views · ${lat.label}</div><div class="kv">${numFmt(lat.page_views)}</div><div class="ks">Unique visitors: ${numFmt(lat.unique_visitors)}</div></div>
-      <div class="kh kh-mint"><div class="kl"><span class="ki">💬</span>Engagement · ${lat.label}</div><div class="kv">${numFmt((lat.likes||0)+(lat.comments||0)+(lat.shares||0))}</div><div class="ks">${momEng}</div></div>
+    <div class="inf-period-bar" style="gap:12px">
+      <span class="fl">PERIOD</span>
+      <div style="position:relative;display:inline-block">
+        <select id="li-sel-${key}" style="appearance:none;-webkit-appearance:none;background:var(--card);border:2px solid var(--blue);border-radius:8px;padding:7px 36px 7px 14px;font:700 13px var(--font);color:var(--ink);cursor:pointer;min-width:160px;outline:none">
+          <option value="all">All Time</option>
+          ${liDesc.map((r,i)=>`<option value="i:${liMonthly.length-1-i}"${i===0?' selected':''}>${r.label}</option>`).join('')}
+        </select>
+        <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--blue);font-size:10px">▼</span>
+      </div>
     </div>
-    <div class="card"><div class="sh"><span class="kicker">📈 Monthly</span><span class="title">Impressions & Follower Growth — ${pageName}</span><span class="desc">Bars = impressions (left). Line = new followers (right).</span></div><div class="cw tall"><canvas id="li-chart-${key}"></canvas></div></div>
-    <div class="card"><div class="sh"><span class="kicker">📅 History</span><span class="title">Monthly Metrics — ${pageName}</span></div><div class="tw" id="li-tbl-${key}"></div></div>
+
+    <div class="inf-kpi-strip" id="li-kpis-${key}" style="grid-template-columns:repeat(6,1fr)"></div>
+
+    <div class="card"><div class="sh"><span class="kicker">📈 Monthly Trend</span><span class="title">Impressions & Follower Growth — ${pageName}</span><span class="desc">Bars = impressions (left). Line = new followers (right).</span></div><div class="cw tall"><canvas id="li-chart-${key}"></canvas></div></div>
+    <div class="card"><div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Metrics — ${pageName}</span></div><div class="tw" id="li-tbl-${key}"></div></div>
     ${li.posts&&li.posts.length?`<div class="card"><div class="sh"><span class="kicker">🔝 Top Posts</span><span class="title">Best Performing Content — ${pageName}</span><span class="desc">Sorted by impressions.</span></div><div class="tw" id="li-posts-${key}"></div></div>`:''}`;
 
-  // Trend chart
+  function renderLIKPIs(val){
+    const idx=val==='all'?liMonthly.length-1:parseInt(val.replace('i:',''),10);
+    const r=liMonthly[idx]||liDesc[0];
+    const p=idx>0?liMonthly[idx-1]:null;
+    const momI=p&&p.impressions?((r.impressions-p.impressions)/p.impressions*100):null;
+    const momV=p&&p.page_views?((r.page_views-p.page_views)/p.page_views*100):null;
+    const momF=p&&p.followers?((r.followers-p.followers)/p.followers*100):null;
+    const momE=p&&p.eng_rate?((r.eng_rate-p.eng_rate)/p.eng_rate*100):null;
+    document.getElementById(`li-kpis-${key}`).innerHTML=`
+      <div class="ink mint"><span class="ink-icon">👥</span><div class="ink-lbl">Followers</div><div class="ink-val">${numFmt(snap.followers||r.followers)}</div><div class="ink-sub">${badge(momF)} MoM</div></div>
+      <div class="ink grn"><span class="ink-icon">📢</span><div class="ink-lbl">Impressions</div><div class="ink-val">${numFmt(r.impressions)}</div><div class="ink-sub">${badge(momI)} MoM</div></div>
+      <div class="ink"><span class="ink-icon">🏠</span><div class="ink-lbl">Page Views</div><div class="ink-val">${numFmt(r.page_views)}</div><div class="ink-sub">${badge(momV)} MoM</div></div>
+      <div class="ink or"><span class="ink-icon">👤</span><div class="ink-lbl">Unique Visitors</div><div class="ink-val">${numFmt(r.unique_visitors)}</div><div class="ink-sub">${r.label}</div></div>
+      <div class="ink pur"><span class="ink-icon">💬</span><div class="ink-lbl">New Followers</div><div class="ink-val">${r.new_followers!=null?'+'+numFmt(r.new_followers):'—'}</div><div class="ink-sub">${r.label}</div></div>
+      <div class="ink red"><span class="ink-icon">⚡</span><div class="ink-lbl">Eng Rate</div><div class="ink-val">${r.eng_rate!=null?r.eng_rate.toFixed(2)+'%':'—'}</div><div class="ink-sub">${badge(momE)} MoM</div></div>`;
+  }
+
+  function renderLITable(val){
+    const rows=val==='all'?liDesc:[liMonthly[parseInt(val.replace('i:',''),10)]].filter(Boolean);
+    const th=`<th>Month</th><th class="nr ch">👥 Followers</th><th class="nr ch">MoM</th><th class="nr">📢 Impressions</th><th class="nr">MoM</th><th class="nr">🏠 Page Views</th><th class="nr">👤 Visitors</th><th class="nr">💬 New Fol.</th><th class="nr">👍 Likes</th><th class="nr">💬 Comments</th><th class="nr">↗ Shares</th><th class="nr ch">⚡ Eng %</th>`;
+    const tbRows=rows.map(r=>{
+      const ri=liMonthly.findIndex(x=>x.label===r.label);
+      const p=ri>0?liMonthly[ri-1]:null;
+      const mF=p&&p.followers?((r.followers-p.followers)/p.followers*100):null;
+      const mI=p&&p.impressions?((r.impressions-p.impressions)/p.impressions*100):null;
+      return`<tr class="${r.label===liDesc[0]?.label?'lat':''}">
+        <td><strong>${r.label}</strong>${r.label===liDesc[0]?.label?' <span class="badge bb">Latest</span>':''}</td>
+        <td class="nr cc"><strong>${numFmt(r.followers)}</strong></td>
+        <td class="nr cc">${badge(mF)}</td>
+        <td class="nr">${numFmt(r.impressions)}</td>
+        <td class="nr">${badge(mI)}</td>
+        <td class="nr">${numFmt(r.page_views)}</td>
+        <td class="nr">${numFmt(r.unique_visitors)}</td>
+        <td class="nr">${r.new_followers!=null?'+'+numFmt(r.new_followers):'—'}</td>
+        <td class="nr">${numFmt(r.likes)}</td>
+        <td class="nr">${numFmt(r.comments)}</td>
+        <td class="nr">${numFmt(r.shares)}</td>
+        <td class="nr cc">${r.eng_rate!=null?r.eng_rate.toFixed(2)+'%':'—'}</td>
+      </tr>`;
+    }).join('');
+    document.getElementById(`li-tbl-${key}`).innerHTML=rows.length?tbl(th,tbRows):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
+  }
+
+  const liSel=document.getElementById(`li-sel-${key}`);
+  liSel.addEventListener('change',e=>{renderLIKPIs(e.target.value);renderLITable(e.target.value);});
+  renderLIKPIs('i:'+(liMonthly.length-1));
+  renderLITable('i:'+(liMonthly.length-1));
+
+  // Trend chart (always all-time)
+  const liCk=`li_${key}`;if(charts[liCk])charts[liCk].destroy();
   const ctx=document.getElementById(`li-chart-${key}`).getContext('2d');
-  charts[`li_${key}`]=new Chart(ctx,{type:'bar',data:{labels:monthly.map(r=>r.label),datasets:[{type:'bar',label:'Impressions',data:monthly.map(r=>r.impressions||0),backgroundColor:'rgba(71,54,254,.18)',yAxisID:'y',borderRadius:5},{type:'line',label:'New Followers',data:monthly.map(r=>r.new_followers||0),borderColor:'#4736FE',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Impressions'},ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'New Followers'},ticks:{callback:v=>numFmt(v)},grid:{display:false}},x:{grid:{display:false}}}}});
+  charts[liCk]=new Chart(ctx,{type:'bar',data:{labels:liMonthly.map(r=>r.label),datasets:[{type:'bar',label:'Impressions',data:liMonthly.map(r=>r.impressions||0),backgroundColor:'rgba(71,54,254,.18)',yAxisID:'y',borderRadius:5},{type:'line',label:'New Followers',data:liMonthly.map(r=>r.new_followers||0),borderColor:'#4736FE',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Impressions'},ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'New Followers'},ticks:{callback:v=>numFmt(v)},grid:{display:false}},x:{grid:{display:false}}}}});
 
-  // Monthly table
-  const th=`<th>Month</th><th class="nr ch">Followers</th><th class="nr ch">New Followers</th><th class="nr">Impressions</th><th class="nr">Page Views</th><th class="nr">Visitors</th><th class="nr">Posts</th><th class="nr">Likes</th><th class="nr">Comments</th><th class="nr">Shares</th><th class="nr">Eng %</th>`;
-  document.getElementById(`li-tbl-${key}`).innerHTML=tbl(th,[...monthly].reverse().map((r,i)=>{
-    const p2=monthly.length>i+1?monthly[monthly.length-i-2]:null;
-    const mf=p2&&r.followers&&p2.followers?((r.followers-p2.followers)/p2.followers*100):null;
-    return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td class="nr cc"><strong>${numFmt(r.followers)}</strong></td><td class="nr cc">${r.new_followers!=null?'+'+numFmt(r.new_followers):'—'}</td><td class="nr">${numFmt(r.impressions)}</td><td class="nr">${numFmt(r.page_views)}</td><td class="nr">${numFmt(r.unique_visitors)}</td><td class="nr">${numFmt(r.posts)}</td><td class="nr">${numFmt(r.likes)}</td><td class="nr">${numFmt(r.comments)}</td><td class="nr">${numFmt(r.shares)}</td><td class="nr">${r.eng_rate!=null?r.eng_rate.toFixed(2)+'%':'—'}</td></tr>`;
-  }).join(''));
-
-  // Top posts table
+  // Top posts table (all-time)
   if(li.posts&&li.posts.length){
     const ph=`<th>Date</th><th>Post</th><th class="nr">Impressions</th><th class="nr">Clicks</th><th class="nr">Likes</th><th class="nr">Comments</th><th class="nr">Shares</th><th class="nr">Eng %</th>`;
     document.getElementById(`li-posts-${key}`).innerHTML=tbl(ph,li.posts.slice(0,10).map(p=>`<tr><td>${p.date}</td><td style="max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${p.title.replace(/"/g,'&quot;')}">${p.title}</td><td class="nr">${numFmt(p.impressions)}</td><td class="nr">${numFmt(p.clicks)}</td><td class="nr">${numFmt(p.likes)}</td><td class="nr">${numFmt(p.comments)}</td><td class="nr">${numFmt(p.shares)}</td><td class="nr">${p.eng_rate!=null?(p.eng_rate*100).toFixed(2)+'%':'—'}</td></tr>`).join(''));
@@ -1298,106 +1353,105 @@ function initInf(){
       <div class="ink"><span class="ink-icon">⚡</span><div class="ink-lbl">Engagement</div><div class="ink-val">${avgEng!=null?avgEng.toFixed(2)+'%':'—'}</div><div class="ink-sub">(likes+cmts+saves)/views</div></div>`;
   }
 
-  // ── renderStatic — all sections below tiles, always use allRows/allMonthly ─
-  function renderStatic(){
-    const rows=allRows;
-    const mons=allMonthly;
-
-    // Trend chart — views bars only
+  // ── Trend + CPV charts (always all-time) ──
+  function renderInfCharts(){
     const tc=document.getElementById('inf-chart-trend').getContext('2d');
     new Chart(tc,{type:'bar',data:{
-      labels:mons.map(m=>m.month),
-      datasets:[{label:'Total Views',data:mons.map(m=>m.views_lakh),backgroundColor:mons.map((_,i)=>i===mons.length-1?'rgba(71,54,254,.75)':'rgba(71,54,254,.22)'),borderRadius:6}]
+      labels:allMonthly.map(m=>m.month),
+      datasets:[{label:'Total Views',data:allMonthly.map(m=>m.views_lakh),backgroundColor:allMonthly.map((_,i)=>i===allMonthly.length-1?'rgba(71,54,254,.75)':'rgba(71,54,254,.22)'),borderRadius:6}]
     },options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.parsed.y?.toFixed(2)}L views`}}},
       scales:{y:{title:{display:true,text:'Views (L)'},ticks:{callback:v=>v.toFixed(1)+'L'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}
     }});
+    const cc=document.getElementById('inf-chart-cpv').getContext('2d');
+    const bcpvData=allMonthly.map(m=>{
+      const mRows=allRows.filter(r=>r.monthOrder===m.monthOrder);
+      const mv=mRows.reduce((s,r)=>s+(r.views||0),0);
+      const mc=mRows.reduce((s,r)=>s+(r.cost||0),0);
+      return mv>0?parseFloat((mc/mv).toFixed(2)):null;
+    });
+    new Chart(cc,{type:'bar',data:{
+      labels:allMonthly.map(m=>m.month),
+      datasets:[{label:'Blended CPV (₹)',data:bcpvData,backgroundColor:bcpvData.map((_,i)=>i===allMonthly.length-1?'rgba(71,54,254,.85)':'rgba(71,54,254,.28)'),borderRadius:6}]
+    },options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`₹${c.parsed.y?.toFixed(2)}`}}},
+      scales:{y:{title:{display:true,text:'Blended CPV (₹)'},ticks:{callback:v=>'₹'+v},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}
+    }});
+  }
 
-    // MoM table — no Creators col, add Likes + Comments cumulative
-    const mth=`<th>Month</th><th class="nr ch">Live Videos</th><th class="nr">Total Views</th><th class="nr">Likes</th><th class="nr">Comments</th><th class="nr ch">Total Spend</th><th class="nr ch">Blended CPV</th><th class="nr">Avg Eng %</th>`;
+  // ── All period-aware tables ──
+  function renderInfTables(val){
+    let rows,mons;
+    if(val==='all'||val==='mom'){rows=allRows;mons=allMonthly;}
+    else{const mo=parseInt(val.replace('mo:',''),10);rows=allRows.filter(r=>r.monthOrder===mo);mons=allMonthly.filter(m=>m.monthOrder===mo);}
+
+    // MoM table
+    const mth=`<th>Month</th><th class="nr ch">Live Videos</th><th class="nr ch">Total Views</th><th class="nr">Likes</th><th class="nr">Comments</th><th class="nr ch">Total Spend</th><th class="nr ch">Blended CPV</th><th class="nr">Avg Eng %</th>`;
     const sortedMons=[...mons].reverse();
     const momRows=sortedMons.map((m,i)=>{
       const mRows=rows.filter(r=>r.monthOrder===m.monthOrder);
-      const mViews   =mRows.reduce((s,r)=>s+(r.views||0),0);
-      const mLikes   =mRows.reduce((s,r)=>s+(r.likes||0),0);
-      const mComments=mRows.reduce((s,r)=>s+(r.comments||0),0);
-      const mCost    =mRows.reduce((s,r)=>s+(r.cost||0),0);
-      const mBcpv    =mViews>0?(mCost/mViews):null;
+      const mViews=mRows.reduce((s,r)=>s+(r.views||0),0);
+      const mLikes=mRows.reduce((s,r)=>s+(r.likes||0),0);
+      const mCmts =mRows.reduce((s,r)=>s+(r.comments||0),0);
+      const mCost =mRows.reduce((s,r)=>s+(r.cost||0),0);
+      const mBcpv =mViews>0?(mCost/mViews):null;
       return`<tr class="${i===0?'lat':''}">
         <td><strong>${m.month}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td>
         <td class="nr cc"><strong>${m.campaigns}</strong></td>
-        <td class="nr">${fv(mViews)}</td>
+        <td class="nr cc"><strong>${fv(mViews)}</strong></td>
         <td class="nr">${fv(mLikes)}</td>
-        <td class="nr">${fv(mComments)}</td>
+        <td class="nr">${fv(mCmts)}</td>
         <td class="nr cc">${fc(mCost)}</td>
         <td class="nr cc">${fcpv(mBcpv)}</td>
         <td class="nr">${m.avg_eng!=null?m.avg_eng.toFixed(2)+'%':'—'}</td>
       </tr>`;
     }).join('');
-    document.getElementById('inf-mom-tbl').innerHTML=tbl(mth,momRows);
+    document.getElementById('inf-mom-tbl').innerHTML=sortedMons.length?tbl(mth,momRows):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
 
     // Top 10 by Views
     const top10V=[...rows].sort((a,b)=>(b.views||0)-(a.views||0)).slice(0,10);
     const vth=`<th>#</th><th>Creator</th><th class="nr ch">Views</th><th class="nr">Spend</th><th class="nr ch">CPV</th><th class="nr">Eng %</th>`;
-    const vrows=top10V.map((r,i)=>`<tr class="${i===0?'lat':''}">
+    document.getElementById('inf-top-views-tbl').innerHTML=top10V.length?tbl(vth,top10V.map((r,i)=>`<tr class="${i===0?'lat':''}">
       <td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td>
       <td><a href="${r.link||r.videoLink||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.name}</a><br><span style="font-size:11px;color:var(--grey)">${r.liveMonth||''}</span></td>
       <td class="nr cc"><strong>${fv(r.views)}</strong></td>
       <td class="nr">${fc(r.cost)}</td>
       <td class="nr cc">${fcpv(r.cpv)}</td>
       <td class="nr">${r.engRate!=null?r.engRate.toFixed(2)+'%':'—'}</td>
-    </tr>`).join('');
-    document.getElementById('inf-top-views-tbl').innerHTML=tbl(vth,vrows);
-
-    // Blended CPV by Month chart
-    const cc=document.getElementById('inf-chart-cpv').getContext('2d');
-    const bcpvData=mons.map(m=>{
-      const mRows=rows.filter(r=>r.monthOrder===m.monthOrder);
-      const mv=mRows.reduce((s,r)=>s+(r.views||0),0);
-      const mc=mRows.reduce((s,r)=>s+(r.cost||0),0);
-      return mv>0?parseFloat((mc/mv).toFixed(2)):null;
-    });
-    new Chart(cc,{type:'bar',data:{
-      labels:mons.map(m=>m.month),
-      datasets:[{label:'Blended CPV (₹)',data:bcpvData,backgroundColor:bcpvData.map((_,i)=>i===mons.length-1?'rgba(71,54,254,.85)':'rgba(71,54,254,.28)'),borderRadius:6}]
-    },options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`₹${c.parsed.y?.toFixed(2)}`}}},
-      scales:{y:{title:{display:true,text:'Blended CPV (₹)'},ticks:{callback:v=>'₹'+v},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}
-    }});
+    </tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
 
     // Top 10 by Engagement Rate
     const top10E=[...rows].filter(r=>r.engRate>0).sort((a,b)=>(b.engRate||0)-(a.engRate||0)).slice(0,10);
     const eth=`<th>#</th><th>Creator</th><th class="nr ch">Eng Rate</th><th class="nr">Views</th><th class="nr">Likes</th><th class="nr">Comments</th>`;
-    const erows=top10E.map((r,i)=>`<tr class="${i===0?'lat':''}">
+    document.getElementById('inf-top-eng-tbl').innerHTML=top10E.length?tbl(eth,top10E.map((r,i)=>`<tr class="${i===0?'lat':''}">
       <td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td>
       <td><a href="${r.link||r.videoLink||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.name}</a><br><span style="font-size:11px;color:var(--grey)">${r.liveMonth||''}</span></td>
       <td class="nr cc"><strong>${r.engRate!=null?r.engRate.toFixed(2)+'%':'—'}</strong></td>
       <td class="nr">${fv(r.views)}</td>
       <td class="nr">${fv(r.likes)}</td>
       <td class="nr">${fv(r.comments)}</td>
-    </tr>`).join('');
-    document.getElementById('inf-top-eng-tbl').innerHTML=tbl(eth,erows);
+    </tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
 
     // Top 10 Lowest CPV
     const top10L=[...rows].filter(r=>r.cpv>0&&r.views>=5000).sort((a,b)=>(a.cpv||999)-(b.cpv||999)).slice(0,10);
     const lth=`<th>#</th><th>Creator</th><th class="nr ch">CPV</th><th class="nr">Views</th><th class="nr">Spend</th><th class="nr">Eng %</th>`;
-    const lrows=top10L.map((r,i)=>`<tr class="${i===0?'lat':''}">
+    document.getElementById('inf-low-cpv-tbl').innerHTML=top10L.length?tbl(lth,top10L.map((r,i)=>`<tr class="${i===0?'lat':''}">
       <td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td>
       <td><a href="${r.link||r.videoLink||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.name}</a><br><span style="font-size:11px;color:var(--grey)">${r.liveMonth||''}</span></td>
       <td class="nr cc"><strong style="color:#22C55E">${fcpv(r.cpv)}</strong></td>
       <td class="nr">${fv(r.views)}</td>
       <td class="nr">${fc(r.cost)}</td>
       <td class="nr">${r.engRate!=null?r.engRate.toFixed(2)+'%':'—'}</td>
-    </tr>`).join('');
-    document.getElementById('inf-low-cpv-tbl').innerHTML=top10L.length?tbl(lth,lrows):'<p style="padding:20px;color:var(--grey);font-size:13px">No campaigns with ≥5K views.</p>';
+    </tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No campaigns with ≥5K views in selected period.</p>';
   }
 
-  // Wire dropdown → KPIs only
-  document.getElementById('inf-sel-period').addEventListener('change',function(){renderKPIs(this.value);});
+  // Wire dropdown → KPIs + all tables
+  document.getElementById('inf-sel-period').addEventListener('change',function(){renderKPIs(this.value);renderInfTables(this.value);});
 
-  // Init: default to latest month for KPIs, static sections always all-time
+  // Init: default to latest month
   renderKPIs('mo:'+latestMO);
-  renderStatic();
+  renderInfTables('mo:'+latestMO);
+  renderInfCharts();
 }
 
 function initYT(){
