@@ -622,12 +622,35 @@ def build_instagram():
                 }
                 rows.append(r)
 
+            # Top posts
+            posts = []
+            pp = DATA / f"instagram_{key}_posts.csv"
+            if pp.exists():
+                try:
+                    pdf = pd.read_csv(pp)
+                    for _, pr in pdf.iterrows():
+                        posts.append({
+                            "date":         str(pr.get("date",""))[:10],
+                            "type":         str(pr.get("type","")),
+                            "caption":      str(pr.get("caption",""))[:100],
+                            "url":          str(pr.get("url","")),
+                            "likes":        int(pr.get("likes",0)),
+                            "comments":     int(pr.get("comments",0)),
+                            "reach":        int(pr.get("reach",0)),
+                            "saves":        int(pr.get("saves",0)),
+                            "shares":       int(pr.get("shares",0)),
+                            "interactions": int(pr.get("interactions",0)),
+                        })
+                except Exception:
+                    pass
+
             result[key] = {
-                "handle":  IG_HANDLES.get(key, key),
+                "handle":   IG_HANDLES.get(key, key),
                 "snapshot": snap,
-                "monthly": rows,
+                "monthly":  rows,
+                "posts":    posts,
             }
-            print(f"  ✓ Instagram {key}: {len(rows)} months")
+            print(f"  ✓ Instagram {key}: {len(rows)} months, {len(posts)} top posts")
         except Exception as e:
             print(f"  ⚠ Instagram {key}: {e}")
     return result

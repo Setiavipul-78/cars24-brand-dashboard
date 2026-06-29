@@ -584,6 +584,72 @@ def fetch_ig_account(key: str, cfg: dict) -> list[dict]:
 
     return rows
 
+def fetch_ig_top_posts(uid: str, tok: str, limit: int = 30) -> list:
+    """Fetch recent posts with per-post insights — returns top 20 by reach."""
+    import requests
+    rows = []
+    try:
+        # Step 1: recent media basic fields
+        r = requests.get(f"{BASE_IG}/{uid}/media", params={
+            "fields": "id,caption,media_type,timestamp,like_count,comments_count,permalink",
+            "limit":  limit,
+            "access_token": tok,
+        }, timeout=20)
+        if not r.ok:
+            return []
+        media_items = r.json().get("data", [])
+    except Exception:
+        return []
+
+    for item in media_items:
+        mid   = item.get("id", "")
+        mtype = item.get("media_type", "")
+        ts    = item.get("timestamp", "")[:10]
+        cap   = (item.get("caption", "") or "")[:120].replace("\n", " ")
+        likes = item.get("like_count", 0)
+        cmts  = item.get("comments_count", 0)
+        url   = item.get("permalink", "")
+        reach = 0
+        saves = 0
+        shares = 0
+
+        # Step 2: insights per post (reach + saves + shares)
+        try:
+            metrics = "reach,saved"
+            if mtype in ("VIDEO", "REELS"):
+                metrics += ",shares"
+            ins = requests.get(f"{BASE_IG}/{mid}/insights", params={
+                "metric": metrics,
+                "access_token": tok,
+            }, timeout=10)
+            if ins.ok:
+                for m in ins.json().get("data", []):
+                    name = m.get("name")
+                    val  = m.get("values", [{}])[0].get("value", 0) if m.get("values") else m.get("value", 0)
+                    if name == "reach":    reach  = val
+                    elif name == "saved":  saves  = val
+                    elif name == "shares": shares = val
+        except Exception:
+            pass
+
+        rows.append({
+            "post_id":    mid,
+            "date":       ts,
+            "type":       mtype,
+            "caption":    cap,
+            "url":        url,
+            "likes":      likes,
+            "comments":   cmts,
+            "reach":      reach,
+            "saves":      saves,
+            "shares":     shares,
+            "interactions": likes + cmts + saves + shares,
+        })
+        time.sleep(0.15)
+
+    # Sort by reach desc, return top 20
+    return sorted(rows, key=lambda x: x["reach"], reverse=True)[:20]
+
 def fetch_all_instagram():
     print("\n── Instagram ────────────────────────────────────────")
     try:
@@ -599,6 +665,10 @@ def fetch_all_instagram():
         try:
             rows = fetch_ig_account(key, cfg)
             write_csv(DATA / f"instagram_{key}.csv", rows)
+            posts = fetch_ig_top_posts(cfg["user_id"], cfg["access_token"])
+            if posts:
+                write_csv(DATA / f"instagram_{key}_posts.csv", posts)
+                print(f"    ✓ top posts: {len(posts)} items")
         except Exception as e:
             print(f"  ✗ {key}: {e}")
         time.sleep(1)
