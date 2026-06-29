@@ -43,6 +43,11 @@ ACCOUNT_CONFIG = {
         "login_hint": "cars24india1@gmail.com",
         "label": "Cars24 India",
     },
+    "teambhp": {
+        "token_key": "YT_REFRESH_TOKEN_TEAMBHP",
+        "login_hint": "cars24india1@gmail.com",
+        "label": "TeamBHP",
+    },
 }
 
 def main():

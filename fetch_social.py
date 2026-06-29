@@ -61,7 +61,7 @@ YT_CHANNELS = {
 YT_TOKEN_KEYS = {
     "cars24_uae":   "YT_REFRESH_TOKEN_UAE",
     "cars24_india": "YT_REFRESH_TOKEN_INDIA",
-    "teambhp":      "YT_REFRESH_TOKEN_INDIA",
+    "teambhp":      "YT_REFRESH_TOKEN_TEAMBHP",
 }
 
 def get_yt_credentials(channel_key: str = None):
