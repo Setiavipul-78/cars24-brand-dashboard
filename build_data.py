@@ -609,17 +609,16 @@ def build_instagram():
             rows = []
             for _, row in df.iterrows():
                 r = {
-                    "month":             str(row["month"])[:7],
-                    "label":             mlabel(str(row["month"])[:7]),
-                    "followers":         int(row.get("followers", 0)),
-                    "followers_gained":  int(row.get("followers_gained", 0)),
-                    "reach":             int(row.get("reach", 0)),
-                    "impressions":       int(row.get("impressions", 0)),
-                    "profile_views":     int(row.get("profile_views", 0)),
-                    "website_clicks":    int(row.get("website_clicks", 0)),
-                    "accounts_engaged":  int(row.get("accounts_engaged", 0)),
-                    "email_contacts":    int(row.get("email_contacts", 0)),
-                    "phone_clicks":      int(row.get("phone_clicks", 0)),
+                    "month":              str(row["month"])[:7],
+                    "label":              mlabel(str(row["month"])[:7]),
+                    "followers":          int(row.get("followers", 0)),
+                    "reach":              int(row.get("reach", 0)),
+                    "profile_views":      int(row.get("profile_views", 0)),
+                    "website_clicks":     int(row.get("website_clicks", 0)),
+                    "accounts_engaged":   int(row.get("accounts_engaged", 0)),
+                    "total_interactions": int(row.get("total_interactions", 0)),
+                    "likes":              int(row.get("likes", 0)),
+                    "comments":           int(row.get("comments", 0)),
                 }
                 rows.append(r)
 

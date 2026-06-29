@@ -502,84 +502,83 @@ def fetch_ig_account(key: str, cfg: dict) -> list[dict]:
     total_followers = snap.get("followers_count", 0)
     total_media = snap.get("media_count", 0)
 
-    # Monthly insights — Instagram allows since/until for period=month
-    monthly_metrics = [
-        "impressions", "reach", "profile_views",
-        "email_contacts", "phone_call_clicks", "website_clicks",
-    ]
+    # v21 IG Insights: all metrics use period=day + metric_type=total_value
+    # Returns total_value.value for the queried window (max 30 days)
+    # Use 28-day windows (1st to 29th) to stay within 30-day limit for all months
+    ALL_METRICS = ["reach", "profile_views", "website_clicks",
+                   "accounts_engaged", "total_interactions", "likes", "comments"]
 
-    # Build list of months from 24 months ago to today
+    # Build months list — IG only keeps 2 years of data
     today = date.today()
+    two_yrs_ago = date(today.year - 2, today.month + 1 if today.month < 12 else 1,
+                       1 if today.month < 12 else 1)
     months = []
-    for i in range(24, 0, -1):
-        yr = today.year - (today.month - i - 1) // 12 - 1 if (today.month - i) <= 0 else today.year
-        mo = (today.month - i - 1) % 12 + 1 if (today.month - i) <= 0 else today.month - i
-        mo = ((today.month - 1 - i) % 12) + 1
-        yr = today.year + ((today.month - 1 - i) // 12)
+    yr, mo = today.year - 2, today.month + 1 if today.month < 12 else 1
+    if today.month == 12:
+        yr += 1
+    # Simpler: just go from 24 months back
+    yr, mo = today.year, today.month
+    for _ in range(24):
+        mo -= 1
+        if mo == 0:
+            mo = 12; yr -= 1
+    start_yr, start_mo = yr, mo
+    yr, mo = start_yr, start_mo
+    while (yr, mo) <= (today.year, today.month):
         months.append(f"{yr:04d}-{mo:02d}")
-    months = sorted(set(months))[-24:]
+        mo += 1
+        if mo > 12:
+            mo = 1; yr += 1
 
     rows = []
     for m in months:
-        # since/until for this month
         yr, mo = int(m[:4]), int(m[5:7])
         since_ts = int(datetime(yr, mo, 1).timestamp())
-        if mo == 12:
-            until_ts = int(datetime(yr + 1, 1, 1).timestamp())
-        else:
-            until_ts = int(datetime(yr, mo + 1, 1).timestamp())
+        # Use 28-day window to stay within IG's 30-day limit
+        until_ts = since_ts + 28 * 86400
 
+        met = {}
         try:
-            data = ig_get(f"/{uid}/insights", {
-                "metric":       ",".join(monthly_metrics),
-                "period":       "month",
-                "since":        since_ts,
-                "until":        until_ts,
-                "access_token": tok,
+            d1 = ig_get(f"/{uid}/insights", {
+                "metric": ",".join(ALL_METRICS), "period": "day",
+                "metric_type": "total_value",
+                "since": since_ts, "until": until_ts, "access_token": tok,
             })
+            for item in d1.get("data", []):
+                tv = item.get("total_value", {})
+                met[item["name"]] = tv.get("value", 0) if isinstance(tv, dict) else 0
         except Exception as e:
-            print(f"    ⚠  {m}: {e}")
+            print(f"    ⚠  {m}: {str(e)[:80]}")
             continue
 
-        met = {item["name"]: item["values"][0]["value"] if item.get("values") else 0
-               for item in data.get("data", [])}
-
-        # Follower count for this month — use period=day and take end-of-month
+        # follower_count: use day period snapshot at end of window
+        followers_eom = total_followers
         try:
-            fc_data = ig_get(f"/{uid}/insights", {
-                "metric":       "follower_count",
-                "period":       "day",
-                "since":        until_ts - 86400,
-                "until":        until_ts,
-                "access_token": tok,
+            d3 = ig_get(f"/{uid}/insights", {
+                "metric": "follower_count", "period": "day",
+                "since": until_ts - 86400, "until": until_ts, "access_token": tok,
             })
-            followers_eom = 0
-            followers_gained = 0
-            for item in fc_data.get("data", []):
+            for item in d3.get("data", []):
                 if item["name"] == "follower_count":
                     vals = item.get("values", [])
                     if vals:
-                        followers_eom = vals[-1].get("value", 0)
-                        if len(vals) >= 2:
-                            followers_gained = max(0, vals[-1].get("value", 0) - vals[0].get("value", 0))
+                        followers_eom = vals[-1].get("value", total_followers)
         except Exception:
-            followers_eom = 0
-            followers_gained = 0
+            pass
 
         rows.append({
-            "month":             m,
-            "label":             mlabel(m),
-            "followers":         followers_eom or total_followers,
-            "followers_gained":  followers_gained,
-            "reach":             met.get("reach", 0),
-            "impressions":       met.get("impressions", 0),
-            "profile_views":     met.get("profile_views", 0),
-            "email_contacts":    met.get("email_contacts", 0),
-            "phone_clicks":      met.get("phone_call_clicks", 0),
-            "website_clicks":    met.get("website_clicks", 0),
-            "accounts_engaged":  met.get("accounts_engaged", 0),
-            "total_followers":   total_followers,
-            "total_media":       total_media,
+            "month":              m,
+            "label":              mlabel(m),
+            "followers":          followers_eom,
+            "reach":              met.get("reach", 0),
+            "profile_views":      met.get("profile_views", 0),
+            "website_clicks":     met.get("website_clicks", 0),
+            "accounts_engaged":   met.get("accounts_engaged", 0),
+            "total_interactions": met.get("total_interactions", 0),
+            "likes":              met.get("likes", 0),
+            "comments":           met.get("comments", 0),
+            "total_followers":    total_followers,
+            "total_media":        total_media,
         })
         time.sleep(0.3)
 

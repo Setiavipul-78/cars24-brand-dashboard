@@ -1002,25 +1002,70 @@ function renderIG(containerId,key,handleName){
   const el=document.getElementById(containerId);if(!el)return;
   const ig=D.instagram?.[key];
   if(!ig||!ig.monthly?.length){
-    el.innerHTML=`<div class="ph"><div class="ph-mark">📸</div><div class="ph-title">Instagram · ${handleName}</div><div class="ph-body">Connect your Instagram account to pull live metrics automatically.</div><div class="setup-steps"><h4>How to connect · one-time setup</h4><ol><li>Go to <a href="https://developers.facebook.com" target="_blank" style="color:var(--blue)">Meta for Developers</a> → My Apps → Create App</li><li>Add Instagram Graph API product</li><li>Connect your Instagram Business Account via Facebook Page</li><li>Graph API Explorer → GET /me → copy your Instagram user ID</li><li>Generate a User Access Token → Exchange for Long-Lived Token (60 days)</li><li>Add to <code>.env</code>: <code>IG_USER_ID_${key.toUpperCase()}</code> and <code>IG_ACCESS_TOKEN</code></li><li>Run <code>python3 fetch_social.py</code> then <code>python3 build_data.py</code></li></ol></div></div>`;return;
+    el.innerHTML=`<div class="ph"><div class="ph-mark">📸</div><div class="ph-title">Instagram · ${handleName}</div><div class="ph-body">Connect your Instagram account to pull live metrics automatically.</div><div class="setup-steps"><h4>How to connect · one-time setup</h4><ol><li>Go to <a href="https://developers.facebook.com" target="_blank" style="color:var(--blue)">Meta for Developers</a> → My Apps → Instagram Graph API product → Use cases</li><li>System User → Generate token with instagram_basic + instagram_manage_insights</li><li>Add to <code>.env</code>: <code>IG_USER_ID_${key.toUpperCase()}</code> and <code>IG_ACCESS_TOKEN_${key.toUpperCase()}</code></li><li>Run <code>python3 fetch_social.py</code> then <code>python3 build_data.py</code></li></ol></div></div>`;return;
   }
-  const snap=ig.snapshot||{},lat=ig.monthly[ig.monthly.length-1],prev=ig.monthly.length>=2?ig.monthly[ig.monthly.length-2]:null;
-  const momF=prev&&lat.followers&&prev.followers?((lat.followers-prev.followers)/prev.followers*100):null;
+  const snap=ig.snapshot||{};
+  const monthsDesc=[...ig.monthly].reverse();
+  const latestM=monthsDesc[0]?.month||'';
+
   el.innerHTML=`
-    <div class="g4">
-      <div class="kh kh-pink"><div class="kl"><span class="ki">👥</span>Total Followers</div><div class="kv">${numFmt(snap.followers||lat.followers)}</div><div class="ks">${lat.followers_gained!=null?`+${numFmt(lat.followers_gained)} in ${lat.label}`:handleName}</div></div>
-      <div class="kh kh-purple"><div class="kl"><span class="ki">👁</span>Reach · ${lat.label}</div><div class="kv">${numFmt(lat.reach)}</div><div class="ks">Impressions: ${numFmt(lat.impressions)}</div></div>
-      <div class="kh kh-teal"><div class="kl"><span class="ki">🏠</span>Profile Views · ${lat.label}</div><div class="kv">${numFmt(lat.profile_views)}</div><div class="ks">Website clicks: ${numFmt(lat.website_clicks)}</div></div>
-      <div class="kh kh-blue"><div class="kl"><span class="ki">💬</span>Engaged Accounts · ${lat.label}</div><div class="kv">${numFmt(lat.accounts_engaged)}</div><div class="ks">${badge(momF)} follower growth MoM</div></div>
+    <!-- Period filter -->
+    <div class="inf-period-bar" style="gap:12px">
+      <span class="fl">PERIOD</span>
+      <div style="position:relative;display:inline-block">
+        <select id="ig-sel-${key}" style="appearance:none;-webkit-appearance:none;background:var(--card);border:2px solid var(--blue);border-radius:8px;padding:7px 36px 7px 14px;font:700 13px var(--font);color:var(--ink);cursor:pointer;min-width:160px;outline:none">
+          ${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}
+        </select>
+        <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--blue);font-size:10px">▼</span>
+      </div>
     </div>
-    <div class="card"><div class="sh"><span class="kicker">📈 Monthly</span><span class="title">Reach & Follower Growth — ${handleName}</span><span class="desc">Bars = monthly reach (left). Line = total followers (right).</span></div><div class="cw tall"><canvas id="ig-chart-${key}"></canvas></div></div>
-    <div class="card"><div class="sh"><span class="kicker">📅 History</span><span class="title">Monthly Metrics — ${handleName}</span></div><div class="tw" id="ig-tbl-${key}"></div></div>`;
 
+    <!-- KPI tiles (period-filtered) -->
+    <div class="inf-kpi-strip" id="ig-kpis-${key}" style="grid-template-columns:repeat(7,1fr)"></div>
+
+    <!-- Trend chart -->
+    <div class="card"><div class="sh"><span class="kicker">📈 Trend</span><span class="title">Reach & Interactions — ${handleName}</span><span class="desc">Bars = reach (left). Line = total interactions (right). All months shown.</span></div><div class="cw tall"><canvas id="ig-chart-${key}"></canvas></div></div>
+
+    <!-- Monthly table -->
+    <div class="card"><div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance — ${handleName}</span></div><div class="tw" id="ig-tbl-${key}"></div></div>`;
+
+  // KPI renderer
+  function renderIGKPIs(period){
+    const m=period.replace('m:','');
+    const row=ig.monthly.find(r=>r.month===m)||monthsDesc[0];
+    const idx=ig.monthly.findIndex(r=>r.month===row.month);
+    const prev=idx>0?ig.monthly[idx-1]:null;
+    const momR=prev&&prev.reach?((row.reach-prev.reach)/prev.reach*100):null;
+    const momE=prev&&prev.total_interactions?((row.total_interactions-prev.total_interactions)/prev.total_interactions*100):null;
+    const momP=prev&&prev.profile_views?((row.profile_views-prev.profile_views)/prev.profile_views*100):null;
+    const momW=prev&&prev.website_clicks?((row.website_clicks-prev.website_clicks)/prev.website_clicks*100):null;
+    const fol=snap.followers||row.followers||0;
+    document.getElementById(`ig-kpis-${key}`).innerHTML=`
+      <div class="ink mint"><span class="ink-icon">👥</span><div class="ink-lbl">Followers</div><div class="ink-val">${numFmt(fol)}</div><div class="ink-sub">${handleName}</div></div>
+      <div class="ink grn"><span class="ink-icon">👁</span><div class="ink-lbl">Reach</div><div class="ink-val">${numFmt(row.reach)}</div><div class="ink-sub">${badge(momR)} MoM</div></div>
+      <div class="ink"><span class="ink-icon">🏠</span><div class="ink-lbl">Profile Views</div><div class="ink-val">${numFmt(row.profile_views)}</div><div class="ink-sub">${badge(momP)} MoM</div></div>
+      <div class="ink pur"><span class="ink-icon">🔗</span><div class="ink-lbl">Website Clicks</div><div class="ink-val">${numFmt(row.website_clicks)}</div><div class="ink-sub">${badge(momW)} MoM</div></div>
+      <div class="ink or"><span class="ink-icon">💬</span><div class="ink-lbl">Engaged Accts</div><div class="ink-val">${numFmt(row.accounts_engaged)}</div><div class="ink-sub">${row.label}</div></div>
+      <div class="ink red"><span class="ink-icon">❤️</span><div class="ink-lbl">Likes</div><div class="ink-val">${numFmt(row.likes)}</div><div class="ink-sub">${row.label}</div></div>
+      <div class="ink"><span class="ink-icon">🔁</span><div class="ink-lbl">Total Interactions</div><div class="ink-val">${numFmt(row.total_interactions)}</div><div class="ink-sub">${badge(momE)} MoM</div></div>`;
+  }
+  const sel=document.getElementById(`ig-sel-${key}`);
+  sel.value=`m:${latestM}`;
+  sel.addEventListener('change',e=>renderIGKPIs(e.target.value));
+  renderIGKPIs(`m:${latestM}`);
+
+  // Trend chart
+  if(charts[`ig_${key}`]){charts[`ig_${key}`].destroy();}
   const ctx=document.getElementById(`ig-chart-${key}`).getContext('2d');
-  charts[`ig_${key}`]=new Chart(ctx,{type:'bar',data:{labels:ig.monthly.map(r=>r.label),datasets:[{type:'bar',label:'Reach',data:ig.monthly.map(r=>r.reach),backgroundColor:'rgba(233,30,140,.18)',yAxisID:'y',borderRadius:5},{type:'line',label:'Followers',data:ig.monthly.map(r=>r.followers),borderColor:'#E91E8C',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Reach'},ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'Followers'},ticks:{callback:v=>numFmt(v)},grid:{display:false}},x:{grid:{display:false}}}}});
+  charts[`ig_${key}`]=new Chart(ctx,{type:'bar',data:{labels:ig.monthly.map(r=>r.label),datasets:[{type:'bar',label:'Reach',data:ig.monthly.map(r=>r.reach),backgroundColor:'rgba(233,30,140,.18)',yAxisID:'y',borderRadius:5},{type:'line',label:'Total Interactions',data:ig.monthly.map(r=>r.total_interactions||0),borderColor:'#E91E8C',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Reach'},ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'Interactions'},ticks:{callback:v=>numFmt(v)},grid:{display:false}},x:{grid:{display:false}}}}});
 
-  const th=`<th>Month</th><th></th><th class="nr ch">Followers</th><th class="nr ch">Gained</th><th class="nr">Reach</th><th class="nr">Impressions</th><th class="nr">Profile Views</th><th class="nr">Website Clicks</th>`;
-  document.getElementById(`ig-tbl-${key}`).innerHTML=tbl(th,[...ig.monthly].reverse().map((r,i)=>{const p2=ig.monthly.length>i+1?ig.monthly[ig.monthly.length-i-2]:null;const mf=p2&&r.followers&&p2.followers?((r.followers-p2.followers)/p2.followers*100):null;return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(mf)}</td><td class="nr cc"><strong>${numFmt(r.followers)}</strong></td><td class="nr cc">${r.followers_gained!=null?'+'+numFmt(r.followers_gained):'—'}</td><td class="nr">${numFmt(r.reach)}</td><td class="nr">${numFmt(r.impressions)}</td><td class="nr">${numFmt(r.profile_views)}</td><td class="nr">${numFmt(r.website_clicks)}</td></tr>`;}).join(''));
+  // Monthly table
+  const th=`<th>Month</th><th class="nr">Reach</th><th class="nr">Profile Views</th><th class="nr">Website Clicks</th><th class="nr ch">Accts Engaged</th><th class="nr">Likes</th><th class="nr">Comments</th><th class="nr ch">Interactions</th>`;
+  document.getElementById(`ig-tbl-${key}`).innerHTML=tbl(th,monthsDesc.map((r,i)=>{
+    const prev2=ig.monthly.length>i+1?ig.monthly[ig.monthly.length-i-2]:null;
+    const mR=prev2&&prev2.reach?((r.reach-prev2.reach)/prev2.reach*100):null;
+    return`<tr class="${r.month===latestM?'lat':''}"><td><strong>${r.label}</strong>${r.month===latestM?' <span class="badge bb">Latest</span>':''}</td><td class="nr">${numFmt(r.reach)}<br><small style="color:#9CA3AF">${badge(mR)}</small></td><td class="nr">${numFmt(r.profile_views)}</td><td class="nr">${numFmt(r.website_clicks)}</td><td class="nr cc"><strong>${numFmt(r.accounts_engaged)}</strong></td><td class="nr">${numFmt(r.likes)}</td><td class="nr">${numFmt(r.comments)}</td><td class="nr cc"><strong>${numFmt(r.total_interactions)}</strong></td></tr>`;
+  }).join(''));
 }
 
 /* ── LinkedIn renderer ── */
