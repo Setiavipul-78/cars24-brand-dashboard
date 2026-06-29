@@ -59,9 +59,11 @@ YT_CHANNELS = {
 
 # Per-channel token env var overrides (key → env var name for refresh token)
 YT_TOKEN_KEYS = {
-    "cars24_uae":   "YT_REFRESH_TOKEN_UAE",
-    "cars24_india": "YT_REFRESH_TOKEN_INDIA",
-    "teambhp":      "YT_REFRESH_TOKEN_TEAMBHP",
+    "cars24_uae":      "YT_REFRESH_TOKEN_UAE",
+    "cars24_india":    "YT_REFRESH_TOKEN_INDIA",
+    "teambhp":         "YT_REFRESH_TOKEN_TEAMBHP",
+    "cars24_insider":  "YT_REFRESH_TOKEN_INSIDER",
+    "cars24_malayalam":"YT_REFRESH_TOKEN_MALAYALAM",
 }
 
 def get_yt_credentials(channel_key: str = None):
