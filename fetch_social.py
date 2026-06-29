@@ -604,14 +604,14 @@ def fetch_all_instagram():
         time.sleep(1)
 
 # ── LinkedIn ──────────────────────────────────────────────────────────────────
-# LinkedIn API tiers:
-#   Basic (no approval) : GET /v2/organizations/{id}?fields=followersCount
-#   Partner required    : followerStatistics, pageStatistics, shareStatistics
-#
+# Requires: Community Management API product on your LinkedIn Developer App
+#   https://www.linkedin.com/developers/apps → Products → Community Management API
+# One access token covers all pages the user admins (India, Arabia, Australia).
 # Add to .env:
 #   LI_ACCESS_TOKEN=AQxxxxxx          (from setup_linkedin_auth.py)
-#   LI_ORG_ID_CARS24=1234567          (numeric org ID from LinkedIn Page URL)
-#   LI_ORG_ID_CARS24_URN=urn:li:organization:1234567
+#   LI_ORG_ID_CARS24=1234567
+#   LI_ORG_ID_CARS24_ARABIA=1234568
+#   LI_ORG_ID_CARS24_AU=1234569
 
 LI_API = "https://api.linkedin.com/v2"
 
@@ -623,147 +623,178 @@ LI_ORGS = {
 
 def _li_headers():
     tok = os.getenv("LI_ACCESS_TOKEN", "")
-    return {"Authorization": f"Bearer {tok}", "X-Restli-Protocol-Version": "2.0.0"}
+    return {
+        "Authorization":              f"Bearer {tok}",
+        "X-Restli-Protocol-Version":  "2.0.0",
+        "LinkedIn-Version":           "202401",
+    }
 
 def _li_get(path: str, params: dict = None):
     import requests as req
     r = req.get(f"{LI_API}{path}", headers=_li_headers(), params=params or {}, timeout=15)
-    r.raise_for_status()
+    if not r.ok:
+        raise Exception(f"HTTP {r.status_code}: {r.text[:200]}")
     return r.json()
 
-def _li_time_range(months_back: int = 12):
-    """Return LinkedIn API timeIntervals covering last N months (monthly granularity)."""
-    from datetime import date, timedelta
-    intervals = []
-    today = date.today()
-    for i in range(months_back, 0, -1):
-        # First of month i months ago
-        y = today.year - ((today.month - i - 1) // 12 + 1) if (today.month - i) <= 0 else today.year
-        m = ((today.month - i - 1) % 12) + 1 if (today.month - i) <= 0 else today.month - i
-        # simpler: use timedelta
-        first = (today.replace(day=1) - timedelta(days=1)).replace(day=1)
-        # Just compute directly
-        yr = today.year
-        mo = today.month - i
-        while mo <= 0:
-            mo += 12; yr -= 1
-        intervals.append({"start": {"year": yr, "month": mo, "day": 1}})
-    return intervals
+def _li_month_ranges(months_back: int = 18):
+    """Return list of (start_ms, end_ms) tuples for each of the last N months."""
+    from datetime import datetime
+    import calendar
+    today = datetime.today()
+    ranges = []
+    yr, mo = today.year, today.month
+    for _ in range(months_back):
+        mo -= 1
+        if mo == 0:
+            mo = 12; yr -= 1
+    for _ in range(months_back):
+        mo += 1
+        if mo > 12:
+            mo = 1; yr += 1
+        _, last_day = calendar.monthrange(yr, mo)
+        start_ms = int(datetime(yr, mo, 1).timestamp() * 1000)
+        end_ms   = int(datetime(yr, mo, last_day, 23, 59, 59).timestamp() * 1000)
+        ranges.append((yr, mo, start_ms, end_ms))
+    return ranges
 
 def fetch_li_org(key: str, org_id: str) -> dict:
-    """
-    Fetch what's available via LinkedIn API.
-    Returns dict with keys: followers_rows, visitor_rows, content_rows
-    All may be empty depending on API access level.
-    """
+    """Fetch LinkedIn Page analytics via Community Management API."""
     import requests as req
     results = {"followers_rows": [], "visitor_rows": [], "content_rows": []}
     urn = f"urn:li:organization:{org_id}"
+    snap_followers = 0
 
-    # ── 1. Basic follower count (no partner approval required) ─────────────
+    # ── 1. Basic org info ──────────────────────────────────────────────────
     try:
-        org = _li_get(f"/organizations/{org_id}", {"fields": "localizedName,followersCount"})
+        org = _li_get(f"/organizations/{org_id}",
+                      {"fields": "localizedName,followersCount"})
         snap_followers = org.get("followersCount", 0)
         org_name = org.get("localizedName", key)
-        print(f"    {org_name}: {snap_followers:,} followers (snapshot)")
+        print(f"    {org_name}: {snap_followers:,} followers")
     except Exception as e:
-        print(f"    ! Basic org fetch failed: {e}")
-        snap_followers = 0
+        print(f"    ! Org lookup failed: {e}")
 
-    # ── 2. Follower statistics (requires r_organization_social / partner) ──
+    month_ranges = _li_month_ranges(18)
+
+    # ── 2. Follower gains — monthly time series ────────────────────────────
     try:
-        stats = _li_get("/organizationFollowerStatistics", {
-            "q":                "organizationalEntity",
-            "organizationalEntity": urn,
-        })
-        elements = stats.get("elements", [])
-        # Monthly rollup from lifetime stats
-        if elements:
-            el = elements[0]
-            monthly_data = el.get("monthlyStatsByFunction", el.get("monthlyStats", []))
-            for row in monthly_data:
-                ti = row.get("timeRange", {})
-                start = ti.get("start", {})
-                mo_str = f"{start.get('year','')}-{str(start.get('month','')).zfill(2)}"
-                gained = row.get("followerGains", {})
-                results["followers_rows"].append({
-                    "Date":            mo_str + "-01",
-                    "Total Followers": snap_followers,  # API only gives delta; snapshot is latest
-                    "New Followers":   gained.get("organicFollowerGain", 0) + gained.get("paidFollowerGain", 0),
-                    "Organic Followers": gained.get("organicFollowerGain", 0),
-                    "Paid Followers":  gained.get("paidFollowerGain", 0),
+        # Compute running total backwards from snapshot
+        fol_rows_raw = []
+        for yr, mo, start_ms, end_ms in month_ranges:
+            try:
+                d = _li_get("/organizationalEntityFollowerStatistics", {
+                    "q":                      "organizationalEntity",
+                    "organizationalEntity":   urn,
+                    "timeIntervals.timeGranularityType": "MONTH",
+                    "timeIntervals.timeRange.start": start_ms,
+                    "timeIntervals.timeRange.end":   end_ms,
                 })
-            print(f"    Follower stats: {len(results['followers_rows'])} months (partner API)")
-    except Exception as e:
-        if "403" in str(e) or "MEMBER_NOT_AUTHORIZED" in str(e):
-            print(f"    ! Follower statistics: requires LinkedIn Marketing Partner approval")
-            # Fall back: write single snapshot row for today
-            from datetime import date
-            today = date.today()
-            mo_str = f"{today.year}-{str(today.month).zfill(2)}-01"
-            if snap_followers:
-                results["followers_rows"] = [{"Date": mo_str, "Total Followers": snap_followers,
-                                               "New Followers": "", "Organic Followers": "", "Paid Followers": ""}]
-        else:
-            print(f"    ! Follower stats error: {e}")
+                for el in d.get("elements", []):
+                    gains = el.get("followerGains", {})
+                    organic = gains.get("organicFollowerGain", 0)
+                    paid    = gains.get("paidFollowerGain", 0)
+                    fol_rows_raw.append({
+                        "yr": yr, "mo": mo,
+                        "new": organic + paid,
+                        "organic": organic, "paid": paid,
+                    })
+                    break
+            except Exception:
+                fol_rows_raw.append({"yr": yr, "mo": mo, "new": 0, "organic": 0, "paid": 0})
+            time.sleep(0.2)
 
-    # ── 3. Page / visitor statistics (requires partner) ────────────────────
-    try:
-        page_stats = _li_get("/organizationPageStatistics", {
-            "q":                "organization",
-            "organization":     urn,
-            "timeIntervals.timeGranularityType": "MONTH",
-        })
-        for el in page_stats.get("elements", []):
-            ti = el.get("timeRange", {})
-            start = ti.get("start", {})
-            mo_str = f"{start.get('year','')}-{str(start.get('month','')).zfill(2)}-01"
-            views = el.get("totalPageStatistics", {}).get("views", {})
-            results["visitor_rows"].append({
-                "Date":                    mo_str,
-                "Total Page Views":        views.get("allPageViews", {}).get("pageViews", 0),
-                "Unique Visitors (total)": views.get("allPageViews", {}).get("uniquePageViews", 0),
+        # Reconstruct running total (snap_followers = end of last month)
+        running = snap_followers
+        for row in reversed(fol_rows_raw):
+            mo_str = f"{row['yr']:04d}-{row['mo']:02d}"
+            results["followers_rows"].insert(0, {
+                "Date":              f"{mo_str}-01",
+                "Total Followers":   running,
+                "New Followers":     row["new"],
+                "Organic Followers": row["organic"],
+                "Paid Followers":    row["paid"],
             })
-        print(f"    Page stats: {len(results['visitor_rows'])} months (partner API)")
-    except Exception as e:
-        if "403" in str(e) or "MEMBER_NOT_AUTHORIZED" in str(e):
-            print(f"    ! Page statistics: requires LinkedIn Marketing Partner approval")
-        else:
-            print(f"    ! Page stats error: {e}")
+            running = max(0, running - row["new"])
 
-    # ── 4. Share / content statistics (requires partner) ───────────────────
-    try:
-        share_stats = _li_get("/organizationalEntityShareStatistics", {
-            "q":                "organizationalEntity",
-            "organizationalEntity": urn,
-            "timeIntervals.timeGranularityType": "MONTH",
-        })
-        for el in share_stats.get("elements", []):
-            ti = el.get("timeRange", {})
-            start = ti.get("start", {})
-            mo_str = f"{start.get('year','')}-{str(start.get('month','')).zfill(2)}-01"
-            s = el.get("totalShareStatistics", {})
-            imps = s.get("impressionCount", 0)
-            clks = s.get("clickCount", 0)
-            lks  = s.get("likeCount", 0)
-            cmts = s.get("commentCount", 0)
-            shrs = s.get("shareCount", 0)
-            results["content_rows"].append({
-                "Published date": mo_str,
-                "Content Title":  f"Monthly aggregate ({mo_str[:7]})",
-                "Impressions":    imps,
-                "Clicks":         clks,
-                "Likes":          lks,
-                "Comments":       cmts,
-                "Shares":         shrs,
-                "Engagement Rate": round((lks + cmts + shrs + clks) / imps, 4) if imps else "",
-            })
-        print(f"    Content stats: {len(results['content_rows'])} months (partner API)")
-    except Exception as e:
-        if "403" in str(e) or "MEMBER_NOT_AUTHORIZED" in str(e):
-            print(f"    ! Content statistics: requires LinkedIn Marketing Partner approval")
+        if results["followers_rows"]:
+            print(f"    ✓ Follower time series: {len(results['followers_rows'])} months")
         else:
-            print(f"    ! Content stats error: {e}")
+            raise Exception("no data")
+    except Exception as e:
+        print(f"    ⚠ Follower stats: {str(e)[:80]}")
+        if snap_followers:
+            from datetime import date as _date
+            t = _date.today()
+            results["followers_rows"] = [{
+                "Date": f"{t.year}-{t.month:02d}-01",
+                "Total Followers": snap_followers,
+                "New Followers": "", "Organic Followers": "", "Paid Followers": "",
+            }]
+
+    # ── 3. Page / visitor statistics ───────────────────────────────────────
+    try:
+        for yr, mo, start_ms, end_ms in month_ranges:
+            try:
+                d = _li_get("/pageStatistics", {
+                    "q":                      "pageStatisticsByOrganization",
+                    "organizationalEntity":   urn,
+                    "timeIntervals.timeGranularityType": "MONTH",
+                    "timeIntervals.timeRange.start": start_ms,
+                    "timeIntervals.timeRange.end":   end_ms,
+                })
+                for el in d.get("elements", []):
+                    views = el.get("totalPageStatistics", {}).get("views", {})
+                    all_v = views.get("allPageViews", {})
+                    results["visitor_rows"].append({
+                        "Date":                    f"{yr:04d}-{mo:02d}-01",
+                        "Total Page Views":        all_v.get("pageViews", 0),
+                        "Unique Visitors (total)": all_v.get("uniquePageViews", 0),
+                    })
+                    break
+            except Exception:
+                pass
+            time.sleep(0.2)
+        if results["visitor_rows"]:
+            print(f"    ✓ Page views: {len(results['visitor_rows'])} months")
+    except Exception as e:
+        print(f"    ⚠ Page stats: {str(e)[:80]}")
+
+    # ── 4. Content / share statistics (monthly aggregates) ─────────────────
+    try:
+        for yr, mo, start_ms, end_ms in month_ranges:
+            try:
+                d = _li_get("/organizationalEntityShareStatistics", {
+                    "q":                      "organizationalEntity",
+                    "organizationalEntity":   urn,
+                    "timeIntervals.timeGranularityType": "MONTH",
+                    "timeIntervals.timeRange.start": start_ms,
+                    "timeIntervals.timeRange.end":   end_ms,
+                })
+                for el in d.get("elements", []):
+                    s = el.get("totalShareStatistics", {})
+                    imps = s.get("impressionCount", 0)
+                    clks = s.get("clickCount", 0)
+                    lks  = s.get("likeCount", 0)
+                    cmts = s.get("commentCount", 0)
+                    shrs = s.get("shareCount", 0)
+                    results["content_rows"].append({
+                        "Published date": f"{yr:04d}-{mo:02d}-01",
+                        "Content Title":  f"Monthly aggregate ({yr:04d}-{mo:02d})",
+                        "Impressions":    imps,
+                        "Clicks":         clks,
+                        "Likes":          lks,
+                        "Comments":       cmts,
+                        "Shares":         shrs,
+                        "Engagement Rate": round((lks+cmts+shrs+clks)/imps, 4) if imps else "",
+                    })
+                    break
+            except Exception:
+                pass
+            time.sleep(0.2)
+        if results["content_rows"]:
+            print(f"    ✓ Content stats: {len(results['content_rows'])} months")
+    except Exception as e:
+        print(f"    ⚠ Content stats: {str(e)[:80]}")
 
     return results
 
