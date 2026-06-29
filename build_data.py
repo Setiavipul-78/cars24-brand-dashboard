@@ -447,7 +447,7 @@ YT_CHANNEL_NAMES = {
     "cars24_india":     "Cars24 India",
     "teambhp":          "TeamBHP",
     "cars24_insider":   "Cars24 Insider",
-    "cars24_malayalam": "Cars24 Malayalam",
+    "cars24_malayalam": "Cars24 Tamil",
     "cars24_au":        "Cars24 Australia",
     "cars24_uae":       "Cars24 UAE",
 }
