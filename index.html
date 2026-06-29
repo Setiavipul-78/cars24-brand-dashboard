@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cars24 · Brand Tracker</title>
+<title>Brand Key Metrics · Cars24</title>
 <link rel="icon" type="image/png" href="https://www.cars24.com/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,9 +30,9 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
 /* Header */
 .hdr{background:var(--card);border-bottom:1.5px solid var(--border);padding:0 28px;position:sticky;top:0;z-index:200}
 .hdr .in{max-width:1380px;margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:12px}
-.bmark{width:44px;height:44px;background:var(--blue);border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
-.bmark svg{width:28px;height:28px}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-logo{height:40px;width:auto;display:block;flex-shrink:0}
+.brand-div{width:1.5px;height:34px;background:var(--border);flex-shrink:0}
 .btxt .t1{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.5px;line-height:1.15}
 .btxt .t2{font-size:12px;font-weight:500;color:var(--grey-2);margin-top:1px}
 .fresh{font-size:11.5px;color:var(--grey-2);font-weight:500;display:flex;align-items:center;gap:5px}
@@ -233,17 +233,10 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
 <header class="hdr">
   <div class="in">
     <div class="brand">
-      <div class="bmark">
-        <!-- Cars24 icon: two C-shaped arrows forming a circular loop -->
-        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M24.5 11.5C22.7 7.9 19 5.5 14.8 5.5C9.1 5.5 4.5 10.2 4.5 16C4.5 16.5 4.5 17 4.6 17.5" stroke="white" stroke-width="2.8" stroke-linecap="round"/>
-          <path d="M4.6 17.5L2.5 14.5L7 13.5" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M7.5 20.5C9.3 24.1 13 26.5 17.2 26.5C22.9 26.5 27.5 21.8 27.5 16C27.5 15.5 27.5 15 27.4 14.5" stroke="white" stroke-width="2.8" stroke-linecap="round"/>
-          <path d="M27.4 14.5L29.5 17.5L25 18.5" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
+      <img class="brand-logo" src="https://static-cdn.cars24.com/qa/cms/2026/01/25/047691f4-d01b-482a-9d76-2c5cb6b0f41borg-logo%20%282%29.png" alt="Cars24">
+      <div class="brand-div"></div>
       <div class="btxt">
-        <div class="t1">Cars24 · Brand Tracker</div>
+        <div class="t1">Brand Key Metrics</div>
         <div class="t2">India · Australia · UAE</div>
       </div>
     </div>
