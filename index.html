@@ -48,7 +48,7 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
 .country{display:none}.country.active{display:block}
 
 /* Tabs */
-.tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:20px;overflow-x:auto;scrollbar-width:none;gap:0}
+.tabs{display:flex;flex-wrap:wrap;border-bottom:2px solid var(--border);margin-bottom:20px;gap:0}
 .tabs::-webkit-scrollbar{display:none}
 .tab{background:none;border:none;border-bottom:2.5px solid transparent;margin-bottom:-2px;padding:11px 16px;font:600 13px/1 var(--font);color:var(--grey);cursor:pointer;white-space:nowrap;border-radius:6px 6px 0 0;display:flex;align-items:center;gap:5px;transition:all .14s}
 .tab .ti{font-size:13px;opacity:.75}
@@ -485,14 +485,8 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
         </section>
 
         <!-- LINKEDIN -->
-        <section class="tabpane" id="in-li">
-          <div class="tabset"><nav class="tabs pills">
-            <button class="tab active" data-target="li-c24">Cars24</button>
-            <button class="tab" data-target="li-careers">Careers</button>
-          </nav><div class="tabpanes">
-            <section class="tabpane active" id="li-c24"><div class="ph"><div class="ph-mark">💼</div><div class="ph-title">LinkedIn · Cars24 India</div><div class="ph-body">Followers, new followers, impressions, unique visitors and engagement rate, month on month.</div><div class="dn-card"><h4>What to share</h4><ul><li>LinkedIn Page admin → Analytics → Followers → Export</li><li>LinkedIn Page admin → Analytics → Content → Export</li></ul></div></div></section>
-            <section class="tabpane" id="li-careers"><div class="ph"><div class="ph-mark">💼</div><div class="ph-title">LinkedIn · Cars24 Careers</div><div class="ph-body">Share the Cars24 Careers LinkedIn export to populate.</div></div></section>
-          </div></div>
+        <section class="tabpane" id="in-li" data-lazy="li">
+          <div id="lic-c24"></div>
         </section>
 
       </div>
@@ -505,7 +499,7 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
       <button class="tab active" data-target="au-s">📊 Brand impressions</button>
       <button class="tab" data-target="au-sos">🆚 Share of searches</button>
       <button class="tab" data-target="au-city">🏙 City level</button>
-      <button class="tab" data-target="au-yt">📺 YouTube</button>
+      <button class="tab" data-target="au-yt" data-lazy="yt">📺 YouTube</button>
       <button class="tab" data-target="au-ig">📸 Instagram</button>
       <button class="tab" data-target="au-li">💼 LinkedIn</button>
     </nav><div class="tabpanes">
@@ -524,9 +518,10 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
       <button class="tab active" data-target="uae-s">📊 Brand impressions</button>
       <button class="tab" data-target="uae-sos">🆚 Share of searches</button>
       <button class="tab" data-target="uae-city">🏙 City level</button>
-      <button class="tab" data-target="uae-yt">📺 YouTube</button>
+      <button class="tab" data-target="uae-yt" data-lazy="yt">📺 YouTube</button>
       <button class="tab" data-target="uae-ig">📸 Instagram</button>
       <button class="tab" data-target="uae-li">💼 LinkedIn</button>
+      <button class="tab" data-target="uae-inf" data-lazy="uae-inf">👥 Influencers</button>
     </nav><div class="tabpanes">
       <section class="tabpane active" id="uae-s"><div class="ph"><div class="ph-mark">📊</div><div class="ph-title">UAE · Brand impressions</div><div class="ph-body">Share the Google Search Console export for UAE to populate.</div></div></section>
       <section class="tabpane" id="uae-sos"><div class="ph"><div class="ph-mark">🆚</div><div class="ph-title">UAE · Share of searches</div><div class="ph-body">Share Brandstack BSOS data (Cars24 vs Dubizzle, Dubicars, YallaMotor).</div></div></section>
@@ -534,6 +529,7 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
       <section class="tabpane" id="uae-yt"><div id="ytc-uae"></div></section>
       <section class="tabpane" id="uae-ig"><div id="igc-uae"></div></section>
       <section class="tabpane" id="uae-li"><div class="ph"><div class="ph-mark">💼</div><div class="ph-title">LinkedIn · Cars24 UAE</div><div class="ph-body">Share the Cars24 UAE LinkedIn export to populate.</div></div></section>
+      <section class="tabpane" id="uae-inf"><div id="uae-inf-content"></div></section>
     </div></div>
   </div>
 
@@ -759,30 +755,246 @@ function initTab5(){
   charts.is=new Chart(c,{type:'bar',data:{labels:merged.map(r=>r.label),datasets:[{type:'bar',label:'Impressions (L)',data:merged.map(r=>r.imp_lakh),backgroundColor:'rgba(71,54,254,.22)',yAxisID:'y',borderRadius:5},{type:'line',label:'Cars24 SoS %',data:merged.map(r=>r.g_sos),borderColor:'#4736FE',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,pointRadius:3,tension:0.3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Impressions (L)'},ticks:{callback:v=>v+'L'},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'SoS %'},ticks:{callback:v=>v+'%'},grid:{display:false}},x:{grid:{display:false}}}}});
 }
 
+/* ── YouTube inner-tab styles (injected once) ── */
+/* ── Traffic source name map ── */
+const YT_SRC_NAMES={YT_SEARCH:'YouTube Search',SUGGESTED_VIDEO:'Suggested Videos',SHORTS:'YouTube Shorts',BROWSE_FEATURES:'Browse / Home',EXT_URL:'External Links',NOTIFICATION:'Notifications',PLAYLIST:'Playlists',YT_CHANNEL:'Channel Page',NO_LINK_EMBEDDED:'Embedded',YT_OTHER_PAGE:'Other YouTube',RELATED_VIDEO:'Suggested',NO_LINK_OTHER:'Direct / Other',HASHTAGS:'Hashtags',END_SCREEN:'End Screens',SOUND_PAGE:'Sound Page',SHORTS_CONTENT_LINKS:'Shorts Links',ADVERTISING:'Ads',SUBSCRIBER:'Subscriptions'};
+
 /* ── YouTube renderer ── */
 function renderYT(containerId,key,channelName){
   const el=document.getElementById(containerId);if(!el)return;
   const yt=D.youtube?.[key];
   if(!yt||!yt.monthly?.length){
-    el.innerHTML=`<div class="ph"><div class="ph-mark">📺</div><div class="ph-title">YouTube · ${channelName}</div><div class="ph-body">Connect your YouTube channel to pull live metrics automatically.</div><div class="setup-steps"><h4>How to connect · one-time setup</h4><ol><li>Run <code>python3 setup_youtube_auth.py</code> — opens Google OAuth in browser</li><li>Select the Google account that owns the <strong>${channelName}</strong> channel</li><li>Refresh token is saved to <code>.env</code> automatically</li><li>Add channel ID to <code>.env</code> — see <code>.env.example</code></li><li>Run <code>python3 fetch_social.py</code> then <code>python3 build_data.py</code></li><li>Refresh this page</li></ol></div></div>`;return;
+    el.innerHTML=`<div class="ph"><div class="ph-mark">📺</div><div class="ph-title">YouTube · ${channelName}</div><div class="ph-body">Connect your YouTube channel to pull live metrics automatically.</div><div class="setup-steps"><h4>How to connect · one-time setup</h4><ol><li>Run <code>python3 setup_youtube_auth.py</code></li><li>Select the Google account that owns <strong>${channelName}</strong></li><li>Add channel ID to <code>.env</code></li><li>Run <code>python3 fetch_social.py</code> then <code>python3 build_data.py</code></li><li>Refresh this page</li></ol></div></div>`;return;
   }
-  const snap=yt.snapshot||{},lat=yt.monthly[yt.monthly.length-1],prev=yt.monthly.length>=2?yt.monthly[yt.monthly.length-2]:null;
-  const momV=prev&&lat.views&&prev.views?((lat.views-prev.views)/prev.views*100):null;
+  const snap=yt.snapshot||{};
+  const monthly=[...yt.monthly].sort((a,b)=>a.month.localeCompare(b.month));
+  const isPublic=monthly[0]?.data_source==='public';
+  const monthsDesc=[...monthly].reverse();
+  const fv=v=>{if(!v&&v!==0)return'—';if(v>=1e6)return(v/1e6).toFixed(2)+'M';if(v>=1e3)return(v/1e3).toFixed(1)+'K';return Math.round(v).toLocaleString();};
+  const fh=h=>h!=null?h.toFixed(1)+'h':'—';
+  const fd=s=>s?Math.floor(s/60)+'m '+Math.floor(s%60)+'s':'—';
+
+  // Build HTML skeleton
   el.innerHTML=`
-    <div class="g4">
-      <div class="kh kh-red"><div class="kl"><span class="ki">📺</span>Total Subscribers</div><div class="kv">${numFmt(snap.subscribers)}</div><div class="ks">${lat.net_subs!=null?(lat.net_subs>0?'+':'')+numFmt(lat.net_subs)+' net in '+lat.label:channelName}</div></div>
-      <div class="kh ${(momV||0)>=0?'kh-blue':'kh-red'}"><div class="kl"><span class="ki">👀</span>Views · ${lat.label}</div><div class="kv">${numFmt(lat.views)}</div><div class="ks">${badge(momV)} MoM</div></div>
-      <div class="kh kh-teal"><div class="kl"><span class="ki">⏱</span>Watch Time · ${lat.label}</div><div class="kv">${numFmt(lat.watch_time_hours)}h</div><div class="ks">Avg: ${lat.avg_view_duration?Math.floor(lat.avg_view_duration/60)+'m '+Math.floor(lat.avg_view_duration%60)+'s':'—'}</div></div>
-      <div class="kh kh-amber"><div class="kl"><span class="ki">🎯</span>CTR · ${lat.label}</div><div class="kv">${lat.ctr!=null?lat.ctr.toFixed(1)+'%':'—'}</div><div class="ks">Impressions: ${numFmt(lat.impressions)}</div></div>
+    ${isPublic?`<div style="background:#EEF0FF;border:1px solid #C7C1FF;border-radius:8px;padding:10px 14px;font-size:12px;color:#4736FE;margin-bottom:14px">ℹ️ Video-level public data — views = cumulative views of videos published that month, not monthly channel traffic.</div>`:''}
+    <div class="inf-period-bar" style="gap:12px">
+      <span class="fl">PERIOD</span>
+      <div style="position:relative;display:inline-block">
+        <select id="yt-sel-${key}" style="appearance:none;-webkit-appearance:none;background:var(--card);border:2px solid var(--blue);border-radius:8px;padding:7px 36px 7px 14px;font:700 13px var(--font);color:var(--ink);cursor:pointer;min-width:160px;outline:none">
+          <option value="all">All Time</option>
+          ${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}
+        </select>
+        <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--blue);font-size:10px">▼</span>
+      </div>
     </div>
-    <div class="card"><div class="sh"><span class="kicker">📈 Monthly</span><span class="title">Views & Subscribers — ${channelName}</span><span class="desc">Bars = views (left axis). Line = net subscribers gained (right axis).</span></div><div class="cw tall"><canvas id="yt-chart-${key}"></canvas></div></div>
-    <div class="card"><div class="sh"><span class="kicker">📅 History</span><span class="title">Monthly Metrics — ${channelName}</span></div><div class="tw" id="yt-tbl-${key}"></div></div>`;
 
-  const ctx=document.getElementById(`yt-chart-${key}`).getContext('2d');
-  charts[`yt_${key}`]=new Chart(ctx,{type:'bar',data:{labels:yt.monthly.map(r=>r.label),datasets:[{type:'bar',label:'Views',data:yt.monthly.map(r=>r.views),backgroundColor:'rgba(231,0,11,.18)',yAxisID:'y',borderRadius:5},{type:'line',label:'Net Subscribers',data:yt.monthly.map(r=>r.net_subs),borderColor:'#E7000B',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Views'},ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'Net Subs'},ticks:{callback:v=>numFmt(v)},grid:{display:false}},x:{grid:{display:false}}}}});
+    <div class="inf-kpi-strip" style="grid-template-columns:repeat(7,1fr)" id="yt-kpis-${key}"></div>
 
-  const th=`<th>Month</th><th></th><th class="nr ch">Views</th><th class="nr ch">MoM</th><th class="nr">Watch Time</th><th class="nr">Net Subs</th><th class="nr">CTR</th>`;
-  document.getElementById(`yt-tbl-${key}`).innerHTML=tbl(th,[...yt.monthly].reverse().map((r,i)=>{const p2=yt.monthly.length>i+1?yt.monthly[yt.monthly.length-i-2]:null;const mv=p2&&r.views&&p2.views?((r.views-p2.views)/p2.views*100):null;return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(mv)}</td><td class="nr cc"><strong>${numFmt(r.views)}</strong></td><td class="nr cc">${badge(mv)}</td><td class="nr">${r.watch_time_hours!=null?numFmt(r.watch_time_hours)+'h':'—'}</td><td class="nr">${r.net_subs!=null?`${r.net_subs>0?'+':''}${numFmt(r.net_subs)}`:'—'}</td><td class="nr">${r.ctr!=null?r.ctr.toFixed(1)+'%':'—'}</td></tr>`;}).join(''));
+    <div class="card">
+      <div class="sh"><span class="kicker">📈 Monthly Trend</span><span class="title">Views Over Time — ${channelName}</span><span class="desc">Monthly views (bars) and net subscriber growth (line, right axis).</span></div>
+      <div class="cw tall"><canvas id="yt-trend-${key}"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance</span><span class="desc">Views, watch time, retention, engagement and subscriber growth per month. MoM% and YoY% highlighted.</span></div>
+      <div class="tw" id="yt-mom-tbl-${key}"></div>
+    </div>
+
+    ${yt.top_videos?.length?`
+    <div class="g2" style="margin-bottom:0">
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">🏆 Top by Views</span><span class="title">Top 10 Videos by Views</span><span class="desc">Highest total views since publishing.</span></div>
+        <div class="tw" id="yt-top-views-${key}"></div>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">⏱ Top by Watch Time</span><span class="title">Top 10 by Hours Watched</span><span class="desc">Videos generating most total watch time.</span></div>
+        <div class="tw" id="yt-top-wt-${key}"></div>
+      </div>
+    </div>
+    <div class="g2" style="margin-top:14px;margin-bottom:0">
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">🔄 Top by Retention</span><span class="title">Top 10 by Avg View %</span><span class="desc">Videos viewers watch most of — highest % of video watched on average.</span></div>
+        <div class="tw" id="yt-top-ret-${key}"></div>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">👥 Top by Subs Gained</span><span class="title">Top 10 Subscriber Drivers</span><span class="desc">Videos that drove the most new subscriber signups.</span></div>
+        <div class="tw" id="yt-top-subs-${key}"></div>
+      </div>
+    </div>
+    <div class="g2" style="margin-top:14px">
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">⚡ Top by Engagement</span><span class="title">Top 10 by Engagement Rate</span><span class="desc">(Likes + Comments + Shares) ÷ Views. Most engaging content.</span></div>
+        <div class="tw" id="yt-top-eng-${key}"></div>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">⏰ Longest Avg Duration</span><span class="title">Top 10 by Avg Watch Duration</span><span class="desc">Videos where viewers stayed the longest (absolute minutes).</span></div>
+        <div class="tw" id="yt-top-dur-${key}"></div>
+      </div>
+    </div>`:''}
+
+    ${yt.geo?.length?`
+    <div class="g2">
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">🌍 City Level</span><span class="title">Top Cities by Views</span><span class="desc">Where your viewers are located. Sorted by total views.</span></div>
+        <div class="cw" style="height:340px"><canvas id="yt-geo-${key}"></canvas></div>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">🗺 City Table</span><span class="title">City Breakdown</span><span class="desc">Views and watch time per city.</span></div>
+        <div class="tw" id="yt-geo-tbl-${key}"></div>
+      </div>
+    </div>`:''}
+
+    ${yt.demographics?.length?`
+    <div class="g2">
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">📊 Age Groups</span><span class="title">Audience Age Distribution</span><span class="desc">% of viewers in each age band. Helps identify your core demographic.</span></div>
+        <div class="cw" style="height:240px"><canvas id="yt-age-${key}"></canvas></div>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">⚤ Gender Split</span><span class="title">Viewer Gender Breakdown</span><span class="desc">Male vs female audience composition.</span></div>
+        <div class="cw" style="height:240px"><canvas id="yt-gender-${key}"></canvas></div>
+      </div>
+    </div>`:''}
+
+    ${yt.traffic_sources?.length?`
+    <div class="g2">
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">🚦 Traffic Sources</span><span class="title">How Viewers Find Your Videos</span><span class="desc">Search, Shorts feed, Browse/Home, Suggested, External and more.</span></div>
+        <div class="cw" style="height:300px"><canvas id="yt-traffic-${key}"></canvas></div>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">📋 Source Table</span><span class="title">Traffic Source Breakdown</span><span class="desc">Views, share %, and watch time per traffic source.</span></div>
+        <div class="tw" id="yt-traffic-tbl-${key}"></div>
+      </div>
+    </div>`:''}
+
+    ${yt.devices?.length?`
+    <div class="g2">
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">📱 Devices</span><span class="title">Device Breakdown</span><span class="desc">Mobile, desktop, tablet and TV split of your viewership.</span></div>
+        <div class="cw" style="height:260px"><canvas id="yt-devices-${key}"></canvas></div>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">📋 Device Table</span><span class="title">Views per Device</span><span class="desc">Views, share % and watch time by device type.</span></div>
+        <div class="tw" id="yt-devices-tbl-${key}"></div>
+      </div>
+    </div>`:''}
+  `;
+
+  // ── KPI renderer (period-aware) ──
+  function renderKPIs(period){
+    let rows=period==='all'?monthly:monthly.filter(r=>r.month===period.replace('m:',''));
+    const tv=rows.reduce((s,r)=>s+(r.views||0),0);
+    const tw=rows.reduce((s,r)=>s+(r.watch_time_hours||0),0);
+    const ts=rows.reduce((s,r)=>s+(r.subscribers_gained||0),0);
+    const tl=rows.reduce((s,r)=>s+(r.likes||0),0);
+    const tc=rows.reduce((s,r)=>s+(r.comments||0),0);
+    const tsh=rows.reduce((s,r)=>s+(r.shares||0),0);
+    const retRows=rows.filter(r=>r.avg_view_percent>0);
+    const avgRet=retRows.length?retRows.reduce((s,r)=>s+r.avg_view_percent,0)/retRows.length:0;
+    const durRows=rows.filter(r=>r.avg_view_duration>0);
+    const avgDur=durRows.length?durRows.reduce((s,r)=>s+r.avg_view_duration,0)/durRows.length:0;
+    const engRate=tv>0?(tl+tc+tsh)/tv*100:0;
+    document.getElementById(`yt-kpis-${key}`).innerHTML=`
+      <div class="ink grn"><span class="ink-icon">👀</span><div class="ink-lbl">Total Views</div><div class="ink-val">${fv(tv)}</div><div class="ink-sub">in period</div></div>
+      <div class="ink"><span class="ink-icon">📹</span><div class="ink-lbl">Videos Live</div><div class="ink-val">${numFmt(snap.videos||0)}</div><div class="ink-sub">on channel</div></div>
+      <div class="ink mint"><span class="ink-icon">👥</span><div class="ink-lbl">Subscribers</div><div class="ink-val">${numFmt(snap.subscribers||0)}</div><div class="ink-sub">total on channel</div></div>
+      <div class="ink pur"><span class="ink-icon">⏱</span><div class="ink-lbl">Watch Time</div><div class="ink-val">${fh(tw)}</div><div class="ink-sub">total hours in period</div></div>
+      <div class="ink or"><span class="ink-icon">⏰</span><div class="ink-lbl">Avg Duration</div><div class="ink-val">${fd(avgDur)}</div><div class="ink-sub">avg per video view</div></div>
+      <div class="ink"><span class="ink-icon">🔄</span><div class="ink-lbl">Avg Retention</div><div class="ink-val">${avgRet>0?avgRet.toFixed(1)+'%':'—'}</div><div class="ink-sub">avg % of video watched</div></div>
+      <div class="ink grn"><span class="ink-icon">⚡</span><div class="ink-lbl">Engagement</div><div class="ink-val">${engRate.toFixed(2)}%</div><div class="ink-sub">(likes+cmts+shares)÷views</div></div>`;
+  }
+
+  // ── Monthly table (always all months, latest row highlighted) ──
+  (()=>{
+    const latestMonth=monthsDesc[0]?.month||'';
+    const rows=[...monthly].reverse();
+    const th=`<th>Month</th><th class="nr ch">👀 Views</th><th class="nr ch">MoM</th><th class="nr ch">YoY</th><th class="nr">⏱ Watch Time</th><th class="nr">MoM</th><th class="nr">⏰ Avg Duration</th><th class="nr">🔄 Retention</th><th class="nr">👥 New Subs</th><th class="nr">YoY Subs</th><th class="nr">👍 Likes</th><th class="nr">💬 Comments</th><th class="nr">↗ Shares</th><th class="nr">⚡ Eng%</th>`;
+    const tbRows=rows.map(r=>`<tr class="${r.month===latestMonth?'lat':''}">
+      <td><strong>${r.label}</strong>${r.month===latestMonth?' <span class="badge bb">Latest</span>':''}</td>
+      <td class="nr cc"><strong>${fv(r.views)}</strong></td>
+      <td class="nr cc">${badge(r.mom_views)}</td>
+      <td class="nr cc">${badge(r.yoy_views)}</td>
+      <td class="nr">${fh(r.watch_time_hours)}</td>
+      <td class="nr">${badge(r.mom_wt)}</td>
+      <td class="nr">${fd(r.avg_view_duration)}</td>
+      <td class="nr">${r.avg_view_percent>0?r.avg_view_percent.toFixed(1)+'%':'—'}</td>
+      <td class="nr">${r.subscribers_gained>0?'+'+numFmt(r.subscribers_gained):'—'}</td>
+      <td class="nr">${badge(r.yoy_subs)}</td>
+      <td class="nr">${numFmt(r.likes)||'—'}</td>
+      <td class="nr">${numFmt(r.comments)||'—'}</td>
+      <td class="nr">${numFmt(r.shares)||'—'}</td>
+      <td class="nr">${r.engagement_rate>0?r.engagement_rate.toFixed(2)+'%':'—'}</td>
+    </tr>`).join('');
+    document.getElementById(`yt-mom-tbl-${key}`).innerHTML=tbl(th,tbRows);
+  })();
+
+  // Period filter — controls KPI tiles only, defaults to latest month
+  const sel=document.getElementById(`yt-sel-${key}`);
+  sel.value=`m:${monthsDesc[0]?.month||''}`;
+  sel.addEventListener('change',e=>renderKPIs(e.target.value));
+  renderKPIs(sel.value);
+
+  // ── Trend chart ──
+  const ck=`yt_${key}_trend`;if(charts[ck])charts[ck].destroy();
+  const tc=document.getElementById(`yt-trend-${key}`);
+  if(tc) charts[ck]=new Chart(tc.getContext('2d'),{type:'bar',data:{labels:monthly.map(r=>r.label),datasets:[{type:'bar',label:'Views',data:monthly.map(r=>r.views),backgroundColor:'rgba(71,54,254,.18)',yAxisID:'y',borderRadius:5},{type:'line',label:'Net Subscribers',data:monthly.map(r=>r.net_subs),borderColor:'#4736FE',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Views'},ticks:{callback:v=>fv(v)},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'Net Subs'},ticks:{callback:v=>numFmt(v)},grid:{display:false}},x:{grid:{display:false}}}}});
+
+  // ── Top 10 video tables ──
+  if(yt.top_videos?.length){
+    const vids=yt.top_videos;
+    const vRow=(v,valHtml,sub)=>`<tr>
+      <td style="max-width:280px"><a href="${v.url}" target="_blank" style="color:var(--blue);font-size:12px;line-height:1.4;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:none" title="${v.title}">${v.title}</a><span style="font-size:10.5px;color:#9CA3AF">${v.published}</span></td>
+      <td class="nr"><strong>${valHtml}</strong><br><span style="font-size:10.5px;color:#9CA3AF">${sub}</span></td>
+    </tr>`;
+    const thV='<th>Video</th><th class="nr">Value</th>';
+    const fill=(sorted,vf,sf)=>document.getElementById(sorted).innerHTML=tbl(thV,[...vids].sort((a,b)=>b[vf]-a[vf]).slice(0,10).map(v=>vRow(v,sf(v),`${fv(v.views)} views`)).join(''));
+    fill(`yt-top-views-${key}`,'views',v=>fv(v.views));
+    fill(`yt-top-wt-${key}`,'watch_time_hours',v=>fh(v.watch_time_hours));
+    fill(`yt-top-ret-${key}`,'avg_view_pct',v=>v.avg_view_pct.toFixed(1)+'%');
+    fill(`yt-top-subs-${key}`,'subs_gained',v=>'+'+numFmt(v.subs_gained));
+    fill(`yt-top-eng-${key}`,'engagement_rate',v=>v.engagement_rate.toFixed(2)+'%');
+    fill(`yt-top-dur-${key}`,'avg_duration_sec',v=>fd(v.avg_duration_sec));
+  }
+
+  // ── Geo chart + table ──
+  if(yt.geo?.length){
+    const geo15=yt.geo.slice(0,15);
+    const gc=document.getElementById(`yt-geo-${key}`);
+    const gck=`yt_${key}_geo`;if(charts[gck])charts[gck].destroy();
+    if(gc) charts[gck]=new Chart(gc.getContext('2d'),{type:'bar',data:{labels:geo15.map(g=>g.city),datasets:[{label:'Views',data:geo15.map(g=>g.views),backgroundColor:'rgba(71,54,254,.7)',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>fv(v)},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
+    const gt=document.getElementById(`yt-geo-tbl-${key}`);
+    if(gt) gt.innerHTML=tbl(`<th>#</th><th>🌍 City</th><th class="nr">👀 Views</th><th class="nr">⏱ Watch Time</th>`,yt.geo.map((g,i)=>`<tr><td>${i+1}</td><td>${g.city}</td><td class="nr">${fv(g.views)}</td><td class="nr">${fh(g.watch_time_hours)}</td></tr>`).join(''));
+  }
+
+  // ── Demographics ──
+  if(yt.demographics?.length){
+    const ageMap={};yt.demographics.forEach(d=>{ageMap[d.age_group]=(ageMap[d.age_group]||0)+d.viewer_pct;});
+    const ages=Object.keys(ageMap).sort();
+    const ac=document.getElementById(`yt-age-${key}`);const ack=`yt_${key}_age`;if(charts[ack])charts[ack].destroy();
+    if(ac) charts[ack]=new Chart(ac.getContext('2d'),{type:'bar',data:{labels:ages,datasets:[{label:'Viewer %',data:ages.map(a=>ageMap[a].toFixed(2)),backgroundColor:ages.map((_,i)=>`hsl(${240+i*15},70%,${50+i*3}%)`),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+    const genMap={};yt.demographics.forEach(d=>{genMap[d.gender]=(genMap[d.gender]||0)+d.viewer_pct;});
+    const gens=Object.keys(genMap);
+    const genc=document.getElementById(`yt-gender-${key}`);const genck=`yt_${key}_gender`;if(charts[genck])charts[genck].destroy();
+    if(genc) charts[genck]=new Chart(genc.getContext('2d'),{type:'doughnut',data:{labels:gens,datasets:[{data:gens.map(g=>genMap[g].toFixed(2)),backgroundColor:['#4736FE','#00C951','#F59E0B'],borderWidth:3,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11},generateLabels:chart=>{const ds=chart.data;return ds.labels.map((l,i)=>({text:`${l} ${parseFloat(ds.datasets[0].data[i]).toFixed(1)}%`,fillStyle:ds.datasets[0].backgroundColor[i],index:i}));}}}}}});
+  }
+
+  // ── Traffic sources chart + table ──
+  if(yt.traffic_sources?.length){
+    const trc=document.getElementById(`yt-traffic-${key}`);const trck=`yt_${key}_traffic`;if(charts[trck])charts[trck].destroy();
+    const trNames=yt.traffic_sources.map(t=>YT_SRC_NAMES[t.source]||t.source);
+    if(trc) charts[trck]=new Chart(trc.getContext('2d'),{type:'bar',data:{labels:trNames,datasets:[{label:'Views',data:yt.traffic_sources.map(t=>t.views),backgroundColor:'rgba(0,201,81,.7)',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>fv(v)},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
+    const trt=document.getElementById(`yt-traffic-tbl-${key}`);
+    if(trt) trt.innerHTML=tbl(`<th>🚦 Source</th><th class="nr">👀 Views</th><th class="nr">Share %</th><th class="nr">⏱ Watch Time</th>`,yt.traffic_sources.map(t=>`<tr><td>${YT_SRC_NAMES[t.source]||t.source}</td><td class="nr">${fv(t.views)}</td><td class="nr">${t.pct}%</td><td class="nr">${fh(t.watch_time_hours)}</td></tr>`).join(''));
+  }
+
+  // ── Devices donut + table ──
+  if(yt.devices?.length){
+    const dvc=document.getElementById(`yt-devices-${key}`);const dvck=`yt_${key}_devices`;if(charts[dvck])charts[dvck].destroy();
+    if(dvc) charts[dvck]=new Chart(dvc.getContext('2d'),{type:'doughnut',data:{labels:yt.devices.map(d=>d.device),datasets:[{data:yt.devices.map(d=>d.views),backgroundColor:['#4736FE','#00C951','#F59E0B','#8B5CF6'],borderWidth:3,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:11},generateLabels:chart=>{const ds=chart.data;return ds.labels.map((l,i)=>({text:`${l} ${yt.devices[i].pct}%`,fillStyle:ds.datasets[0].backgroundColor[i],index:i}));}}}}}});
+    const dvt=document.getElementById(`yt-devices-tbl-${key}`);
+    if(dvt) dvt.innerHTML=tbl(`<th>📱 Device</th><th class="nr">👀 Views</th><th class="nr">Share %</th><th class="nr">⏱ Watch Time</th>`,yt.devices.map(d=>`<tr><td>${d.device}</td><td class="nr">${fv(d.views)}</td><td class="nr">${d.pct}%</td><td class="nr">${fh(d.watch_time_hours)}</td></tr>`).join(''));
+  }
 }
 
 /* ── Instagram renderer ── */
@@ -809,6 +1021,47 @@ function renderIG(containerId,key,handleName){
 
   const th=`<th>Month</th><th></th><th class="nr ch">Followers</th><th class="nr ch">Gained</th><th class="nr">Reach</th><th class="nr">Impressions</th><th class="nr">Profile Views</th><th class="nr">Website Clicks</th>`;
   document.getElementById(`ig-tbl-${key}`).innerHTML=tbl(th,[...ig.monthly].reverse().map((r,i)=>{const p2=ig.monthly.length>i+1?ig.monthly[ig.monthly.length-i-2]:null;const mf=p2&&r.followers&&p2.followers?((r.followers-p2.followers)/p2.followers*100):null;return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(mf)}</td><td class="nr cc"><strong>${numFmt(r.followers)}</strong></td><td class="nr cc">${r.followers_gained!=null?'+'+numFmt(r.followers_gained):'—'}</td><td class="nr">${numFmt(r.reach)}</td><td class="nr">${numFmt(r.impressions)}</td><td class="nr">${numFmt(r.profile_views)}</td><td class="nr">${numFmt(r.website_clicks)}</td></tr>`;}).join(''));
+}
+
+/* ── LinkedIn renderer ── */
+function renderLI(containerId,key,pageName){
+  const el=document.getElementById(containerId);if(!el)return;
+  const li=D.linkedin?.[key];
+  if(!li||!li.monthly?.length){
+    el.innerHTML=`<div class="ph"><div class="ph-mark">💼</div><div class="ph-title">LinkedIn · ${pageName}</div><div class="ph-body">Export analytics from LinkedIn Page Admin and save as CSV in the <code>data/</code> folder.</div><div class="setup-steps"><h4>How to set up (one-time)</h4><ol><li>Go to your <strong>LinkedIn Page</strong> → click <strong>Analytics</strong> in the left nav</li><li><strong>Followers</strong> tab → click <strong>Export</strong> → save as <code>data/linkedin_${key}_followers.csv</code></li><li><strong>Visitors</strong> tab → click <strong>Export</strong> → save as <code>data/linkedin_${key}_visitors.csv</code></li><li><strong>Content</strong> tab → click <strong>Export</strong> (top right) → save as <code>data/linkedin_${key}_content.csv</code></li><li>Run <code>python3 build_data.py</code> and refresh</li></ol><p style="margin-top:12px;font-size:12px;color:#6B7280">Tip: LinkedIn exports cover the past 365 days. Re-export monthly to keep the dashboard current.</p></div></div>`;return;
+  }
+  const snap=li.snapshot||{},monthly=li.monthly,lat=monthly[monthly.length-1],prev=monthly.length>=2?monthly[monthly.length-2]:null;
+  const momFol=prev&&lat.new_followers?`+${numFmt(lat.new_followers)} new in ${lat.label}`:pageName;
+  const momEng=lat.eng_rate!=null?`${lat.eng_rate.toFixed(2)}% eng rate`:'—';
+  const momImp=prev&&prev.impressions&&lat.impressions?((lat.impressions-prev.impressions)/prev.impressions*100):null;
+  el.innerHTML=`
+    <div class="g4">
+      <div class="kh kh-blue"><div class="kl"><span class="ki">👥</span>Total Followers</div><div class="kv">${numFmt(snap.followers||lat.followers)}</div><div class="ks">${momFol}</div></div>
+      <div class="kh kh-teal"><div class="kl"><span class="ki">📢</span>Impressions · ${lat.label}</div><div class="kv">${numFmt(lat.impressions)}</div><div class="ks">${badge(momImp)} vs prior month</div></div>
+      <div class="kh kh-purple"><div class="kl"><span class="ki">🏠</span>Page Views · ${lat.label}</div><div class="kv">${numFmt(lat.page_views)}</div><div class="ks">Unique visitors: ${numFmt(lat.unique_visitors)}</div></div>
+      <div class="kh kh-mint"><div class="kl"><span class="ki">💬</span>Engagement · ${lat.label}</div><div class="kv">${numFmt((lat.likes||0)+(lat.comments||0)+(lat.shares||0))}</div><div class="ks">${momEng}</div></div>
+    </div>
+    <div class="card"><div class="sh"><span class="kicker">📈 Monthly</span><span class="title">Impressions & Follower Growth — ${pageName}</span><span class="desc">Bars = impressions (left). Line = new followers (right).</span></div><div class="cw tall"><canvas id="li-chart-${key}"></canvas></div></div>
+    <div class="card"><div class="sh"><span class="kicker">📅 History</span><span class="title">Monthly Metrics — ${pageName}</span></div><div class="tw" id="li-tbl-${key}"></div></div>
+    ${li.posts&&li.posts.length?`<div class="card"><div class="sh"><span class="kicker">🔝 Top Posts</span><span class="title">Best Performing Content — ${pageName}</span><span class="desc">Sorted by impressions.</span></div><div class="tw" id="li-posts-${key}"></div></div>`:''}`;
+
+  // Trend chart
+  const ctx=document.getElementById(`li-chart-${key}`).getContext('2d');
+  charts[`li_${key}`]=new Chart(ctx,{type:'bar',data:{labels:monthly.map(r=>r.label),datasets:[{type:'bar',label:'Impressions',data:monthly.map(r=>r.impressions||0),backgroundColor:'rgba(71,54,254,.18)',yAxisID:'y',borderRadius:5},{type:'line',label:'New Followers',data:monthly.map(r=>r.new_followers||0),borderColor:'#4736FE',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Impressions'},ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'New Followers'},ticks:{callback:v=>numFmt(v)},grid:{display:false}},x:{grid:{display:false}}}}});
+
+  // Monthly table
+  const th=`<th>Month</th><th class="nr ch">Followers</th><th class="nr ch">New Followers</th><th class="nr">Impressions</th><th class="nr">Page Views</th><th class="nr">Visitors</th><th class="nr">Posts</th><th class="nr">Likes</th><th class="nr">Comments</th><th class="nr">Shares</th><th class="nr">Eng %</th>`;
+  document.getElementById(`li-tbl-${key}`).innerHTML=tbl(th,[...monthly].reverse().map((r,i)=>{
+    const p2=monthly.length>i+1?monthly[monthly.length-i-2]:null;
+    const mf=p2&&r.followers&&p2.followers?((r.followers-p2.followers)/p2.followers*100):null;
+    return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td class="nr cc"><strong>${numFmt(r.followers)}</strong></td><td class="nr cc">${r.new_followers!=null?'+'+numFmt(r.new_followers):'—'}</td><td class="nr">${numFmt(r.impressions)}</td><td class="nr">${numFmt(r.page_views)}</td><td class="nr">${numFmt(r.unique_visitors)}</td><td class="nr">${numFmt(r.posts)}</td><td class="nr">${numFmt(r.likes)}</td><td class="nr">${numFmt(r.comments)}</td><td class="nr">${numFmt(r.shares)}</td><td class="nr">${r.eng_rate!=null?r.eng_rate.toFixed(2)+'%':'—'}</td></tr>`;
+  }).join(''));
+
+  // Top posts table
+  if(li.posts&&li.posts.length){
+    const ph=`<th>Date</th><th>Post</th><th class="nr">Impressions</th><th class="nr">Clicks</th><th class="nr">Likes</th><th class="nr">Comments</th><th class="nr">Shares</th><th class="nr">Eng %</th>`;
+    document.getElementById(`li-posts-${key}`).innerHTML=tbl(ph,li.posts.slice(0,10).map(p=>`<tr><td>${p.date}</td><td style="max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${p.title.replace(/"/g,'&quot;')}">${p.title}</td><td class="nr">${numFmt(p.impressions)}</td><td class="nr">${numFmt(p.clicks)}</td><td class="nr">${numFmt(p.likes)}</td><td class="nr">${numFmt(p.comments)}</td><td class="nr">${numFmt(p.shares)}</td><td class="nr">${p.eng_rate!=null?(p.eng_rate*100).toFixed(2)+'%':'—'}</td></tr>`).join(''));
+  }
 }
 
 /* ── Influencer renderer ── */
@@ -1028,8 +1281,223 @@ function initIG(){
   renderIG('igc-au','cars24_au','Cars24 Australia');
   renderIG('igc-uae','cars24_uae','Cars24 UAE');
 }
+function initLI(){
+  renderLI('lic-c24','cars24','Cars24 India');
+}
 
-const lazyInit={kw:initTab2,bsos:initTab3,gi:initTab4,impsos:initTab5,inf:initInf,yt:initYT,ig:initIG};
+async function initUAEInf(){
+  const el=document.getElementById('uae-inf-content');if(!el)return;
+  el.innerHTML=`<div class="ph"><div class="ph-mark">⏳</div><div class="ph-title">Loading UAE influencer data…</div><div class="ph-body">Fetching live from Google Sheets</div></div>`;
+
+  const SHEET_ID='1_DEKX02I3Dh41B8nBtwPR1G-_4nt98WgDILZjzg3sp4', GID='211709974';
+  const MO={'january':1,'february':2,'march':3,'april':4,'may':5,'june':6,'july':7,'august':8,'september':9,'october':10,'november':11,'december':12};
+  let allRows=[];
+
+  try{
+    const res=await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${GID}&tqx=out:json`);
+    const txt=await res.text();
+    const m=txt.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);?\s*$/);
+    if(!m)throw new Error('Unexpected sheet response');
+    const tbl=JSON.parse(m[1]).table;
+    const hmap={};
+    tbl.cols.forEach((c,i)=>{const k=(c.label||c.id||'').toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/_+$/,'');if(k)hmap[k]=i;});
+    const gv=(row,k)=>{const i=hmap[k]??-1;return i>=0&&row.c[i]?row.c[i].v:null;};
+    allRows=tbl.rows.map(row=>{
+      if(!row||!row.c)return null;
+      const name   =gv(row,'creator_name')||gv(row,'creator')||gv(row,'influencer');
+      const views  =+(gv(row,'total_views')||gv(row,'views')||0);
+      const likes  =+(gv(row,'total_likes')||gv(row,'likes')||0);
+      const comments=+(gv(row,'total_comments')||gv(row,'comments')||0);
+      const shares =+(gv(row,'total_shares')||gv(row,'shares')||0);
+      const saves  =+(gv(row,'saves')||0);
+      const cost   =+(gv(row,'creator_cost_aed')||gv(row,'cost')||0);
+      const month  =String(gv(row,'month')||'').trim();
+      const campaign=String(gv(row,'campaign')||'').trim();
+      const link   =gv(row,'post_url')||gv(row,'url')||'';
+      const moNum  =MO[month.toLowerCase()]||0;
+      const eng    =views>0?((likes+comments+saves)/views*100):null;
+      const cpv    =views>0&&cost>0?(cost/views):null;
+      return name?{name,views,likes,comments,shares,saves,cost,month,campaign,link,moNum,eng,cpv}:null;
+    }).filter(Boolean);
+  }catch(e){
+    el.innerHTML=`<div class="ph"><div class="ph-mark">⚠️</div><div class="ph-title">Could not load UAE influencer data</div><div class="ph-body">${e.message}</div></div>`;return;
+  }
+
+  if(!allRows.length){el.innerHTML=`<div class="ph"><div class="ph-mark">📊</div><div class="ph-title">No data found in UAE influencer sheet</div></div>`;return;}
+
+  // Monthly aggregates
+  const moMap={};
+  allRows.forEach(r=>{
+    if(!moMap[r.moNum])moMap[r.moNum]={moNum:r.moNum,month:r.month,views:0,likes:0,comments:0,cost:0,campaigns:0};
+    moMap[r.moNum].views+=r.views;moMap[r.moNum].likes+=r.likes;moMap[r.moNum].comments+=r.comments;
+    moMap[r.moNum].cost+=r.cost;moMap[r.moNum].campaigns++;
+  });
+  const allMonthly=Object.values(moMap).sort((a,b)=>a.moNum-b.moNum);
+  allMonthly.forEach(m=>{
+    const mrows=allRows.filter(r=>r.moNum===m.moNum);
+    const ers=mrows.filter(r=>r.eng>0).map(r=>r.eng);
+    m.avg_eng=ers.length?ers.reduce((a,b)=>a+b)/ers.length:null;
+  });
+
+  const monthsDesc=[...allMonthly].reverse();
+  const latestMO=monthsDesc[0]?.moNum;
+
+  // Formatters (AED, K/M scale)
+  const fv=v=>{if(v==null||isNaN(v))return'—';if(v>=1e6)return(v/1e6).toFixed(2)+'M';if(v>=1e3)return(v/1e3).toFixed(1)+'K';return Math.round(v).toLocaleString();};
+  const fc=v=>{if(v==null||isNaN(v)||v===0)return'—';if(v>=1e6)return'AED '+(v/1e6).toFixed(2)+'M';if(v>=1e3)return'AED '+(v/1e3).toFixed(1)+'K';return'AED '+Math.round(v).toLocaleString();};
+  const fcpv=v=>v==null||isNaN(v)?'—':'AED '+Number(v).toFixed(3);
+
+  el.innerHTML=`
+    <div class="inf-ext-banner">
+      <div class="inf-ext-txt"><strong>Cars24 Arabia Influencer Tracker</strong> &nbsp;·&nbsp; Full campaign analytics, creator profiles &amp; live Google Sheets sync</div>
+      <a class="inf-ext-link" href="https://cars24arabia-influencer-tracker.netlify.app/" target="_blank">Open Full Dashboard ↗</a>
+    </div>
+
+    <div class="inf-period-bar" style="gap:12px">
+      <span class="fl">PERIOD</span>
+      <div style="position:relative;display:inline-block">
+        <select id="uae-inf-sel" style="appearance:none;-webkit-appearance:none;background:var(--card);border:2px solid var(--blue);border-radius:8px;padding:7px 36px 7px 14px;font:700 13px var(--font);color:var(--ink);cursor:pointer;min-width:160px;outline:none">
+          <option value="all">All Time</option>
+          ${monthsDesc.map(m=>`<option value="mo:${m.moNum}"${m.moNum===latestMO?' selected':''}>${m.month}</option>`).join('')}
+        </select>
+        <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--blue);font-size:10px">▼</span>
+      </div>
+    </div>
+
+    <div class="inf-kpi-strip" id="uae-inf-kpis"></div>
+
+    <div class="card">
+      <div class="sh"><span class="kicker">📈 Monthly trend</span><span class="title">Views Over Time</span><span class="desc">Total influencer views per month across all UAE campaigns.</span></div>
+      <div class="cw tall"><canvas id="uae-inf-chart-trend"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance Table</span><span class="desc">Views, likes, comments, spend and blended CPV per month.</span></div>
+      <div class="tw" id="uae-inf-mom-tbl"></div>
+    </div>
+
+    <div class="g2" style="margin-bottom:0">
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">🏆 Top creators</span><span class="title">Top 10 by Views</span></div>
+        <div class="tw" id="uae-inf-top-views"></div>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">📉 Cost efficiency</span><span class="title">Blended CPV by Month</span><span class="desc">Total spend ÷ total views. Lower = more efficient.</span></div>
+        <div class="cw tall" style="height:260px"><canvas id="uae-inf-chart-cpv"></canvas></div>
+      </div>
+    </div>
+
+    <div class="g2" style="margin-top:14px">
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">⚡ Best engagement</span><span class="title">Top 10 by Engagement Rate</span><span class="desc">(likes + comments + saves) ÷ views</span></div>
+        <div class="tw" id="uae-inf-top-eng"></div>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">💰 Lowest CPV</span><span class="title">Top 10 Most Efficient Creators</span><span class="desc">Lowest AED CPV (min 5K views)</span></div>
+        <div class="tw" id="uae-inf-low-cpv"></div>
+      </div>
+    </div>`;
+
+  function renderUAEKPIs(val){
+    const rows=val==='all'?allRows:allRows.filter(r=>r.moNum===parseInt(val.replace('mo:',''),10));
+    const tv=rows.reduce((s,r)=>s+r.views,0);
+    const tc=rows.reduce((s,r)=>s+r.cost,0);
+    const ers=rows.filter(r=>r.eng>0).map(r=>r.eng);
+    const bcpv=tv>0?(tc/tv):null;
+    const avgEng=ers.length?(ers.reduce((a,b)=>a+b)/ers.length):null;
+    const uniqC=new Set(rows.map(r=>r.name)).size;
+    const mons=new Set(rows.map(r=>r.moNum)).size;
+    document.getElementById('uae-inf-kpis').innerHTML=`
+      <div class="ink"><span class="ink-icon">📅</span><div class="ink-lbl">Active Months</div><div class="ink-val">${mons}</div><div class="ink-sub">months with live creators</div></div>
+      <div class="ink mint"><span class="ink-icon">👥</span><div class="ink-lbl">Creators</div><div class="ink-val">${uniqC}</div><div class="ink-sub">total across campaign</div></div>
+      <div class="ink grn"><span class="ink-icon">👁️</span><div class="ink-lbl">Total Views</div><div class="ink-val">${fv(tv)}</div><div class="ink-sub">plays in period</div></div>
+      <div class="ink or"><span class="ink-icon">💸</span><div class="ink-lbl">Total Spend</div><div class="ink-val">${fc(tc)}</div><div class="ink-sub">budget in period</div></div>
+      <div class="ink pur"><span class="ink-icon">📉</span><div class="ink-lbl">Blended CPV</div><div class="ink-val">${fcpv(bcpv)}</div><div class="ink-sub">spend ÷ views</div></div>
+      <div class="ink"><span class="ink-icon">⚡</span><div class="ink-lbl">Engagement</div><div class="ink-val">${avgEng!=null?avgEng.toFixed(2)+'%':'—'}</div><div class="ink-sub">(likes+cmts+saves)/views</div></div>`;
+  }
+
+  function renderUAEStatic(){
+    // Trend chart
+    const tc=document.getElementById('uae-inf-chart-trend').getContext('2d');
+    new Chart(tc,{type:'bar',data:{
+      labels:allMonthly.map(m=>m.month),
+      datasets:[{label:'Total Views',data:allMonthly.map(m=>m.views/1000),backgroundColor:allMonthly.map((_,i)=>i===allMonthly.length-1?'rgba(71,54,254,.75)':'rgba(71,54,254,.22)'),borderRadius:6}]
+    },options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.parsed.y?.toFixed(1)}K views`}}},
+      scales:{y:{title:{display:true,text:'Views (K)'},ticks:{callback:v=>v+'K'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+
+    // MoM table
+    const mth=`<th>Month</th><th class="nr ch">Live Videos</th><th class="nr">Total Views</th><th class="nr">Likes</th><th class="nr">Comments</th><th class="nr ch">Total Spend</th><th class="nr ch">Blended CPV</th><th class="nr">Avg Eng %</th>`;
+    document.getElementById('uae-inf-mom-tbl').innerHTML=tbl(mth,[...allMonthly].reverse().map((m,i)=>{
+      const bcpv=m.views>0?(m.cost/m.views):null;
+      return`<tr class="${i===0?'lat':''}">
+        <td><strong>${m.month}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td>
+        <td class="nr cc"><strong>${m.campaigns}</strong></td>
+        <td class="nr">${fv(m.views)}</td>
+        <td class="nr">${fv(m.likes)}</td>
+        <td class="nr">${fv(m.comments)}</td>
+        <td class="nr cc">${fc(m.cost)}</td>
+        <td class="nr cc">${fcpv(bcpv)}</td>
+        <td class="nr">${m.avg_eng!=null?m.avg_eng.toFixed(2)+'%':'—'}</td>
+      </tr>`;
+    }).join(''));
+
+    // Top 10 Views
+    const top10V=[...allRows].sort((a,b)=>b.views-a.views).slice(0,10);
+    document.getElementById('uae-inf-top-views').innerHTML=tbl(
+      `<th>#</th><th>Creator</th><th class="nr ch">Views</th><th class="nr">Spend</th><th class="nr ch">CPV</th><th class="nr">Eng %</th>`,
+      top10V.map((r,i)=>`<tr class="${i===0?'lat':''}">
+        <td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td>
+        <td><a href="${r.link||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.name}</a><br><span style="font-size:11px;color:var(--grey)">${r.month}</span></td>
+        <td class="nr cc"><strong>${fv(r.views)}</strong></td>
+        <td class="nr">${fc(r.cost)}</td>
+        <td class="nr cc">${fcpv(r.cpv)}</td>
+        <td class="nr">${r.eng!=null?r.eng.toFixed(2)+'%':'—'}</td>
+      </tr>`).join(''));
+
+    // CPV by month chart
+    const cc=document.getElementById('uae-inf-chart-cpv').getContext('2d');
+    const bcpvData=allMonthly.map(m=>m.views>0?parseFloat((m.cost/m.views).toFixed(3)):null);
+    new Chart(cc,{type:'bar',data:{
+      labels:allMonthly.map(m=>m.month),
+      datasets:[{label:'Blended CPV (AED)',data:bcpvData,backgroundColor:bcpvData.map((_,i)=>i===allMonthly.length-1?'rgba(71,54,254,.85)':'rgba(71,54,254,.28)'),borderRadius:6}]
+    },options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`AED ${c.parsed.y?.toFixed(3)}`}}},
+      scales:{y:{title:{display:true,text:'Blended CPV (AED)'},ticks:{callback:v=>'AED '+v},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+
+    // Top 10 Engagement
+    const top10E=[...allRows].filter(r=>r.eng>0).sort((a,b)=>b.eng-a.eng).slice(0,10);
+    document.getElementById('uae-inf-top-eng').innerHTML=tbl(
+      `<th>#</th><th>Creator</th><th class="nr ch">Eng Rate</th><th class="nr">Views</th><th class="nr">Likes</th><th class="nr">Comments</th>`,
+      top10E.map((r,i)=>`<tr class="${i===0?'lat':''}">
+        <td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td>
+        <td><a href="${r.link||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.name}</a><br><span style="font-size:11px;color:var(--grey)">${r.month}</span></td>
+        <td class="nr cc"><strong>${r.eng.toFixed(2)}%</strong></td>
+        <td class="nr">${fv(r.views)}</td>
+        <td class="nr">${fv(r.likes)}</td>
+        <td class="nr">${fv(r.comments)}</td>
+      </tr>`).join(''));
+
+    // Lowest CPV (min 5K views)
+    const lowCPV=[...allRows].filter(r=>r.views>=5000&&r.cpv>0).sort((a,b)=>a.cpv-b.cpv).slice(0,10);
+    document.getElementById('uae-inf-low-cpv').innerHTML=tbl(
+      `<th>#</th><th>Creator</th><th class="nr ch">CPV</th><th class="nr">Views</th><th class="nr">Spend</th><th class="nr">Eng %</th>`,
+      lowCPV.map((r,i)=>`<tr class="${i===0?'lat':''}">
+        <td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td>
+        <td><a href="${r.link||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.name}</a><br><span style="font-size:11px;color:var(--grey)">${r.month}</span></td>
+        <td class="nr cc"><strong>${fcpv(r.cpv)}</strong></td>
+        <td class="nr">${fv(r.views)}</td>
+        <td class="nr">${fc(r.cost)}</td>
+        <td class="nr">${r.eng!=null?r.eng.toFixed(2)+'%':'—'}</td>
+      </tr>`).join(''));
+  }
+
+  document.getElementById('uae-inf-sel').addEventListener('change',function(){renderUAEKPIs(this.value);});
+  renderUAEKPIs('mo:'+latestMO);
+  renderUAEStatic();
+}
+
+const lazyInit={kw:initTab2,bsos:initTab3,gi:initTab4,impsos:initTab5,inf:initInf,yt:initYT,ig:initIG,li:initLI,'uae-inf':initUAEInf};
 
 async function main(){
   try{

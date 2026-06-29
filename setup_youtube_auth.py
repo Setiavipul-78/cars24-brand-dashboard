@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 """
 One-time OAuth setup for YouTube Analytics API.
-Run this once locally to get a refresh token saved to .env.
+Run this once per account to save a refresh token to .env.
+
+Usage:
+  python3 setup_youtube_auth.py              # sets YT_REFRESH_TOKEN (Cars24 AU)
+  python3 setup_youtube_auth.py --account uae  # sets YT_REFRESH_TOKEN_UAE
+  python3 setup_youtube_auth.py --account au   # sets YT_REFRESH_TOKEN_AU (same as default)
 
 Prerequisites:
   1. Go to https://console.cloud.google.com/
@@ -9,17 +14,45 @@ Prerequisites:
   3. OAuth consent screen → External → Add your email as test user
   4. Credentials → Create OAuth client ID → Desktop app → Download JSON
   5. Save as credentials.json in this directory
-  6. Run: python3 setup_youtube_auth.py
 """
 
 import os
+import sys
 import json
+import argparse
 from pathlib import Path
+
+os.environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "1"
 
 CREDS_FILE = Path("credentials.json")
 ENV_FILE = Path(".env")
 
+ACCOUNT_CONFIG = {
+    "au": {
+        "token_key": "YT_REFRESH_TOKEN",
+        "login_hint": "vipul.setia@cars24.com",
+        "label": "Cars24 AU",
+    },
+    "uae": {
+        "token_key": "YT_REFRESH_TOKEN_UAE",
+        "login_hint": None,  # will be set from --email arg or left blank
+        "label": "Cars24 UAE",
+    },
+}
+
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--account", default="au", choices=list(ACCOUNT_CONFIG.keys()),
+                        help="Which account to authenticate (au | uae)")
+    parser.add_argument("--email", default=None,
+                        help="Google account email to pre-fill in browser login")
+    args = parser.parse_args()
+
+    cfg = ACCOUNT_CONFIG[args.account]
+    token_key = cfg["token_key"]
+    login_hint = args.email or cfg["login_hint"]
+    label = cfg["label"]
+
     if not CREDS_FILE.exists():
         print("""
   ✗  credentials.json not found.
@@ -38,7 +71,6 @@ def main():
 
     try:
         from google_auth_oauthlib.flow import InstalledAppFlow
-        from google.oauth2.credentials import Credentials
     except ImportError:
         print("  ! Install: pip install google-auth-oauthlib google-api-python-client")
         return
@@ -46,13 +78,26 @@ def main():
     SCOPES = [
         "https://www.googleapis.com/auth/yt-analytics.readonly",
         "https://www.googleapis.com/auth/youtube.readonly",
+        "https://www.googleapis.com/auth/userinfo.email",
     ]
 
-    print("\n  Opening browser for Google OAuth…")
-    flow = InstalledAppFlow.from_client_secrets_file(str(CREDS_FILE), SCOPES)
-    creds = flow.run_local_server(port=0, open_browser=True)
+    print(f"\n  Opening browser for Google OAuth — {label}")
+    if login_hint:
+        print(f"  Account hint: {login_hint}")
+    print()
 
-    # Extract client ID/secret from credentials.json
+    flow = InstalledAppFlow.from_client_secrets_file(str(CREDS_FILE), SCOPES)
+    server_kwargs = dict(
+        port=0,
+        open_browser=True,
+        authorization_prompt_message='',
+        prompt='select_account',
+    )
+    if login_hint:
+        server_kwargs["login_hint"] = login_hint
+
+    creds = flow.run_local_server(**server_kwargs)
+
     with open(CREDS_FILE) as f:
         c = json.load(f)["installed"]
 
@@ -61,7 +106,8 @@ def main():
     client_secret = c["client_secret"]
 
     print(f"""
-  ✓  Auth successful!
+  ✓  Auth successful for {label}!
+     Token key: {token_key}
      Refresh token: {refresh_token[:30]}…
 """)
 
@@ -75,17 +121,15 @@ def main():
 
     existing["GOOGLE_CLIENT_ID"] = client_id
     existing["GOOGLE_CLIENT_SECRET"] = client_secret
-    existing["YT_REFRESH_TOKEN"] = refresh_token
+    existing[token_key] = refresh_token
 
     with open(ENV_FILE, "w") as f:
         for k, v in existing.items():
             f.write(f"{k}={v}\n")
 
-    print(f"  ✓  .env updated with GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, YT_REFRESH_TOKEN")
-    print("\n  Next steps:")
-    print("    1. Add channel IDs to .env (see .env.example)")
-    print("    2. Add Instagram credentials to .env")
-    print("    3. Run: python3 fetch_social.py")
+    print(f"  ✓  .env updated: {token_key}")
+    print(f"\n  Next steps:")
+    print(f"    python3 fetch_social.py")
 
 if __name__ == "__main__":
     main()

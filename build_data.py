@@ -472,31 +472,109 @@ def build_youtube():
             if "total_videos" in df.columns:
                 snap["videos"] = int(df["total_videos"].iloc[-1])
 
+            # Load extra JSON if available
+            extra_path = DATA / f"youtube_{key}_extra.json"
+            extra = {}
+            if extra_path.exists():
+                try:
+                    with open(extra_path) as ef:
+                        extra = json.load(ef)
+                except Exception as e:
+                    print(f"  ⚠ YouTube {key} extra.json: {e}")
+
             rows = []
-            for _, row in df.iterrows():
+            for i, row in df.iterrows():
+                views = int(row.get("views", 0))
+                wt    = sf(row.get("watch_time_hours"))
+                subs  = int(row.get("subscribers_gained", 0))
+                likes    = int(row.get("likes", 0))
+                comments = int(row.get("comments", 0))
+                shares   = int(row.get("shares", 0))
+                avg_dur  = sf(row.get("avg_view_duration"))
+
+                # avg_view_percent from CSV column if present
+                avg_view_pct = 0
+                if "avg_view_percent" in df.columns:
+                    v = sf(row.get("avg_view_percent"))
+                    if v is not None:
+                        avg_view_pct = v
+
+                # MoM calculations
+                mom_views = None
+                mom_wt    = None
+                mom_subs  = None
+                if i > 0:
+                    prev = df.iloc[i - 1]
+                    pv = int(prev.get("views", 0))
+                    pw = sf(prev.get("watch_time_hours"))
+                    ps = int(prev.get("subscribers_gained", 0))
+                    if pv:
+                        mom_views = round((views - pv) / pv * 100, 1)
+                    if pw and pw != 0 and wt is not None:
+                        mom_wt = round((wt - pw) / abs(pw) * 100, 1)
+                    if ps:
+                        mom_subs = round((subs - ps) / ps * 100, 1)
+
+                # YoY calculations (same month 12 rows back)
+                yoy_views = None
+                yoy_wt    = None
+                yoy_subs  = None
+                if i >= 12:
+                    yoy_row = df.iloc[i - 12]
+                    yv = int(yoy_row.get("views", 0))
+                    yw = sf(yoy_row.get("watch_time_hours"))
+                    ys = int(yoy_row.get("subscribers_gained", 0))
+                    if yv:
+                        yoy_views = round((views - yv) / yv * 100, 1)
+                    if yw and yw != 0 and wt is not None:
+                        yoy_wt = round((wt - yw) / abs(yw) * 100, 1)
+                    if ys:
+                        yoy_subs = round((subs - ys) / ys * 100, 1)
+
+                # Engagement rate
+                engagement_rate = round((likes + comments + shares) / views * 100, 2) if views > 0 else 0
+
+                # avg_view_duration in minutes
+                avg_view_duration_min = round(avg_dur / 60, 1) if avg_dur is not None else None
+
                 r = {
-                    "month":             str(row["month"])[:7],
-                    "label":             mlabel(str(row["month"])[:7]),
-                    "views":             int(row.get("views", 0)),
-                    "watch_time_hours":  sf(row.get("watch_time_hours")),
-                    "avg_view_duration": sf(row.get("avg_view_duration")),
-                    "subscribers_gained": int(row.get("subscribers_gained", 0)),
-                    "subscribers_lost":  int(row.get("subscribers_lost", 0)),
-                    "net_subs":          int(row.get("net_subs", 0)),
-                    "likes":             int(row.get("likes", 0)),
-                    "comments":          int(row.get("comments", 0)),
-                    "shares":            int(row.get("shares", 0)),
-                    "impressions":       int(row.get("impressions", 0)),
-                    "ctr":               sf(row.get("ctr")),
+                    "month":                str(row["month"])[:7],
+                    "label":                mlabel(str(row["month"])[:7]),
+                    "views":                views,
+                    "watch_time_hours":     wt,
+                    "avg_view_duration":    avg_dur,
+                    "avg_view_duration_min": avg_view_duration_min,
+                    "avg_view_percent":     avg_view_pct,
+                    "subscribers_gained":   subs,
+                    "subscribers_lost":     int(row.get("subscribers_lost", 0)),
+                    "net_subs":             int(row.get("net_subs", 0)),
+                    "likes":                likes,
+                    "comments":             comments,
+                    "shares":               shares,
+                    "impressions":          int(row.get("impressions", 0)),
+                    "ctr":                  sf(row.get("ctr")),
+                    "data_source":          str(row.get("data_source", "analytics")),
+                    "mom_views":            mom_views,
+                    "mom_wt":               mom_wt,
+                    "mom_subs":             mom_subs,
+                    "yoy_views":            yoy_views,
+                    "yoy_wt":               yoy_wt,
+                    "yoy_subs":             yoy_subs,
+                    "engagement_rate":      engagement_rate,
                 }
                 rows.append(r)
 
             result[key] = {
-                "channel_name": YT_CHANNEL_NAMES.get(key, key),
-                "snapshot":     snap,
-                "monthly":      rows,
+                "channel_name":  YT_CHANNEL_NAMES.get(key, key),
+                "snapshot":      snap,
+                "monthly":       rows,
+                "geo":           extra.get("geo", []),
+                "demographics":  extra.get("demographics", []),
+                "traffic_sources": extra.get("traffic_sources", []),
+                "devices":       extra.get("devices", []),
+                "top_videos":    extra.get("top_videos", []),
             }
-            print(f"  ✓ YouTube {key}: {len(rows)} months")
+            print(f"  ✓ YouTube {key}: {len(rows)} months | geo:{len(extra.get('geo',[]))} | demo:{len(extra.get('demographics',[]))} | traffic:{len(extra.get('traffic_sources',[]))} | devices:{len(extra.get('devices',[]))}")
         except Exception as e:
             print(f"  ⚠ YouTube {key}: {e}")
     return result
@@ -555,6 +633,189 @@ def build_instagram():
             print(f"  ⚠ Instagram {key}: {e}")
     return result
 
+# ── LinkedIn ──────────────────────────────────────────────────────────────────
+# Expected files in data/:
+#   linkedin_cars24_followers.csv   — from LinkedIn Page → Analytics → Followers → Export
+#   linkedin_cars24_content.csv     — from LinkedIn Page → Analytics → Content → Export
+#   linkedin_cars24_visitors.csv    — from LinkedIn Page → Analytics → Visitors → Export
+#   (same pattern for linkedin_careers_*.csv)
+#
+# LinkedIn export column names vary by locale — we normalise below.
+
+LI_PAGES = {
+    "cars24": "Cars24 India",
+}
+
+def _li_col(df, *candidates):
+    """Return first matching column name (case-insensitive)."""
+    cols_lower = {c.lower(): c for c in df.columns}
+    for cand in candidates:
+        hit = cols_lower.get(cand.lower())
+        if hit:
+            return hit
+    return None
+
+def _li_int(row, *cols):
+    for c in cols:
+        v = row.get(c)
+        if v is not None and str(v).strip() not in ("", "—", "-", "nan"):
+            try: return int(float(str(v).replace(",", "")))
+            except: pass
+    return 0
+
+def _li_float(row, *cols):
+    for c in cols:
+        v = row.get(c)
+        if v is not None and str(v).strip() not in ("", "—", "-", "nan"):
+            try: return round(float(str(v).replace(",", "").replace("%", "")), 4)
+            except: pass
+    return None
+
+def build_linkedin():
+    result = {}
+    for key, name in LI_PAGES.items():
+        fol_p = DATA / f"linkedin_{key}_followers.csv"
+        con_p = DATA / f"linkedin_{key}_content.csv"
+        vis_p = DATA / f"linkedin_{key}_visitors.csv"
+
+        if not fol_p.exists() and not con_p.exists():
+            continue
+
+        page_data = {"page_name": name, "snapshot": {}, "monthly": [], "posts": []}
+
+        # ── Followers CSV ──────────────────────────────────────────────────
+        if fol_p.exists():
+            try:
+                df = pd.read_csv(fol_p, skiprows=2)  # LinkedIn exports have 2 header rows
+                df.columns = [c.strip() for c in df.columns]
+                date_col = _li_col(df, "date", "Date")
+                if date_col:
+                    df[date_col] = pd.to_datetime(df[date_col], errors="coerce")
+                    df = df.dropna(subset=[date_col])
+                    df["_month"] = df[date_col].dt.to_period("M").astype(str)
+
+                    total_col    = _li_col(df, "total followers", "total_followers", "followers (total)")
+                    new_col      = _li_col(df, "new followers", "new_followers", "followers gained")
+                    organic_col  = _li_col(df, "organic followers", "new organic followers")
+
+                    monthly_fol = df.groupby("_month").agg(
+                        total_followers=(total_col, "last") if total_col else ("_month", "count"),
+                        new_followers=(new_col, "sum") if new_col else ("_month", "count"),
+                    ).reset_index()
+
+                    if total_col:
+                        snap_val = int(df[total_col].dropna().iloc[-1]) if not df[total_col].dropna().empty else 0
+                        page_data["snapshot"]["followers"] = snap_val
+
+                    for _, row in monthly_fol.iterrows():
+                        page_data["monthly"].append({
+                            "month": str(row["_month"]),
+                            "label": mlabel(str(row["_month"])),
+                            "followers": _li_int(row, "total_followers"),
+                            "new_followers": _li_int(row, "new_followers"),
+                        })
+                print(f"  ✓ LinkedIn {key} followers: {len(page_data['monthly'])} months")
+            except Exception as e:
+                print(f"  ⚠ LinkedIn {key} followers: {e}")
+
+        # ── Visitors CSV ───────────────────────────────────────────────────
+        if vis_p.exists():
+            try:
+                df = pd.read_csv(vis_p, skiprows=2)
+                df.columns = [c.strip() for c in df.columns]
+                date_col = _li_col(df, "date", "Date")
+                if date_col:
+                    df[date_col] = pd.to_datetime(df[date_col], errors="coerce")
+                    df = df.dropna(subset=[date_col])
+                    df["_month"] = df[date_col].dt.to_period("M").astype(str)
+
+                    pv_col  = _li_col(df, "total page views", "page views (total)", "desktop page views")
+                    uv_col  = _li_col(df, "unique visitors", "desktop unique visitors")
+
+                    monthly_vis = df.groupby("_month").agg(
+                        page_views=(pv_col, "sum") if pv_col else ("_month", "count"),
+                        unique_visitors=(uv_col, "sum") if uv_col else ("_month", "count"),
+                    ).reset_index()
+
+                    # Merge into existing monthly rows
+                    vis_map = {str(r["_month"]): r for _, r in monthly_vis.iterrows()}
+                    for m in page_data["monthly"]:
+                        v = vis_map.get(m["month"], {})
+                        m["page_views"]      = _li_int(v, "page_views")
+                        m["unique_visitors"]  = _li_int(v, "unique_visitors")
+                print(f"  ✓ LinkedIn {key} visitors merged")
+            except Exception as e:
+                print(f"  ⚠ LinkedIn {key} visitors: {e}")
+
+        # ── Content / Posts CSV ────────────────────────────────────────────
+        if con_p.exists():
+            try:
+                df = pd.read_csv(con_p, skiprows=2)
+                df.columns = [c.strip() for c in df.columns]
+                date_col = _li_col(df, "published date", "created date", "date")
+                imp_col  = _li_col(df, "impressions", "Impressions")
+                clk_col  = _li_col(df, "clicks", "Clicks")
+                lk_col   = _li_col(df, "likes", "Likes", "reactions")
+                cmt_col  = _li_col(df, "comments", "Comments")
+                shr_col  = _li_col(df, "shares", "Shares", "reposts")
+                eng_col  = _li_col(df, "engagement rate", "engagement rate (organic)")
+                ttl_col  = _li_col(df, "content title", "post", "title", "update")
+
+                if date_col:
+                    df[date_col] = pd.to_datetime(df[date_col], errors="coerce")
+                    df = df.dropna(subset=[date_col])
+                    df["_month"] = df[date_col].dt.to_period("M").astype(str)
+
+                    # Monthly content aggregates
+                    agg = {"posts": ("_month", "count")}
+                    if imp_col: agg["impressions"] = (imp_col, "sum")
+                    if clk_col: agg["clicks"]      = (clk_col, "sum")
+                    if lk_col:  agg["likes"]       = (lk_col,  "sum")
+                    if cmt_col: agg["comments"]    = (cmt_col, "sum")
+                    if shr_col: agg["shares"]      = (shr_col, "sum")
+
+                    monthly_con = df.groupby("_month").agg(**agg).reset_index()
+                    con_map = {str(r["_month"]): r for _, r in monthly_con.iterrows()}
+                    for m in page_data["monthly"]:
+                        v = con_map.get(m["month"], {})
+                        m["posts"]       = _li_int(v, "posts")
+                        m["impressions"] = _li_int(v, "impressions")
+                        m["clicks"]      = _li_int(v, "clicks")
+                        m["likes"]       = _li_int(v, "likes")
+                        m["comments"]    = _li_int(v, "comments")
+                        m["shares"]      = _li_int(v, "shares")
+                        total_eng = m["likes"] + m["comments"] + m["shares"] + m["clicks"]
+                        m["eng_rate"]    = round(total_eng / m["impressions"] * 100, 2) if m["impressions"] else None
+
+                    # Top posts
+                    post_rows = []
+                    for _, row in df.sort_values(imp_col or "_month", ascending=False).head(50).iterrows():
+                        post_rows.append({
+                            "date":        str(row[date_col])[:10],
+                            "month":       str(row["_month"]),
+                            "title":       str(row[ttl_col])[:120] if ttl_col else "—",
+                            "impressions": _li_int(row, imp_col) if imp_col else 0,
+                            "clicks":      _li_int(row, clk_col) if clk_col else 0,
+                            "likes":       _li_int(row, lk_col)  if lk_col  else 0,
+                            "comments":    _li_int(row, cmt_col) if cmt_col else 0,
+                            "shares":      _li_int(row, shr_col) if shr_col else 0,
+                            "eng_rate":    _li_float(row, eng_col) if eng_col else None,
+                        })
+                    page_data["posts"] = post_rows
+
+                    # Snapshot
+                    if imp_col:
+                        page_data["snapshot"]["total_impressions"] = int(df[imp_col].sum())
+                print(f"  ✓ LinkedIn {key} content: {len(post_rows)} posts")
+            except Exception as e:
+                print(f"  ⚠ LinkedIn {key} content: {e}")
+
+        if page_data["monthly"] or page_data["posts"]:
+            page_data["monthly"].sort(key=lambda x: x["month"])
+            result[key] = page_data
+
+    return result
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     print("Building data.json …")
@@ -570,6 +831,7 @@ if __name__ == "__main__":
     youtube        = build_youtube()
     instagram      = build_instagram()
     influencers    = build_influencers()
+    linkedin       = build_linkedin()
 
     payload = {
         "_meta": {
@@ -589,6 +851,7 @@ if __name__ == "__main__":
         "youtube":            youtube,
         "instagram":          instagram,
         "influencers":        influencers,
+        "linkedin":           linkedin,
     }
 
     with open(OUT, "w") as f:
@@ -597,7 +860,7 @@ if __name__ == "__main__":
     sz = OUT.stat().st_size / 1024
     print(f"\n✅ data.json written — {sz:.0f} KB")
     print(f"   Impressions: {len(monthly)} months | BSOS: {len(bsos_monthly)} months | Cities: {len(bsos_cities)}")
-    print(f"   YouTube: {len(youtube)} channels | Instagram: {len(instagram)} accounts")
+    print(f"   YouTube: {len(youtube)} channels | Instagram: {len(instagram)} accounts | LinkedIn: {len(linkedin)} pages")
     inf_count = influencers.get("kpis", {}).get("total_campaigns", 0)
     print(f"   Influencers: {inf_count} campaigns")
     print(f"   KPIs: {kpis.get('curr_imp_fmt')} impressions · {kpis.get('c24_sos')}% SoS")
