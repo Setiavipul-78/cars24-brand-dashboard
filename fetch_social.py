@@ -469,13 +469,13 @@ IG_ACCOUNTS = {
         "handle":       "@teambhp",
     },
     "cars24_au": {
-        "user_id":      os.getenv("IG_USER_ID_AU"),
-        "access_token": os.getenv("IG_ACCESS_TOKEN_AU") or os.getenv("IG_ACCESS_TOKEN"),
-        "handle":       "@cars24australia",
+        "user_id":      os.getenv("IG_USER_ID_CARS24_AU"),
+        "access_token": os.getenv("IG_ACCESS_TOKEN_CARS24_AU"),
+        "handle":       "@cars24au",
     },
     "cars24_uae": {
-        "user_id":      os.getenv("IG_USER_ID_UAE"),
-        "access_token": os.getenv("IG_ACCESS_TOKEN_UAE") or os.getenv("IG_ACCESS_TOKEN"),
+        "user_id":      os.getenv("IG_USER_ID_CARS24_UAE"),
+        "access_token": os.getenv("IG_ACCESS_TOKEN_CARS24_UAE"),
         "handle":       "@cars24uae",
     },
 }
