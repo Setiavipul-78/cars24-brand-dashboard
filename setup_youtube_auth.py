@@ -35,8 +35,13 @@ ACCOUNT_CONFIG = {
     },
     "uae": {
         "token_key": "YT_REFRESH_TOKEN_UAE",
-        "login_hint": None,  # will be set from --email arg or left blank
+        "login_hint": "cars24.uaesocial@cars24.com",
         "label": "Cars24 UAE",
+    },
+    "india": {
+        "token_key": "YT_REFRESH_TOKEN_INDIA",
+        "login_hint": "cars24india1@gmail.com",
+        "label": "Cars24 India",
     },
 }
 
