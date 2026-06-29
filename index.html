@@ -777,18 +777,16 @@ function renderYT(containerId,key,channelName){
   // Build HTML skeleton
   el.innerHTML=`
     ${isPublic?`<div style="background:#EEF0FF;border:1px solid #C7C1FF;border-radius:8px;padding:10px 14px;font-size:12px;color:#4736FE;margin-bottom:14px">ℹ️ Video-level public data — views = cumulative views of videos published that month, not monthly channel traffic.</div>`:''}
-    <div class="inf-period-bar" style="gap:12px">
-      <span class="fl">PERIOD</span>
-      <div style="position:relative;display:inline-block">
-        <select id="yt-sel-${key}" style="appearance:none;-webkit-appearance:none;background:var(--card);border:2px solid var(--blue);border-radius:8px;padding:7px 36px 7px 14px;font:700 13px var(--font);color:var(--ink);cursor:pointer;min-width:160px;outline:none">
+    <div class="card">
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+        <div><span class="kicker">📊 Key Metrics</span><span class="title">Performance Overview — ${channelName}</span></div>
+        <select class="inf-sel" id="yt-kpi-sel-${key}">
           <option value="all">All Time</option>
-          ${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}
+          ${monthsDesc.map(r=>`<option value="m:${r.month}"${r.month===monthsDesc[0]?.month?' selected':''}>${r.label}</option>`).join('')}
         </select>
-        <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--blue);font-size:10px">▼</span>
       </div>
+      <div class="inf-kpi-strip" style="grid-template-columns:repeat(7,1fr)" id="yt-kpis-${key}"></div>
     </div>
-
-    <div class="inf-kpi-strip" style="grid-template-columns:repeat(7,1fr)" id="yt-kpis-${key}"></div>
 
     <div class="card">
       <div class="sh"><span class="kicker">📈 Monthly Trend</span><span class="title">Views Over Time — ${channelName}</span><span class="desc">Monthly views (bars) and net subscriber growth (line, right axis).</span></div>
@@ -796,7 +794,13 @@ function renderYT(containerId,key,channelName){
     </div>
 
     <div class="card">
-      <div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance</span><span class="desc">Views, watch time, retention, engagement and subscriber growth per month. MoM% and YoY% highlighted.</span></div>
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+        <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance</span><span class="desc">Views, watch time, retention, engagement and subscriber growth per month. MoM% and YoY% highlighted.</span></div>
+        <select class="inf-sel" id="yt-tbl-sel-${key}">
+          <option value="all" selected>All Time</option>
+          ${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}
+        </select>
+      </div>
       <div class="tw" id="yt-mom-tbl-${key}"></div>
     </div>
 
@@ -929,12 +933,11 @@ function renderYT(containerId,key,channelName){
     document.getElementById(`yt-mom-tbl-${key}`).innerHTML=rows.length?tbl(th,tbRows):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
   }
 
-  // Period filter — controls KPI tiles + monthly table, defaults to latest month
-  const sel=document.getElementById(`yt-sel-${key}`);
-  sel.value=`m:${monthsDesc[0]?.month||''}`;
-  sel.addEventListener('change',e=>{renderKPIs(e.target.value);renderYTTable(e.target.value);});
-  renderKPIs(sel.value);
-  renderYTTable(sel.value);
+  // Independent period filters per section
+  document.getElementById(`yt-kpi-sel-${key}`).addEventListener('change',e=>renderKPIs(e.target.value));
+  renderKPIs(`m:${monthsDesc[0]?.month||''}`);
+  document.getElementById(`yt-tbl-sel-${key}`).addEventListener('change',e=>renderYTTable(e.target.value));
+  renderYTTable('all');
 
   // ── Trend chart ──
   const ck=`yt_${key}_trend`;if(charts[ck])charts[ck].destroy();
@@ -1017,18 +1020,16 @@ function renderIG(containerId,key,handleName){
   const typeCount={};posts.forEach(p=>{const t=TYPE_LABEL[p.type]||p.type;typeCount[t]=(typeCount[t]||0)+1;});
 
   el.innerHTML=`
-    <div class="inf-period-bar" style="gap:12px">
-      <span class="fl">PERIOD</span>
-      <div style="position:relative;display:inline-block">
-        <select id="ig-sel-${key}" style="appearance:none;-webkit-appearance:none;background:var(--card);border:2px solid var(--blue);border-radius:8px;padding:7px 36px 7px 14px;font:700 13px var(--font);color:var(--ink);cursor:pointer;min-width:160px;outline:none">
+    <div class="card">
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+        <div><span class="kicker">📊 Key Metrics</span><span class="title">Performance Overview — ${handleName}</span></div>
+        <select class="inf-sel" id="ig-kpi-sel-${key}">
           <option value="all">All Time</option>
-          ${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}
+          ${monthsDesc.map(r=>`<option value="m:${r.month}"${r.month===latestM?' selected':''}>${r.label}</option>`).join('')}
         </select>
-        <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--blue);font-size:10px">▼</span>
       </div>
+      <div class="inf-kpi-strip" id="ig-kpis-${key}" style="grid-template-columns:repeat(7,1fr)"></div>
     </div>
-
-    <div class="inf-kpi-strip" id="ig-kpis-${key}" style="grid-template-columns:repeat(7,1fr)"></div>
 
     <div class="card">
       <div class="sh"><span class="kicker">📈 Monthly Trend</span><span class="title">Reach Over Time — ${handleName}</span><span class="desc">Monthly reach (bars, left) and total interactions (line, right). All months shown.</span></div>
@@ -1036,7 +1037,13 @@ function renderIG(containerId,key,handleName){
     </div>
 
     <div class="card">
-      <div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance</span><span class="desc">Reach, profile views, website clicks, engagement and interactions with MoM change.</span></div>
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+        <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance</span><span class="desc">Reach, profile views, website clicks, engagement and interactions with MoM change.</span></div>
+        <select class="inf-sel" id="ig-tbl-sel-${key}">
+          <option value="all" selected>All Time</option>
+          ${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}
+        </select>
+      </div>
       <div class="tw" id="ig-mom-tbl-${key}"></div>
     </div>
 
@@ -1097,9 +1104,6 @@ function renderIG(containerId,key,handleName){
       <div class="ink red"><span class="ink-icon">❤️</span><div class="ink-lbl">Likes</div><div class="ink-val">${numFmt(row.likes)}</div><div class="ink-sub">${row.label}</div></div>
       <div class="ink"><span class="ink-icon">⚡</span><div class="ink-lbl">Eng Rate</div><div class="ink-val">${engRate.toFixed(2)}%</div><div class="ink-sub">${badge(momE)} interactions MoM</div></div>`;
   }
-  const sel=document.getElementById(`ig-sel-${key}`);
-  sel.value=`m:${latestM}`;
-
   // ── Monthly table (period-filtered) ──
   function renderIGTable(period){
     const filtered=period==='all'?monthsDesc:monthly.filter(r=>r.month===period.replace('m:','')).reverse();
@@ -1125,16 +1129,18 @@ function renderIG(containerId,key,handleName){
     document.getElementById(`ig-mom-tbl-${key}`).innerHTML=filtered.length?tbl(th,rows):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
   }
 
-  sel.addEventListener('change',e=>{renderIGKPIs(e.target.value);renderIGTable(e.target.value);});
+  // Independent period filters per section
+  document.getElementById(`ig-kpi-sel-${key}`).addEventListener('change',e=>renderIGKPIs(e.target.value));
   renderIGKPIs(`m:${latestM}`);
+  document.getElementById(`ig-tbl-sel-${key}`).addEventListener('change',e=>renderIGTable(e.target.value));
 
   // ── Trend chart ──
   const ck=`ig_${key}_trend`;if(charts[ck])charts[ck].destroy();
   const tc=document.getElementById(`ig-trend-${key}`);
   if(tc) charts[ck]=new Chart(tc.getContext('2d'),{type:'bar',data:{labels:monthly.map(r=>r.label),datasets:[{type:'bar',label:'Reach',data:monthly.map(r=>r.reach),backgroundColor:'rgba(233,30,140,.18)',yAxisID:'y',borderRadius:5},{type:'line',label:'Total Interactions',data:monthly.map(r=>r.total_interactions||0),borderColor:'#E91E8C',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Reach'},ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'Interactions'},ticks:{callback:v=>numFmt(v)},grid:{display:false}},x:{grid:{display:false}}}}});
 
-  // ── Monthly table (rendered by renderIGTable, called via period filter) ──
-  renderIGTable(`m:${latestM}`);
+  // ── Monthly table ──
+  renderIGTable('all');
 
   // ── Top posts tables ──
   if(posts.length){
@@ -1175,21 +1181,28 @@ function renderLI(containerId,key,pageName){
   const liLatest=liDesc[0]?.month||liDesc[0]?.label||'';
 
   el.innerHTML=`
-    <div class="inf-period-bar" style="gap:12px">
-      <span class="fl">PERIOD</span>
-      <div style="position:relative;display:inline-block">
-        <select id="li-sel-${key}" style="appearance:none;-webkit-appearance:none;background:var(--card);border:2px solid var(--blue);border-radius:8px;padding:7px 36px 7px 14px;font:700 13px var(--font);color:var(--ink);cursor:pointer;min-width:160px;outline:none">
+    <div class="card">
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+        <div><span class="kicker">📊 Key Metrics</span><span class="title">Performance Overview — ${pageName}</span></div>
+        <select class="inf-sel" id="li-kpi-sel-${key}">
           <option value="all">All Time</option>
           ${liDesc.map((r,i)=>`<option value="i:${liMonthly.length-1-i}"${i===0?' selected':''}>${r.label}</option>`).join('')}
         </select>
-        <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--blue);font-size:10px">▼</span>
       </div>
+      <div class="inf-kpi-strip" id="li-kpis-${key}" style="grid-template-columns:repeat(6,1fr)"></div>
     </div>
 
-    <div class="inf-kpi-strip" id="li-kpis-${key}" style="grid-template-columns:repeat(6,1fr)"></div>
-
     <div class="card"><div class="sh"><span class="kicker">📈 Monthly Trend</span><span class="title">Impressions & Follower Growth — ${pageName}</span><span class="desc">Bars = impressions (left). Line = new followers (right).</span></div><div class="cw tall"><canvas id="li-chart-${key}"></canvas></div></div>
-    <div class="card"><div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Metrics — ${pageName}</span></div><div class="tw" id="li-tbl-${key}"></div></div>
+    <div class="card">
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+        <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Metrics — ${pageName}</span></div>
+        <select class="inf-sel" id="li-tbl-sel-${key}">
+          <option value="all" selected>All Time</option>
+          ${liDesc.map((r,i)=>`<option value="i:${liMonthly.length-1-i}">${r.label}</option>`).join('')}
+        </select>
+      </div>
+      <div class="tw" id="li-tbl-${key}"></div>
+    </div>
     ${li.posts&&li.posts.length?`<div class="card"><div class="sh"><span class="kicker">🔝 Top Posts</span><span class="title">Best Performing Content — ${pageName}</span><span class="desc">Sorted by impressions.</span></div><div class="tw" id="li-posts-${key}"></div></div>`:''}`;
 
   function renderLIKPIs(val){
@@ -1235,10 +1248,10 @@ function renderLI(containerId,key,pageName){
     document.getElementById(`li-tbl-${key}`).innerHTML=rows.length?tbl(th,tbRows):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
   }
 
-  const liSel=document.getElementById(`li-sel-${key}`);
-  liSel.addEventListener('change',e=>{renderLIKPIs(e.target.value);renderLITable(e.target.value);});
+  document.getElementById(`li-kpi-sel-${key}`).addEventListener('change',e=>renderLIKPIs(e.target.value));
   renderLIKPIs('i:'+(liMonthly.length-1));
-  renderLITable('i:'+(liMonthly.length-1));
+  document.getElementById(`li-tbl-sel-${key}`).addEventListener('change',e=>renderLITable(e.target.value));
+  renderLITable('all');
 
   // Trend chart (always all-time)
   const liCk=`li_${key}`;if(charts[liCk])charts[liCk].destroy();
@@ -1280,38 +1293,42 @@ function initInf(){
       <a class="inf-ext-link" href="https://cars24-influencer-dashboard.pages.dev/" target="_blank">Open Full Dashboard ↗</a>
     </div>
 
-    <!-- Period filter → controls KPI tiles only -->
-    <div class="inf-period-bar" style="gap:12px">
-      <span class="fl">PERIOD</span>
-      <div style="position:relative;display:inline-block">
-        <select id="inf-sel-period" style="appearance:none;-webkit-appearance:none;background:var(--card);border:2px solid var(--blue);border-radius:8px;padding:7px 36px 7px 14px;font:700 13px var(--font);color:var(--ink);cursor:pointer;min-width:160px;outline:none">
+    <div class="card">
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+        <div><span class="kicker">📊 Key Metrics</span><span class="title">Influencer Performance Overview</span></div>
+        <select class="inf-sel" id="inf-kpi-sel">
           <option value="all">All Time</option>
-          <option value="mom">Month on Month</option>
           ${monthsDesc.map(mo=>`<option value="mo:${mo}"${mo===latestMO?' selected':''}>${moLabel[mo]||mo}</option>`).join('')}
         </select>
-        <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--blue);font-size:10px">▼</span>
       </div>
+      <div class="inf-kpi-strip" id="inf-kpis"></div>
     </div>
 
-    <!-- KPI tiles (period-filtered) -->
-    <div class="inf-kpi-strip" id="inf-kpis"></div>
-
-    <!-- Trend chart — always all-time -->
     <div class="card">
       <div class="sh"><span class="kicker">📈 Monthly trend</span><span class="title">Views Over Time</span><span class="desc">Total influencer video views per month across all campaigns.</span></div>
       <div class="cw tall"><canvas id="inf-chart-trend"></canvas></div>
     </div>
 
-    <!-- MoM table — always all-time -->
     <div class="card">
-      <div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance Table</span><span class="desc">Views, likes, comments, spend and blended CPV per month.</span></div>
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+        <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance Table</span><span class="desc">Views, likes, comments, spend and blended CPV per month.</span></div>
+        <select class="inf-sel" id="inf-tbl-sel">
+          <option value="all" selected>All Time</option>
+          ${monthsDesc.map(mo=>`<option value="mo:${mo}">${moLabel[mo]||mo}</option>`).join('')}
+        </select>
+      </div>
       <div class="tw" id="inf-mom-tbl"></div>
     </div>
 
-    <!-- Top 10 by views + Blended CPV chart — always all-time -->
     <div class="g2" style="margin-bottom:0">
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">🏆 Top creators</span><span class="title">Top 10 by Views</span><span class="desc">Highest-performing influencers by views across all time.</span></div>
+        <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div><span class="kicker">🏆 Top creators</span><span class="title">Top 10 by Views</span><span class="desc">Highest-performing influencers in selected period.</span></div>
+          <select class="inf-sel" id="inf-topv-sel">
+            <option value="all" selected>All Time</option>
+            ${monthsDesc.map(mo=>`<option value="mo:${mo}">${moLabel[mo]||mo}</option>`).join('')}
+          </select>
+        </div>
         <div class="tw" id="inf-top-views-tbl"></div>
       </div>
       <div class="card" style="margin:0">
@@ -1320,14 +1337,25 @@ function initInf(){
       </div>
     </div>
 
-    <!-- Engagement + Lowest CPV — always all-time -->
     <div class="g2" style="margin-top:14px">
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">⚡ Best engagement</span><span class="title">Top 10 by Engagement Rate</span><span class="desc">Highest (likes + comments + saves) ÷ views.</span></div>
+        <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div><span class="kicker">⚡ Best engagement</span><span class="title">Top 10 by Engagement Rate</span><span class="desc">Highest (likes + comments + saves) ÷ views in period.</span></div>
+          <select class="inf-sel" id="inf-tope-sel">
+            <option value="all" selected>All Time</option>
+            ${monthsDesc.map(mo=>`<option value="mo:${mo}">${moLabel[mo]||mo}</option>`).join('')}
+          </select>
+        </div>
         <div class="tw" id="inf-top-eng-tbl"></div>
       </div>
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">💰 Lowest CPV</span><span class="title">Top 10 Most Efficient Creators</span><span class="desc">Lowest blended CPV (min 5K views).</span></div>
+        <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div><span class="kicker">💰 Lowest CPV</span><span class="title">Top 10 Most Efficient Creators</span><span class="desc">Lowest blended CPV (min 5K views) in period.</span></div>
+          <select class="inf-sel" id="inf-topl-sel">
+            <option value="all" selected>All Time</option>
+            ${monthsDesc.map(mo=>`<option value="mo:${mo}">${moLabel[mo]||mo}</option>`).join('')}
+          </select>
+        </div>
         <div class="tw" id="inf-low-cpv-tbl"></div>
       </div>
     </div>`;
@@ -1380,77 +1408,51 @@ function initInf(){
   }
 
   // ── All period-aware tables ──
-  function renderInfTables(val){
-    let rows,mons;
-    if(val==='all'||val==='mom'){rows=allRows;mons=allMonthly;}
-    else{const mo=parseInt(val.replace('mo:',''),10);rows=allRows.filter(r=>r.monthOrder===mo);mons=allMonthly.filter(m=>m.monthOrder===mo);}
+  function _infRows(val){return(val==='all'||val==='mom')?allRows:allRows.filter(r=>r.monthOrder===parseInt(val.replace('mo:',''),10));}
+  function _infMons(val){return(val==='all'||val==='mom')?allMonthly:allMonthly.filter(m=>m.monthOrder===parseInt(val.replace('mo:',''),10));}
 
-    // MoM table
+  function renderInfMomTable(val){
+    const rows=_infRows(val),mons=[..._infMons(val)].reverse();
     const mth=`<th>Month</th><th class="nr ch">Live Videos</th><th class="nr ch">Total Views</th><th class="nr">Likes</th><th class="nr">Comments</th><th class="nr ch">Total Spend</th><th class="nr ch">Blended CPV</th><th class="nr">Avg Eng %</th>`;
-    const sortedMons=[...mons].reverse();
-    const momRows=sortedMons.map((m,i)=>{
-      const mRows=rows.filter(r=>r.monthOrder===m.monthOrder);
-      const mViews=mRows.reduce((s,r)=>s+(r.views||0),0);
-      const mLikes=mRows.reduce((s,r)=>s+(r.likes||0),0);
-      const mCmts =mRows.reduce((s,r)=>s+(r.comments||0),0);
-      const mCost =mRows.reduce((s,r)=>s+(r.cost||0),0);
-      const mBcpv =mViews>0?(mCost/mViews):null;
-      return`<tr class="${i===0?'lat':''}">
-        <td><strong>${m.month}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td>
-        <td class="nr cc"><strong>${m.campaigns}</strong></td>
-        <td class="nr cc"><strong>${fv(mViews)}</strong></td>
-        <td class="nr">${fv(mLikes)}</td>
-        <td class="nr">${fv(mCmts)}</td>
-        <td class="nr cc">${fc(mCost)}</td>
-        <td class="nr cc">${fcpv(mBcpv)}</td>
-        <td class="nr">${m.avg_eng!=null?m.avg_eng.toFixed(2)+'%':'—'}</td>
-      </tr>`;
+    const tbRows=mons.map((m,i)=>{
+      const mR=rows.filter(r=>r.monthOrder===m.monthOrder);
+      const mv=mR.reduce((s,r)=>s+(r.views||0),0),mc=mR.reduce((s,r)=>s+(r.cost||0),0);
+      return`<tr class="${i===0?'lat':''}"><td><strong>${m.month}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td class="nr cc"><strong>${m.campaigns}</strong></td><td class="nr cc"><strong>${fv(mv)}</strong></td><td class="nr">${fv(mR.reduce((s,r)=>s+(r.likes||0),0))}</td><td class="nr">${fv(mR.reduce((s,r)=>s+(r.comments||0),0))}</td><td class="nr cc">${fc(mc)}</td><td class="nr cc">${mv>0?fcpv(mc/mv):'—'}</td><td class="nr">${m.avg_eng!=null?m.avg_eng.toFixed(2)+'%':'—'}</td></tr>`;
     }).join('');
-    document.getElementById('inf-mom-tbl').innerHTML=sortedMons.length?tbl(mth,momRows):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
-
-    // Top 10 by Views
-    const top10V=[...rows].sort((a,b)=>(b.views||0)-(a.views||0)).slice(0,10);
-    const vth=`<th>#</th><th>Creator</th><th class="nr ch">Views</th><th class="nr">Spend</th><th class="nr ch">CPV</th><th class="nr">Eng %</th>`;
-    document.getElementById('inf-top-views-tbl').innerHTML=top10V.length?tbl(vth,top10V.map((r,i)=>`<tr class="${i===0?'lat':''}">
-      <td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td>
-      <td><a href="${r.link||r.videoLink||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.name}</a><br><span style="font-size:11px;color:var(--grey)">${r.liveMonth||''}</span></td>
-      <td class="nr cc"><strong>${fv(r.views)}</strong></td>
-      <td class="nr">${fc(r.cost)}</td>
-      <td class="nr cc">${fcpv(r.cpv)}</td>
-      <td class="nr">${r.engRate!=null?r.engRate.toFixed(2)+'%':'—'}</td>
-    </tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
-
-    // Top 10 by Engagement Rate
-    const top10E=[...rows].filter(r=>r.engRate>0).sort((a,b)=>(b.engRate||0)-(a.engRate||0)).slice(0,10);
-    const eth=`<th>#</th><th>Creator</th><th class="nr ch">Eng Rate</th><th class="nr">Views</th><th class="nr">Likes</th><th class="nr">Comments</th>`;
-    document.getElementById('inf-top-eng-tbl').innerHTML=top10E.length?tbl(eth,top10E.map((r,i)=>`<tr class="${i===0?'lat':''}">
-      <td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td>
-      <td><a href="${r.link||r.videoLink||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.name}</a><br><span style="font-size:11px;color:var(--grey)">${r.liveMonth||''}</span></td>
-      <td class="nr cc"><strong>${r.engRate!=null?r.engRate.toFixed(2)+'%':'—'}</strong></td>
-      <td class="nr">${fv(r.views)}</td>
-      <td class="nr">${fv(r.likes)}</td>
-      <td class="nr">${fv(r.comments)}</td>
-    </tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
-
-    // Top 10 Lowest CPV
-    const top10L=[...rows].filter(r=>r.cpv>0&&r.views>=5000).sort((a,b)=>(a.cpv||999)-(b.cpv||999)).slice(0,10);
-    const lth=`<th>#</th><th>Creator</th><th class="nr ch">CPV</th><th class="nr">Views</th><th class="nr">Spend</th><th class="nr">Eng %</th>`;
-    document.getElementById('inf-low-cpv-tbl').innerHTML=top10L.length?tbl(lth,top10L.map((r,i)=>`<tr class="${i===0?'lat':''}">
-      <td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td>
-      <td><a href="${r.link||r.videoLink||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.name}</a><br><span style="font-size:11px;color:var(--grey)">${r.liveMonth||''}</span></td>
-      <td class="nr cc"><strong style="color:#22C55E">${fcpv(r.cpv)}</strong></td>
-      <td class="nr">${fv(r.views)}</td>
-      <td class="nr">${fc(r.cost)}</td>
-      <td class="nr">${r.engRate!=null?r.engRate.toFixed(2)+'%':'—'}</td>
-    </tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No campaigns with ≥5K views in selected period.</p>';
+    document.getElementById('inf-mom-tbl').innerHTML=mons.length?tbl(mth,tbRows):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
   }
 
-  // Wire dropdown → KPIs + all tables
-  document.getElementById('inf-sel-period').addEventListener('change',function(){renderKPIs(this.value);renderInfTables(this.value);});
+  function renderInfTopViews(val){
+    const rows=_infRows(val);
+    const top=[...rows].sort((a,b)=>(b.views||0)-(a.views||0)).slice(0,10);
+    const th=`<th>#</th><th>Creator</th><th class="nr ch">Views</th><th class="nr">Spend</th><th class="nr ch">CPV</th><th class="nr">Eng %</th>`;
+    document.getElementById('inf-top-views-tbl').innerHTML=top.length?tbl(th,top.map((r,i)=>`<tr class="${i===0?'lat':''}"><td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td><td><a href="${r.link||r.videoLink||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.name}</a><br><span style="font-size:11px;color:var(--grey)">${r.liveMonth||''}</span></td><td class="nr cc"><strong>${fv(r.views)}</strong></td><td class="nr">${fc(r.cost)}</td><td class="nr cc">${fcpv(r.cpv)}</td><td class="nr">${r.engRate!=null?r.engRate.toFixed(2)+'%':'—'}</td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
+  }
 
-  // Init: default to latest month
+  function renderInfTopEng(val){
+    const rows=_infRows(val).filter(r=>r.engRate>0).sort((a,b)=>(b.engRate||0)-(a.engRate||0)).slice(0,10);
+    const th=`<th>#</th><th>Creator</th><th class="nr ch">Eng Rate</th><th class="nr">Views</th><th class="nr">Likes</th><th class="nr">Comments</th>`;
+    document.getElementById('inf-top-eng-tbl').innerHTML=rows.length?tbl(th,rows.map((r,i)=>`<tr class="${i===0?'lat':''}"><td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td><td><a href="${r.link||r.videoLink||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.name}</a><br><span style="font-size:11px;color:var(--grey)">${r.liveMonth||''}</span></td><td class="nr cc"><strong>${r.engRate!=null?r.engRate.toFixed(2)+'%':'—'}</strong></td><td class="nr">${fv(r.views)}</td><td class="nr">${fv(r.likes)}</td><td class="nr">${fv(r.comments)}</td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
+  }
+
+  function renderInfLowCPV(val){
+    const rows=_infRows(val).filter(r=>r.cpv>0&&r.views>=5000).sort((a,b)=>(a.cpv||999)-(b.cpv||999)).slice(0,10);
+    const th=`<th>#</th><th>Creator</th><th class="nr ch">CPV</th><th class="nr">Views</th><th class="nr">Spend</th><th class="nr">Eng %</th>`;
+    document.getElementById('inf-low-cpv-tbl').innerHTML=rows.length?tbl(th,rows.map((r,i)=>`<tr class="${i===0?'lat':''}"><td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td><td><a href="${r.link||r.videoLink||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.name}</a><br><span style="font-size:11px;color:var(--grey)">${r.liveMonth||''}</span></td><td class="nr cc"><strong style="color:#22C55E">${fcpv(r.cpv)}</strong></td><td class="nr">${fv(r.views)}</td><td class="nr">${fc(r.cost)}</td><td class="nr">${r.engRate!=null?r.engRate.toFixed(2)+'%':'—'}</td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No campaigns with ≥5K views in period.</p>';
+  }
+
+  // Independent period filters per section
+  document.getElementById('inf-kpi-sel').addEventListener('change',function(){renderKPIs(this.value);});
+  document.getElementById('inf-tbl-sel').addEventListener('change',function(){renderInfMomTable(this.value);});
+  document.getElementById('inf-topv-sel').addEventListener('change',function(){renderInfTopViews(this.value);});
+  document.getElementById('inf-tope-sel').addEventListener('change',function(){renderInfTopEng(this.value);});
+  document.getElementById('inf-topl-sel').addEventListener('change',function(){renderInfLowCPV(this.value);});
+
   renderKPIs('mo:'+latestMO);
-  renderInfTables('mo:'+latestMO);
+  renderInfMomTable('all');
+  renderInfTopViews('all');
+  renderInfTopEng('all');
+  renderInfLowCPV('all');
   renderInfCharts();
 }
 
