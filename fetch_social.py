@@ -616,7 +616,9 @@ def fetch_all_instagram():
 LI_API = "https://api.linkedin.com/v2"
 
 LI_ORGS = {
-    "cars24": os.getenv("LI_ORG_ID_CARS24", ""),
+    "cars24":        os.getenv("LI_ORG_ID_CARS24", ""),
+    "cars24_arabia": os.getenv("LI_ORG_ID_CARS24_ARABIA", ""),
+    "cars24_au":     os.getenv("LI_ORG_ID_CARS24_AU", ""),
 }
 
 def _li_headers():

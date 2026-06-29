@@ -642,7 +642,9 @@ def build_instagram():
 # LinkedIn export column names vary by locale — we normalise below.
 
 LI_PAGES = {
-    "cars24": "Cars24 India",
+    "cars24":         "Cars24 India",
+    "cars24_arabia":  "Cars24 Arabia",
+    "cars24_au":      "Cars24 Australia",
 }
 
 def _li_col(df, *candidates):
