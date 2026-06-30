@@ -579,7 +579,11 @@ let D=null;
 const charts={},inited={};
 
 function initTabs(){
-  document.querySelectorAll('[data-seg]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-seg]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.country').forEach(p=>p.classList.toggle('active',p.id==='country-'+b.dataset.seg));}));
+  document.querySelectorAll('[data-seg]').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('[data-seg]').forEach(x=>x.classList.toggle('active',x===b));
+    document.querySelectorAll('.country').forEach(p=>p.classList.toggle('active',p.id==='country-'+b.dataset.seg));
+    requestAnimationFrame(()=>Object.values(charts).forEach(c=>{try{c.resize();}catch(e){}}));
+  }));
   document.querySelectorAll('.tabs .tab').forEach(btn=>btn.addEventListener('click',()=>activateTab(btn)));
 }
 function activateTab(btn){
@@ -590,6 +594,7 @@ function activateTab(btn){
   if(host)host.querySelectorAll(':scope>.tabpane').forEach(p=>p.classList.toggle('active',p.id===btn.dataset.target));
   const key=btn.dataset.lazy;
   if(key&&!inited[key]){lazyInit[key]?.();inited[key]=true;}
+  requestAnimationFrame(()=>Object.values(charts).forEach(c=>{try{c.resize();}catch(e){}}));
 }
 
 function renderOv(){
