@@ -56,7 +56,6 @@ jobs:
           IG_USER_ID_CARS24_UAE:           ${{ secrets.IG_USER_ID_CARS24_UAE }}
           IG_ACCESS_TOKEN_CARS24_UAE:      ${{ secrets.IG_ACCESS_TOKEN_CARS24_UAE }}
           GSC_REFRESH_TOKEN:               ${{ secrets.GSC_REFRESH_TOKEN }}
-          SHEETS_REFRESH_TOKEN:            ${{ secrets.SHEETS_REFRESH_TOKEN }}
         run: python3 fetch_social.py
 
       - name: Build data.json
