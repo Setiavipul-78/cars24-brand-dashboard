@@ -1764,7 +1764,7 @@ async function initUAEInf(){
   renderUAEStatic();
 }
 
-const lazyInit={kw:initTab2,bsos:initTab3,gi:initTab4,impsos:initTab5,inf:initInf,yt:initYT,ig:initIG,li:initLI,'uae-inf':initUAEInf,'au-ig':()=>renderIG('igc-au','cars24_au','Cars24 Australia'),'uae-ig':()=>renderIG('igc-uae','cars24_uae','Cars24 UAE'),'yt-malayalam2':()=>{const el=document.getElementById('ytc-malayalam2');if(el)el.innerHTML=`<div class="ph"><div class="ph-mark">📺</div><div class="ph-title">Cars24 Malayalam</div><div class="ph-body">Share the Cars24 Malayalam YouTube channel URL to complete integration.</div></div>`}};
+const lazyInit={kw:initTab2,bsos:initTab3,gi:initTab4,impsos:initTab5,inf:initInf,yt:initYT,ig:initIG,li:initLI,'uae-inf':initUAEInf,'au-ig':()=>renderIG('igc-au','cars24_au','Cars24 Australia'),'uae-ig':()=>renderIG('igc-uae','cars24_uae','Cars24 UAE'),'yt-malayalam2':()=>renderYT('ytc-malayalam2','cars24_malayalam2','Cars24 Malayalam')};
 
 async function main(){
   try{

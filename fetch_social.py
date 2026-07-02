@@ -49,21 +49,23 @@ def write_csv(path: Path, rows: list[dict]) -> None:
 
 # ── YouTube Analytics API ─────────────────────────────────────────────────────
 YT_CHANNELS = {
-    "cars24_india":     os.getenv("YT_CHANNEL_ID_CARS24_INDIA"),
-    "teambhp":          os.getenv("YT_CHANNEL_ID_TEAMBHP"),
-    "cars24_insider":   os.getenv("YT_CHANNEL_ID_INSIDER"),
-    "cars24_malayalam": os.getenv("YT_CHANNEL_ID_CARS24_MALAYALAM"),
-    "cars24_au":        os.getenv("YT_CHANNEL_ID_AU"),
-    "cars24_uae":       os.getenv("YT_CHANNEL_ID_UAE"),
+    "cars24_india":      os.getenv("YT_CHANNEL_ID_CARS24_INDIA"),
+    "teambhp":           os.getenv("YT_CHANNEL_ID_TEAMBHP"),
+    "cars24_insider":    os.getenv("YT_CHANNEL_ID_INSIDER"),
+    "cars24_malayalam":  os.getenv("YT_CHANNEL_ID_CARS24_MALAYALAM"),   # Tamil
+    "cars24_malayalam2": os.getenv("YT_CHANNEL_ID_CARS24_MALAYALAM2"),  # Malayalam
+    "cars24_au":         os.getenv("YT_CHANNEL_ID_AU"),
+    "cars24_uae":        os.getenv("YT_CHANNEL_ID_UAE"),
 }
 
 # Per-channel token env var overrides (key → env var name for refresh token)
 YT_TOKEN_KEYS = {
-    "cars24_uae":      "YT_REFRESH_TOKEN_UAE",
-    "cars24_india":    "YT_REFRESH_TOKEN_INDIA",
-    "teambhp":         "YT_REFRESH_TOKEN_TEAMBHP",
-    "cars24_insider":  "YT_REFRESH_TOKEN_INSIDER",
-    "cars24_malayalam":"YT_REFRESH_TOKEN_MALAYALAM",
+    "cars24_uae":       "YT_REFRESH_TOKEN_UAE",
+    "cars24_india":     "YT_REFRESH_TOKEN_INDIA",
+    "teambhp":          "YT_REFRESH_TOKEN_TEAMBHP",
+    "cars24_insider":   "YT_REFRESH_TOKEN_INSIDER",
+    "cars24_malayalam": "YT_REFRESH_TOKEN_MALAYALAM",   # Tamil — vipul.setia@cars24.com
+    "cars24_malayalam2":"YT_REFRESH_TOKEN_MALAYALAM",   # Malayalam — same owner account
 }
 
 def get_yt_credentials(channel_key: str = None):

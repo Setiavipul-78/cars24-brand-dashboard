@@ -53,6 +53,11 @@ ACCOUNT_CONFIG = {
         "login_hint": "Cars24.tamil@cars24.com",
         "label": "Cars24 Insider",
     },
+    "tamil": {
+        "token_key": "YT_REFRESH_TOKEN_MALAYALAM",
+        "login_hint": "vipul.setia@cars24.com",
+        "label": "Cars24 Tamil (+ Malayalam)",
+    },
     "malayalam": {
         "token_key": "YT_REFRESH_TOKEN_MALAYALAM",
         "login_hint": "Cars24.tamil@cars24.com",
@@ -63,8 +68,8 @@ ACCOUNT_CONFIG = {
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--account", default="au", choices=list(ACCOUNT_CONFIG.keys()),
-                        # au | uae | india | teambhp | insider | malayalam
-                        help="Which account to authenticate (au | uae)")
+                        # au | uae | india | teambhp | insider | tamil | malayalam
+                        help="Which account to authenticate")
     parser.add_argument("--email", default=None,
                         help="Google account email to pre-fill in browser login")
     args = parser.parse_args()
