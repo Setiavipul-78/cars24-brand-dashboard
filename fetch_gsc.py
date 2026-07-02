@@ -56,7 +56,8 @@ def get_access_token():
 def query_gsc(access_token, start: date, end: date):
     """Query GSC searchAnalytics for brand impressions in India, grouped by date."""
     import requests
-    url = f"https://searchconsole.googleapis.com/v1/sites/{SITE.replace('/', '%2F')}/searchAnalytics/query"
+    from urllib.parse import quote
+    url = f"https://www.googleapis.com/webmasters/v3/sites/{quote(SITE, safe='')}/searchAnalytics/query"
     headers = {"Authorization": f"Bearer {access_token}", "Content-Type": "application/json"}
 
     all_rows = []
