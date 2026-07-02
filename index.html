@@ -781,12 +781,13 @@ function initTab1(){
     tblEl.innerHTML=tbl(th,rows);
     if(charts.wow)charts.wow.destroy();
     const c=document.getElementById('chart-wow');if(!c)return;
-    if(fdB&&fdB.length){
-      const len=Math.max(fdA.length,fdB.length);
-      charts.wow=new Chart(c.getContext('2d'),{type:'line',data:{labels:Array.from({length:len},(_,i)=>`Wk ${i+1}`),datasets:[
-        {label:'Period A',data:fdA.map(r=>r.impressions),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:false,tension:0.3,borderWidth:2,pointRadius:fdA.length>20?0:3},
-        {label:'Period B',data:fdB.map(r=>r.impressions),borderColor:'#FF9500',backgroundColor:'rgba(255,149,0,.08)',fill:false,tension:0.3,borderWidth:2,pointRadius:fdB.length>20?0:3,borderDash:[5,3]}
-      ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'top',labels:{boxWidth:12,font:{size:11}}}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16}}}}});
+    if(p==='compare'){
+      const len=Math.max(fdA.length,(fdB||[]).length);
+      const lbls=Array.from({length:len},(_,i)=>`Wk ${i+1}`);
+      charts.wow=new Chart(c.getContext('2d'),{type:'line',data:{labels:lbls,datasets:[
+        {label:'Period A',data:fdA.map(r=>r.impressions),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.1)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#4736FE'},
+        {label:'Period B',data:(fdB||[]).map(r=>r.impressions),borderColor:'#FF9500',backgroundColor:'rgba(255,149,0,.08)',fill:false,tension:0.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#FF9500',segment:{borderDash:ctx=>ctx.p0DataIndex%2===0?[6,3]:undefined}}
+      ]},options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{display:true,position:'top',labels:{boxWidth:12,font:{size:11},usePointStyle:true}}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16}}}}});
     } else {
       charts.wow=new Chart(c.getContext('2d'),{type:'line',data:{labels:fdA.map(r=>r.week_label.split('–')[0].trim()),datasets:[{label:'Impressions',data:fdA.map(r=>r.impressions),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.07)',fill:true,tension:0.3,borderWidth:2,pointRadius:fdA.length>40?0:2,pointBackgroundColor:'#4736FE'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16,maxRotation:45}}}}});
     }
@@ -817,12 +818,13 @@ function initTab1(){
     if(charts.dod)charts.dod.destroy();
     const c=document.getElementById('chart-dod');if(!c)return;
     if(!fdA.length)return;
-    if(fdB&&fdB.length){
-      const len=Math.max(fdA.length,fdB.length);
-      charts.dod=new Chart(c.getContext('2d'),{type:'line',data:{labels:Array.from({length:len},(_,i)=>`Day ${i+1}`),datasets:[
-        {label:'Period A',data:fdA.map(r=>r.impressions),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.07)',fill:false,tension:0.3,borderWidth:2,pointRadius:fdA.length>60?0:2},
-        {label:'Period B',data:fdB.map(r=>r.impressions),borderColor:'#FF9500',backgroundColor:'rgba(255,149,0,.07)',fill:false,tension:0.3,borderWidth:2,pointRadius:fdB.length>60?0:2,borderDash:[5,3]}
-      ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'top',labels:{boxWidth:12,font:{size:11}}}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:20}}}}});
+    if(p==='compare'){
+      const len=Math.max(fdA.length,(fdB||[]).length);
+      const lbls=Array.from({length:len},(_,i)=>`Day ${i+1}`);
+      charts.dod=new Chart(c.getContext('2d'),{type:'line',data:{labels:lbls,datasets:[
+        {label:'Period A',data:fdA.map(r=>r.impressions),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.1)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:fdA.length>60?0:2,pointBackgroundColor:'#4736FE'},
+        {label:'Period B',data:(fdB||[]).map(r=>r.impressions),borderColor:'#FF9500',backgroundColor:'rgba(255,149,0,.08)',fill:false,tension:0.3,borderWidth:2.5,pointRadius:(fdB||[]).length>60?0:2,pointBackgroundColor:'#FF9500',segment:{borderDash:ctx=>ctx.p0DataIndex%2===0?[6,3]:undefined}}
+      ]},options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{display:true,position:'top',labels:{boxWidth:12,font:{size:11},usePointStyle:true}}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:20}}}}});
     } else {
       charts.dod=new Chart(c.getContext('2d'),{type:'line',data:{labels:fdA.map(r=>r.date.slice(5)),datasets:[{label:'Daily Impressions',data:fdA.map(r=>r.impressions),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.07)',fill:true,tension:0.3,borderWidth:2,pointRadius:fdA.length>60?0:2,pointBackgroundColor:'#4736FE'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:20,maxRotation:45}}}}});
     }
