@@ -920,4 +920,12 @@ if __name__ == "__main__":
     fetch_all_youtube()
     fetch_all_instagram()
     fetch_all_linkedin()
+
+    print("\n── Google Search Console ────────────────────────────")
+    try:
+        import fetch_gsc
+        fetch_gsc.main()
+    except Exception as e:
+        print(f"  ! GSC fetch error: {e}")
+
     print("\n✅  Done — run: python3 build_data.py")

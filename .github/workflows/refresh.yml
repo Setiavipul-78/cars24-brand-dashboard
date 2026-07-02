@@ -55,6 +55,7 @@ jobs:
           IG_ACCESS_TOKEN_CARS24_AU:       ${{ secrets.IG_ACCESS_TOKEN_CARS24_AU }}
           IG_USER_ID_CARS24_UAE:           ${{ secrets.IG_USER_ID_CARS24_UAE }}
           IG_ACCESS_TOKEN_CARS24_UAE:      ${{ secrets.IG_ACCESS_TOKEN_CARS24_UAE }}
+          GSC_SERVICE_ACCOUNT_JSON:        ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
         run: python3 fetch_social.py
 
       - name: Build data.json
