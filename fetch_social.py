@@ -928,4 +928,12 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"  ! GSC fetch error: {e}")
 
+    # Backfill pre-Feb-2025 daily data from the Google Sheet
+    print("\n── GSC Sheet Backfill (historical daily) ────────────")
+    try:
+        import fetch_sheets_gsc
+        fetch_sheets_gsc.main()
+    except Exception as e:
+        print(f"  ! Sheet backfill error: {e}")
+
     print("\n✅  Done — run: python3 build_data.py")
