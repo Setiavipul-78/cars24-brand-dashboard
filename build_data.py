@@ -188,8 +188,34 @@ def build_gsc_daily():
             "dod":         pct_ch(int(row["impressions"]), prev_imp),
             "weekend":     row["date"].weekday() >= 5,
         })
-    rows = rows[-90:]
     print(f"  ✓ GSC daily: {len(rows)} days")
+    return rows
+
+# ── GSC Weekly ────────────────────────────────────────────────────────────────
+def build_gsc_weekly():
+    p = DATA / "gsc_daily_india.csv"
+    if not p.exists():
+        print("  ⚠ gsc_daily_india.csv missing (weekly skipped)"); return []
+    df = pd.read_csv(p)
+    df["date"] = pd.to_datetime(df["date"])
+    df = df.sort_values("date")
+    # Week starts Monday
+    df["week_start"] = df["date"] - pd.to_timedelta(df["date"].dt.weekday, unit="D")
+    weekly = df.groupby("week_start").agg(impressions=("impressions","sum"), clicks=("clicks","sum")).reset_index()
+    weekly = weekly.sort_values("week_start").reset_index(drop=True)
+    rows = []
+    for i, row in weekly.iterrows():
+        prev = int(weekly.iloc[i-1]["impressions"]) if i > 0 else None
+        ws = row["week_start"]
+        we = ws + pd.Timedelta(days=6)
+        rows.append({
+            "week_start": ws.strftime("%Y-%m-%d"),
+            "week_label": f"{ws.strftime('%d %b')} – {we.strftime('%d %b %y')}",
+            "impressions": int(row["impressions"]),
+            "clicks":      int(row.get("clicks", 0) or 0),
+            "wow":         pct_ch(int(row["impressions"]), prev),
+        })
+    print(f"  ✓ GSC weekly: {len(rows)} weeks")
     return rows
 
 # ── Google Indexed ────────────────────────────────────────────────────────────
@@ -850,6 +876,8 @@ if __name__ == "__main__":
     bsos_daily     = build_bsos_daily()
     bsos_cities    = build_bsos_cities()
     gsc_daily      = build_gsc_daily()
+    gsc_weekly     = build_gsc_weekly()
+    print(f"  GSC weekly: {len(gsc_weekly)} weeks")
     google_indexed = build_google_indexed()
     keywords       = build_keywords()
     kpis           = build_kpis(monthly, bsos_monthly)
@@ -871,6 +899,7 @@ if __name__ == "__main__":
         "bsos_daily":         bsos_daily,
         "bsos_cities":        bsos_cities,
         "gsc_daily":          gsc_daily,
+        "gsc_weekly":         gsc_weekly,
         "google_indexed":     google_indexed,
         "keywords":           keywords,
         "youtube":            youtube,

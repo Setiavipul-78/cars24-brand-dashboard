@@ -291,48 +291,100 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
 
         <!-- TAB 1: SEARCH IMPRESSIONS -->
         <section class="tabpane active" id="m-search">
-          <div class="g3" id="imp-kpis"></div>
+  <div class="g3" id="imp-kpis"></div>
 
-          <div class="card">
-            <div class="sh"><span class="kicker">📈 Monthly trend</span><span class="title">Brand Search Impressions</span><span class="desc">Total times Cars24-related searches appeared on Google, India. Higher = more brand awareness.</span></div>
-            <div class="cw tall"><canvas id="chart-imp"></canvas></div>
-          </div>
+  <div class="card" style="margin-bottom:10px">
+    <div class="sh"><span class="kicker">📈 Monthly trend</span><span class="title">Brand Search Impressions</span><span class="desc">Total times Cars24-related searches appeared on Google, India.</span></div>
+    <div class="cw tall"><canvas id="chart-imp"></canvas></div>
+  </div>
 
-          <div class="card">
-            <div class="sh"><span class="kicker">📅 History</span><span class="title">Month-on-Month Table</span><span class="desc">Impressions, MoM % and YoY % change per month. Green badge = grew, Red = declined.</span></div>
-            <div class="fb">
-              <span class="fl">Show</span>
-              <div class="pp-wrap" id="pp-imp">
-                <button class="pp active" data-p="all">All time</button>
-                <button class="pp" data-p="12m">12 months</button>
-                <button class="pp" data-p="6m">6 months</button>
-                <button class="pp" data-p="3m">3 months</button>
-                <button class="pp" data-p="custom">Custom ▾</button>
-              </div>
-              <div class="cr" id="cr-imp">
-                <input type="month" id="imp-from"><span class="sep">to</span>
-                <input type="month" id="imp-to">
-                <button class="apply-btn" onclick="applyFilter('imp')">Apply</button>
-              </div>
-            </div>
-            <div class="tw" id="tbl-monthly"></div>
+  <!-- MoM: table left, bar chart right -->
+  <div class="g2" style="gap:10px;margin-bottom:10px;align-items:stretch">
+    <div class="card" style="margin:0;display:flex;flex-direction:column">
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+        <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Impressions Table</span></div>
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+          <div class="pp-wrap" id="pp-imp">
+            <button class="pp active" data-p="all">All</button>
+            <button class="pp" data-p="12m">12M</button>
+            <button class="pp" data-p="6m">6M</button>
+            <button class="pp" data-p="3m">3M</button>
+            <button class="pp" data-p="custom">Custom ▾</button>
           </div>
+          <div class="cr" id="cr-imp" style="display:none">
+            <input type="month" id="imp-from"><span class="sep">→</span>
+            <input type="month" id="imp-to">
+            <button class="apply-btn" onclick="applyFilter('imp')">Apply</button>
+          </div>
+        </div>
+      </div>
+      <div class="tw" id="tbl-monthly" style="flex:1"></div>
+    </div>
+    <div class="card" style="margin:0;display:flex;flex-direction:column">
+      <div class="sh" style="margin-bottom:8px"><span class="kicker">📊 MoM Chart</span><span class="title">Impressions by Month</span><span class="desc">Blue = grew vs prior month · Red = declined</span></div>
+      <div style="flex:1;min-height:220px"><canvas id="chart-mom-bar"></canvas></div>
+    </div>
+  </div>
 
-          <div class="card">
-            <div class="sh"><span class="kicker">📆 Week-on-Week</span><span class="title">Weekly Brand Demand Index</span><span class="desc">Cars24's average share of all used-car searches each week. Blue = grew, red = shrank.</span></div>
-            <div class="fb">
-              <span class="fl">Show</span>
-              <div class="pp-wrap" id="pp-wow">
-                <button class="pp active" data-p="all">All weeks</button>
-                <button class="pp" data-p="26w">26W</button>
-                <button class="pp" data-p="12w">12W</button>
-                <button class="pp" data-p="8w">8W</button>
-              </div>
-            </div>
-            <div class="cw"><canvas id="chart-wow"></canvas></div>
-            <div class="tw" style="margin-top:14px" id="tbl-weekly"></div>
-          </div>
-        </section>
+  <!-- MoM Comparison -->
+  <div class="card" style="margin-bottom:10px;padding:14px 16px">
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <span style="font-size:12px;font-weight:700;color:var(--grey)">⚖ Compare months</span>
+      <select class="inf-sel" id="comp-a" style="min-width:100px"></select>
+      <span style="font-size:12px;color:var(--grey)">vs</span>
+      <select class="inf-sel" id="comp-b" style="min-width:100px"></select>
+      <button class="apply-btn" id="comp-go">Compare</button>
+    </div>
+    <div id="comp-result" style="margin-top:10px"></div>
+  </div>
+
+  <!-- WoW: table top, chart below -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+      <div><span class="kicker">📆 Week-on-Week</span><span class="title">Weekly Brand Search Impressions</span><span class="desc">Total weekly impressions from Google Search Console since Nov 2023. Blue = grew, Red = declined.</span></div>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <div class="pp-wrap" id="pp-wow">
+          <button class="pp active" data-p="all">All</button>
+          <button class="pp" data-p="26w">26W</button>
+          <button class="pp" data-p="12w">12W</button>
+          <button class="pp" data-p="8w">8W</button>
+          <button class="pp" data-p="custom">Custom ▾</button>
+        </div>
+        <div class="cr" id="cr-wow" style="display:none">
+          <input type="date" id="wow-from"><span class="sep">→</span>
+          <input type="date" id="wow-to">
+          <button class="apply-btn" onclick="applyFilterDate('wow')">Apply</button>
+        </div>
+      </div>
+    </div>
+    <div class="tw" id="tbl-weekly" style="margin-bottom:10px"></div>
+    <div class="cw"><canvas id="chart-wow"></canvas></div>
+  </div>
+
+  <!-- DoD: table top, chart below -->
+  <div class="card" style="margin-bottom:0">
+    <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+      <div><span class="kicker">📆 Day-on-Day</span><span class="title">Daily Brand Search Impressions</span><span class="desc">Daily impressions from Google Search Console. Blue = grew, Red = declined.</span></div>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <div class="pp-wrap" id="pp-dod">
+          <button class="pp" data-p="all">All</button>
+          <button class="pp active" data-p="90d">90D</button>
+          <button class="pp" data-p="30d">30D</button>
+          <button class="pp" data-p="14d">14D</button>
+          <button class="pp" data-p="7d">7D</button>
+          <button class="pp" data-p="custom">Custom ▾</button>
+        </div>
+        <div class="cr" id="cr-dod" style="display:none">
+          <input type="date" id="dod-from"><span class="sep">→</span>
+          <input type="date" id="dod-to">
+          <button class="apply-btn" onclick="applyFilterDate('dod')">Apply</button>
+        </div>
+      </div>
+    </div>
+    <div class="tw" id="tbl-daily" style="margin-bottom:10px"></div>
+    <div class="cw"><canvas id="chart-dod"></canvas></div>
+  </div>
+</section>
 
         <!-- TAB 2: KEYWORDS -->
         <section class="tabpane" id="m-kw">
@@ -595,6 +647,7 @@ function filterPeriod(data,period,from,to){
   const n=new Date(),offs={};
   if(period==='3m')offs.m=3;else if(period==='6m')offs.m=6;else if(period==='12m')offs.m=12;
   else if(period==='8w')offs.d=56;else if(period==='12w')offs.d=84;else if(period==='26w')offs.d=182;
+  else if(period==='7d')offs.d=7;else if(period==='14d')offs.d=14;else if(period==='30d')offs.d=30;else if(period==='90d')offs.d=90;
   if(offs.m){const c=new Date(n.getFullYear(),n.getMonth()-offs.m,1);const cs=`${c.getFullYear()}-${String(c.getMonth()+1).padStart(2,'0')}`;return data.filter(r=>r.month>=cs);}
   if(offs.d){const cs=new Date(n-offs.d*864e5).toISOString().slice(0,10);return data.filter(r=>(r.week_start||r.date||r.month)>=cs);}
   return data;
@@ -602,6 +655,11 @@ function filterPeriod(data,period,from,to){
 const fcbs={},fstate={};
 function wirePills(id,key,cb){const el=document.getElementById(id);if(!el)return;el.querySelectorAll('.pp').forEach(btn=>btn.addEventListener('click',()=>{el.querySelectorAll('.pp').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const p=btn.dataset.p;fstate[key]={p,from:null,to:null};const cr=document.getElementById('cr-'+key);if(cr){p==='custom'?cr.classList.add('open'):cr.classList.remove('open');}cb(p,null,null);}));}
 function applyFilter(key){const from=document.getElementById(key+'-from')?.value||null,to=document.getElementById(key+'-to')?.value||null;fstate[key]={p:'custom',from,to};fcbs[key]?.('custom',from,to);}
+function applyFilterDate(key){
+  const from=document.getElementById(`${key}-from`)?.value||'';
+  const to=document.getElementById(`${key}-to`)?.value||'';
+  if(fcbs[key])fcbs[key]('custom',from,to);
+}
 
 let D=null;
 const charts={},inited={};
@@ -637,7 +695,7 @@ function renderOv(){
 }
 
 function initTab1(){
-  const k=D.kpis,mon=D.monthly_impressions||[];
+  const k=D.kpis,mon=D.monthly_impressions||[],daily=D.gsc_daily||[],weekly=D.gsc_weekly||[];
   const mC=(k.mom_imp||0)>=0?'kh-green':'kh-red',yC=(k.yoy_imp||0)>=0?'kh-green':'kh-red';
   document.getElementById('imp-kpis').innerHTML=`
     <div class="kh kh-blue"><div class="kl"><span class="ki">📊</span>Brand Impressions · ${k.latest_month_label}</div><div class="kv">${k.curr_imp_fmt}</div><div class="ks">${badge(k.mom_imp)} MoM &nbsp; ${badge(k.yoy_imp)} YoY ${k.is_ath?'&nbsp;<span class="badge ba">⭐ ATH</span>':''}</div></div>
@@ -646,32 +704,93 @@ function initTab1(){
 
   if(mon.length){
     const c=document.getElementById('chart-imp').getContext('2d');
-    charts.imp=new Chart(c,{type:'line',data:{labels:mon.map(r=>r.label),datasets:[{label:'Impressions (L)',data:mon.map(r=>r.imp_lakh),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.35,borderWidth:3,pointRadius:3,pointBackgroundColor:'#4736FE',pointHoverRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'L'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:12}}}}});
+    charts.imp=new Chart(c,{type:'line',data:{labels:mon.map(r=>r.label),datasets:[{label:'Impressions (L)',data:mon.map(r=>r.imp_lakh),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.35,borderWidth:3,pointRadius:2,pointBackgroundColor:'#4736FE'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'L'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14}}}}});
+  }
+
+  // ── MoM table (no Trend column) + right bar chart ──
+  function renderMomBar(fd){
+    const ck='mom_bar';if(charts[ck])charts[ck].destroy();
+    const c=document.getElementById('chart-mom-bar');if(!c)return;
+    charts[ck]=new Chart(c.getContext('2d'),{type:'bar',data:{labels:fd.map(r=>r.label),datasets:[{label:'Impressions (L)',data:fd.map(r=>r.imp_lakh),backgroundColor:fd.map(r=>(r.mom||0)>=0?'rgba(71,54,254,.75)':'rgba(231,0,11,.68)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'L'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
   }
 
   function renderMonthlyTable(p,from,to){
     const fd=filterPeriod(mon,p,from,to);
-    const sv=mon.map(r=>r.imp_lakh);
-    const th=`<th>Month</th><th></th><th class="nr ch">Impressions</th><th class="nr ch">MoM</th><th class="nr">YoY</th><th>Trend</th>`;
-    const rows=[...fd].reverse().map((r,i)=>{
-      const idx=mon.indexOf(r);const sl=sv.slice(Math.max(0,idx-4),idx+1);
-      return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(r.mom)}</td><td class="nr cc"><strong>${r.imp_lakh.toFixed(2)}L</strong></td><td class="nr cc">${badge(r.mom)}</td><td class="nr">${badge(r.yoy)}</td><td>${spark(sl)}</td></tr>`;
-    }).join('');
-    document.getElementById('tbl-monthly').innerHTML=tbl(th,rows);
+    const th=`<th>Month</th><th></th><th class="nr ch">Impressions</th><th class="nr ch">MoM</th><th class="nr">YoY</th>`;
+    const rows=[...fd].reverse().map((r,i)=>`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(r.mom)}</td><td class="nr cc"><strong>${r.imp_lakh.toFixed(2)}L</strong></td><td class="nr cc">${badge(r.mom)}</td><td class="nr">${badge(r.yoy)}</td></tr>`).join('');
+    document.getElementById('tbl-monthly').innerHTML=fd.length?tbl(th,rows):'<p style="padding:16px;color:var(--grey);font-size:13px">No data for selected period.</p>';
+    renderMomBar(fd);
   }
   fcbs['imp']=renderMonthlyTable;wirePills('pp-imp','imp',renderMonthlyTable);renderMonthlyTable('all');
 
-  const ww=D.bsos_weekly||[];
-  function renderWoW(p){
-    const fd=filterPeriod(ww,p);if(!fd.length)return;
-    if(charts.wow)charts.wow.destroy();
-    const c=document.getElementById('chart-wow').getContext('2d');
-    charts.wow=new Chart(c,{type:'bar',data:{labels:fd.map(r=>r.week.split('–')[0].trim()),datasets:[{label:'Cars24 SoS %',data:fd.map(r=>r.Cars24),backgroundColor:fd.map(r=>(r.Cars24_wow||0)>=0?'rgba(71,54,254,.78)':'rgba(231,0,11,.72)'),borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:13,maxRotation:45}}}}});
-    const th=`<th>Week</th><th></th><th class="nr ch">Cars24 SoS</th><th class="nr">WoW Δ</th>`;
-    const rows=[...fd].reverse().slice(0,14).map((r,i)=>`<tr class="${i===0?'lat':''}"><td style="font-size:12px">${r.week}</td><td>${tia(r.Cars24_wow)}</td><td class="nr cc">${fP(r.Cars24)}</td><td class="nr">${badge(r.Cars24_wow,true)}</td></tr>`).join('');
-    document.getElementById('tbl-weekly').innerHTML=tbl(th,rows);
+  // ── Month comparison ──
+  const compA=document.getElementById('comp-a'),compB=document.getElementById('comp-b');
+  if(compA&&compB){
+    // ascending order in A (oldest first), descending in B (newest first)
+    const asc=[...mon];
+    const desc=[...mon].reverse();
+    compA.innerHTML=asc.map(r=>`<option value="${r.month}">${r.label}</option>`).join('');
+    compB.innerHTML=desc.map(r=>`<option value="${r.month}">${r.label}</option>`).join('');
+    // default: A = second-to-last month, B = latest month
+    if(mon.length>=2){compA.value=mon[mon.length-2].month;compB.value=mon[mon.length-1].month;}
+    function runComp(){
+      const mA=compA.value,mB=compB.value;
+      const rA=mon.find(r=>r.month===mA),rB=mon.find(r=>r.month===mB);
+      if(!rA||!rB)return;
+      const delta=(rB.imp_lakh-rA.imp_lakh).toFixed(2);
+      const pct=rA.imp_lakh?((rB.imp_lakh-rA.imp_lakh)/rA.imp_lakh*100).toFixed(1):null;
+      const clr=parseFloat(delta)>=0?'var(--green)':'var(--red)';
+      document.getElementById('comp-result').innerHTML=`
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:8px 0">
+          <div style="background:var(--bg);border-radius:8px;padding:10px 16px;min-width:120px;text-align:center">
+            <div style="font-size:11px;color:var(--grey);margin-bottom:4px">${rA.label}</div>
+            <div style="font-size:20px;font-weight:800;color:var(--ink)">${rA.imp_lakh.toFixed(2)}L</div>
+          </div>
+          <div style="font-size:18px;color:var(--grey)">→</div>
+          <div style="background:var(--bg);border-radius:8px;padding:10px 16px;min-width:120px;text-align:center">
+            <div style="font-size:11px;color:var(--grey);margin-bottom:4px">${rB.label}</div>
+            <div style="font-size:20px;font-weight:800;color:var(--ink)">${rB.imp_lakh.toFixed(2)}L</div>
+          </div>
+          <div style="background:var(--bg);border-radius:8px;padding:10px 16px;text-align:center">
+            <div style="font-size:11px;color:var(--grey);margin-bottom:4px">Change</div>
+            <div style="font-size:20px;font-weight:800;color:${clr}">${parseFloat(delta)>=0?'+':''}${delta}L</div>
+            ${pct!=null?`<div style="font-size:12px;color:${clr}">${parseFloat(pct)>=0?'+':''}${pct}%</div>`:''}
+          </div>
+        </div>`;
+    }
+    document.getElementById('comp-go').addEventListener('click',runComp);
+    runComp();
   }
-  wirePills('pp-wow','wow',p=>renderWoW(p));renderWoW('all');
+
+  // ── WoW: weekly impressions (not SoS) ──
+  function renderWoW(p,from,to){
+    let fd;
+    if(p==='custom'&&from&&to){fd=weekly.filter(r=>r.week_start>=from&&r.week_start<=to);}
+    else{fd=filterPeriod(weekly,p);}
+    if(!fd.length){document.getElementById('tbl-weekly').innerHTML='<p style="padding:16px;color:var(--grey);font-size:13px">No weekly data available.</p>';return;}
+    const th=`<th>Week</th><th></th><th class="nr ch">Impressions</th><th class="nr">WoW Δ</th>`;
+    const rows=[...fd].reverse().map((r,i)=>`<tr class="${i===0?'lat':''}"><td style="font-size:12px;white-space:nowrap">${r.week_label}</td><td>${tia(r.wow)}</td><td class="nr cc"><strong>${numFmt(r.impressions)}</strong></td><td class="nr">${badge(r.wow)}</td></tr>`).join('');
+    document.getElementById('tbl-weekly').innerHTML=tbl(th,rows);
+    if(charts.wow)charts.wow.destroy();
+    const c=document.getElementById('chart-wow');if(!c)return;
+    charts.wow=new Chart(c.getContext('2d'),{type:'bar',data:{labels:fd.map(r=>r.week_label.split('–')[0].trim()),datasets:[{label:'Impressions',data:fd.map(r=>r.impressions),backgroundColor:fd.map(r=>(r.wow||0)>=0?'rgba(71,54,254,.75)':'rgba(231,0,11,.68)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16,maxRotation:45}}}}});
+  }
+  fcbs['wow']=renderWoW;wirePills('pp-wow','wow',renderWoW);renderWoW('all');
+
+  // ── DoD: daily impressions ──
+  function renderDoD(p,from,to){
+    let fd;
+    if(p==='custom'&&from&&to){fd=daily.filter(r=>r.date>=from&&r.date<=to);}
+    else{fd=filterPeriod(daily,p);}
+    if(!fd.length){document.getElementById('tbl-daily').innerHTML='<p style="padding:16px;color:var(--grey);font-size:13px">No daily data available.</p>';return;}
+    const th=`<th>Date</th><th></th><th class="nr ch">Impressions</th><th class="nr">DoD Δ</th>`;
+    const rows=[...fd].reverse().map((r,i)=>`<tr class="${i===0?'lat':''}"><td style="font-size:12px;white-space:nowrap">${r.date}</td><td>${tia(r.dod)}</td><td class="nr cc"><strong>${numFmt(r.impressions)}</strong></td><td class="nr">${badge(r.dod)}</td></tr>`).join('');
+    document.getElementById('tbl-daily').innerHTML=tbl(th,rows);
+    if(charts.dod)charts.dod.destroy();
+    const c=document.getElementById('chart-dod');if(!c)return;
+    charts.dod=new Chart(c.getContext('2d'),{type:'bar',data:{labels:fd.map(r=>r.date.slice(5)),datasets:[{label:'Impressions',data:fd.map(r=>r.impressions),backgroundColor:fd.map(r=>(r.dod||0)>=0?'rgba(71,54,254,.65)':'rgba(231,0,11,.6)'),borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:22,maxRotation:45}}}}});
+  }
+  fcbs['dod']=renderDoD;wirePills('pp-dod','dod',renderDoD);renderDoD('90d');
 }
 
 function initTab2(){

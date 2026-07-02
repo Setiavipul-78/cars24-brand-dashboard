@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "built": "2026-07-02 18:00",
+    "built": "2026-07-02 20:54",
     "latest_month": "2026-05",
     "latest_month_label": "May'26"
   },
@@ -7408,6 +7408,5977 @@
   },
   "gsc_daily": [
     {
+      "date": "2023-11-01",
+      "impressions": 29085,
+      "clicks": 6264,
+      "dod": null,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-02",
+      "impressions": 27795,
+      "clicks": 5915,
+      "dod": -4.44,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-03",
+      "impressions": 28926,
+      "clicks": 6346,
+      "dod": 4.07,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-04",
+      "impressions": 29930,
+      "clicks": 6172,
+      "dod": 3.47,
+      "weekend": true
+    },
+    {
+      "date": "2023-11-05",
+      "impressions": 30998,
+      "clicks": 6623,
+      "dod": 3.57,
+      "weekend": true
+    },
+    {
+      "date": "2023-11-06",
+      "impressions": 30738,
+      "clicks": 7605,
+      "dod": -0.84,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-07",
+      "impressions": 28459,
+      "clicks": 7138,
+      "dod": -7.41,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-08",
+      "impressions": 28696,
+      "clicks": 7295,
+      "dod": 0.83,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-09",
+      "impressions": 27442,
+      "clicks": 6940,
+      "dod": -4.37,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-10",
+      "impressions": 26544,
+      "clicks": 6626,
+      "dod": -3.27,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-11",
+      "impressions": 24136,
+      "clicks": 6153,
+      "dod": -9.07,
+      "weekend": true
+    },
+    {
+      "date": "2023-11-12",
+      "impressions": 22357,
+      "clicks": 5700,
+      "dod": -7.37,
+      "weekend": true
+    },
+    {
+      "date": "2023-11-13",
+      "impressions": 30728,
+      "clicks": 7873,
+      "dod": 37.44,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-14",
+      "impressions": 32555,
+      "clicks": 9083,
+      "dod": 5.95,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-15",
+      "impressions": 27080,
+      "clicks": 7525,
+      "dod": -16.82,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-16",
+      "impressions": 30753,
+      "clicks": 8993,
+      "dod": 13.56,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-17",
+      "impressions": 31876,
+      "clicks": 9336,
+      "dod": 3.65,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-18",
+      "impressions": 32103,
+      "clicks": 9331,
+      "dod": 0.71,
+      "weekend": true
+    },
+    {
+      "date": "2023-11-19",
+      "impressions": 26198,
+      "clicks": 7451,
+      "dod": -18.39,
+      "weekend": true
+    },
+    {
+      "date": "2023-11-20",
+      "impressions": 30787,
+      "clicks": 9303,
+      "dod": 17.52,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-21",
+      "impressions": 30728,
+      "clicks": 9013,
+      "dod": -0.19,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-22",
+      "impressions": 31855,
+      "clicks": 10533,
+      "dod": 3.67,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-23",
+      "impressions": 30219,
+      "clicks": 9460,
+      "dod": -5.14,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-24",
+      "impressions": 31103,
+      "clicks": 9244,
+      "dod": 2.93,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-25",
+      "impressions": 32206,
+      "clicks": 9316,
+      "dod": 3.55,
+      "weekend": true
+    },
+    {
+      "date": "2023-11-26",
+      "impressions": 32630,
+      "clicks": 9652,
+      "dod": 1.32,
+      "weekend": true
+    },
+    {
+      "date": "2023-11-27",
+      "impressions": 32009,
+      "clicks": 10167,
+      "dod": -1.9,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-28",
+      "impressions": 31139,
+      "clicks": 10253,
+      "dod": -2.72,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-29",
+      "impressions": 31586,
+      "clicks": 12283,
+      "dod": 1.44,
+      "weekend": false
+    },
+    {
+      "date": "2023-11-30",
+      "impressions": 30935,
+      "clicks": 13819,
+      "dod": -2.06,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-01",
+      "impressions": 29427,
+      "clicks": 9253,
+      "dod": -4.87,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-02",
+      "impressions": 31008,
+      "clicks": 9652,
+      "dod": 5.37,
+      "weekend": true
+    },
+    {
+      "date": "2023-12-03",
+      "impressions": 29622,
+      "clicks": 9094,
+      "dod": -4.47,
+      "weekend": true
+    },
+    {
+      "date": "2023-12-04",
+      "impressions": 29662,
+      "clicks": 9596,
+      "dod": 0.14,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-05",
+      "impressions": 29671,
+      "clicks": 9323,
+      "dod": 0.03,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-06",
+      "impressions": 29739,
+      "clicks": 9013,
+      "dod": 0.23,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-07",
+      "impressions": 29635,
+      "clicks": 9319,
+      "dod": -0.35,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-08",
+      "impressions": 31036,
+      "clicks": 9255,
+      "dod": 4.73,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-09",
+      "impressions": 31956,
+      "clicks": 9498,
+      "dod": 2.96,
+      "weekend": true
+    },
+    {
+      "date": "2023-12-10",
+      "impressions": 32380,
+      "clicks": 9441,
+      "dod": 1.33,
+      "weekend": true
+    },
+    {
+      "date": "2023-12-11",
+      "impressions": 32152,
+      "clicks": 9432,
+      "dod": -0.7,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-12",
+      "impressions": 31431,
+      "clicks": 9240,
+      "dod": -2.24,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-13",
+      "impressions": 30580,
+      "clicks": 9114,
+      "dod": -2.71,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-14",
+      "impressions": 31002,
+      "clicks": 9056,
+      "dod": 1.38,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-15",
+      "impressions": 31564,
+      "clicks": 9194,
+      "dod": 1.81,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-16",
+      "impressions": 34357,
+      "clicks": 10032,
+      "dod": 8.85,
+      "weekend": true
+    },
+    {
+      "date": "2023-12-17",
+      "impressions": 34112,
+      "clicks": 9807,
+      "dod": -0.71,
+      "weekend": true
+    },
+    {
+      "date": "2023-12-18",
+      "impressions": 33532,
+      "clicks": 9669,
+      "dod": -1.7,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-19",
+      "impressions": 31641,
+      "clicks": 10456,
+      "dod": -5.64,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-20",
+      "impressions": 30616,
+      "clicks": 10065,
+      "dod": -3.24,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-21",
+      "impressions": 29782,
+      "clicks": 8663,
+      "dod": -2.72,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-22",
+      "impressions": 30549,
+      "clicks": 8612,
+      "dod": 2.58,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-23",
+      "impressions": 33075,
+      "clicks": 8899,
+      "dod": 8.27,
+      "weekend": true
+    },
+    {
+      "date": "2023-12-24",
+      "impressions": 33971,
+      "clicks": 9550,
+      "dod": 2.71,
+      "weekend": true
+    },
+    {
+      "date": "2023-12-25",
+      "impressions": 33907,
+      "clicks": 9400,
+      "dod": -0.19,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-26",
+      "impressions": 34654,
+      "clicks": 9165,
+      "dod": 2.2,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-27",
+      "impressions": 34009,
+      "clicks": 9534,
+      "dod": -1.86,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-28",
+      "impressions": 32888,
+      "clicks": 9009,
+      "dod": -3.3,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-29",
+      "impressions": 32441,
+      "clicks": 8956,
+      "dod": -1.36,
+      "weekend": false
+    },
+    {
+      "date": "2023-12-30",
+      "impressions": 31897,
+      "clicks": 8977,
+      "dod": -1.68,
+      "weekend": true
+    },
+    {
+      "date": "2023-12-31",
+      "impressions": 26396,
+      "clicks": 6661,
+      "dod": -17.25,
+      "weekend": true
+    },
+    {
+      "date": "2024-01-01",
+      "impressions": 30204,
+      "clicks": 7810,
+      "dod": 14.43,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-02",
+      "impressions": 31648,
+      "clicks": 8141,
+      "dod": 4.78,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-03",
+      "impressions": 31563,
+      "clicks": 8285,
+      "dod": -0.27,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-04",
+      "impressions": 30989,
+      "clicks": 8052,
+      "dod": -1.82,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-05",
+      "impressions": 31350,
+      "clicks": 8110,
+      "dod": 1.16,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-06",
+      "impressions": 33644,
+      "clicks": 8363,
+      "dod": 7.32,
+      "weekend": true
+    },
+    {
+      "date": "2024-01-07",
+      "impressions": 34135,
+      "clicks": 8647,
+      "dod": 1.46,
+      "weekend": true
+    },
+    {
+      "date": "2024-01-08",
+      "impressions": 33549,
+      "clicks": 8887,
+      "dod": -1.72,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-09",
+      "impressions": 31716,
+      "clicks": 8557,
+      "dod": -5.46,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-10",
+      "impressions": 30782,
+      "clicks": 8049,
+      "dod": -2.94,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-11",
+      "impressions": 30025,
+      "clicks": 8360,
+      "dod": -2.46,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-12",
+      "impressions": 30510,
+      "clicks": 8498,
+      "dod": 1.62,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-13",
+      "impressions": 31507,
+      "clicks": 8494,
+      "dod": 3.27,
+      "weekend": true
+    },
+    {
+      "date": "2024-01-14",
+      "impressions": 31568,
+      "clicks": 8423,
+      "dod": 0.19,
+      "weekend": true
+    },
+    {
+      "date": "2024-01-15",
+      "impressions": 31853,
+      "clicks": 9011,
+      "dod": 0.9,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-16",
+      "impressions": 32767,
+      "clicks": 9181,
+      "dod": 2.87,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-17",
+      "impressions": 32953,
+      "clicks": 9809,
+      "dod": 0.57,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-18",
+      "impressions": 32089,
+      "clicks": 9258,
+      "dod": -2.62,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-19",
+      "impressions": 32007,
+      "clicks": 9011,
+      "dod": -0.26,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-20",
+      "impressions": 32669,
+      "clicks": 8988,
+      "dod": 2.07,
+      "weekend": true
+    },
+    {
+      "date": "2024-01-21",
+      "impressions": 31289,
+      "clicks": 8299,
+      "dod": -4.22,
+      "weekend": true
+    },
+    {
+      "date": "2024-01-22",
+      "impressions": 29385,
+      "clicks": 7808,
+      "dod": -6.09,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-23",
+      "impressions": 31173,
+      "clicks": 8078,
+      "dod": 6.08,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-24",
+      "impressions": 30849,
+      "clicks": 7974,
+      "dod": -1.04,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-25",
+      "impressions": 30399,
+      "clicks": 8107,
+      "dod": -1.46,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-26",
+      "impressions": 32658,
+      "clicks": 9770,
+      "dod": 7.43,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-27",
+      "impressions": 34015,
+      "clicks": 12976,
+      "dod": 4.16,
+      "weekend": true
+    },
+    {
+      "date": "2024-01-28",
+      "impressions": 33183,
+      "clicks": 12958,
+      "dod": -2.45,
+      "weekend": true
+    },
+    {
+      "date": "2024-01-29",
+      "impressions": 33404,
+      "clicks": 13117,
+      "dod": 0.67,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-30",
+      "impressions": 32608,
+      "clicks": 12473,
+      "dod": -2.38,
+      "weekend": false
+    },
+    {
+      "date": "2024-01-31",
+      "impressions": 30628,
+      "clicks": 11612,
+      "dod": -6.07,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-01",
+      "impressions": 30391,
+      "clicks": 10868,
+      "dod": -0.77,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-02",
+      "impressions": 31101,
+      "clicks": 10242,
+      "dod": 2.34,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-03",
+      "impressions": 32422,
+      "clicks": 9644,
+      "dod": 4.25,
+      "weekend": true
+    },
+    {
+      "date": "2024-02-04",
+      "impressions": 32989,
+      "clicks": 10925,
+      "dod": 1.75,
+      "weekend": true
+    },
+    {
+      "date": "2024-02-05",
+      "impressions": 32193,
+      "clicks": 9484,
+      "dod": -2.41,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-06",
+      "impressions": 31194,
+      "clicks": 9255,
+      "dod": -3.1,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-07",
+      "impressions": 30666,
+      "clicks": 9180,
+      "dod": -1.69,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-08",
+      "impressions": 30618,
+      "clicks": 8500,
+      "dod": -0.16,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-09",
+      "impressions": 30625,
+      "clicks": 8428,
+      "dod": 0.02,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-10",
+      "impressions": 32909,
+      "clicks": 9425,
+      "dod": 7.46,
+      "weekend": true
+    },
+    {
+      "date": "2024-02-11",
+      "impressions": 32518,
+      "clicks": 8712,
+      "dod": -1.19,
+      "weekend": true
+    },
+    {
+      "date": "2024-02-12",
+      "impressions": 32017,
+      "clicks": 8941,
+      "dod": -1.54,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-13",
+      "impressions": 30864,
+      "clicks": 8577,
+      "dod": -3.6,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-14",
+      "impressions": 29329,
+      "clicks": 7575,
+      "dod": -4.97,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-15",
+      "impressions": 29626,
+      "clicks": 8228,
+      "dod": 1.01,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-16",
+      "impressions": 31643,
+      "clicks": 8495,
+      "dod": 6.81,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-17",
+      "impressions": 33523,
+      "clicks": 8508,
+      "dod": 5.94,
+      "weekend": true
+    },
+    {
+      "date": "2024-02-18",
+      "impressions": 33864,
+      "clicks": 8693,
+      "dod": 1.02,
+      "weekend": true
+    },
+    {
+      "date": "2024-02-19",
+      "impressions": 33466,
+      "clicks": 8991,
+      "dod": -1.18,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-20",
+      "impressions": 32722,
+      "clicks": 9030,
+      "dod": -2.22,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-21",
+      "impressions": 31735,
+      "clicks": 9065,
+      "dod": -3.02,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-22",
+      "impressions": 30969,
+      "clicks": 8373,
+      "dod": -2.41,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-23",
+      "impressions": 31526,
+      "clicks": 8662,
+      "dod": 1.8,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-24",
+      "impressions": 33496,
+      "clicks": 8441,
+      "dod": 6.25,
+      "weekend": true
+    },
+    {
+      "date": "2024-02-25",
+      "impressions": 32637,
+      "clicks": 8241,
+      "dod": -2.56,
+      "weekend": true
+    },
+    {
+      "date": "2024-02-26",
+      "impressions": 32740,
+      "clicks": 8726,
+      "dod": 0.32,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-27",
+      "impressions": 31835,
+      "clicks": 8576,
+      "dod": -2.76,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-28",
+      "impressions": 31234,
+      "clicks": 8565,
+      "dod": -1.89,
+      "weekend": false
+    },
+    {
+      "date": "2024-02-29",
+      "impressions": 29752,
+      "clicks": 8462,
+      "dod": -4.74,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-01",
+      "impressions": 30795,
+      "clicks": 10571,
+      "dod": 3.51,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-02",
+      "impressions": 31698,
+      "clicks": 10533,
+      "dod": 2.93,
+      "weekend": true
+    },
+    {
+      "date": "2024-03-03",
+      "impressions": 33255,
+      "clicks": 11181,
+      "dod": 4.91,
+      "weekend": true
+    },
+    {
+      "date": "2024-03-04",
+      "impressions": 31869,
+      "clicks": 10530,
+      "dod": -4.17,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-05",
+      "impressions": 31713,
+      "clicks": 9770,
+      "dod": -0.49,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-06",
+      "impressions": 29932,
+      "clicks": 9335,
+      "dod": -5.62,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-07",
+      "impressions": 29927,
+      "clicks": 9975,
+      "dod": -0.02,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-08",
+      "impressions": 31364,
+      "clicks": 9055,
+      "dod": 4.8,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-09",
+      "impressions": 32704,
+      "clicks": 9670,
+      "dod": 4.27,
+      "weekend": true
+    },
+    {
+      "date": "2024-03-10",
+      "impressions": 30048,
+      "clicks": 9855,
+      "dod": -8.12,
+      "weekend": true
+    },
+    {
+      "date": "2024-03-11",
+      "impressions": 31608,
+      "clicks": 9309,
+      "dod": 5.19,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-12",
+      "impressions": 30366,
+      "clicks": 8986,
+      "dod": -3.93,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-13",
+      "impressions": 29268,
+      "clicks": 8359,
+      "dod": -3.62,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-14",
+      "impressions": 29775,
+      "clicks": 8680,
+      "dod": 1.73,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-15",
+      "impressions": 29591,
+      "clicks": 8482,
+      "dod": -0.62,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-16",
+      "impressions": 30751,
+      "clicks": 8243,
+      "dod": 3.92,
+      "weekend": true
+    },
+    {
+      "date": "2024-03-17",
+      "impressions": 30933,
+      "clicks": 8303,
+      "dod": 0.59,
+      "weekend": true
+    },
+    {
+      "date": "2024-03-18",
+      "impressions": 31533,
+      "clicks": 8741,
+      "dod": 1.94,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-19",
+      "impressions": 32236,
+      "clicks": 8482,
+      "dod": 2.23,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-20",
+      "impressions": 30896,
+      "clicks": 8351,
+      "dod": -4.16,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-21",
+      "impressions": 29651,
+      "clicks": 7833,
+      "dod": -4.03,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-22",
+      "impressions": 28027,
+      "clicks": 7554,
+      "dod": -5.48,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-23",
+      "impressions": 29094,
+      "clicks": 8051,
+      "dod": 3.81,
+      "weekend": true
+    },
+    {
+      "date": "2024-03-24",
+      "impressions": 27028,
+      "clicks": 6949,
+      "dod": -7.1,
+      "weekend": true
+    },
+    {
+      "date": "2024-03-25",
+      "impressions": 26275,
+      "clicks": 7562,
+      "dod": -2.79,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-26",
+      "impressions": 30398,
+      "clicks": 8949,
+      "dod": 15.69,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-27",
+      "impressions": 29151,
+      "clicks": 8137,
+      "dod": -4.1,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-28",
+      "impressions": 30795,
+      "clicks": 8912,
+      "dod": 5.64,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-29",
+      "impressions": 32099,
+      "clicks": 9695,
+      "dod": 4.23,
+      "weekend": false
+    },
+    {
+      "date": "2024-03-30",
+      "impressions": 32616,
+      "clicks": 8916,
+      "dod": 1.61,
+      "weekend": true
+    },
+    {
+      "date": "2024-03-31",
+      "impressions": 29804,
+      "clicks": 8791,
+      "dod": -8.62,
+      "weekend": true
+    },
+    {
+      "date": "2024-04-01",
+      "impressions": 30796,
+      "clicks": 8304,
+      "dod": 3.33,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-02",
+      "impressions": 29565,
+      "clicks": 8764,
+      "dod": -4.0,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-03",
+      "impressions": 29549,
+      "clicks": 8128,
+      "dod": -0.05,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-04",
+      "impressions": 29811,
+      "clicks": 8146,
+      "dod": 0.89,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-05",
+      "impressions": 29372,
+      "clicks": 8002,
+      "dod": -1.47,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-06",
+      "impressions": 29985,
+      "clicks": 7553,
+      "dod": 2.09,
+      "weekend": true
+    },
+    {
+      "date": "2024-04-07",
+      "impressions": 30225,
+      "clicks": 8439,
+      "dod": 0.8,
+      "weekend": true
+    },
+    {
+      "date": "2024-04-08",
+      "impressions": 30301,
+      "clicks": 8014,
+      "dod": 0.25,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-09",
+      "impressions": 31111,
+      "clicks": 8300,
+      "dod": 2.67,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-10",
+      "impressions": 30828,
+      "clicks": 8191,
+      "dod": -0.91,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-11",
+      "impressions": 31075,
+      "clicks": 7863,
+      "dod": 0.8,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-12",
+      "impressions": 31788,
+      "clicks": 8026,
+      "dod": 2.29,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-13",
+      "impressions": 32796,
+      "clicks": 8057,
+      "dod": 3.17,
+      "weekend": true
+    },
+    {
+      "date": "2024-04-14",
+      "impressions": 31263,
+      "clicks": 7530,
+      "dod": -4.67,
+      "weekend": true
+    },
+    {
+      "date": "2024-04-15",
+      "impressions": 30924,
+      "clicks": 7908,
+      "dod": -1.08,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-16",
+      "impressions": 31009,
+      "clicks": 7812,
+      "dod": 0.27,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-17",
+      "impressions": 30654,
+      "clicks": 7775,
+      "dod": -1.14,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-18",
+      "impressions": 30060,
+      "clicks": 7626,
+      "dod": -1.94,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-19",
+      "impressions": 30590,
+      "clicks": 7588,
+      "dod": 1.76,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-20",
+      "impressions": 31690,
+      "clicks": 7843,
+      "dod": 3.6,
+      "weekend": true
+    },
+    {
+      "date": "2024-04-21",
+      "impressions": 31477,
+      "clicks": 7594,
+      "dod": -0.67,
+      "weekend": true
+    },
+    {
+      "date": "2024-04-22",
+      "impressions": 31756,
+      "clicks": 8282,
+      "dod": 0.89,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-23",
+      "impressions": 31306,
+      "clicks": 8172,
+      "dod": -1.42,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-24",
+      "impressions": 31324,
+      "clicks": 7872,
+      "dod": 0.06,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-25",
+      "impressions": 30977,
+      "clicks": 8068,
+      "dod": -1.11,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-26",
+      "impressions": 31260,
+      "clicks": 7635,
+      "dod": 0.91,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-27",
+      "impressions": 33403,
+      "clicks": 8011,
+      "dod": 6.86,
+      "weekend": true
+    },
+    {
+      "date": "2024-04-28",
+      "impressions": 32104,
+      "clicks": 7753,
+      "dod": -3.89,
+      "weekend": true
+    },
+    {
+      "date": "2024-04-29",
+      "impressions": 33494,
+      "clicks": 8484,
+      "dod": 4.33,
+      "weekend": false
+    },
+    {
+      "date": "2024-04-30",
+      "impressions": 32788,
+      "clicks": 7894,
+      "dod": -2.11,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-01",
+      "impressions": 32917,
+      "clicks": 7805,
+      "dod": 0.39,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-02",
+      "impressions": 31970,
+      "clicks": 8261,
+      "dod": -2.88,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-03",
+      "impressions": 33213,
+      "clicks": 8046,
+      "dod": 3.89,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-04",
+      "impressions": 34480,
+      "clicks": 7858,
+      "dod": 3.81,
+      "weekend": true
+    },
+    {
+      "date": "2024-05-05",
+      "impressions": 33916,
+      "clicks": 7909,
+      "dod": -1.64,
+      "weekend": true
+    },
+    {
+      "date": "2024-05-06",
+      "impressions": 33327,
+      "clicks": 8442,
+      "dod": -1.74,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-07",
+      "impressions": 33294,
+      "clicks": 8097,
+      "dod": -0.1,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-08",
+      "impressions": 33501,
+      "clicks": 8348,
+      "dod": 0.62,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-09",
+      "impressions": 33275,
+      "clicks": 8854,
+      "dod": -0.67,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-10",
+      "impressions": 33284,
+      "clicks": 8475,
+      "dod": 0.03,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-11",
+      "impressions": 34418,
+      "clicks": 8571,
+      "dod": 3.41,
+      "weekend": true
+    },
+    {
+      "date": "2024-05-12",
+      "impressions": 32938,
+      "clicks": 8290,
+      "dod": -4.3,
+      "weekend": true
+    },
+    {
+      "date": "2024-05-13",
+      "impressions": 33756,
+      "clicks": 8755,
+      "dod": 2.48,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-14",
+      "impressions": 33230,
+      "clicks": 8359,
+      "dod": -1.56,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-15",
+      "impressions": 32837,
+      "clicks": 8204,
+      "dod": -1.18,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-16",
+      "impressions": 34113,
+      "clicks": 8679,
+      "dod": 3.89,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-17",
+      "impressions": 33578,
+      "clicks": 8341,
+      "dod": -1.57,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-18",
+      "impressions": 34654,
+      "clicks": 8259,
+      "dod": 3.2,
+      "weekend": true
+    },
+    {
+      "date": "2024-05-19",
+      "impressions": 34974,
+      "clicks": 8438,
+      "dod": 0.92,
+      "weekend": true
+    },
+    {
+      "date": "2024-05-20",
+      "impressions": 34540,
+      "clicks": 8804,
+      "dod": -1.24,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-21",
+      "impressions": 33265,
+      "clicks": 8552,
+      "dod": -3.69,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-22",
+      "impressions": 31484,
+      "clicks": 8088,
+      "dod": -5.35,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-23",
+      "impressions": 33004,
+      "clicks": 8206,
+      "dod": 4.83,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-24",
+      "impressions": 32750,
+      "clicks": 8280,
+      "dod": -0.77,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-25",
+      "impressions": 34266,
+      "clicks": 8411,
+      "dod": 4.63,
+      "weekend": true
+    },
+    {
+      "date": "2024-05-26",
+      "impressions": 33528,
+      "clicks": 8204,
+      "dod": -2.15,
+      "weekend": true
+    },
+    {
+      "date": "2024-05-27",
+      "impressions": 34610,
+      "clicks": 8960,
+      "dod": 3.23,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-28",
+      "impressions": 33571,
+      "clicks": 8746,
+      "dod": -3.0,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-29",
+      "impressions": 32246,
+      "clicks": 8471,
+      "dod": -3.95,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-30",
+      "impressions": 33454,
+      "clicks": 8988,
+      "dod": 3.75,
+      "weekend": false
+    },
+    {
+      "date": "2024-05-31",
+      "impressions": 32657,
+      "clicks": 8531,
+      "dod": -2.38,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-01",
+      "impressions": 32552,
+      "clicks": 8068,
+      "dod": -0.32,
+      "weekend": true
+    },
+    {
+      "date": "2024-06-02",
+      "impressions": 32986,
+      "clicks": 8113,
+      "dod": 1.33,
+      "weekend": true
+    },
+    {
+      "date": "2024-06-03",
+      "impressions": 29929,
+      "clicks": 7836,
+      "dod": -9.27,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-04",
+      "impressions": 24188,
+      "clicks": 6006,
+      "dod": -19.18,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-05",
+      "impressions": 27656,
+      "clicks": 7160,
+      "dod": 14.34,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-06",
+      "impressions": 29751,
+      "clicks": 7588,
+      "dod": 7.58,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-07",
+      "impressions": 30044,
+      "clicks": 7372,
+      "dod": 0.98,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-08",
+      "impressions": 32244,
+      "clicks": 7920,
+      "dod": 7.32,
+      "weekend": true
+    },
+    {
+      "date": "2024-06-09",
+      "impressions": 30165,
+      "clicks": 7239,
+      "dod": -6.45,
+      "weekend": true
+    },
+    {
+      "date": "2024-06-10",
+      "impressions": 31660,
+      "clicks": 8265,
+      "dod": 4.96,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-11",
+      "impressions": 32455,
+      "clicks": 8605,
+      "dod": 2.51,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-12",
+      "impressions": 31258,
+      "clicks": 8447,
+      "dod": -3.69,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-13",
+      "impressions": 31213,
+      "clicks": 8798,
+      "dod": -0.14,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-14",
+      "impressions": 31664,
+      "clicks": 8568,
+      "dod": 1.44,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-15",
+      "impressions": 32962,
+      "clicks": 9334,
+      "dod": 4.1,
+      "weekend": true
+    },
+    {
+      "date": "2024-06-16",
+      "impressions": 34067,
+      "clicks": 8510,
+      "dod": 3.35,
+      "weekend": true
+    },
+    {
+      "date": "2024-06-17",
+      "impressions": 34299,
+      "clicks": 9115,
+      "dod": 0.68,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-18",
+      "impressions": 34164,
+      "clicks": 9783,
+      "dod": -0.39,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-19",
+      "impressions": 33043,
+      "clicks": 8708,
+      "dod": -3.28,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-20",
+      "impressions": 31870,
+      "clicks": 8260,
+      "dod": -3.55,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-21",
+      "impressions": 32575,
+      "clicks": 8407,
+      "dod": 2.21,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-22",
+      "impressions": 34718,
+      "clicks": 8375,
+      "dod": 6.58,
+      "weekend": true
+    },
+    {
+      "date": "2024-06-23",
+      "impressions": 35215,
+      "clicks": 8281,
+      "dod": 1.43,
+      "weekend": true
+    },
+    {
+      "date": "2024-06-24",
+      "impressions": 32889,
+      "clicks": 8303,
+      "dod": -6.61,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-25",
+      "impressions": 32207,
+      "clicks": 8298,
+      "dod": -2.07,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-26",
+      "impressions": 31729,
+      "clicks": 8034,
+      "dod": -1.48,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-27",
+      "impressions": 30987,
+      "clicks": 7888,
+      "dod": -2.34,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-28",
+      "impressions": 31141,
+      "clicks": 7957,
+      "dod": 0.5,
+      "weekend": false
+    },
+    {
+      "date": "2024-06-29",
+      "impressions": 29258,
+      "clicks": 7442,
+      "dod": -6.05,
+      "weekend": true
+    },
+    {
+      "date": "2024-06-30",
+      "impressions": 30129,
+      "clicks": 7688,
+      "dod": 2.98,
+      "weekend": true
+    },
+    {
+      "date": "2024-07-01",
+      "impressions": 31175,
+      "clicks": 8251,
+      "dod": 3.47,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-02",
+      "impressions": 31063,
+      "clicks": 8335,
+      "dod": -0.36,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-03",
+      "impressions": 31740,
+      "clicks": 8346,
+      "dod": 2.18,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-04",
+      "impressions": 30272,
+      "clicks": 7854,
+      "dod": -4.63,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-05",
+      "impressions": 30349,
+      "clicks": 7898,
+      "dod": 0.25,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-06",
+      "impressions": 32991,
+      "clicks": 8337,
+      "dod": 8.71,
+      "weekend": true
+    },
+    {
+      "date": "2024-07-07",
+      "impressions": 33997,
+      "clicks": 8779,
+      "dod": 3.05,
+      "weekend": true
+    },
+    {
+      "date": "2024-07-08",
+      "impressions": 33268,
+      "clicks": 8743,
+      "dod": -2.14,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-09",
+      "impressions": 32154,
+      "clicks": 8395,
+      "dod": -3.35,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-10",
+      "impressions": 30705,
+      "clicks": 7992,
+      "dod": -4.51,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-11",
+      "impressions": 31331,
+      "clicks": 7940,
+      "dod": 2.04,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-12",
+      "impressions": 31345,
+      "clicks": 7929,
+      "dod": 0.04,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-13",
+      "impressions": 33341,
+      "clicks": 8189,
+      "dod": 6.37,
+      "weekend": true
+    },
+    {
+      "date": "2024-07-14",
+      "impressions": 33242,
+      "clicks": 8230,
+      "dod": -0.3,
+      "weekend": true
+    },
+    {
+      "date": "2024-07-15",
+      "impressions": 33546,
+      "clicks": 8572,
+      "dod": 0.91,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-16",
+      "impressions": 33306,
+      "clicks": 8625,
+      "dod": -0.72,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-17",
+      "impressions": 33157,
+      "clicks": 8541,
+      "dod": -0.45,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-18",
+      "impressions": 31147,
+      "clicks": 8292,
+      "dod": -6.06,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-19",
+      "impressions": 31171,
+      "clicks": 7990,
+      "dod": 0.08,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-20",
+      "impressions": 33025,
+      "clicks": 8181,
+      "dod": 5.95,
+      "weekend": true
+    },
+    {
+      "date": "2024-07-21",
+      "impressions": 33398,
+      "clicks": 8300,
+      "dod": 1.13,
+      "weekend": true
+    },
+    {
+      "date": "2024-07-22",
+      "impressions": 32934,
+      "clicks": 8730,
+      "dod": -1.39,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-23",
+      "impressions": 32284,
+      "clicks": 8908,
+      "dod": -1.97,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-24",
+      "impressions": 31682,
+      "clicks": 8376,
+      "dod": -1.86,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-25",
+      "impressions": 31692,
+      "clicks": 7998,
+      "dod": 0.03,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-26",
+      "impressions": 32230,
+      "clicks": 8324,
+      "dod": 1.7,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-27",
+      "impressions": 33520,
+      "clicks": 8337,
+      "dod": 4.0,
+      "weekend": true
+    },
+    {
+      "date": "2024-07-28",
+      "impressions": 33279,
+      "clicks": 8011,
+      "dod": -0.72,
+      "weekend": true
+    },
+    {
+      "date": "2024-07-29",
+      "impressions": 32539,
+      "clicks": 8389,
+      "dod": -2.22,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-30",
+      "impressions": 31075,
+      "clicks": 7948,
+      "dod": -4.5,
+      "weekend": false
+    },
+    {
+      "date": "2024-07-31",
+      "impressions": 30587,
+      "clicks": 7720,
+      "dod": -1.57,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-01",
+      "impressions": 30373,
+      "clicks": 7837,
+      "dod": -0.7,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-02",
+      "impressions": 30879,
+      "clicks": 8190,
+      "dod": 1.67,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-03",
+      "impressions": 33011,
+      "clicks": 8444,
+      "dod": 6.9,
+      "weekend": true
+    },
+    {
+      "date": "2024-08-04",
+      "impressions": 32311,
+      "clicks": 8216,
+      "dod": -2.12,
+      "weekend": true
+    },
+    {
+      "date": "2024-08-05",
+      "impressions": 31816,
+      "clicks": 8329,
+      "dod": -1.53,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-06",
+      "impressions": 31662,
+      "clicks": 8272,
+      "dod": -0.48,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-07",
+      "impressions": 31765,
+      "clicks": 7978,
+      "dod": 0.33,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-08",
+      "impressions": 33989,
+      "clicks": 8491,
+      "dod": 7.0,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-09",
+      "impressions": 33864,
+      "clicks": 8710,
+      "dod": -0.37,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-10",
+      "impressions": 35982,
+      "clicks": 9044,
+      "dod": 6.25,
+      "weekend": true
+    },
+    {
+      "date": "2024-08-11",
+      "impressions": 35110,
+      "clicks": 9152,
+      "dod": -2.42,
+      "weekend": true
+    },
+    {
+      "date": "2024-08-12",
+      "impressions": 34542,
+      "clicks": 8701,
+      "dod": -1.62,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-13",
+      "impressions": 33081,
+      "clicks": 8128,
+      "dod": -4.23,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-14",
+      "impressions": 32158,
+      "clicks": 7970,
+      "dod": -2.79,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-15",
+      "impressions": 32943,
+      "clicks": 8027,
+      "dod": 2.44,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-16",
+      "impressions": 33541,
+      "clicks": 8105,
+      "dod": 1.82,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-17",
+      "impressions": 33771,
+      "clicks": 8196,
+      "dod": 0.69,
+      "weekend": true
+    },
+    {
+      "date": "2024-08-18",
+      "impressions": 35062,
+      "clicks": 7678,
+      "dod": 3.82,
+      "weekend": true
+    },
+    {
+      "date": "2024-08-19",
+      "impressions": 33297,
+      "clicks": 7678,
+      "dod": -5.03,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-20",
+      "impressions": 35588,
+      "clicks": 8271,
+      "dod": 6.88,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-21",
+      "impressions": 34985,
+      "clicks": 8125,
+      "dod": -1.69,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-22",
+      "impressions": 34878,
+      "clicks": 8228,
+      "dod": -0.31,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-23",
+      "impressions": 34713,
+      "clicks": 8348,
+      "dod": -0.47,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-24",
+      "impressions": 37707,
+      "clicks": 9297,
+      "dod": 8.63,
+      "weekend": true
+    },
+    {
+      "date": "2024-08-25",
+      "impressions": 36109,
+      "clicks": 8476,
+      "dod": -4.24,
+      "weekend": true
+    },
+    {
+      "date": "2024-08-26",
+      "impressions": 34896,
+      "clicks": 8244,
+      "dod": -3.36,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-27",
+      "impressions": 33908,
+      "clicks": 8227,
+      "dod": -2.83,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-28",
+      "impressions": 34837,
+      "clicks": 8218,
+      "dod": 2.74,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-29",
+      "impressions": 34199,
+      "clicks": 8157,
+      "dod": -1.83,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-30",
+      "impressions": 33554,
+      "clicks": 8053,
+      "dod": -1.89,
+      "weekend": false
+    },
+    {
+      "date": "2024-08-31",
+      "impressions": 34550,
+      "clicks": 8217,
+      "dod": 2.97,
+      "weekend": true
+    },
+    {
+      "date": "2024-09-01",
+      "impressions": 33988,
+      "clicks": 7966,
+      "dod": -1.63,
+      "weekend": true
+    },
+    {
+      "date": "2024-09-02",
+      "impressions": 33603,
+      "clicks": 8328,
+      "dod": -1.13,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-03",
+      "impressions": 32775,
+      "clicks": 7842,
+      "dod": -2.46,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-04",
+      "impressions": 30826,
+      "clicks": 7523,
+      "dod": -5.95,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-05",
+      "impressions": 30619,
+      "clicks": 7689,
+      "dod": -0.67,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-06",
+      "impressions": 30458,
+      "clicks": 7528,
+      "dod": -0.53,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-07",
+      "impressions": 32193,
+      "clicks": 7940,
+      "dod": 5.7,
+      "weekend": true
+    },
+    {
+      "date": "2024-09-08",
+      "impressions": 33492,
+      "clicks": 8311,
+      "dod": 4.04,
+      "weekend": true
+    },
+    {
+      "date": "2024-09-09",
+      "impressions": 34804,
+      "clicks": 11667,
+      "dod": 3.92,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-10",
+      "impressions": 33206,
+      "clicks": 11309,
+      "dod": -4.59,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-11",
+      "impressions": 32150,
+      "clicks": 10792,
+      "dod": -3.18,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-12",
+      "impressions": 32341,
+      "clicks": 11101,
+      "dod": 0.59,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-13",
+      "impressions": 32584,
+      "clicks": 10948,
+      "dod": 0.75,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-14",
+      "impressions": 34999,
+      "clicks": 11844,
+      "dod": 7.41,
+      "weekend": true
+    },
+    {
+      "date": "2024-09-15",
+      "impressions": 35262,
+      "clicks": 11448,
+      "dod": 0.75,
+      "weekend": true
+    },
+    {
+      "date": "2024-09-16",
+      "impressions": 34826,
+      "clicks": 8891,
+      "dod": -1.24,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-17",
+      "impressions": 33697,
+      "clicks": 8247,
+      "dod": -3.24,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-18",
+      "impressions": 32638,
+      "clicks": 7928,
+      "dod": -3.14,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-19",
+      "impressions": 32308,
+      "clicks": 7973,
+      "dod": -1.01,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-20",
+      "impressions": 32816,
+      "clicks": 7859,
+      "dod": 1.57,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-21",
+      "impressions": 34454,
+      "clicks": 8091,
+      "dod": 4.99,
+      "weekend": true
+    },
+    {
+      "date": "2024-09-22",
+      "impressions": 33845,
+      "clicks": 8208,
+      "dod": -1.77,
+      "weekend": true
+    },
+    {
+      "date": "2024-09-23",
+      "impressions": 32513,
+      "clicks": 8086,
+      "dod": -3.94,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-24",
+      "impressions": 31632,
+      "clicks": 8204,
+      "dod": -2.71,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-25",
+      "impressions": 30202,
+      "clicks": 7519,
+      "dod": -4.52,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-26",
+      "impressions": 30042,
+      "clicks": 7210,
+      "dod": -0.53,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-27",
+      "impressions": 30083,
+      "clicks": 7250,
+      "dod": 0.14,
+      "weekend": false
+    },
+    {
+      "date": "2024-09-28",
+      "impressions": 32661,
+      "clicks": 7739,
+      "dod": 8.57,
+      "weekend": true
+    },
+    {
+      "date": "2024-09-29",
+      "impressions": 31919,
+      "clicks": 7466,
+      "dod": -2.27,
+      "weekend": true
+    },
+    {
+      "date": "2024-09-30",
+      "impressions": 30784,
+      "clicks": 9609,
+      "dod": -3.56,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-01",
+      "impressions": 30066,
+      "clicks": 9654,
+      "dod": -2.33,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-02",
+      "impressions": 31404,
+      "clicks": 7876,
+      "dod": 4.45,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-03",
+      "impressions": 31865,
+      "clicks": 9512,
+      "dod": 1.47,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-04",
+      "impressions": 31645,
+      "clicks": 9340,
+      "dod": -0.69,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-05",
+      "impressions": 32467,
+      "clicks": 9060,
+      "dod": 2.6,
+      "weekend": true
+    },
+    {
+      "date": "2024-10-06",
+      "impressions": 32886,
+      "clicks": 8733,
+      "dod": 1.29,
+      "weekend": true
+    },
+    {
+      "date": "2024-10-07",
+      "impressions": 31879,
+      "clicks": 8280,
+      "dod": -3.06,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-08",
+      "impressions": 30878,
+      "clicks": 7697,
+      "dod": -3.14,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-09",
+      "impressions": 29873,
+      "clicks": 7525,
+      "dod": -3.25,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-10",
+      "impressions": 28453,
+      "clicks": 6969,
+      "dod": -4.75,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-11",
+      "impressions": 28986,
+      "clicks": 7293,
+      "dod": 1.87,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-12",
+      "impressions": 31896,
+      "clicks": 7655,
+      "dod": 10.04,
+      "weekend": true
+    },
+    {
+      "date": "2024-10-13",
+      "impressions": 33594,
+      "clicks": 8153,
+      "dod": 5.32,
+      "weekend": true
+    },
+    {
+      "date": "2024-10-14",
+      "impressions": 35747,
+      "clicks": 8772,
+      "dod": 6.41,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-15",
+      "impressions": 34907,
+      "clicks": 8925,
+      "dod": -2.35,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-16",
+      "impressions": 33939,
+      "clicks": 9077,
+      "dod": -2.77,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-17",
+      "impressions": 33339,
+      "clicks": 10651,
+      "dod": -1.77,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-18",
+      "impressions": 32876,
+      "clicks": 10480,
+      "dod": -1.39,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-19",
+      "impressions": 35057,
+      "clicks": 12065,
+      "dod": 6.63,
+      "weekend": true
+    },
+    {
+      "date": "2024-10-20",
+      "impressions": 35186,
+      "clicks": 12141,
+      "dod": 0.37,
+      "weekend": true
+    },
+    {
+      "date": "2024-10-21",
+      "impressions": 35292,
+      "clicks": 11494,
+      "dod": 0.3,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-22",
+      "impressions": 34236,
+      "clicks": 9658,
+      "dod": -2.99,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-23",
+      "impressions": 32973,
+      "clicks": 8008,
+      "dod": -3.69,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-24",
+      "impressions": 32067,
+      "clicks": 7747,
+      "dod": -2.75,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-25",
+      "impressions": 31116,
+      "clicks": 7408,
+      "dod": -2.97,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-26",
+      "impressions": 31724,
+      "clicks": 7478,
+      "dod": 1.95,
+      "weekend": true
+    },
+    {
+      "date": "2024-10-27",
+      "impressions": 30409,
+      "clicks": 7040,
+      "dod": -4.15,
+      "weekend": true
+    },
+    {
+      "date": "2024-10-28",
+      "impressions": 29969,
+      "clicks": 6688,
+      "dod": -1.45,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-29",
+      "impressions": 28176,
+      "clicks": 6210,
+      "dod": -5.98,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-30",
+      "impressions": 25403,
+      "clicks": 5582,
+      "dod": -9.84,
+      "weekend": false
+    },
+    {
+      "date": "2024-10-31",
+      "impressions": 23226,
+      "clicks": 6462,
+      "dod": -8.57,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-01",
+      "impressions": 27674,
+      "clicks": 8643,
+      "dod": 19.15,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-02",
+      "impressions": 30892,
+      "clicks": 9969,
+      "dod": 11.63,
+      "weekend": true
+    },
+    {
+      "date": "2024-11-03",
+      "impressions": 34841,
+      "clicks": 10583,
+      "dod": 12.78,
+      "weekend": true
+    },
+    {
+      "date": "2024-11-04",
+      "impressions": 33933,
+      "clicks": 9389,
+      "dod": -2.61,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-05",
+      "impressions": 34054,
+      "clicks": 9410,
+      "dod": 0.36,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-06",
+      "impressions": 32602,
+      "clicks": 10345,
+      "dod": -4.26,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-07",
+      "impressions": 31503,
+      "clicks": 9766,
+      "dod": -3.37,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-08",
+      "impressions": 31136,
+      "clicks": 9736,
+      "dod": -1.16,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-09",
+      "impressions": 31831,
+      "clicks": 10132,
+      "dod": 2.23,
+      "weekend": true
+    },
+    {
+      "date": "2024-11-10",
+      "impressions": 32192,
+      "clicks": 10374,
+      "dod": 1.13,
+      "weekend": true
+    },
+    {
+      "date": "2024-11-11",
+      "impressions": 32269,
+      "clicks": 9013,
+      "dod": 0.24,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-12",
+      "impressions": 32128,
+      "clicks": 7464,
+      "dod": -0.44,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-13",
+      "impressions": 30470,
+      "clicks": 6886,
+      "dod": -5.16,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-14",
+      "impressions": 30889,
+      "clicks": 7074,
+      "dod": 1.38,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-15",
+      "impressions": 30784,
+      "clicks": 7133,
+      "dod": -0.34,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-16",
+      "impressions": 31996,
+      "clicks": 7283,
+      "dod": 3.94,
+      "weekend": true
+    },
+    {
+      "date": "2024-11-17",
+      "impressions": 32084,
+      "clicks": 7049,
+      "dod": 0.28,
+      "weekend": true
+    },
+    {
+      "date": "2024-11-18",
+      "impressions": 32817,
+      "clicks": 7615,
+      "dod": 2.28,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-19",
+      "impressions": 31264,
+      "clicks": 7241,
+      "dod": -4.73,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-20",
+      "impressions": 31113,
+      "clicks": 7274,
+      "dod": -0.48,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-21",
+      "impressions": 30535,
+      "clicks": 7055,
+      "dod": -1.86,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-22",
+      "impressions": 29378,
+      "clicks": 6913,
+      "dod": -3.79,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-23",
+      "impressions": 29793,
+      "clicks": 6745,
+      "dod": 1.41,
+      "weekend": true
+    },
+    {
+      "date": "2024-11-24",
+      "impressions": 28923,
+      "clicks": 6488,
+      "dod": -2.92,
+      "weekend": true
+    },
+    {
+      "date": "2024-11-25",
+      "impressions": 32278,
+      "clicks": 7188,
+      "dod": 11.6,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-26",
+      "impressions": 31386,
+      "clicks": 6914,
+      "dod": -2.76,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-27",
+      "impressions": 31030,
+      "clicks": 6905,
+      "dod": -1.13,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-28",
+      "impressions": 30348,
+      "clicks": 6755,
+      "dod": -2.2,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-29",
+      "impressions": 30409,
+      "clicks": 7040,
+      "dod": 0.2,
+      "weekend": false
+    },
+    {
+      "date": "2024-11-30",
+      "impressions": 30407,
+      "clicks": 8315,
+      "dod": -0.01,
+      "weekend": true
+    },
+    {
+      "date": "2024-12-01",
+      "impressions": 31883,
+      "clicks": 9951,
+      "dod": 4.85,
+      "weekend": true
+    },
+    {
+      "date": "2024-12-02",
+      "impressions": 32531,
+      "clicks": 10007,
+      "dod": 2.03,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-03",
+      "impressions": 31325,
+      "clicks": 8316,
+      "dod": -3.71,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-04",
+      "impressions": 30044,
+      "clicks": 7919,
+      "dod": -4.09,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-05",
+      "impressions": 29164,
+      "clicks": 8116,
+      "dod": -2.93,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-06",
+      "impressions": 29857,
+      "clicks": 9148,
+      "dod": 2.38,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-07",
+      "impressions": 31155,
+      "clicks": 9628,
+      "dod": 4.35,
+      "weekend": true
+    },
+    {
+      "date": "2024-12-08",
+      "impressions": 32583,
+      "clicks": 9989,
+      "dod": 4.58,
+      "weekend": true
+    },
+    {
+      "date": "2024-12-09",
+      "impressions": 32422,
+      "clicks": 9747,
+      "dod": -0.49,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-10",
+      "impressions": 31480,
+      "clicks": 9358,
+      "dod": -2.91,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-11",
+      "impressions": 31564,
+      "clicks": 9816,
+      "dod": 0.27,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-12",
+      "impressions": 31393,
+      "clicks": 9979,
+      "dod": -0.54,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-13",
+      "impressions": 31743,
+      "clicks": 9746,
+      "dod": 1.11,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-14",
+      "impressions": 32881,
+      "clicks": 9930,
+      "dod": 3.59,
+      "weekend": true
+    },
+    {
+      "date": "2024-12-15",
+      "impressions": 31918,
+      "clicks": 9002,
+      "dod": -2.93,
+      "weekend": true
+    },
+    {
+      "date": "2024-12-16",
+      "impressions": 32987,
+      "clicks": 8127,
+      "dod": 3.35,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-17",
+      "impressions": 32695,
+      "clicks": 8534,
+      "dod": -0.89,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-18",
+      "impressions": 32867,
+      "clicks": 8243,
+      "dod": 0.53,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-19",
+      "impressions": 32591,
+      "clicks": 7731,
+      "dod": -0.84,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-20",
+      "impressions": 32705,
+      "clicks": 7570,
+      "dod": 0.35,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-21",
+      "impressions": 33130,
+      "clicks": 7769,
+      "dod": 1.3,
+      "weekend": true
+    },
+    {
+      "date": "2024-12-22",
+      "impressions": 34920,
+      "clicks": 8132,
+      "dod": 5.4,
+      "weekend": true
+    },
+    {
+      "date": "2024-12-23",
+      "impressions": 35499,
+      "clicks": 9273,
+      "dod": 1.66,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-24",
+      "impressions": 34631,
+      "clicks": 9295,
+      "dod": -2.45,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-25",
+      "impressions": 34400,
+      "clicks": 8079,
+      "dod": -0.67,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-26",
+      "impressions": 35027,
+      "clicks": 7965,
+      "dod": 1.82,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-27",
+      "impressions": 35333,
+      "clicks": 8594,
+      "dod": 0.87,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-28",
+      "impressions": 34784,
+      "clicks": 8658,
+      "dod": -1.55,
+      "weekend": true
+    },
+    {
+      "date": "2024-12-29",
+      "impressions": 34620,
+      "clicks": 7909,
+      "dod": -0.47,
+      "weekend": true
+    },
+    {
+      "date": "2024-12-30",
+      "impressions": 33682,
+      "clicks": 9239,
+      "dod": -2.71,
+      "weekend": false
+    },
+    {
+      "date": "2024-12-31",
+      "impressions": 28420,
+      "clicks": 9320,
+      "dod": -15.62,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-01",
+      "impressions": 30991,
+      "clicks": 10301,
+      "dod": 9.05,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-02",
+      "impressions": 34730,
+      "clicks": 11096,
+      "dod": 12.06,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-03",
+      "impressions": 32654,
+      "clicks": 10723,
+      "dod": -5.98,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-04",
+      "impressions": 33132,
+      "clicks": 10454,
+      "dod": 1.46,
+      "weekend": true
+    },
+    {
+      "date": "2025-01-05",
+      "impressions": 33668,
+      "clicks": 10069,
+      "dod": 1.62,
+      "weekend": true
+    },
+    {
+      "date": "2025-01-06",
+      "impressions": 34451,
+      "clicks": 10319,
+      "dod": 2.33,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-07",
+      "impressions": 33334,
+      "clicks": 9919,
+      "dod": -3.24,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-08",
+      "impressions": 32540,
+      "clicks": 9816,
+      "dod": -2.38,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-09",
+      "impressions": 31893,
+      "clicks": 9484,
+      "dod": -1.99,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-10",
+      "impressions": 33004,
+      "clicks": 9842,
+      "dod": 3.48,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-11",
+      "impressions": 32881,
+      "clicks": 9876,
+      "dod": -0.37,
+      "weekend": true
+    },
+    {
+      "date": "2025-01-12",
+      "impressions": 32592,
+      "clicks": 9663,
+      "dod": -0.88,
+      "weekend": true
+    },
+    {
+      "date": "2025-01-13",
+      "impressions": 30780,
+      "clicks": 9757,
+      "dod": -5.56,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-14",
+      "impressions": 31386,
+      "clicks": 9969,
+      "dod": 1.97,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-15",
+      "impressions": 32783,
+      "clicks": 9209,
+      "dod": 4.45,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-16",
+      "impressions": 33076,
+      "clicks": 8907,
+      "dod": 0.89,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-17",
+      "impressions": 33462,
+      "clicks": 7425,
+      "dod": 1.17,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-18",
+      "impressions": 33369,
+      "clicks": 7106,
+      "dod": -0.28,
+      "weekend": true
+    },
+    {
+      "date": "2025-01-19",
+      "impressions": 33337,
+      "clicks": 6981,
+      "dod": -0.1,
+      "weekend": true
+    },
+    {
+      "date": "2025-01-20",
+      "impressions": 34248,
+      "clicks": 7357,
+      "dod": 2.73,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-21",
+      "impressions": 33926,
+      "clicks": 7540,
+      "dod": -0.94,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-22",
+      "impressions": 32860,
+      "clicks": 7772,
+      "dod": -3.14,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-23",
+      "impressions": 33564,
+      "clicks": 7787,
+      "dod": 2.14,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-24",
+      "impressions": 37559,
+      "clicks": 7867,
+      "dod": 11.9,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-25",
+      "impressions": 36380,
+      "clicks": 7520,
+      "dod": -3.14,
+      "weekend": true
+    },
+    {
+      "date": "2025-01-26",
+      "impressions": 33493,
+      "clicks": 7743,
+      "dod": -7.94,
+      "weekend": true
+    },
+    {
+      "date": "2025-01-27",
+      "impressions": 35822,
+      "clicks": 8568,
+      "dod": 6.95,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-28",
+      "impressions": 35874,
+      "clicks": 9118,
+      "dod": 0.15,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-29",
+      "impressions": 34454,
+      "clicks": 7547,
+      "dod": -3.96,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-30",
+      "impressions": 32743,
+      "clicks": 7212,
+      "dod": -4.97,
+      "weekend": false
+    },
+    {
+      "date": "2025-01-31",
+      "impressions": 31918,
+      "clicks": 7782,
+      "dod": -2.52,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-01",
+      "impressions": 33756,
+      "clicks": 9830,
+      "dod": 5.76,
+      "weekend": true
+    },
+    {
+      "date": "2025-02-02",
+      "impressions": 34349,
+      "clicks": 9525,
+      "dod": 1.76,
+      "weekend": true
+    },
+    {
+      "date": "2025-02-03",
+      "impressions": 34933,
+      "clicks": 9453,
+      "dod": 1.7,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-04",
+      "impressions": 35188,
+      "clicks": 9305,
+      "dod": 0.73,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-05",
+      "impressions": 37774,
+      "clicks": 9573,
+      "dod": 7.35,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-06",
+      "impressions": 34942,
+      "clicks": 8273,
+      "dod": -7.5,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-07",
+      "impressions": 34166,
+      "clicks": 6813,
+      "dod": -2.22,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-08",
+      "impressions": 35085,
+      "clicks": 6924,
+      "dod": 2.69,
+      "weekend": true
+    },
+    {
+      "date": "2025-02-09",
+      "impressions": 35601,
+      "clicks": 6913,
+      "dod": 1.47,
+      "weekend": true
+    },
+    {
+      "date": "2025-02-10",
+      "impressions": 37029,
+      "clicks": 7173,
+      "dod": 4.01,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-11",
+      "impressions": 35477,
+      "clicks": 6854,
+      "dod": -4.19,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-12",
+      "impressions": 33659,
+      "clicks": 6689,
+      "dod": -5.12,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-13",
+      "impressions": 34045,
+      "clicks": 6879,
+      "dod": 1.15,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-14",
+      "impressions": 32787,
+      "clicks": 6577,
+      "dod": -3.7,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-15",
+      "impressions": 34802,
+      "clicks": 7100,
+      "dod": 6.15,
+      "weekend": true
+    },
+    {
+      "date": "2025-02-16",
+      "impressions": 36210,
+      "clicks": 7294,
+      "dod": 4.05,
+      "weekend": true
+    },
+    {
+      "date": "2025-02-17",
+      "impressions": 36871,
+      "clicks": 7709,
+      "dod": 1.83,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-18",
+      "impressions": 35631,
+      "clicks": 8079,
+      "dod": -3.36,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-19",
+      "impressions": 35052,
+      "clicks": 7702,
+      "dod": -1.62,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-20",
+      "impressions": 34970,
+      "clicks": 7599,
+      "dod": -0.23,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-21",
+      "impressions": 35649,
+      "clicks": 7414,
+      "dod": 1.94,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-22",
+      "impressions": 35223,
+      "clicks": 7102,
+      "dod": -1.19,
+      "weekend": true
+    },
+    {
+      "date": "2025-02-23",
+      "impressions": 32773,
+      "clicks": 6861,
+      "dod": -6.96,
+      "weekend": true
+    },
+    {
+      "date": "2025-02-24",
+      "impressions": 35334,
+      "clicks": 7605,
+      "dod": 7.81,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-25",
+      "impressions": 35122,
+      "clicks": 7438,
+      "dod": -0.6,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-26",
+      "impressions": 34900,
+      "clicks": 7871,
+      "dod": -0.63,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-27",
+      "impressions": 35128,
+      "clicks": 7937,
+      "dod": 0.65,
+      "weekend": false
+    },
+    {
+      "date": "2025-02-28",
+      "impressions": 33857,
+      "clicks": 8163,
+      "dod": -3.62,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-01",
+      "impressions": 34665,
+      "clicks": 9071,
+      "dod": 2.39,
+      "weekend": true
+    },
+    {
+      "date": "2025-03-02",
+      "impressions": 33981,
+      "clicks": 9762,
+      "dod": -1.97,
+      "weekend": true
+    },
+    {
+      "date": "2025-03-03",
+      "impressions": 35327,
+      "clicks": 9598,
+      "dod": 3.96,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-04",
+      "impressions": 32542,
+      "clicks": 8959,
+      "dod": -7.88,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-05",
+      "impressions": 34231,
+      "clicks": 9192,
+      "dod": 5.19,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-06",
+      "impressions": 35396,
+      "clicks": 9266,
+      "dod": 3.4,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-07",
+      "impressions": 35797,
+      "clicks": 9260,
+      "dod": 1.13,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-08",
+      "impressions": 35980,
+      "clicks": 7299,
+      "dod": 0.51,
+      "weekend": true
+    },
+    {
+      "date": "2025-03-09",
+      "impressions": 29472,
+      "clicks": 5418,
+      "dod": -18.09,
+      "weekend": true
+    },
+    {
+      "date": "2025-03-10",
+      "impressions": 36449,
+      "clicks": 7163,
+      "dod": 23.67,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-11",
+      "impressions": 36920,
+      "clicks": 7280,
+      "dod": 1.29,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-12",
+      "impressions": 36093,
+      "clicks": 6744,
+      "dod": -2.24,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-13",
+      "impressions": 32453,
+      "clicks": 5647,
+      "dod": -10.09,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-14",
+      "impressions": 31947,
+      "clicks": 5699,
+      "dod": -1.56,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-15",
+      "impressions": 37586,
+      "clicks": 6824,
+      "dod": 17.65,
+      "weekend": true
+    },
+    {
+      "date": "2025-03-16",
+      "impressions": 38893,
+      "clicks": 7201,
+      "dod": 3.48,
+      "weekend": true
+    },
+    {
+      "date": "2025-03-17",
+      "impressions": 41678,
+      "clicks": 7824,
+      "dod": 7.16,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-18",
+      "impressions": 39876,
+      "clicks": 8052,
+      "dod": -4.32,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-19",
+      "impressions": 38214,
+      "clicks": 7513,
+      "dod": -4.17,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-20",
+      "impressions": 37682,
+      "clicks": 7538,
+      "dod": -1.39,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-21",
+      "impressions": 36947,
+      "clicks": 7324,
+      "dod": -1.95,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-22",
+      "impressions": 36971,
+      "clicks": 7022,
+      "dod": 0.06,
+      "weekend": true
+    },
+    {
+      "date": "2025-03-23",
+      "impressions": 36172,
+      "clicks": 6988,
+      "dod": -2.16,
+      "weekend": true
+    },
+    {
+      "date": "2025-03-24",
+      "impressions": 37290,
+      "clicks": 7397,
+      "dod": 3.09,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-25",
+      "impressions": 36546,
+      "clicks": 7205,
+      "dod": -2.0,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-26",
+      "impressions": 35837,
+      "clicks": 7524,
+      "dod": -1.94,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-27",
+      "impressions": 37235,
+      "clicks": 8342,
+      "dod": 3.9,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-28",
+      "impressions": 34051,
+      "clicks": 7019,
+      "dod": -8.55,
+      "weekend": false
+    },
+    {
+      "date": "2025-03-29",
+      "impressions": 33017,
+      "clicks": 6776,
+      "dod": -3.04,
+      "weekend": true
+    },
+    {
+      "date": "2025-03-30",
+      "impressions": 34596,
+      "clicks": 6869,
+      "dod": 4.78,
+      "weekend": true
+    },
+    {
+      "date": "2025-03-31",
+      "impressions": 35598,
+      "clicks": 7390,
+      "dod": 2.9,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-01",
+      "impressions": 37108,
+      "clicks": 8067,
+      "dod": 4.24,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-02",
+      "impressions": 37098,
+      "clicks": 7849,
+      "dod": -0.03,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-03",
+      "impressions": 37333,
+      "clicks": 8228,
+      "dod": 0.63,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-04",
+      "impressions": 36822,
+      "clicks": 7270,
+      "dod": -1.37,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-05",
+      "impressions": 35859,
+      "clicks": 7297,
+      "dod": -2.62,
+      "weekend": true
+    },
+    {
+      "date": "2025-04-06",
+      "impressions": 36336,
+      "clicks": 7037,
+      "dod": 1.33,
+      "weekend": true
+    },
+    {
+      "date": "2025-04-07",
+      "impressions": 35953,
+      "clicks": 7002,
+      "dod": -1.05,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-08",
+      "impressions": 35893,
+      "clicks": 6986,
+      "dod": -0.17,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-09",
+      "impressions": 36685,
+      "clicks": 7302,
+      "dod": 2.21,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-10",
+      "impressions": 37914,
+      "clicks": 7693,
+      "dod": 3.35,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-11",
+      "impressions": 35848,
+      "clicks": 7657,
+      "dod": -5.45,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-12",
+      "impressions": 37210,
+      "clicks": 6883,
+      "dod": 3.8,
+      "weekend": true
+    },
+    {
+      "date": "2025-04-13",
+      "impressions": 35537,
+      "clicks": 7130,
+      "dod": -4.5,
+      "weekend": true
+    },
+    {
+      "date": "2025-04-14",
+      "impressions": 37826,
+      "clicks": 7441,
+      "dod": 6.44,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-15",
+      "impressions": 37491,
+      "clicks": 7579,
+      "dod": -0.89,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-16",
+      "impressions": 37303,
+      "clicks": 7348,
+      "dod": -0.5,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-17",
+      "impressions": 36954,
+      "clicks": 7203,
+      "dod": -0.94,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-18",
+      "impressions": 37951,
+      "clicks": 7398,
+      "dod": 2.7,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-19",
+      "impressions": 37486,
+      "clicks": 7276,
+      "dod": -1.23,
+      "weekend": true
+    },
+    {
+      "date": "2025-04-20",
+      "impressions": 36277,
+      "clicks": 6904,
+      "dod": -3.23,
+      "weekend": true
+    },
+    {
+      "date": "2025-04-21",
+      "impressions": 39264,
+      "clicks": 7587,
+      "dod": 8.23,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-22",
+      "impressions": 37615,
+      "clicks": 7292,
+      "dod": -4.2,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-23",
+      "impressions": 37648,
+      "clicks": 7074,
+      "dod": 0.09,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-24",
+      "impressions": 36223,
+      "clicks": 6283,
+      "dod": -3.79,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-25",
+      "impressions": 36279,
+      "clicks": 6493,
+      "dod": 0.15,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-26",
+      "impressions": 39334,
+      "clicks": 7126,
+      "dod": 8.42,
+      "weekend": true
+    },
+    {
+      "date": "2025-04-27",
+      "impressions": 38632,
+      "clicks": 7215,
+      "dod": -1.78,
+      "weekend": true
+    },
+    {
+      "date": "2025-04-28",
+      "impressions": 40855,
+      "clicks": 8402,
+      "dod": 5.75,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-29",
+      "impressions": 38665,
+      "clicks": 8343,
+      "dod": -5.36,
+      "weekend": false
+    },
+    {
+      "date": "2025-04-30",
+      "impressions": 36031,
+      "clicks": 7894,
+      "dod": -6.81,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-01",
+      "impressions": 34533,
+      "clicks": 7982,
+      "dod": -4.16,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-02",
+      "impressions": 35714,
+      "clicks": 7883,
+      "dod": 3.42,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-03",
+      "impressions": 36208,
+      "clicks": 8072,
+      "dod": 1.38,
+      "weekend": true
+    },
+    {
+      "date": "2025-05-04",
+      "impressions": 35416,
+      "clicks": 7953,
+      "dod": -2.19,
+      "weekend": true
+    },
+    {
+      "date": "2025-05-05",
+      "impressions": 36865,
+      "clicks": 8328,
+      "dod": 4.09,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-06",
+      "impressions": 33485,
+      "clicks": 7579,
+      "dod": -9.17,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-07",
+      "impressions": 32258,
+      "clicks": 7077,
+      "dod": -3.66,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-08",
+      "impressions": 32009,
+      "clicks": 7294,
+      "dod": -0.77,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-09",
+      "impressions": 32238,
+      "clicks": 7242,
+      "dod": 0.72,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-10",
+      "impressions": 34217,
+      "clicks": 7518,
+      "dod": 6.14,
+      "weekend": true
+    },
+    {
+      "date": "2025-05-11",
+      "impressions": 36368,
+      "clicks": 8151,
+      "dod": 6.29,
+      "weekend": true
+    },
+    {
+      "date": "2025-05-12",
+      "impressions": 38830,
+      "clicks": 8846,
+      "dod": 6.77,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-13",
+      "impressions": 38365,
+      "clicks": 8491,
+      "dod": -1.2,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-14",
+      "impressions": 40108,
+      "clicks": 9201,
+      "dod": 4.54,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-15",
+      "impressions": 39975,
+      "clicks": 9197,
+      "dod": -0.33,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-16",
+      "impressions": 39333,
+      "clicks": 9541,
+      "dod": -1.61,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-17",
+      "impressions": 40158,
+      "clicks": 9465,
+      "dod": 2.1,
+      "weekend": true
+    },
+    {
+      "date": "2025-05-18",
+      "impressions": 40170,
+      "clicks": 9261,
+      "dod": 0.03,
+      "weekend": true
+    },
+    {
+      "date": "2025-05-19",
+      "impressions": 42231,
+      "clicks": 9869,
+      "dod": 5.13,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-20",
+      "impressions": 41519,
+      "clicks": 10403,
+      "dod": -1.69,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-21",
+      "impressions": 39811,
+      "clicks": 9658,
+      "dod": -4.11,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-22",
+      "impressions": 40517,
+      "clicks": 9948,
+      "dod": 1.77,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-23",
+      "impressions": 39993,
+      "clicks": 10016,
+      "dod": -1.29,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-24",
+      "impressions": 41445,
+      "clicks": 10522,
+      "dod": 3.63,
+      "weekend": true
+    },
+    {
+      "date": "2025-05-25",
+      "impressions": 41095,
+      "clicks": 10348,
+      "dod": -0.84,
+      "weekend": true
+    },
+    {
+      "date": "2025-05-26",
+      "impressions": 42912,
+      "clicks": 10585,
+      "dod": 4.42,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-27",
+      "impressions": 41612,
+      "clicks": 11811,
+      "dod": -3.03,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-28",
+      "impressions": 40160,
+      "clicks": 10989,
+      "dod": -3.49,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-29",
+      "impressions": 41268,
+      "clicks": 10895,
+      "dod": 2.76,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-30",
+      "impressions": 41462,
+      "clicks": 10896,
+      "dod": 0.47,
+      "weekend": false
+    },
+    {
+      "date": "2025-05-31",
+      "impressions": 41994,
+      "clicks": 11325,
+      "dod": 1.28,
+      "weekend": true
+    },
+    {
+      "date": "2025-06-01",
+      "impressions": 39758,
+      "clicks": 10819,
+      "dod": -5.32,
+      "weekend": true
+    },
+    {
+      "date": "2025-06-02",
+      "impressions": 39944,
+      "clicks": 10497,
+      "dod": 0.47,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-03",
+      "impressions": 38049,
+      "clicks": 9764,
+      "dod": -4.74,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-04",
+      "impressions": 37331,
+      "clicks": 9721,
+      "dod": -1.89,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-05",
+      "impressions": 37869,
+      "clicks": 9726,
+      "dod": 1.44,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-06",
+      "impressions": 38757,
+      "clicks": 10099,
+      "dod": 2.34,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-07",
+      "impressions": 40052,
+      "clicks": 10416,
+      "dod": 3.34,
+      "weekend": true
+    },
+    {
+      "date": "2025-06-08",
+      "impressions": 40099,
+      "clicks": 10020,
+      "dod": 0.12,
+      "weekend": true
+    },
+    {
+      "date": "2025-06-09",
+      "impressions": 41928,
+      "clicks": 14440,
+      "dod": 4.56,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-10",
+      "impressions": 41755,
+      "clicks": 11327,
+      "dod": -0.41,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-11",
+      "impressions": 40551,
+      "clicks": 9362,
+      "dod": -2.88,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-12",
+      "impressions": 37403,
+      "clicks": 8916,
+      "dod": -7.76,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-13",
+      "impressions": 39305,
+      "clicks": 8679,
+      "dod": 5.09,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-14",
+      "impressions": 39785,
+      "clicks": 9107,
+      "dod": 1.22,
+      "weekend": true
+    },
+    {
+      "date": "2025-06-15",
+      "impressions": 39548,
+      "clicks": 9490,
+      "dod": -0.6,
+      "weekend": true
+    },
+    {
+      "date": "2025-06-16",
+      "impressions": 40996,
+      "clicks": 9695,
+      "dod": 3.66,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-17",
+      "impressions": 40250,
+      "clicks": 10107,
+      "dod": -1.82,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-18",
+      "impressions": 40075,
+      "clicks": 9494,
+      "dod": -0.43,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-19",
+      "impressions": 40442,
+      "clicks": 10178,
+      "dod": 0.92,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-20",
+      "impressions": 39598,
+      "clicks": 9675,
+      "dod": -2.09,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-21",
+      "impressions": 40099,
+      "clicks": 9665,
+      "dod": 1.27,
+      "weekend": true
+    },
+    {
+      "date": "2025-06-22",
+      "impressions": 40038,
+      "clicks": 9258,
+      "dod": -0.15,
+      "weekend": true
+    },
+    {
+      "date": "2025-06-23",
+      "impressions": 40786,
+      "clicks": 9737,
+      "dod": 1.87,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-24",
+      "impressions": 40052,
+      "clicks": 9937,
+      "dod": -1.8,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-25",
+      "impressions": 40041,
+      "clicks": 9257,
+      "dod": -0.03,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-26",
+      "impressions": 40313,
+      "clicks": 9419,
+      "dod": 0.68,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-27",
+      "impressions": 41593,
+      "clicks": 9733,
+      "dod": 3.18,
+      "weekend": false
+    },
+    {
+      "date": "2025-06-28",
+      "impressions": 42599,
+      "clicks": 10026,
+      "dod": 2.42,
+      "weekend": true
+    },
+    {
+      "date": "2025-06-29",
+      "impressions": 42708,
+      "clicks": 9870,
+      "dod": 0.26,
+      "weekend": true
+    },
+    {
+      "date": "2025-06-30",
+      "impressions": 42087,
+      "clicks": 10454,
+      "dod": -1.45,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-01",
+      "impressions": 42727,
+      "clicks": 11880,
+      "dod": 1.52,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-02",
+      "impressions": 44388,
+      "clicks": 12003,
+      "dod": 3.89,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-03",
+      "impressions": 43673,
+      "clicks": 11748,
+      "dod": -1.61,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-04",
+      "impressions": 42161,
+      "clicks": 11492,
+      "dod": -3.46,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-05",
+      "impressions": 43350,
+      "clicks": 11611,
+      "dod": 2.82,
+      "weekend": true
+    },
+    {
+      "date": "2025-07-06",
+      "impressions": 43725,
+      "clicks": 12816,
+      "dod": 0.87,
+      "weekend": true
+    },
+    {
+      "date": "2025-07-07",
+      "impressions": 43400,
+      "clicks": 13256,
+      "dod": -0.74,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-08",
+      "impressions": 42199,
+      "clicks": 12407,
+      "dod": -2.77,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-09",
+      "impressions": 40370,
+      "clicks": 11098,
+      "dod": -4.33,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-10",
+      "impressions": 40421,
+      "clicks": 11558,
+      "dod": 0.13,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-11",
+      "impressions": 40014,
+      "clicks": 11738,
+      "dod": -1.01,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-12",
+      "impressions": 40818,
+      "clicks": 12170,
+      "dod": 2.01,
+      "weekend": true
+    },
+    {
+      "date": "2025-07-13",
+      "impressions": 40557,
+      "clicks": 11863,
+      "dod": -0.64,
+      "weekend": true
+    },
+    {
+      "date": "2025-07-14",
+      "impressions": 41269,
+      "clicks": 11748,
+      "dod": 1.76,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-15",
+      "impressions": 41251,
+      "clicks": 12955,
+      "dod": -0.04,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-16",
+      "impressions": 41146,
+      "clicks": 12307,
+      "dod": -0.25,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-17",
+      "impressions": 40605,
+      "clicks": 12123,
+      "dod": -1.31,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-18",
+      "impressions": 40504,
+      "clicks": 11606,
+      "dod": -0.25,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-19",
+      "impressions": 41377,
+      "clicks": 11731,
+      "dod": 2.16,
+      "weekend": true
+    },
+    {
+      "date": "2025-07-20",
+      "impressions": 40936,
+      "clicks": 11632,
+      "dod": -1.07,
+      "weekend": true
+    },
+    {
+      "date": "2025-07-21",
+      "impressions": 41647,
+      "clicks": 12555,
+      "dod": 1.74,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-22",
+      "impressions": 40233,
+      "clicks": 12204,
+      "dod": -3.4,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-23",
+      "impressions": 39638,
+      "clicks": 12096,
+      "dod": -1.48,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-24",
+      "impressions": 40200,
+      "clicks": 24407,
+      "dod": 1.42,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-25",
+      "impressions": 40473,
+      "clicks": 12301,
+      "dod": 0.68,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-26",
+      "impressions": 41546,
+      "clicks": 11075,
+      "dod": 2.65,
+      "weekend": true
+    },
+    {
+      "date": "2025-07-27",
+      "impressions": 41531,
+      "clicks": 11425,
+      "dod": -0.04,
+      "weekend": true
+    },
+    {
+      "date": "2025-07-28",
+      "impressions": 42181,
+      "clicks": 11658,
+      "dod": 1.57,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-29",
+      "impressions": 41764,
+      "clicks": 12572,
+      "dod": -0.99,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-30",
+      "impressions": 40681,
+      "clicks": 11911,
+      "dod": -2.59,
+      "weekend": false
+    },
+    {
+      "date": "2025-07-31",
+      "impressions": 38199,
+      "clicks": 11356,
+      "dod": -6.1,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-01",
+      "impressions": 37604,
+      "clicks": 11094,
+      "dod": -1.56,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-02",
+      "impressions": 38609,
+      "clicks": 11326,
+      "dod": 2.67,
+      "weekend": true
+    },
+    {
+      "date": "2025-08-03",
+      "impressions": 38298,
+      "clicks": 10840,
+      "dod": -0.81,
+      "weekend": true
+    },
+    {
+      "date": "2025-08-04",
+      "impressions": 38929,
+      "clicks": 10937,
+      "dod": 1.65,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-05",
+      "impressions": 40044,
+      "clicks": 10575,
+      "dod": 2.86,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-06",
+      "impressions": 38658,
+      "clicks": 10821,
+      "dod": -3.46,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-07",
+      "impressions": 36624,
+      "clicks": 10213,
+      "dod": -5.26,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-08",
+      "impressions": 35652,
+      "clicks": 9595,
+      "dod": -2.65,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-09",
+      "impressions": 36530,
+      "clicks": 9419,
+      "dod": 2.46,
+      "weekend": true
+    },
+    {
+      "date": "2025-08-10",
+      "impressions": 40143,
+      "clicks": 10551,
+      "dod": 9.89,
+      "weekend": true
+    },
+    {
+      "date": "2025-08-11",
+      "impressions": 41733,
+      "clicks": 11802,
+      "dod": 3.96,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-12",
+      "impressions": 42071,
+      "clicks": 12245,
+      "dod": 0.81,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-13",
+      "impressions": 40159,
+      "clicks": 12140,
+      "dod": -4.54,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-14",
+      "impressions": 37773,
+      "clicks": 11160,
+      "dod": -5.94,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-15",
+      "impressions": 37326,
+      "clicks": 10942,
+      "dod": -1.18,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-16",
+      "impressions": 39637,
+      "clicks": 11811,
+      "dod": 6.19,
+      "weekend": true
+    },
+    {
+      "date": "2025-08-17",
+      "impressions": 40256,
+      "clicks": 11757,
+      "dod": 1.56,
+      "weekend": true
+    },
+    {
+      "date": "2025-08-18",
+      "impressions": 41957,
+      "clicks": 13017,
+      "dod": 4.23,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-19",
+      "impressions": 39975,
+      "clicks": 11933,
+      "dod": -4.72,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-20",
+      "impressions": 39509,
+      "clicks": 11452,
+      "dod": -1.17,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-21",
+      "impressions": 41210,
+      "clicks": 11385,
+      "dod": 4.31,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-22",
+      "impressions": 41058,
+      "clicks": 11476,
+      "dod": -0.37,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-23",
+      "impressions": 42819,
+      "clicks": 11915,
+      "dod": 4.29,
+      "weekend": true
+    },
+    {
+      "date": "2025-08-24",
+      "impressions": 42158,
+      "clicks": 11297,
+      "dod": -1.54,
+      "weekend": true
+    },
+    {
+      "date": "2025-08-25",
+      "impressions": 42207,
+      "clicks": 13812,
+      "dod": 0.12,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-26",
+      "impressions": 40086,
+      "clicks": 11191,
+      "dod": -5.03,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-27",
+      "impressions": 39634,
+      "clicks": 10723,
+      "dod": -1.13,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-28",
+      "impressions": 39567,
+      "clicks": 9655,
+      "dod": -0.17,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-29",
+      "impressions": 38910,
+      "clicks": 9702,
+      "dod": -1.66,
+      "weekend": false
+    },
+    {
+      "date": "2025-08-30",
+      "impressions": 39310,
+      "clicks": 9373,
+      "dod": 1.03,
+      "weekend": true
+    },
+    {
+      "date": "2025-08-31",
+      "impressions": 39266,
+      "clicks": 9478,
+      "dod": -0.11,
+      "weekend": true
+    },
+    {
+      "date": "2025-09-01",
+      "impressions": 39547,
+      "clicks": 10028,
+      "dod": 0.72,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-02",
+      "impressions": 38926,
+      "clicks": 9582,
+      "dod": -1.57,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-03",
+      "impressions": 40625,
+      "clicks": 9534,
+      "dod": 4.36,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-04",
+      "impressions": 42594,
+      "clicks": 10018,
+      "dod": 4.85,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-05",
+      "impressions": 43713,
+      "clicks": 10456,
+      "dod": 2.63,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-06",
+      "impressions": 43705,
+      "clicks": 11685,
+      "dod": -0.02,
+      "weekend": true
+    },
+    {
+      "date": "2025-09-07",
+      "impressions": 45018,
+      "clicks": 11555,
+      "dod": 3.0,
+      "weekend": true
+    },
+    {
+      "date": "2025-09-08",
+      "impressions": 46564,
+      "clicks": 12417,
+      "dod": 3.43,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-09",
+      "impressions": 46338,
+      "clicks": 12855,
+      "dod": -0.49,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-10",
+      "impressions": 44180,
+      "clicks": 12700,
+      "dod": -4.66,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-11",
+      "impressions": 45219,
+      "clicks": 13728,
+      "dod": 2.35,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-12",
+      "impressions": 45918,
+      "clicks": 14056,
+      "dod": 1.55,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-13",
+      "impressions": 45142,
+      "clicks": 13937,
+      "dod": -1.69,
+      "weekend": true
+    },
+    {
+      "date": "2025-09-14",
+      "impressions": 41239,
+      "clicks": 13209,
+      "dod": -8.65,
+      "weekend": true
+    },
+    {
+      "date": "2025-09-15",
+      "impressions": 42397,
+      "clicks": 13649,
+      "dod": 2.81,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-16",
+      "impressions": 41485,
+      "clicks": 11829,
+      "dod": -2.15,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-17",
+      "impressions": 41087,
+      "clicks": 11920,
+      "dod": -0.96,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-18",
+      "impressions": 43826,
+      "clicks": 12979,
+      "dod": 6.67,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-19",
+      "impressions": 41967,
+      "clicks": 11701,
+      "dod": -4.24,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-20",
+      "impressions": 42099,
+      "clicks": 11289,
+      "dod": 0.31,
+      "weekend": true
+    },
+    {
+      "date": "2025-09-21",
+      "impressions": 41423,
+      "clicks": 11137,
+      "dod": -1.61,
+      "weekend": true
+    },
+    {
+      "date": "2025-09-22",
+      "impressions": 45023,
+      "clicks": 13842,
+      "dod": 8.69,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-23",
+      "impressions": 43752,
+      "clicks": 13797,
+      "dod": -2.82,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-24",
+      "impressions": 42783,
+      "clicks": 14410,
+      "dod": -2.21,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-25",
+      "impressions": 42370,
+      "clicks": 13864,
+      "dod": -0.97,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-26",
+      "impressions": 42169,
+      "clicks": 13587,
+      "dod": -0.47,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-27",
+      "impressions": 43517,
+      "clicks": 14828,
+      "dod": 3.2,
+      "weekend": true
+    },
+    {
+      "date": "2025-09-28",
+      "impressions": 41605,
+      "clicks": 14123,
+      "dod": -4.39,
+      "weekend": true
+    },
+    {
+      "date": "2025-09-29",
+      "impressions": 41147,
+      "clicks": 15159,
+      "dod": -1.1,
+      "weekend": false
+    },
+    {
+      "date": "2025-09-30",
+      "impressions": 39697,
+      "clicks": 13671,
+      "dod": -3.52,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-01",
+      "impressions": 37783,
+      "clicks": 11775,
+      "dod": -4.82,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-02",
+      "impressions": 39478,
+      "clicks": 12633,
+      "dod": 4.49,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-03",
+      "impressions": 43134,
+      "clicks": 13742,
+      "dod": 9.26,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-04",
+      "impressions": 45123,
+      "clicks": 14583,
+      "dod": 4.61,
+      "weekend": true
+    },
+    {
+      "date": "2025-10-05",
+      "impressions": 43234,
+      "clicks": 14093,
+      "dod": -4.19,
+      "weekend": true
+    },
+    {
+      "date": "2025-10-06",
+      "impressions": 42914,
+      "clicks": 13900,
+      "dod": -0.74,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-07",
+      "impressions": 41713,
+      "clicks": 13242,
+      "dod": -2.8,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-08",
+      "impressions": 41047,
+      "clicks": 12824,
+      "dod": -1.6,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-09",
+      "impressions": 40346,
+      "clicks": 11913,
+      "dod": -1.71,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-10",
+      "impressions": 38723,
+      "clicks": 10922,
+      "dod": -4.02,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-11",
+      "impressions": 40100,
+      "clicks": 9840,
+      "dod": 3.56,
+      "weekend": true
+    },
+    {
+      "date": "2025-10-12",
+      "impressions": 40137,
+      "clicks": 9994,
+      "dod": 0.09,
+      "weekend": true
+    },
+    {
+      "date": "2025-10-13",
+      "impressions": 41051,
+      "clicks": 10518,
+      "dod": 2.28,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-14",
+      "impressions": 40244,
+      "clicks": 10727,
+      "dod": -1.97,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-15",
+      "impressions": 39253,
+      "clicks": 10775,
+      "dod": -2.46,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-16",
+      "impressions": 38324,
+      "clicks": 10861,
+      "dod": -2.37,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-17",
+      "impressions": 35192,
+      "clicks": 9579,
+      "dod": -8.17,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-18",
+      "impressions": 33846,
+      "clicks": 8878,
+      "dod": -3.82,
+      "weekend": true
+    },
+    {
+      "date": "2025-10-19",
+      "impressions": 31366,
+      "clicks": 7900,
+      "dod": -7.33,
+      "weekend": true
+    },
+    {
+      "date": "2025-10-20",
+      "impressions": 27679,
+      "clicks": 7240,
+      "dod": -11.75,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-21",
+      "impressions": 35419,
+      "clicks": 9339,
+      "dod": 27.96,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-22",
+      "impressions": 38337,
+      "clicks": 10485,
+      "dod": 8.24,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-23",
+      "impressions": 40229,
+      "clicks": 11069,
+      "dod": 4.94,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-24",
+      "impressions": 42809,
+      "clicks": 12354,
+      "dod": 6.41,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-25",
+      "impressions": 42504,
+      "clicks": 11797,
+      "dod": -0.71,
+      "weekend": true
+    },
+    {
+      "date": "2025-10-26",
+      "impressions": 42760,
+      "clicks": 11819,
+      "dod": 0.6,
+      "weekend": true
+    },
+    {
+      "date": "2025-10-27",
+      "impressions": 43071,
+      "clicks": 11646,
+      "dod": 0.73,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-28",
+      "impressions": 44349,
+      "clicks": 13029,
+      "dod": 2.97,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-29",
+      "impressions": 43242,
+      "clicks": 13081,
+      "dod": -2.5,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-30",
+      "impressions": 41695,
+      "clicks": 10907,
+      "dod": -3.58,
+      "weekend": false
+    },
+    {
+      "date": "2025-10-31",
+      "impressions": 40203,
+      "clicks": 9990,
+      "dod": -3.58,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-01",
+      "impressions": 41398,
+      "clicks": 10044,
+      "dod": 2.97,
+      "weekend": true
+    },
+    {
+      "date": "2025-11-02",
+      "impressions": 42227,
+      "clicks": 9994,
+      "dod": 2.0,
+      "weekend": true
+    },
+    {
+      "date": "2025-11-03",
+      "impressions": 39919,
+      "clicks": 9639,
+      "dod": -5.47,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-04",
+      "impressions": 42079,
+      "clicks": 10958,
+      "dod": 5.41,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-05",
+      "impressions": 40332,
+      "clicks": 10847,
+      "dod": -4.15,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-06",
+      "impressions": 38851,
+      "clicks": 9653,
+      "dod": -3.67,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-07",
+      "impressions": 39721,
+      "clicks": 10079,
+      "dod": 2.24,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-08",
+      "impressions": 40321,
+      "clicks": 10298,
+      "dod": 1.51,
+      "weekend": true
+    },
+    {
+      "date": "2025-11-09",
+      "impressions": 39588,
+      "clicks": 9948,
+      "dod": -1.82,
+      "weekend": true
+    },
+    {
+      "date": "2025-11-10",
+      "impressions": 43428,
+      "clicks": 12057,
+      "dod": 9.7,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-11",
+      "impressions": 41444,
+      "clicks": 10307,
+      "dod": -4.57,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-12",
+      "impressions": 40232,
+      "clicks": 9993,
+      "dod": -2.92,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-13",
+      "impressions": 38501,
+      "clicks": 8828,
+      "dod": -4.3,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-14",
+      "impressions": 37647,
+      "clicks": 7941,
+      "dod": -2.22,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-15",
+      "impressions": 38527,
+      "clicks": 8113,
+      "dod": 2.34,
+      "weekend": true
+    },
+    {
+      "date": "2025-11-16",
+      "impressions": 39164,
+      "clicks": 8103,
+      "dod": 1.65,
+      "weekend": true
+    },
+    {
+      "date": "2025-11-17",
+      "impressions": 42430,
+      "clicks": 10611,
+      "dod": 8.34,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-18",
+      "impressions": 43195,
+      "clicks": 12093,
+      "dod": 1.8,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-19",
+      "impressions": 41612,
+      "clicks": 10730,
+      "dod": -3.66,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-20",
+      "impressions": 41842,
+      "clicks": 11575,
+      "dod": 0.55,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-21",
+      "impressions": 41378,
+      "clicks": 11820,
+      "dod": -1.11,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-22",
+      "impressions": 40160,
+      "clicks": 11674,
+      "dod": -2.94,
+      "weekend": true
+    },
+    {
+      "date": "2025-11-23",
+      "impressions": 40818,
+      "clicks": 12099,
+      "dod": 1.64,
+      "weekend": true
+    },
+    {
+      "date": "2025-11-24",
+      "impressions": 43212,
+      "clicks": 13955,
+      "dod": 5.87,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-25",
+      "impressions": 44490,
+      "clicks": 13643,
+      "dod": 2.96,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-26",
+      "impressions": 41479,
+      "clicks": 11468,
+      "dod": -6.77,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-27",
+      "impressions": 41456,
+      "clicks": 12280,
+      "dod": -0.06,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-28",
+      "impressions": 42217,
+      "clicks": 12136,
+      "dod": 1.84,
+      "weekend": false
+    },
+    {
+      "date": "2025-11-29",
+      "impressions": 41567,
+      "clicks": 11763,
+      "dod": -1.54,
+      "weekend": true
+    },
+    {
+      "date": "2025-11-30",
+      "impressions": 38747,
+      "clicks": 11098,
+      "dod": -6.78,
+      "weekend": true
+    },
+    {
+      "date": "2025-12-01",
+      "impressions": 44352,
+      "clicks": 11674,
+      "dod": 14.47,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-02",
+      "impressions": 45732,
+      "clicks": 12481,
+      "dod": 3.11,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-03",
+      "impressions": 43477,
+      "clicks": 11839,
+      "dod": -4.93,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-04",
+      "impressions": 41252,
+      "clicks": 10107,
+      "dod": -5.12,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-05",
+      "impressions": 43334,
+      "clicks": 11899,
+      "dod": 5.05,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-06",
+      "impressions": 41738,
+      "clicks": 11790,
+      "dod": -3.68,
+      "weekend": true
+    },
+    {
+      "date": "2025-12-07",
+      "impressions": 43942,
+      "clicks": 12030,
+      "dod": 5.28,
+      "weekend": true
+    },
+    {
+      "date": "2025-12-08",
+      "impressions": 45866,
+      "clicks": 13032,
+      "dod": 4.38,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-09",
+      "impressions": 44938,
+      "clicks": 13243,
+      "dod": -2.02,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-10",
+      "impressions": 43794,
+      "clicks": 13182,
+      "dod": -2.55,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-11",
+      "impressions": 45197,
+      "clicks": 13662,
+      "dod": 3.2,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-12",
+      "impressions": 47856,
+      "clicks": 15533,
+      "dod": 5.88,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-13",
+      "impressions": 45252,
+      "clicks": 13600,
+      "dod": -5.44,
+      "weekend": true
+    },
+    {
+      "date": "2025-12-14",
+      "impressions": 43703,
+      "clicks": 12522,
+      "dod": -3.42,
+      "weekend": true
+    },
+    {
+      "date": "2025-12-15",
+      "impressions": 46223,
+      "clicks": 13670,
+      "dod": 5.77,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-16",
+      "impressions": 44299,
+      "clicks": 13865,
+      "dod": -4.16,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-17",
+      "impressions": 44629,
+      "clicks": 13527,
+      "dod": 0.74,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-18",
+      "impressions": 45368,
+      "clicks": 13823,
+      "dod": 1.66,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-19",
+      "impressions": 44134,
+      "clicks": 13148,
+      "dod": -2.72,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-20",
+      "impressions": 44766,
+      "clicks": 12832,
+      "dod": 1.43,
+      "weekend": true
+    },
+    {
+      "date": "2025-12-21",
+      "impressions": 44546,
+      "clicks": 11999,
+      "dod": -0.49,
+      "weekend": true
+    },
+    {
+      "date": "2025-12-22",
+      "impressions": 48502,
+      "clicks": 12996,
+      "dod": 8.88,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-23",
+      "impressions": 47232,
+      "clicks": 13375,
+      "dod": -2.62,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-24",
+      "impressions": 45703,
+      "clicks": 14398,
+      "dod": -3.24,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-25",
+      "impressions": 47347,
+      "clicks": 15980,
+      "dod": 3.6,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-26",
+      "impressions": 49361,
+      "clicks": 16338,
+      "dod": 4.25,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-27",
+      "impressions": 47973,
+      "clicks": 16393,
+      "dod": -2.81,
+      "weekend": true
+    },
+    {
+      "date": "2025-12-28",
+      "impressions": 47713,
+      "clicks": 16506,
+      "dod": -0.54,
+      "weekend": true
+    },
+    {
+      "date": "2025-12-29",
+      "impressions": 50634,
+      "clicks": 18017,
+      "dod": 6.12,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-30",
+      "impressions": 48988,
+      "clicks": 17249,
+      "dod": -3.25,
+      "weekend": false
+    },
+    {
+      "date": "2025-12-31",
+      "impressions": 38600,
+      "clicks": 12516,
+      "dod": -21.21,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-01",
+      "impressions": 43614,
+      "clicks": 12506,
+      "dod": 12.99,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-02",
+      "impressions": 49745,
+      "clicks": 15149,
+      "dod": 14.06,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-03",
+      "impressions": 51239,
+      "clicks": 16506,
+      "dod": 3.0,
+      "weekend": true
+    },
+    {
+      "date": "2026-01-04",
+      "impressions": 48423,
+      "clicks": 14501,
+      "dod": -5.5,
+      "weekend": true
+    },
+    {
+      "date": "2026-01-05",
+      "impressions": 55826,
+      "clicks": 17411,
+      "dod": 15.29,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-06",
+      "impressions": 54818,
+      "clicks": 17668,
+      "dod": -1.81,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-07",
+      "impressions": 48294,
+      "clicks": 16107,
+      "dod": -11.9,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-08",
+      "impressions": 46690,
+      "clicks": 15029,
+      "dod": -3.32,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-09",
+      "impressions": 46529,
+      "clicks": 13500,
+      "dod": -0.34,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-10",
+      "impressions": 46559,
+      "clicks": 13573,
+      "dod": 0.06,
+      "weekend": true
+    },
+    {
+      "date": "2026-01-11",
+      "impressions": 45275,
+      "clicks": 13013,
+      "dod": -2.76,
+      "weekend": true
+    },
+    {
+      "date": "2026-01-12",
+      "impressions": 46030,
+      "clicks": 13237,
+      "dod": 1.67,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-13",
+      "impressions": 45068,
+      "clicks": 13117,
+      "dod": -2.09,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-14",
+      "impressions": 43024,
+      "clicks": 12318,
+      "dod": -4.54,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-15",
+      "impressions": 44085,
+      "clicks": 12697,
+      "dod": 2.47,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-16",
+      "impressions": 44893,
+      "clicks": 12223,
+      "dod": 1.83,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-17",
+      "impressions": 46483,
+      "clicks": 13822,
+      "dod": 3.54,
+      "weekend": true
+    },
+    {
+      "date": "2026-01-18",
+      "impressions": 45894,
+      "clicks": 13966,
+      "dod": -1.27,
+      "weekend": true
+    },
+    {
+      "date": "2026-01-19",
+      "impressions": 46987,
+      "clicks": 14690,
+      "dod": 2.38,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-20",
+      "impressions": 45375,
+      "clicks": 14727,
+      "dod": -3.43,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-21",
+      "impressions": 44955,
+      "clicks": 13944,
+      "dod": -0.93,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-22",
+      "impressions": 43194,
+      "clicks": 14042,
+      "dod": -3.92,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-23",
+      "impressions": 42053,
+      "clicks": 12869,
+      "dod": -2.64,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-24",
+      "impressions": 44927,
+      "clicks": 14122,
+      "dod": 6.83,
+      "weekend": true
+    },
+    {
+      "date": "2026-01-25",
+      "impressions": 43807,
+      "clicks": 12424,
+      "dod": -2.49,
+      "weekend": true
+    },
+    {
+      "date": "2026-01-26",
+      "impressions": 46367,
+      "clicks": 13961,
+      "dod": 5.84,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-27",
+      "impressions": 47767,
+      "clicks": 15164,
+      "dod": 3.02,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-28",
+      "impressions": 46323,
+      "clicks": 14640,
+      "dod": -3.02,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-29",
+      "impressions": 46415,
+      "clicks": 15618,
+      "dod": 0.2,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-30",
+      "impressions": 45521,
+      "clicks": 15870,
+      "dod": -1.93,
+      "weekend": false
+    },
+    {
+      "date": "2026-01-31",
+      "impressions": 28967,
+      "clicks": 9619,
+      "dod": -36.37,
+      "weekend": true
+    },
+    {
+      "date": "2026-02-01",
+      "impressions": 44408,
+      "clicks": 13891,
+      "dod": 53.31,
+      "weekend": true
+    },
+    {
+      "date": "2026-02-02",
+      "impressions": 45450,
+      "clicks": 13178,
+      "dod": 2.35,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-03",
+      "impressions": 44108,
+      "clicks": 12317,
+      "dod": -2.95,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-04",
+      "impressions": 44712,
+      "clicks": 12188,
+      "dod": 1.37,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-05",
+      "impressions": 43353,
+      "clicks": 11977,
+      "dod": -3.04,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-06",
+      "impressions": 44467,
+      "clicks": 12175,
+      "dod": 2.57,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-07",
+      "impressions": 44282,
+      "clicks": 12532,
+      "dod": -0.42,
+      "weekend": true
+    },
+    {
+      "date": "2026-02-08",
+      "impressions": 45481,
+      "clicks": 12601,
+      "dod": 2.71,
+      "weekend": true
+    },
+    {
+      "date": "2026-02-09",
+      "impressions": 47553,
+      "clicks": 13482,
+      "dod": 4.56,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-10",
+      "impressions": 45984,
+      "clicks": 12697,
+      "dod": -3.3,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-11",
+      "impressions": 47012,
+      "clicks": 13248,
+      "dod": 2.24,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-12",
+      "impressions": 46151,
+      "clicks": 12386,
+      "dod": -1.83,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-13",
+      "impressions": 45138,
+      "clicks": 12219,
+      "dod": -2.19,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-14",
+      "impressions": 45300,
+      "clicks": 12962,
+      "dod": 0.36,
+      "weekend": true
+    },
+    {
+      "date": "2026-02-15",
+      "impressions": 44089,
+      "clicks": 12336,
+      "dod": -2.67,
+      "weekend": true
+    },
+    {
+      "date": "2026-02-16",
+      "impressions": 45963,
+      "clicks": 12258,
+      "dod": 4.25,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-17",
+      "impressions": 47098,
+      "clicks": 13808,
+      "dod": 2.47,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-18",
+      "impressions": 44233,
+      "clicks": 12783,
+      "dod": -6.08,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-19",
+      "impressions": 43286,
+      "clicks": 12426,
+      "dod": -2.14,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-20",
+      "impressions": 44024,
+      "clicks": 11444,
+      "dod": 1.7,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-21",
+      "impressions": 45125,
+      "clicks": 13050,
+      "dod": 2.5,
+      "weekend": true
+    },
+    {
+      "date": "2026-02-22",
+      "impressions": 55969,
+      "clicks": 13725,
+      "dod": 24.03,
+      "weekend": true
+    },
+    {
+      "date": "2026-02-23",
+      "impressions": 49558,
+      "clicks": 13686,
+      "dod": -11.45,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-24",
+      "impressions": 46566,
+      "clicks": 12222,
+      "dod": -6.04,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-25",
+      "impressions": 44783,
+      "clicks": 13575,
+      "dod": -3.83,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-26",
+      "impressions": 45960,
+      "clicks": 13934,
+      "dod": 2.63,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-27",
+      "impressions": 46013,
+      "clicks": 14219,
+      "dod": 0.12,
+      "weekend": false
+    },
+    {
+      "date": "2026-02-28",
+      "impressions": 44160,
+      "clicks": 12678,
+      "dod": -4.03,
+      "weekend": true
+    },
+    {
+      "date": "2026-03-01",
+      "impressions": 42422,
+      "clicks": 9809,
+      "dod": -3.94,
+      "weekend": true
+    },
+    {
+      "date": "2026-03-02",
+      "impressions": 40069,
+      "clicks": 9964,
+      "dod": -5.55,
+      "weekend": false
+    },
+    {
       "date": "2026-03-03",
       "impressions": 36985,
       "clicks": 8961,
@@ -8036,6 +14007,953 @@
       "clicks": 13338,
       "dod": -4.92,
       "weekend": true
+    }
+  ],
+  "gsc_weekly": [
+    {
+      "week_start": "2023-10-30",
+      "week_label": "30 Oct \u2013 05 Nov 23",
+      "impressions": 146734,
+      "clicks": 31320,
+      "wow": null
+    },
+    {
+      "week_start": "2023-11-06",
+      "week_label": "06 Nov \u2013 12 Nov 23",
+      "impressions": 188372,
+      "clicks": 47457,
+      "wow": 28.38
+    },
+    {
+      "week_start": "2023-11-13",
+      "week_label": "13 Nov \u2013 19 Nov 23",
+      "impressions": 211293,
+      "clicks": 59592,
+      "wow": 12.17
+    },
+    {
+      "week_start": "2023-11-20",
+      "week_label": "20 Nov \u2013 26 Nov 23",
+      "impressions": 219528,
+      "clicks": 66521,
+      "wow": 3.9
+    },
+    {
+      "week_start": "2023-11-27",
+      "week_label": "27 Nov \u2013 03 Dec 23",
+      "impressions": 215726,
+      "clicks": 74521,
+      "wow": -1.73
+    },
+    {
+      "week_start": "2023-12-04",
+      "week_label": "04 Dec \u2013 10 Dec 23",
+      "impressions": 214079,
+      "clicks": 65445,
+      "wow": -0.76
+    },
+    {
+      "week_start": "2023-12-11",
+      "week_label": "11 Dec \u2013 17 Dec 23",
+      "impressions": 225198,
+      "clicks": 65875,
+      "wow": 5.19
+    },
+    {
+      "week_start": "2023-12-18",
+      "week_label": "18 Dec \u2013 24 Dec 23",
+      "impressions": 223166,
+      "clicks": 65914,
+      "wow": -0.9
+    },
+    {
+      "week_start": "2023-12-25",
+      "week_label": "25 Dec \u2013 31 Dec 23",
+      "impressions": 226192,
+      "clicks": 61702,
+      "wow": 1.36
+    },
+    {
+      "week_start": "2024-01-01",
+      "week_label": "01 Jan \u2013 07 Jan 24",
+      "impressions": 223533,
+      "clicks": 57408,
+      "wow": -1.18
+    },
+    {
+      "week_start": "2024-01-08",
+      "week_label": "08 Jan \u2013 14 Jan 24",
+      "impressions": 219657,
+      "clicks": 59268,
+      "wow": -1.73
+    },
+    {
+      "week_start": "2024-01-15",
+      "week_label": "15 Jan \u2013 21 Jan 24",
+      "impressions": 225627,
+      "clicks": 63557,
+      "wow": 2.72
+    },
+    {
+      "week_start": "2024-01-22",
+      "week_label": "22 Jan \u2013 28 Jan 24",
+      "impressions": 221662,
+      "clicks": 67671,
+      "wow": -1.76
+    },
+    {
+      "week_start": "2024-01-29",
+      "week_label": "29 Jan \u2013 04 Feb 24",
+      "impressions": 223543,
+      "clicks": 78881,
+      "wow": 0.85
+    },
+    {
+      "week_start": "2024-02-05",
+      "week_label": "05 Feb \u2013 11 Feb 24",
+      "impressions": 220723,
+      "clicks": 62984,
+      "wow": -1.26
+    },
+    {
+      "week_start": "2024-02-12",
+      "week_label": "12 Feb \u2013 18 Feb 24",
+      "impressions": 220866,
+      "clicks": 59017,
+      "wow": 0.06
+    },
+    {
+      "week_start": "2024-02-19",
+      "week_label": "19 Feb \u2013 25 Feb 24",
+      "impressions": 226551,
+      "clicks": 60803,
+      "wow": 2.57
+    },
+    {
+      "week_start": "2024-02-26",
+      "week_label": "26 Feb \u2013 03 Mar 24",
+      "impressions": 221309,
+      "clicks": 66614,
+      "wow": -2.31
+    },
+    {
+      "week_start": "2024-03-04",
+      "week_label": "04 Mar \u2013 10 Mar 24",
+      "impressions": 217557,
+      "clicks": 68190,
+      "wow": -1.7
+    },
+    {
+      "week_start": "2024-03-11",
+      "week_label": "11 Mar \u2013 17 Mar 24",
+      "impressions": 212292,
+      "clicks": 60362,
+      "wow": -2.42
+    },
+    {
+      "week_start": "2024-03-18",
+      "week_label": "18 Mar \u2013 24 Mar 24",
+      "impressions": 208465,
+      "clicks": 55961,
+      "wow": -1.8
+    },
+    {
+      "week_start": "2024-03-25",
+      "week_label": "25 Mar \u2013 31 Mar 24",
+      "impressions": 211138,
+      "clicks": 60962,
+      "wow": 1.28
+    },
+    {
+      "week_start": "2024-04-01",
+      "week_label": "01 Apr \u2013 07 Apr 24",
+      "impressions": 209303,
+      "clicks": 57336,
+      "wow": -0.87
+    },
+    {
+      "week_start": "2024-04-08",
+      "week_label": "08 Apr \u2013 14 Apr 24",
+      "impressions": 219162,
+      "clicks": 55981,
+      "wow": 4.71
+    },
+    {
+      "week_start": "2024-04-15",
+      "week_label": "15 Apr \u2013 21 Apr 24",
+      "impressions": 216404,
+      "clicks": 54146,
+      "wow": -1.26
+    },
+    {
+      "week_start": "2024-04-22",
+      "week_label": "22 Apr \u2013 28 Apr 24",
+      "impressions": 222130,
+      "clicks": 55793,
+      "wow": 2.65
+    },
+    {
+      "week_start": "2024-04-29",
+      "week_label": "29 Apr \u2013 05 May 24",
+      "impressions": 232778,
+      "clicks": 56257,
+      "wow": 4.79
+    },
+    {
+      "week_start": "2024-05-06",
+      "week_label": "06 May \u2013 12 May 24",
+      "impressions": 234037,
+      "clicks": 59077,
+      "wow": 0.54
+    },
+    {
+      "week_start": "2024-05-13",
+      "week_label": "13 May \u2013 19 May 24",
+      "impressions": 237142,
+      "clicks": 59035,
+      "wow": 1.33
+    },
+    {
+      "week_start": "2024-05-20",
+      "week_label": "20 May \u2013 26 May 24",
+      "impressions": 232837,
+      "clicks": 58545,
+      "wow": -1.82
+    },
+    {
+      "week_start": "2024-05-27",
+      "week_label": "27 May \u2013 02 Jun 24",
+      "impressions": 232076,
+      "clicks": 59877,
+      "wow": -0.33
+    },
+    {
+      "week_start": "2024-06-03",
+      "week_label": "03 Jun \u2013 09 Jun 24",
+      "impressions": 203977,
+      "clicks": 51121,
+      "wow": -12.11
+    },
+    {
+      "week_start": "2024-06-10",
+      "week_label": "10 Jun \u2013 16 Jun 24",
+      "impressions": 225279,
+      "clicks": 60527,
+      "wow": 10.44
+    },
+    {
+      "week_start": "2024-06-17",
+      "week_label": "17 Jun \u2013 23 Jun 24",
+      "impressions": 235884,
+      "clicks": 60929,
+      "wow": 4.71
+    },
+    {
+      "week_start": "2024-06-24",
+      "week_label": "24 Jun \u2013 30 Jun 24",
+      "impressions": 218340,
+      "clicks": 55610,
+      "wow": -7.44
+    },
+    {
+      "week_start": "2024-07-01",
+      "week_label": "01 Jul \u2013 07 Jul 24",
+      "impressions": 221587,
+      "clicks": 57800,
+      "wow": 1.49
+    },
+    {
+      "week_start": "2024-07-08",
+      "week_label": "08 Jul \u2013 14 Jul 24",
+      "impressions": 225386,
+      "clicks": 57418,
+      "wow": 1.71
+    },
+    {
+      "week_start": "2024-07-15",
+      "week_label": "15 Jul \u2013 21 Jul 24",
+      "impressions": 228750,
+      "clicks": 58501,
+      "wow": 1.49
+    },
+    {
+      "week_start": "2024-07-22",
+      "week_label": "22 Jul \u2013 28 Jul 24",
+      "impressions": 227621,
+      "clicks": 58684,
+      "wow": -0.49
+    },
+    {
+      "week_start": "2024-07-29",
+      "week_label": "29 Jul \u2013 04 Aug 24",
+      "impressions": 220775,
+      "clicks": 56744,
+      "wow": -3.01
+    },
+    {
+      "week_start": "2024-08-05",
+      "week_label": "05 Aug \u2013 11 Aug 24",
+      "impressions": 234188,
+      "clicks": 59976,
+      "wow": 6.08
+    },
+    {
+      "week_start": "2024-08-12",
+      "week_label": "12 Aug \u2013 18 Aug 24",
+      "impressions": 235098,
+      "clicks": 56805,
+      "wow": 0.39
+    },
+    {
+      "week_start": "2024-08-19",
+      "week_label": "19 Aug \u2013 25 Aug 24",
+      "impressions": 247277,
+      "clicks": 58423,
+      "wow": 5.18
+    },
+    {
+      "week_start": "2024-08-26",
+      "week_label": "26 Aug \u2013 01 Sep 24",
+      "impressions": 239932,
+      "clicks": 57082,
+      "wow": -2.97
+    },
+    {
+      "week_start": "2024-09-02",
+      "week_label": "02 Sep \u2013 08 Sep 24",
+      "impressions": 223966,
+      "clicks": 55161,
+      "wow": -6.65
+    },
+    {
+      "week_start": "2024-09-09",
+      "week_label": "09 Sep \u2013 15 Sep 24",
+      "impressions": 235346,
+      "clicks": 79109,
+      "wow": 5.08
+    },
+    {
+      "week_start": "2024-09-16",
+      "week_label": "16 Sep \u2013 22 Sep 24",
+      "impressions": 234584,
+      "clicks": 57197,
+      "wow": -0.32
+    },
+    {
+      "week_start": "2024-09-23",
+      "week_label": "23 Sep \u2013 29 Sep 24",
+      "impressions": 219052,
+      "clicks": 53474,
+      "wow": -6.62
+    },
+    {
+      "week_start": "2024-09-30",
+      "week_label": "30 Sep \u2013 06 Oct 24",
+      "impressions": 221117,
+      "clicks": 63784,
+      "wow": 0.94
+    },
+    {
+      "week_start": "2024-10-07",
+      "week_label": "07 Oct \u2013 13 Oct 24",
+      "impressions": 215559,
+      "clicks": 53572,
+      "wow": -2.51
+    },
+    {
+      "week_start": "2024-10-14",
+      "week_label": "14 Oct \u2013 20 Oct 24",
+      "impressions": 241051,
+      "clicks": 72111,
+      "wow": 11.83
+    },
+    {
+      "week_start": "2024-10-21",
+      "week_label": "21 Oct \u2013 27 Oct 24",
+      "impressions": 227817,
+      "clicks": 58833,
+      "wow": -5.49
+    },
+    {
+      "week_start": "2024-10-28",
+      "week_label": "28 Oct \u2013 03 Nov 24",
+      "impressions": 200181,
+      "clicks": 54137,
+      "wow": -12.13
+    },
+    {
+      "week_start": "2024-11-04",
+      "week_label": "04 Nov \u2013 10 Nov 24",
+      "impressions": 227251,
+      "clicks": 69152,
+      "wow": 13.52
+    },
+    {
+      "week_start": "2024-11-11",
+      "week_label": "11 Nov \u2013 17 Nov 24",
+      "impressions": 220620,
+      "clicks": 51902,
+      "wow": -2.92
+    },
+    {
+      "week_start": "2024-11-18",
+      "week_label": "18 Nov \u2013 24 Nov 24",
+      "impressions": 213823,
+      "clicks": 49331,
+      "wow": -3.08
+    },
+    {
+      "week_start": "2024-11-25",
+      "week_label": "25 Nov \u2013 01 Dec 24",
+      "impressions": 217741,
+      "clicks": 53068,
+      "wow": 1.83
+    },
+    {
+      "week_start": "2024-12-02",
+      "week_label": "02 Dec \u2013 08 Dec 24",
+      "impressions": 216659,
+      "clicks": 63123,
+      "wow": -0.5
+    },
+    {
+      "week_start": "2024-12-09",
+      "week_label": "09 Dec \u2013 15 Dec 24",
+      "impressions": 223401,
+      "clicks": 67578,
+      "wow": 3.11
+    },
+    {
+      "week_start": "2024-12-16",
+      "week_label": "16 Dec \u2013 22 Dec 24",
+      "impressions": 231895,
+      "clicks": 56106,
+      "wow": 3.8
+    },
+    {
+      "week_start": "2024-12-23",
+      "week_label": "23 Dec \u2013 29 Dec 24",
+      "impressions": 244294,
+      "clicks": 59773,
+      "wow": 5.35
+    },
+    {
+      "week_start": "2024-12-30",
+      "week_label": "30 Dec \u2013 05 Jan 25",
+      "impressions": 227277,
+      "clicks": 71202,
+      "wow": -6.97
+    },
+    {
+      "week_start": "2025-01-06",
+      "week_label": "06 Jan \u2013 12 Jan 25",
+      "impressions": 230695,
+      "clicks": 68919,
+      "wow": 1.5
+    },
+    {
+      "week_start": "2025-01-13",
+      "week_label": "13 Jan \u2013 19 Jan 25",
+      "impressions": 228193,
+      "clicks": 59354,
+      "wow": -1.08
+    },
+    {
+      "week_start": "2025-01-20",
+      "week_label": "20 Jan \u2013 26 Jan 25",
+      "impressions": 242030,
+      "clicks": 53586,
+      "wow": 6.06
+    },
+    {
+      "week_start": "2025-01-27",
+      "week_label": "27 Jan \u2013 02 Feb 25",
+      "impressions": 238916,
+      "clicks": 59582,
+      "wow": -1.29
+    },
+    {
+      "week_start": "2025-02-03",
+      "week_label": "03 Feb \u2013 09 Feb 25",
+      "impressions": 247689,
+      "clicks": 57254,
+      "wow": 3.67
+    },
+    {
+      "week_start": "2025-02-10",
+      "week_label": "10 Feb \u2013 16 Feb 25",
+      "impressions": 244009,
+      "clicks": 48566,
+      "wow": -1.49
+    },
+    {
+      "week_start": "2025-02-17",
+      "week_label": "17 Feb \u2013 23 Feb 25",
+      "impressions": 246169,
+      "clicks": 52466,
+      "wow": 0.89
+    },
+    {
+      "week_start": "2025-02-24",
+      "week_label": "24 Feb \u2013 02 Mar 25",
+      "impressions": 242987,
+      "clicks": 57847,
+      "wow": -1.29
+    },
+    {
+      "week_start": "2025-03-03",
+      "week_label": "03 Mar \u2013 09 Mar 25",
+      "impressions": 238745,
+      "clicks": 58992,
+      "wow": -1.75
+    },
+    {
+      "week_start": "2025-03-10",
+      "week_label": "10 Mar \u2013 16 Mar 25",
+      "impressions": 250341,
+      "clicks": 46558,
+      "wow": 4.86
+    },
+    {
+      "week_start": "2025-03-17",
+      "week_label": "17 Mar \u2013 23 Mar 25",
+      "impressions": 267540,
+      "clicks": 52261,
+      "wow": 6.87
+    },
+    {
+      "week_start": "2025-03-24",
+      "week_label": "24 Mar \u2013 30 Mar 25",
+      "impressions": 248572,
+      "clicks": 51132,
+      "wow": -7.09
+    },
+    {
+      "week_start": "2025-03-31",
+      "week_label": "31 Mar \u2013 06 Apr 25",
+      "impressions": 256154,
+      "clicks": 53138,
+      "wow": 3.05
+    },
+    {
+      "week_start": "2025-04-07",
+      "week_label": "07 Apr \u2013 13 Apr 25",
+      "impressions": 255040,
+      "clicks": 50653,
+      "wow": -0.43
+    },
+    {
+      "week_start": "2025-04-14",
+      "week_label": "14 Apr \u2013 20 Apr 25",
+      "impressions": 261288,
+      "clicks": 51149,
+      "wow": 2.45
+    },
+    {
+      "week_start": "2025-04-21",
+      "week_label": "21 Apr \u2013 27 Apr 25",
+      "impressions": 264995,
+      "clicks": 49070,
+      "wow": 1.42
+    },
+    {
+      "week_start": "2025-04-28",
+      "week_label": "28 Apr \u2013 04 May 25",
+      "impressions": 257422,
+      "clicks": 56529,
+      "wow": -2.86
+    },
+    {
+      "week_start": "2025-05-05",
+      "week_label": "05 May \u2013 11 May 25",
+      "impressions": 237440,
+      "clicks": 53189,
+      "wow": -7.76
+    },
+    {
+      "week_start": "2025-05-12",
+      "week_label": "12 May \u2013 18 May 25",
+      "impressions": 276939,
+      "clicks": 64002,
+      "wow": 16.64
+    },
+    {
+      "week_start": "2025-05-19",
+      "week_label": "19 May \u2013 25 May 25",
+      "impressions": 286611,
+      "clicks": 70764,
+      "wow": 3.49
+    },
+    {
+      "week_start": "2025-05-26",
+      "week_label": "26 May \u2013 01 Jun 25",
+      "impressions": 289166,
+      "clicks": 77320,
+      "wow": 0.89
+    },
+    {
+      "week_start": "2025-06-02",
+      "week_label": "02 Jun \u2013 08 Jun 25",
+      "impressions": 272101,
+      "clicks": 70243,
+      "wow": -5.9
+    },
+    {
+      "week_start": "2025-06-09",
+      "week_label": "09 Jun \u2013 15 Jun 25",
+      "impressions": 280275,
+      "clicks": 71321,
+      "wow": 3.0
+    },
+    {
+      "week_start": "2025-06-16",
+      "week_label": "16 Jun \u2013 22 Jun 25",
+      "impressions": 281498,
+      "clicks": 68072,
+      "wow": 0.44
+    },
+    {
+      "week_start": "2025-06-23",
+      "week_label": "23 Jun \u2013 29 Jun 25",
+      "impressions": 288092,
+      "clicks": 67979,
+      "wow": 2.34
+    },
+    {
+      "week_start": "2025-06-30",
+      "week_label": "30 Jun \u2013 06 Jul 25",
+      "impressions": 302111,
+      "clicks": 82004,
+      "wow": 4.87
+    },
+    {
+      "week_start": "2025-07-07",
+      "week_label": "07 Jul \u2013 13 Jul 25",
+      "impressions": 287779,
+      "clicks": 84090,
+      "wow": -4.74
+    },
+    {
+      "week_start": "2025-07-14",
+      "week_label": "14 Jul \u2013 20 Jul 25",
+      "impressions": 287088,
+      "clicks": 84102,
+      "wow": -0.24
+    },
+    {
+      "week_start": "2025-07-21",
+      "week_label": "21 Jul \u2013 27 Jul 25",
+      "impressions": 285268,
+      "clicks": 96063,
+      "wow": -0.63
+    },
+    {
+      "week_start": "2025-07-28",
+      "week_label": "28 Jul \u2013 03 Aug 25",
+      "impressions": 277336,
+      "clicks": 80757,
+      "wow": -2.78
+    },
+    {
+      "week_start": "2025-08-04",
+      "week_label": "04 Aug \u2013 10 Aug 25",
+      "impressions": 266580,
+      "clicks": 72111,
+      "wow": -3.88
+    },
+    {
+      "week_start": "2025-08-11",
+      "week_label": "11 Aug \u2013 17 Aug 25",
+      "impressions": 278955,
+      "clicks": 81857,
+      "wow": 4.64
+    },
+    {
+      "week_start": "2025-08-18",
+      "week_label": "18 Aug \u2013 24 Aug 25",
+      "impressions": 288686,
+      "clicks": 82475,
+      "wow": 3.49
+    },
+    {
+      "week_start": "2025-08-25",
+      "week_label": "25 Aug \u2013 31 Aug 25",
+      "impressions": 278980,
+      "clicks": 73934,
+      "wow": -3.36
+    },
+    {
+      "week_start": "2025-09-01",
+      "week_label": "01 Sep \u2013 07 Sep 25",
+      "impressions": 294128,
+      "clicks": 72858,
+      "wow": 5.43
+    },
+    {
+      "week_start": "2025-09-08",
+      "week_label": "08 Sep \u2013 14 Sep 25",
+      "impressions": 314600,
+      "clicks": 92902,
+      "wow": 6.96
+    },
+    {
+      "week_start": "2025-09-15",
+      "week_label": "15 Sep \u2013 21 Sep 25",
+      "impressions": 294284,
+      "clicks": 84504,
+      "wow": -6.46
+    },
+    {
+      "week_start": "2025-09-22",
+      "week_label": "22 Sep \u2013 28 Sep 25",
+      "impressions": 301219,
+      "clicks": 98451,
+      "wow": 2.36
+    },
+    {
+      "week_start": "2025-09-29",
+      "week_label": "29 Sep \u2013 05 Oct 25",
+      "impressions": 289596,
+      "clicks": 95656,
+      "wow": -3.86
+    },
+    {
+      "week_start": "2025-10-06",
+      "week_label": "06 Oct \u2013 12 Oct 25",
+      "impressions": 284980,
+      "clicks": 82635,
+      "wow": -1.59
+    },
+    {
+      "week_start": "2025-10-13",
+      "week_label": "13 Oct \u2013 19 Oct 25",
+      "impressions": 259276,
+      "clicks": 69238,
+      "wow": -9.02
+    },
+    {
+      "week_start": "2025-10-20",
+      "week_label": "20 Oct \u2013 26 Oct 25",
+      "impressions": 269737,
+      "clicks": 74103,
+      "wow": 4.03
+    },
+    {
+      "week_start": "2025-10-27",
+      "week_label": "27 Oct \u2013 02 Nov 25",
+      "impressions": 296185,
+      "clicks": 78691,
+      "wow": 9.81
+    },
+    {
+      "week_start": "2025-11-03",
+      "week_label": "03 Nov \u2013 09 Nov 25",
+      "impressions": 280811,
+      "clicks": 71422,
+      "wow": -5.19
+    },
+    {
+      "week_start": "2025-11-10",
+      "week_label": "10 Nov \u2013 16 Nov 25",
+      "impressions": 278943,
+      "clicks": 65342,
+      "wow": -0.67
+    },
+    {
+      "week_start": "2025-11-17",
+      "week_label": "17 Nov \u2013 23 Nov 25",
+      "impressions": 291435,
+      "clicks": 80602,
+      "wow": 4.48
+    },
+    {
+      "week_start": "2025-11-24",
+      "week_label": "24 Nov \u2013 30 Nov 25",
+      "impressions": 293168,
+      "clicks": 86343,
+      "wow": 0.59
+    },
+    {
+      "week_start": "2025-12-01",
+      "week_label": "01 Dec \u2013 07 Dec 25",
+      "impressions": 303827,
+      "clicks": 81820,
+      "wow": 3.64
+    },
+    {
+      "week_start": "2025-12-08",
+      "week_label": "08 Dec \u2013 14 Dec 25",
+      "impressions": 316606,
+      "clicks": 94774,
+      "wow": 4.21
+    },
+    {
+      "week_start": "2025-12-15",
+      "week_label": "15 Dec \u2013 21 Dec 25",
+      "impressions": 313965,
+      "clicks": 92864,
+      "wow": -0.83
+    },
+    {
+      "week_start": "2025-12-22",
+      "week_label": "22 Dec \u2013 28 Dec 25",
+      "impressions": 333831,
+      "clicks": 105986,
+      "wow": 6.33
+    },
+    {
+      "week_start": "2025-12-29",
+      "week_label": "29 Dec \u2013 04 Jan 26",
+      "impressions": 331243,
+      "clicks": 106444,
+      "wow": -0.78
+    },
+    {
+      "week_start": "2026-01-05",
+      "week_label": "05 Jan \u2013 11 Jan 26",
+      "impressions": 343991,
+      "clicks": 106301,
+      "wow": 3.85
+    },
+    {
+      "week_start": "2026-01-12",
+      "week_label": "12 Jan \u2013 18 Jan 26",
+      "impressions": 315477,
+      "clicks": 91380,
+      "wow": -8.29
+    },
+    {
+      "week_start": "2026-01-19",
+      "week_label": "19 Jan \u2013 25 Jan 26",
+      "impressions": 311298,
+      "clicks": 96818,
+      "wow": -1.32
+    },
+    {
+      "week_start": "2026-01-26",
+      "week_label": "26 Jan \u2013 01 Feb 26",
+      "impressions": 305768,
+      "clicks": 98763,
+      "wow": -1.78
+    },
+    {
+      "week_start": "2026-02-02",
+      "week_label": "02 Feb \u2013 08 Feb 26",
+      "impressions": 311853,
+      "clicks": 86968,
+      "wow": 1.99
+    },
+    {
+      "week_start": "2026-02-09",
+      "week_label": "09 Feb \u2013 15 Feb 26",
+      "impressions": 321227,
+      "clicks": 89330,
+      "wow": 3.01
+    },
+    {
+      "week_start": "2026-02-16",
+      "week_label": "16 Feb \u2013 22 Feb 26",
+      "impressions": 325698,
+      "clicks": 89494,
+      "wow": 1.39
+    },
+    {
+      "week_start": "2026-02-23",
+      "week_label": "23 Feb \u2013 01 Mar 26",
+      "impressions": 319462,
+      "clicks": 90123,
+      "wow": -1.91
+    },
+    {
+      "week_start": "2026-03-02",
+      "week_label": "02 Mar \u2013 08 Mar 26",
+      "impressions": 293641,
+      "clicks": 67492,
+      "wow": -8.08
+    },
+    {
+      "week_start": "2026-03-09",
+      "week_label": "09 Mar \u2013 15 Mar 26",
+      "impressions": 317396,
+      "clicks": 73265,
+      "wow": 8.09
+    },
+    {
+      "week_start": "2026-03-16",
+      "week_label": "16 Mar \u2013 22 Mar 26",
+      "impressions": 322306,
+      "clicks": 82254,
+      "wow": 1.55
+    },
+    {
+      "week_start": "2026-03-23",
+      "week_label": "23 Mar \u2013 29 Mar 26",
+      "impressions": 319024,
+      "clicks": 83166,
+      "wow": -1.02
+    },
+    {
+      "week_start": "2026-03-30",
+      "week_label": "30 Mar \u2013 05 Apr 26",
+      "impressions": 311975,
+      "clicks": 73648,
+      "wow": -2.21
+    },
+    {
+      "week_start": "2026-04-06",
+      "week_label": "06 Apr \u2013 12 Apr 26",
+      "impressions": 317067,
+      "clicks": 67304,
+      "wow": 1.63
+    },
+    {
+      "week_start": "2026-04-13",
+      "week_label": "13 Apr \u2013 19 Apr 26",
+      "impressions": 326489,
+      "clicks": 76428,
+      "wow": 2.97
+    },
+    {
+      "week_start": "2026-04-20",
+      "week_label": "20 Apr \u2013 26 Apr 26",
+      "impressions": 329726,
+      "clicks": 77287,
+      "wow": 0.99
+    },
+    {
+      "week_start": "2026-04-27",
+      "week_label": "27 Apr \u2013 03 May 26",
+      "impressions": 351851,
+      "clicks": 73257,
+      "wow": 6.71
+    },
+    {
+      "week_start": "2026-05-04",
+      "week_label": "04 May \u2013 10 May 26",
+      "impressions": 363402,
+      "clicks": 72288,
+      "wow": 3.28
+    },
+    {
+      "week_start": "2026-05-11",
+      "week_label": "11 May \u2013 17 May 26",
+      "impressions": 355610,
+      "clicks": 75612,
+      "wow": -2.14
+    },
+    {
+      "week_start": "2026-05-18",
+      "week_label": "18 May \u2013 24 May 26",
+      "impressions": 360052,
+      "clicks": 84836,
+      "wow": 1.25
+    },
+    {
+      "week_start": "2026-05-25",
+      "week_label": "25 May \u2013 31 May 26",
+      "impressions": 371496,
+      "clicks": 98042,
+      "wow": 3.18
     }
   ],
   "google_indexed": [],
