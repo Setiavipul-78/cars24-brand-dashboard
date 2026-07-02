@@ -1,0 +1,346 @@
+{
+  "geo": [
+    {
+      "city": "Chennai",
+      "views": 2503,
+      "watch_time_hours": 18.8
+    },
+    {
+      "city": "Coimbatore",
+      "views": 905,
+      "watch_time_hours": 7.5
+    },
+    {
+      "city": "Bengaluru",
+      "views": 560,
+      "watch_time_hours": 3.5
+    },
+    {
+      "city": "Madurai",
+      "views": 346,
+      "watch_time_hours": 3.2
+    },
+    {
+      "city": "Salem",
+      "views": 241,
+      "watch_time_hours": 2.1
+    },
+    {
+      "city": "Kochi",
+      "views": 51,
+      "watch_time_hours": 0.3
+    },
+    {
+      "city": "Singapore",
+      "views": 32,
+      "watch_time_hours": 0.3
+    },
+    {
+      "city": "Delhi",
+      "views": 21,
+      "watch_time_hours": 0.1
+    },
+    {
+      "city": "Colombo",
+      "views": 21,
+      "watch_time_hours": 0.1
+    }
+  ],
+  "demographics": [
+    {
+      "age_group": "age18-24",
+      "gender": "female",
+      "viewer_pct": 0.4
+    },
+    {
+      "age_group": "age18-24",
+      "gender": "male",
+      "viewer_pct": 14.8
+    },
+    {
+      "age_group": "age25-34",
+      "gender": "female",
+      "viewer_pct": 2.7
+    },
+    {
+      "age_group": "age25-34",
+      "gender": "male",
+      "viewer_pct": 41.8
+    },
+    {
+      "age_group": "age35-44",
+      "gender": "female",
+      "viewer_pct": 2.5
+    },
+    {
+      "age_group": "age35-44",
+      "gender": "male",
+      "viewer_pct": 26.3
+    },
+    {
+      "age_group": "age45-54",
+      "gender": "female",
+      "viewer_pct": 0.4
+    },
+    {
+      "age_group": "age45-54",
+      "gender": "male",
+      "viewer_pct": 9.0
+    },
+    {
+      "age_group": "age55-64",
+      "gender": "male",
+      "viewer_pct": 2.2
+    }
+  ],
+  "traffic_sources": [
+    {
+      "source": "SHORTS",
+      "views": 6143,
+      "watch_time_hours": 40.2,
+      "pct": 67.8
+    },
+    {
+      "source": "YT_CHANNEL",
+      "views": 1606,
+      "watch_time_hours": 6.0,
+      "pct": 17.7
+    },
+    {
+      "source": "YT_SEARCH",
+      "views": 682,
+      "watch_time_hours": 7.1,
+      "pct": 7.5
+    },
+    {
+      "source": "SUBSCRIBER",
+      "views": 450,
+      "watch_time_hours": 8.6,
+      "pct": 5.0
+    },
+    {
+      "source": "YT_OTHER_PAGE",
+      "views": 72,
+      "watch_time_hours": 0.5,
+      "pct": 0.8
+    },
+    {
+      "source": "EXT_URL",
+      "views": 64,
+      "watch_time_hours": 0.9,
+      "pct": 0.7
+    },
+    {
+      "source": "PLAYLIST",
+      "views": 25,
+      "watch_time_hours": 0.1,
+      "pct": 0.3
+    },
+    {
+      "source": "NOTIFICATION",
+      "views": 12,
+      "watch_time_hours": 0.1,
+      "pct": 0.1
+    },
+    {
+      "source": "SOUND_PAGE",
+      "views": 2,
+      "watch_time_hours": 0.0,
+      "pct": 0.0
+    },
+    {
+      "source": "NO_LINK_OTHER",
+      "views": 1,
+      "watch_time_hours": 0.0,
+      "pct": 0.0
+    }
+  ],
+  "devices": [
+    {
+      "device": "MOBILE",
+      "views": 7920,
+      "watch_time_hours": 57.5,
+      "pct": 87.5
+    },
+    {
+      "device": "TV",
+      "views": 786,
+      "watch_time_hours": 3.6,
+      "pct": 8.7
+    },
+    {
+      "device": "DESKTOP",
+      "views": 221,
+      "watch_time_hours": 1.7,
+      "pct": 2.4
+    },
+    {
+      "device": "TABLET",
+      "views": 125,
+      "watch_time_hours": 0.7,
+      "pct": 1.4
+    }
+  ],
+  "top_videos": [
+    {
+      "id": "_FQJ75t6Kdw",
+      "title": "Maruti Eeco's Under Seat Engine! #cars24tamil",
+      "published": "2025-10-30",
+      "url": "https://www.youtube.com/watch?v=_FQJ75t6Kdw",
+      "thumbnail": "https://i.ytimg.com/vi/_FQJ75t6Kdw/default.jpg",
+      "views": 3050,
+      "watch_time_hours": 29.77,
+      "avg_duration_sec": 61.0,
+      "avg_view_pct": 41.7,
+      "subs_gained": 26,
+      "likes": 117,
+      "comments": 3,
+      "shares": 5,
+      "engagement_rate": 4.1
+    },
+    {
+      "id": "9lh_XZLp6zA",
+      "title": "Congestion TAX in Karnataka?!? \ud83d\ude28 #cars24Tamil",
+      "published": "2025-10-28",
+      "url": "https://www.youtube.com/watch?v=9lh_XZLp6zA",
+      "thumbnail": "https://i.ytimg.com/vi/9lh_XZLp6zA/default.jpg",
+      "views": 1597,
+      "watch_time_hours": 5.68,
+      "avg_duration_sec": 31.0,
+      "avg_view_pct": 50.5,
+      "subs_gained": 5,
+      "likes": 26,
+      "comments": 2,
+      "shares": 5,
+      "engagement_rate": 2.07
+    },
+    {
+      "id": "LmmZwh8Hltw",
+      "title": "Why Liquor Shops on Highways? \ud83d\ude35\u200d\ud83d\udcab #cars24Tamil",
+      "published": "2025-10-29",
+      "url": "https://www.youtube.com/watch?v=LmmZwh8Hltw",
+      "thumbnail": "https://i.ytimg.com/vi/LmmZwh8Hltw/default.jpg",
+      "views": 1496,
+      "watch_time_hours": 12.78,
+      "avg_duration_sec": 44.0,
+      "avg_view_pct": 35.3,
+      "subs_gained": 6,
+      "likes": 60,
+      "comments": 4,
+      "shares": 1,
+      "engagement_rate": 4.34
+    },
+    {
+      "id": "rZJxAv_-kII",
+      "title": "Maruti Ignis - India's BEST Hatchback? #cars24tamil",
+      "published": "2025-11-01",
+      "url": "https://www.youtube.com/watch?v=rZJxAv_-kII",
+      "thumbnail": "https://i.ytimg.com/vi/rZJxAv_-kII/default.jpg",
+      "views": 1264,
+      "watch_time_hours": 5.58,
+      "avg_duration_sec": 27.0,
+      "avg_view_pct": 23.4,
+      "subs_gained": 3,
+      "likes": 19,
+      "comments": 2,
+      "shares": 0,
+      "engagement_rate": 1.66
+    },
+    {
+      "id": "3brGUNO5-wI",
+      "title": "How to Do Your Car\u2019s KYV (Know Your Vehicle)? #cars24tamil",
+      "published": "2025-11-12",
+      "url": "https://www.youtube.com/watch?v=3brGUNO5-wI",
+      "thumbnail": "https://i.ytimg.com/vi/3brGUNO5-wI/default.jpg",
+      "views": 859,
+      "watch_time_hours": 7.0,
+      "avg_duration_sec": 36.0,
+      "avg_view_pct": 24.0,
+      "subs_gained": 4,
+      "likes": 17,
+      "comments": 1,
+      "shares": 16,
+      "engagement_rate": 3.96
+    },
+    {
+      "id": "Ex7HTIFgkHE",
+      "title": "Maruti Zen Estilo - Why Maruti? #cars24tamil",
+      "published": "2025-11-03",
+      "url": "https://www.youtube.com/watch?v=Ex7HTIFgkHE",
+      "thumbnail": "https://i.ytimg.com/vi/Ex7HTIFgkHE/default.jpg",
+      "views": 298,
+      "watch_time_hours": 1.32,
+      "avg_duration_sec": 22.0,
+      "avg_view_pct": 32.8,
+      "subs_gained": 1,
+      "likes": 7,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 2.35
+    },
+    {
+      "id": "EeV4-ScHwr4",
+      "title": "Harshad Mehta's LS400! #cars24tamil",
+      "published": "2025-11-07",
+      "url": "https://www.youtube.com/watch?v=EeV4-ScHwr4",
+      "thumbnail": "https://i.ytimg.com/vi/EeV4-ScHwr4/default.jpg",
+      "views": 261,
+      "watch_time_hours": 0.67,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 28.3,
+      "subs_gained": 1,
+      "likes": 5,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 1.92
+    },
+    {
+      "id": "-EdYrm3Vt5k",
+      "title": "Correct Way To Hold The Steering Wheel #cars24",
+      "published": "2025-11-03",
+      "url": "https://www.youtube.com/watch?v=-EdYrm3Vt5k",
+      "thumbnail": "https://i.ytimg.com/vi/-EdYrm3Vt5k/default.jpg",
+      "views": 152,
+      "watch_time_hours": 0.58,
+      "avg_duration_sec": 25.0,
+      "avg_view_pct": 49.7,
+      "subs_gained": 1,
+      "likes": 6,
+      "comments": 1,
+      "shares": 0,
+      "engagement_rate": 4.61
+    },
+    {
+      "id": "dCh9a0gjtIw",
+      "title": "Rear Underside Protection Device! #cars24",
+      "published": "2025-11-04",
+      "url": "https://www.youtube.com/watch?v=dCh9a0gjtIw",
+      "thumbnail": "https://i.ytimg.com/vi/dCh9a0gjtIw/default.jpg",
+      "views": 134,
+      "watch_time_hours": 0.35,
+      "avg_duration_sec": 15.0,
+      "avg_view_pct": 27.5,
+      "subs_gained": 0,
+      "likes": 2,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 1.49
+    },
+    {
+      "id": "YhPHEJ1gV2U",
+      "title": "ZERO Road Tax on Private Roads! #cars24tamil",
+      "published": "2025-10-31",
+      "url": "https://www.youtube.com/watch?v=YhPHEJ1gV2U",
+      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=CKy8jtIG&rs=AOn4CLD1deIuXaVzO4bkvb3HexcH-klbsA",
+      "views": 54,
+      "watch_time_hours": 0.32,
+      "avg_duration_sec": 35.0,
+      "avg_view_pct": 37.6,
+      "subs_gained": 1,
+      "likes": 4,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 7.41
+    }
+  ]
+}
