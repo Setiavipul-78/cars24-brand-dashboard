@@ -2,7 +2,7 @@ name: Refresh dashboard data
 
 on:
   schedule:
-    - cron: '30 20 * * *'   # 2:00 AM IST daily (20:30 UTC)
+    - cron: '30 6 * * *'    # 12:00 PM IST daily (06:30 UTC)
   workflow_dispatch:          # manual trigger from GitHub UI
 
 jobs:
