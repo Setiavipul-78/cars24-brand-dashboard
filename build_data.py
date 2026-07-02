@@ -46,6 +46,28 @@ def build_monthly():
     if not p.exists():
         print("  ⚠ historical_totals.csv missing"); return []
     df = pd.read_csv(p).sort_values("month").reset_index(drop=True)
+
+    # Auto-extend with months from gsc_daily_india.csv not yet in historical_totals
+    gsc_p = DATA / "gsc_daily_india.csv"
+    if gsc_p.exists():
+        gsc = pd.read_csv(gsc_p)
+        gsc["date"]  = pd.to_datetime(gsc["date"])
+        gsc["month"] = gsc["date"].dt.to_period("M").astype(str)
+        # Only consider complete months (not the current partial month)
+        today_period = str(pd.Timestamp("today").to_period("M"))
+        known = set(df["month"].tolist())
+        monthly_agg = (gsc[gsc["month"] != today_period]
+                       .groupby("month")["impressions"].sum().reset_index()
+                       .rename(columns={"impressions": "total_impressions"}))
+        new_months = monthly_agg[~monthly_agg["month"].isin(known)].copy()
+        if not new_months.empty:
+            new_months["mom_pct"] = None
+            new_months["yoy_pct"] = None
+            df = pd.concat([df, new_months[["month","total_impressions","mom_pct","yoy_pct"]]]
+                           ).sort_values("month").reset_index(drop=True)
+            print(f"  + Extended monthly with {len(new_months)} GSC months: "
+                  f"{new_months['month'].tolist()}")
+
     rows = []
     for i, row in df.iterrows():
         prev_imp = float(df.iloc[i-1]["total_impressions"]) if i > 0 else None

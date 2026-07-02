@@ -1,18 +1,18 @@
 {
   "_meta": {
-    "built": "2026-07-03 01:09",
-    "latest_month": "2026-05",
-    "latest_month_label": "May'26"
+    "built": "2026-07-03 01:12",
+    "latest_month": "2026-06",
+    "latest_month_label": "Jun'26"
   },
   "kpis": {
-    "latest_month": "2026-05",
-    "latest_month_label": "May'26",
-    "curr_imp": 1608434,
-    "curr_imp_lakh": 16.08,
-    "curr_imp_fmt": "16.08L",
-    "mom_imp": 15.84,
-    "yoy_imp": 34.91,
-    "is_ath": true,
+    "latest_month": "2026-06",
+    "latest_month_label": "Jun'26",
+    "curr_imp": 1549657,
+    "curr_imp_lakh": 15.5,
+    "curr_imp_fmt": "15.50L",
+    "mom_imp": -3.65,
+    "yoy_imp": 28.73,
+    "is_ath": false,
     "peak_month": "2026-05",
     "peak_month_label": "May'26",
     "peak_imp_fmt": "16.08L",
@@ -282,6 +282,14 @@
       "imp_lakh": 16.08,
       "mom": 15.84,
       "yoy": 34.91
+    },
+    {
+      "month": "2026-06",
+      "label": "Jun'26",
+      "impressions": 1549657,
+      "imp_lakh": 15.5,
+      "mom": -3.65,
+      "yoy": 28.73
     }
   ],
   "bsos_monthly": [
