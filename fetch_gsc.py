@@ -21,8 +21,7 @@ DATA    = Path("data")
 SITE    = "https://www.cars24.com/"
 CSV_OUT = DATA / "gsc_daily_india.csv"
 
-# Matches: cars24, car24, cars 24, car 24, cars-24
-BRAND_REGEX = r"cars?\s?24|car24"
+BRAND_REGEX = r"car 24|cars24|cars 24|24 car|cara 24|carz 24|card24|car24|24 cars"
 
 TOKEN_URL = "https://oauth2.googleapis.com/token"
 
@@ -134,7 +133,8 @@ def main():
         print("  Keeping existing gsc_daily_india.csv unchanged.")
         return
 
-    existing = load_existing()
+    # For full refresh, start clean so no stale data from old regex bleeds in
+    existing = {} if full_refresh else load_existing()
 
     # Determine date range
     end_date = date.today() - timedelta(days=1)  # yesterday (dataState=all)
