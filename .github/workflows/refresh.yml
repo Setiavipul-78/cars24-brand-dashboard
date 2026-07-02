@@ -2,22 +2,21 @@ name: Refresh dashboard data
 
 on:
   schedule:
-    # Runs at 06:00 UTC on the 2nd of every month
-    - cron: '0 6 2 * *'
-  workflow_dispatch:   # Allow manual trigger from GitHub UI
+    - cron: '30 20 * * *'   # 2:00 AM IST daily (20:30 UTC)
+  workflow_dispatch:          # manual trigger from GitHub UI
 
 jobs:
   refresh:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # needed to push data.json
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
           cache: 'pip'
 
       - name: Install dependencies
@@ -32,29 +31,39 @@ jobs:
 
       - name: Fetch social media data
         env:
-          GOOGLE_CLIENT_ID:             ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET:         ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          YT_REFRESH_TOKEN:             ${{ secrets.YT_REFRESH_TOKEN }}
+          GOOGLE_CLIENT_ID:                ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET:            ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN:                ${{ secrets.YT_REFRESH_TOKEN }}
+          YT_REFRESH_TOKEN_INDIA:          ${{ secrets.YT_REFRESH_TOKEN_INDIA }}
+          YT_REFRESH_TOKEN_TEAMBHP:        ${{ secrets.YT_REFRESH_TOKEN_TEAMBHP }}
+          YT_REFRESH_TOKEN_INSIDER:        ${{ secrets.YT_REFRESH_TOKEN_INSIDER }}
+          YT_REFRESH_TOKEN_MALAYALAM:      ${{ secrets.YT_REFRESH_TOKEN_MALAYALAM }}
+          YT_REFRESH_TOKEN_MALAYALAM2:     ${{ secrets.YT_REFRESH_TOKEN_MALAYALAM2 }}
+          YT_REFRESH_TOKEN_UAE:            ${{ secrets.YT_REFRESH_TOKEN_UAE }}
           YT_CHANNEL_ID_CARS24_INDIA:      ${{ secrets.YT_CHANNEL_ID_CARS24_INDIA }}
           YT_CHANNEL_ID_TEAMBHP:           ${{ secrets.YT_CHANNEL_ID_TEAMBHP }}
           YT_CHANNEL_ID_INSIDER:           ${{ secrets.YT_CHANNEL_ID_INSIDER }}
           YT_CHANNEL_ID_CARS24_MALAYALAM:  ${{ secrets.YT_CHANNEL_ID_CARS24_MALAYALAM }}
+          YT_CHANNEL_ID_CARS24_MALAYALAM2: ${{ secrets.YT_CHANNEL_ID_CARS24_MALAYALAM2 }}
           YT_CHANNEL_ID_AU:                ${{ secrets.YT_CHANNEL_ID_AU }}
           YT_CHANNEL_ID_UAE:               ${{ secrets.YT_CHANNEL_ID_UAE }}
-          IG_ACCESS_TOKEN:              ${{ secrets.IG_ACCESS_TOKEN }}
-          IG_USER_ID_CARS24_INDIA:      ${{ secrets.IG_USER_ID_CARS24_INDIA }}
-          IG_USER_ID_TEAMBHP:           ${{ secrets.IG_USER_ID_TEAMBHP }}
-          IG_USER_ID_AU:                ${{ secrets.IG_USER_ID_AU }}
-          IG_USER_ID_UAE:               ${{ secrets.IG_USER_ID_UAE }}
-        run: python fetch_social.py
+          IG_USER_ID_CARS24_INDIA:         ${{ secrets.IG_USER_ID_CARS24_INDIA }}
+          IG_ACCESS_TOKEN_CARS24_INDIA:    ${{ secrets.IG_ACCESS_TOKEN_CARS24_INDIA }}
+          IG_USER_ID_TEAMBHP:              ${{ secrets.IG_USER_ID_TEAMBHP }}
+          IG_ACCESS_TOKEN_TEAMBHP:         ${{ secrets.IG_ACCESS_TOKEN_TEAMBHP }}
+          IG_USER_ID_CARS24_AU:            ${{ secrets.IG_USER_ID_CARS24_AU }}
+          IG_ACCESS_TOKEN_CARS24_AU:       ${{ secrets.IG_ACCESS_TOKEN_CARS24_AU }}
+          IG_USER_ID_CARS24_UAE:           ${{ secrets.IG_USER_ID_CARS24_UAE }}
+          IG_ACCESS_TOKEN_CARS24_UAE:      ${{ secrets.IG_ACCESS_TOKEN_CARS24_UAE }}
+        run: python3 fetch_social.py
 
       - name: Build data.json
-        run: python build_data.py
+        run: python3 build_data.py
 
       - name: Commit and push if data changed
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json data/*.csv
-          git diff --staged --quiet || git commit -m "Auto-refresh: $(date -u +%Y-%m-%d)"
+          git add data.json data/*.csv data/*.json
+          git diff --staged --quiet || git commit -m "Auto-refresh: $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push
