@@ -1,0 +1,908 @@
+{
+  "geo": [
+    {
+      "city": "Bengaluru",
+      "views": 26361,
+      "watch_time_hours": 1241.4
+    },
+    {
+      "city": "Delhi",
+      "views": 14933,
+      "watch_time_hours": 647.7
+    },
+    {
+      "city": "Hyderabad",
+      "views": 13882,
+      "watch_time_hours": 655.5
+    },
+    {
+      "city": "Pune",
+      "views": 13283,
+      "watch_time_hours": 621.5
+    },
+    {
+      "city": "Mumbai",
+      "views": 12703,
+      "watch_time_hours": 602.5
+    },
+    {
+      "city": "Guwahati",
+      "views": 6061,
+      "watch_time_hours": 288.9
+    },
+    {
+      "city": "Kolkata",
+      "views": 5862,
+      "watch_time_hours": 289.5
+    },
+    {
+      "city": "Ahmedabad",
+      "views": 5299,
+      "watch_time_hours": 233.1
+    },
+    {
+      "city": "Patna",
+      "views": 3779,
+      "watch_time_hours": 170.1
+    },
+    {
+      "city": "Jaipur",
+      "views": 3687,
+      "watch_time_hours": 158.7
+    },
+    {
+      "city": "Lucknow",
+      "views": 3671,
+      "watch_time_hours": 162.4
+    },
+    {
+      "city": "Chennai",
+      "views": 3588,
+      "watch_time_hours": 147.8
+    },
+    {
+      "city": "Bhubaneswar",
+      "views": 3369,
+      "watch_time_hours": 147.4
+    },
+    {
+      "city": "Indore",
+      "views": 3136,
+      "watch_time_hours": 131.1
+    },
+    {
+      "city": "Nagpur",
+      "views": 3071,
+      "watch_time_hours": 144.7
+    },
+    {
+      "city": "Gurugram",
+      "views": 2561,
+      "watch_time_hours": 118.3
+    },
+    {
+      "city": "Ludhiana",
+      "views": 2451,
+      "watch_time_hours": 105.0
+    },
+    {
+      "city": "New Delhi",
+      "views": 2356,
+      "watch_time_hours": 109.0
+    },
+    {
+      "city": "Ghaziabad",
+      "views": 2255,
+      "watch_time_hours": 105.4
+    },
+    {
+      "city": "Kochi",
+      "views": 2235,
+      "watch_time_hours": 99.2
+    },
+    {
+      "city": "Pimpri-Chinchwad",
+      "views": 2215,
+      "watch_time_hours": 107.2
+    },
+    {
+      "city": "Bhopal",
+      "views": 1879,
+      "watch_time_hours": 82.2
+    },
+    {
+      "city": "Surat",
+      "views": 1686,
+      "watch_time_hours": 74.3
+    },
+    {
+      "city": "Agra",
+      "views": 1397,
+      "watch_time_hours": 57.8
+    },
+    {
+      "city": "Navi Mumbai",
+      "views": 1319,
+      "watch_time_hours": 67.4
+    }
+  ],
+  "demographics": [
+    {
+      "age_group": "age13-17",
+      "gender": "male",
+      "viewer_pct": 1.6
+    },
+    {
+      "age_group": "age18-24",
+      "gender": "female",
+      "viewer_pct": 0.2
+    },
+    {
+      "age_group": "age18-24",
+      "gender": "male",
+      "viewer_pct": 21.8
+    },
+    {
+      "age_group": "age25-34",
+      "gender": "female",
+      "viewer_pct": 0.7
+    },
+    {
+      "age_group": "age25-34",
+      "gender": "male",
+      "viewer_pct": 47.9
+    },
+    {
+      "age_group": "age35-44",
+      "gender": "female",
+      "viewer_pct": 1.5
+    },
+    {
+      "age_group": "age35-44",
+      "gender": "male",
+      "viewer_pct": 18.8
+    },
+    {
+      "age_group": "age45-54",
+      "gender": "female",
+      "viewer_pct": 0.7
+    },
+    {
+      "age_group": "age45-54",
+      "gender": "male",
+      "viewer_pct": 5.4
+    },
+    {
+      "age_group": "age55-64",
+      "gender": "female",
+      "viewer_pct": 0.1
+    },
+    {
+      "age_group": "age55-64",
+      "gender": "male",
+      "viewer_pct": 0.9
+    },
+    {
+      "age_group": "age65-",
+      "gender": "female",
+      "viewer_pct": 0.0
+    },
+    {
+      "age_group": "age65-",
+      "gender": "male",
+      "viewer_pct": 0.4
+    }
+  ],
+  "traffic_sources": [
+    {
+      "source": "SUBSCRIBER",
+      "views": 227790,
+      "watch_time_hours": 10092.1,
+      "pct": 76.1
+    },
+    {
+      "source": "RELATED_VIDEO",
+      "views": 26328,
+      "watch_time_hours": 1578.5,
+      "pct": 8.8
+    },
+    {
+      "source": "YT_SEARCH",
+      "views": 11710,
+      "watch_time_hours": 450.1,
+      "pct": 3.9
+    },
+    {
+      "source": "SHORTS",
+      "views": 8076,
+      "watch_time_hours": 25.0,
+      "pct": 2.7
+    },
+    {
+      "source": "YT_CHANNEL",
+      "views": 8031,
+      "watch_time_hours": 295.3,
+      "pct": 2.7
+    },
+    {
+      "source": "YT_OTHER_PAGE",
+      "views": 7461,
+      "watch_time_hours": 394.0,
+      "pct": 2.5
+    },
+    {
+      "source": "NO_LINK_OTHER",
+      "views": 5873,
+      "watch_time_hours": 263.1,
+      "pct": 2.0
+    },
+    {
+      "source": "EXT_URL",
+      "views": 1751,
+      "watch_time_hours": 65.8,
+      "pct": 0.6
+    },
+    {
+      "source": "PLAYLIST",
+      "views": 933,
+      "watch_time_hours": 60.3,
+      "pct": 0.3
+    },
+    {
+      "source": "END_SCREEN",
+      "views": 840,
+      "watch_time_hours": 46.6,
+      "pct": 0.3
+    },
+    {
+      "source": "NOTIFICATION",
+      "views": 608,
+      "watch_time_hours": 21.0,
+      "pct": 0.2
+    },
+    {
+      "source": "ANNOTATION",
+      "views": 31,
+      "watch_time_hours": 2.1,
+      "pct": 0.0
+    },
+    {
+      "source": "SHORTS_CONTENT_LINKS",
+      "views": 22,
+      "watch_time_hours": 0.2,
+      "pct": 0.0
+    },
+    {
+      "source": "HASHTAGS",
+      "views": 7,
+      "watch_time_hours": 0.3,
+      "pct": 0.0
+    },
+    {
+      "source": "SOUND_PAGE",
+      "views": 1,
+      "watch_time_hours": 0.0,
+      "pct": 0.0
+    }
+  ],
+  "devices": [
+    {
+      "device": "MOBILE",
+      "views": 173611,
+      "watch_time_hours": 7049.7,
+      "pct": 58.2
+    },
+    {
+      "device": "TV",
+      "views": 66932,
+      "watch_time_hours": 3210.0,
+      "pct": 22.4
+    },
+    {
+      "device": "DESKTOP",
+      "views": 41145,
+      "watch_time_hours": 2088.2,
+      "pct": 13.8
+    },
+    {
+      "device": "TABLET",
+      "views": 16697,
+      "watch_time_hours": 888.5,
+      "pct": 5.6
+    }
+  ],
+  "top_videos": [
+    {
+      "id": "dlcFoU2FrOA",
+      "title": "How to Catch Odometer Fraud!",
+      "published": "2026-05-15",
+      "url": "https://www.youtube.com/watch?v=dlcFoU2FrOA",
+      "thumbnail": "https://i.ytimg.com/vi/dlcFoU2FrOA/default.jpg",
+      "views": 72944,
+      "watch_time_hours": 2126.92,
+      "avg_duration_sec": 104.0,
+      "avg_view_pct": 49.5,
+      "subs_gained": 546,
+      "likes": 1656,
+      "comments": 62,
+      "shares": 235,
+      "engagement_rate": 2.68
+    },
+    {
+      "id": "E30R0qAIYM0",
+      "title": "Cars24 Inspected My Car and Here\u2019s What Happened!",
+      "published": "2026-03-06",
+      "url": "https://www.youtube.com/watch?v=E30R0qAIYM0",
+      "thumbnail": "https://i.ytimg.com/vi/E30R0qAIYM0/default.jpg",
+      "views": 35583,
+      "watch_time_hours": 2345.13,
+      "avg_duration_sec": 237.0,
+      "avg_view_pct": 39.4,
+      "subs_gained": 222,
+      "likes": 1057,
+      "comments": 76,
+      "shares": 124,
+      "engagement_rate": 3.53
+    },
+    {
+      "id": "oowCqHcWSfs",
+      "title": "The Diesel Story Isn't Over.",
+      "published": "2026-05-29",
+      "url": "https://www.youtube.com/watch?v=oowCqHcWSfs",
+      "thumbnail": "https://i.ytimg.com/vi/oowCqHcWSfs/default.jpg",
+      "views": 30715,
+      "watch_time_hours": 1512.13,
+      "avg_duration_sec": 177.0,
+      "avg_view_pct": 36.4,
+      "subs_gained": 249,
+      "likes": 890,
+      "comments": 102,
+      "shares": 92,
+      "engagement_rate": 3.53
+    },
+    {
+      "id": "e1JP20OrZZ4",
+      "title": "You Sell. We List. But HOW?",
+      "published": "2026-04-10",
+      "url": "https://www.youtube.com/watch?v=e1JP20OrZZ4",
+      "thumbnail": "https://i.ytimg.com/vi/e1JP20OrZZ4/default.jpg",
+      "views": 27534,
+      "watch_time_hours": 1659.93,
+      "avg_duration_sec": 217.0,
+      "avg_view_pct": 34.8,
+      "subs_gained": 136,
+      "likes": 616,
+      "comments": 36,
+      "shares": 33,
+      "engagement_rate": 2.49
+    },
+    {
+      "id": "m7biwKzMyms",
+      "title": "The Best & Worst Car Colours for Resale Value in India",
+      "published": "2026-01-23",
+      "url": "https://www.youtube.com/watch?v=m7biwKzMyms",
+      "thumbnail": "https://i.ytimg.com/vi/m7biwKzMyms/default.jpg",
+      "views": 22904,
+      "watch_time_hours": 1062.75,
+      "avg_duration_sec": 167.0,
+      "avg_view_pct": 41.7,
+      "subs_gained": 158,
+      "likes": 428,
+      "comments": 22,
+      "shares": 89,
+      "engagement_rate": 2.35
+    },
+    {
+      "id": "ACNUUSToKAs",
+      "title": "Will Ethanol Damage Your Old Car?",
+      "published": "2026-06-19",
+      "url": "https://www.youtube.com/watch?v=ACNUUSToKAs",
+      "thumbnail": "https://i.ytimg.com/vi/ACNUUSToKAs/default.jpg",
+      "views": 16533,
+      "watch_time_hours": 875.83,
+      "avg_duration_sec": 190.0,
+      "avg_view_pct": 47.4,
+      "subs_gained": 135,
+      "likes": 728,
+      "comments": 129,
+      "shares": 97,
+      "engagement_rate": 5.77
+    },
+    {
+      "id": "JWZYblx7Ok0",
+      "title": "Why Do Some Cars NEVER Lose Value?",
+      "published": "2026-05-01",
+      "url": "https://www.youtube.com/watch?v=JWZYblx7Ok0",
+      "thumbnail": "https://i.ytimg.com/vi/JWZYblx7Ok0/default.jpg",
+      "views": 13945,
+      "watch_time_hours": 713.88,
+      "avg_duration_sec": 184.0,
+      "avg_view_pct": 40.1,
+      "subs_gained": 109,
+      "likes": 418,
+      "comments": 23,
+      "shares": 38,
+      "engagement_rate": 3.43
+    },
+    {
+      "id": "iPdumiSoh2E",
+      "title": "Hidden Costs of Used Cars: Avoid Paying Extra",
+      "published": "2025-12-12",
+      "url": "https://www.youtube.com/watch?v=iPdumiSoh2E",
+      "thumbnail": "https://i.ytimg.com/vi/iPdumiSoh2E/default.jpg",
+      "views": 9998,
+      "watch_time_hours": 411.13,
+      "avg_duration_sec": 148.0,
+      "avg_view_pct": 36.5,
+      "subs_gained": 82,
+      "likes": 226,
+      "comments": 24,
+      "shares": 23,
+      "engagement_rate": 2.73
+    },
+    {
+      "id": "6PMSE4lqgwY",
+      "title": "Why Car Companies Keep Building Them?",
+      "published": "2026-06-12",
+      "url": "https://www.youtube.com/watch?v=6PMSE4lqgwY",
+      "thumbnail": "https://i.ytimg.com/vi/6PMSE4lqgwY/default.jpg",
+      "views": 8997,
+      "watch_time_hours": 450.38,
+      "avg_duration_sec": 180.0,
+      "avg_view_pct": 31.7,
+      "subs_gained": 59,
+      "likes": 290,
+      "comments": 9,
+      "shares": 14,
+      "engagement_rate": 3.48
+    },
+    {
+      "id": "4QpNYkAufvI",
+      "title": "Just Bought a Used Car? Do This NOW!",
+      "published": "2026-03-21",
+      "url": "https://www.youtube.com/watch?v=4QpNYkAufvI",
+      "thumbnail": "https://i.ytimg.com/vi/4QpNYkAufvI/default.jpg",
+      "views": 7731,
+      "watch_time_hours": 348.83,
+      "avg_duration_sec": 162.0,
+      "avg_view_pct": 42.4,
+      "subs_gained": 77,
+      "likes": 341,
+      "comments": 10,
+      "shares": 27,
+      "engagement_rate": 4.89
+    },
+    {
+      "id": "0A19GJ8Ua8I",
+      "title": "What Happens to Your Car After 15 Years?",
+      "published": "2026-03-13",
+      "url": "https://www.youtube.com/watch?v=0A19GJ8Ua8I",
+      "thumbnail": "https://i.ytimg.com/vi/0A19GJ8Ua8I/default.jpg",
+      "views": 7090,
+      "watch_time_hours": 303.9,
+      "avg_duration_sec": 154.0,
+      "avg_view_pct": 45.5,
+      "subs_gained": 59,
+      "likes": 287,
+      "comments": 29,
+      "shares": 23,
+      "engagement_rate": 4.78
+    },
+    {
+      "id": "PxA78OFphUE",
+      "title": "Buying Outside Your State? Here\u2019s the Reality",
+      "published": "2025-12-30",
+      "url": "https://www.youtube.com/watch?v=PxA78OFphUE",
+      "thumbnail": "https://i.ytimg.com/vi/PxA78OFphUE/default.jpg",
+      "views": 5894,
+      "watch_time_hours": 269.87,
+      "avg_duration_sec": 164.0,
+      "avg_view_pct": 42.0,
+      "subs_gained": 56,
+      "likes": 181,
+      "comments": 15,
+      "shares": 64,
+      "engagement_rate": 4.41
+    },
+    {
+      "id": "rfmB0oIKaKo",
+      "title": "Someone Hit Your Car? Don't Panic!",
+      "published": "2026-05-08",
+      "url": "https://www.youtube.com/watch?v=rfmB0oIKaKo",
+      "thumbnail": "https://i.ytimg.com/vi/rfmB0oIKaKo/default.jpg",
+      "views": 4711,
+      "watch_time_hours": 260.13,
+      "avg_duration_sec": 198.0,
+      "avg_view_pct": 37.4,
+      "subs_gained": 47,
+      "likes": 267,
+      "comments": 19,
+      "shares": 53,
+      "engagement_rate": 7.2
+    },
+    {
+      "id": "AVm-02AMuTE",
+      "title": "Looks Perfect. But It\u2019s Coastal!",
+      "published": "2026-04-04",
+      "url": "https://www.youtube.com/watch?v=AVm-02AMuTE",
+      "thumbnail": "https://i.ytimg.com/vi/AVm-02AMuTE/default.jpg",
+      "views": 3134,
+      "watch_time_hours": 162.9,
+      "avg_duration_sec": 187.0,
+      "avg_view_pct": 35.4,
+      "subs_gained": 26,
+      "likes": 150,
+      "comments": 9,
+      "shares": 14,
+      "engagement_rate": 5.52
+    },
+    {
+      "id": "08sdKVW_-p0",
+      "title": "Why Buying Used Cars Is a Smarter Move",
+      "published": "2026-04-17",
+      "url": "https://www.youtube.com/watch?v=08sdKVW_-p0",
+      "thumbnail": "https://i.ytimg.com/vi/08sdKVW_-p0/default.jpg",
+      "views": 2867,
+      "watch_time_hours": 119.25,
+      "avg_duration_sec": 149.0,
+      "avg_view_pct": 31.3,
+      "subs_gained": 14,
+      "likes": 98,
+      "comments": 8,
+      "shares": 14,
+      "engagement_rate": 4.19
+    },
+    {
+      "id": "L0EOxb573HA",
+      "title": "The Cost of Skipping Car Service!",
+      "published": "2026-06-26",
+      "url": "https://www.youtube.com/watch?v=L0EOxb573HA",
+      "thumbnail": "https://i.ytimg.com/vi/L0EOxb573HA/default.jpg",
+      "views": 2634,
+      "watch_time_hours": 104.87,
+      "avg_duration_sec": 143.0,
+      "avg_view_pct": 36.9,
+      "subs_gained": 4,
+      "likes": 98,
+      "comments": 6,
+      "shares": 22,
+      "engagement_rate": 4.78
+    },
+    {
+      "id": "d403LxJfk6M",
+      "title": "This One Check Can Save You Lakhs",
+      "published": "2025-12-05",
+      "url": "https://www.youtube.com/watch?v=d403LxJfk6M",
+      "thumbnail": "https://i.ytimg.com/vi/d403LxJfk6M/default.jpg",
+      "views": 2566,
+      "watch_time_hours": 54.15,
+      "avg_duration_sec": 75.0,
+      "avg_view_pct": 45.0,
+      "subs_gained": 18,
+      "likes": 46,
+      "comments": 12,
+      "shares": 61,
+      "engagement_rate": 4.64
+    },
+    {
+      "id": "Ed9wc4yIASM",
+      "title": "DON'T Let the Engine Surprise You!",
+      "published": "2026-01-09",
+      "url": "https://www.youtube.com/watch?v=Ed9wc4yIASM",
+      "thumbnail": "https://i.ytimg.com/vi/Ed9wc4yIASM/default.jpg",
+      "views": 2182,
+      "watch_time_hours": 68.18,
+      "avg_duration_sec": 112.0,
+      "avg_view_pct": 46.5,
+      "subs_gained": 15,
+      "likes": 69,
+      "comments": 8,
+      "shares": 27,
+      "engagement_rate": 4.77
+    },
+    {
+      "id": "CVYwX-a_00Y",
+      "title": "We Simplified Car Selling for You",
+      "published": "2026-03-18",
+      "url": "https://www.youtube.com/watch?v=CVYwX-a_00Y",
+      "thumbnail": "https://i.ytimg.com/vi/CVYwX-a_00Y/default.jpg",
+      "views": 1855,
+      "watch_time_hours": 4.12,
+      "avg_duration_sec": 23.0,
+      "avg_view_pct": 20.2,
+      "subs_gained": 3,
+      "likes": 20,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 1.08
+    },
+    {
+      "id": "aaiR5iRHywY",
+      "title": "Just One Visit Convinced Me! \u263a\ufe0f #cars24",
+      "published": "2026-06-03",
+      "url": "https://www.youtube.com/watch?v=aaiR5iRHywY",
+      "thumbnail": "https://i.ytimg.com/vi/aaiR5iRHywY/default.jpg",
+      "views": 1804,
+      "watch_time_hours": 5.73,
+      "avg_duration_sec": 17.0,
+      "avg_view_pct": 34.7,
+      "subs_gained": 2,
+      "likes": 41,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 2.27
+    },
+    {
+      "id": "0pW9BZnh4NI",
+      "title": "How to Sell Your Car Without Insurance?",
+      "published": "2026-04-24",
+      "url": "https://www.youtube.com/watch?v=0pW9BZnh4NI",
+      "thumbnail": "https://i.ytimg.com/vi/0pW9BZnh4NI/default.jpg",
+      "views": 1793,
+      "watch_time_hours": 41.82,
+      "avg_duration_sec": 83.0,
+      "avg_view_pct": 40.0,
+      "subs_gained": 13,
+      "likes": 57,
+      "comments": 4,
+      "shares": 8,
+      "engagement_rate": 3.85
+    },
+    {
+      "id": "NDEEfNhTpec",
+      "title": "Used Car Battery Test You Need!",
+      "published": "2026-05-22",
+      "url": "https://www.youtube.com/watch?v=NDEEfNhTpec",
+      "thumbnail": "https://i.ytimg.com/vi/NDEEfNhTpec/default.jpg",
+      "views": 1740,
+      "watch_time_hours": 80.57,
+      "avg_duration_sec": 166.0,
+      "avg_view_pct": 32.4,
+      "subs_gained": 10,
+      "likes": 74,
+      "comments": 3,
+      "shares": 7,
+      "engagement_rate": 4.83
+    },
+    {
+      "id": "fZSxFvdP4iE",
+      "title": "Got a Challan? Don\u2019t Panic!",
+      "published": "2026-02-27",
+      "url": "https://www.youtube.com/watch?v=fZSxFvdP4iE",
+      "thumbnail": "https://i.ytimg.com/vi/fZSxFvdP4iE/default.jpg",
+      "views": 1675,
+      "watch_time_hours": 53.6,
+      "avg_duration_sec": 115.0,
+      "avg_view_pct": 38.7,
+      "subs_gained": 10,
+      "likes": 68,
+      "comments": 3,
+      "shares": 11,
+      "engagement_rate": 4.9
+    },
+    {
+      "id": "gx3cF-qvTYE",
+      "title": "Why Car Inspections Are So Strict! \ud83d\ude97",
+      "published": "2026-03-04",
+      "url": "https://www.youtube.com/watch?v=gx3cF-qvTYE",
+      "thumbnail": "https://i.ytimg.com/vi/gx3cF-qvTYE/default.jpg",
+      "views": 1632,
+      "watch_time_hours": 6.35,
+      "avg_duration_sec": 32.0,
+      "avg_view_pct": 25.4,
+      "subs_gained": 1,
+      "likes": 42,
+      "comments": 2,
+      "shares": 1,
+      "engagement_rate": 2.76
+    },
+    {
+      "id": "ENvqdpd49HE",
+      "title": "Your Car Is Worth More Than You Think",
+      "published": "2026-01-30",
+      "url": "https://www.youtube.com/watch?v=ENvqdpd49HE",
+      "thumbnail": "https://i.ytimg.com/vi/ENvqdpd49HE/default.jpg",
+      "views": 1506,
+      "watch_time_hours": 61.27,
+      "avg_duration_sec": 146.0,
+      "avg_view_pct": 36.1,
+      "subs_gained": 15,
+      "likes": 59,
+      "comments": 5,
+      "shares": 13,
+      "engagement_rate": 5.11
+    },
+    {
+      "id": "X1E_xXXF4GM",
+      "title": "Why RC Transfer Takes So Long? - Cars24 CEO Explains",
+      "published": "2026-02-18",
+      "url": "https://www.youtube.com/watch?v=X1E_xXXF4GM",
+      "thumbnail": "https://i.ytimg.com/vi/X1E_xXXF4GM/default.jpg",
+      "views": 1488,
+      "watch_time_hours": 94.48,
+      "avg_duration_sec": 228.0,
+      "avg_view_pct": 11.2,
+      "subs_gained": 7,
+      "likes": 53,
+      "comments": 7,
+      "shares": 9,
+      "engagement_rate": 4.64
+    },
+    {
+      "id": "zqGPqJGZOZ8",
+      "title": "2 Cars. One Platform. Zero Stress. #cars24",
+      "published": "2026-05-20",
+      "url": "https://www.youtube.com/watch?v=zqGPqJGZOZ8",
+      "thumbnail": "https://i.ytimg.com/vi/zqGPqJGZOZ8/default.jpg",
+      "views": 1449,
+      "watch_time_hours": 4.72,
+      "avg_duration_sec": 25.0,
+      "avg_view_pct": 38.4,
+      "subs_gained": 1,
+      "likes": 16,
+      "comments": 1,
+      "shares": 1,
+      "engagement_rate": 1.24
+    },
+    {
+      "id": "ocMtQhKqdNY",
+      "title": "Never be a Victim of Car Theft!",
+      "published": "2026-06-05",
+      "url": "https://www.youtube.com/watch?v=ocMtQhKqdNY",
+      "thumbnail": "https://i.ytimg.com/vi/ocMtQhKqdNY/default.jpg",
+      "views": 1329,
+      "watch_time_hours": 37.8,
+      "avg_duration_sec": 102.0,
+      "avg_view_pct": 54.2,
+      "subs_gained": 4,
+      "likes": 69,
+      "comments": 1,
+      "shares": 4,
+      "engagement_rate": 5.57
+    },
+    {
+      "id": "eZFdjUwKOyM",
+      "title": "No Warranty? Your Used Car Could Cost Lakhs",
+      "published": "2025-12-19",
+      "url": "https://www.youtube.com/watch?v=eZFdjUwKOyM",
+      "thumbnail": "https://i.ytimg.com/vi/eZFdjUwKOyM/default.jpg",
+      "views": 1238,
+      "watch_time_hours": 28.08,
+      "avg_duration_sec": 81.0,
+      "avg_view_pct": 44.6,
+      "subs_gained": 4,
+      "likes": 28,
+      "comments": 3,
+      "shares": 5,
+      "engagement_rate": 2.91
+    },
+    {
+      "id": "FidPrcYsArc",
+      "title": "Why RC Transfer Takes So Long!",
+      "published": "2026-03-11",
+      "url": "https://www.youtube.com/watch?v=FidPrcYsArc",
+      "thumbnail": "https://i.ytimg.com/vi/FidPrcYsArc/default.jpg",
+      "views": 894,
+      "watch_time_hours": 6.87,
+      "avg_duration_sec": 50.0,
+      "avg_view_pct": 28.9,
+      "subs_gained": 2,
+      "likes": 46,
+      "comments": 2,
+      "shares": 2,
+      "engagement_rate": 5.59
+    },
+    {
+      "id": "91GQ6KQVvx4",
+      "title": "From Search to Delivery: Cars24 Used Car Buying Experience",
+      "published": "2026-02-06",
+      "url": "https://www.youtube.com/watch?v=91GQ6KQVvx4",
+      "thumbnail": "https://i.ytimg.com/vi/91GQ6KQVvx4/default.jpg",
+      "views": 882,
+      "watch_time_hours": 6.08,
+      "avg_duration_sec": 55.0,
+      "avg_view_pct": 34.0,
+      "subs_gained": 0,
+      "likes": 38,
+      "comments": 6,
+      "shares": 3,
+      "engagement_rate": 5.33
+    },
+    {
+      "id": "JlTT4O7jp4Q",
+      "title": "Selling Your Car? Why Inspection Changes the Final Price.",
+      "published": "2026-02-23",
+      "url": "https://www.youtube.com/watch?v=JlTT4O7jp4Q",
+      "thumbnail": "https://i.ytimg.com/vi/JlTT4O7jp4Q/default.jpg",
+      "views": 617,
+      "watch_time_hours": 4.07,
+      "avg_duration_sec": 46.0,
+      "avg_view_pct": 32.2,
+      "subs_gained": 1,
+      "likes": 18,
+      "comments": 1,
+      "shares": 3,
+      "engagement_rate": 3.57
+    },
+    {
+      "id": "GIDBb-RYZjA",
+      "title": "Online Price vs Final Price!",
+      "published": "2026-03-28",
+      "url": "https://www.youtube.com/watch?v=GIDBb-RYZjA",
+      "thumbnail": "https://i.ytimg.com/vi/GIDBb-RYZjA/default.jpg",
+      "views": 575,
+      "watch_time_hours": 3.53,
+      "avg_duration_sec": 35.0,
+      "avg_view_pct": 29.1,
+      "subs_gained": 1,
+      "likes": 11,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 1.91
+    },
+    {
+      "id": "ibXdgxe1Npw",
+      "title": "We Take the Legal Risk, Not You",
+      "published": "2026-03-25",
+      "url": "https://www.youtube.com/watch?v=ibXdgxe1Npw",
+      "thumbnail": "https://i.ytimg.com/vi/ibXdgxe1Npw/default.jpg",
+      "views": 491,
+      "watch_time_hours": 3.65,
+      "avg_duration_sec": 45.0,
+      "avg_view_pct": 55.0,
+      "subs_gained": 2,
+      "likes": 14,
+      "comments": 1,
+      "shares": 1,
+      "engagement_rate": 3.26
+    },
+    {
+      "id": "kSCoZNCRAQY",
+      "title": "kSCoZNCRAQY",
+      "published": "",
+      "url": "https://www.youtube.com/watch?v=kSCoZNCRAQY",
+      "thumbnail": "",
+      "views": 191,
+      "watch_time_hours": 0.12,
+      "avg_duration_sec": 10.0,
+      "avg_view_pct": 67.5,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "a1ajpbd5dBA",
+      "title": "a1ajpbd5dBA",
+      "published": "",
+      "url": "https://www.youtube.com/watch?v=a1ajpbd5dBA",
+      "thumbnail": "",
+      "views": 188,
+      "watch_time_hours": 0.08,
+      "avg_duration_sec": 9.0,
+      "avg_view_pct": 61.6,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "SyW8wbErnB0",
+      "title": "SyW8wbErnB0",
+      "published": "",
+      "url": "https://www.youtube.com/watch?v=SyW8wbErnB0",
+      "thumbnail": "",
+      "views": 163,
+      "watch_time_hours": 0.1,
+      "avg_duration_sec": 8.0,
+      "avg_view_pct": 57.3,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.0
+    }
+  ]
+}

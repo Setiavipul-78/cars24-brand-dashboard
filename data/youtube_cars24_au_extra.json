@@ -1,0 +1,1131 @@
+{
+  "geo": [
+    {
+      "city": "Sydney",
+      "views": 17632,
+      "watch_time_hours": 197.5
+    },
+    {
+      "city": "Melbourne",
+      "views": 17572,
+      "watch_time_hours": 111.1
+    },
+    {
+      "city": "Bengaluru",
+      "views": 9206,
+      "watch_time_hours": 29.7
+    },
+    {
+      "city": "Brisbane",
+      "views": 7199,
+      "watch_time_hours": 42.9
+    },
+    {
+      "city": "Hyderabad",
+      "views": 4720,
+      "watch_time_hours": 14.2
+    },
+    {
+      "city": "Chennai",
+      "views": 3948,
+      "watch_time_hours": 10.8
+    },
+    {
+      "city": "London",
+      "views": 3408,
+      "watch_time_hours": 31.1
+    },
+    {
+      "city": "Mumbai",
+      "views": 3010,
+      "watch_time_hours": 10.3
+    },
+    {
+      "city": "Delhi",
+      "views": 2817,
+      "watch_time_hours": 9.5
+    },
+    {
+      "city": "Pune",
+      "views": 2641,
+      "watch_time_hours": 8.8
+    },
+    {
+      "city": "Perth",
+      "views": 2402,
+      "watch_time_hours": 13.5
+    },
+    {
+      "city": "Singapore",
+      "views": 2289,
+      "watch_time_hours": 23.3
+    },
+    {
+      "city": "Kochi",
+      "views": 1995,
+      "watch_time_hours": 6.5
+    },
+    {
+      "city": "Kuala Lumpur",
+      "views": 1529,
+      "watch_time_hours": 16.4
+    },
+    {
+      "city": "Toronto",
+      "views": 1446,
+      "watch_time_hours": 11.7
+    },
+    {
+      "city": "Adelaide",
+      "views": 1413,
+      "watch_time_hours": 7.3
+    },
+    {
+      "city": "Dublin",
+      "views": 1319,
+      "watch_time_hours": 9.4
+    },
+    {
+      "city": "Cape Town",
+      "views": 1302,
+      "watch_time_hours": 11.6
+    },
+    {
+      "city": "Dubai",
+      "views": 1117,
+      "watch_time_hours": 8.0
+    },
+    {
+      "city": "Jakarta",
+      "views": 956,
+      "watch_time_hours": 8.3
+    },
+    {
+      "city": "Guwahati",
+      "views": 950,
+      "watch_time_hours": 4.7
+    },
+    {
+      "city": "Pretoria",
+      "views": 871,
+      "watch_time_hours": 10.2
+    },
+    {
+      "city": "New York",
+      "views": 803,
+      "watch_time_hours": 7.0
+    },
+    {
+      "city": "Kolkata",
+      "views": 717,
+      "watch_time_hours": 2.8
+    },
+    {
+      "city": "Karachi",
+      "views": 653,
+      "watch_time_hours": 4.6
+    }
+  ],
+  "demographics": [
+    {
+      "age_group": "age13-17",
+      "gender": "female",
+      "viewer_pct": 0.8
+    },
+    {
+      "age_group": "age13-17",
+      "gender": "male",
+      "viewer_pct": 2.2
+    },
+    {
+      "age_group": "age18-24",
+      "gender": "female",
+      "viewer_pct": 3.5
+    },
+    {
+      "age_group": "age18-24",
+      "gender": "male",
+      "viewer_pct": 17.2
+    },
+    {
+      "age_group": "age18-24",
+      "gender": "genderUserSpecified",
+      "viewer_pct": 0.0
+    },
+    {
+      "age_group": "age25-34",
+      "gender": "female",
+      "viewer_pct": 5.4
+    },
+    {
+      "age_group": "age25-34",
+      "gender": "male",
+      "viewer_pct": 32.1
+    },
+    {
+      "age_group": "age25-34",
+      "gender": "genderUserSpecified",
+      "viewer_pct": 0.0
+    },
+    {
+      "age_group": "age35-44",
+      "gender": "female",
+      "viewer_pct": 4.9
+    },
+    {
+      "age_group": "age35-44",
+      "gender": "male",
+      "viewer_pct": 18.3
+    },
+    {
+      "age_group": "age45-54",
+      "gender": "female",
+      "viewer_pct": 1.6
+    },
+    {
+      "age_group": "age45-54",
+      "gender": "male",
+      "viewer_pct": 8.3
+    },
+    {
+      "age_group": "age55-64",
+      "gender": "female",
+      "viewer_pct": 0.4
+    },
+    {
+      "age_group": "age55-64",
+      "gender": "male",
+      "viewer_pct": 3.2
+    },
+    {
+      "age_group": "age65-",
+      "gender": "female",
+      "viewer_pct": 0.3
+    },
+    {
+      "age_group": "age65-",
+      "gender": "male",
+      "viewer_pct": 1.8
+    }
+  ],
+  "traffic_sources": [
+    {
+      "source": "ADVERTISING",
+      "views": 4667360,
+      "watch_time_hours": 17920.6,
+      "pct": 87.5
+    },
+    {
+      "source": "SHORTS",
+      "views": 368915,
+      "watch_time_hours": 1747.5,
+      "pct": 6.9
+    },
+    {
+      "source": "YT_SEARCH",
+      "views": 193966,
+      "watch_time_hours": 1466.7,
+      "pct": 3.6
+    },
+    {
+      "source": "EXT_URL",
+      "views": 34676,
+      "watch_time_hours": 575.6,
+      "pct": 0.7
+    },
+    {
+      "source": "SUBSCRIBER",
+      "views": 27240,
+      "watch_time_hours": 713.5,
+      "pct": 0.5
+    },
+    {
+      "source": "PLAYLIST",
+      "views": 12399,
+      "watch_time_hours": 374.7,
+      "pct": 0.2
+    },
+    {
+      "source": "YT_OTHER_PAGE",
+      "views": 10275,
+      "watch_time_hours": 91.0,
+      "pct": 0.2
+    },
+    {
+      "source": "YT_CHANNEL",
+      "views": 10188,
+      "watch_time_hours": 67.3,
+      "pct": 0.2
+    },
+    {
+      "source": "RELATED_VIDEO",
+      "views": 4490,
+      "watch_time_hours": 276.8,
+      "pct": 0.1
+    },
+    {
+      "source": "NO_LINK_OTHER",
+      "views": 2525,
+      "watch_time_hours": 40.2,
+      "pct": 0.0
+    },
+    {
+      "source": "NOTIFICATION",
+      "views": 353,
+      "watch_time_hours": 3.0,
+      "pct": 0.0
+    },
+    {
+      "source": "SHORTS_CONTENT_LINKS",
+      "views": 304,
+      "watch_time_hours": 3.5,
+      "pct": 0.0
+    },
+    {
+      "source": "HASHTAGS",
+      "views": 276,
+      "watch_time_hours": 1.2,
+      "pct": 0.0
+    },
+    {
+      "source": "END_SCREEN",
+      "views": 42,
+      "watch_time_hours": 0.8,
+      "pct": 0.0
+    },
+    {
+      "source": "SOUND_PAGE",
+      "views": 42,
+      "watch_time_hours": 0.2,
+      "pct": 0.0
+    }
+  ],
+  "devices": [
+    {
+      "device": "MOBILE",
+      "views": 3953389,
+      "watch_time_hours": 17249.2,
+      "pct": 74.2
+    },
+    {
+      "device": "TABLET",
+      "views": 1082637,
+      "watch_time_hours": 3538.6,
+      "pct": 20.3
+    },
+    {
+      "device": "TV",
+      "views": 199766,
+      "watch_time_hours": 1608.6,
+      "pct": 3.8
+    },
+    {
+      "device": "DESKTOP",
+      "views": 90709,
+      "watch_time_hours": 857.1,
+      "pct": 1.7
+    }
+  ],
+  "top_videos": [
+    {
+      "id": "breGosTdhZo",
+      "title": "Value-Prop | Portrait | 15 Seconds",
+      "published": "2024-07-08",
+      "url": "https://www.youtube.com/watch?v=breGosTdhZo",
+      "thumbnail": "https://i.ytimg.com/vi/breGosTdhZo/default.jpg",
+      "views": 914717,
+      "watch_time_hours": 2649.3,
+      "avg_duration_sec": 27.0,
+      "avg_view_pct": 162.8,
+      "subs_gained": 0,
+      "likes": 4241,
+      "comments": 2,
+      "shares": 6,
+      "engagement_rate": 0.46
+    },
+    {
+      "id": "h8bqlSVoA3w",
+      "title": "Dream SUV Landscape",
+      "published": "2024-03-06",
+      "url": "https://www.youtube.com/watch?v=h8bqlSVoA3w",
+      "thumbnail": "https://i.ytimg.com/vi/h8bqlSVoA3w/default.jpg",
+      "views": 787419,
+      "watch_time_hours": 2592.95,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 94.8,
+      "subs_gained": 0,
+      "likes": 24,
+      "comments": 0,
+      "shares": 31,
+      "engagement_rate": 0.01
+    },
+    {
+      "id": "3Yz6D70i3NI",
+      "title": "Brand USP Landscape",
+      "published": "2024-03-06",
+      "url": "https://www.youtube.com/watch?v=3Yz6D70i3NI",
+      "thumbnail": "https://i.ytimg.com/vi/3Yz6D70i3NI/default.jpg",
+      "views": 739965,
+      "watch_time_hours": 2539.45,
+      "avg_duration_sec": 13.0,
+      "avg_view_pct": 90.2,
+      "subs_gained": 0,
+      "likes": 5,
+      "comments": 0,
+      "shares": 21,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "VHuPZxH1q_s",
+      "title": "Brand USP Portait",
+      "published": "2024-03-06",
+      "url": "https://www.youtube.com/watch?v=VHuPZxH1q_s",
+      "thumbnail": "https://i.ytimg.com/vi/VHuPZxH1q_s/default.jpg",
+      "views": 335072,
+      "watch_time_hours": 820.02,
+      "avg_duration_sec": 15.0,
+      "avg_view_pct": 104.7,
+      "subs_gained": 0,
+      "likes": 97,
+      "comments": 0,
+      "shares": 4,
+      "engagement_rate": 0.03
+    },
+    {
+      "id": "wjYuH9UesIo",
+      "title": "Car Video | Portrait | 15 Seconds",
+      "published": "2024-07-08",
+      "url": "https://www.youtube.com/watch?v=wjYuH9UesIo",
+      "thumbnail": "https://i.ytimg.com/vi/wjYuH9UesIo/default.jpg",
+      "views": 282343,
+      "watch_time_hours": 1956.27,
+      "avg_duration_sec": 26.0,
+      "avg_view_pct": 149.7,
+      "subs_gained": 0,
+      "likes": 5702,
+      "comments": 1,
+      "shares": 7,
+      "engagement_rate": 2.02
+    },
+    {
+      "id": "8kWYwYrQciU",
+      "title": "Brand USP Square",
+      "published": "2024-03-06",
+      "url": "https://www.youtube.com/watch?v=8kWYwYrQciU",
+      "thumbnail": "https://i.ytimg.com/vi/8kWYwYrQciU/default.jpg",
+      "views": 177146,
+      "watch_time_hours": 634.18,
+      "avg_duration_sec": 13.0,
+      "avg_view_pct": 88.8,
+      "subs_gained": 2,
+      "likes": 11,
+      "comments": 0,
+      "shares": 6,
+      "engagement_rate": 0.01
+    },
+    {
+      "id": "5Vfb-9BULvY",
+      "title": "USP-New | Landscape | 15 Seconds",
+      "published": "2024-07-08",
+      "url": "https://www.youtube.com/watch?v=5Vfb-9BULvY",
+      "thumbnail": "https://i.ytimg.com/vi/5Vfb-9BULvY/default.jpg",
+      "views": 159872,
+      "watch_time_hours": 611.43,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 95.3,
+      "subs_gained": 1,
+      "likes": 4,
+      "comments": 0,
+      "shares": 4,
+      "engagement_rate": 0.01
+    },
+    {
+      "id": "OJQq7QvQHs0",
+      "title": "C24_1x1_V01.mp4",
+      "published": "2025-10-30",
+      "url": "https://www.youtube.com/watch?v=OJQq7QvQHs0",
+      "thumbnail": "https://i.ytimg.com/vi/OJQq7QvQHs0/default.jpg",
+      "views": 98963,
+      "watch_time_hours": 610.05,
+      "avg_duration_sec": 37.0,
+      "avg_view_pct": 99.0,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 4,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "ZnJczPtecXU",
+      "title": "C24_R2_1080x1350.mp4",
+      "published": "2025-11-06",
+      "url": "https://www.youtube.com/watch?v=ZnJczPtecXU",
+      "thumbnail": "https://i.ytimg.com/vi/ZnJczPtecXU/default.jpg",
+      "views": 98257,
+      "watch_time_hours": 685.98,
+      "avg_duration_sec": 43.0,
+      "avg_view_pct": 96.6,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 1,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "o7MMbK2ozoM",
+      "title": "USP-New | 4:5  | 15 Seconds",
+      "published": "2024-07-08",
+      "url": "https://www.youtube.com/watch?v=o7MMbK2ozoM",
+      "thumbnail": "https://i.ytimg.com/vi/o7MMbK2ozoM/default.jpg",
+      "views": 87133,
+      "watch_time_hours": 362.7,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 93.7,
+      "subs_gained": 0,
+      "likes": 5,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.01
+    },
+    {
+      "id": "ebBqOYnDV0k",
+      "title": "Demand gen video Horizontal.mp4",
+      "published": "2025-10-30",
+      "url": "https://www.youtube.com/watch?v=ebBqOYnDV0k",
+      "thumbnail": "https://i.ytimg.com/vi/ebBqOYnDV0k/default.jpg",
+      "views": 86811,
+      "watch_time_hours": 450.62,
+      "avg_duration_sec": 35.0,
+      "avg_view_pct": 98.0,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 1,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "FDnQAI9gVm4",
+      "title": "30 Day return  #automobile",
+      "published": "2026-03-31",
+      "url": "https://www.youtube.com/watch?v=FDnQAI9gVm4",
+      "thumbnail": "https://i.ytimg.com/vi/FDnQAI9gVm4/default.jpg",
+      "views": 85647,
+      "watch_time_hours": 294.12,
+      "avg_duration_sec": 24.0,
+      "avg_view_pct": 87.2,
+      "subs_gained": 0,
+      "likes": 43,
+      "comments": 0,
+      "shares": 4,
+      "engagement_rate": 0.05
+    },
+    {
+      "id": "Z1r70fkXkWg",
+      "title": "USP-New | Landscape | 10 Seconds",
+      "published": "2024-07-08",
+      "url": "https://www.youtube.com/watch?v=Z1r70fkXkWg",
+      "thumbnail": "https://i.ytimg.com/vi/Z1r70fkXkWg/default.jpg",
+      "views": 84514,
+      "watch_time_hours": 226.73,
+      "avg_duration_sec": 9.0,
+      "avg_view_pct": 96.6,
+      "subs_gained": 0,
+      "likes": 3,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "6sSWafoHwec",
+      "title": "Car Video | Square| 15 Seconds",
+      "published": "2024-07-08",
+      "url": "https://www.youtube.com/watch?v=6sSWafoHwec",
+      "thumbnail": "https://i.ytimg.com/vi/6sSWafoHwec/default.jpg",
+      "views": 71109,
+      "watch_time_hours": 314.45,
+      "avg_duration_sec": 16.0,
+      "avg_view_pct": 94.3,
+      "subs_gained": 0,
+      "likes": 13,
+      "comments": 0,
+      "shares": 2,
+      "engagement_rate": 0.02
+    },
+    {
+      "id": "wH_-1rBOQsg",
+      "title": "C24_4x5_V01.mp4",
+      "published": "2025-10-30",
+      "url": "https://www.youtube.com/watch?v=wH_-1rBOQsg",
+      "thumbnail": "https://i.ytimg.com/vi/wH_-1rBOQsg/default.jpg",
+      "views": 65046,
+      "watch_time_hours": 404.37,
+      "avg_duration_sec": 37.0,
+      "avg_view_pct": 99.2,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 1,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "nTB9CwqvQmI",
+      "title": "C24_R2_1080x1080.mp4",
+      "published": "2025-11-06",
+      "url": "https://www.youtube.com/watch?v=nTB9CwqvQmI",
+      "thumbnail": "https://i.ytimg.com/vi/nTB9CwqvQmI/default.jpg",
+      "views": 56669,
+      "watch_time_hours": 446.52,
+      "avg_duration_sec": 43.0,
+      "avg_view_pct": 97.0,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "xRSXBVMLD1s",
+      "title": "Dream SUV Square",
+      "published": "2024-03-06",
+      "url": "https://www.youtube.com/watch?v=xRSXBVMLD1s",
+      "thumbnail": "https://i.ytimg.com/vi/xRSXBVMLD1s/default.jpg",
+      "views": 52608,
+      "watch_time_hours": 199.97,
+      "avg_duration_sec": 13.0,
+      "avg_view_pct": 92.9,
+      "subs_gained": 0,
+      "likes": 9,
+      "comments": 0,
+      "shares": 5,
+      "engagement_rate": 0.03
+    },
+    {
+      "id": "OwWVMC_EqS4",
+      "title": "Should you buy a  Mazda CX-3? #CARS24",
+      "published": "2025-07-10",
+      "url": "https://www.youtube.com/watch?v=OwWVMC_EqS4",
+      "thumbnail": "https://i.ytimg.com/vi/OwWVMC_EqS4/default.jpg",
+      "views": 52011,
+      "watch_time_hours": 315.13,
+      "avg_duration_sec": 31.0,
+      "avg_view_pct": 88.2,
+      "subs_gained": 50,
+      "likes": 473,
+      "comments": 9,
+      "shares": 59,
+      "engagement_rate": 1.04
+    },
+    {
+      "id": "NXq41xQvmms",
+      "title": "C24_R2_1080x1920.mp4",
+      "published": "2025-11-06",
+      "url": "https://www.youtube.com/watch?v=NXq41xQvmms",
+      "thumbnail": "https://i.ytimg.com/vi/NXq41xQvmms/default.jpg",
+      "views": 45030,
+      "watch_time_hours": 279.22,
+      "avg_duration_sec": 43.0,
+      "avg_view_pct": 96.7,
+      "subs_gained": 0,
+      "likes": 10,
+      "comments": 0,
+      "shares": 1,
+      "engagement_rate": 0.02
+    },
+    {
+      "id": "VufhHiuQyOs",
+      "title": "Value-Prop | Square | 15 Seconds",
+      "published": "2024-07-08",
+      "url": "https://www.youtube.com/watch?v=VufhHiuQyOs",
+      "thumbnail": "https://i.ytimg.com/vi/VufhHiuQyOs/default.jpg",
+      "views": 40963,
+      "watch_time_hours": 169.83,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 87.8,
+      "subs_gained": 0,
+      "likes": 10,
+      "comments": 0,
+      "shares": 2,
+      "engagement_rate": 0.03
+    },
+    {
+      "id": "2_Ig7PgcSls",
+      "title": "August_App 9x16",
+      "published": "2023-08-29",
+      "url": "https://www.youtube.com/watch?v=2_Ig7PgcSls",
+      "thumbnail": "https://i.ytimg.com/vi/2_Ig7PgcSls/default.jpg",
+      "views": 39667,
+      "watch_time_hours": 185.58,
+      "avg_duration_sec": 16.0,
+      "avg_view_pct": 168.4,
+      "subs_gained": 0,
+      "likes": 438,
+      "comments": 0,
+      "shares": 1,
+      "engagement_rate": 1.11
+    },
+    {
+      "id": "r-JQYNoZ7P4",
+      "title": "Dream SUV Portrait",
+      "published": "2024-03-06",
+      "url": "https://www.youtube.com/watch?v=r-JQYNoZ7P4",
+      "thumbnail": "https://i.ytimg.com/vi/r-JQYNoZ7P4/default.jpg",
+      "views": 34048,
+      "watch_time_hours": 134.37,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 94.8,
+      "subs_gained": 0,
+      "likes": 6,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.02
+    },
+    {
+      "id": "ISJPOdPcxp0",
+      "title": "2022 Ford Ranger vs Toyota Hilux #CARS24",
+      "published": "2025-06-02",
+      "url": "https://www.youtube.com/watch?v=ISJPOdPcxp0",
+      "thumbnail": "https://i.ytimg.com/vi/ISJPOdPcxp0/default.jpg",
+      "views": 32160,
+      "watch_time_hours": 176.87,
+      "avg_duration_sec": 29.0,
+      "avg_view_pct": 79.3,
+      "subs_gained": 55,
+      "likes": 433,
+      "comments": 33,
+      "shares": 14,
+      "engagement_rate": 1.49
+    },
+    {
+      "id": "IyBcsfVdW00",
+      "title": "Finance-VAS| Landscape | 15 Seconds",
+      "published": "2025-05-26",
+      "url": "https://www.youtube.com/watch?v=IyBcsfVdW00",
+      "thumbnail": "https://i.ytimg.com/vi/IyBcsfVdW00/default.jpg",
+      "views": 30534,
+      "watch_time_hours": 114.62,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 89.4,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 3,
+      "engagement_rate": 0.01
+    },
+    {
+      "id": "eKK8MiqNiJ0",
+      "title": "August_App 16x9",
+      "published": "2023-08-29",
+      "url": "https://www.youtube.com/watch?v=eKK8MiqNiJ0",
+      "thumbnail": "https://i.ytimg.com/vi/eKK8MiqNiJ0/default.jpg",
+      "views": 29090,
+      "watch_time_hours": 82.77,
+      "avg_duration_sec": 10.0,
+      "avg_view_pct": 102.4,
+      "subs_gained": 1,
+      "likes": 18,
+      "comments": 0,
+      "shares": 6,
+      "engagement_rate": 0.08
+    },
+    {
+      "id": "3wVaUM6KlgY",
+      "title": "5 Things We Like About the Kia Picanto! #CARS24",
+      "published": "2025-07-04",
+      "url": "https://www.youtube.com/watch?v=3wVaUM6KlgY",
+      "thumbnail": "https://i.ytimg.com/vi/3wVaUM6KlgY/default.jpg",
+      "views": 27788,
+      "watch_time_hours": 80.97,
+      "avg_duration_sec": 18.0,
+      "avg_view_pct": 79.8,
+      "subs_gained": 16,
+      "likes": 226,
+      "comments": 2,
+      "shares": 10,
+      "engagement_rate": 0.86
+    },
+    {
+      "id": "COT29Wc2-RE",
+      "title": "Value-Prop | 4:5 | 15 Seconds",
+      "published": "2024-07-08",
+      "url": "https://www.youtube.com/watch?v=COT29Wc2-RE",
+      "thumbnail": "https://i.ytimg.com/vi/COT29Wc2-RE/default.jpg",
+      "views": 27438,
+      "watch_time_hours": 124.48,
+      "avg_duration_sec": 16.0,
+      "avg_view_pct": 96.5,
+      "subs_gained": 0,
+      "likes": 4,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.01
+    },
+    {
+      "id": "xntSrBYxZn0",
+      "title": "2017 Kia Sportage vs Volkswagen Tiguan #CARS24",
+      "published": "2025-05-18",
+      "url": "https://www.youtube.com/watch?v=xntSrBYxZn0",
+      "thumbnail": "https://i.ytimg.com/vi/xntSrBYxZn0/default.jpg",
+      "views": 23127,
+      "watch_time_hours": 100.38,
+      "avg_duration_sec": 27.0,
+      "avg_view_pct": 89.9,
+      "subs_gained": 16,
+      "likes": 169,
+      "comments": 7,
+      "shares": 17,
+      "engagement_rate": 0.83
+    },
+    {
+      "id": "HoX6LsfQMx0",
+      "title": "Value-Prop | Landscape | 10 Seconds",
+      "published": "2024-07-08",
+      "url": "https://www.youtube.com/watch?v=HoX6LsfQMx0",
+      "thumbnail": "https://i.ytimg.com/vi/HoX6LsfQMx0/default.jpg",
+      "views": 22896,
+      "watch_time_hours": 83.37,
+      "avg_duration_sec": 24.0,
+      "avg_view_pct": 225.8,
+      "subs_gained": 0,
+      "likes": 193,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.84
+    },
+    {
+      "id": "8lwq1KSOryM",
+      "title": "USP-New | Square | 15 Seconds",
+      "published": "2024-07-08",
+      "url": "https://www.youtube.com/watch?v=8lwq1KSOryM",
+      "thumbnail": "https://i.ytimg.com/vi/8lwq1KSOryM/default.jpg",
+      "views": 22335,
+      "watch_time_hours": 92.62,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 93.4,
+      "subs_gained": 0,
+      "likes": 2,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.01
+    },
+    {
+      "id": "DIps843bo6k",
+      "title": "CARS24 - Order Your Next Car Online From The Bathtub",
+      "published": "2022-05-06",
+      "url": "https://www.youtube.com/watch?v=DIps843bo6k",
+      "thumbnail": "https://i.ytimg.com/vi/DIps843bo6k/default.jpg",
+      "views": 20440,
+      "watch_time_hours": 134.8,
+      "avg_duration_sec": 27.0,
+      "avg_view_pct": 89.8,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 4,
+      "engagement_rate": 0.02
+    },
+    {
+      "id": "DMcDmJVGIsg",
+      "title": "30 Day warranty",
+      "published": "2026-03-31",
+      "url": "https://www.youtube.com/watch?v=DMcDmJVGIsg",
+      "thumbnail": "https://i.ytimg.com/vi/DMcDmJVGIsg/default.jpg",
+      "views": 19560,
+      "watch_time_hours": 105.6,
+      "avg_duration_sec": 32.0,
+      "avg_view_pct": 87.3,
+      "subs_gained": 0,
+      "likes": 6,
+      "comments": 0,
+      "shares": 2,
+      "engagement_rate": 0.04
+    },
+    {
+      "id": "cAqN7oIwpVY",
+      "title": "30 Day return",
+      "published": "2026-03-31",
+      "url": "https://www.youtube.com/watch?v=cAqN7oIwpVY",
+      "thumbnail": "https://i.ytimg.com/vi/cAqN7oIwpVY/default.jpg",
+      "views": 16661,
+      "watch_time_hours": 67.5,
+      "avg_duration_sec": 24.0,
+      "avg_view_pct": 95.9,
+      "subs_gained": 0,
+      "likes": 2,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.01
+    },
+    {
+      "id": "ky9BdR1P84s",
+      "title": "Street Interview which one would you choose? #shorts",
+      "published": "2024-04-16",
+      "url": "https://www.youtube.com/watch?v=ky9BdR1P84s",
+      "thumbnail": "https://i.ytimg.com/vi/ky9BdR1P84s/default.jpg",
+      "views": 16015,
+      "watch_time_hours": 124.17,
+      "avg_duration_sec": 28.0,
+      "avg_view_pct": 80.2,
+      "subs_gained": 19,
+      "likes": 409,
+      "comments": 6,
+      "shares": 12,
+      "engagement_rate": 2.67
+    },
+    {
+      "id": "NgR4ONxUMd8",
+      "title": "Top 5 Things We Like About The Honda Jazz #Cars24Australia",
+      "published": "2025-08-17",
+      "url": "https://www.youtube.com/watch?v=NgR4ONxUMd8",
+      "thumbnail": "https://i.ytimg.com/vi/NgR4ONxUMd8/default.jpg",
+      "views": 15042,
+      "watch_time_hours": 81.3,
+      "avg_duration_sec": 30.0,
+      "avg_view_pct": 77.2,
+      "subs_gained": 13,
+      "likes": 161,
+      "comments": 6,
+      "shares": 1,
+      "engagement_rate": 1.12
+    },
+    {
+      "id": "M72Esi5XOKc",
+      "title": "Street Interview: Can you name 5 car brands starts with M? #streetinterview #shorts",
+      "published": "2024-05-10",
+      "url": "https://www.youtube.com/watch?v=M72Esi5XOKc",
+      "thumbnail": "https://i.ytimg.com/vi/M72Esi5XOKc/default.jpg",
+      "views": 14988,
+      "watch_time_hours": 111.02,
+      "avg_duration_sec": 26.0,
+      "avg_view_pct": 81.3,
+      "subs_gained": 6,
+      "likes": 421,
+      "comments": 5,
+      "shares": 2,
+      "engagement_rate": 2.86
+    },
+    {
+      "id": "Dq_q5RAVYbg",
+      "title": "Street Interview Car Logo Quiz #shorts #streetinterview",
+      "published": "2024-05-18",
+      "url": "https://www.youtube.com/watch?v=Dq_q5RAVYbg",
+      "thumbnail": "https://i.ytimg.com/vi/Dq_q5RAVYbg/default.jpg",
+      "views": 14460,
+      "watch_time_hours": 94.28,
+      "avg_duration_sec": 23.0,
+      "avg_view_pct": 78.4,
+      "subs_gained": 26,
+      "likes": 203,
+      "comments": 2,
+      "shares": 0,
+      "engagement_rate": 1.42
+    },
+    {
+      "id": "mNl4dsHBGSI",
+      "title": "Car Video | Portrait | 10 Seconds",
+      "published": "2024-07-09",
+      "url": "https://www.youtube.com/watch?v=mNl4dsHBGSI",
+      "thumbnail": "https://i.ytimg.com/vi/mNl4dsHBGSI/default.jpg",
+      "views": 13948,
+      "watch_time_hours": 87.75,
+      "avg_duration_sec": 23.0,
+      "avg_view_pct": 178.5,
+      "subs_gained": 0,
+      "likes": 319,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 2.29
+    },
+    {
+      "id": "hbF9t6Wg-Iw",
+      "title": "Street Interview: What was your first car? #streetinterview #shorts",
+      "published": "2024-08-13",
+      "url": "https://www.youtube.com/watch?v=hbF9t6Wg-Iw",
+      "thumbnail": "https://i.ytimg.com/vi/hbF9t6Wg-Iw/default.jpg",
+      "views": 13822,
+      "watch_time_hours": 85.62,
+      "avg_duration_sec": 22.0,
+      "avg_view_pct": 77.8,
+      "subs_gained": 16,
+      "likes": 173,
+      "comments": 1,
+      "shares": 6,
+      "engagement_rate": 1.3
+    },
+    {
+      "id": "rC3TNzVryXw",
+      "title": "How To Open The Ford #Ranger Tray Cover #CARS24",
+      "published": "2025-04-29",
+      "url": "https://www.youtube.com/watch?v=rC3TNzVryXw",
+      "thumbnail": "https://i.ytimg.com/vi/rC3TNzVryXw/default.jpg",
+      "views": 13397,
+      "watch_time_hours": 131.97,
+      "avg_duration_sec": 51.0,
+      "avg_view_pct": 60.2,
+      "subs_gained": 7,
+      "likes": 79,
+      "comments": 5,
+      "shares": 16,
+      "engagement_rate": 0.75
+    },
+    {
+      "id": "VY92BDTDYpM",
+      "title": "August_App 1x1",
+      "published": "2023-08-29",
+      "url": "https://www.youtube.com/watch?v=VY92BDTDYpM",
+      "thumbnail": "https://i.ytimg.com/vi/VY92BDTDYpM/default.jpg",
+      "views": 13221,
+      "watch_time_hours": 38.18,
+      "avg_duration_sec": 10.0,
+      "avg_view_pct": 104.0,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 3,
+      "engagement_rate": 0.02
+    },
+    {
+      "id": "FA2ypyrx6nM",
+      "title": "USP-New | Square | 10 Seconds",
+      "published": "2024-07-08",
+      "url": "https://www.youtube.com/watch?v=FA2ypyrx6nM",
+      "thumbnail": "https://i.ytimg.com/vi/FA2ypyrx6nM/default.jpg",
+      "views": 12928,
+      "watch_time_hours": 38.67,
+      "avg_duration_sec": 10.0,
+      "avg_view_pct": 107.7,
+      "subs_gained": 0,
+      "likes": 3,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.02
+    },
+    {
+      "id": "irAxysk0R2o",
+      "title": "Car Video | 4:5 | 10 Seconds",
+      "published": "2024-07-09",
+      "url": "https://www.youtube.com/watch?v=irAxysk0R2o",
+      "thumbnail": "https://i.ytimg.com/vi/irAxysk0R2o/default.jpg",
+      "views": 11978,
+      "watch_time_hours": 55.82,
+      "avg_duration_sec": 16.0,
+      "avg_view_pct": 129.1,
+      "subs_gained": 1,
+      "likes": 154,
+      "comments": 0,
+      "shares": 2,
+      "engagement_rate": 1.3
+    },
+    {
+      "id": "4vtfoUW5_hc",
+      "title": "Yes or No are theese car brands from Japan? #streetinterview",
+      "published": "2024-05-28",
+      "url": "https://www.youtube.com/watch?v=4vtfoUW5_hc",
+      "thumbnail": "https://i.ytimg.com/vi/4vtfoUW5_hc/default.jpg",
+      "views": 11663,
+      "watch_time_hours": 114.42,
+      "avg_duration_sec": 35.0,
+      "avg_view_pct": 70.8,
+      "subs_gained": 4,
+      "likes": 177,
+      "comments": 0,
+      "shares": 2,
+      "engagement_rate": 1.53
+    },
+    {
+      "id": "G51jh1dw6qg",
+      "title": "Suzuki Swift vs MG3 #CARS24",
+      "published": "2025-06-28",
+      "url": "https://www.youtube.com/watch?v=G51jh1dw6qg",
+      "thumbnail": "https://i.ytimg.com/vi/G51jh1dw6qg/default.jpg",
+      "views": 11374,
+      "watch_time_hours": 67.52,
+      "avg_duration_sec": 33.0,
+      "avg_view_pct": 75.2,
+      "subs_gained": 4,
+      "likes": 137,
+      "comments": 2,
+      "shares": 6,
+      "engagement_rate": 1.27
+    },
+    {
+      "id": "Tkiw_aN1kC0",
+      "title": "CARS24 - How to Buy",
+      "published": "2022-08-10",
+      "url": "https://www.youtube.com/watch?v=Tkiw_aN1kC0",
+      "thumbnail": "https://i.ytimg.com/vi/Tkiw_aN1kC0/default.jpg",
+      "views": 10969,
+      "watch_time_hours": 68.88,
+      "avg_duration_sec": 22.0,
+      "avg_view_pct": 26.3,
+      "subs_gained": 5,
+      "likes": 10,
+      "comments": 0,
+      "shares": 19,
+      "engagement_rate": 0.26
+    },
+    {
+      "id": "faXE0OmYikY",
+      "title": "CARS24 Mechanics What car do they drive? #shorts",
+      "published": "2024-05-13",
+      "url": "https://www.youtube.com/watch?v=faXE0OmYikY",
+      "thumbnail": "https://i.ytimg.com/vi/faXE0OmYikY/default.jpg",
+      "views": 10715,
+      "watch_time_hours": 99.83,
+      "avg_duration_sec": 33.0,
+      "avg_view_pct": 73.2,
+      "subs_gained": 10,
+      "likes": 272,
+      "comments": 4,
+      "shares": 4,
+      "engagement_rate": 2.61
+    },
+    {
+      "id": "Vy_iSY4b3P4",
+      "title": "Street Interview Car Logo Quiz #shorts #streetinterview",
+      "published": "2024-05-20",
+      "url": "https://www.youtube.com/watch?v=Vy_iSY4b3P4",
+      "thumbnail": "https://i.ytimg.com/vi/Vy_iSY4b3P4/default.jpg",
+      "views": 10692,
+      "watch_time_hours": 70.05,
+      "avg_duration_sec": 23.0,
+      "avg_view_pct": 76.2,
+      "subs_gained": 12,
+      "likes": 318,
+      "comments": 2,
+      "shares": 4,
+      "engagement_rate": 3.03
+    },
+    {
+      "id": "7wdUuU6cmJE",
+      "title": "Yes or No are theese car brands from Japan? #streetinterview",
+      "published": "2024-07-29",
+      "url": "https://www.youtube.com/watch?v=7wdUuU6cmJE",
+      "thumbnail": "https://i.ytimg.com/vi/7wdUuU6cmJE/default.jpg",
+      "views": 10649,
+      "watch_time_hours": 110.9,
+      "avg_duration_sec": 37.0,
+      "avg_view_pct": 85.8,
+      "subs_gained": 6,
+      "likes": 366,
+      "comments": 6,
+      "shares": 4,
+      "engagement_rate": 3.53
+    },
+    {
+      "id": "r5_r9RqzyIo",
+      "title": "Street Interview which one would you choose? #shorts",
+      "published": "2024-07-31",
+      "url": "https://www.youtube.com/watch?v=r5_r9RqzyIo",
+      "thumbnail": "https://i.ytimg.com/vi/r5_r9RqzyIo/default.jpg",
+      "views": 10359,
+      "watch_time_hours": 80.23,
+      "avg_duration_sec": 28.0,
+      "avg_view_pct": 84.9,
+      "subs_gained": 19,
+      "likes": 321,
+      "comments": 5,
+      "shares": 6,
+      "engagement_rate": 3.2
+    }
+  ]
+}

@@ -1,0 +1,1140 @@
+{
+  "geo": [
+    {
+      "city": "Dubai",
+      "views": 6541216,
+      "watch_time_hours": 27837.2
+    },
+    {
+      "city": "Abu Dhabi",
+      "views": 1341951,
+      "watch_time_hours": 6140.4
+    },
+    {
+      "city": "Sharjah",
+      "views": 520855,
+      "watch_time_hours": 2347.4
+    },
+    {
+      "city": "Al Ain",
+      "views": 216522,
+      "watch_time_hours": 974.8
+    },
+    {
+      "city": "Bengaluru",
+      "views": 85334,
+      "watch_time_hours": 416.0
+    },
+    {
+      "city": "Hyderabad",
+      "views": 45187,
+      "watch_time_hours": 210.8
+    },
+    {
+      "city": "Mumbai",
+      "views": 39912,
+      "watch_time_hours": 204.4
+    },
+    {
+      "city": "Delhi",
+      "views": 35870,
+      "watch_time_hours": 180.9
+    },
+    {
+      "city": "Pune",
+      "views": 33471,
+      "watch_time_hours": 162.2
+    },
+    {
+      "city": "Chennai",
+      "views": 27453,
+      "watch_time_hours": 124.7
+    },
+    {
+      "city": "Ajman",
+      "views": 23975,
+      "watch_time_hours": 111.9
+    },
+    {
+      "city": "Ahmedabad",
+      "views": 17166,
+      "watch_time_hours": 85.4
+    },
+    {
+      "city": "Kochi",
+      "views": 16284,
+      "watch_time_hours": 83.1
+    },
+    {
+      "city": "Kolkata",
+      "views": 13449,
+      "watch_time_hours": 70.4
+    },
+    {
+      "city": "Lucknow",
+      "views": 12978,
+      "watch_time_hours": 66.4
+    },
+    {
+      "city": "Jaipur",
+      "views": 11744,
+      "watch_time_hours": 58.3
+    },
+    {
+      "city": "Guwahati",
+      "views": 11093,
+      "watch_time_hours": 60.0
+    },
+    {
+      "city": "Patna",
+      "views": 10712,
+      "watch_time_hours": 52.2
+    },
+    {
+      "city": "Indore",
+      "views": 9269,
+      "watch_time_hours": 48.0
+    },
+    {
+      "city": "Karachi",
+      "views": 9255,
+      "watch_time_hours": 53.0
+    },
+    {
+      "city": "Lahore",
+      "views": 8293,
+      "watch_time_hours": 45.2
+    },
+    {
+      "city": "Nagpur",
+      "views": 7987,
+      "watch_time_hours": 38.8
+    },
+    {
+      "city": "Bhubaneswar",
+      "views": 7884,
+      "watch_time_hours": 42.3
+    },
+    {
+      "city": "London",
+      "views": 7124,
+      "watch_time_hours": 44.7
+    },
+    {
+      "city": "Ludhiana",
+      "views": 6417,
+      "watch_time_hours": 33.6
+    }
+  ],
+  "demographics": [
+    {
+      "age_group": "age13-17",
+      "gender": "female",
+      "viewer_pct": 0.1
+    },
+    {
+      "age_group": "age13-17",
+      "gender": "male",
+      "viewer_pct": 0.7
+    },
+    {
+      "age_group": "age18-24",
+      "gender": "female",
+      "viewer_pct": 2.6
+    },
+    {
+      "age_group": "age18-24",
+      "gender": "male",
+      "viewer_pct": 10.5
+    },
+    {
+      "age_group": "age18-24",
+      "gender": "genderUserSpecified",
+      "viewer_pct": 0.0
+    },
+    {
+      "age_group": "age25-34",
+      "gender": "female",
+      "viewer_pct": 11.4
+    },
+    {
+      "age_group": "age25-34",
+      "gender": "male",
+      "viewer_pct": 32.1
+    },
+    {
+      "age_group": "age25-34",
+      "gender": "genderUserSpecified",
+      "viewer_pct": 0.0
+    },
+    {
+      "age_group": "age35-44",
+      "gender": "female",
+      "viewer_pct": 8.1
+    },
+    {
+      "age_group": "age35-44",
+      "gender": "male",
+      "viewer_pct": 22.1
+    },
+    {
+      "age_group": "age35-44",
+      "gender": "genderUserSpecified",
+      "viewer_pct": 0.0
+    },
+    {
+      "age_group": "age45-54",
+      "gender": "female",
+      "viewer_pct": 2.2
+    },
+    {
+      "age_group": "age45-54",
+      "gender": "male",
+      "viewer_pct": 6.8
+    },
+    {
+      "age_group": "age45-54",
+      "gender": "genderUserSpecified",
+      "viewer_pct": 0.0
+    },
+    {
+      "age_group": "age55-64",
+      "gender": "female",
+      "viewer_pct": 0.6
+    },
+    {
+      "age_group": "age55-64",
+      "gender": "male",
+      "viewer_pct": 1.8
+    },
+    {
+      "age_group": "age65-",
+      "gender": "female",
+      "viewer_pct": 0.3
+    },
+    {
+      "age_group": "age65-",
+      "gender": "male",
+      "viewer_pct": 0.7
+    },
+    {
+      "age_group": "age65-",
+      "gender": "genderUserSpecified",
+      "viewer_pct": 0.0
+    }
+  ],
+  "traffic_sources": [
+    {
+      "source": "ADVERTISING",
+      "views": 190218042,
+      "watch_time_hours": 661948.8,
+      "pct": 98.9
+    },
+    {
+      "source": "SHORTS",
+      "views": 1089996,
+      "watch_time_hours": 5510.3,
+      "pct": 0.6
+    },
+    {
+      "source": "YT_SEARCH",
+      "views": 826959,
+      "watch_time_hours": 4440.6,
+      "pct": 0.4
+    },
+    {
+      "source": "EXT_URL",
+      "views": 134080,
+      "watch_time_hours": 726.3,
+      "pct": 0.1
+    },
+    {
+      "source": "YT_CHANNEL",
+      "views": 39202,
+      "watch_time_hours": 718.8,
+      "pct": 0.0
+    },
+    {
+      "source": "YT_OTHER_PAGE",
+      "views": 19524,
+      "watch_time_hours": 102.6,
+      "pct": 0.0
+    },
+    {
+      "source": "PLAYLIST",
+      "views": 19082,
+      "watch_time_hours": 189.7,
+      "pct": 0.0
+    },
+    {
+      "source": "SUBSCRIBER",
+      "views": 14550,
+      "watch_time_hours": 111.2,
+      "pct": 0.0
+    },
+    {
+      "source": "NO_LINK_OTHER",
+      "views": 6680,
+      "watch_time_hours": 47.0,
+      "pct": 0.0
+    },
+    {
+      "source": "RELATED_VIDEO",
+      "views": 4841,
+      "watch_time_hours": 160.1,
+      "pct": 0.0
+    },
+    {
+      "source": "HASHTAGS",
+      "views": 2377,
+      "watch_time_hours": 12.2,
+      "pct": 0.0
+    },
+    {
+      "source": "NOTIFICATION",
+      "views": 323,
+      "watch_time_hours": 2.1,
+      "pct": 0.0
+    },
+    {
+      "source": "SOUND_PAGE",
+      "views": 186,
+      "watch_time_hours": 0.6,
+      "pct": 0.0
+    },
+    {
+      "source": "IMMERSIVE_LIVE",
+      "views": 10,
+      "watch_time_hours": 0.1,
+      "pct": 0.0
+    }
+  ],
+  "devices": [
+    {
+      "device": "MOBILE",
+      "views": 155249481,
+      "watch_time_hours": 541412.3,
+      "pct": 81.4
+    },
+    {
+      "device": "TABLET",
+      "views": 23516400,
+      "watch_time_hours": 51532.1,
+      "pct": 12.3
+    },
+    {
+      "device": "TV",
+      "views": 11397432,
+      "watch_time_hours": 72732.8,
+      "pct": 6.0
+    },
+    {
+      "device": "DESKTOP",
+      "views": 541025,
+      "watch_time_hours": 3047.6,
+      "pct": 0.3
+    }
+  ],
+  "top_videos": [
+    {
+      "id": "GEmNAm2aEI0",
+      "title": "Don't start the new year with same old car| Buy a luxury pre-owned car with Cars24",
+      "published": "2026-01-05",
+      "url": "https://www.youtube.com/watch?v=GEmNAm2aEI0",
+      "thumbnail": "https://i9.ytimg.com/vi/GEmNAm2aEI0/default.jpg?sqp=CLSQmdIG&rs=AOn4CLAD1vZyACDgnpvd7lD0YUdGnE8gGg",
+      "views": 17694760,
+      "watch_time_hours": 17789.35,
+      "avg_duration_sec": 20.0,
+      "avg_view_pct": 80.4,
+      "subs_gained": 1,
+      "likes": 7446,
+      "comments": 76,
+      "shares": 136,
+      "engagement_rate": 0.04
+    },
+    {
+      "id": "1oWTma88fOc",
+      "title": "WIDE RANGE OF HIGH QUALITY USED CARS WITH CARS24",
+      "published": "2023-07-13",
+      "url": "https://www.youtube.com/watch?v=1oWTma88fOc",
+      "thumbnail": "https://i9.ytimg.com/vi/1oWTma88fOc/default.jpg?sqp=CLSQmdIG&rs=AOn4CLDXTf85TZM7uqCD9H0vlPS-ezXcDQ",
+      "views": 11336475,
+      "watch_time_hours": 79037.57,
+      "avg_duration_sec": 25.0,
+      "avg_view_pct": 97.3,
+      "subs_gained": 31,
+      "likes": 200,
+      "comments": 5,
+      "shares": 456,
+      "engagement_rate": 0.01
+    },
+    {
+      "id": "dfPgKsX0bcM",
+      "title": "Get the upgrade you deserve | Trade your old car and get up to AED 20,000 off on your next car",
+      "published": "2026-01-05",
+      "url": "https://www.youtube.com/watch?v=dfPgKsX0bcM",
+      "thumbnail": "https://i.ytimg.com/vi/dfPgKsX0bcM/default.jpg",
+      "views": 10051656,
+      "watch_time_hours": 7838.37,
+      "avg_duration_sec": 21.0,
+      "avg_view_pct": 100.1,
+      "subs_gained": 1,
+      "likes": 1865,
+      "comments": 11,
+      "shares": 16,
+      "engagement_rate": 0.02
+    },
+    {
+      "id": "TJMGoWgf_eA",
+      "title": "Luxury cars under AED 100K | Luxury cars, best prices",
+      "published": "2025-10-17",
+      "url": "https://www.youtube.com/watch?v=TJMGoWgf_eA",
+      "thumbnail": "https://i.ytimg.com/vi/TJMGoWgf_eA/default.jpg",
+      "views": 8332317,
+      "watch_time_hours": 32161.82,
+      "avg_duration_sec": 41.0,
+      "avg_view_pct": 87.4,
+      "subs_gained": 0,
+      "likes": 134,
+      "comments": 2,
+      "shares": 30,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "1xAWb-5F1I8",
+      "title": "BMW's your dream car too? We've got 'em all for you.",
+      "published": "2025-07-29",
+      "url": "https://www.youtube.com/watch?v=1xAWb-5F1I8",
+      "thumbnail": "https://i.ytimg.com/vi/1xAWb-5F1I8/default.jpg",
+      "views": 7128624,
+      "watch_time_hours": 24231.95,
+      "avg_duration_sec": 19.0,
+      "avg_view_pct": 70.3,
+      "subs_gained": 3,
+      "likes": 1,
+      "comments": 0,
+      "shares": 24,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "khheCxPAhTw",
+      "title": "Worst mistake to make!",
+      "published": "2026-02-19",
+      "url": "https://www.youtube.com/watch?v=khheCxPAhTw",
+      "thumbnail": "https://i.ytimg.com/vi/khheCxPAhTw/default.jpg",
+      "views": 6578131,
+      "watch_time_hours": 17776.47,
+      "avg_duration_sec": 21.0,
+      "avg_view_pct": 81.8,
+      "subs_gained": 0,
+      "likes": 624,
+      "comments": 4,
+      "shares": 93,
+      "engagement_rate": 0.01
+    },
+    {
+      "id": "8ZvKIsVmVWw",
+      "title": "BMW's your dream car too? We've got 'em all for you.",
+      "published": "2025-07-29",
+      "url": "https://www.youtube.com/watch?v=8ZvKIsVmVWw",
+      "thumbnail": "https://i.ytimg.com/vi/8ZvKIsVmVWw/default.jpg",
+      "views": 6135940,
+      "watch_time_hours": 13605.6,
+      "avg_duration_sec": 18.0,
+      "avg_view_pct": 64.6,
+      "subs_gained": 0,
+      "likes": 116,
+      "comments": 1,
+      "shares": 18,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "dN_e6g7y8qY",
+      "title": "BMW's your dream car too? We've got 'em all for you.",
+      "published": "2025-07-29",
+      "url": "https://www.youtube.com/watch?v=dN_e6g7y8qY",
+      "thumbnail": "https://i.ytimg.com/vi/dN_e6g7y8qY/default.jpg",
+      "views": 5217033,
+      "watch_time_hours": 17536.73,
+      "avg_duration_sec": 19.0,
+      "avg_view_pct": 68.2,
+      "subs_gained": 1,
+      "likes": 1,
+      "comments": 0,
+      "shares": 15,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "oRjspDWvTOo",
+      "title": "2024 Chevy Tahoe \u2013 Bold & Spacious | Download CARS24 App and Check It Out Now",
+      "published": "2025-06-26",
+      "url": "https://www.youtube.com/watch?v=oRjspDWvTOo",
+      "thumbnail": "https://i9.ytimg.com/vi/oRjspDWvTOo/default.jpg?sqp=CLSQmdIG&rs=AOn4CLB3oB59q6skwWcebsxQ-kqLM5OzJw",
+      "views": 4831542,
+      "watch_time_hours": 10427.1,
+      "avg_duration_sec": 41.0,
+      "avg_view_pct": 87.3,
+      "subs_gained": 0,
+      "likes": 125,
+      "comments": 0,
+      "shares": 23,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "wKy4xKbc7jU",
+      "title": "FREE TEST DRIVE LUXURY CARS IN UAE AT CARS24 MRL HUB",
+      "published": "2023-06-23",
+      "url": "https://www.youtube.com/watch?v=wKy4xKbc7jU",
+      "thumbnail": "https://i9.ytimg.com/vi/wKy4xKbc7jU/default.jpg?sqp=CLSQmdIG&rs=AOn4CLBkEtZP9mvpJgoCD956SqtJXGrX2g",
+      "views": 4426149,
+      "watch_time_hours": 12772.92,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 108.3,
+      "subs_gained": 6,
+      "likes": 109,
+      "comments": 5,
+      "shares": 111,
+      "engagement_rate": 0.01
+    },
+    {
+      "id": "T86cq0Kj2EQ",
+      "title": "Don\u2019t Just Buy a Car - Test It for 30 Days | With Cars24 UAE",
+      "published": "2026-02-02",
+      "url": "https://www.youtube.com/watch?v=T86cq0Kj2EQ",
+      "thumbnail": "https://i.ytimg.com/vi/T86cq0Kj2EQ/default.jpg",
+      "views": 4321524,
+      "watch_time_hours": 17191.8,
+      "avg_duration_sec": 20.0,
+      "avg_view_pct": 93.8,
+      "subs_gained": 1,
+      "likes": 1,
+      "comments": 1,
+      "shares": 61,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "o7ScsEH_9EA",
+      "title": "Upgrade your old car. Get upto AED 2k trade-in discount",
+      "published": "2025-10-16",
+      "url": "https://www.youtube.com/watch?v=o7ScsEH_9EA",
+      "thumbnail": "https://i.ytimg.com/vi/o7ScsEH_9EA/default.jpg",
+      "views": 3959097,
+      "watch_time_hours": 4863.02,
+      "avg_duration_sec": 12.0,
+      "avg_view_pct": 104.2,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 2,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "GBn6fecdvrM",
+      "title": "Buy a car with confidence | UAE's first and only 30 day return policy on cars | Cars24",
+      "published": "2025-12-04",
+      "url": "https://www.youtube.com/watch?v=GBn6fecdvrM",
+      "thumbnail": "https://i.ytimg.com/vi/GBn6fecdvrM/default.jpg",
+      "views": 3658391,
+      "watch_time_hours": 17628.3,
+      "avg_duration_sec": 35.0,
+      "avg_view_pct": 68.6,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 21,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "_u2ZpB9LktI",
+      "title": "Mini Cooper JCW - Compact Icon, Big Personality | Dowload the CARS24 App Now",
+      "published": "2025-06-26",
+      "url": "https://www.youtube.com/watch?v=_u2ZpB9LktI",
+      "thumbnail": "https://i9.ytimg.com/vi/_u2ZpB9LktI/default.jpg?sqp=CLSQmdIG&rs=AOn4CLC6OvD3kMEm15Rpk5lVIsa893DS3A",
+      "views": 3411636,
+      "watch_time_hours": 4475.72,
+      "avg_duration_sec": 32.0,
+      "avg_view_pct": 97.7,
+      "subs_gained": 0,
+      "likes": 54,
+      "comments": 0,
+      "shares": 4,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "EmHtV8y1r8c",
+      "title": "TRADE IN YOUR CAR WITH CARS24",
+      "published": "2024-02-09",
+      "url": "https://www.youtube.com/watch?v=EmHtV8y1r8c",
+      "thumbnail": "https://i9.ytimg.com/vi/EmHtV8y1r8c/default.jpg?sqp=CLSQmdIG&rs=AOn4CLBmkhLFmBO-sUh2Btwc2i7Ss12qzA",
+      "views": 2880524,
+      "watch_time_hours": 7576.65,
+      "avg_duration_sec": 10.0,
+      "avg_view_pct": 91.6,
+      "subs_gained": 0,
+      "likes": 31,
+      "comments": 0,
+      "shares": 61,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "J5pa3iXTlpQ",
+      "title": "Drive it, test it | 30 days return on all cars | Cars24 UAE",
+      "published": "2025-12-11",
+      "url": "https://www.youtube.com/watch?v=J5pa3iXTlpQ",
+      "thumbnail": "https://i.ytimg.com/vi/J5pa3iXTlpQ/default.jpg",
+      "views": 2821680,
+      "watch_time_hours": 8005.9,
+      "avg_duration_sec": 18.0,
+      "avg_view_pct": 89.5,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 21,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "ED0CwGPoHKo",
+      "title": "TEST DRIVE HIGH QUALITY USED CARS IN UAE",
+      "published": "2023-07-26",
+      "url": "https://www.youtube.com/watch?v=ED0CwGPoHKo",
+      "thumbnail": "https://i9.ytimg.com/vi/ED0CwGPoHKo/default.jpg?sqp=CLSQmdIG&rs=AOn4CLBjsdv1KlldiWTHOSieyLkYM8J-1w",
+      "views": 2648695,
+      "watch_time_hours": 10020.6,
+      "avg_duration_sec": 13.0,
+      "avg_view_pct": 99.2,
+      "subs_gained": 2,
+      "likes": 390,
+      "comments": 0,
+      "shares": 69,
+      "engagement_rate": 0.02
+    },
+    {
+      "id": "SqhfWKpo0wM",
+      "title": "BIG AUTO SALE BY CARS24 LIVE NOW!",
+      "published": "2025-10-13",
+      "url": "https://www.youtube.com/watch?v=SqhfWKpo0wM",
+      "thumbnail": "https://i9.ytimg.com/vi/SqhfWKpo0wM/default.jpg?sqp=CLSQmdIG&rs=AOn4CLD-rRCdMPc9bl1AfXOw_2KATWgBKQ",
+      "views": 2183528,
+      "watch_time_hours": 5449.13,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 100.1,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 61,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "rilTB4nI1og",
+      "title": "Sell your premium car for the best value at CARS24!",
+      "published": "2025-10-02",
+      "url": "https://www.youtube.com/watch?v=rilTB4nI1og",
+      "thumbnail": "https://i.ytimg.com/vi/rilTB4nI1og/default.jpg",
+      "views": 2123260,
+      "watch_time_hours": 3850.02,
+      "avg_duration_sec": 13.0,
+      "avg_view_pct": 102.7,
+      "subs_gained": 1,
+      "likes": 0,
+      "comments": 0,
+      "shares": 2,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "1I0SF47j-9U",
+      "title": "Return the car if you don't like it | UAE's first 30-day return policy on cars - Cars24",
+      "published": "2025-12-04",
+      "url": "https://www.youtube.com/watch?v=1I0SF47j-9U",
+      "thumbnail": "https://i.ytimg.com/vi/1I0SF47j-9U/default.jpg",
+      "views": 2008646,
+      "watch_time_hours": 5874.22,
+      "avg_duration_sec": 26.0,
+      "avg_view_pct": 92.6,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 3,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "I9SI5WPOHOw",
+      "title": "CARS24 : # 1 App to buy quality used cars  #uae #automobile #cars #autodealsuae #dubai",
+      "published": "2024-01-03",
+      "url": "https://www.youtube.com/watch?v=I9SI5WPOHOw",
+      "thumbnail": "https://i9.ytimg.com/vi/I9SI5WPOHOw/default.jpg?sqp=CLSQmdIG&rs=AOn4CLCqkhPAqArPN_3hnA957uOdwbsMWw",
+      "views": 1954521,
+      "watch_time_hours": 14662.65,
+      "avg_duration_sec": 28.0,
+      "avg_view_pct": 71.6,
+      "subs_gained": 3,
+      "likes": 27375,
+      "comments": 2,
+      "shares": 49,
+      "engagement_rate": 1.4
+    },
+    {
+      "id": "wvpFNtsRgQo",
+      "title": "Why Used Luxury Cars Make More Sense Today| Cars24 UAE",
+      "published": "2026-02-02",
+      "url": "https://www.youtube.com/watch?v=wvpFNtsRgQo",
+      "thumbnail": "https://i.ytimg.com/vi/wvpFNtsRgQo/default.jpg",
+      "views": 1849410,
+      "watch_time_hours": 4778.48,
+      "avg_duration_sec": 37.0,
+      "avg_view_pct": 84.5,
+      "subs_gained": 0,
+      "likes": 268,
+      "comments": 3,
+      "shares": 16,
+      "engagement_rate": 0.02
+    },
+    {
+      "id": "d9Axy-n6CWQ",
+      "title": "Verify First. Decide Later. 30 Day Return on Cars| With Cars24 UAE",
+      "published": "2026-02-02",
+      "url": "https://www.youtube.com/watch?v=d9Axy-n6CWQ",
+      "thumbnail": "https://i.ytimg.com/vi/d9Axy-n6CWQ/default.jpg",
+      "views": 1776059,
+      "watch_time_hours": 6547.53,
+      "avg_duration_sec": 22.0,
+      "avg_view_pct": 93.7,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 17,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "uEz15KAVg50",
+      "title": "TRADE IN YOUR CAR WITH CARS24",
+      "published": "2024-02-09",
+      "url": "https://www.youtube.com/watch?v=uEz15KAVg50",
+      "thumbnail": "https://i9.ytimg.com/vi/uEz15KAVg50/default.jpg?sqp=CLSQmdIG&rs=AOn4CLCU-9VJLcuDE--6DngbSMdMTeXt6g",
+      "views": 1536309,
+      "watch_time_hours": 4193.73,
+      "avg_duration_sec": 9.0,
+      "avg_view_pct": 90.7,
+      "subs_gained": 0,
+      "likes": 4,
+      "comments": 0,
+      "shares": 29,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "gnz4A0pvttI",
+      "title": "Sell your car at CARS24 & Get the Best price for your car!",
+      "published": "2024-02-20",
+      "url": "https://www.youtube.com/watch?v=gnz4A0pvttI",
+      "thumbnail": "https://i.ytimg.com/vi/gnz4A0pvttI/default.jpg",
+      "views": 1409915,
+      "watch_time_hours": 2942.45,
+      "avg_duration_sec": 16.0,
+      "avg_view_pct": 62.8,
+      "subs_gained": 0,
+      "likes": 7,
+      "comments": 0,
+      "shares": 1,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "v_-fOYS2oHs",
+      "title": "TRADE IN YOUR CAR WITH CARS24",
+      "published": "2024-02-09",
+      "url": "https://www.youtube.com/watch?v=v_-fOYS2oHs",
+      "thumbnail": "https://i.ytimg.com/vi/v_-fOYS2oHs/default.jpg",
+      "views": 1346464,
+      "watch_time_hours": 3738.95,
+      "avg_duration_sec": 10.0,
+      "avg_view_pct": 91.3,
+      "subs_gained": 0,
+      "likes": 264,
+      "comments": 0,
+      "shares": 120,
+      "engagement_rate": 0.03
+    },
+    {
+      "id": "LPqC12YqinE",
+      "title": "BIG AUTO SALE BY CARS24 LIVE NOW!",
+      "published": "2025-10-13",
+      "url": "https://www.youtube.com/watch?v=LPqC12YqinE",
+      "thumbnail": "https://i9.ytimg.com/vi/LPqC12YqinE/default.jpg?sqp=CLSQmdIG&rs=AOn4CLBHxkOcyQmEB-abIoqTdFDbP1U-0A",
+      "views": 1263351,
+      "watch_time_hours": 3126.05,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 100.8,
+      "subs_gained": 1,
+      "likes": 99,
+      "comments": 0,
+      "shares": 30,
+      "engagement_rate": 0.01
+    },
+    {
+      "id": "orb1SvCTwtE",
+      "title": "Drive with peace of mind",
+      "published": "2026-04-29",
+      "url": "https://www.youtube.com/watch?v=orb1SvCTwtE",
+      "thumbnail": "https://i.ytimg.com/vi/orb1SvCTwtE/default.jpg",
+      "views": 1187711,
+      "watch_time_hours": 2676.48,
+      "avg_duration_sec": 37.0,
+      "avg_view_pct": 79.5,
+      "subs_gained": 0,
+      "likes": 364,
+      "comments": 2,
+      "shares": 18,
+      "engagement_rate": 0.03
+    },
+    {
+      "id": "TaemsLNJezM",
+      "title": "Choose Better This Ramadan | Cars24",
+      "published": "2026-02-17",
+      "url": "https://www.youtube.com/watch?v=TaemsLNJezM",
+      "thumbnail": "https://i.ytimg.com/vi/TaemsLNJezM/default.jpg",
+      "views": 1090495,
+      "watch_time_hours": 1667.32,
+      "avg_duration_sec": 22.0,
+      "avg_view_pct": 88.4,
+      "subs_gained": 0,
+      "likes": 78,
+      "comments": 0,
+      "shares": 3,
+      "engagement_rate": 0.01
+    },
+    {
+      "id": "OdWjYzyunu8",
+      "title": "\u0623\u062e\u062a\u0627\u0631 \u0631\u0627\u062d\u0629 \u0627\u0644\u0628\u0627\u0644",
+      "published": "2026-04-29",
+      "url": "https://www.youtube.com/watch?v=OdWjYzyunu8",
+      "thumbnail": "https://i.ytimg.com/vi/OdWjYzyunu8/default.jpg",
+      "views": 1079421,
+      "watch_time_hours": 2666.25,
+      "avg_duration_sec": 28.0,
+      "avg_view_pct": 100.0,
+      "subs_gained": 1,
+      "likes": 347,
+      "comments": 3,
+      "shares": 26,
+      "engagement_rate": 0.03
+    },
+    {
+      "id": "gb1nO2DVRQ4",
+      "title": "TRADE IN YOUR CAR WITH CARS24",
+      "published": "2024-02-09",
+      "url": "https://www.youtube.com/watch?v=gb1nO2DVRQ4",
+      "thumbnail": "https://i9.ytimg.com/vi/gb1nO2DVRQ4/default.jpg?sqp=CLSQmdIG&rs=AOn4CLAhuAJ-ZVcxkmW0tqlyPj7t8rRKwQ",
+      "views": 1047016,
+      "watch_time_hours": 2923.4,
+      "avg_duration_sec": 10.0,
+      "avg_view_pct": 93.5,
+      "subs_gained": 1,
+      "likes": 514,
+      "comments": 0,
+      "shares": 39,
+      "engagement_rate": 0.05
+    },
+    {
+      "id": "tptutg4_Brc",
+      "title": "Sheeza -  Drive with peace of mind",
+      "published": "2026-04-02",
+      "url": "https://www.youtube.com/watch?v=tptutg4_Brc",
+      "thumbnail": "https://i.ytimg.com/vi/tptutg4_Brc/default.jpg",
+      "views": 1009227,
+      "watch_time_hours": 2940.88,
+      "avg_duration_sec": 39.0,
+      "avg_view_pct": 84.4,
+      "subs_gained": 0,
+      "likes": 255,
+      "comments": 3,
+      "shares": 17,
+      "engagement_rate": 0.03
+    },
+    {
+      "id": "6fxCOqmou3s",
+      "title": "Buy Pre-owned Luxury Cars, Save More | Cars24",
+      "published": "2025-10-27",
+      "url": "https://www.youtube.com/watch?v=6fxCOqmou3s",
+      "thumbnail": "https://i.ytimg.com/vi/6fxCOqmou3s/default.jpg",
+      "views": 996905,
+      "watch_time_hours": 1692.08,
+      "avg_duration_sec": 34.0,
+      "avg_view_pct": 84.0,
+      "subs_gained": 1,
+      "likes": 84,
+      "comments": 0,
+      "shares": 5,
+      "engagement_rate": 0.01
+    },
+    {
+      "id": "1txZ6IlPwmc",
+      "title": "The Right price, always",
+      "published": "2026-04-20",
+      "url": "https://www.youtube.com/watch?v=1txZ6IlPwmc",
+      "thumbnail": "https://i.ytimg.com/vi/1txZ6IlPwmc/default.jpg",
+      "views": 956368,
+      "watch_time_hours": 1979.68,
+      "avg_duration_sec": 24.0,
+      "avg_view_pct": 96.6,
+      "subs_gained": 0,
+      "likes": 413,
+      "comments": 3,
+      "shares": 18,
+      "engagement_rate": 0.05
+    },
+    {
+      "id": "Er5Gnquw1g4",
+      "title": "FLOOD-FREE HIGH QUALITY USED CARS IN THE UAE",
+      "published": "2024-04-26",
+      "url": "https://www.youtube.com/watch?v=Er5Gnquw1g4",
+      "thumbnail": "https://i.ytimg.com/vi/Er5Gnquw1g4/default.jpg",
+      "views": 844419,
+      "watch_time_hours": 2686.45,
+      "avg_duration_sec": 11.0,
+      "avg_view_pct": 104.2,
+      "subs_gained": 4,
+      "likes": 767,
+      "comments": 0,
+      "shares": 79,
+      "engagement_rate": 0.1
+    },
+    {
+      "id": "czpeoPxaUrs",
+      "title": "7 Days Easy Return Policy | 100% Refund | Download the CARS24 App now!",
+      "published": "2021-05-24",
+      "url": "https://www.youtube.com/watch?v=czpeoPxaUrs",
+      "thumbnail": "https://i.ytimg.com/vi/czpeoPxaUrs/default.jpg",
+      "views": 838288,
+      "watch_time_hours": 7789.52,
+      "avg_duration_sec": 33.0,
+      "avg_view_pct": 92.9,
+      "subs_gained": 9,
+      "likes": -44,
+      "comments": 4,
+      "shares": 112,
+      "engagement_rate": 0.01
+    },
+    {
+      "id": "jKekBoTLqvs",
+      "title": "Dalia",
+      "published": "2026-04-02",
+      "url": "https://www.youtube.com/watch?v=jKekBoTLqvs",
+      "thumbnail": "https://i.ytimg.com/vi/jKekBoTLqvs/default.jpg",
+      "views": 699605,
+      "watch_time_hours": 1136.12,
+      "avg_duration_sec": 30.0,
+      "avg_view_pct": 104.5,
+      "subs_gained": 0,
+      "likes": 388,
+      "comments": 2,
+      "shares": 33,
+      "engagement_rate": 0.06
+    },
+    {
+      "id": "2V1oWDHhGBs",
+      "title": "Drive Better This Ramadan | Up to AED 20,000 off with Cars24",
+      "published": "2026-02-17",
+      "url": "https://www.youtube.com/watch?v=2V1oWDHhGBs",
+      "thumbnail": "https://i.ytimg.com/vi/2V1oWDHhGBs/default.jpg",
+      "views": 679789,
+      "watch_time_hours": 2050.62,
+      "avg_duration_sec": 20.0,
+      "avg_view_pct": 99.8,
+      "subs_gained": 5,
+      "likes": 0,
+      "comments": 0,
+      "shares": 8,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "ET15IHa48d8",
+      "title": "Buy confidently.",
+      "published": "2026-02-19",
+      "url": "https://www.youtube.com/watch?v=ET15IHa48d8",
+      "thumbnail": "https://i.ytimg.com/vi/ET15IHa48d8/default.jpg",
+      "views": 596405,
+      "watch_time_hours": 1202.42,
+      "avg_duration_sec": 27.0,
+      "avg_view_pct": 96.6,
+      "subs_gained": 0,
+      "likes": 163,
+      "comments": 4,
+      "shares": 12,
+      "engagement_rate": 0.03
+    },
+    {
+      "id": "zaO2yjx_6HQ",
+      "title": "FREE TEST DRIVE LUXURY CARS IN UAE AT CARS24 MRL HUB",
+      "published": "2023-06-22",
+      "url": "https://www.youtube.com/watch?v=zaO2yjx_6HQ",
+      "thumbnail": "https://i9.ytimg.com/vi/zaO2yjx_6HQ/default.jpg?sqp=CLSQmdIG&rs=AOn4CLCvh6yI9wXA390wyIovQmBIuTRyzQ",
+      "views": 547321,
+      "watch_time_hours": 1952.1,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 111.9,
+      "subs_gained": 0,
+      "likes": 3427,
+      "comments": 0,
+      "shares": 5,
+      "engagement_rate": 0.63
+    },
+    {
+      "id": "EbEuemWLxEk",
+      "title": "TEST DRIVE HIGH QUALITY USED CARS IN UAE",
+      "published": "2023-07-26",
+      "url": "https://www.youtube.com/watch?v=EbEuemWLxEk",
+      "thumbnail": "https://i9.ytimg.com/vi/EbEuemWLxEk/default.jpg?sqp=CLSQmdIG&rs=AOn4CLCIMCrbGPA5eHEiOPon7nkvjZnowQ",
+      "views": 540962,
+      "watch_time_hours": 1840.33,
+      "avg_duration_sec": 15.0,
+      "avg_view_pct": 111.7,
+      "subs_gained": 3,
+      "likes": 2001,
+      "comments": 0,
+      "shares": 12,
+      "engagement_rate": 0.37
+    },
+    {
+      "id": "YhZttM3hkeQ",
+      "title": "FLOOD-FREE HIGH QUALITY USED CARS IN THE UAE",
+      "published": "2024-04-25",
+      "url": "https://www.youtube.com/watch?v=YhZttM3hkeQ",
+      "thumbnail": "https://i.ytimg.com/vi/YhZttM3hkeQ/default.jpg",
+      "views": 538793,
+      "watch_time_hours": 1520.42,
+      "avg_duration_sec": 10.0,
+      "avg_view_pct": 92.3,
+      "subs_gained": 0,
+      "likes": 22,
+      "comments": 0,
+      "shares": 29,
+      "engagement_rate": 0.01
+    },
+    {
+      "id": "qXBdwtvkuJ8",
+      "title": "A promise you can trust. Lifetime warranty | Cars24",
+      "published": "2026-02-26",
+      "url": "https://www.youtube.com/watch?v=qXBdwtvkuJ8",
+      "thumbnail": "https://i.ytimg.com/vi/qXBdwtvkuJ8/default.jpg",
+      "views": 517694,
+      "watch_time_hours": 1886.02,
+      "avg_duration_sec": 21.0,
+      "avg_view_pct": 84.6,
+      "subs_gained": 0,
+      "likes": 84,
+      "comments": 5,
+      "shares": 5,
+      "engagement_rate": 0.02
+    },
+    {
+      "id": "ZK13ShDV4No",
+      "title": "TEST DRIVE HIGH QUALITY USED CARS IN UAE",
+      "published": "2023-07-26",
+      "url": "https://www.youtube.com/watch?v=ZK13ShDV4No",
+      "thumbnail": "https://i9.ytimg.com/vi/ZK13ShDV4No/default.jpg?sqp=CLSQmdIG&rs=AOn4CLC02j9IC5DhKiWWOFqIWubAPiwJWQ",
+      "views": 513220,
+      "watch_time_hours": 1289.37,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 102.1,
+      "subs_gained": 0,
+      "likes": 66,
+      "comments": 0,
+      "shares": 8,
+      "engagement_rate": 0.01
+    },
+    {
+      "id": "U_qWTR9CU8Q",
+      "title": "Slow down. Choose right",
+      "published": "2026-02-17",
+      "url": "https://www.youtube.com/watch?v=U_qWTR9CU8Q",
+      "thumbnail": "https://i.ytimg.com/vi/U_qWTR9CU8Q/default.jpg",
+      "views": 491638,
+      "watch_time_hours": 1548.13,
+      "avg_duration_sec": 21.0,
+      "avg_view_pct": 85.6,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 4,
+      "engagement_rate": 0.0
+    },
+    {
+      "id": "nl-UwP4rrZ8",
+      "title": "Get Your Car Delivered At Your Doorstep | Download the CARS24 App now.",
+      "published": "2021-05-24",
+      "url": "https://www.youtube.com/watch?v=nl-UwP4rrZ8",
+      "thumbnail": "https://i.ytimg.com/vi/nl-UwP4rrZ8/default.jpg",
+      "views": 465391,
+      "watch_time_hours": 3739.53,
+      "avg_duration_sec": 28.0,
+      "avg_view_pct": 93.3,
+      "subs_gained": 1,
+      "likes": 15,
+      "comments": 0,
+      "shares": 23,
+      "engagement_rate": 0.01
+    },
+    {
+      "id": "jNjezJsDlyI",
+      "title": "Don't wait to sell it first",
+      "published": "2026-06-05",
+      "url": "https://www.youtube.com/watch?v=jNjezJsDlyI",
+      "thumbnail": "https://i.ytimg.com/vi/jNjezJsDlyI/default.jpg",
+      "views": 462247,
+      "watch_time_hours": 445.52,
+      "avg_duration_sec": 20.0,
+      "avg_view_pct": 94.1,
+      "subs_gained": 0,
+      "likes": 414,
+      "comments": 10,
+      "shares": 14,
+      "engagement_rate": 0.09
+    },
+    {
+      "id": "j-J9Tfa8Vyk",
+      "title": "Save Up to AED 20,000 with Cars24| Ramadan Special",
+      "published": "2026-02-16",
+      "url": "https://www.youtube.com/watch?v=j-J9Tfa8Vyk",
+      "thumbnail": "https://i.ytimg.com/vi/j-J9Tfa8Vyk/default.jpg",
+      "views": 453973,
+      "watch_time_hours": 1450.03,
+      "avg_duration_sec": 21.0,
+      "avg_view_pct": 95.7,
+      "subs_gained": 0,
+      "likes": 82,
+      "comments": 2,
+      "shares": 6,
+      "engagement_rate": 0.02
+    },
+    {
+      "id": "KNC646kU1JE",
+      "title": "FLOOD-FREE HIGH QUALITY USED CARS IN THE UAE",
+      "published": "2024-04-25",
+      "url": "https://www.youtube.com/watch?v=KNC646kU1JE",
+      "thumbnail": "https://i9.ytimg.com/vi/KNC646kU1JE/default.jpg?sqp=CLSQmdIG&rs=AOn4CLD4NpDKm8HnMjm0e0n_jZkYVf2OJQ",
+      "views": 435241,
+      "watch_time_hours": 1249.38,
+      "avg_duration_sec": 10.0,
+      "avg_view_pct": 94.0,
+      "subs_gained": 0,
+      "likes": 97,
+      "comments": 0,
+      "shares": 16,
+      "engagement_rate": 0.03
+    },
+    {
+      "id": "ZhkzgeDE2ZE",
+      "title": "Hershey",
+      "published": "2026-04-03",
+      "url": "https://www.youtube.com/watch?v=ZhkzgeDE2ZE",
+      "thumbnail": "https://i.ytimg.com/vi/ZhkzgeDE2ZE/default.jpg",
+      "views": 392281,
+      "watch_time_hours": 1518.45,
+      "avg_duration_sec": 49.0,
+      "avg_view_pct": 90.0,
+      "subs_gained": 0,
+      "likes": 160,
+      "comments": 3,
+      "shares": 9,
+      "engagement_rate": 0.04
+    }
+  ]
+}

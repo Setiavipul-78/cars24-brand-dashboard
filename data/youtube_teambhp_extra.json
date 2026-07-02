@@ -1,0 +1,1121 @@
+{
+  "geo": [
+    {
+      "city": "Bengaluru",
+      "views": 77177,
+      "watch_time_hours": 3020.0
+    },
+    {
+      "city": "Hyderabad",
+      "views": 33416,
+      "watch_time_hours": 1243.6
+    },
+    {
+      "city": "Chennai",
+      "views": 32675,
+      "watch_time_hours": 1267.3
+    },
+    {
+      "city": "Delhi",
+      "views": 26106,
+      "watch_time_hours": 759.0
+    },
+    {
+      "city": "Mumbai",
+      "views": 24752,
+      "watch_time_hours": 1034.0
+    },
+    {
+      "city": "Pune",
+      "views": 24330,
+      "watch_time_hours": 837.9
+    },
+    {
+      "city": "Kochi",
+      "views": 10864,
+      "watch_time_hours": 419.2
+    },
+    {
+      "city": "Ahmedabad",
+      "views": 7399,
+      "watch_time_hours": 206.8
+    },
+    {
+      "city": "Kolkata",
+      "views": 6496,
+      "watch_time_hours": 236.2
+    },
+    {
+      "city": "Guwahati",
+      "views": 5891,
+      "watch_time_hours": 181.0
+    },
+    {
+      "city": "Coimbatore",
+      "views": 4813,
+      "watch_time_hours": 187.1
+    },
+    {
+      "city": "Jaipur",
+      "views": 4680,
+      "watch_time_hours": 115.8
+    },
+    {
+      "city": "Lucknow",
+      "views": 4525,
+      "watch_time_hours": 106.1
+    },
+    {
+      "city": "Gurugram",
+      "views": 4401,
+      "watch_time_hours": 190.5
+    },
+    {
+      "city": "Patna",
+      "views": 4332,
+      "watch_time_hours": 91.5
+    },
+    {
+      "city": "Bhubaneswar",
+      "views": 4104,
+      "watch_time_hours": 110.0
+    },
+    {
+      "city": "Indore",
+      "views": 3739,
+      "watch_time_hours": 92.6
+    },
+    {
+      "city": "New Delhi",
+      "views": 3417,
+      "watch_time_hours": 144.8
+    },
+    {
+      "city": "Thiruvananthapuram",
+      "views": 3156,
+      "watch_time_hours": 129.7
+    },
+    {
+      "city": "Ghaziabad",
+      "views": 3033,
+      "watch_time_hours": 123.3
+    },
+    {
+      "city": "Nagpur",
+      "views": 2863,
+      "watch_time_hours": 86.8
+    },
+    {
+      "city": "Pimpri-Chinchwad",
+      "views": 2798,
+      "watch_time_hours": 116.5
+    },
+    {
+      "city": "Ludhiana",
+      "views": 2455,
+      "watch_time_hours": 66.5
+    },
+    {
+      "city": "Noida",
+      "views": 2196,
+      "watch_time_hours": 90.1
+    },
+    {
+      "city": "Bhopal",
+      "views": 1879,
+      "watch_time_hours": 50.0
+    }
+  ],
+  "demographics": [
+    {
+      "age_group": "age13-17",
+      "gender": "male",
+      "viewer_pct": 0.8
+    },
+    {
+      "age_group": "age18-24",
+      "gender": "female",
+      "viewer_pct": 0.1
+    },
+    {
+      "age_group": "age18-24",
+      "gender": "male",
+      "viewer_pct": 15.7
+    },
+    {
+      "age_group": "age18-24",
+      "gender": "genderUserSpecified",
+      "viewer_pct": 0.0
+    },
+    {
+      "age_group": "age25-34",
+      "gender": "female",
+      "viewer_pct": 0.7
+    },
+    {
+      "age_group": "age25-34",
+      "gender": "male",
+      "viewer_pct": 39.7
+    },
+    {
+      "age_group": "age35-44",
+      "gender": "female",
+      "viewer_pct": 1.2
+    },
+    {
+      "age_group": "age35-44",
+      "gender": "male",
+      "viewer_pct": 28.2
+    },
+    {
+      "age_group": "age45-54",
+      "gender": "female",
+      "viewer_pct": 0.5
+    },
+    {
+      "age_group": "age45-54",
+      "gender": "male",
+      "viewer_pct": 10.0
+    },
+    {
+      "age_group": "age55-64",
+      "gender": "female",
+      "viewer_pct": 0.1
+    },
+    {
+      "age_group": "age55-64",
+      "gender": "male",
+      "viewer_pct": 2.3
+    },
+    {
+      "age_group": "age65-",
+      "gender": "female",
+      "viewer_pct": 0.0
+    },
+    {
+      "age_group": "age65-",
+      "gender": "male",
+      "viewer_pct": 0.7
+    }
+  ],
+  "traffic_sources": [
+    {
+      "source": "SUBSCRIBER",
+      "views": 353080,
+      "watch_time_hours": 13588.1,
+      "pct": 35.2
+    },
+    {
+      "source": "EXT_URL",
+      "views": 235969,
+      "watch_time_hours": 3438.4,
+      "pct": 23.6
+    },
+    {
+      "source": "YT_SEARCH",
+      "views": 192058,
+      "watch_time_hours": 3338.0,
+      "pct": 19.2
+    },
+    {
+      "source": "SHORTS",
+      "views": 131215,
+      "watch_time_hours": 690.8,
+      "pct": 13.1
+    },
+    {
+      "source": "RELATED_VIDEO",
+      "views": 28227,
+      "watch_time_hours": 1920.3,
+      "pct": 2.8
+    },
+    {
+      "source": "YT_CHANNEL",
+      "views": 27832,
+      "watch_time_hours": 606.0,
+      "pct": 2.8
+    },
+    {
+      "source": "NO_LINK_OTHER",
+      "views": 18936,
+      "watch_time_hours": 439.6,
+      "pct": 1.9
+    },
+    {
+      "source": "YT_OTHER_PAGE",
+      "views": 8028,
+      "watch_time_hours": 376.5,
+      "pct": 0.8
+    },
+    {
+      "source": "NOTIFICATION",
+      "views": 3431,
+      "watch_time_hours": 90.0,
+      "pct": 0.3
+    },
+    {
+      "source": "PLAYLIST",
+      "views": 1491,
+      "watch_time_hours": 71.7,
+      "pct": 0.1
+    },
+    {
+      "source": "SHORTS_CONTENT_LINKS",
+      "views": 769,
+      "watch_time_hours": 17.6,
+      "pct": 0.1
+    },
+    {
+      "source": "END_SCREEN",
+      "views": 518,
+      "watch_time_hours": 24.9,
+      "pct": 0.1
+    },
+    {
+      "source": "HASHTAGS",
+      "views": 36,
+      "watch_time_hours": 1.0,
+      "pct": 0.0
+    },
+    {
+      "source": "ANNOTATION",
+      "views": 35,
+      "watch_time_hours": 0.8,
+      "pct": 0.0
+    },
+    {
+      "source": "SOUND_PAGE",
+      "views": 28,
+      "watch_time_hours": 0.2,
+      "pct": 0.0
+    }
+  ],
+  "devices": [
+    {
+      "device": "MOBILE",
+      "views": 718276,
+      "watch_time_hours": 14021.7,
+      "pct": 71.8
+    },
+    {
+      "device": "DESKTOP",
+      "views": 146442,
+      "watch_time_hours": 3980.2,
+      "pct": 14.6
+    },
+    {
+      "device": "TV",
+      "views": 101870,
+      "watch_time_hours": 5278.8,
+      "pct": 10.2
+    },
+    {
+      "device": "TABLET",
+      "views": 33706,
+      "watch_time_hours": 1259.9,
+      "pct": 3.4
+    }
+  ],
+  "top_videos": [
+    {
+      "id": "nQFnWdMLkpU",
+      "title": "Honda City Facelift: 15 Things Honda Must Fix!",
+      "published": "2026-05-19",
+      "url": "https://www.youtube.com/watch?v=nQFnWdMLkpU",
+      "thumbnail": "https://i.ytimg.com/vi/nQFnWdMLkpU/default.jpg",
+      "views": 106130,
+      "watch_time_hours": 1628.52,
+      "avg_duration_sec": 64.0,
+      "avg_view_pct": 53.5,
+      "subs_gained": 532,
+      "likes": 5201,
+      "comments": 239,
+      "shares": 72,
+      "engagement_rate": 5.19
+    },
+    {
+      "id": "4uneEXPVV7M",
+      "title": "2025 Citroen Aircross X | Official First Look",
+      "published": "2025-11-04",
+      "url": "https://www.youtube.com/watch?v=4uneEXPVV7M",
+      "thumbnail": "https://i.ytimg.com/vi/4uneEXPVV7M/default.jpg",
+      "views": 98040,
+      "watch_time_hours": 5683.92,
+      "avg_duration_sec": 208.0,
+      "avg_view_pct": 33.2,
+      "subs_gained": 2399,
+      "likes": 1330,
+      "comments": 199,
+      "shares": 346,
+      "engagement_rate": 1.91
+    },
+    {
+      "id": "t6rEpxtvnAM",
+      "title": "Maruti Suzuki Robotic Welding - Manesar Plant",
+      "published": "2016-07-14",
+      "url": "https://www.youtube.com/watch?v=t6rEpxtvnAM",
+      "thumbnail": "https://i.ytimg.com/vi/t6rEpxtvnAM/default.jpg",
+      "views": 41366,
+      "watch_time_hours": 231.42,
+      "avg_duration_sec": 20.0,
+      "avg_view_pct": 77.5,
+      "subs_gained": 63,
+      "likes": 155,
+      "comments": 4,
+      "shares": 1084,
+      "engagement_rate": 3.0
+    },
+    {
+      "id": "4TPt9D6ZqCE",
+      "title": "Why Honda Discontinued The Civic In India!",
+      "published": "2026-06-19",
+      "url": "https://www.youtube.com/watch?v=4TPt9D6ZqCE",
+      "thumbnail": "https://i.ytimg.com/vi/4TPt9D6ZqCE/default.jpg",
+      "views": 38721,
+      "watch_time_hours": 2365.05,
+      "avg_duration_sec": 219.0,
+      "avg_view_pct": 33.5,
+      "subs_gained": 581,
+      "likes": 814,
+      "comments": 95,
+      "shares": 99,
+      "engagement_rate": 2.6
+    },
+    {
+      "id": "Juv2V0J0-RE",
+      "title": "Bengaluru Road Rage Incident | Part 4 of 5",
+      "published": "2024-03-06",
+      "url": "https://www.youtube.com/watch?v=Juv2V0J0-RE",
+      "thumbnail": "https://i.ytimg.com/vi/Juv2V0J0-RE/default.jpg",
+      "views": 34762,
+      "watch_time_hours": 538.25,
+      "avg_duration_sec": 55.0,
+      "avg_view_pct": 85.8,
+      "subs_gained": 9,
+      "likes": 17,
+      "comments": 15,
+      "shares": 44,
+      "engagement_rate": 0.22
+    },
+    {
+      "id": "G8Boo_uEUyk",
+      "title": "Mercedes S-Class : Magic Body Control",
+      "published": "2013-08-27",
+      "url": "https://www.youtube.com/watch?v=G8Boo_uEUyk",
+      "thumbnail": "https://i.ytimg.com/vi/G8Boo_uEUyk/default.jpg",
+      "views": 33828,
+      "watch_time_hours": 196.15,
+      "avg_duration_sec": 20.0,
+      "avg_view_pct": 74.5,
+      "subs_gained": 7,
+      "likes": 66,
+      "comments": 1,
+      "shares": 208,
+      "engagement_rate": 0.81
+    },
+    {
+      "id": "o-D4daB38aA",
+      "title": "Bengaluru Road Rage Incident | Part 1 of 5",
+      "published": "2024-03-06",
+      "url": "https://www.youtube.com/watch?v=o-D4daB38aA",
+      "thumbnail": "https://i.ytimg.com/vi/o-D4daB38aA/default.jpg",
+      "views": 29537,
+      "watch_time_hours": 406.55,
+      "avg_duration_sec": 49.0,
+      "avg_view_pct": 82.6,
+      "subs_gained": 39,
+      "likes": 26,
+      "comments": 19,
+      "shares": 29,
+      "engagement_rate": 0.25
+    },
+    {
+      "id": "ZGprHUBp0N8",
+      "title": "Are CVT Paddle Shifters Completely Useless?",
+      "published": "2026-05-15",
+      "url": "https://www.youtube.com/watch?v=ZGprHUBp0N8",
+      "thumbnail": "https://i.ytimg.com/vi/ZGprHUBp0N8/default.jpg",
+      "views": 26809,
+      "watch_time_hours": 366.6,
+      "avg_duration_sec": 63.0,
+      "avg_view_pct": 67.5,
+      "subs_gained": 165,
+      "likes": 1591,
+      "comments": 22,
+      "shares": 39,
+      "engagement_rate": 6.16
+    },
+    {
+      "id": "ZBUUmXt4Uj0",
+      "title": "We Need to Talk About the Creta N Line!",
+      "published": "2026-04-25",
+      "url": "https://www.youtube.com/watch?v=ZBUUmXt4Uj0",
+      "thumbnail": "https://i.ytimg.com/vi/ZBUUmXt4Uj0/default.jpg",
+      "views": 26730,
+      "watch_time_hours": 1432.77,
+      "avg_duration_sec": 192.0,
+      "avg_view_pct": 25.8,
+      "subs_gained": 424,
+      "likes": 440,
+      "comments": 38,
+      "shares": 35,
+      "engagement_rate": 1.92
+    },
+    {
+      "id": "YBD5hAbF5SY",
+      "title": "Bengaluru Road Rage Incident | Part 3 of 5",
+      "published": "2024-03-06",
+      "url": "https://www.youtube.com/watch?v=YBD5hAbF5SY",
+      "thumbnail": "https://i.ytimg.com/vi/YBD5hAbF5SY/default.jpg",
+      "views": 26035,
+      "watch_time_hours": 356.53,
+      "avg_duration_sec": 49.0,
+      "avg_view_pct": 80.8,
+      "subs_gained": 4,
+      "likes": 10,
+      "comments": 3,
+      "shares": 21,
+      "engagement_rate": 0.13
+    },
+    {
+      "id": "r_LTWYwwgRM",
+      "title": "New Hyundai Venue Review | More Premium, More Expensive. Worth It?",
+      "published": "2026-04-01",
+      "url": "https://www.youtube.com/watch?v=r_LTWYwwgRM",
+      "thumbnail": "https://i.ytimg.com/vi/r_LTWYwwgRM/default.jpg",
+      "views": 25502,
+      "watch_time_hours": 1497.02,
+      "avg_duration_sec": 211.0,
+      "avg_view_pct": 22.0,
+      "subs_gained": 139,
+      "likes": 219,
+      "comments": 26,
+      "shares": 78,
+      "engagement_rate": 1.27
+    },
+    {
+      "id": "aGYg27RuT2c",
+      "title": "Bengaluru Road Rage Incident | Part 2 of 5",
+      "published": "2024-03-06",
+      "url": "https://www.youtube.com/watch?v=aGYg27RuT2c",
+      "thumbnail": "https://i.ytimg.com/vi/aGYg27RuT2c/default.jpg",
+      "views": 23730,
+      "watch_time_hours": 319.72,
+      "avg_duration_sec": 48.0,
+      "avg_view_pct": 79.5,
+      "subs_gained": 9,
+      "likes": 7,
+      "comments": 9,
+      "shares": 10,
+      "engagement_rate": 0.11
+    },
+    {
+      "id": "UPOCqIZdYwk",
+      "title": "Mahindra XEV 9S: Pros & Cons #teambhp",
+      "published": "2025-12-26",
+      "url": "https://www.youtube.com/watch?v=UPOCqIZdYwk",
+      "thumbnail": "https://i.ytimg.com/vi/UPOCqIZdYwk/default.jpg",
+      "views": 19225,
+      "watch_time_hours": 331.62,
+      "avg_duration_sec": 81.0,
+      "avg_view_pct": 46.2,
+      "subs_gained": 72,
+      "likes": 377,
+      "comments": 7,
+      "shares": 58,
+      "engagement_rate": 2.3
+    },
+    {
+      "id": "q5s4VG6bDFk",
+      "title": "Your Car Engine Is Not Centred For A Reason",
+      "published": "2026-06-10",
+      "url": "https://www.youtube.com/watch?v=q5s4VG6bDFk",
+      "thumbnail": "https://i.ytimg.com/vi/q5s4VG6bDFk/default.jpg",
+      "views": 19114,
+      "watch_time_hours": 359.92,
+      "avg_duration_sec": 80.0,
+      "avg_view_pct": 64.4,
+      "subs_gained": 114,
+      "likes": 1088,
+      "comments": 25,
+      "shares": 24,
+      "engagement_rate": 5.95
+    },
+    {
+      "id": "OTDaOX6nGLM",
+      "title": "Has the Toyota Innova Lost Its Soul?",
+      "published": "2026-05-01",
+      "url": "https://www.youtube.com/watch?v=OTDaOX6nGLM",
+      "thumbnail": "https://i.ytimg.com/vi/OTDaOX6nGLM/default.jpg",
+      "views": 17427,
+      "watch_time_hours": 974.17,
+      "avg_duration_sec": 201.0,
+      "avg_view_pct": 34.7,
+      "subs_gained": 432,
+      "likes": 402,
+      "comments": 57,
+      "shares": 67,
+      "engagement_rate": 3.02
+    },
+    {
+      "id": "QRD3rvLt0Ew",
+      "title": "BYD Atto 3 Charging Port Fried",
+      "published": "2024-08-06",
+      "url": "https://www.youtube.com/watch?v=QRD3rvLt0Ew",
+      "thumbnail": "https://i.ytimg.com/vi/QRD3rvLt0Ew/default.jpg",
+      "views": 15859,
+      "watch_time_hours": 140.45,
+      "avg_duration_sec": 31.0,
+      "avg_view_pct": 77.8,
+      "subs_gained": 15,
+      "likes": 26,
+      "comments": 13,
+      "shares": 153,
+      "engagement_rate": 1.21
+    },
+    {
+      "id": "RvIQuZoqAiI",
+      "title": "India\u2019s Fake SUV Problem Explained!",
+      "published": "2026-05-22",
+      "url": "https://www.youtube.com/watch?v=RvIQuZoqAiI",
+      "thumbnail": "https://i.ytimg.com/vi/RvIQuZoqAiI/default.jpg",
+      "views": 14555,
+      "watch_time_hours": 920.87,
+      "avg_duration_sec": 227.0,
+      "avg_view_pct": 35.8,
+      "subs_gained": 332,
+      "likes": 547,
+      "comments": 59,
+      "shares": 71,
+      "engagement_rate": 4.65
+    },
+    {
+      "id": "xJX3rYxa56o",
+      "title": "Bengaluru Road Rage Incident | Part 5 of 5",
+      "published": "2024-03-06",
+      "url": "https://www.youtube.com/watch?v=xJX3rYxa56o",
+      "thumbnail": "https://i.ytimg.com/vi/xJX3rYxa56o/default.jpg",
+      "views": 14453,
+      "watch_time_hours": 75.92,
+      "avg_duration_sec": 18.0,
+      "avg_view_pct": 70.0,
+      "subs_gained": 8,
+      "likes": 6,
+      "comments": 2,
+      "shares": 2,
+      "engagement_rate": 0.07
+    },
+    {
+      "id": "cBJeLZSh9Hk",
+      "title": "Tata Harrier Petrol & Safari Petrol | Official First Look",
+      "published": "2026-01-23",
+      "url": "https://www.youtube.com/watch?v=cBJeLZSh9Hk",
+      "thumbnail": "https://i.ytimg.com/vi/cBJeLZSh9Hk/default.jpg",
+      "views": 14240,
+      "watch_time_hours": 742.45,
+      "avg_duration_sec": 187.0,
+      "avg_view_pct": 36.5,
+      "subs_gained": 229,
+      "likes": 220,
+      "comments": 28,
+      "shares": 42,
+      "engagement_rate": 2.04
+    },
+    {
+      "id": "rk09tbc97Xg",
+      "title": "New 2025 Hyundai Venue Review | Bigger, Safer, More Tech | Diesel AT, Turbo DCT, N Line",
+      "published": "2025-11-27",
+      "url": "https://www.youtube.com/watch?v=rk09tbc97Xg",
+      "thumbnail": "https://i.ytimg.com/vi/rk09tbc97Xg/default.jpg",
+      "views": 13773,
+      "watch_time_hours": 55.22,
+      "avg_duration_sec": 46.0,
+      "avg_view_pct": 26.2,
+      "subs_gained": 18,
+      "likes": 76,
+      "comments": 7,
+      "shares": 4,
+      "engagement_rate": 0.63
+    },
+    {
+      "id": "Se6CWge1atI",
+      "title": "Tata Sierra - Comeback Of An Icon #teambhp",
+      "published": "2025-12-04",
+      "url": "https://www.youtube.com/watch?v=Se6CWge1atI",
+      "thumbnail": "https://i.ytimg.com/vi/Se6CWge1atI/default.jpg",
+      "views": 12915,
+      "watch_time_hours": 77.97,
+      "avg_duration_sec": 61.0,
+      "avg_view_pct": 34.4,
+      "subs_gained": 16,
+      "likes": 143,
+      "comments": 6,
+      "shares": 17,
+      "engagement_rate": 1.29
+    },
+    {
+      "id": "UYvMQJz1fL8",
+      "title": "2026 Mahindra XUV7XO Official First Look | XUV7XO vs XUV700",
+      "published": "2026-01-25",
+      "url": "https://www.youtube.com/watch?v=UYvMQJz1fL8",
+      "thumbnail": "https://i.ytimg.com/vi/UYvMQJz1fL8/default.jpg",
+      "views": 12819,
+      "watch_time_hours": 516.6,
+      "avg_duration_sec": 145.0,
+      "avg_view_pct": 24.6,
+      "subs_gained": 130,
+      "likes": 159,
+      "comments": 11,
+      "shares": 45,
+      "engagement_rate": 1.68
+    },
+    {
+      "id": "cepvlXOAxaE",
+      "title": "Mahindra XEV 9S | India\u2019s First Proper 7-Seater Electric SUV #teambhp",
+      "published": "2025-12-25",
+      "url": "https://www.youtube.com/watch?v=cepvlXOAxaE",
+      "thumbnail": "https://i.ytimg.com/vi/cepvlXOAxaE/default.jpg",
+      "views": 12353,
+      "watch_time_hours": 182.1,
+      "avg_duration_sec": 68.0,
+      "avg_view_pct": 40.2,
+      "subs_gained": 54,
+      "likes": 309,
+      "comments": 5,
+      "shares": 27,
+      "engagement_rate": 2.76
+    },
+    {
+      "id": "JUDShycg1_I",
+      "title": "MG Majestor: India's First D+ Segment SUV | Official First Look",
+      "published": "2026-02-16",
+      "url": "https://www.youtube.com/watch?v=JUDShycg1_I",
+      "thumbnail": "https://i.ytimg.com/vi/JUDShycg1_I/default.jpg",
+      "views": 10620,
+      "watch_time_hours": 478.37,
+      "avg_duration_sec": 162.0,
+      "avg_view_pct": 21.6,
+      "subs_gained": 76,
+      "likes": 121,
+      "comments": 11,
+      "shares": 47,
+      "engagement_rate": 1.69
+    },
+    {
+      "id": "8bl-hD6nULQ",
+      "title": "MG Gloster facelift caught testing in India [2024-July]",
+      "published": "2024-07-12",
+      "url": "https://www.youtube.com/watch?v=8bl-hD6nULQ",
+      "thumbnail": "https://i.ytimg.com/vi/8bl-hD6nULQ/default.jpg",
+      "views": 10298,
+      "watch_time_hours": 185.7,
+      "avg_duration_sec": 64.0,
+      "avg_view_pct": 37.7,
+      "subs_gained": 44,
+      "likes": 69,
+      "comments": 22,
+      "shares": 52,
+      "engagement_rate": 1.39
+    },
+    {
+      "id": "oeuC6SiBBow",
+      "title": "DCT Explained! DSG, PDK, DCA & More! #teambhp",
+      "published": "2026-04-18",
+      "url": "https://www.youtube.com/watch?v=oeuC6SiBBow",
+      "thumbnail": "https://i.ytimg.com/vi/oeuC6SiBBow/default.jpg",
+      "views": 10243,
+      "watch_time_hours": 461.98,
+      "avg_duration_sec": 162.0,
+      "avg_view_pct": 44.9,
+      "subs_gained": 285,
+      "likes": 310,
+      "comments": 11,
+      "shares": 32,
+      "engagement_rate": 3.45
+    },
+    {
+      "id": "XjbhK85Jk5U",
+      "title": "VinFast VF 6 | First Look #teambhp",
+      "published": "2026-03-11",
+      "url": "https://www.youtube.com/watch?v=XjbhK85Jk5U",
+      "thumbnail": "https://i.ytimg.com/vi/XjbhK85Jk5U/default.jpg",
+      "views": 10209,
+      "watch_time_hours": 46.6,
+      "avg_duration_sec": 42.0,
+      "avg_view_pct": 24.9,
+      "subs_gained": 7,
+      "likes": 48,
+      "comments": 1,
+      "shares": 8,
+      "engagement_rate": 0.56
+    },
+    {
+      "id": "4ZP4YaMXEjU",
+      "title": "2025 Mahindra Thar Facelift | Official First Look",
+      "published": "2025-10-17",
+      "url": "https://www.youtube.com/watch?v=4ZP4YaMXEjU",
+      "thumbnail": "https://i.ytimg.com/vi/4ZP4YaMXEjU/default.jpg",
+      "views": 10066,
+      "watch_time_hours": 295.42,
+      "avg_duration_sec": 105.0,
+      "avg_view_pct": 35.2,
+      "subs_gained": 599,
+      "likes": 217,
+      "comments": 22,
+      "shares": 55,
+      "engagement_rate": 2.92
+    },
+    {
+      "id": "qbb_8sw3xVs",
+      "title": "2026 Honda City Facelift & Honda ZR-V | Official First Look",
+      "published": "2026-05-27",
+      "url": "https://www.youtube.com/watch?v=qbb_8sw3xVs",
+      "thumbnail": "https://i.ytimg.com/vi/qbb_8sw3xVs/default.jpg",
+      "views": 9028,
+      "watch_time_hours": 403.13,
+      "avg_duration_sec": 160.0,
+      "avg_view_pct": 29.6,
+      "subs_gained": 72,
+      "likes": 98,
+      "comments": 15,
+      "shares": 19,
+      "engagement_rate": 1.46
+    },
+    {
+      "id": "ow_GqEwuNVs",
+      "title": "Alto K10 noise from cabin",
+      "published": "2019-10-22",
+      "url": "https://www.youtube.com/watch?v=ow_GqEwuNVs",
+      "thumbnail": "https://i.ytimg.com/vi/ow_GqEwuNVs/default.jpg",
+      "views": 8815,
+      "watch_time_hours": 23.63,
+      "avg_duration_sec": 15.0,
+      "avg_view_pct": 122.9,
+      "subs_gained": 8,
+      "likes": 56,
+      "comments": 7,
+      "shares": 8,
+      "engagement_rate": 0.81
+    },
+    {
+      "id": "0JmKf0xU8QU",
+      "title": "2026 Skoda Kushaq Facelift First Look",
+      "published": "2026-02-03",
+      "url": "https://www.youtube.com/watch?v=0JmKf0xU8QU",
+      "thumbnail": "https://i.ytimg.com/vi/0JmKf0xU8QU/default.jpg",
+      "views": 8210,
+      "watch_time_hours": 125.32,
+      "avg_duration_sec": 66.0,
+      "avg_view_pct": 41.0,
+      "subs_gained": 38,
+      "likes": 233,
+      "comments": 2,
+      "shares": 17,
+      "engagement_rate": 3.07
+    },
+    {
+      "id": "xP5Utp9yxZs",
+      "title": "Maruti Celerio Diesel : Engine Sound & NVH",
+      "published": "2015-06-23",
+      "url": "https://www.youtube.com/watch?v=xP5Utp9yxZs",
+      "thumbnail": "https://i.ytimg.com/vi/xP5Utp9yxZs/default.jpg",
+      "views": 7939,
+      "watch_time_hours": 89.67,
+      "avg_duration_sec": 40.0,
+      "avg_view_pct": 47.3,
+      "subs_gained": 15,
+      "likes": 62,
+      "comments": 4,
+      "shares": 93,
+      "engagement_rate": 2.0
+    },
+    {
+      "id": "iHRD_o-4aTA",
+      "title": "VinFast VF6 & VF7 Drive | India\u2019s New EV SUVs Experienced #teambhp",
+      "published": "2026-03-02",
+      "url": "https://www.youtube.com/watch?v=iHRD_o-4aTA",
+      "thumbnail": "https://i.ytimg.com/vi/iHRD_o-4aTA/default.jpg",
+      "views": 7579,
+      "watch_time_hours": 350.95,
+      "avg_duration_sec": 166.0,
+      "avg_view_pct": 40.1,
+      "subs_gained": 55,
+      "likes": 60,
+      "comments": 13,
+      "shares": 30,
+      "engagement_rate": 1.36
+    },
+    {
+      "id": "gUeCw_TFwuE",
+      "title": "BMW M Ignite Explained: How BMW Is Keeping The M4, M3, and M2 Alive!",
+      "published": "2026-05-30",
+      "url": "https://www.youtube.com/watch?v=gUeCw_TFwuE",
+      "thumbnail": "https://i.ytimg.com/vi/gUeCw_TFwuE/default.jpg",
+      "views": 7530,
+      "watch_time_hours": 76.92,
+      "avg_duration_sec": 66.0,
+      "avg_view_pct": 43.8,
+      "subs_gained": 32,
+      "likes": 486,
+      "comments": 2,
+      "shares": 22,
+      "engagement_rate": 6.77
+    },
+    {
+      "id": "_NjMTMAwC5Q",
+      "title": "Chevrolet Beat Diesel - Engine NVH",
+      "published": "2011-07-14",
+      "url": "https://www.youtube.com/watch?v=_NjMTMAwC5Q",
+      "thumbnail": "https://i.ytimg.com/vi/_NjMTMAwC5Q/default.jpg",
+      "views": 7298,
+      "watch_time_hours": 46.38,
+      "avg_duration_sec": 22.0,
+      "avg_view_pct": 69.3,
+      "subs_gained": 13,
+      "likes": 25,
+      "comments": 6,
+      "shares": 23,
+      "engagement_rate": 0.74
+    },
+    {
+      "id": "BQPdonQgrE4",
+      "title": "DSG vs PDK vs DCA! Aren\u2019t They All DCTs?",
+      "published": "2026-04-23",
+      "url": "https://www.youtube.com/watch?v=BQPdonQgrE4",
+      "thumbnail": "https://i.ytimg.com/vi/BQPdonQgrE4/default.jpg",
+      "views": 6655,
+      "watch_time_hours": 37.12,
+      "avg_duration_sec": 61.0,
+      "avg_view_pct": 35.1,
+      "subs_gained": 7,
+      "likes": 114,
+      "comments": 3,
+      "shares": 0,
+      "engagement_rate": 1.76
+    },
+    {
+      "id": "jraDDc3KB2A",
+      "title": "DON'T Buy the Wrong DCT! Wet vs Dry DCT Explained",
+      "published": "2026-04-22",
+      "url": "https://www.youtube.com/watch?v=jraDDc3KB2A",
+      "thumbnail": "https://i.ytimg.com/vi/jraDDc3KB2A/default.jpg",
+      "views": 6465,
+      "watch_time_hours": 116.37,
+      "avg_duration_sec": 97.0,
+      "avg_view_pct": 62.2,
+      "subs_gained": 30,
+      "likes": 249,
+      "comments": 4,
+      "shares": 38,
+      "engagement_rate": 4.5
+    },
+    {
+      "id": "VeADbOubqWU",
+      "title": "280 Nm Torque Monster: Renault Duster 1.3 Turbo Petrol!!! #teambhp",
+      "published": "2026-03-31",
+      "url": "https://www.youtube.com/watch?v=VeADbOubqWU",
+      "thumbnail": "https://i.ytimg.com/vi/VeADbOubqWU/default.jpg",
+      "views": 6177,
+      "watch_time_hours": 25.85,
+      "avg_duration_sec": 43.0,
+      "avg_view_pct": 25.6,
+      "subs_gained": 4,
+      "likes": 57,
+      "comments": 1,
+      "shares": 2,
+      "engagement_rate": 0.97
+    },
+    {
+      "id": "CIS_vGgxUN4",
+      "title": "The TRUTH About Premium Car Audio Brands!",
+      "published": "2026-05-12",
+      "url": "https://www.youtube.com/watch?v=CIS_vGgxUN4",
+      "thumbnail": "https://i.ytimg.com/vi/CIS_vGgxUN4/default.jpg",
+      "views": 5778,
+      "watch_time_hours": 38.32,
+      "avg_duration_sec": 37.0,
+      "avg_view_pct": 57.4,
+      "subs_gained": 11,
+      "likes": 169,
+      "comments": 3,
+      "shares": 4,
+      "engagement_rate": 3.05
+    },
+    {
+      "id": "TgfNaby0Y0A",
+      "title": "Baleno RS! Why did it FAIL in India?",
+      "published": "2026-06-12",
+      "url": "https://www.youtube.com/watch?v=TgfNaby0Y0A",
+      "thumbnail": "https://i.ytimg.com/vi/TgfNaby0Y0A/default.jpg",
+      "views": 5611,
+      "watch_time_hours": 345.37,
+      "avg_duration_sec": 221.0,
+      "avg_view_pct": 34.2,
+      "subs_gained": 76,
+      "likes": 186,
+      "comments": 18,
+      "shares": 17,
+      "engagement_rate": 3.94
+    },
+    {
+      "id": "G2B2YpvrYVM",
+      "title": "VinFast VF 7 | First Look #teambhp",
+      "published": "2026-03-13",
+      "url": "https://www.youtube.com/watch?v=G2B2YpvrYVM",
+      "thumbnail": "https://i.ytimg.com/vi/G2B2YpvrYVM/default.jpg",
+      "views": 5562,
+      "watch_time_hours": 25.12,
+      "avg_duration_sec": 37.0,
+      "avg_view_pct": 29.4,
+      "subs_gained": 2,
+      "likes": 43,
+      "comments": 1,
+      "shares": 4,
+      "engagement_rate": 0.86
+    },
+    {
+      "id": "dr1S80t4WFA",
+      "title": "Land Rover Defender Air Suspension using Key",
+      "published": "2025-04-02",
+      "url": "https://www.youtube.com/watch?v=dr1S80t4WFA",
+      "thumbnail": "https://i.ytimg.com/vi/dr1S80t4WFA/default.jpg",
+      "views": 5012,
+      "watch_time_hours": 35.75,
+      "avg_duration_sec": 37.0,
+      "avg_view_pct": 79.3,
+      "subs_gained": 3,
+      "likes": 63,
+      "comments": 1,
+      "shares": 19,
+      "engagement_rate": 1.66
+    },
+    {
+      "id": "YWiEwFEN5yk",
+      "title": "Parking : Mahindra BE 6e and XEV 9e",
+      "published": "2024-11-28",
+      "url": "https://www.youtube.com/watch?v=YWiEwFEN5yk",
+      "thumbnail": "https://i.ytimg.com/vi/YWiEwFEN5yk/default.jpg",
+      "views": 4843,
+      "watch_time_hours": 73.55,
+      "avg_duration_sec": 54.0,
+      "avg_view_pct": 92.7,
+      "subs_gained": 2,
+      "likes": 3,
+      "comments": 0,
+      "shares": 32,
+      "engagement_rate": 0.72
+    },
+    {
+      "id": "drw2adbfueM",
+      "title": "Mahindra BE 6e and XEV 9e Head Up Display\u00a0Features",
+      "published": "2024-11-28",
+      "url": "https://www.youtube.com/watch?v=drw2adbfueM",
+      "thumbnail": "https://i.ytimg.com/vi/drw2adbfueM/default.jpg",
+      "views": 4827,
+      "watch_time_hours": 28.58,
+      "avg_duration_sec": 21.0,
+      "avg_view_pct": 97.0,
+      "subs_gained": 7,
+      "likes": 5,
+      "comments": 0,
+      "shares": 4,
+      "engagement_rate": 0.19
+    },
+    {
+      "id": "9wEICkGiviw",
+      "title": "Going OFF-ROAD in the Mercedes-Benz GLS 450d! #teambhp",
+      "published": "2025-12-27",
+      "url": "https://www.youtube.com/watch?v=9wEICkGiviw",
+      "thumbnail": "https://i.ytimg.com/vi/9wEICkGiviw/default.jpg",
+      "views": 4563,
+      "watch_time_hours": 22.73,
+      "avg_duration_sec": 34.0,
+      "avg_view_pct": 40.4,
+      "subs_gained": 13,
+      "likes": 85,
+      "comments": 2,
+      "shares": 3,
+      "engagement_rate": 1.97
+    },
+    {
+      "id": "YVTsxfu6XyA",
+      "title": "Ford Endeavour Auto Parking : Team-BHP",
+      "published": "2016-02-16",
+      "url": "https://www.youtube.com/watch?v=YVTsxfu6XyA",
+      "thumbnail": "https://i.ytimg.com/vi/YVTsxfu6XyA/default.jpg",
+      "views": 4275,
+      "watch_time_hours": 52.8,
+      "avg_duration_sec": 44.0,
+      "avg_view_pct": 39.7,
+      "subs_gained": 115,
+      "likes": 12,
+      "comments": 1,
+      "shares": 57,
+      "engagement_rate": 1.64
+    },
+    {
+      "id": "Hykwhcak3JI",
+      "title": "VW Tayron R-Line: Is it Volkswagen\u2019s Most Calculated SUV Yet? #teambhp",
+      "published": "2026-02-06",
+      "url": "https://www.youtube.com/watch?v=Hykwhcak3JI",
+      "thumbnail": "https://i.ytimg.com/vi/Hykwhcak3JI/default.jpg",
+      "views": 4170,
+      "watch_time_hours": 34.63,
+      "avg_duration_sec": 52.0,
+      "avg_view_pct": 44.1,
+      "subs_gained": 14,
+      "likes": 199,
+      "comments": 3,
+      "shares": 0,
+      "engagement_rate": 4.84
+    },
+    {
+      "id": "Ejx6HzhU04g",
+      "title": "Tata Harrier.ev on test track",
+      "published": "2025-03-10",
+      "url": "https://www.youtube.com/watch?v=Ejx6HzhU04g",
+      "thumbnail": "https://i.ytimg.com/vi/Ejx6HzhU04g/default.jpg",
+      "views": 4106,
+      "watch_time_hours": 54.77,
+      "avg_duration_sec": 48.0,
+      "avg_view_pct": 52.8,
+      "subs_gained": 17,
+      "likes": 55,
+      "comments": 1,
+      "shares": 13,
+      "engagement_rate": 1.68
+    },
+    {
+      "id": "EKjTl7F7a8w",
+      "title": "Tata Harrier & Safari Now Available In Petrol Versions!",
+      "published": "2026-01-24",
+      "url": "https://www.youtube.com/watch?v=EKjTl7F7a8w",
+      "thumbnail": "https://i.ytimg.com/vi/EKjTl7F7a8w/default.jpg",
+      "views": 3799,
+      "watch_time_hours": 43.57,
+      "avg_duration_sec": 66.0,
+      "avg_view_pct": 40.2,
+      "subs_gained": 11,
+      "likes": 128,
+      "comments": 6,
+      "shares": 1,
+      "engagement_rate": 3.55
+    },
+    {
+      "id": "ykS9WUCnT50",
+      "title": "Tata Manza",
+      "published": "2011-05-08",
+      "url": "https://www.youtube.com/watch?v=ykS9WUCnT50",
+      "thumbnail": "https://i.ytimg.com/vi/ykS9WUCnT50/default.jpg",
+      "views": 3725,
+      "watch_time_hours": 67.63,
+      "avg_duration_sec": 65.0,
+      "avg_view_pct": 29.2,
+      "subs_gained": 6,
+      "likes": 20,
+      "comments": 2,
+      "shares": 25,
+      "engagement_rate": 1.26
+    }
+  ]
+}
