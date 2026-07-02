@@ -874,7 +874,7 @@ function initTab2(){
   const monthTotals=sortedMons.map(m=>({m,total:allCats.reduce((s,cat)=>{const r=matrix.find(x=>x.category===cat)||{};return s+(r[m]||0);},0)}));
   const peakM=monthTotals.reduce((a,b)=>b.total>a.total?b:a,monthTotals[0]||{m:''}).m;
 
-  const momTh=`<th>Month</th>${allCats.map(c=>`<th class="nr" style="font-size:10px;white-space:nowrap">${c.replace('Cars24 ','C24 ')}</th>`).join('')}<th class="nr ch">Total</th>`;
+  const momTh=`<th>Month</th>${allCats.map(c=>`<th class="nr" style="font-size:10px;white-space:nowrap">${c}</th>`).join('')}<th class="nr ch">Total</th>`;
   const momRows=monthTotals.map(({m,total},i)=>{
     const isPeak=m===peakM;
     let acc=0;
