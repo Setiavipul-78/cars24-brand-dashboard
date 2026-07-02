@@ -195,8 +195,9 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
 .biz-sell{background:#DCFCE7;color:#15803D;padding:2px 7px;border-radius:10px;font-size:11px;font-weight:700}
 .biz-buy{background:#EEF0FF;color:#4736FE;padding:2px 7px;border-radius:10px;font-size:11px;font-weight:700}
 .inf-filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
-.inf-sel{padding:6px 10px;border:1.5px solid var(--border);border-radius:9px;font:600 12px var(--font);color:var(--ink);background:var(--card);cursor:pointer;outline:none}
+.inf-sel{padding:6px 10px;border:1.5px solid var(--border);border-radius:9px;font:600 12px var(--font);color:var(--ink);background:var(--card);cursor:pointer;outline:none;transition:border-color .15s,background .15s,color .15s}
 .inf-sel:focus{border-color:var(--blue)}
+.inf-sel.sel-on{border-color:var(--blue);background:#EEF0FF;color:var(--blue)}
 .inf-count{font-size:12px;color:var(--grey);margin-left:auto}
 
 /* Influencer dashboard link banner */
@@ -542,6 +543,31 @@ const BC={Cars24:'#4736FE',Spinny:'#E91E8C',CarWale:'#FF6B6B',Cardekho:'#F97316'
 const BN={Cars24:'Cars24',Spinny:'Spinny',CarWale:'CarWale',Cardekho:'CarDekho',MFC:'Mahindra First Choice',MTV:'Maruti True Value',OLX:'OLX Auto'};
 const CC=['#4736FE','#00C951','#FF4F01','#E91E8C','#F59E0B','#7C3AED','#0EA5E9','#059669','#FF6B6B','#9CA3AF'];
 
+// Current month (always show in period filters)
+const _now=new Date();
+const _curM=`${_now.getFullYear()}-${String(_now.getMonth()+1).padStart(2,'0')}`;
+const _curLbl=_now.toLocaleString('en-US',{month:'short'})+`'${String(_now.getFullYear()).slice(2)}`;
+
+// Social channel URLs
+const YT_URLS={cars24_india:'https://www.youtube.com/@Cars24India',teambhp:'https://www.youtube.com/@TeamBHP',cars24_insider:'https://www.youtube.com/@Cars24Insider',cars24_malayalam:'https://www.youtube.com/channel/UCDsx70znq0fGHPjHWD-l5dA',cars24_malayalam2:'https://www.youtube.com/channel/UCyk90jODJw7RPu1WUz6zlQQ',cars24_au:'https://www.youtube.com/@Cars24Australia',cars24_uae:'https://www.youtube.com/@Cars24UAE'};
+const IG_URLS={cars24_india:'https://www.instagram.com/cars24india/',teambhp:'https://www.instagram.com/teambhp/',cars24_au:'https://www.instagram.com/cars24au/',cars24_uae:'https://www.instagram.com/cars24uae/'};
+
+// Build month <option> list, always injecting current month at top
+function monthOpts(monthsDesc,selectLatest=false){
+  const hasCur=monthsDesc.some(r=>r.month===_curM);
+  const cur=hasCur?'':`<option value="m:${_curM}"${selectLatest?' selected':''}>${_curLbl} · current</option>`;
+  const defLatest=selectLatest&&!hasCur?false:selectLatest; // if current month injected, it's already selected
+  return cur+monthsDesc.map(r=>`<option value="m:${r.month}"${defLatest&&hasCur&&r.month===monthsDesc[0]?.month?' selected':''}>${r.label}</option>`).join('');
+}
+
+// Attach change listener + keep blue highlight when a month is picked
+function bindSel(id,cb){
+  const el=document.getElementById(id);if(!el)return;
+  const upd=v=>{el.classList.toggle('sel-on',v!=='all'&&!v.startsWith('all'));cb(v);};
+  el.addEventListener('change',e=>upd(e.target.value));
+  upd(el.value); // apply on init
+}
+
 const sf=v=>{if(v==null)return null;try{const f=parseFloat(v);return isNaN(f)?null:f;}catch{return null;}};
 const fP=v=>v==null?'—':`${v.toFixed(1)}%`;
 const fM=v=>v==null?'—':`${v>0?'+':''}${v.toFixed(1)}%`;
@@ -787,10 +813,10 @@ function renderYT(containerId,key,channelName){
     ${isPublic?`<div style="background:#EEF0FF;border:1px solid #C7C1FF;border-radius:8px;padding:10px 14px;font-size:12px;color:#4736FE;margin-bottom:14px">ℹ️ Video-level public data — views = cumulative views of videos published that month, not monthly channel traffic.</div>`:''}
     <div class="card">
       <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
-        <div><span class="kicker">📊 Key Metrics</span><span class="title">Performance Overview — ${channelName}</span></div>
+        <div><span class="kicker">📊 Key Metrics</span><span class="title">Performance Overview — ${YT_URLS[key]?`<a href="${YT_URLS[key]}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--blue)">${channelName}</a>`:channelName}</span></div>
         <select class="inf-sel" id="yt-kpi-sel-${key}">
           <option value="all">All Time</option>
-          ${monthsDesc.map(r=>`<option value="m:${r.month}"${r.month===monthsDesc[0]?.month?' selected':''}>${r.label}</option>`).join('')}
+          ${monthOpts(monthsDesc,true)}
         </select>
       </div>
       <div class="inf-kpi-strip" style="grid-template-columns:repeat(7,1fr)" id="yt-kpis-${key}"></div>
@@ -806,7 +832,7 @@ function renderYT(containerId,key,channelName){
         <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance</span><span class="desc">Views, watch time, retention, engagement and subscriber growth per month. MoM% and YoY% highlighted.</span></div>
         <select class="inf-sel" id="yt-tbl-sel-${key}">
           <option value="all" selected>All Time</option>
-          ${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}
+          ${monthOpts(monthsDesc)}
         </select>
       </div>
       <div class="tw" id="yt-mom-tbl-${key}"></div>
@@ -817,14 +843,14 @@ function renderYT(containerId,key,channelName){
       <div class="card" style="margin:0">
         <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
           <div><span class="kicker">🏆 Top by Views</span><span class="title">Top 10 Videos by Views</span><span class="desc">Highest total views since publishing.</span></div>
-          <select class="inf-sel" id="yt-top-views-sel-${key}"><option value="all" selected>All Time</option>${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}</select>
+          <select class="inf-sel" id="yt-top-views-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
         </div>
         <div class="tw" id="yt-top-views-${key}"></div>
       </div>
       <div class="card" style="margin:0">
         <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
           <div><span class="kicker">⏱ Top by Watch Time</span><span class="title">Top 10 by Hours Watched</span><span class="desc">Videos generating most total watch time.</span></div>
-          <select class="inf-sel" id="yt-top-wt-sel-${key}"><option value="all" selected>All Time</option>${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}</select>
+          <select class="inf-sel" id="yt-top-wt-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
         </div>
         <div class="tw" id="yt-top-wt-${key}"></div>
       </div>
@@ -833,14 +859,14 @@ function renderYT(containerId,key,channelName){
       <div class="card" style="margin:0">
         <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
           <div><span class="kicker">🔄 Top by Retention</span><span class="title">Top 10 by Avg View %</span><span class="desc">Videos viewers watch most of — highest % of video watched on average.</span></div>
-          <select class="inf-sel" id="yt-top-ret-sel-${key}"><option value="all" selected>All Time</option>${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}</select>
+          <select class="inf-sel" id="yt-top-ret-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
         </div>
         <div class="tw" id="yt-top-ret-${key}"></div>
       </div>
       <div class="card" style="margin:0">
         <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
           <div><span class="kicker">👥 Top by Subs Gained</span><span class="title">Top 10 Subscriber Drivers</span><span class="desc">Videos that drove the most new subscriber signups.</span></div>
-          <select class="inf-sel" id="yt-top-subs-sel-${key}"><option value="all" selected>All Time</option>${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}</select>
+          <select class="inf-sel" id="yt-top-subs-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
         </div>
         <div class="tw" id="yt-top-subs-${key}"></div>
       </div>
@@ -849,14 +875,14 @@ function renderYT(containerId,key,channelName){
       <div class="card" style="margin:0">
         <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
           <div><span class="kicker">⚡ Top by Engagement</span><span class="title">Top 10 by Engagement Rate</span><span class="desc">(Likes + Comments + Shares) ÷ Views. Most engaging content.</span></div>
-          <select class="inf-sel" id="yt-top-eng-sel-${key}"><option value="all" selected>All Time</option>${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}</select>
+          <select class="inf-sel" id="yt-top-eng-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
         </div>
         <div class="tw" id="yt-top-eng-${key}"></div>
       </div>
       <div class="card" style="margin:0">
         <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
           <div><span class="kicker">⏰ Longest Avg Duration</span><span class="title">Top 10 by Avg Watch Duration</span><span class="desc">Videos where viewers stayed the longest (absolute minutes).</span></div>
-          <select class="inf-sel" id="yt-top-dur-sel-${key}"><option value="all" selected>All Time</option>${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}</select>
+          <select class="inf-sel" id="yt-top-dur-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
         </div>
         <div class="tw" id="yt-top-dur-${key}"></div>
       </div>
@@ -960,9 +986,9 @@ function renderYT(containerId,key,channelName){
   }
 
   // Independent period filters per section
-  document.getElementById(`yt-kpi-sel-${key}`).addEventListener('change',e=>renderKPIs(e.target.value));
-  renderKPIs(`m:${monthsDesc[0]?.month||''}`);
-  document.getElementById(`yt-tbl-sel-${key}`).addEventListener('change',e=>renderYTTable(e.target.value));
+  bindSel(`yt-kpi-sel-${key}`,renderKPIs);
+  renderKPIs(document.getElementById(`yt-kpi-sel-${key}`)?.value||`m:${monthsDesc[0]?.month||''}`);
+  bindSel(`yt-tbl-sel-${key}`,renderYTTable);
   renderYTTable('all');
 
   // ── Trend chart ──
@@ -982,8 +1008,8 @@ function renderYT(containerId,key,channelName){
         const sorted=[...filtered].sort((a,b)=>b[vf]-a[vf]).slice(0,10);
         document.getElementById(elId).innerHTML=sorted.length?tbl(thV,sorted.map(v=>vRow(v,sf(v))).join('')):noData;
       }
-      const sel=document.getElementById(selId);if(sel)sel.addEventListener('change',e=>render(e.target.value));
-      render('all');
+      bindSel(selId,render);
+      render(document.getElementById(selId)?.value||'all');
     }
     ytTopFill(`yt-top-views-${key}`,`yt-top-views-sel-${key}`,'views',v=>fv(v.views));
     ytTopFill(`yt-top-wt-${key}`,`yt-top-wt-sel-${key}`,'watch_time_hours',v=>fh(v.watch_time_hours));
@@ -1054,10 +1080,10 @@ function renderIG(containerId,key,handleName){
   el.innerHTML=`
     <div class="card">
       <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
-        <div><span class="kicker">📊 Key Metrics</span><span class="title">Performance Overview — ${handleName}</span></div>
+        <div><span class="kicker">📊 Key Metrics</span><span class="title">Performance Overview — ${IG_URLS[key]?`<a href="${IG_URLS[key]}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1.5px solid #E91E8C">${handleName}</a>`:handleName}</span></div>
         <select class="inf-sel" id="ig-kpi-sel-${key}">
           <option value="all">All Time</option>
-          ${monthsDesc.map(r=>`<option value="m:${r.month}"${r.month===latestM?' selected':''}>${r.label}</option>`).join('')}
+          ${monthOpts(monthsDesc,true)}
         </select>
       </div>
       <div class="inf-kpi-strip" id="ig-kpis-${key}" style="grid-template-columns:repeat(7,1fr)"></div>
@@ -1073,7 +1099,7 @@ function renderIG(containerId,key,handleName){
         <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance</span><span class="desc">Reach, profile views, website clicks, engagement and interactions with MoM change.</span></div>
         <select class="inf-sel" id="ig-tbl-sel-${key}">
           <option value="all" selected>All Time</option>
-          ${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}
+          ${monthOpts(monthsDesc)}
         </select>
       </div>
       <div class="tw" id="ig-mom-tbl-${key}"></div>
@@ -1084,14 +1110,14 @@ function renderIG(containerId,key,handleName){
       <div class="card" style="margin:0">
         <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
           <div><span class="kicker">🏆 Top by Reach</span><span class="title">Top 10 Posts by Reach</span><span class="desc">Most accounts reached — highest distribution posts.</span></div>
-          <select class="inf-sel" id="ig-top-reach-sel-${key}"><option value="all" selected>All Time</option>${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}</select>
+          <select class="inf-sel" id="ig-top-reach-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
         </div>
         <div class="tw" id="ig-top-reach-${key}"></div>
       </div>
       <div class="card" style="margin:0">
         <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
           <div><span class="kicker">❤️ Top by Likes</span><span class="title">Top 10 Posts by Likes</span><span class="desc">Most liked posts — audience favourites.</span></div>
-          <select class="inf-sel" id="ig-top-likes-sel-${key}"><option value="all" selected>All Time</option>${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}</select>
+          <select class="inf-sel" id="ig-top-likes-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
         </div>
         <div class="tw" id="ig-top-likes-${key}"></div>
       </div>
@@ -1100,14 +1126,14 @@ function renderIG(containerId,key,handleName){
       <div class="card" style="margin:0">
         <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
           <div><span class="kicker">🔖 Top by Saves</span><span class="title">Top 10 Posts by Saves</span><span class="desc">Most saved posts — high-value content people bookmark.</span></div>
-          <select class="inf-sel" id="ig-top-saves-sel-${key}"><option value="all" selected>All Time</option>${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}</select>
+          <select class="inf-sel" id="ig-top-saves-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
         </div>
         <div class="tw" id="ig-top-saves-${key}"></div>
       </div>
       <div class="card" style="margin:0">
         <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
           <div><span class="kicker">⚡ Top by Interactions</span><span class="title">Top 10 by Total Interactions</span><span class="desc">Likes + comments + saves + shares combined.</span></div>
-          <select class="inf-sel" id="ig-top-int-sel-${key}"><option value="all" selected>All Time</option>${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}</select>
+          <select class="inf-sel" id="ig-top-int-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
         </div>
         <div class="tw" id="ig-top-int-${key}"></div>
       </div>
@@ -1118,7 +1144,7 @@ function renderIG(containerId,key,handleName){
       <div class="card" style="margin:0">
         <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
           <div><span class="kicker">📊 Content Mix</span><span class="title">Posts by Content Type</span><span class="desc">Breakdown of posts in selected period: Reels, Photos, Carousels, Videos.</span></div>
-          <select class="inf-sel" id="ig-type-sel-${key}"><option value="all" selected>All Time</option>${monthsDesc.map(r=>`<option value="m:${r.month}">${r.label}</option>`).join('')}</select>
+          <select class="inf-sel" id="ig-type-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
         </div>
         <div class="cw" style="height:260px"><canvas id="ig-types-${key}"></canvas></div>
       </div>
@@ -1177,9 +1203,9 @@ function renderIG(containerId,key,handleName){
   }
 
   // Independent period filters per section
-  document.getElementById(`ig-kpi-sel-${key}`).addEventListener('change',e=>renderIGKPIs(e.target.value));
-  renderIGKPIs(`m:${latestM}`);
-  document.getElementById(`ig-tbl-sel-${key}`).addEventListener('change',e=>renderIGTable(e.target.value));
+  bindSel(`ig-kpi-sel-${key}`,renderIGKPIs);
+  renderIGKPIs(document.getElementById(`ig-kpi-sel-${key}`)?.value||`m:${latestM}`);
+  bindSel(`ig-tbl-sel-${key}`,renderIGTable);
 
   // ── Trend chart ──
   const ck=`ig_${key}_trend`;if(charts[ck])charts[ck].destroy();
@@ -1200,8 +1226,8 @@ function renderIG(containerId,key,handleName){
         const sorted=[...fp].sort((a,b)=>b[sf]-a[sf]).slice(0,10);
         const el2=document.getElementById(elId);if(el2)el2.innerHTML=sorted.length?tbl(thP,sorted.map(p=>pRow(p,numFmt(p[sf]))).join('')):noPost;
       }
-      const sel=document.getElementById(selId);if(sel)sel.addEventListener('change',e=>render(e.target.value));
-      render('all');
+      bindSel(selId,render);
+      render(document.getElementById(selId)?.value||'all');
     }
     igPostFill(`ig-top-reach-${key}`,`ig-top-reach-sel-${key}`,'reach');
     igPostFill(`ig-top-likes-${key}`,`ig-top-likes-sel-${key}`,'likes');
@@ -1222,7 +1248,7 @@ function renderIG(containerId,key,handleName){
       const tr2=document.getElementById(`ig-typereach-${key}`);const trk2=`ig_${key}_typereach`;if(charts[trk2])charts[trk2].destroy();
       if(tr2) charts[trk2]=new Chart(tr2.getContext('2d'),{type:'bar',data:{labels:types,datasets:[{label:'Avg Reach',data:types.map(t=>avgR[t]),backgroundColor:clrs,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
     }
-    const typeSel=document.getElementById(`ig-type-sel-${key}`);if(typeSel)typeSel.addEventListener('change',e=>renderIGTypeCharts(e.target.value));
+    bindSel(`ig-type-sel-${key}`,renderIGTypeCharts);
     renderIGTypeCharts('all');
   }
 }

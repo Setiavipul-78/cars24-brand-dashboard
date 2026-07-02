@@ -134,7 +134,10 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
 
     start = datetime(datetime.today().year - 2, 1, 1).strftime("%Y-%m-%d")
     today = date.today()
-    end   = today.replace(day=1).strftime("%Y-%m-%d")
+    # Use first of NEXT month so current partial month is included
+    _nm = today.replace(day=1)
+    _nm = date(_nm.year + (_nm.month // 12), (_nm.month % 12) + 1, 1)
+    end = _nm.strftime("%Y-%m-%d")
 
     # Monthly metrics including averageViewPercentage
     resp  = yta.reports().query(
