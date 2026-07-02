@@ -65,7 +65,7 @@ YT_TOKEN_KEYS = {
     "teambhp":          "YT_REFRESH_TOKEN_TEAMBHP",
     "cars24_insider":   "YT_REFRESH_TOKEN_INSIDER",
     "cars24_malayalam": "YT_REFRESH_TOKEN_MALAYALAM",   # Tamil — vipul.setia@cars24.com
-    "cars24_malayalam2":"YT_REFRESH_TOKEN_MALAYALAM",   # Malayalam — same owner account
+    "cars24_malayalam2":"YT_REFRESH_TOKEN_MALAYALAM2",  # Malayalam — vipul.setia@cars24.com
 }
 
 def get_yt_credentials(channel_key: str = None):

@@ -58,6 +58,11 @@ ACCOUNT_CONFIG = {
         "login_hint": "vipul.setia@cars24.com",
         "label": "Cars24 Tamil (+ Malayalam)",
     },
+    "malayalam2": {
+        "token_key": "YT_REFRESH_TOKEN_MALAYALAM2",
+        "login_hint": "vipul.setia@cars24.com",
+        "label": "Cars24 Malayalam",
+    },
     "malayalam": {
         "token_key": "YT_REFRESH_TOKEN_MALAYALAM",
         "login_hint": "Cars24.tamil@cars24.com",
