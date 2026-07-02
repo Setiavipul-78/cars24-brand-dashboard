@@ -111,8 +111,11 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
 .pp.active{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 2px 6px rgba(71,54,254,.3)}
 .cr{display:none;align-items:center;gap:7px;background:var(--blue-lt);border:1.5px solid var(--border);border-radius:10px;padding:6px 12px}
 .cr.open{display:flex}
-.cr input[type=month]{border:1.5px solid var(--border);border-radius:7px;padding:4px 9px;font:600 12px var(--font);color:var(--ink);background:var(--card);outline:none}
-.cr input[type=month]:focus{border-color:var(--blue)}
+.cr input[type=month],.cr input[type=date]{border:1.5px solid var(--border);border-radius:7px;padding:4px 9px;font:600 12px var(--font);color:var(--ink);background:var(--card);outline:none}
+.cr input[type=month]:focus,.cr input[type=date]:focus{border-color:var(--blue)}
+.cr-pair{display:flex;flex-direction:column;gap:5px}
+.cr-row{display:flex;align-items:center;gap:5px}
+.cr-lbl{font-size:10px;font-weight:700;min-width:52px;text-align:right;padding-right:4px}
 .cr .sep{font-size:12px;color:var(--grey)}
 .apply-btn{background:var(--blue);color:#fff;border:none;border-radius:7px;padding:5px 11px;font:700 12px var(--font);cursor:pointer}
 .apply-btn:hover{background:var(--blue-dk)}
@@ -311,11 +314,12 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
             <button class="pp" data-p="3m">3M</button>
             <button class="pp" data-p="compare">Compare ▾</button>
           </div>
-          <div class="cr" id="cr-imp" style="display:none">
-            <select class="inf-sel" id="imp-comp-a" style="min-width:90px"></select>
-            <span class="sep">vs</span>
-            <select class="inf-sel" id="imp-comp-b" style="min-width:90px"></select>
-            <button class="apply-btn" onclick="applyCompare('imp')">Go</button>
+          <div class="cr" id="cr-imp">
+            <div class="cr-pair">
+              <div class="cr-row"><span class="cr-lbl" style="color:var(--blue)">Period A</span><input type="month" id="imp-a-from"><span class="sep">–</span><input type="month" id="imp-a-to"></div>
+              <div class="cr-row"><span class="cr-lbl" style="color:var(--grey)">vs</span><input type="month" id="imp-b-from"><span class="sep">–</span><input type="month" id="imp-b-to"></div>
+              <button class="apply-btn" onclick="applyCompare('imp')" style="align-self:flex-end">Compare</button>
+            </div>
           </div>
         </div>
       </div>
@@ -339,11 +343,12 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
           <button class="pp" data-p="8w">8W</button>
           <button class="pp" data-p="compare">Compare ▾</button>
         </div>
-        <div class="cr" id="cr-wow" style="display:none">
-          <select class="inf-sel" id="wow-comp-a" style="min-width:130px"></select>
-          <span class="sep">vs</span>
-          <select class="inf-sel" id="wow-comp-b" style="min-width:130px"></select>
-          <button class="apply-btn" onclick="applyCompare('wow')">Go</button>
+        <div class="cr" id="cr-wow">
+          <div class="cr-pair">
+            <div class="cr-row"><span class="cr-lbl" style="color:var(--blue)">Period A</span><input type="date" id="wow-a-from"><span class="sep">–</span><input type="date" id="wow-a-to"></div>
+            <div class="cr-row"><span class="cr-lbl" style="color:var(--grey)">vs</span><input type="date" id="wow-b-from"><span class="sep">–</span><input type="date" id="wow-b-to"></div>
+            <button class="apply-btn" onclick="applyCompare('wow')" style="align-self:flex-end">Compare</button>
+          </div>
         </div>
       </div>
     </div>
@@ -364,10 +369,12 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
           <button class="pp" data-p="7d">7D</button>
           <button class="pp" data-p="compare">Compare ▾</button>
         </div>
-        <div class="cr" id="cr-dod" style="display:none">
-          <input type="date" id="dod-comp-a"><span class="sep">vs</span>
-          <input type="date" id="dod-comp-b">
-          <button class="apply-btn" onclick="applyCompare('dod')">Go</button>
+        <div class="cr" id="cr-dod">
+          <div class="cr-pair">
+            <div class="cr-row"><span class="cr-lbl" style="color:var(--blue)">Period A</span><input type="date" id="dod-a-from"><span class="sep">–</span><input type="date" id="dod-a-to"></div>
+            <div class="cr-row"><span class="cr-lbl" style="color:var(--grey)">vs</span><input type="date" id="dod-b-from"><span class="sep">–</span><input type="date" id="dod-b-to"></div>
+            <button class="apply-btn" onclick="applyCompare('dod')" style="align-self:flex-end">Compare</button>
+          </div>
         </div>
       </div>
     </div>
@@ -642,7 +649,7 @@ function filterPeriod(data,period,from,to){
   return data;
 }
 const fcbs={},fstate={};
-function wirePills(id,key,cb){const el=document.getElementById(id);if(!el)return;el.querySelectorAll('.pp').forEach(btn=>btn.addEventListener('click',()=>{el.querySelectorAll('.pp').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const p=btn.dataset.p;fstate[key]={p,from:null,to:null};const cr=document.getElementById('cr-'+key);if(cr){p==='custom'?cr.classList.add('open'):cr.classList.remove('open');}cb(p,null,null);}));}
+function wirePills(id,key,cb){const el=document.getElementById(id);if(!el)return;el.querySelectorAll('.pp').forEach(btn=>btn.addEventListener('click',()=>{el.querySelectorAll('.pp').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const p=btn.dataset.p;fstate[key]={p,from:null,to:null};const cr=document.getElementById('cr-'+key);if(cr){(p==='custom'||p==='compare')?cr.classList.add('open'):cr.classList.remove('open');}cb(p,null,null);}));}
 function applyFilter(key){const from=document.getElementById(key+'-from')?.value||null,to=document.getElementById(key+'-to')?.value||null;fstate[key]={p:'custom',from,to};fcbs[key]?.('custom',from,to);}
 function applyFilterDate(key){
   const from=document.getElementById(`${key}-from`)?.value||'';
@@ -698,81 +705,135 @@ function initTab1(){
   }
 
   // ── MoM table (no Trend column) + right bar chart ──
-  function renderMomBar(fd){
+  function renderMomBar(fdA,fdB){
     const ck='mom_bar';if(charts[ck])charts[ck].destroy();
     const c=document.getElementById('chart-mom-bar');if(!c)return;
-    charts[ck]=new Chart(c.getContext('2d'),{type:'bar',data:{labels:fd.map(r=>r.label),datasets:[{label:'Impressions (L)',data:fd.map(r=>r.imp_lakh),backgroundColor:fd.map(r=>(r.mom||0)>=0?'rgba(71,54,254,.75)':'rgba(231,0,11,.68)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'L'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
+    let datasets,labels;
+    if(fdB&&fdB.length){
+      // compare mode: two coloured datasets merged by position
+      const allA=fdA.map(r=>({...r,_p:'A'})),allB=fdB.map(r=>({...r,_p:'B'}));
+      const all=[...allA,...allB].sort((a,b)=>a.month.localeCompare(b.month));
+      labels=all.map(r=>`${r._p}: ${r.label}`);
+      datasets=[{label:'Impressions (L)',data:all.map(r=>r.imp_lakh),backgroundColor:all.map(r=>r._p==='A'?'rgba(71,54,254,.8)':'rgba(255,149,0,.8)'),borderRadius:4}];
+    } else {
+      labels=fdA.map(r=>r.label);
+      datasets=[{label:'Impressions (L)',data:fdA.map(r=>r.imp_lakh),backgroundColor:fdA.map(r=>(r.mom||0)>=0?'rgba(71,54,254,.75)':'rgba(231,0,11,.68)'),borderRadius:4}];
+    }
+    charts[ck]=new Chart(c.getContext('2d'),{type:'bar',data:{labels,datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'L'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
   }
 
-  function renderMonthlyTable(p,from,to){
-    let fd;
+  function renderMonthlyTable(p){
+    let fdA,fdB=null;
     if(p==='compare'){
-      const mA=document.getElementById('imp-comp-a')?.value;
-      const mB=document.getElementById('imp-comp-b')?.value;
-      fd=mon.filter(r=>r.month===mA||r.month===mB);
+      const aFrom=document.getElementById('imp-a-from')?.value||'';
+      const aTo=document.getElementById('imp-a-to')?.value||'';
+      const bFrom=document.getElementById('imp-b-from')?.value||'';
+      const bTo=document.getElementById('imp-b-to')?.value||'';
+      fdA=mon.filter(r=>(!aFrom||r.month>=aFrom)&&(!aTo||r.month<=aTo));
+      fdB=mon.filter(r=>(!bFrom||r.month>=bFrom)&&(!bTo||r.month<=bTo));
     } else {
-      fd=filterPeriod(mon,p,from,to);
+      fdA=filterPeriod(mon,p);
     }
     const th=`<th>Month</th><th></th><th class="nr ch">Impressions</th><th class="nr ch">MoM</th><th class="nr">YoY</th>`;
-    const rows=[...fd].reverse().map((r,i)=>`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(r.mom)}</td><td class="nr cc"><strong>${r.imp_lakh.toFixed(2)}L</strong></td><td class="nr cc">${badge(r.mom)}</td><td class="nr">${badge(r.yoy)}</td></tr>`).join('');
-    document.getElementById('tbl-monthly').innerHTML=fd.length?tbl(th,rows):'<p style="padding:16px;color:var(--grey);font-size:13px">No data for selected period.</p>';
-    renderMomBar(fd);
+    let rows;
+    if(fdB){
+      const rA=[...fdA].reverse().map(r=>`<tr><td><strong>${r.label}</strong> <span style="font-size:10px;color:var(--blue);font-weight:800">A</span></td><td>${tia(r.mom)}</td><td class="nr cc"><strong>${r.imp_lakh.toFixed(2)}L</strong></td><td class="nr cc">${badge(r.mom)}</td><td class="nr">${badge(r.yoy)}</td></tr>`).join('');
+      const rB=[...fdB].reverse().map(r=>`<tr><td><strong>${r.label}</strong> <span style="font-size:10px;color:#f90;font-weight:800">B</span></td><td>${tia(r.mom)}</td><td class="nr cc"><strong>${r.imp_lakh.toFixed(2)}L</strong></td><td class="nr cc">${badge(r.mom)}</td><td class="nr">${badge(r.yoy)}</td></tr>`).join('');
+      rows=rA+(rB?`<tr style="background:var(--bg)"><td colspan="5" style="padding:3px 8px;font-size:10px;color:var(--grey);letter-spacing:.5px">── Period B ──</td></tr>`+rB:'');
+    } else {
+      rows=[...fdA].reverse().map((r,i)=>`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(r.mom)}</td><td class="nr cc"><strong>${r.imp_lakh.toFixed(2)}L</strong></td><td class="nr cc">${badge(r.mom)}</td><td class="nr">${badge(r.yoy)}</td></tr>`).join('');
+    }
+    document.getElementById('tbl-monthly').innerHTML=(fdA.length||(fdB?.length))?tbl(th,rows):'<p style="padding:16px;color:var(--grey);font-size:13px">No data for selected period.</p>';
+    renderMomBar(fdA,fdB);
   }
-  // populate compare selects (ascending A = oldest first, descending B = newest first)
-  const impA=document.getElementById('imp-comp-a'),impB=document.getElementById('imp-comp-b');
-  if(impA&&impB){
-    impA.innerHTML=[...mon].map(r=>`<option value="${r.month}">${r.label}</option>`).join('');
-    impB.innerHTML=[...mon].reverse().map(r=>`<option value="${r.month}">${r.label}</option>`).join('');
-    if(mon.length>=2){impA.value=mon[mon.length-2].month;impB.value=mon[mon.length-1].month;}
+  // default compare inputs: Period A = latest month, Period B = prev month
+  if(mon.length>=2){
+    const latest=mon[mon.length-1].month,prev=mon[mon.length-2].month;
+    document.getElementById('imp-a-from').value=latest;document.getElementById('imp-a-to').value=latest;
+    document.getElementById('imp-b-from').value=prev;document.getElementById('imp-b-to').value=prev;
   }
   fcbs['imp']=renderMonthlyTable;wirePills('pp-imp','imp',renderMonthlyTable);renderMonthlyTable('all');
 
-  // ── WoW: weekly impressions ──
+  // ── WoW: weekly impressions — line chart ──
   function renderWoW(p){
-    let fd;
+    let fdA,fdB=null;
     if(p==='compare'){
-      const wA=document.getElementById('wow-comp-a')?.value;
-      const wB=document.getElementById('wow-comp-b')?.value;
-      fd=weekly.filter(r=>r.week_start===wA||r.week_start===wB);
+      const aFrom=document.getElementById('wow-a-from')?.value||'';
+      const aTo=document.getElementById('wow-a-to')?.value||'';
+      const bFrom=document.getElementById('wow-b-from')?.value||'';
+      const bTo=document.getElementById('wow-b-to')?.value||'';
+      fdA=weekly.filter(r=>(!aFrom||r.week_start>=aFrom)&&(!aTo||r.week_start<=aTo));
+      fdB=weekly.filter(r=>(!bFrom||r.week_start>=bFrom)&&(!bTo||r.week_start<=bTo));
     } else {
-      fd=filterPeriod(weekly,p);
+      fdA=filterPeriod(weekly,p);
     }
-    if(!fd.length){document.getElementById('tbl-weekly').innerHTML='<p style="padding:16px;color:var(--grey);font-size:13px">No weekly data available.</p>';return;}
+    const tblEl=document.getElementById('tbl-weekly');
+    if(!fdA.length&&!fdB?.length){tblEl.innerHTML='<p style="padding:16px;color:var(--grey);font-size:13px">No weekly data available.</p>';return;}
     const th=`<th>Week</th><th></th><th class="nr ch">Impressions</th><th class="nr">WoW Δ</th>`;
-    const rows=[...fd].reverse().map((r,i)=>`<tr class="${i===0?'lat':''}"><td style="font-size:12px;white-space:nowrap">${r.week_label}</td><td>${tia(r.wow)}</td><td class="nr cc"><strong>${numFmt(r.impressions)}</strong></td><td class="nr">${badge(r.wow)}</td></tr>`).join('');
-    document.getElementById('tbl-weekly').innerHTML=tbl(th,rows);
+    let rows;
+    if(fdB){
+      const rA=[...fdA].reverse().map(r=>`<tr><td style="font-size:12px;white-space:nowrap">${r.week_label} <span style="font-size:10px;color:var(--blue);font-weight:800">A</span></td><td>${tia(r.wow)}</td><td class="nr cc"><strong>${numFmt(r.impressions)}</strong></td><td class="nr">${badge(r.wow)}</td></tr>`).join('');
+      const rB=[...fdB].reverse().map(r=>`<tr><td style="font-size:12px;white-space:nowrap">${r.week_label} <span style="font-size:10px;color:#f90;font-weight:800">B</span></td><td>${tia(r.wow)}</td><td class="nr cc"><strong>${numFmt(r.impressions)}</strong></td><td class="nr">${badge(r.wow)}</td></tr>`).join('');
+      rows=rA+`<tr style="background:var(--bg)"><td colspan="4" style="padding:3px 8px;font-size:10px;color:var(--grey)">── Period B ──</td></tr>`+rB;
+    } else {
+      rows=[...fdA].reverse().map((r,i)=>`<tr class="${i===0?'lat':''}"><td style="font-size:12px;white-space:nowrap">${r.week_label}</td><td>${tia(r.wow)}</td><td class="nr cc"><strong>${numFmt(r.impressions)}</strong></td><td class="nr">${badge(r.wow)}</td></tr>`).join('');
+    }
+    tblEl.innerHTML=tbl(th,rows);
     if(charts.wow)charts.wow.destroy();
     const c=document.getElementById('chart-wow');if(!c)return;
-    charts.wow=new Chart(c.getContext('2d'),{type:'bar',data:{labels:fd.map(r=>r.week_label.split('–')[0].trim()),datasets:[{label:'Impressions',data:fd.map(r=>r.impressions),backgroundColor:fd.map(r=>(r.wow||0)>=0?'rgba(71,54,254,.75)':'rgba(231,0,11,.68)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16,maxRotation:45}}}}});
+    if(fdB&&fdB.length){
+      const len=Math.max(fdA.length,fdB.length);
+      charts.wow=new Chart(c.getContext('2d'),{type:'line',data:{labels:Array.from({length:len},(_,i)=>`Wk ${i+1}`),datasets:[
+        {label:'Period A',data:fdA.map(r=>r.impressions),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:false,tension:0.3,borderWidth:2,pointRadius:fdA.length>20?0:3},
+        {label:'Period B',data:fdB.map(r=>r.impressions),borderColor:'#FF9500',backgroundColor:'rgba(255,149,0,.08)',fill:false,tension:0.3,borderWidth:2,pointRadius:fdB.length>20?0:3,borderDash:[5,3]}
+      ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'top',labels:{boxWidth:12,font:{size:11}}}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16}}}}});
+    } else {
+      charts.wow=new Chart(c.getContext('2d'),{type:'line',data:{labels:fdA.map(r=>r.week_label.split('–')[0].trim()),datasets:[{label:'Impressions',data:fdA.map(r=>r.impressions),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.07)',fill:true,tension:0.3,borderWidth:2,pointRadius:fdA.length>40?0:2,pointBackgroundColor:'#4736FE'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16,maxRotation:45}}}}});
+    }
   }
-  // populate wow compare selects
-  const wowA=document.getElementById('wow-comp-a'),wowB=document.getElementById('wow-comp-b');
-  if(wowA&&wowB){
-    wowA.innerHTML=[...weekly].map(r=>`<option value="${r.week_start}">${r.week_label}</option>`).join('');
-    wowB.innerHTML=[...weekly].reverse().map(r=>`<option value="${r.week_start}">${r.week_label}</option>`).join('');
-    if(weekly.length>=2){wowA.value=weekly[weekly.length-2].week_start;wowB.value=weekly[weekly.length-1].week_start;}
+  // default wow compare inputs: Period A = last 4 weeks, Period B = 4 weeks before that
+  if(weekly.length>=8){
+    const w=weekly;
+    document.getElementById('wow-a-from').value=w[w.length-4].week_start;
+    document.getElementById('wow-a-to').value=w[w.length-1].week_start;
+    document.getElementById('wow-b-from').value=w[w.length-8].week_start;
+    document.getElementById('wow-b-to').value=w[w.length-5].week_start;
   }
   fcbs['wow']=renderWoW;wirePills('pp-wow','wow',renderWoW);renderWoW('all');
 
   // ── DoD: daily impressions — line chart only ──
   function renderDoD(p){
-    let fd;
+    let fdA,fdB=null;
     if(p==='compare'){
-      const dA=document.getElementById('dod-comp-a')?.value;
-      const dB=document.getElementById('dod-comp-b')?.value;
-      if(dA&&dB){const lo=dA<dB?dA:dB,hi=dA<dB?dB:dA;fd=daily.filter(r=>r.date>=lo&&r.date<=hi);}
-      else{fd=filterPeriod(daily,'90d');}
+      const aFrom=document.getElementById('dod-a-from')?.value||'';
+      const aTo=document.getElementById('dod-a-to')?.value||'';
+      const bFrom=document.getElementById('dod-b-from')?.value||'';
+      const bTo=document.getElementById('dod-b-to')?.value||'';
+      fdA=daily.filter(r=>(!aFrom||r.date>=aFrom)&&(!aTo||r.date<=aTo));
+      fdB=daily.filter(r=>(!bFrom||r.date>=bFrom)&&(!bTo||r.date<=bTo));
     } else {
-      fd=filterPeriod(daily,p);
+      fdA=filterPeriod(daily,p);
     }
     if(charts.dod)charts.dod.destroy();
     const c=document.getElementById('chart-dod');if(!c)return;
-    if(!fd.length)return;
-    charts.dod=new Chart(c.getContext('2d'),{type:'line',data:{labels:fd.map(r=>r.date.slice(5)),datasets:[{label:'Daily Impressions',data:fd.map(r=>r.impressions),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.07)',fill:true,tension:0.3,borderWidth:2,pointRadius:fd.length>60?0:2,pointBackgroundColor:'#4736FE'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:20,maxRotation:45}}}}});
+    if(!fdA.length)return;
+    if(fdB&&fdB.length){
+      const len=Math.max(fdA.length,fdB.length);
+      charts.dod=new Chart(c.getContext('2d'),{type:'line',data:{labels:Array.from({length:len},(_,i)=>`Day ${i+1}`),datasets:[
+        {label:'Period A',data:fdA.map(r=>r.impressions),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.07)',fill:false,tension:0.3,borderWidth:2,pointRadius:fdA.length>60?0:2},
+        {label:'Period B',data:fdB.map(r=>r.impressions),borderColor:'#FF9500',backgroundColor:'rgba(255,149,0,.07)',fill:false,tension:0.3,borderWidth:2,pointRadius:fdB.length>60?0:2,borderDash:[5,3]}
+      ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'top',labels:{boxWidth:12,font:{size:11}}}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:20}}}}});
+    } else {
+      charts.dod=new Chart(c.getContext('2d'),{type:'line',data:{labels:fdA.map(r=>r.date.slice(5)),datasets:[{label:'Daily Impressions',data:fdA.map(r=>r.impressions),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.07)',fill:true,tension:0.3,borderWidth:2,pointRadius:fdA.length>60?0:2,pointBackgroundColor:'#4736FE'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:20,maxRotation:45}}}}});
+    }
   }
-  // default dod date range inputs to last 90 days
-  const dodA=document.getElementById('dod-comp-a'),dodB=document.getElementById('dod-comp-b');
-  if(dodA&&dodB&&daily.length>=2){dodA.value=daily[daily.length-90]?.date||daily[0].date;dodB.value=daily[daily.length-1].date;}
+  // default dod compare inputs: Period A = last 30 days, Period B = prior 30 days
+  if(daily.length>=60){
+    document.getElementById('dod-a-from').value=daily[daily.length-30].date;
+    document.getElementById('dod-a-to').value=daily[daily.length-1].date;
+    document.getElementById('dod-b-from').value=daily[daily.length-60].date;
+    document.getElementById('dod-b-to').value=daily[daily.length-31].date;
+  }
   fcbs['dod']=renderDoD;wirePills('pp-dod','dod',renderDoD);renderDoD('90d');
 }
 
