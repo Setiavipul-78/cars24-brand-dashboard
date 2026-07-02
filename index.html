@@ -137,6 +137,7 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
 .dt tbody tr.lat td{background:#EEF0FF}
 .dt tbody td{padding:9px 13px;vertical-align:middle}
 .dt .cc{background:#F5F4FF;font-weight:700;color:var(--blue)}
+.peak-box{display:inline-block;background:rgba(71,54,254,.1);border:2px solid var(--blue);border-radius:5px;padding:1px 8px;color:var(--blue);font-weight:800;font-size:12px}
 .dt .nr{text-align:right;font-variant-numeric:tabular-nums}
 .tw{max-height:460px;overflow-y:auto;border-radius:10px;border:1.5px solid var(--border)}
 
@@ -385,37 +386,17 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
         <!-- TAB 2: KEYWORDS -->
         <section class="tabpane" id="m-kw">
 
-          <!-- Category Breakdown with period + compare filter -->
+          <!-- Category Breakdown with month dropdown -->
           <div class="card">
             <div class="sh"><span class="kicker">🍩 Category Breakdown</span><span class="title">Keyword Volume by Category</span><span class="desc">How search impressions split across intent categories for the selected period.</span></div>
             <div class="fb">
-              <span class="fl">Period</span>
-              <div class="pp-wrap" id="pp-cat">
-                <button class="pp active" data-p="all">All time</button>
-                <button class="pp" data-p="6m">6M</button>
-                <button class="pp" data-p="3m">3M</button>
-                <button class="pp" data-p="custom">Custom ▾</button>
-                <button class="pp" data-p="compare">Compare ▾</button>
-              </div>
-              <div class="cr" id="cr-cat">
-                <div id="cr-cat-single" class="cr-pair">
-                  <div class="cr-row"><input type="month" id="cat-from"><span class="sep">–</span><input type="month" id="cat-to"></div>
-                  <button class="apply-btn" onclick="applyFilterDate('cat')">Apply</button>
-                </div>
-                <div id="cr-cat-cmp" class="cr-pair" style="display:none">
-                  <div class="cr-row"><span class="cr-lbl" style="color:var(--blue)">Period A</span><input type="month" id="cat-a-from"><span class="sep">–</span><input type="month" id="cat-a-to"></div>
-                  <div class="cr-row"><span class="cr-lbl" style="color:var(--grey)">vs</span><input type="month" id="cat-b-from"><span class="sep">–</span><input type="month" id="cat-b-to"></div>
-                  <button class="apply-btn" onclick="applyCompare('cat')" style="align-self:flex-end">Compare</button>
-                </div>
-              </div>
+              <span class="fl">Month</span>
+              <select class="ctrl-sel" id="cat-period-sel"></select>
             </div>
-            <!-- Normal mode: table left, donut right -->
-            <div class="g2" id="cat-norm" style="align-items:start">
+            <div class="g2" style="align-items:start">
               <div class="tw" id="tbl-cats"></div>
               <div class="dw"><canvas id="chart-donut"></canvas></div>
             </div>
-            <!-- Compare mode: grouped bar chart -->
-            <div id="cat-cmp-view" style="display:none"><div class="cw"><canvas id="chart-cat-cmp"></canvas></div></div>
           </div>
 
           <!-- MoM Category Pivot: months × categories -->
@@ -858,17 +839,6 @@ function initTab2(){
 
   function mLbl(m){try{const[y,mo]=m.split('-');return['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+mo-1]+"'"+y.slice(2);}catch{return m;}}
 
-  // Filter catMonths array to those matching a period
-  function filterMons(p,from,to){
-    if(p==='all')return catMonths;
-    if(p==='custom')return catMonths.filter(m=>(!from||m>=from)&&(!to||m<=to));
-    const n=new Date();
-    if(p==='3m'){const c=new Date(n.getFullYear(),n.getMonth()-3,1).toISOString().slice(0,7);return catMonths.filter(m=>m>=c);}
-    if(p==='6m'){const c=new Date(n.getFullYear(),n.getMonth()-6,1).toISOString().slice(0,7);return catMonths.filter(m=>m>=c);}
-    if(p==='12m'){const c=new Date(n.getFullYear(),n.getMonth()-12,1).toISOString().slice(0,7);return catMonths.filter(m=>m>=c);}
-    return catMonths;
-  }
-
   // Sum each category's impressions across given months
   function aggCats(mons){
     const tot={};allCats.forEach(c=>{tot[c]=0;});
@@ -877,8 +847,8 @@ function initTab2(){
     return allCats.map((c,i)=>({category:c,impressions:tot[c],share:grand>0?tot[c]/grand*100:0,color:CC[i]}));
   }
 
-  // Render table + donut for a single aggregated period
-  function renderNorm(aggData){
+  function renderCat(mons){
+    const aggData=aggCats(mons);
     const cth=`<th>Category</th><th class="nr">Volume</th><th class="nr">Share</th>`;
     document.getElementById('tbl-cats').innerHTML=tbl(cth,aggData.map(c=>`<tr><td><span class="bdot" style="background:${c.color}"></span>${c.category}</td><td class="nr">${(c.impressions/1e5).toFixed(2)}L</td><td class="nr">${c.share.toFixed(1)}%</td></tr>`).join(''));
     if(charts.donut)charts.donut.destroy();
@@ -886,48 +856,33 @@ function initTab2(){
     charts.donut=new Chart(c3,{type:'doughnut',data:{labels:aggData.map(c=>c.category),datasets:[{data:aggData.map(c=>c.impressions),backgroundColor:aggData.map(c=>c.color),borderWidth:3,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:11},padding:8}}}}});
   }
 
-  function renderCat(p,from,to){
-    // Toggle sub-panels inside cr-cat
-    document.getElementById('cr-cat-single').style.display=p==='compare'?'none':'';
-    document.getElementById('cr-cat-cmp').style.display=p==='compare'?'':'none';
-    const normDiv=document.getElementById('cat-norm'),cmpDiv=document.getElementById('cat-cmp-view');
-    if(p==='compare'){
-      normDiv.style.display='none';cmpDiv.style.display='';
-      const aFrom=document.getElementById('cat-a-from')?.value||'';
-      const aTo=document.getElementById('cat-a-to')?.value||'';
-      const bFrom=document.getElementById('cat-b-from')?.value||'';
-      const bTo=document.getElementById('cat-b-to')?.value||'';
-      const dA=aggCats(filterMons('custom',aFrom,aTo));
-      const dB=aggCats(filterMons('custom',bFrom,bTo));
-      if(charts.catCmp)charts.catCmp.destroy();
-      const c=document.getElementById('chart-cat-cmp').getContext('2d');
-      charts.catCmp=new Chart(c,{type:'bar',data:{labels:allCats.map(n=>n.replace('Cars24 ','C24 ')),datasets:[
-        {label:'Period A',data:dA.map(c=>+(c.impressions/1e5).toFixed(2)),backgroundColor:'rgba(71,54,254,.8)',borderRadius:4},
-        {label:'Period B',data:dB.map(c=>+(c.impressions/1e5).toFixed(2)),backgroundColor:'rgba(255,149,0,.8)',borderRadius:4}
-      ]},options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{position:'top',labels:{boxWidth:12,font:{size:11},usePointStyle:true}}},scales:{y:{ticks:{callback:v=>v+'L'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{font:{size:10}}}}}});
-    } else {
-      normDiv.style.display='';cmpDiv.style.display='none';
-      renderNorm(aggCats(filterMons(p,from,to)));
-    }
-  }
-
-  // Default compare inputs: last 3M vs prior 3M
-  if(catMonths.length>=6){
-    document.getElementById('cat-a-from').value=catMonths[catMonths.length-3];
-    document.getElementById('cat-a-to').value=catMonths[catMonths.length-1];
-    document.getElementById('cat-b-from').value=catMonths[catMonths.length-6];
-    document.getElementById('cat-b-to').value=catMonths[catMonths.length-4];
-  }
-
-  fcbs['cat']=renderCat;wirePills('pp-cat','cat',renderCat);renderCat('all');
+  // Build month dropdown — newest first, default = latest month
+  const latestM=catMonths.length?catMonths[catMonths.length-1]:'';
+  const catSel=document.getElementById('cat-period-sel');
+  catSel.innerHTML=`<option value="all">All time</option>`+
+    [...catMonths].sort().reverse().map(m=>`<option value="${m}"${m===latestM?' selected':''}>${mLbl(m)}</option>`).join('');
+  catSel.addEventListener('change',e=>{
+    const v=e.target.value;
+    renderCat(v==='all'?catMonths:catMonths.filter(m=>m===v));
+  });
+  // Render latest month by default
+  renderCat(latestM?catMonths.filter(m=>m===latestM):catMonths);
 
   // MoM Category Pivot: months (rows) × categories (columns)
+  // Precompute totals to find peak month
   const sortedMons=[...catMonths].sort().reverse();
+  const monthTotals=sortedMons.map(m=>({m,total:allCats.reduce((s,cat)=>{const r=matrix.find(x=>x.category===cat)||{};return s+(r[m]||0);},0)}));
+  const peakM=monthTotals.reduce((a,b)=>b.total>a.total?b:a,monthTotals[0]||{m:''}).m;
+
   const momTh=`<th>Month</th>${allCats.map(c=>`<th class="nr" style="font-size:10px;white-space:nowrap">${c.replace('Cars24 ','C24 ')}</th>`).join('')}<th class="nr ch">Total</th>`;
-  const momRows=sortedMons.map((m,i)=>{
-    let total=0;
-    const cells=allCats.map(cat=>{const r=matrix.find(x=>x.category===cat)||{};const v=r[m];if(v!=null)total+=v;return`<td class="nr">${v!=null?(v/1e5).toFixed(2)+'L':'—'}</td>`;}).join('');
-    return`<tr class="${i===0?'lat':''}"><td><strong>${mLbl(m)}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td>${cells}<td class="nr cc"><strong>${(total/1e5).toFixed(2)}L</strong></td></tr>`;
+  const momRows=monthTotals.map(({m,total},i)=>{
+    const isPeak=m===peakM;
+    let acc=0;
+    const cells=allCats.map(cat=>{const r=matrix.find(x=>x.category===cat)||{};const v=r[m];if(v!=null)acc+=v;return`<td class="nr">${v!=null?(v/1e5).toFixed(2)+'L':'—'}</td>`;}).join('');
+    const totalCell=isPeak
+      ?`<td class="nr"><span class="peak-box">${(total/1e5).toFixed(2)}L ⭐ Peak</span></td>`
+      :`<td class="nr cc"><strong>${(total/1e5).toFixed(2)}L</strong></td>`;
+    return`<tr class="${i===0?'lat':''}"><td><strong>${mLbl(m)}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td>${cells}${totalCell}</tr>`;
   }).join('');
   document.getElementById('tbl-cat-mom').innerHTML=tbl(momTh,momRows);
 
