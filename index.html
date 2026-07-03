@@ -186,6 +186,22 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
 .dw{position:relative;height:220px}
 .spark{vertical-align:middle;opacity:.8}
 
+/* Ratio column highlight (e.g. C24÷Spinny) */
+.ratio-hi{background:#FFF6E9!important;color:#B5650A!important;font-weight:800!important}
+th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
+
+/* Competitor multiselect dropdown */
+.ms-dd{position:relative;display:inline-block}
+.ms-btn{border:1.5px solid var(--border);background:var(--card);padding:7px 12px;border-radius:9px;font:600 12.5px var(--font);color:var(--ink);cursor:pointer;display:flex;align-items:center;gap:8px;min-width:130px;justify-content:space-between}
+.ms-btn:after{content:'▾';font-size:10px;color:var(--grey)}
+.ms-btn:focus{border-color:var(--blue)}
+.ms-panel{display:none;position:absolute;top:calc(100% + 6px);left:0;background:var(--card);border:1.5px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.14);padding:6px;z-index:40;min-width:190px;max-height:260px;overflow-y:auto}
+.ms-panel.open{display:block}
+.ms-item{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;font-size:12.5px;font-weight:600;color:var(--ink);cursor:pointer}
+.ms-item:hover{background:var(--bg)}
+.ms-item input{margin:0;accent-color:var(--blue)}
+.ms-all{border-bottom:1.5px solid var(--border);margin-bottom:4px;padding-bottom:7px}
+
 /* Influencer-specific */
 .tier-chip{display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:800;white-space:nowrap}
 .tier-nano{background:#F1F0F7;color:#6B7280}
@@ -414,26 +430,21 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
 
         <!-- TAB 3: BSOS -->
         <section class="tabpane" id="m-bsos">
-          <div class="sos-hero">
-            <div class="sos-eyebrow">🏆 Cars24 · Share of Searches · All-India</div>
-            <div class="sos-val" id="sos-val">—</div>
-            <div class="sos-txt" id="sos-txt"></div>
-            <div class="sos-badges" id="sos-badges"></div>
-          </div>
-
           <div class="g4" id="sos-kpis"></div>
 
           <div class="card">
             <div class="sh"><span class="kicker">📈 All brands · Monthly</span><span class="title">Share of Searches — Trend</span><span class="desc">What % of all used-car searches each brand captured, month by month. Cars24 line is thicker.</span></div>
             <div class="fb">
-              <span class="fl">Show</span>
-              <div class="pp-wrap" id="pp-sos">
-                <button class="pp active" data-p="all">All time</button>
-                <button class="pp" data-p="12m">12M</button>
-                <button class="pp" data-p="6m">6M</button>
-                <button class="pp" data-p="3m">3M</button>
-                <button class="pp" data-p="custom">Custom ▾</button>
-              </div>
+              <span class="fl">Period</span>
+              <select class="ctrl-sel" id="sos-period-sel">
+                <option value="all" selected>All time</option>
+                <option value="12m">Last 12 months</option>
+                <option value="6m">Last 6 months</option>
+                <option value="3m">Last 3 months</option>
+                <option value="custom">Custom range…</option>
+              </select>
+              <span class="fl">Competitors</span>
+              <div class="ms-dd" id="ms-sos"></div>
               <div class="cr" id="cr-sos">
                 <input type="month" id="sos-from"><span class="sep">to</span>
                 <input type="month" id="sos-to">
@@ -461,6 +472,57 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
               </div>
             </div>
             <div class="tw" id="tbl-comp"></div>
+          </div>
+
+          <!-- WoW: table top, chart below -->
+          <div class="card">
+            <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+              <div><span class="kicker">📆 Week-on-Week</span><span class="title">Share of Searches — All Brands by Week</span><span class="desc">Blue column = Cars24. Weekly data since Dec 2025.</span></div>
+              <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+                <div class="pp-wrap" id="pp-sos-wow">
+                  <button class="pp active" data-p="all">All</button>
+                  <button class="pp" data-p="26w">26W</button>
+                  <button class="pp" data-p="12w">12W</button>
+                  <button class="pp" data-p="8w">8W</button>
+                  <button class="pp" data-p="compare">Compare ▾</button>
+                </div>
+                <div class="cr" id="cr-sos-wow">
+                  <div class="cr-pair">
+                    <div class="cr-row"><span class="cr-lbl" style="color:var(--blue)">Period A</span><input type="date" id="sos-wow-a-from"><span class="sep">–</span><input type="date" id="sos-wow-a-to"></div>
+                    <div class="cr-row"><span class="cr-lbl" style="color:var(--grey)">vs</span><input type="date" id="sos-wow-b-from"><span class="sep">–</span><input type="date" id="sos-wow-b-to"></div>
+                    <button class="apply-btn" onclick="applyCompare('sos-wow')" style="align-self:flex-end">Compare</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tw" id="tbl-sos-wow" style="margin-bottom:10px"></div>
+            <div class="cw"><canvas id="chart-sos-wow"></canvas></div>
+          </div>
+
+          <!-- DoD: table top, chart below -->
+          <div class="card">
+            <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+              <div><span class="kicker">📆 Day-on-Day</span><span class="title">Share of Searches — All Brands by Day</span><span class="desc">Blue column = Cars24. Daily data since Jan 2026.</span></div>
+              <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+                <div class="pp-wrap" id="pp-sos-dod">
+                  <button class="pp" data-p="all">All</button>
+                  <button class="pp active" data-p="90d">90D</button>
+                  <button class="pp" data-p="30d">30D</button>
+                  <button class="pp" data-p="14d">14D</button>
+                  <button class="pp" data-p="7d">7D</button>
+                  <button class="pp" data-p="compare">Compare ▾</button>
+                </div>
+                <div class="cr" id="cr-sos-dod">
+                  <div class="cr-pair">
+                    <div class="cr-row"><span class="cr-lbl" style="color:var(--blue)">Period A</span><input type="date" id="sos-dod-a-from"><span class="sep">–</span><input type="date" id="sos-dod-a-to"></div>
+                    <div class="cr-row"><span class="cr-lbl" style="color:var(--grey)">vs</span><input type="date" id="sos-dod-b-from"><span class="sep">–</span><input type="date" id="sos-dod-b-to"></div>
+                    <button class="apply-btn" onclick="applyCompare('sos-dod')" style="align-self:flex-end">Compare</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tw" id="tbl-sos-dod" style="margin-bottom:10px"></div>
+            <div class="cw"><canvas id="chart-sos-dod"></canvas></div>
           </div>
 
           <div class="card">
@@ -579,7 +641,7 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
 </main>
 <script>
 const BC={Cars24:'#4736FE',Spinny:'#E91E8C',CarWale:'#FF6B6B',Cardekho:'#F97316',MFC:'#7C3AED',MTV:'#059669',OLX:'#0EA5E9'};
-const BN={Cars24:'Cars24',Spinny:'Spinny',CarWale:'CarWale',Cardekho:'CarDekho',MFC:'Mahindra First Choice',MTV:'Maruti True Value',OLX:'OLX Auto'};
+const BN={Cars24:'Cars24',Spinny:'Spinny',CarWale:'CarWale',Cardekho:'CarDekho',MFC:'Mahindra',MTV:'Maruti',OLX:'OLX Auto'};
 const CC=['#4736FE','#00C951','#FF4F01','#E91E8C','#F59E0B','#7C3AED','#0EA5E9','#059669','#FF6B6B','#9CA3AF'];
 
 // Current month (always show in period filters)
@@ -648,6 +710,36 @@ function applyFilterDate(key){
   if(fcbs[key])fcbs[key]('custom',from,to);
 }
 function applyCompare(key){ if(fcbs[key])fcbs[key]('compare'); }
+
+function wireSelect(id,key,cb){
+  const el=document.getElementById(id);if(!el)return;
+  el.addEventListener('change',()=>{
+    const p=el.value;fstate[key]={p,from:null,to:null};
+    const cr=document.getElementById('cr-'+key);
+    if(cr)p==='custom'?cr.classList.add('open'):cr.classList.remove('open');
+    if(p!=='custom')cb(p,null,null);
+  });
+}
+function buildMultiSelect(id,pool,initial,labelFn,onChange){
+  const el=document.getElementById(id);if(!el)return{get:()=>initial};
+  let sel=new Set(initial);
+  const summary=()=>sel.size===0?'None selected':sel.size===pool.length?'All competitors':sel.size+' selected';
+  function render(){
+    el.innerHTML=`<button type="button" class="ms-btn">${summary()}</button><div class="ms-panel">`+
+      `<label class="ms-item ms-all"><input type="checkbox" data-all${sel.size===pool.length?' checked':''}>All competitors</label>`+
+      pool.map(b=>`<label class="ms-item">${bdot(b)}<input type="checkbox" value="${b}"${sel.has(b)?' checked':''}>${labelFn(b)}</label>`).join('')+
+      `</div>`;
+    const btn=el.querySelector('.ms-btn'),panel=el.querySelector('.ms-panel');
+    btn.addEventListener('click',e=>{e.stopPropagation();document.querySelectorAll('.ms-panel.open').forEach(p=>{if(p!==panel)p.classList.remove('open');});panel.classList.toggle('open');});
+    panel.querySelector('[data-all]').addEventListener('change',e=>{sel=e.target.checked?new Set(pool):new Set();btn.textContent=summary();panel.querySelectorAll('input[type=checkbox]:not([data-all])').forEach(cb=>cb.checked=sel.has(cb.value));onChange([...sel]);});
+    panel.querySelectorAll('input[type=checkbox]:not([data-all])').forEach(cb=>{
+      cb.addEventListener('change',e=>{e.target.checked?sel.add(e.target.value):sel.delete(e.target.value);btn.textContent=summary();panel.querySelector('[data-all]').checked=sel.size===pool.length;onChange([...sel]);});
+    });
+  }
+  render();
+  return{get:()=>[...sel]};
+}
+document.addEventListener('click',()=>document.querySelectorAll('.ms-panel.open').forEach(p=>p.classList.remove('open')));
 
 let D=null;
 const charts={},inited={};
@@ -895,11 +987,7 @@ function initTab2(){
 }
 
 function initTab3(){
-  const k=D.kpis,bm=D.bsos_monthly||[],bc=D.bsos_cities||{};
-  document.getElementById('sos-val').textContent=k.c24_sos!=null?`${k.c24_sos.toFixed(1)}%`:'—';
-  const si=k.c24_sos!=null?Math.round(k.c24_sos):null;
-  document.getElementById('sos-txt').innerHTML=si!=null?`Out of every <strong>100</strong> people searching for a used car, <strong>${si}</strong> searched for Cars24 &nbsp;·&nbsp; ${k.latest_month_label}`:'';
-  document.getElementById('sos-badges').innerHTML=badge(k.c24_sos_mom,true)+' vs last month';
+  const k=D.kpis,bm=D.bsos_monthly||[],bw=D.bsos_weekly||[],bd=D.bsos_daily||[],bc=D.bsos_cities||{};
 
   const leader=Object.entries(k.brand_sos||{}).sort((a,b)=>b[1]-a[1])[0];
   document.getElementById('sos-kpis').innerHTML=`
@@ -909,22 +997,122 @@ function initTab3(){
     <div class="kh ${(k.c24_vs_carwale||0)>0?'kh-green':'kh-red'}"><div class="kl"><span class="ki">${(k.c24_vs_carwale||0)>0?'✅':'⚠️'}</span>vs CarWale Gap</div><div class="kv">${k.c24_vs_carwale!=null?`${k.c24_vs_carwale>0?'+':''}${k.c24_vs_carwale.toFixed(1)}pp`:'—'}</div><div class="ks">${(k.c24_vs_carwale||0)>0?'Cars24 leads':'CarWale leads'}</div></div>`;
 
   const brands=['Cars24','Spinny','CarWale','Cardekho','MFC','MTV'].filter(b=>bm.some(r=>r[b]!=null));
+  const trendPool=brands.filter(b=>b!=='Cars24');
+  let trendComps=[...trendPool];
   function renderSoS(p,from,to){
     const fd=filterPeriod(bm,p,from,to);
     if(charts.sos)charts.sos.destroy();
     const c=document.getElementById('chart-sos').getContext('2d');
-    charts.sos=new Chart(c,{type:'line',data:{labels:fd.map(r=>r.label),datasets:brands.map(b=>({label:BN[b]||b,data:fd.map(r=>r[b]),borderColor:BC[b],backgroundColor:b==='Cars24'?'rgba(71,54,254,.07)':'transparent',fill:b==='Cars24',tension:0.3,spanGaps:true,borderWidth:b==='Cars24'?3:1.8,pointRadius:b==='Cars24'?3:2}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,font:{size:11},padding:10}}},scales:{y:{min:0,ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14}}}}});
+    const active=['Cars24',...trendComps];
+    charts.sos=new Chart(c,{type:'line',data:{labels:fd.map(r=>r.label),datasets:active.map(b=>({label:BN[b]||b,data:fd.map(r=>r[b]),borderColor:BC[b],backgroundColor:b==='Cars24'?'rgba(71,54,254,.07)':'transparent',fill:b==='Cars24',tension:0.3,spanGaps:true,borderWidth:b==='Cars24'?3:1.8,pointRadius:b==='Cars24'?3:2}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,font:{size:11},padding:10}}},scales:{y:{min:0,ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14}}}}});
   }
-  fcbs['sos']=renderSoS;wirePills('pp-sos','sos',renderSoS);renderSoS('all');
+  fcbs['sos']=renderSoS;
+  wireSelect('sos-period-sel','sos',renderSoS);
+  buildMultiSelect('ms-sos',trendPool,trendPool,b=>BN[b]||b,vals=>{trendComps=vals;renderSoS(document.getElementById('sos-period-sel').value,null,null);});
+  renderSoS('all');
 
   const compBrands=brands.filter(b=>b!=='Cars24');
   function renderComp(p,from,to){
     const fd=filterPeriod(bm,p,from,to);
-    const th=`<th>Month</th><th></th><th class="nr ch">Cars24</th><th class="nr ch">MoM Δ</th>${compBrands.map(b=>`<th class="nr" style="color:${BC[b]}">${bdot(b)}${b==='MFC'?'MFC':b==='MTV'?'MTV':BN[b]}</th>`).join('')}<th class="nr">C24÷Spinny</th>`;
-    const rows=[...fd].reverse().map((r,i)=>{const sp=sf(r.Spinny);const ratio=(r.Cars24!=null&&sp&&sp>0)?(r.Cars24/sp).toFixed(2)+'x':'—';return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(r.Cars24_mom)}</td><td class="nr cc"><strong>${fP(r.Cars24)}</strong></td><td class="nr cc">${badge(r.Cars24_mom,true)}</td>${compBrands.map(b=>`<td class="nr" style="color:${BC[b]}">${fP(r[b])}</td>`).join('')}<td class="nr" style="color:var(--grey);font-size:12px;font-weight:600">${ratio}</td></tr>`;}).join('');
+    const th=`<th>Month</th><th></th><th class="nr ch">Cars24</th><th class="nr ch">MoM Δ</th>${compBrands.map(b=>`<th class="nr" style="color:${BC[b]}">${bdot(b)}${BN[b]}</th>`).join('')}<th class="nr ratio-hi">C24÷Spinny</th>`;
+    const rows=[...fd].reverse().map((r,i)=>{const sp=sf(r.Spinny);const ratio=(r.Cars24!=null&&sp&&sp>0)?(r.Cars24/sp).toFixed(2)+'x':'—';return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(r.Cars24_mom)}</td><td class="nr cc"><strong>${fP(r.Cars24)}</strong></td><td class="nr cc">${badge(r.Cars24_mom,true)}</td>${compBrands.map(b=>`<td class="nr" style="color:${BC[b]}">${fP(r[b])}</td>`).join('')}<td class="nr ratio-hi">${ratio}</td></tr>`;}).join('');
     document.getElementById('tbl-comp').innerHTML=tbl(th,rows);
   }
   fcbs['comp']=renderComp;wirePills('pp-comp','comp',renderComp);renderComp('12m');
+
+  // ── WoW / DoD BSOS: generic table+chart builder shared by both granularities ──
+  function fmtDayLabel(dateStr){
+    const [y,m,d]=dateStr.split('-');
+    const MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${d} ${MN[+m-1]}'${y.slice(2)}`;
+  }
+  function withDailyDeltas(rows,brandKeys){
+    return rows.map((r,i)=>{
+      const o={...r,label:fmtDayLabel(r.date)};
+      const p=rows[i-1];
+      brandKeys.forEach(b=>{o[b+'_dod']=(p&&r[b]!=null&&p[b]!=null)?+(r[b]-p[b]).toFixed(2):null;});
+      return o;
+    });
+  }
+  function renderBsosGranular(cfg){
+    const {data,dateKey,labelFn,deltaSuffix,brandsArr,compArr,tblId,chartId,ckey,prefix,dateLabel,deltaLabel}=cfg;
+    function rowHtml(r,tag,isLatest){
+      const sp=sf(r.Spinny);const ratio=(r.Cars24!=null&&sp&&sp>0)?(r.Cars24/sp).toFixed(2)+'x':'—';
+      const d=r['Cars24'+deltaSuffix];
+      const tagHtml=tag?` <span style="font-size:10px;color:${tag==='A'?'var(--blue)':'#f90'};font-weight:800">${tag}</span>`:(isLatest?' <span class="badge bb">Latest</span>':'');
+      return `<tr class="${isLatest&&!tag?'lat':''}"><td><strong>${labelFn(r)}</strong>${tagHtml}</td><td>${tia(d)}</td><td class="nr cc"><strong>${fP(r.Cars24)}</strong></td><td class="nr cc">${badge(d,true)}</td>${compArr.map(b=>`<td class="nr" style="color:${BC[b]}">${fP(r[b])}</td>`).join('')}<td class="nr ratio-hi">${ratio}</td></tr>`;
+    }
+    function paint(p){
+      let fdA,fdB=null;
+      if(p==='compare'){
+        const aFrom=document.getElementById(`${prefix}-a-from`)?.value||'';
+        const aTo=document.getElementById(`${prefix}-a-to`)?.value||'';
+        const bFrom=document.getElementById(`${prefix}-b-from`)?.value||'';
+        const bTo=document.getElementById(`${prefix}-b-to`)?.value||'';
+        fdA=data.filter(r=>(!aFrom||r[dateKey]>=aFrom)&&(!aTo||r[dateKey]<=aTo));
+        fdB=data.filter(r=>(!bFrom||r[dateKey]>=bFrom)&&(!bTo||r[dateKey]<=bTo));
+      } else {
+        fdA=filterPeriod(data,p);
+      }
+      const tblEl=document.getElementById(tblId);
+      if(!fdA.length&&!fdB?.length){tblEl.innerHTML='<p style="padding:16px;color:var(--grey);font-size:13px">No data for selected period.</p>';return;}
+      const th=`<th>${dateLabel}</th><th></th><th class="nr ch">Cars24</th><th class="nr ch">${deltaLabel}</th>${compArr.map(b=>`<th class="nr" style="color:${BC[b]}">${bdot(b)}${BN[b]}</th>`).join('')}<th class="nr ratio-hi">C24÷Spinny</th>`;
+      let rows;
+      if(fdB){
+        const rA=[...fdA].reverse().map(r=>rowHtml(r,'A',false)).join('');
+        const rB=[...fdB].reverse().map(r=>rowHtml(r,'B',false)).join('');
+        rows=rA+`<tr style="background:var(--bg)"><td colspan="${4+compArr.length+1}" style="padding:3px 8px;font-size:10px;color:var(--grey);letter-spacing:.5px">── Period B ──</td></tr>`+rB;
+      } else {
+        rows=[...fdA].reverse().map((r,i)=>rowHtml(r,null,i===0)).join('');
+      }
+      tblEl.innerHTML=tbl(th,rows);
+      if(charts[ckey])charts[ckey].destroy();
+      const c=document.getElementById(chartId);if(!c)return;
+      if(p==='compare'){
+        const len=Math.max(fdA.length,(fdB||[]).length);
+        const lbls=Array.from({length:len},(_,i)=>`${i+1}`);
+        charts[ckey]=new Chart(c.getContext('2d'),{type:'line',data:{labels:lbls,datasets:[
+          {label:'Cars24 — Period A',data:fdA.map(r=>r.Cars24),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.1)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#4736FE'},
+          {label:'Cars24 — Period B',data:(fdB||[]).map(r=>r.Cars24),borderColor:'#FF9500',backgroundColor:'rgba(255,149,0,.08)',fill:false,tension:0.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#FF9500',segment:{borderDash:ctx=>ctx.p0DataIndex%2===0?[6,3]:undefined}}
+        ]},options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{display:true,position:'top',labels:{boxWidth:12,font:{size:11},usePointStyle:true}}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16}}}}});
+      } else {
+        charts[ckey]=new Chart(c.getContext('2d'),{type:'line',data:{labels:fdA.map(labelFn),datasets:brandsArr.map(b=>({label:BN[b]||b,data:fdA.map(r=>r[b]),borderColor:BC[b],backgroundColor:b==='Cars24'?'rgba(71,54,254,.07)':'transparent',fill:b==='Cars24',tension:0.3,spanGaps:true,borderWidth:b==='Cars24'?3:1.8,pointRadius:fdA.length>40?0:2}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,font:{size:11},padding:10}}},scales:{y:{min:0,ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
+      }
+    }
+    fcbs[prefix]=paint;
+    wirePills('pp-'+prefix,prefix,paint);
+    return paint;
+  }
+
+  if(bw.length){
+    const wowBrands=['Cars24','Spinny','CarWale','Cardekho','MFC','MTV'].filter(b=>bw.some(r=>r[b]!=null));
+    const wowComp=wowBrands.filter(b=>b!=='Cars24');
+    if(bw.length>=8){
+      document.getElementById('sos-wow-a-from').value=bw[bw.length-4].week_start;
+      document.getElementById('sos-wow-a-to').value=bw[bw.length-1].week_start;
+      document.getElementById('sos-wow-b-from').value=bw[bw.length-8].week_start;
+      document.getElementById('sos-wow-b-to').value=bw[bw.length-5].week_start;
+    }
+    renderBsosGranular({data:bw,dateKey:'week_start',labelFn:r=>r.week,deltaSuffix:'_wow',brandsArr:wowBrands,compArr:wowComp,tblId:'tbl-sos-wow',chartId:'chart-sos-wow',ckey:'sosWow',prefix:'sos-wow',dateLabel:'Week',deltaLabel:'WoW Δ'})('all');
+  } else {
+    document.getElementById('tbl-sos-wow').innerHTML='<p style="padding:16px;color:var(--grey);font-size:13px">Weekly BSOS data not available.</p>';
+  }
+
+  if(bd.length){
+    const dodBrandKeys=['Cars24','Spinny','CarWale','Cardekho','MFC','MTV','OLX'].filter(b=>bd.some(r=>r[b]!=null));
+    const bdD=withDailyDeltas(bd,dodBrandKeys);
+    const dodBrands=['Cars24','Spinny','CarWale','Cardekho','MFC','MTV'].filter(b=>bdD.some(r=>r[b]!=null));
+    const dodComp=dodBrands.filter(b=>b!=='Cars24');
+    if(bdD.length>=60){
+      document.getElementById('sos-dod-a-from').value=bdD[bdD.length-30].date;
+      document.getElementById('sos-dod-a-to').value=bdD[bdD.length-1].date;
+      document.getElementById('sos-dod-b-from').value=bdD[bdD.length-60].date;
+      document.getElementById('sos-dod-b-to').value=bdD[bdD.length-31].date;
+    }
+    renderBsosGranular({data:bdD,dateKey:'date',labelFn:r=>r.label,deltaSuffix:'_dod',brandsArr:dodBrands,compArr:dodComp,tblId:'tbl-sos-dod',chartId:'chart-sos-dod',ckey:'sosDod',prefix:'sos-dod',dateLabel:'Day',deltaLabel:'DoD Δ'})('90d');
+  } else {
+    document.getElementById('tbl-sos-dod').innerHTML='<p style="padding:16px;color:var(--grey);font-size:13px">Daily BSOS data not available.</p>';
+  }
 
   const cities=Object.keys(bc);
   if(!cities.length){['tbl-city-snap','tbl-city-growth'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='<div style="padding:24px;text-align:center;color:var(--grey)">City data not available.</div>';});return;}
@@ -935,7 +1123,7 @@ function initTab3(){
   function renderCitySnap(snapM){
     const rows=cities.map(city=>{const r=bc[city].find(x=>x.month===snapM);return r&&r.Cars24!=null?{city,r}:null;}).filter(Boolean).sort((a,b)=>(b.r.Cars24||0)-(a.r.Cars24||0));
     const cmp=['Spinny','CarWale','Cardekho','MFC','MTV'].filter(b=>rows.some(x=>x.r[b]!=null));
-    const th=`<th>City</th><th>Rank</th><th class="nr ch">Cars24</th><th class="nr ch">MoM Δ</th>${cmp.map(b=>`<th class="nr">vs ${b==='MFC'?'MFC':b==='MTV'?'MTV':b}</th>`).join('')}`;
+    const th=`<th>City</th><th>Rank</th><th class="nr ch">Cars24</th><th class="nr ch">MoM Δ</th>${cmp.map(b=>`<th class="nr">vs ${BN[b]||b}</th>`).join('')}`;
     const tr=rows.map((x,i)=>{const allV=[x.r.Cars24,...cmp.map(b=>x.r[b])].filter(v=>v!=null);const rank=[...allV].sort((a,b)=>b-a).indexOf(x.r.Cars24)+1;return`<tr class="${i===0?'lat':''}"><td><strong>${x.city}</strong></td><td>${rchip(rank)}</td><td class="nr cc"><strong>${fP(x.r.Cars24)}</strong></td><td class="nr">${badge(x.r.Cars24_mom,true)}</td>${cmp.map(b=>{const g=(x.r.Cars24!=null&&x.r[b]!=null)?x.r.Cars24-x.r[b]:null;return gapCell(g);}).join('')}</tr>`;}).join('');
     document.getElementById('tbl-city-snap').innerHTML=tbl(th,tr);
   }
