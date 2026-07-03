@@ -168,6 +168,48 @@ def build_bsos_daily():
     return []
 
 # ── City BSOS ─────────────────────────────────────────────────────────────────
+def _city_monthly(grp, bc):
+    monthly = grp.groupby("month")[bc].mean().reset_index().sort_values("month").reset_index(drop=True)
+    rows = []
+    for i, row in monthly.iterrows():
+        pr = monthly.iloc[i-1] if i > 0 else None
+        r = {"month": row["month"], "label": mlabel(row["month"])}
+        for b in bc:
+            v = sf(row.get(b))
+            r[b] = v
+            r[f"{b}_mom"] = pp_ch(v, sf(pr.get(b)) if pr is not None else None)
+        rows.append(r)
+    return rows
+
+def _city_weekly(grp, bc):
+    g = grp.copy()
+    g["ws"] = g["date"].dt.to_period("W").apply(lambda x: x.start_time)
+    weekly = g.groupby("ws")[bc].mean().reset_index().sort_values("ws").reset_index(drop=True)
+    rows = []
+    for i, row in weekly.iterrows():
+        pr = weekly.iloc[i-1] if i > 0 else None
+        ws = pd.Timestamp(row["ws"])
+        r = {
+            "week_start": ws.strftime("%Y-%m-%d"),
+            "week": f"{ws.strftime('%d %b')} – {(ws + pd.Timedelta(6,'d')).strftime('%d %b %Y')}",
+        }
+        for b in bc:
+            v = sf(row.get(b))
+            r[b] = v
+            r[f"{b}_wow"] = pp_ch(v, sf(pr.get(b)) if pr is not None else None)
+        rows.append(r)
+    return rows[-26:]
+
+def _city_daily(grp, bc):
+    daily = grp.sort_values("date").reset_index(drop=True)
+    rows = []
+    for _, row in daily.iterrows():
+        r = {"date": row["date"].strftime("%Y-%m-%d")}
+        for b in bc:
+            r[b] = sf(row.get(b))
+        rows.append(r)
+    return rows[-180:]
+
 def build_bsos_cities():
     p = DATA / "bsos_city_daily.csv"
     if not p.exists():
@@ -178,18 +220,12 @@ def build_bsos_cities():
     bc = [c for c in df.columns if c not in ("date","city","month")]
     result = {}
     for city, grp in df.groupby("city"):
-        monthly = grp.groupby("month")[bc].mean().reset_index().sort_values("month").reset_index(drop=True)
-        city_rows = []
-        for i, row in monthly.iterrows():
-            pr = monthly.iloc[i-1] if i > 0 else None
-            r = {"month": row["month"], "label": mlabel(row["month"])}
-            for b in bc:
-                v = sf(row.get(b))
-                r[b] = v
-                r[f"{b}_mom"] = pp_ch(v, sf(pr.get(b)) if pr is not None else None)
-            city_rows.append(r)
-        result[city] = city_rows
-    print(f"  ✓ City BSOS: {len(result)} cities")
+        result[city] = {
+            "monthly": _city_monthly(grp, bc),
+            "weekly":  _city_weekly(grp, bc),
+            "daily":   _city_daily(grp, bc),
+        }
+    print(f"  ✓ City BSOS: {len(result)} cities (monthly + weekly + daily)")
     return result
 
 # ── GSC Daily ─────────────────────────────────────────────────────────────────
