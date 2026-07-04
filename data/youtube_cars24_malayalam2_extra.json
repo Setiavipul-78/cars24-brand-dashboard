@@ -2,128 +2,128 @@
   "geo": [
     {
       "city": "Kochi",
-      "views": 4908859,
-      "watch_time_hours": 49210.7
+      "views": 4908020,
+      "watch_time_hours": 49206.5
     },
     {
       "city": "Thiruvananthapuram",
-      "views": 1115313,
-      "watch_time_hours": 10951.8
+      "views": 1115266,
+      "watch_time_hours": 10950.3
     },
     {
       "city": "Kozhikode",
-      "views": 923373,
-      "watch_time_hours": 8826.0
+      "views": 923262,
+      "watch_time_hours": 8825.2
     },
     {
       "city": "Thrissur",
-      "views": 373845,
-      "watch_time_hours": 3640.0
+      "views": 373884,
+      "watch_time_hours": 3640.3
     },
     {
       "city": "Bengaluru",
-      "views": 336680,
-      "watch_time_hours": 3438.2
+      "views": 336660,
+      "watch_time_hours": 3438.1
     },
     {
       "city": "Dubai",
-      "views": 233264,
+      "views": 233259,
       "watch_time_hours": 2337.9
     },
     {
       "city": "Abu Dhabi",
-      "views": 136543,
+      "views": 136518,
       "watch_time_hours": 1354.4
     },
     {
       "city": "Kollam",
-      "views": 118497,
+      "views": 118478,
       "watch_time_hours": 1196.5
     },
     {
       "city": "Chennai",
-      "views": 88634,
-      "watch_time_hours": 899.2
+      "views": 88648,
+      "watch_time_hours": 899.3
     },
     {
       "city": "Doha",
-      "views": 74921,
-      "watch_time_hours": 750.6
+      "views": 74908,
+      "watch_time_hours": 750.5
     },
     {
       "city": "Sharjah",
-      "views": 72777,
-      "watch_time_hours": 720.9
+      "views": 72755,
+      "watch_time_hours": 720.7
     },
     {
       "city": "Riyadh",
-      "views": 62978,
-      "watch_time_hours": 632.0
+      "views": 62960,
+      "watch_time_hours": 631.9
     },
     {
       "city": "Jeddah",
-      "views": 46305,
+      "views": 46308,
       "watch_time_hours": 458.9
     },
     {
       "city": "Kanhangad",
-      "views": 41308,
-      "watch_time_hours": 428.5
+      "views": 41329,
+      "watch_time_hours": 428.6
     },
     {
       "city": "Dammam",
-      "views": 37864,
+      "views": 37865,
       "watch_time_hours": 386.8
     },
     {
       "city": "Muscat",
       "views": 36836,
-      "watch_time_hours": 367.8
+      "watch_time_hours": 367.7
     },
     {
       "city": "Tirur",
-      "views": 35712,
+      "views": 35706,
       "watch_time_hours": 353.6
     },
     {
       "city": "Hyderabad",
-      "views": 30062,
-      "watch_time_hours": 302.3
-    },
-    {
-      "city": "Alappuzha",
-      "views": 26359,
-      "watch_time_hours": 268.3
+      "views": 30060,
+      "watch_time_hours": 302.2
     },
     {
       "city": "Manama",
-      "views": 26343,
+      "views": 26344,
       "watch_time_hours": 275.1
     },
     {
+      "city": "Alappuzha",
+      "views": 26329,
+      "watch_time_hours": 268.1
+    },
+    {
       "city": "Palakkad",
-      "views": 24857,
-      "watch_time_hours": 250.3
+      "views": 24836,
+      "watch_time_hours": 250.2
     },
     {
       "city": "London",
-      "views": 24075,
-      "watch_time_hours": 264.1
+      "views": 24044,
+      "watch_time_hours": 263.9
     },
     {
       "city": "Coimbatore",
-      "views": 23735,
+      "views": 23725,
       "watch_time_hours": 233.6
     },
     {
       "city": "Thalassery",
-      "views": 22710,
-      "watch_time_hours": 232.9
+      "views": 22676,
+      "watch_time_hours": 232.7
     },
     {
       "city": "Chavara",
-      "views": 20432,
-      "watch_time_hours": 211.3
+      "views": 20414,
+      "watch_time_hours": 211.1
     }
   ],
   "demographics": [
@@ -226,32 +226,32 @@
   "traffic_sources": [
     {
       "source": "SHORTS",
-      "views": 8368942,
-      "watch_time_hours": 77612.0,
+      "views": 8368773,
+      "watch_time_hours": 77611.4,
       "pct": 64.3
     },
     {
       "source": "SUBSCRIBER",
-      "views": 2764348,
-      "watch_time_hours": 33006.9,
+      "views": 2764371,
+      "watch_time_hours": 33007.2,
       "pct": 21.2
     },
     {
       "source": "YT_SEARCH",
-      "views": 1244795,
-      "watch_time_hours": 10086.5,
+      "views": 1244830,
+      "watch_time_hours": 10086.7,
       "pct": 9.6
     },
     {
       "source": "YT_CHANNEL",
-      "views": 403362,
-      "watch_time_hours": 3361.0,
+      "views": 403368,
+      "watch_time_hours": 3361.1,
       "pct": 3.1
     },
     {
       "source": "YT_OTHER_PAGE",
-      "views": 97131,
-      "watch_time_hours": 1064.1,
+      "views": 97127,
+      "watch_time_hours": 1064.0,
       "pct": 0.7
     },
     {
@@ -262,8 +262,8 @@
     },
     {
       "source": "EXT_URL",
-      "views": 24047,
-      "watch_time_hours": 300.0,
+      "views": 24048,
+      "watch_time_hours": 300.1,
       "pct": 0.2
     },
     {
@@ -280,19 +280,19 @@
     },
     {
       "source": "PLAYLIST",
-      "views": 3859,
+      "views": 3860,
       "watch_time_hours": 35.8,
       "pct": 0.0
     },
     {
       "source": "NO_LINK_OTHER",
-      "views": 1730,
+      "views": 1724,
       "watch_time_hours": 27.0,
       "pct": 0.0
     },
     {
       "source": "SOUND_PAGE",
-      "views": 567,
+      "views": 568,
       "watch_time_hours": 5.8,
       "pct": 0.0
     },
@@ -324,25 +324,25 @@
   "devices": [
     {
       "device": "MOBILE",
-      "views": 11820454,
+      "views": 11820367,
       "watch_time_hours": 113921.0,
       "pct": 90.9
     },
     {
       "device": "TV",
-      "views": 505403,
+      "views": 505381,
       "watch_time_hours": 5561.5,
       "pct": 3.9
     },
     {
       "device": "DESKTOP",
-      "views": 462399,
+      "views": 462398,
       "watch_time_hours": 5241.9,
       "pct": 3.6
     },
     {
       "device": "TABLET",
-      "views": 222173,
+      "views": 222171,
       "watch_time_hours": 2147.3,
       "pct": 1.7
     }
@@ -354,7 +354,7 @@
       "published": "2024-11-12",
       "url": "https://www.youtube.com/watch?v=6UMbJtElaM8",
       "thumbnail": "https://i.ytimg.com/vi/6UMbJtElaM8/default.jpg",
-      "views": 899899,
+      "views": 899898,
       "watch_time_hours": 9716.63,
       "avg_duration_sec": 44.0,
       "avg_view_pct": 73.5,
@@ -642,7 +642,7 @@
       "published": "2026-06-01",
       "url": "https://www.youtube.com/watch?v=EXnPQKzcyoQ",
       "thumbnail": "https://i.ytimg.com/vi/EXnPQKzcyoQ/default.jpg",
-      "views": 179964,
+      "views": 179962,
       "watch_time_hours": 1803.6,
       "avg_duration_sec": 44.0,
       "avg_view_pct": 64.1,
@@ -674,7 +674,7 @@
       "published": "2024-12-08",
       "url": "https://www.youtube.com/watch?v=QIfAOa0VE_4",
       "thumbnail": "https://i.ytimg.com/vi/QIfAOa0VE_4/default.jpg",
-      "views": 166696,
+      "views": 166695,
       "watch_time_hours": 1490.73,
       "avg_duration_sec": 40.0,
       "avg_view_pct": 67.8,
@@ -802,7 +802,7 @@
       "published": "2024-10-23",
       "url": "https://www.youtube.com/watch?v=HbBVd8ZWEbc",
       "thumbnail": "https://i.ytimg.com/vi/HbBVd8ZWEbc/default.jpg",
-      "views": 129342,
+      "views": 129341,
       "watch_time_hours": 1085.58,
       "avg_duration_sec": 41.0,
       "avg_view_pct": 71.1,
@@ -850,14 +850,14 @@
       "published": "2026-06-12",
       "url": "https://www.youtube.com/watch?v=cMYVKSJCOpk",
       "thumbnail": "https://i.ytimg.com/vi/cMYVKSJCOpk/default.jpg",
-      "views": 121309,
-      "watch_time_hours": 1052.22,
+      "views": 121306,
+      "watch_time_hours": 1052.23,
       "avg_duration_sec": 39.0,
       "avg_view_pct": 64.2,
       "subs_gained": 158,
       "likes": 3860,
       "comments": 138,
-      "shares": 703,
+      "shares": 704,
       "engagement_rate": 3.88
     },
     {
@@ -962,11 +962,11 @@
       "published": "2026-06-11",
       "url": "https://www.youtube.com/watch?v=HTUzyGYINVI",
       "thumbnail": "https://i.ytimg.com/vi/HTUzyGYINVI/default.jpg",
-      "views": 91372,
-      "watch_time_hours": 603.75,
+      "views": 91364,
+      "watch_time_hours": 603.73,
       "avg_duration_sec": 42.0,
       "avg_view_pct": 70.2,
-      "subs_gained": 495,
+      "subs_gained": 496,
       "likes": 2896,
       "comments": 51,
       "shares": 353,

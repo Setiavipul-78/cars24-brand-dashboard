@@ -2,23 +2,23 @@
   "geo": [
     {
       "city": "Bengaluru",
-      "views": 26430,
-      "watch_time_hours": 1244.8
+      "views": 26428,
+      "watch_time_hours": 1244.5
     },
     {
       "city": "Delhi",
-      "views": 14943,
-      "watch_time_hours": 648.0
+      "views": 14950,
+      "watch_time_hours": 648.1
     },
     {
       "city": "Hyderabad",
-      "views": 13882,
+      "views": 13884,
       "watch_time_hours": 655.6
     },
     {
       "city": "Pune",
-      "views": 13282,
-      "watch_time_hours": 621.5
+      "views": 13280,
+      "watch_time_hours": 621.3
     },
     {
       "city": "Mumbai",
@@ -27,8 +27,8 @@
     },
     {
       "city": "Guwahati",
-      "views": 6073,
-      "watch_time_hours": 289.3
+      "views": 6070,
+      "watch_time_hours": 289.1
     },
     {
       "city": "Kolkata",
@@ -196,8 +196,8 @@
   "traffic_sources": [
     {
       "source": "SUBSCRIBER",
-      "views": 228069,
-      "watch_time_hours": 10103.9,
+      "views": 228070,
+      "watch_time_hours": 10104.0,
       "pct": 75.9
     },
     {
@@ -208,7 +208,7 @@
     },
     {
       "source": "YT_SEARCH",
-      "views": 12048,
+      "views": 12049,
       "watch_time_hours": 464.6,
       "pct": 4.0
     },
@@ -226,14 +226,14 @@
     },
     {
       "source": "YT_OTHER_PAGE",
-      "views": 7487,
+      "views": 7486,
       "watch_time_hours": 395.0,
       "pct": 2.5
     },
     {
       "source": "NO_LINK_OTHER",
-      "views": 5893,
-      "watch_time_hours": 263.9,
+      "views": 5892,
+      "watch_time_hours": 263.8,
       "pct": 2.0
     },
     {

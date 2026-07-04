@@ -2,33 +2,33 @@
   "geo": [
     {
       "city": "Bengaluru",
-      "views": 77259,
+      "views": 77258,
       "watch_time_hours": 3025.3
     },
     {
       "city": "Hyderabad",
-      "views": 33427,
+      "views": 33426,
       "watch_time_hours": 1244.5
     },
     {
       "city": "Chennai",
-      "views": 32724,
-      "watch_time_hours": 1270.0
+      "views": 32725,
+      "watch_time_hours": 1270.1
     },
     {
       "city": "Delhi",
-      "views": 26133,
-      "watch_time_hours": 760.5
+      "views": 26128,
+      "watch_time_hours": 760.4
     },
     {
       "city": "Mumbai",
-      "views": 24778,
-      "watch_time_hours": 1035.7
+      "views": 24774,
+      "watch_time_hours": 1035.4
     },
     {
       "city": "Pune",
-      "views": 24361,
-      "watch_time_hours": 839.5
+      "views": 24362,
+      "watch_time_hours": 839.6
     },
     {
       "city": "Kochi",
@@ -52,8 +52,8 @@
     },
     {
       "city": "Coimbatore",
-      "views": 4812,
-      "watch_time_hours": 187.1
+      "views": 4817,
+      "watch_time_hours": 187.4
     },
     {
       "city": "Jaipur",
@@ -102,8 +102,8 @@
     },
     {
       "city": "Nagpur",
-      "views": 2863,
-      "watch_time_hours": 86.8
+      "views": 2862,
+      "watch_time_hours": 86.6
     },
     {
       "city": "Pimpri-Chinchwad",
@@ -201,19 +201,19 @@
   "traffic_sources": [
     {
       "source": "SUBSCRIBER",
-      "views": 353708,
-      "watch_time_hours": 13620.8,
+      "views": 353707,
+      "watch_time_hours": 13620.9,
       "pct": 35.2
     },
     {
       "source": "EXT_URL",
-      "views": 236637,
-      "watch_time_hours": 3446.9,
+      "views": 236579,
+      "watch_time_hours": 3446.5,
       "pct": 23.6
     },
     {
       "source": "YT_SEARCH",
-      "views": 192855,
+      "views": 192856,
       "watch_time_hours": 3359.9,
       "pct": 19.2
     },
@@ -225,7 +225,7 @@
     },
     {
       "source": "RELATED_VIDEO",
-      "views": 28348,
+      "views": 28349,
       "watch_time_hours": 1927.3,
       "pct": 2.8
     },
@@ -237,7 +237,7 @@
     },
     {
       "source": "NO_LINK_OTHER",
-      "views": 18973,
+      "views": 18972,
       "watch_time_hours": 441.4,
       "pct": 1.9
     },
@@ -293,8 +293,8 @@
   "devices": [
     {
       "device": "MOBILE",
-      "views": 720073,
-      "watch_time_hours": 14068.4,
+      "views": 720018,
+      "watch_time_hours": 14068.0,
       "pct": 71.8
     },
     {
@@ -311,7 +311,7 @@
     },
     {
       "device": "TABLET",
-      "views": 33801,
+      "views": 33798,
       "watch_time_hours": 1264.4,
       "pct": 3.4
     }
@@ -371,15 +371,15 @@
       "published": "2026-06-19",
       "url": "https://www.youtube.com/watch?v=4TPt9D6ZqCE",
       "thumbnail": "https://i.ytimg.com/vi/4TPt9D6ZqCE/default.jpg",
-      "views": 39733,
-      "watch_time_hours": 2395.3,
+      "views": 39675,
+      "watch_time_hours": 2394.82,
       "avg_duration_sec": 217.0,
       "avg_view_pct": 33.1,
       "subs_gained": 586,
       "likes": 827,
       "comments": 95,
       "shares": 101,
-      "engagement_rate": 2.57
+      "engagement_rate": 2.58
     },
     {
       "id": "Juv2V0J0-RE",
