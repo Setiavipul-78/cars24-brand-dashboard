@@ -468,7 +468,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
                 </div>
               </div>
             </div>
-            <div class="card-actions"><a class="card-act-btn" href="https://docs.google.com/spreadsheets/d/1GleR3Nf_wpIx_GN7PD_hoB0XxtTNPZCz6yhdLQk8rbg/edit#gid=1161327844" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-comp','sos_monthly_benchmark.csv')">⬇ CSV</button></div>
+            <div class="card-actions"><a class="card-act-btn" href="https://docs.google.com/spreadsheets/d/1GleR3Nf_wpIx_GN7PD_hoB0XxtTNPZCz6yhdLQk8rbg/edit?gid=1161327844#gid=1161327844" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-comp','sos_monthly_benchmark.csv')">⬇ CSV</button></div>
             <div class="tw" id="tbl-comp" style="margin-bottom:10px"></div>
             <div class="cw"><canvas id="chart-sos"></canvas></div>
           </div>
@@ -493,7 +493,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
                 </div>
               </div>
             </div>
-            <div class="card-actions"><a class="card-act-btn" id="sheet-link-sos-gran" href="https://docs.google.com/spreadsheets/d/1GleR3Nf_wpIx_GN7PD_hoB0XxtTNPZCz6yhdLQk8rbg/edit#gid=988543240" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-sos-gran','sos_granular.csv')">⬇ CSV</button></div>
+            <div class="card-actions"><a class="card-act-btn" id="sheet-link-sos-gran" href="https://docs.google.com/spreadsheets/d/1GleR3Nf_wpIx_GN7PD_hoB0XxtTNPZCz6yhdLQk8rbg/edit?gid=988543240#gid=988543240" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-sos-gran','sos_granular.csv')">⬇ CSV</button></div>
             <div class="tw" id="tbl-sos-gran" style="margin-bottom:10px"></div>
             <div class="cw"><canvas id="chart-sos-gran"></canvas></div>
           </div>
@@ -516,7 +516,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
                 </div>
               </div>
             </div>
-            <div class="card-actions"><a class="card-act-btn" href="https://docs.google.com/spreadsheets/d/1R9WbF_Avt4RMofh-KwHFBT33saIpIRcLy3HRl62EKEM/edit#gid=390472163" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-city-growth','sos_city_growth.csv')">⬇ CSV</button></div>
+            <div class="card-actions"><a class="card-act-btn" href="https://docs.google.com/spreadsheets/d/1R9WbF_Avt4RMofh-KwHFBT33saIpIRcLy3HRl62EKEM/edit?gid=390472163#gid=390472163" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-city-growth','sos_city_growth.csv')">⬇ CSV</button></div>
             <div class="tw tbl-compact" id="tbl-city-growth" style="margin-bottom:10px"></div>
             <div class="fb">
               <span class="fl">Cities</span>
@@ -548,7 +548,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
                 </div>
               </div>
             </div>
-            <div class="card-actions"><a class="card-act-btn" href="https://docs.google.com/spreadsheets/d/1R9WbF_Avt4RMofh-KwHFBT33saIpIRcLy3HRl62EKEM/edit#gid=390472163" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-city-snap','sos_city_battle.csv')">⬇ CSV</button></div>
+            <div class="card-actions"><a class="card-act-btn" href="https://docs.google.com/spreadsheets/d/1R9WbF_Avt4RMofh-KwHFBT33saIpIRcLy3HRl62EKEM/edit?gid=390472163#gid=390472163" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-city-snap','sos_city_battle.csv')">⬇ CSV</button></div>
             <div class="tw" id="tbl-city-snap" style="margin-bottom:10px"></div>
             <div class="fb">
               <span class="fl">Cities</span>
@@ -1150,7 +1150,7 @@ function initTab3(){
     document.querySelectorAll('#sos-gran-toggle .pp').forEach(b=>b.classList.toggle('active',b.dataset.g===g));
     document.getElementById('cr-sos-gran').classList.remove('open');
     document.getElementById('pp-sos-gran').innerHTML=`<button class="pp" data-p="compare" type="button">Compare ▾</button>`;
-    document.getElementById('sheet-link-sos-gran').href=`https://docs.google.com/spreadsheets/d/1GleR3Nf_wpIx_GN7PD_hoB0XxtTNPZCz6yhdLQk8rbg/edit#gid=${g==='week'?988543240:1107858406}`;
+    document.getElementById('sheet-link-sos-gran').href=`https://docs.google.com/spreadsheets/d/1GleR3Nf_wpIx_GN7PD_hoB0XxtTNPZCz6yhdLQk8rbg/edit?gid=${g==='week'?988543240:1107858406}#gid=${g==='week'?988543240:1107858406}`;
     if(g==='week'){
       granSel.innerHTML=`<option value="all" selected>All time</option>`+bw.map(r=>`<option value="from:${r.week_start}">From ${r.week}</option>`).join('');
       if(bw.length>=8){
@@ -1389,14 +1389,14 @@ function initTab4(){
           </div>
         </div>
       </div>
-      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}#gid=0" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-pan','gindex_pan_india.csv')">⬇ CSV</button></div>
+      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}?gid=0#gid=0" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-pan','gindex_pan_india.csv')">⬇ CSV</button></div>
       <div class="tw" id="tbl-gi-pan" style="margin-bottom:10px"></div>
       <div class="cw"><canvas id="chart-gi-pan"></canvas></div>
     </div>
 
     <div class="card">
       <div class="sh"><span class="kicker">🏙 City-level · Monthly</span><span class="title">Google Search Index by City — Cars24 Brand</span><span class="desc">Brand-specific search interest by city, month by month.</span></div>
-      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}#gid=1878676239" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-city','gindex_city_brand.csv')">⬇ CSV</button></div>
+      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}?gid=1878676239#gid=1878676239" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-city','gindex_city_brand.csv')">⬇ CSV</button></div>
       <div class="tw tbl-compact" id="tbl-gi-city" style="margin-bottom:10px"></div>
       <div class="fb"><span class="fl">Cities</span><div class="ms-dd" id="ms-gi-city"></div></div>
       <div class="cw"><canvas id="chart-gi-city"></canvas></div>
@@ -1404,7 +1404,7 @@ function initTab4(){
 
     <div class="card">
       <div class="sh"><span class="kicker">⚖️ Comparison · Monthly</span><span class="title">Cars24 Brand vs Category Search Interest</span><span class="desc">Gap = Cars24 index minus Category index. Positive = brand outpacing the category.</span></div>
-      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}#gid=0" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-cmp','gindex_comparison.csv')">⬇ CSV</button></div>
+      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}?gid=0#gid=0" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-cmp','gindex_comparison.csv')">⬇ CSV</button></div>
       <div class="tw" id="tbl-gi-cmp" style="margin-bottom:10px"></div>
       <div class="cw"><canvas id="chart-gi-cmp"></canvas></div>
     </div>
@@ -1414,7 +1414,7 @@ function initTab4(){
         <div><span class="kicker">🏙 City-wise · Monthly</span><span class="title">Cars24 Brand vs Generic — By City</span><span class="desc">Gap = Cars24 brand index minus Generic category index, per city. Positive = brand outpacing the category in that city.</span></div>
         <select class="ctrl-sel" id="gi-city-cmp-period-sel"></select>
       </div>
-      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}#gid=1878676239" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-city-cmp','gindex_city_brand_vs_generic.csv')">⬇ CSV</button></div>
+      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}?gid=1878676239#gid=1878676239" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-city-cmp','gindex_city_brand_vs_generic.csv')">⬇ CSV</button></div>
       <div class="tw" id="tbl-gi-city-cmp" style="margin-bottom:10px"></div>
       <div class="fb"><span class="fl">Cities</span><div class="ms-dd" id="ms-gi-city-cmp"></div></div>
       <div class="cw"><canvas id="chart-gi-city-cmp"></canvas></div>
