@@ -942,4 +942,11 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"  ! BSOS sheets fetch error: {e}")
 
+    print("\n── Google Search Index Sheets ─────────────────────────")
+    try:
+        import fetch_gindex_sheets
+        fetch_gindex_sheets.main()
+    except Exception as e:
+        print(f"  ! Google Index sheets fetch error: {e}")
+
     print("\n✅  Done — run: python3 build_data.py")

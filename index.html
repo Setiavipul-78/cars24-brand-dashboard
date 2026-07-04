@@ -1287,23 +1287,189 @@ function initTab3(){
 }
 
 function initTab4(){
-  const gi=D.google_indexed;
-  if(!gi||!gi.length){document.getElementById('gi-content').innerHTML=`<div class="ph"><div class="ph-mark">📡</div><div class="ph-title">Google Indexed data not loaded</div><div class="ph-body">Share the Brandstack Google-universe BSOS export to populate this tab.</div></div>`;return;}
-  const gb=['Cars24','Spinny','CarWale','Cardekho'].filter(b=>gi.some(r=>r[b]!=null));
-  document.getElementById('gi-content').innerHTML=`<div class="card"><div class="sh"><span class="kicker">📡 Google universe</span><span class="title">Share of Searches — Google Indexed</span><span class="desc">Cars24 share in Google's broader keyword universe. Slightly higher than Brandstack.</span></div><div class="cw tall"><canvas id="chart-gi"></canvas></div></div><div class="card"><div class="sh"><span class="kicker">📅 Monthly</span><span class="title">Google Indexed — History</span></div><div class="tw" id="tbl-gi"></div></div>`;
-  const c=document.getElementById('chart-gi').getContext('2d');
-  charts.gi=new Chart(c,{type:'line',data:{labels:gi.map(r=>r.label),datasets:gb.map(b=>({label:BN[b]||b,data:gi.map(r=>r[b]),borderColor:BC[b],backgroundColor:'transparent',borderWidth:b==='Cars24'?3:1.5,tension:0.3,spanGaps:true,pointRadius:3}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
-  const gith=`<th>Month</th><th></th>${gb.map(b=>`<th class="nr${b==='Cars24'?' ch':''}">${bdot(b)}${BN[b]||b}</th>`).join('')}<th class="nr ch">MoM Δ</th>`;
-  document.getElementById('tbl-gi').innerHTML=tbl(gith,[...gi].reverse().map((r,i)=>`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong></td><td>${tia(r.Cars24_mom)}</td>${gb.map(b=>`<td class="nr${b==='Cars24'?' cc':''}">${fP(r[b])}</td>`).join('')}<td class="nr cc">${badge(r.Cars24_mom,true)}</td></tr>`).join(''));
+  const Dgi=D.google_index;
+  if(!Dgi||!Dgi.monthly?.length){document.getElementById('gi-content').innerHTML=`<div class="ph"><div class="ph-mark">📡</div><div class="ph-title">Google Index data not loaded</div><div class="ph-body">Share the Google Index sheet to populate this tab.</div></div>`;return;}
+  const giM=Dgi.monthly,cityBrand=Dgi.city_brand||{},cityGeneric=Dgi.city_generic||{};
+  const cities=Object.keys(cityBrand);
+  const fIdx=v=>v==null?'—':v.toFixed(1);
+  const CITY_PALETTE=['#4736FE','#E91E8C','#FF6B6B','#F97316','#059669','#7C3AED','#0EA5E9','#EAB308','#DC2626','#0891B2','#84CC16','#D946EF','#F43F5E','#14B8A6','#8B5CF6','#EA580C','#65A30D','#06B6D4'];
+
+  document.getElementById('gi-content').innerHTML=`
+    <div class="card">
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+        <div><span class="kicker">📡 Pan-India · Monthly</span><span class="title">Google Search Index — Cars24 Brand</span><span class="desc">Google's relative search-interest index (0-100 scale) for the Cars24 brand, month by month.</span></div>
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+          <select class="ctrl-sel" id="gi-pan-period-sel"></select>
+          <div class="pp-wrap" id="pp-gi-pan"><button class="pp" data-p="compare" type="button">Compare ▾</button></div>
+          <div class="cr" id="cr-gi-pan">
+            <div class="cr-pair">
+              <div class="cr-row"><span class="cr-lbl" style="color:var(--blue)">Period A</span><input type="month" id="gi-pan-a-from"><span class="sep">–</span><input type="month" id="gi-pan-a-to"></div>
+              <div class="cr-row"><span class="cr-lbl" style="color:var(--grey)">vs</span><input type="month" id="gi-pan-b-from"><span class="sep">–</span><input type="month" id="gi-pan-b-to"></div>
+              <button class="apply-btn" onclick="applyCompare('gi-pan')" style="align-self:flex-end">Compare</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tw" id="tbl-gi-pan" style="margin-bottom:10px"></div>
+      <div class="cw"><canvas id="chart-gi-pan"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+        <div><span class="kicker">🏙 City-level · Monthly</span><span class="title">Google Search Index by City</span><span class="desc">Toggle between brand-specific and category-level search interest by city.</span></div>
+        <div class="pp-wrap" id="gi-city-toggle">
+          <button class="pp active" data-g="brand" type="button">Brand</button>
+          <button class="pp" data-g="generic" type="button">Generic</button>
+        </div>
+      </div>
+      <div class="tw tbl-compact" id="tbl-gi-city" style="margin-bottom:10px"></div>
+      <div class="fb"><span class="fl">Cities</span><div class="ms-dd" id="ms-gi-city"></div></div>
+      <div class="cw"><canvas id="chart-gi-city"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="sh"><span class="kicker">⚖️ Comparison · Monthly</span><span class="title">Cars24 Brand vs Category Search Interest</span><span class="desc">Gap = Cars24 index minus Category index. Positive = brand outpacing the category.</span></div>
+      <div class="tw" id="tbl-gi-cmp" style="margin-bottom:10px"></div>
+      <div class="cw"><canvas id="chart-gi-cmp"></canvas></div>
+    </div>`;
+
+  // ── TABLE 1: Pan-India Brand Index ──
+  function rowHtmlGiPan(r,tag,isLatest){
+    const tagHtml=tag?` <span style="font-size:10px;color:${tag==='A'?'var(--blue)':'#f90'};font-weight:800">${tag}</span>`:(isLatest?' <span class="badge bb">Latest</span>':'');
+    return `<tr class="${isLatest&&!tag?'lat':''}"><td><strong>${r.label}</strong>${tagHtml}</td><td>${tia(r.Cars24_mom)}</td><td class="nr cc"><strong>${fIdx(r.Cars24)}</strong></td><td class="nr cc">${badge(r.Cars24_mom,true)}</td></tr>`;
+  }
+  function paintGiPan(p){
+    let fdA,fdB=null;
+    if(p==='compare'){
+      const aFrom=document.getElementById('gi-pan-a-from')?.value||'';
+      const aTo=document.getElementById('gi-pan-a-to')?.value||'';
+      const bFrom=document.getElementById('gi-pan-b-from')?.value||'';
+      const bTo=document.getElementById('gi-pan-b-to')?.value||'';
+      fdA=giM.filter(r=>(!aFrom||r.month>=aFrom)&&(!aTo||r.month<=aTo));
+      fdB=giM.filter(r=>(!bFrom||r.month>=bFrom)&&(!bTo||r.month<=bTo));
+    } else if(typeof p==='string'&&p.startsWith('from:')){
+      fdA=giM.filter(r=>r.month>=p.slice(5));
+    } else {
+      fdA=filterPeriod(giM,p);
+    }
+    const tblEl=document.getElementById('tbl-gi-pan');
+    if(!fdA.length&&!fdB?.length){tblEl.innerHTML='<p style="padding:16px;color:var(--grey);font-size:13px">No data for selected period.</p>';return;}
+    const th=`<th>Month</th><th></th><th class="nr ch" style="text-transform:none">Index</th><th class="nr ch">MoM Δ</th>`;
+    let rows;
+    if(fdB){
+      const rA=[...fdA].reverse().map(r=>rowHtmlGiPan(r,'A',false)).join('');
+      const rB=[...fdB].reverse().map(r=>rowHtmlGiPan(r,'B',false)).join('');
+      rows=rA+`<tr style="background:var(--bg)"><td colspan="4" style="padding:3px 8px;font-size:10px;color:var(--grey);letter-spacing:.5px">── Period B ──</td></tr>`+rB;
+    } else {
+      rows=[...fdA].reverse().map((r,i)=>rowHtmlGiPan(r,null,i===0)).join('');
+    }
+    tblEl.innerHTML=tbl(th,rows);
+    if(charts.giPan)charts.giPan.destroy();
+    const c=document.getElementById('chart-gi-pan');if(!c)return;
+    if(p==='compare'){
+      const len=Math.max(fdA.length,(fdB||[]).length);
+      const lbls=Array.from({length:len},(_,i)=>`${i+1}`);
+      charts.giPan=new Chart(c.getContext('2d'),{type:'line',data:{labels:lbls,datasets:[
+        {label:'Period A',data:fdA.map(r=>r.Cars24),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.1)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#4736FE'},
+        {label:'Period B',data:(fdB||[]).map(r=>r.Cars24),borderColor:'#FF9500',backgroundColor:'rgba(255,149,0,.08)',fill:false,tension:0.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#FF9500',segment:{borderDash:ctx=>ctx.p0DataIndex%2===0?[6,3]:undefined}}
+      ]},options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{display:true,position:'top',labels:{boxWidth:12,font:{size:11},usePointStyle:true}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16}}}}});
+    } else {
+      charts.giPan=new Chart(c.getContext('2d'),{type:'line',data:{labels:fdA.map(r=>r.label),datasets:[{label:'Cars24 Index',data:fdA.map(r=>r.Cars24),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.3,spanGaps:true,borderWidth:3,pointRadius:fdA.length>40?0:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
+    }
+  }
+  const giPanSel=document.getElementById('gi-pan-period-sel');
+  giPanSel.innerHTML=`<option value="all" selected>All time</option>`+giM.map(r=>`<option value="from:${r.month}">From ${r.label}</option>`).join('');
+  giPanSel.addEventListener('change',()=>{
+    document.querySelectorAll('#pp-gi-pan .pp').forEach(b=>b.classList.remove('active'));
+    document.getElementById('cr-gi-pan').classList.remove('open');
+    paintGiPan(giPanSel.value);
+  });
+  fcbs['gi-pan']=paintGiPan;
+  wirePills('pp-gi-pan','gi-pan',paintGiPan);
+  if(giM.length>=2){
+    const latest=giM[giM.length-1].month,prev=giM[giM.length-2].month;
+    document.getElementById('gi-pan-a-from').value=latest;document.getElementById('gi-pan-a-to').value=latest;
+    document.getElementById('gi-pan-b-from').value=prev;document.getElementById('gi-pan-b-to').value=prev;
+  }
+  paintGiPan('all');
+
+  // ── TABLE 2: City-level, Brand/Generic toggle ──
+  let giCityGran='brand',giCitySel=[...cities];
+  const allGiMonths=[...new Set(cities.flatMap(c=>cityBrand[c].map(r=>r.month)))].sort();
+  const last6Gi=allGiMonths.slice(-6);
+  const mLabelGi={};
+  cities.forEach(c=>cityBrand[c].forEach(r=>{if(!mLabelGi[r.month])mLabelGi[r.month]=r.label;}));
+  const cityDataFor=gran=>gran==='brand'?cityBrand:cityGeneric;
+
+  function renderGiCityTable(){
+    const src=cityDataFor(giCityGran);
+    const gth=`<th>City</th>${last6Gi.map((m,i)=>`<th class="nr${i===last6Gi.length-1?' ch':''}">${mLabelGi[m]||m}</th>`).join('')}<th class="nr ch">MoM Δ</th>`;
+    const gr=cities.map(city=>{
+      const vals=last6Gi.map(m=>{const r=src[city].find(x=>x.month===m);return r?r.index:null;});
+      const mom=(vals.length>=2&&vals[vals.length-1]!=null&&vals[vals.length-2]!=null)?vals[vals.length-1]-vals[vals.length-2]:null;
+      return{city,vals,last:vals[vals.length-1],mom};
+    }).sort((a,b)=>(b.last||0)-(a.last||0));
+    document.getElementById('tbl-gi-city').innerHTML=tbl(gth,gr.map(({city,vals,mom})=>`<tr><td><strong>${city}</strong></td>${vals.map((v,i)=>{const il=i===vals.length-1;const s=il?'color:var(--blue);font-weight:800;background:#F5F4FF':(v!=null&&vals[0]!=null&&v>vals[0]+0.2?'color:var(--mint);font-weight:600':v!=null&&vals[0]!=null&&v<vals[0]-0.2?'color:var(--red);font-weight:600':'');return`<td class="nr" style="${s}">${fIdx(v)}</td>`;}).join('')}<td class="nr">${badge(mom,true)}</td></tr>`).join(''));
+  }
+  function renderGiCityChart(){
+    if(charts.giCity)charts.giCity.destroy();
+    const ctx=document.getElementById('chart-gi-city');if(!ctx)return;
+    const src=cityDataFor(giCityGran);
+    charts.giCity=new Chart(ctx.getContext('2d'),{type:'line',data:{labels:last6Gi.map(m=>mLabelGi[m]||m),datasets:giCitySel.map((city,i)=>({label:city,data:last6Gi.map(m=>{const r=src[city].find(x=>x.month===m);return r?r.index:null;}),borderColor:CITY_PALETTE[i%CITY_PALETTE.length],backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:2}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5},padding:8}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+  }
+  document.querySelectorAll('#gi-city-toggle .pp').forEach(btn=>btn.addEventListener('click',()=>{
+    giCityGran=btn.dataset.g;
+    document.querySelectorAll('#gi-city-toggle .pp').forEach(b=>b.classList.toggle('active',b===btn));
+    renderGiCityTable();renderGiCityChart();
+  }));
+  buildMultiSelect('ms-gi-city',cities,cities,c=>c,vals=>{giCitySel=vals;renderGiCityChart();},'All cities');
+  renderGiCityTable();renderGiCityChart();
+
+  // ── TABLE 3: Brand vs Generic comparison (pan-India) ──
+  const gth3=`<th>Month</th><th class="nr ch" style="text-transform:none">Cars24</th><th class="nr">Category</th><th class="nr ratio-hi">Gap (Brand−Category)</th>`;
+  const rows3=[...giM].reverse().map((r,i)=>{
+    const g=(r.Cars24!=null&&r.Category!=null)?r.Cars24-r.Category:null;
+    return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td class="nr cc"><strong>${fIdx(r.Cars24)}</strong></td><td class="nr">${fIdx(r.Category)}</td><td class="nr ratio-hi">${g!=null?(g>0?'+':'')+g.toFixed(1):'—'}</td></tr>`;
+  }).join('');
+  document.getElementById('tbl-gi-cmp').innerHTML=tbl(gth3,rows3);
+  charts.giCmp=new Chart(document.getElementById('chart-gi-cmp').getContext('2d'),{type:'line',data:{labels:giM.map(r=>r.label),datasets:[
+    {label:'Cars24 Brand',data:giM.map(r=>r.Cars24),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.3,spanGaps:true,borderWidth:3,pointRadius:0},
+    {label:'Category (Generic)',data:giM.map(r=>r.Category),borderColor:'#FF9500',backgroundColor:'transparent',fill:false,tension:0.3,spanGaps:true,borderWidth:2,borderDash:[5,3],pointRadius:0}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11},usePointStyle:true}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
 }
 
 function initTab5(){
-  const gi=D.google_indexed,mon=D.monthly_impressions;
-  if(!gi||!gi.length){document.getElementById('impsos-content').innerHTML=`<div class="ph"><div class="ph-mark">📈</div><div class="ph-title">Impressions × SoS — needs Google Indexed data</div><div class="ph-body">Once Tab 4 is populated this shows dual-axis correlation between GSC impressions and Google SoS%.</div></div>`;return;}
-  const merged=mon.map(m=>{const g=gi.find(r=>r.month===m.month);return g?{...m,g_sos:g.Cars24}:null;}).filter(Boolean);
-  document.getElementById('impsos-content').innerHTML=`<div class="card"><div class="sh"><span class="kicker">📊 Correlation</span><span class="title">Monthly Impressions × Cars24 SoS %</span><span class="desc">Bars = GSC impressions (left). Line = Google SoS % (right). Both up = strong brand momentum.</span></div><div class="cw tall"><canvas id="chart-is"></canvas></div></div>`;
+  const gi=D.google_index?.monthly,mon=D.monthly_impressions;
+  if(!gi||!gi.length){document.getElementById('impsos-content').innerHTML=`<div class="ph"><div class="ph-mark">📈</div><div class="ph-title">Impressions × SoS — needs Google Index data</div><div class="ph-body">Once the Google Index tab is populated this shows dual-axis correlation between GSC impressions and the Google search index.</div></div>`;return;}
+  const merged=mon.map(m=>{const g=gi.find(r=>r.month===m.month);return g?{...m,g_idx:g.Cars24}:null;}).filter(Boolean);
+  const withMom=merged.map((r,i)=>{
+    const prev=merged[i-1];
+    const idxMomPct=(prev&&prev.g_idx!=null&&r.g_idx!=null&&prev.g_idx)?(r.g_idx-prev.g_idx)/prev.g_idx*100:null;
+    return{...r,idx_mom_pct:idxMomPct};
+  });
+  document.getElementById('impsos-content').innerHTML=`
+    <div class="card">
+      <div class="sh"><span class="kicker">📊 Correlation</span><span class="title">Monthly Impressions × Cars24 Search Index</span><span class="desc">Bars = GSC impressions (left). Line = Google search index (right). Both up = strong brand momentum.</span></div>
+      <div class="cw tall"><canvas id="chart-is"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="sh"><span class="kicker">📈 Month-on-Month</span><span class="title">Impressions Growth vs Search Index Growth</span><span class="desc">Both shown as MoM % change on the same axis — do impressions and brand search interest move together?</span></div>
+      <div class="tw" id="tbl-is-mom" style="margin-bottom:10px"></div>
+      <div class="cw"><canvas id="chart-is-mom"></canvas></div>
+    </div>`;
   const c=document.getElementById('chart-is').getContext('2d');
-  charts.is=new Chart(c,{type:'bar',data:{labels:merged.map(r=>r.label),datasets:[{type:'bar',label:'Impressions (L)',data:merged.map(r=>r.imp_lakh),backgroundColor:'rgba(71,54,254,.22)',yAxisID:'y',borderRadius:5},{type:'line',label:'Cars24 SoS %',data:merged.map(r=>r.g_sos),borderColor:'#4736FE',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,pointRadius:3,tension:0.3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Impressions (L)'},ticks:{callback:v=>v+'L'},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'SoS %'},ticks:{callback:v=>v+'%'},grid:{display:false}},x:{grid:{display:false}}}}});
+  charts.is=new Chart(c,{type:'bar',data:{labels:merged.map(r=>r.label),datasets:[{type:'bar',label:'Impressions (L)',data:merged.map(r=>r.imp_lakh),backgroundColor:'rgba(71,54,254,.22)',yAxisID:'y',borderRadius:5},{type:'line',label:'Cars24 Search Index',data:merged.map(r=>r.g_idx),borderColor:'#4736FE',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,pointRadius:3,tension:0.3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Impressions (L)'},ticks:{callback:v=>v+'L'},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'Search Index'},grid:{display:false}},x:{grid:{display:false}}}}});
+
+  const gth=`<th>Month</th><th></th><th class="nr ch">Impressions MoM</th><th class="nr">Index MoM</th><th class="nr ratio-hi">Gap (Impr−Index)</th>`;
+  const rows=[...withMom].reverse().map((r,i)=>{
+    const gap=(r.mom!=null&&r.idx_mom_pct!=null)?r.mom-r.idx_mom_pct:null;
+    return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(r.mom)}</td><td class="nr cc">${badge(r.mom,true)}</td><td class="nr">${badge(r.idx_mom_pct,true)}</td><td class="nr ratio-hi">${gap!=null?(gap>0?'+':'')+gap.toFixed(1)+'pp':'—'}</td></tr>`;
+  }).join('');
+  document.getElementById('tbl-is-mom').innerHTML=tbl(gth,rows);
+  charts.isMom=new Chart(document.getElementById('chart-is-mom').getContext('2d'),{type:'line',data:{labels:withMom.map(r=>r.label),datasets:[
+    {label:'Impressions MoM %',data:withMom.map(r=>r.mom),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.3,spanGaps:true,borderWidth:2.5,pointRadius:2},
+    {label:'Search Index MoM %',data:withMom.map(r=>r.idx_mom_pct),borderColor:'#FF9500',backgroundColor:'transparent',fill:false,tension:0.3,spanGaps:true,borderWidth:2,borderDash:[5,3],pointRadius:2}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11},usePointStyle:true}}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
 }
 
 /* ── YouTube inner-tab styles (injected once) ── */

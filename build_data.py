@@ -276,14 +276,16 @@ def build_gsc_weekly():
     print(f"  ✓ GSC weekly: {len(rows)} weeks")
     return rows
 
-# ── Google Indexed ────────────────────────────────────────────────────────────
-def build_google_indexed():
-    p = DATA / "bsos_google_monthly.csv"
-    if not p.exists():
-        print("  ⚠ bsos_google_monthly.csv missing (Tab 4 will be empty)"); return []
-    df = pd.read_csv(p).sort_values("month").reset_index(drop=True)
+# ── Google Search Index (Trends-style 0-100 index, not a % share) ─────────────
+def build_gindex():
+    pan_p = DATA / "gindex_pan_monthly.csv"
+    if not pan_p.exists():
+        print("  ⚠ gindex_pan_monthly.csv missing (Google Index tab will be empty)")
+        return {"monthly": [], "city_brand": {}, "city_generic": {}}
+
+    df = pd.read_csv(pan_p).sort_values("month").reset_index(drop=True)
     bc = [c for c in df.columns if c != "month"]
-    rows = []
+    monthly = []
     for i, row in df.iterrows():
         pr = df.iloc[i-1] if i > 0 else None
         r = {"month": row["month"], "label": mlabel(row["month"])}
@@ -291,9 +293,34 @@ def build_google_indexed():
             v = sf(row.get(b))
             r[b] = v
             r[f"{b}_mom"] = pp_ch(v, sf(pr.get(b)) if pr is not None else None)
-        rows.append(r)
-    print(f"  ✓ Google Indexed: {len(rows)} months")
-    return rows
+        monthly.append(r)
+
+    def load_city_index(fname):
+        p = DATA / fname
+        if not p.exists():
+            return {}
+        cdf = pd.read_csv(p).sort_values("month").reset_index(drop=True)
+        cities = [c for c in cdf.columns if c != "month"]
+        result = {}
+        for city in cities:
+            rows = []
+            for i, row in cdf.iterrows():
+                pr = cdf.iloc[i-1] if i > 0 else None
+                v = sf(row.get(city))
+                rows.append({
+                    "month": row["month"], "label": mlabel(row["month"]),
+                    "index": v,
+                    "index_mom": pp_ch(v, sf(pr.get(city)) if pr is not None else None),
+                })
+            result[city] = rows
+        return result
+
+    city_brand   = load_city_index("gindex_city_brand_monthly.csv")
+    city_generic = load_city_index("gindex_city_generic_monthly.csv")
+
+    print(f"  ✓ Google Index: {len(monthly)} months (pan-India) | "
+          f"{len(city_brand)} cities (brand) | {len(city_generic)} cities (generic)")
+    return {"monthly": monthly, "city_brand": city_brand, "city_generic": city_generic}
 
 # ── Keywords ──────────────────────────────────────────────────────────────────
 def build_keywords():
@@ -936,7 +963,7 @@ if __name__ == "__main__":
     gsc_daily      = build_gsc_daily()
     gsc_weekly     = build_gsc_weekly()
     print(f"  GSC weekly: {len(gsc_weekly)} weeks")
-    google_indexed = build_google_indexed()
+    gindex         = build_gindex()
     keywords       = build_keywords()
     kpis           = build_kpis(monthly, bsos_monthly)
     youtube        = build_youtube()
@@ -958,7 +985,7 @@ if __name__ == "__main__":
         "bsos_cities":        bsos_cities,
         "gsc_daily":          gsc_daily,
         "gsc_weekly":         gsc_weekly,
-        "google_indexed":     google_indexed,
+        "google_index":       gindex,
         "keywords":           keywords,
         "youtube":            youtube,
         "instagram":          instagram,
