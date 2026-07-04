@@ -120,6 +120,12 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
 .apply-btn{background:var(--blue);color:#fff;border:none;border-radius:7px;padding:5px 11px;font:700 12px var(--font);cursor:pointer}
 .apply-btn:hover{background:var(--blue-dk)}
 
+/* Card actions: sheet link + CSV download */
+.card-actions{display:flex;gap:6px;align-items:center;justify-content:flex-end;margin:-6px 0 12px}
+.card-act-btn{display:inline-flex;align-items:center;gap:4px;border:1.5px solid var(--border);background:var(--card);color:var(--grey);padding:4px 9px;border-radius:7px;font:600 11px var(--font);cursor:pointer;text-decoration:none;white-space:nowrap}
+.card-act-btn:hover{border-color:var(--blue);color:var(--blue)}
+.tab-actions{display:flex;justify-content:flex-end;margin-bottom:10px}
+
 /* Badges */
 .badge{display:inline-flex;align-items:center;gap:2px;padding:2px 7px;border-radius:20px;font-size:11px;font-weight:700;vertical-align:middle}
 .bu{background:#DCFCE7;color:#15803D}
@@ -432,6 +438,8 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
         <section class="tabpane" id="m-bsos">
           <div class="g4" id="sos-kpis"></div>
 
+          <div class="tab-actions"><button class="card-act-btn" type="button" onclick="downloadAllTablesCSV('share_of_searches_all.csv',[{title:'Monthly Benchmark',tblWrapperId:'tbl-comp'},{title:'Granular',tblWrapperId:'tbl-sos-gran'},{title:'City Growth',tblWrapperId:'tbl-city-growth'},{title:'City Battle',tblWrapperId:'tbl-city-snap'}])">⬇ Download all tables (CSV)</button></div>
+
           <!-- TABLE 1: Monthly benchmark — table + chart, one shared filter (mirrors Brand Search Impressions) -->
           <div class="card">
             <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
@@ -452,6 +460,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
                 </div>
               </div>
             </div>
+            <div class="card-actions"><a class="card-act-btn" href="https://docs.google.com/spreadsheets/d/1GleR3Nf_wpIx_GN7PD_hoB0XxtTNPZCz6yhdLQk8rbg/edit#gid=1161327844" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-comp','sos_monthly_benchmark.csv')">⬇ CSV</button></div>
             <div class="tw" id="tbl-comp" style="margin-bottom:10px"></div>
             <div class="cw"><canvas id="chart-sos"></canvas></div>
           </div>
@@ -476,6 +485,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
                 </div>
               </div>
             </div>
+            <div class="card-actions"><a class="card-act-btn" id="sheet-link-sos-gran" href="https://docs.google.com/spreadsheets/d/1GleR3Nf_wpIx_GN7PD_hoB0XxtTNPZCz6yhdLQk8rbg/edit#gid=988543240" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-sos-gran','sos_granular.csv')">⬇ CSV</button></div>
             <div class="tw" id="tbl-sos-gran" style="margin-bottom:10px"></div>
             <div class="cw"><canvas id="chart-sos-gran"></canvas></div>
           </div>
@@ -498,6 +508,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
                 </div>
               </div>
             </div>
+            <div class="card-actions"><a class="card-act-btn" href="https://docs.google.com/spreadsheets/d/1R9WbF_Avt4RMofh-KwHFBT33saIpIRcLy3HRl62EKEM/edit#gid=390472163" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-city-growth','sos_city_growth.csv')">⬇ CSV</button></div>
             <div class="tw tbl-compact" id="tbl-city-growth" style="margin-bottom:10px"></div>
             <div class="fb">
               <span class="fl">Cities</span>
@@ -529,6 +540,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
                 </div>
               </div>
             </div>
+            <div class="card-actions"><a class="card-act-btn" href="https://docs.google.com/spreadsheets/d/1R9WbF_Avt4RMofh-KwHFBT33saIpIRcLy3HRl62EKEM/edit#gid=390472163" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-city-snap','sos_city_battle.csv')">⬇ CSV</button></div>
             <div class="tw" id="tbl-city-snap" style="margin-bottom:10px"></div>
             <div class="fb">
               <span class="fl">Cities</span>
@@ -676,6 +688,42 @@ function gapCell(gap){if(gap==null)return'<td class="nr">—</td>';const c=gap>0
 function spark(vals,color='#4736FE',w=56,h=18){const cl=vals.filter(v=>v!=null);if(cl.length<2)return'';const mn=Math.min(...cl),mx=Math.max(...cl),rng=mx-mn||1;const pts=vals.map((v,i)=>{if(v==null)return null;const x=(i/(vals.length-1))*w,y=h-((v-mn)/rng)*h;return`${x.toFixed(1)},${y.toFixed(1)}`;}).filter(Boolean).join(' ');return`<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round"/></svg>`;}
 function trendTxt(vals){let u=0,d=0;for(let i=1;i<vals.length;i++){if(vals[i]!=null&&vals[i-1]!=null){const dv=vals[i]-vals[i-1];if(dv>0.1)u++;else if(dv<-0.1)d++;}}if(u>d)return`<span style="color:var(--mint);font-weight:800">▲${u}</span>`;if(d>u)return`<span style="color:var(--red);font-weight:800">▼${d}</span>`;return`<span style="color:var(--grey)">→</span>`;}
 function tbl(thead,rows){return`<table class="dt"><thead><tr>${thead}</tr></thead><tbody>${rows||'<tr><td colspan="20" style="text-align:center;padding:24px;color:var(--grey)">No data</td></tr>'}</tbody></table>`;}
+
+// ── CSV export (reads whatever is currently rendered, respecting active filters/toggles) ──
+function csvEscape(v){const s=String(v??'');return/[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}
+function tableToCSVRows(tableEl){
+  if(!tableEl)return[];
+  const rows=[];
+  tableEl.querySelectorAll('thead tr').forEach(tr=>rows.push(Array.from(tr.children).map(td=>td.textContent.trim())));
+  tableEl.querySelectorAll('tbody tr').forEach(tr=>rows.push(Array.from(tr.children).map(td=>td.textContent.trim())));
+  return rows;
+}
+function rowsToCSV(rows){return rows.map(r=>r.map(csvEscape).join(',')).join('\n');}
+function downloadCSV(filename,csvText){
+  const blob=new Blob([csvText],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=filename;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+function downloadTableCSV(tblWrapperId,filename){
+  const tableEl=document.getElementById(tblWrapperId)?.querySelector('table.dt');
+  if(!tableEl){alert('No data to download yet.');return;}
+  downloadCSV(filename,rowsToCSV(tableToCSVRows(tableEl)));
+}
+function downloadAllTablesCSV(filename,sections){
+  const parts=sections.map(({title,tblWrapperId})=>{
+    const tableEl=document.getElementById(tblWrapperId)?.querySelector('table.dt');
+    if(!tableEl)return null;
+    return`## ${title}\n${rowsToCSV(tableToCSVRows(tableEl))}`;
+  }).filter(Boolean);
+  if(!parts.length){alert('No data to download yet.');return;}
+  downloadCSV(filename,parts.join('\n\n'));
+}
+function cardActionsHtml(sheetUrl,tblWrapperId,csvFilename,linkId){
+  return`<div class="card-actions"><a class="card-act-btn"${linkId?` id="${linkId}"`:''} href="${sheetUrl}" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('${tblWrapperId}','${csvFilename}')">⬇ CSV</button></div>`;
+}
 
 function filterPeriod(data,period,from,to){
   if(!data||!data.length)return data;
@@ -1075,6 +1123,7 @@ function initTab3(){
     document.querySelectorAll('#sos-gran-toggle .pp').forEach(b=>b.classList.toggle('active',b.dataset.g===g));
     document.getElementById('cr-sos-gran').classList.remove('open');
     document.getElementById('pp-sos-gran').innerHTML=`<button class="pp" data-p="compare" type="button">Compare ▾</button>`;
+    document.getElementById('sheet-link-sos-gran').href=`https://docs.google.com/spreadsheets/d/1GleR3Nf_wpIx_GN7PD_hoB0XxtTNPZCz6yhdLQk8rbg/edit#gid=${g==='week'?988543240:1107858406}`;
     if(g==='week'){
       granSel.innerHTML=`<option value="all" selected>All time</option>`+bw.map(r=>`<option value="from:${r.week_start}">From ${r.week}</option>`).join('');
       if(bw.length>=8){
@@ -1294,13 +1343,16 @@ function initTab4(){
   const fIdx=v=>v==null?'—':v.toFixed(1);
   const CITY_PALETTE=['#4736FE','#E91E8C','#FF6B6B','#F97316','#059669','#7C3AED','#0EA5E9','#EAB308','#DC2626','#0891B2','#84CC16','#D946EF','#F43F5E','#14B8A6','#8B5CF6','#EA580C','#65A30D','#06B6D4'];
 
+  const GI_SHEET='https://docs.google.com/spreadsheets/d/1d3umTUBQ1vKWzbhfdVr88kr8Stpn832V1mCSkfjQ51A/edit';
   document.getElementById('gi-content').innerHTML=`
+    <div class="tab-actions"><button class="card-act-btn" type="button" onclick="downloadAllTablesCSV('google_index_all.csv',[{title:'Pan-India Brand Index',tblWrapperId:'tbl-gi-pan'},{title:'City-level Index',tblWrapperId:'tbl-gi-city'},{title:'Brand vs Category Comparison',tblWrapperId:'tbl-gi-cmp'}])">⬇ Download all tables (CSV)</button></div>
+
     <div class="card">
       <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
         <div><span class="kicker">📡 Pan-India · Monthly</span><span class="title">Google Search Index — Cars24 Brand</span><span class="desc">Google's relative search-interest index (0-100 scale) for the Cars24 brand, month by month.</span></div>
         <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
           <select class="ctrl-sel" id="gi-pan-period-sel"></select>
-          <div class="pp-wrap" id="pp-gi-pan"><button class="pp" data-p="compare" type="button">Compare ▾</button></div>
+          <div class="pp-wrap" id="pp-gi-pan"><button class="pp" data-p="12m" type="button">Last 12 Months</button><button class="pp" data-p="compare" type="button">Compare ▾</button></div>
           <div class="cr" id="cr-gi-pan">
             <div class="cr-pair">
               <div class="cr-row"><span class="cr-lbl" style="color:var(--blue)">Period A</span><input type="month" id="gi-pan-a-from"><span class="sep">–</span><input type="month" id="gi-pan-a-to"></div>
@@ -1310,6 +1362,7 @@ function initTab4(){
           </div>
         </div>
       </div>
+      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}#gid=0" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-pan','gindex_pan_india.csv')">⬇ CSV</button></div>
       <div class="tw" id="tbl-gi-pan" style="margin-bottom:10px"></div>
       <div class="cw"><canvas id="chart-gi-pan"></canvas></div>
     </div>
@@ -1322,6 +1375,7 @@ function initTab4(){
           <button class="pp" data-g="generic" type="button">Generic</button>
         </div>
       </div>
+      <div class="card-actions"><a class="card-act-btn" id="sheet-link-gi-city" href="${GI_SHEET}#gid=1878676239" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-city','gindex_city.csv')">⬇ CSV</button></div>
       <div class="tw tbl-compact" id="tbl-gi-city" style="margin-bottom:10px"></div>
       <div class="fb"><span class="fl">Cities</span><div class="ms-dd" id="ms-gi-city"></div></div>
       <div class="cw"><canvas id="chart-gi-city"></canvas></div>
@@ -1329,6 +1383,7 @@ function initTab4(){
 
     <div class="card">
       <div class="sh"><span class="kicker">⚖️ Comparison · Monthly</span><span class="title">Cars24 Brand vs Category Search Interest</span><span class="desc">Gap = Cars24 index minus Category index. Positive = brand outpacing the category.</span></div>
+      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}#gid=0" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-cmp','gindex_comparison.csv')">⬇ CSV</button></div>
       <div class="tw" id="tbl-gi-cmp" style="margin-bottom:10px"></div>
       <div class="cw"><canvas id="chart-gi-cmp"></canvas></div>
     </div>`;
@@ -1396,16 +1451,16 @@ function initTab4(){
   // ── TABLE 2: City-level, Brand/Generic toggle ──
   let giCityGran='brand',giCitySel=[...cities];
   const allGiMonths=[...new Set(cities.flatMap(c=>cityBrand[c].map(r=>r.month)))].sort();
-  const last6Gi=allGiMonths.slice(-6);
+  const giMonthsShown=allGiMonths;  // full history since Jan'23, not just last 6 months
   const mLabelGi={};
   cities.forEach(c=>cityBrand[c].forEach(r=>{if(!mLabelGi[r.month])mLabelGi[r.month]=r.label;}));
   const cityDataFor=gran=>gran==='brand'?cityBrand:cityGeneric;
 
   function renderGiCityTable(){
     const src=cityDataFor(giCityGran);
-    const gth=`<th>City</th>${last6Gi.map((m,i)=>`<th class="nr${i===last6Gi.length-1?' ch':''}">${mLabelGi[m]||m}</th>`).join('')}<th class="nr ch">MoM Δ</th>`;
+    const gth=`<th>City</th>${giMonthsShown.map((m,i)=>`<th class="nr${i===giMonthsShown.length-1?' ch':''}">${mLabelGi[m]||m}</th>`).join('')}<th class="nr ch">MoM Δ</th>`;
     const gr=cities.map(city=>{
-      const vals=last6Gi.map(m=>{const r=src[city].find(x=>x.month===m);return r?r.index:null;});
+      const vals=giMonthsShown.map(m=>{const r=src[city].find(x=>x.month===m);return r?r.index:null;});
       const mom=(vals.length>=2&&vals[vals.length-1]!=null&&vals[vals.length-2]!=null)?vals[vals.length-1]-vals[vals.length-2]:null;
       return{city,vals,last:vals[vals.length-1],mom};
     }).sort((a,b)=>(b.last||0)-(a.last||0));
@@ -1415,11 +1470,12 @@ function initTab4(){
     if(charts.giCity)charts.giCity.destroy();
     const ctx=document.getElementById('chart-gi-city');if(!ctx)return;
     const src=cityDataFor(giCityGran);
-    charts.giCity=new Chart(ctx.getContext('2d'),{type:'line',data:{labels:last6Gi.map(m=>mLabelGi[m]||m),datasets:giCitySel.map((city,i)=>({label:city,data:last6Gi.map(m=>{const r=src[city].find(x=>x.month===m);return r?r.index:null;}),borderColor:CITY_PALETTE[i%CITY_PALETTE.length],backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:2}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5},padding:8}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+    charts.giCity=new Chart(ctx.getContext('2d'),{type:'line',data:{labels:giMonthsShown.map(m=>mLabelGi[m]||m),datasets:giCitySel.map((city,i)=>({label:city,data:giMonthsShown.map(m=>{const r=src[city].find(x=>x.month===m);return r?r.index:null;}),borderColor:CITY_PALETTE[i%CITY_PALETTE.length],backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:2}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5},padding:8}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
   }
   document.querySelectorAll('#gi-city-toggle .pp').forEach(btn=>btn.addEventListener('click',()=>{
     giCityGran=btn.dataset.g;
     document.querySelectorAll('#gi-city-toggle .pp').forEach(b=>b.classList.toggle('active',b===btn));
+    document.getElementById('sheet-link-gi-city').href=`${GI_SHEET}#gid=${giCityGran==='brand'?1878676239:1291535197}`;
     renderGiCityTable();renderGiCityChart();
   }));
   buildMultiSelect('ms-gi-city',cities,cities,c=>c,vals=>{giCitySel=vals;renderGiCityChart();},'All cities');
