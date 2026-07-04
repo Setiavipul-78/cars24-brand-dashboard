@@ -440,6 +440,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
                 <div class="ms-dd" id="ms-sos"></div>
                 <select class="ctrl-sel" id="sos-m-period-sel"></select>
                 <div class="pp-wrap" id="pp-sos-m">
+                  <button class="pp" data-p="12m" type="button">Last 12 Months</button>
                   <button class="pp" data-p="compare" type="button">Compare ▾</button>
                 </div>
                 <div class="cr" id="cr-sos-m">
@@ -1049,7 +1050,7 @@ function initTab3(){
     document.getElementById('sos-m-b-from').value=prev;document.getElementById('sos-m-b-to').value=prev;
   }
   const sosMSel=document.getElementById('sos-m-period-sel');
-  sosMSel.innerHTML=`<option value="all" selected>All time</option><option value="12m">Last 12 months</option>`+bm.map(r=>`<option value="from:${r.month}">From ${r.label}</option>`).join('');
+  sosMSel.innerHTML=`<option value="all" selected>All time</option>`+bm.map(r=>`<option value="from:${r.month}">From ${r.label}</option>`).join('');
   sosMSel.addEventListener('change',()=>{
     document.querySelectorAll('#pp-sos-m .pp').forEach(b=>b.classList.remove('active'));
     document.getElementById('cr-sos-m').classList.remove('open');
