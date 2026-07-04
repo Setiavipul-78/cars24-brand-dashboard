@@ -650,6 +650,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
 <script>
 const BC={Cars24:'#4736FE',Spinny:'#E91E8C',CarWale:'#FF6B6B',Cardekho:'#F97316',MFC:'#7C3AED',MTV:'#059669',OLX:'#0EA5E9'};
 const GSC_URL='https://search.google.com/search-console?resource_id='+encodeURIComponent('https://www.cars24.com/');
+const GI_SHEET='https://docs.google.com/spreadsheets/d/1d3umTUBQ1vKWzbhfdVr88kr8Stpn832V1mCSkfjQ51A/edit';
 const BN={Cars24:'Cars24',Spinny:'Spinny',CarWale:'CarWale',Cardekho:'CarDekho',MFC:'Mahindra First Choice',MTV:'Maruti True Value',OLX:'OLX Auto'};
 const CC=['#4736FE','#00C951','#FF4F01','#E91E8C','#F59E0B','#7C3AED','#0EA5E9','#059669','#FF6B6B','#9CA3AF'];
 
@@ -1370,7 +1371,6 @@ function initTab4(){
   const fIdx=v=>v==null?'—':v.toFixed(1);
   const CITY_PALETTE=['#4736FE','#E91E8C','#FF6B6B','#F97316','#059669','#7C3AED','#0EA5E9','#EAB308','#DC2626','#0891B2','#84CC16','#D946EF','#F43F5E','#14B8A6','#8B5CF6','#EA580C','#65A30D','#06B6D4'];
 
-  const GI_SHEET='https://docs.google.com/spreadsheets/d/1d3umTUBQ1vKWzbhfdVr88kr8Stpn832V1mCSkfjQ51A/edit';
   document.getElementById('gi-content').innerHTML=`
     <div class="tab-actions"><button class="card-act-btn" type="button" onclick="downloadAllTablesCSV('google_index_all.csv',[{title:'Pan-India Brand Index',tblWrapperId:'tbl-gi-pan'},{title:'City-level Index',tblWrapperId:'tbl-gi-city'},{title:'Brand vs Category Comparison',tblWrapperId:'tbl-gi-cmp'},{title:'City-wise Brand vs Generic',tblWrapperId:'tbl-gi-city-cmp'}])">⬇ Download all tables (CSV)</button></div>
 
@@ -1571,37 +1571,253 @@ function initTab4(){
 }
 
 function initTab5(){
-  const gi=D.google_index?.monthly,mon=D.monthly_impressions;
-  if(!gi||!gi.length){document.getElementById('impsos-content').innerHTML=`<div class="ph"><div class="ph-mark">📈</div><div class="ph-title">Impressions × SoS — needs Google Index data</div><div class="ph-body">Once the Google Index tab is populated this shows dual-axis correlation between GSC impressions and the Google search index.</div></div>`;return;}
-  const merged=mon.map(m=>{const g=gi.find(r=>r.month===m.month);return g?{...m,g_idx:g.Cars24}:null;}).filter(Boolean);
-  const withMom=merged.map((r,i)=>{
-    const prev=merged[i-1];
-    const idxMomPct=(prev&&prev.g_idx!=null&&r.g_idx!=null&&prev.g_idx)?(r.g_idx-prev.g_idx)/prev.g_idx*100:null;
-    return{...r,idx_mom_pct:idxMomPct};
-  });
-  document.getElementById('impsos-content').innerHTML=`
-    <div class="card">
-      <div class="sh"><span class="kicker">📊 Correlation</span><span class="title">Monthly Impressions × Cars24 Search Index</span><span class="desc">Bars = GSC impressions (left). Line = Google search index (right). Both up = strong brand momentum.</span></div>
-      <div class="cw tall"><canvas id="chart-is"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="sh"><span class="kicker">📈 Month-on-Month</span><span class="title">Impressions Growth vs Search Index Growth</span><span class="desc">Both shown as MoM % change on the same axis — do impressions and brand search interest move together?</span></div>
-      <div class="tw" id="tbl-is-mom" style="margin-bottom:10px"></div>
-      <div class="cw"><canvas id="chart-is-mom"></canvas></div>
-    </div>`;
-  const c=document.getElementById('chart-is').getContext('2d');
-  charts.is=new Chart(c,{type:'bar',data:{labels:merged.map(r=>r.label),datasets:[{type:'bar',label:'Impressions (L)',data:merged.map(r=>r.imp_lakh),backgroundColor:'rgba(71,54,254,.22)',yAxisID:'y',borderRadius:5},{type:'line',label:'Cars24 Search Index',data:merged.map(r=>r.g_idx),borderColor:'#4736FE',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,pointRadius:3,tension:0.3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Impressions (L)'},ticks:{callback:v=>v+'L'},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'Search Index'},grid:{display:false}},x:{grid:{display:false}}}}});
+  const Dgi=D.google_index;
+  if(!Dgi||!Dgi.monthly?.length){document.getElementById('impsos-content').innerHTML=`<div class="ph"><div class="ph-mark">📈</div><div class="ph-title">India Branded Search Index — needs Google Index data</div><div class="ph-body">Once the Google Index sheet is populated this builds the full performance dashboard automatically.</div></div>`;return;}
+  const giM=Dgi.monthly;                       // already complete-month-filtered in build_data.py
+  const cityBrand=Dgi.city_brand||{};
+  const cities=Object.keys(cityBrand);
+  const tiers=D.city_tiers||{};
+  const mon=D.monthly_impressions||[];
+  const bsosM=D.bsos_monthly||[];
+  const bsosCities=D.bsos_cities||{};
+  const fIdx=v=>v==null?'—':v.toFixed(1);
+  const fPct=v=>v==null?'—':(v>0?'+':'')+v.toFixed(1)+'%';
+  const CITY_PALETTE=['#4736FE','#E91E8C','#FF6B6B','#F97316','#059669','#7C3AED','#0EA5E9','#EAB308','#DC2626','#0891B2','#84CC16','#D946EF','#F43F5E','#14B8A6','#8B5CF6','#EA580C','#65A30D','#06B6D4'];
+  const TIER_CLR={P0:'#4736FE',P1:'#059669',P2:'#F97316'};
 
-  const gth=`<th>Month</th><th></th><th class="nr ch">Impressions MoM</th><th class="nr">Index MoM</th><th class="nr ratio-hi">Gap (Impr−Index)</th>`;
-  const rows=[...withMom].reverse().map((r,i)=>{
-    const gap=(r.mom!=null&&r.idx_mom_pct!=null)?r.mom-r.idx_mom_pct:null;
-    return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(r.mom)}</td><td class="nr cc">${badge(r.mom,true)}</td><td class="nr">${badge(r.idx_mom_pct,true)}</td><td class="nr ratio-hi">${gap!=null?(gap>0?'+':'')+gap.toFixed(1)+'pp':'—'}</td></tr>`;
-  }).join('');
-  document.getElementById('tbl-is-mom').innerHTML=tbl(gth,rows);
-  charts.isMom=new Chart(document.getElementById('chart-is-mom').getContext('2d'),{type:'line',data:{labels:withMom.map(r=>r.label),datasets:[
-    {label:'Impressions MoM %',data:withMom.map(r=>r.mom),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.3,spanGaps:true,borderWidth:2.5,pointRadius:2},
-    {label:'Search Index MoM %',data:withMom.map(r=>r.idx_mom_pct),borderColor:'#FF9500',backgroundColor:'transparent',fill:false,tension:0.3,spanGaps:true,borderWidth:2,borderDash:[5,3],pointRadius:2}
-  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11},usePointStyle:true}}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
+  // ── National-level computed metrics ──
+  const latest=giM[giM.length-1],first=giM[0];
+  const allTimeMax=Math.max(...giM.map(r=>r.Cars24).filter(v=>v!=null));
+  const isAtPeak=latest.Cars24===allTimeMax;
+  const sinceStartPct=first.Cars24?(latest.Cars24-first.Cars24)/first.Cars24*100:null;
+  const latestYear=+latest.month.slice(0,4),latestMonthNum=+latest.month.slice(5,7);
+  function avgVals(rows){const vals=rows.map(r=>r.Cars24).filter(v=>v!=null);return vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:null;}
+  const last12Avg=avgVals(giM.slice(-12)),prior12Avg=avgVals(giM.slice(-24,-12));
+  const rolling12Growth=(last12Avg!=null&&prior12Avg)?(last12Avg-prior12Avg)/prior12Avg*100:null;
+
+  // ── Per-city computed metrics ──
+  const cityStats=cities.map(city=>{
+    const rows=cityBrand[city]||[];
+    const latestRow=rows[rows.length-1];
+    let peak=null,peakMonth=null,peakLabel=null;
+    rows.forEach(r=>{if(r.index!=null&&(peak===null||r.index>peak)){peak=r.index;peakMonth=r.month;peakLabel=r.label;}});
+    const atPeak=latestRow&&latestRow.index!=null&&peak!=null&&latestRow.index>=peak;
+    const yoyMonth=latestRow?`${+latestRow.month.slice(0,4)-1}-${latestRow.month.slice(5,7)}`:null;
+    const yoyRow=rows.find(r=>r.month===yoyMonth);
+    const yoy=(latestRow&&latestRow.index!=null&&yoyRow&&yoyRow.index)?(latestRow.index-yoyRow.index)/yoyRow.index*100:null;
+    const pctOffPeak=(latestRow&&latestRow.index!=null&&peak)?(latestRow.index-peak)/peak*100:null;
+    return{city,tier:tiers[city]||'—',index:latestRow?latestRow.index:null,peak,peakMonth,peakLabel,atPeak,yoy,pctOffPeak,rows};
+  });
+  const citiesAtPeak=cityStats.filter(c=>c.atPeak).length;
+  const sumLatestIdx=cityStats.reduce((s,c)=>s+(c.index||0),0);
+  cityStats.forEach(c=>{c.demandMix=(c.index!=null&&sumLatestIdx>0)?c.index/sumLatestIdx*100:null;});
+
+  // ── Calendar-year averages ──
+  const years=[...new Set(giM.map(r=>r.month.slice(0,4)))].sort();
+  const yearAvgs=years.map((y,i)=>{
+    const rows=giM.filter(r=>r.month.slice(0,4)===y);
+    const avg=avgVals(rows);
+    const prevRows=i>0?giM.filter(r=>r.month.slice(0,4)===years[i-1]):[];
+    const prevAvg=prevRows.length?avgVals(prevRows):null;
+    const yoyPct=(avg!=null&&prevAvg)?(avg-prevAvg)/prevAvg*100:null;
+    return{year:y,avg,yoyPct,partial:rows.length<12};
+  });
+  // YTD growth: current (partial) year's average vs the prior FULL calendar year's average
+  const ytdGrowth=yearAvgs.length?yearAvgs[yearAvgs.length-1].yoyPct:null;
+  const priorYtdGrowth=yearAvgs.length>1?yearAvgs[yearAvgs.length-2].yoyPct:null;
+  const ytdTrend=(ytdGrowth!=null&&priorYtdGrowth!=null)?(ytdGrowth>=priorYtdGrowth?'re-accelerating':'decelerating'):'';
+
+  document.getElementById('impsos-content').innerHTML=`
+    <div class="g4" id="idx-kpis"></div>
+
+    <div class="g2" style="gap:10px;margin-bottom:10px;align-items:stretch">
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">📈 National · Monthly</span><span class="title">Branded Search Trend</span><span class="desc">Monthly index, Jan'23 – ${latest.label} (100 = all-time peak).</span></div>
+        <div class="cw"><canvas id="chart-idx-national"></canvas></div>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">📅 Calendar Year</span><span class="title">Annual Average Index</span><span class="desc">Annual mean with year-on-year growth. ${latestYear} is Jan–${latest.label.split("'")[0]} to date.</span></div>
+        <div class="cw"><canvas id="chart-idx-years"></canvas></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+        <div><span class="kicker">🏙 City-level · Monthly</span><span class="title">City Branded Search Trend</span><span class="desc">Compare cities' trajectory against the national trend, month by month.</span></div>
+        <div class="pp-wrap" id="idx-quick">
+          <button class="pp" data-q="top5" type="button">Top 5</button>
+          <button class="pp" data-q="P0" type="button">P0 metros</button>
+          <button class="pp" data-q="P1" type="button">P1 large</button>
+          <button class="pp" data-q="P2" type="button">P2 emerging</button>
+          <button class="pp active" data-q="all" type="button">All cities</button>
+          <button class="pp" data-q="clear" type="button">Clear</button>
+        </div>
+      </div>
+      <div class="fb"><span class="fl">Cities</span><div class="ms-dd" id="ms-idx-city"></div></div>
+      <div class="cw tall"><canvas id="chart-idx-city"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+        <div><span class="kicker">🔥 Heatmap</span><span class="title">City × Month Index Matrix</span><span class="desc">Each city shaded against its own range. Peak month ringed in mint.</span></div>
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+          <div class="pp-wrap" id="idx-matrix-cluster">
+            <button class="pp active" data-c="all" type="button">All</button>
+            <button class="pp" data-c="P0" type="button">P0</button>
+            <button class="pp" data-c="P1" type="button">P1</button>
+            <button class="pp" data-c="P2" type="button">P2</button>
+          </div>
+          <select class="ctrl-sel" id="idx-matrix-peak-sel"></select>
+        </div>
+      </div>
+      <div class="tw tbl-compact" id="tbl-idx-matrix"></div>
+    </div>
+
+    <div class="g2" style="gap:10px;margin-bottom:10px;align-items:stretch">
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">🥧 Demand Mix</span><span class="title">City Scale — Demand Mix</span><span class="desc">Each city's slice of branded search across all tracked cities, ${latest.label}.</span></div>
+        <div class="cw"><canvas id="chart-idx-mix"></canvas></div>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">🚀 Momentum</span><span class="title">City Momentum — YoY Growth</span><span class="desc">${latest.label} vs same month last year.</span></div>
+        <div class="cw"><canvas id="chart-idx-yoy"></canvas></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="sh"><span class="kicker">📋 Detail</span><span class="title">City-level Detail</span><span class="desc">Click any column header to sort.</span></div>
+      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}?gid=1878676239#gid=1878676239" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-idx-detail','india_branded_search_city_detail.csv')">⬇ CSV</button></div>
+      <div class="tw" id="tbl-idx-detail"></div>
+    </div>
+
+    <div class="card" id="idx-insights">
+      <div class="sh"><span class="kicker">💡 Auto-generated</span><span class="title">Summary &amp; Insights</span><span class="desc">Recomputed automatically from the latest data — read on indexed demand only (trajectory and share, not absolute volume).</span></div>
+      <div id="idx-insights-body"></div>
+    </div>`;
+
+  // ── KPI strip ──
+  document.getElementById('idx-kpis').innerHTML=`
+    <div class="kh kh-blue"><div class="kl"><span class="ki">📡</span>Latest Index (${latest.label})</div><div class="kv">${fIdx(latest.Cars24)}</div><div class="ks">${isAtPeak?'⭐ All-time peak':'Below peak'} · ${fPct(sinceStartPct)} since ${first.label}</div></div>
+    <div class="kh ${(ytdGrowth||0)>=0?'kh-green':'kh-red'}"><div class="kl"><span class="ki">${(ytdGrowth||0)>=0?'📈':'📉'}</span>${latestYear} YTD Growth</div><div class="kv">${fPct(ytdGrowth)}</div><div class="ks">vs full-year ${latestYear-1}${ytdTrend?' · '+ytdTrend:''}</div></div>
+    <div class="kh ${(rolling12Growth||0)>=0?'kh-green':'kh-red'}"><div class="kl"><span class="ki">${(rolling12Growth||0)>=0?'📈':'📉'}</span>Rolling 12-Mo Demand</div><div class="kv">${fPct(rolling12Growth)}</div><div class="ks">vs prior 12 months</div></div>
+    <div class="kh kh-purple"><div class="kl"><span class="ki">🏙</span>Cities at All-Time High</div><div class="kv">${citiesAtPeak}<span style="font-size:16px;color:rgba(255,255,255,.6)">/${cities.length}</span></div><div class="ks">in ${latest.label}</div></div>`;
+
+  // ── National trend chart ──
+  charts.idxNational=new Chart(document.getElementById('chart-idx-national').getContext('2d'),{type:'line',data:{labels:giM.map(r=>r.label),datasets:[{label:'India (national)',data:giM.map(r=>r.Cars24),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.3,spanGaps:true,borderWidth:3,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11},usePointStyle:true}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
+
+  // ── Calendar-year bar chart ──
+  charts.idxYears=new Chart(document.getElementById('chart-idx-years').getContext('2d'),{type:'bar',data:{labels:years,datasets:[{label:'Avg index',data:yearAvgs.map(y=>y.avg),backgroundColor:yearAvgs.map((y,i)=>i===yearAvgs.length-1?'#059669':'#4736FE'),borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{afterLabel:ctx=>{const y=yearAvgs[ctx.dataIndex];return y.yoyPct!=null?`YoY: ${fPct(y.yoyPct)}`:'';}}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+
+  // ── City trend chart with quick-select + multiselect ──
+  let idxCitySel=[...cities];
+  function renderIdxCityChart(){
+    if(charts.idxCity)charts.idxCity.destroy();
+    const ctx=document.getElementById('chart-idx-city');if(!ctx)return;
+    const datasets=[{label:'India (national)',data:giM.map(r=>r.Cars24),borderColor:'#111',backgroundColor:'transparent',borderDash:[6,3],tension:0.3,spanGaps:true,borderWidth:2,pointRadius:0}];
+    idxCitySel.forEach((city,i)=>{
+      const rows=cityBrand[city]||[];
+      datasets.push({label:city,data:giM.map(r=>{const m=rows.find(x=>x.month===r.month);return m?m.index:null;}),borderColor:CITY_PALETTE[i%CITY_PALETTE.length],backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:0});
+    });
+    charts.idxCity=new Chart(ctx.getContext('2d'),{type:'line',data:{labels:giM.map(r=>r.label),datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5},padding:8}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
+  }
+  buildMultiSelect('ms-idx-city',cities,cities,c=>c,vals=>{idxCitySel=vals;renderIdxCityChart();},'All cities');
+  document.querySelectorAll('#idx-quick .pp').forEach(btn=>btn.addEventListener('click',()=>{
+    document.querySelectorAll('#idx-quick .pp').forEach(b=>b.classList.toggle('active',b===btn));
+    const q=btn.dataset.q;
+    let sel;
+    if(q==='clear')sel=[];
+    else if(q==='all')sel=[...cities];
+    else if(q==='top5')sel=[...cityStats].sort((a,b)=>(b.index||0)-(a.index||0)).slice(0,5).map(c=>c.city);
+    else sel=cities.filter(c=>tiers[c]===q);
+    idxCitySel=sel;
+    document.getElementById('ms-idx-city').innerHTML='';
+    buildMultiSelect('ms-idx-city',cities,sel,c=>c,vals=>{idxCitySel=vals;renderIdxCityChart();},'All cities');
+    renderIdxCityChart();
+  }));
+  renderIdxCityChart();
+
+  // ── City × month heatmap matrix ──
+  let matrixCluster='all';
+  function renderIdxMatrix(){
+    const rows=cityStats.filter(c=>matrixCluster==='all'||c.tier===matrixCluster).sort((a,b)=>(b.index||0)-(a.index||0));
+    const peakSelVal=document.getElementById('idx-matrix-peak-sel').value;
+    const th=`<th>City</th>${giM.map((m,i)=>`<th class="nr${i===giM.length-1?' ch':''}">${m.label}</th>`).join('')}`;
+    const trs=rows.map(c=>{
+      const highlight=peakSelVal&&peakSelVal!=='__all__'&&c.peakMonth===peakSelVal;
+      const rowVals=c.rows.map(r=>r.index).filter(v=>v!=null);
+      const rowMin=rowVals.length?Math.min(...rowVals):0,rowMax=rowVals.length?Math.max(...rowVals):0;
+      const cells=giM.map(m=>{
+        const r=c.rows.find(x=>x.month===m.month);
+        const v=r?r.index:null;
+        if(v==null)return`<td class="nr">—</td>`;
+        const t=rowMax>rowMin?(v-rowMin)/(rowMax-rowMin):0.5;
+        const alpha=0.12+t*0.55;
+        const isPeak=v===c.peak;
+        const style=`background:rgba(71,54,254,${alpha.toFixed(2)});${isPeak?'box-shadow:inset 0 0 0 2px var(--mint);font-weight:800;':''}color:${t>0.6?'#fff':'var(--ink)'}`;
+        return`<td class="nr" style="${style}">${v.toFixed(0)}</td>`;
+      }).join('');
+      return`<tr${highlight?' style="outline:2px solid var(--blue)"':''}><td><strong>${c.city}</strong> <span class="tier-chip" style="background:${TIER_CLR[c.tier]}22;color:${TIER_CLR[c.tier]}">${c.tier}</span></td>${cells}</tr>`;
+    }).join('');
+    document.getElementById('tbl-idx-matrix').innerHTML=tbl(th,trs);
+  }
+  document.querySelectorAll('#idx-matrix-cluster .pp').forEach(btn=>btn.addEventListener('click',()=>{
+    matrixCluster=btn.dataset.c;
+    document.querySelectorAll('#idx-matrix-cluster .pp').forEach(b=>b.classList.toggle('active',b===btn));
+    renderIdxMatrix();
+  }));
+  const idxMatrixPeakSel=document.getElementById('idx-matrix-peak-sel');
+  idxMatrixPeakSel.innerHTML=`<option value="__all__">All cities (no highlight)</option>`+giM.map(r=>`<option value="${r.month}">${r.label}</option>`).join('');
+  idxMatrixPeakSel.addEventListener('change',renderIdxMatrix);
+  renderIdxMatrix();
+
+  // ── Demand mix + YoY momentum charts ──
+  const mixSorted=[...cityStats].sort((a,b)=>(b.demandMix||0)-(a.demandMix||0));
+  charts.idxMix=new Chart(document.getElementById('chart-idx-mix').getContext('2d'),{type:'bar',data:{labels:mixSorted.map(c=>c.city),datasets:[{data:mixSorted.map(c=>c.demandMix),backgroundColor:mixSorted.map(c=>TIER_CLR[c.tier]||'#999'),borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
+  const yoySorted=[...cityStats].filter(c=>c.yoy!=null).sort((a,b)=>b.yoy-a.yoy);
+  charts.idxYoy=new Chart(document.getElementById('chart-idx-yoy').getContext('2d'),{type:'bar',data:{labels:yoySorted.map(c=>c.city),datasets:[{data:yoySorted.map(c=>c.yoy),backgroundColor:yoySorted.map(c=>c.yoy>=0?'#4736FE':'#E7000B'),borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
+
+  // ── Sortable city detail table ──
+  let sortKey='index',sortDir=-1;
+  function renderIdxDetail(){
+    const sorted=[...cityStats].sort((a,b)=>{
+      const av=a[sortKey],bv=b[sortKey];
+      if(av==null)return 1;if(bv==null)return -1;
+      return av<bv?-sortDir:av>bv?sortDir:0;
+    });
+    const cols=[['city','City'],['tier','Cluster'],['index','Index · '+latest.label],['demandMix','Demand Mix %'],['yoy','YoY Growth'],['peakLabel','Peak Month'],['peak','Peak Index'],['pctOffPeak','% Off Peak']];
+    const th=cols.map(([k,label])=>`<th class="${k!=='city'&&k!=='tier'&&k!=='peakLabel'?'nr':''}${k===sortKey?' ch':''}" style="cursor:pointer" onclick="window.__idxSort('${k}')">${label}${k===sortKey?(sortDir===1?' ▲':' ▼'):''}</th>`).join('');
+    const tr=sorted.map(c=>`<tr><td><strong>${c.city}</strong></td><td><span class="tier-chip" style="background:${TIER_CLR[c.tier]}22;color:${TIER_CLR[c.tier]}">${c.tier}</span></td><td class="nr cc"><strong>${fIdx(c.index)}</strong></td><td class="nr">${c.demandMix!=null?c.demandMix.toFixed(1)+'%':'—'}</td><td class="nr">${badge(c.yoy,true)}</td><td class="nr">${c.peakLabel||'—'}</td><td class="nr">${fIdx(c.peak)}</td><td class="nr">${c.atPeak?'<span style="color:var(--mint);font-weight:800">at peak</span>':c.pctOffPeak!=null?`<span style="color:var(--red);font-weight:700">${c.pctOffPeak.toFixed(1)}%</span>`:'—'}</td></tr>`).join('');
+    document.getElementById('tbl-idx-detail').innerHTML=tbl(th,tr);
+  }
+  window.__idxSort=(key)=>{ sortDir=(sortKey===key)?-sortDir:-1; sortKey=key; renderIdxDetail(); };
+  renderIdxDetail();
+
+  // ── Auto-generated insights ──
+  const worstOffPeak=[...cityStats].filter(c=>c.pctOffPeak!=null&&c.pctOffPeak<-15).sort((a,b)=>a.pctOffPeak-b.pctOffPeak).slice(0,3);
+  const bestYoy=[...cityStats].filter(c=>c.yoy!=null).sort((a,b)=>b.yoy-a.yoy).slice(0,3);
+  const worstYoy=[...cityStats].filter(c=>c.yoy!=null&&c.yoy<0).sort((a,b)=>a.yoy-b.yoy).slice(0,2);
+  let bullets=[];
+  bullets.push(`<li>India branded search ${isAtPeak?`hit its <strong>all-time peak in ${latest.label}</strong>`:`is at ${fIdx(latest.Cars24)} in ${latest.label}, off its all-time peak of ${fIdx(allTimeMax)}`}, ${fPct(sinceStartPct)} since ${first.label}.</li>`);
+  bullets.push(`<li>Rolling 12-month demand is ${fPct(rolling12Growth)} vs the prior 12 months. Annual mean index moved ${yearAvgs.map(y=>y.avg!=null?y.avg.toFixed(1):'—').join(' → ')}; ${latestYear} YTD is ${fPct(ytdGrowth)} vs full-year ${latestYear-1}${ytdTrend?` (${ytdTrend})`:''}.</li>`);
+  bullets.push(`<li><strong>${citiesAtPeak} of ${cities.length} cities are at their all-time high</strong> in ${latest.label}. ${cities.length-citiesAtPeak} are off-peak.</li>`);
+  if(bestYoy.length)bullets.push(`<li>Fastest-growing cities YoY: ${bestYoy.map(c=>`<strong>${c.city}</strong> (${fPct(c.yoy)})`).join(', ')}.</li>`);
+  if(worstOffPeak.length)bullets.push(`<li>Furthest below their own peak: ${worstOffPeak.map(c=>`<strong>${c.city}</strong> (${c.pctOffPeak.toFixed(1)}%, peaked ${c.peakLabel})`).join(', ')} — worth checking whether this is supply-side (fewer listings/activity) or genuine demand softness.</li>`);
+  if(worstYoy.length)bullets.push(`<li>Declining YoY: ${worstYoy.map(c=>`<strong>${c.city}</strong> (${fPct(c.yoy)})`).join(', ')}.</li>`);
+
+  const catLast12=avgVals(giM.slice(-12).map(r=>({Cars24:r.Category}))),catPrior12=avgVals(giM.slice(-24,-12).map(r=>({Cars24:r.Category})));
+  const catGrowth=(catLast12!=null&&catPrior12)?(catLast12-catPrior12)/catPrior12*100:null;
+  if(rolling12Growth!=null&&catGrowth!=null)bullets.push(`<li>Cross-read with the category: over the last 12 months Cars24's index grew ${fPct(rolling12Growth)} while the overall category grew ${fPct(catGrowth)} — ${rolling12Growth>catGrowth?'Cars24 is gaining share of a moving category':'the category is outpacing Cars24'}.</li>`);
+  if(bsosM.length){
+    const latestBsos=bsosM[bsosM.length-1];
+    const p0Cities=cities.filter(c=>tiers[c]==='P0');
+    const p0Rows=p0Cities.map(c=>bsosCities[c]?.[bsosCities[c].length-1]).filter(Boolean);
+    if(p0Rows.length){
+      const p0Avg=b=>{const vals=p0Rows.map(r=>r[b]).filter(v=>v!=null);return vals.length?vals.reduce((a,x)=>a+x,0)/vals.length:null;};
+      bullets.push(`<li>On absolute share-of-search (Brandstack panel, ${latestBsos.label}): Cars24 ~${fIdx(latestBsos.Cars24)}%, CarWale ~${fIdx(latestBsos.CarWale)}%, Spinny ~${fIdx(latestBsos.Spinny)}% pan-India. In P0 metros specifically: Cars24 ~${fIdx(p0Avg('Cars24'))}%, CarWale ~${fIdx(p0Avg('CarWale'))}%, Spinny ~${fIdx(p0Avg('Spinny'))}%. The Google Index rise reflects real demand growth — it is not the same as competitive share-of-search leadership.</li>`);
+    }
+  }
+  document.getElementById('idx-insights-body').innerHTML=`<ul style="margin:0;padding-left:20px;line-height:1.9;font-size:13.5px;color:var(--ink)">${bullets.join('')}</ul>`;
+  scanTw(document.getElementById('impsos-content'));
 }
 
 /* ── YouTube inner-tab styles (injected once) ── */

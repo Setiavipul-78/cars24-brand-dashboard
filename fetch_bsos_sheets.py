@@ -237,6 +237,41 @@ def build_city_daily(token):
           f"({out[0]['date']} → {out[-1]['date']})")
 
 
+# ── City tier mapping (P0/P1/P2) ────────────────────────────────────────────
+def build_city_tiers(token):
+    rows_raw = fetch_values(token, SHEET_CITY, "City Mapping!A1:E20000")
+    hdr_idx = next((i for i, r in enumerate(rows_raw) if r and r[0].strip() == "city_latest"), None)
+    if hdr_idx is None:
+        raise ValidationError("City Mapping: could not find 'city_latest' header row")
+    header = rows_raw[hdr_idx]
+    city_col = next((i for i, h in enumerate(header) if h.strip() == "Brandstack City"), None)
+    tier_col = next((i for i, h in enumerate(header) if h.strip() == "Priority"), None)
+    if city_col is None or tier_col is None:
+        raise ValidationError(f"City Mapping: expected 'Brandstack City' and 'Priority' columns, got {header!r}")
+
+    tiers = {}
+    conflicts = []
+    for r in rows_raw[hdr_idx + 1:]:
+        if len(r) <= max(city_col, tier_col) or not r[city_col].strip() or not r[tier_col].strip():
+            continue
+        city, tier = r[city_col].strip(), r[tier_col].strip()
+        if tier not in ("P0", "P1", "P2"):
+            continue
+        if city in tiers and tiers[city] != tier:
+            conflicts.append((city, tiers[city], tier))
+        tiers[city] = tier
+    if conflicts:
+        raise ValidationError(f"City Mapping: inconsistent tier for same city across rows: {conflicts}")
+    if len(tiers) < 5:
+        raise ValidationError(f"City Mapping: only {len(tiers)} cities resolved — expected many more")
+
+    rows = [{"city": c, "tier": t} for c, t in sorted(tiers.items())]
+    path = DATA / "city_tiers.csv"
+    check_row_count(len(rows), path, "City tiers")
+    write_csv(path, ["city", "tier"], rows)
+    print(f"  ✓ city_tiers.csv: {len(rows)} cities")
+
+
 def main():
     load_env()
     token = get_token()
@@ -253,6 +288,12 @@ def main():
         build_city_daily(token)
     except (ValidationError, ValueError, KeyError) as e:
         print(f"  ✗ BSOS city daily fetch failed validation, existing CSV left untouched: {e}")
+
+    print("  Fetching city tier mapping (City Mapping tab)…")
+    try:
+        build_city_tiers(token)
+    except (ValidationError, ValueError, KeyError) as e:
+        print(f"  ✗ City tiers fetch failed validation, existing CSV left untouched: {e}")
 
 
 if __name__ == "__main__":

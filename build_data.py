@@ -283,7 +283,12 @@ def build_gindex():
         print("  ⚠ gindex_pan_monthly.csv missing (Google Index tab will be empty)")
         return {"monthly": [], "city_brand": {}, "city_generic": {}}
 
+    # Exclude the current calendar month if it has landed but isn't finished yet —
+    # same convention as build_monthly()'s GSC auto-extend.
+    today_period = str(pd.Timestamp("today").to_period("M"))
+
     df = pd.read_csv(pan_p).sort_values("month").reset_index(drop=True)
+    df = df[df["month"] != today_period].reset_index(drop=True)
     bc = [c for c in df.columns if c != "month"]
     monthly = []
     for i, row in df.iterrows():
@@ -300,6 +305,7 @@ def build_gindex():
         if not p.exists():
             return {}
         cdf = pd.read_csv(p).sort_values("month").reset_index(drop=True)
+        cdf = cdf[cdf["month"] != today_period].reset_index(drop=True)
         cities = [c for c in cdf.columns if c != "month"]
         result = {}
         for city in cities:
@@ -321,6 +327,14 @@ def build_gindex():
     print(f"  ✓ Google Index: {len(monthly)} months (pan-India) | "
           f"{len(city_brand)} cities (brand) | {len(city_generic)} cities (generic)")
     return {"monthly": monthly, "city_brand": city_brand, "city_generic": city_generic}
+
+def build_city_tiers():
+    p = DATA / "city_tiers.csv"
+    if not p.exists():
+        print("  ⚠ city_tiers.csv missing (city tiers will be empty)")
+        return {}
+    df = pd.read_csv(p)
+    return dict(zip(df["city"], df["tier"]))
 
 # ── Keywords ──────────────────────────────────────────────────────────────────
 def build_keywords():
@@ -964,6 +978,7 @@ if __name__ == "__main__":
     gsc_weekly     = build_gsc_weekly()
     print(f"  GSC weekly: {len(gsc_weekly)} weeks")
     gindex         = build_gindex()
+    city_tiers     = build_city_tiers()
     keywords       = build_keywords()
     kpis           = build_kpis(monthly, bsos_monthly)
     youtube        = build_youtube()
@@ -986,6 +1001,7 @@ if __name__ == "__main__":
         "gsc_daily":          gsc_daily,
         "gsc_weekly":         gsc_weekly,
         "google_index":       gindex,
+        "city_tiers":         city_tiers,
         "keywords":           keywords,
         "youtube":            youtube,
         "instagram":          instagram,

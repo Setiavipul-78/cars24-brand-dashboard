@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "built": "2026-07-04 20:12",
+    "built": "2026-07-05 02:54",
     "latest_month": "2026-06",
     "latest_month_label": "Jun'26"
   },
@@ -62655,6 +62655,25 @@
         }
       ]
     }
+  },
+  "city_tiers": {
+    "Ahmedabad": "P1",
+    "Bengaluru": "P0",
+    "Chandigarh": "P2",
+    "Chennai": "P1",
+    "Coimbatore": "P2",
+    "Delhi NCR": "P0",
+    "Hyderabad": "P0",
+    "Indore": "P2",
+    "Jaipur": "P1",
+    "Kochi": "P2",
+    "Kolkata": "P1",
+    "Lucknow": "P2",
+    "Mumbai": "P1",
+    "Patna": "P2",
+    "Pune": "P0",
+    "Surat": "P2",
+    "Vadodara": "P2"
   },
   "keywords": {
     "monthly": [
