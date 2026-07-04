@@ -23,7 +23,7 @@ Usage:
   5. Then: python3 build_data.py
 """
 
-import os, csv, json, time, sys
+import os, csv, json, time, sys, re
 from datetime import datetime, date
 from pathlib import Path
 from dotenv import load_dotenv
@@ -116,13 +116,70 @@ def _yt_row_template(m, total_subs, total_views, total_videos):
         "subscribers_gained": 0, "subscribers_lost": 0, "net_subs": 0,
         "likes": 0, "comments": 0, "shares": 0,
         "impressions": 0, "ctr": 0, "videos_published": 0,
+        "videos_published_shorts": 0, "videos_published_long": 0,
         "data_source": "analytics",
         "total_subscribers": total_subs, "total_views": total_views, "total_videos": total_videos,
     }
 
+def _parse_iso8601_duration(s: str) -> int:
+    """PT#H#M#S -> total seconds."""
+    m = re.match(r"PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?", s or "")
+    if not m:
+        return 0
+    h, mi, se = (int(x) if x else 0 for x in m.groups())
+    return h * 3600 + mi * 60 + se
+
+def fetch_video_publish_counts(channel_id: str, ytd) -> dict:
+    """
+    Cheap (1 quota unit/page) full listing of every video on the channel via its
+    uploads playlist, classified Shorts (<=60s) vs long-form by duration.
+    Returns {month: {"total": n, "shorts": n, "long_form": n}}.
+    """
+    from collections import defaultdict
+
+    ch = ytd.channels().list(part="contentDetails", id=channel_id).execute()
+    items = ch.get("items", [])
+    if not items:
+        return {}
+    uploads_id = items[0]["contentDetails"]["relatedPlaylists"]["uploads"]
+
+    video_pubs = []  # [(video_id, publishedAt)]
+    page_token = None
+    for _ in range(40):  # up to 2000 videos
+        resp = ytd.playlistItems().list(
+            part="contentDetails", playlistId=uploads_id,
+            maxResults=50, pageToken=page_token,
+        ).execute()
+        for it in resp.get("items", []):
+            cd = it.get("contentDetails", {})
+            vid = cd.get("videoId")
+            pub = cd.get("videoPublishedAt")
+            if vid and pub:
+                video_pubs.append((vid, pub[:7]))
+        page_token = resp.get("nextPageToken")
+        if not page_token:
+            break
+
+    monthly = defaultdict(lambda: {"total": 0, "shorts": 0, "long_form": 0})
+    for i in range(0, len(video_pubs), 50):
+        batch = video_pubs[i:i + 50]
+        ids = ",".join(v[0] for v in batch)
+        vresp = ytd.videos().list(part="contentDetails", id=ids).execute()
+        dur_by_id = {v["id"]: _parse_iso8601_duration(v.get("contentDetails", {}).get("duration", "")) for v in vresp.get("items", [])}
+        for vid, month in batch:
+            dur = dur_by_id.get(vid, 0)
+            bucket = monthly[month]
+            bucket["total"] += 1
+            if dur <= 60:
+                bucket["shorts"] += 1
+            else:
+                bucket["long_form"] += 1
+    return dict(monthly)
+
 def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
     """Pull monthly analytics (requires channel owner OAuth)."""
     from googleapiclient.discovery import build
+    from collections import defaultdict
     yta = build("youtubeAnalytics", "v2", credentials=creds, cache_discovery=False)
     ytd = build("youtube", "v3", credentials=creds, cache_discovery=False)
 
@@ -169,39 +226,32 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
         })
         rows.append(base)
 
-    # Build month-indexed dict for impressions/CTR merge
+    # Build month-indexed dict for later merges (publish counts, traffic sources)
     rows_by_month = {r["month"]: r for r in rows}
+    # NOTE: impressions/CTR are intentionally not fetched. As of early 2026 YouTube
+    # retired `impressions`/`impressionsClickThroughRate` from the interactive Analytics
+    # API; their successors (videoThumbnailImpressions / videoThumbnailImpressionsClickRate)
+    # are recognized metric names but only queryable via the bulk YouTube Reporting API
+    # (scheduled jobs + CSV download) — confirmed by direct API testing across every
+    # dimension combination, not available through this synchronous reports().query() call.
 
-    # Fetch daily impressions + CTR, then aggregate by month
+    # Fetch full video list (cheap, 1 quota unit/page via uploads playlist) for
+    # accurate per-month published counts, split Shorts (<=60s) vs long-form
     try:
-        daily_resp = yta.reports().query(
-            ids=f"channel=={channel_id}", startDate=start, endDate=end,
-            dimensions="day",
-            metrics="impressions,impressionsClickThroughRate",
-            sort="day",
-        ).execute()
-        daily_headers = [h["name"] for h in daily_resp.get("columnHeaders", [])]
-        from collections import defaultdict
-        imp_by_month = defaultdict(lambda: {"impressions": 0, "ctr_sum": 0.0, "ctr_count": 0})
-        for dr in daily_resp.get("rows", []):
-            drow = dict(zip(daily_headers, dr))
-            dm = drow.get("day", "")[:7]
-            imp_by_month[dm]["impressions"] += int(drow.get("impressions", 0))
-            ctr_val = float(drow.get("impressionsClickThroughRate", 0))
-            imp_by_month[dm]["ctr_sum"] += ctr_val
-            imp_by_month[dm]["ctr_count"] += 1
-        # Merge impressions and avg CTR into monthly rows
-        for m, agg in imp_by_month.items():
+        publish_counts = fetch_video_publish_counts(channel_id, ytd)
+        for m, agg in publish_counts.items():
             if m in rows_by_month:
-                rows_by_month[m]["impressions"] = agg["impressions"]
-                rows_by_month[m]["ctr"] = round(agg["ctr_sum"] / agg["ctr_count"], 4) if agg["ctr_count"] else 0
+                rows_by_month[m]["videos_published"] = agg["total"]
+                rows_by_month[m]["videos_published_shorts"] = agg["shorts"]
+                rows_by_month[m]["videos_published_long"] = agg["long_form"]
     except Exception as e:
-        print(f"    ⚠  Daily impressions/CTR fetch failed for {key}: {e}")
+        print(f"    ⚠  Video publish-count fetch failed for {key}: {e}")
 
     # Fetch extra dimension data and save to JSON
     extra = {}
 
-    # Geo: top cities
+    # Geo: top cities (all-time only — confirmed via direct API testing that YouTube
+    # Analytics API does not support combining `city` with any time dimension, day or month)
     try:
         geo_resp = yta.reports().query(
             ids=f"channel=={channel_id}", startDate=start, endDate=end,
@@ -224,7 +274,8 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
     except Exception as e:
         print(f"    ⚠  Geo fetch failed for {key}: {e}")
 
-    # Demographics: age group + gender
+    # Demographics: age group + gender (all-time only — same API limitation as city;
+    # ageGroup/gender cannot be combined with a time dimension)
     try:
         demo_resp = yta.reports().query(
             ids=f"channel=={channel_id}", startDate=start, endDate=end,
@@ -245,7 +296,8 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
     except Exception as e:
         print(f"    ⚠  Demographics fetch failed for {key}: {e}")
 
-    # Traffic sources
+    # Traffic sources (all-time snapshot + per-month breakdown, via day→month rollup —
+    # confirmed `day,insightTrafficSourceType` IS a supported combination, unlike city/demo)
     try:
         traffic_resp = yta.reports().query(
             ids=f"channel=={channel_id}", startDate=start, endDate=end,
@@ -269,6 +321,34 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
         print(f"    traffic_sources: {len(traffic_raw)} sources")
     except Exception as e:
         print(f"    ⚠  Traffic sources fetch failed for {key}: {e}")
+    try:
+        traffic_m_resp = yta.reports().query(
+            ids=f"channel=={channel_id}", startDate=start, endDate=end,
+            dimensions="day,insightTrafficSourceType",
+            metrics="views,estimatedMinutesWatched",
+            sort="day",
+            # No maxResults: with it set, the API silently truncates (confirmed via
+            # testing — e.g. maxResults=4000 + sort=day kept only the OLDEST 9 months
+            # and dropped everything since). Omitting it returns the full row set.
+        ).execute()
+        traffic_m_headers = [h["name"] for h in traffic_m_resp.get("columnHeaders", [])]
+        traffic_by_month = defaultdict(lambda: defaultdict(lambda: {"views": 0, "watch_time_hours": 0.0}))
+        for tr in traffic_m_resp.get("rows", []):
+            trow = dict(zip(traffic_m_headers, tr))
+            m = trow.get("day", "")[:7]
+            src = trow.get("insightTrafficSourceType", "")
+            bucket = traffic_by_month[m][src]
+            bucket["views"] += int(trow.get("views", 0))
+            bucket["watch_time_hours"] += round(float(trow.get("estimatedMinutesWatched", 0)) / 60, 1)
+        for m, by_src in traffic_by_month.items():
+            rows_m = [{"source": src, **agg} for src, agg in by_src.items()]
+            tot = sum(r["views"] for r in rows_m) or 1
+            for r in rows_m:
+                r["pct"] = round(r["views"] / tot * 100, 1)
+            traffic_by_month[m] = sorted(rows_m, key=lambda r: -r["views"])
+        extra["traffic_sources_monthly"] = dict(traffic_by_month)
+    except Exception as e:
+        print(f"    ⚠  Traffic sources (monthly) fetch failed for {key}: {e}")
 
     # Devices
     try:
@@ -294,6 +374,32 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
         print(f"    devices: {len(device_raw)} types")
     except Exception as e:
         print(f"    ⚠  Devices fetch failed for {key}: {e}")
+    try:
+        device_m_resp = yta.reports().query(
+            ids=f"channel=={channel_id}", startDate=start, endDate=end,
+            dimensions="day,deviceType",
+            metrics="views,estimatedMinutesWatched",
+            sort="day",
+            # No maxResults — see comment on the traffic-sources query above.
+        ).execute()
+        device_m_headers = [h["name"] for h in device_m_resp.get("columnHeaders", [])]
+        device_by_month = defaultdict(lambda: defaultdict(lambda: {"views": 0, "watch_time_hours": 0.0}))
+        for dr in device_m_resp.get("rows", []):
+            drow = dict(zip(device_m_headers, dr))
+            m = drow.get("day", "")[:7]
+            dev = drow.get("deviceType", "")
+            bucket = device_by_month[m][dev]
+            bucket["views"] += int(drow.get("views", 0))
+            bucket["watch_time_hours"] += round(float(drow.get("estimatedMinutesWatched", 0)) / 60, 1)
+        for m, by_dev in device_by_month.items():
+            rows_m = [{"device": dev, **agg} for dev, agg in by_dev.items()]
+            tot = sum(r["views"] for r in rows_m) or 1
+            for r in rows_m:
+                r["pct"] = round(r["views"] / tot * 100, 1)
+            device_by_month[m] = sorted(rows_m, key=lambda r: -r["views"])
+        extra["devices_monthly"] = dict(device_by_month)
+    except Exception as e:
+        print(f"    ⚠  Devices (monthly) fetch failed for {key}: {e}")
 
     # Top videos (per-video analytics + metadata)
     try:
@@ -373,7 +479,7 @@ def fetch_yt_channel_public(key: str, channel_id: str, creds) -> list[dict]:
     total_videos = int(stats.get("videoCount", 0))
 
     # Collect videos (up to 10 pages = 500 videos)
-    monthly = defaultdict(lambda: {"views": 0, "likes": 0, "comments": 0, "count": 0})
+    monthly = defaultdict(lambda: {"views": 0, "likes": 0, "comments": 0, "count": 0, "shorts": 0, "long_form": 0})
     next_page = None
     for _ in range(10):
         params = {"part": "id", "channelId": channel_id, "type": "video",
@@ -383,14 +489,19 @@ def fetch_yt_channel_public(key: str, channel_id: str, creds) -> list[dict]:
         search_resp = ytd.search().list(**params).execute()
         vid_ids = [item["id"]["videoId"] for item in search_resp.get("items", []) if item.get("id", {}).get("videoId")]
         if vid_ids:
-            vstats = ytd.videos().list(part="statistics,snippet", id=",".join(vid_ids)).execute()
+            vstats = ytd.videos().list(part="statistics,snippet,contentDetails", id=",".join(vid_ids)).execute()
             for v in vstats.get("items", []):
                 pub = v["snippet"]["publishedAt"][:7]
                 vs  = v.get("statistics", {})
+                dur = _parse_iso8601_duration(v.get("contentDetails", {}).get("duration", ""))
                 monthly[pub]["views"]    += int(vs.get("viewCount", 0))
                 monthly[pub]["likes"]    += int(vs.get("likeCount", 0))
                 monthly[pub]["comments"] += int(vs.get("commentCount", 0))
                 monthly[pub]["count"]    += 1
+                if dur <= 60:
+                    monthly[pub]["shorts"] += 1
+                else:
+                    monthly[pub]["long_form"] += 1
         next_page = search_resp.get("nextPageToken")
         if not next_page:
             break
@@ -405,6 +516,8 @@ def fetch_yt_channel_public(key: str, channel_id: str, creds) -> list[dict]:
             "likes":            d["likes"],
             "comments":         d["comments"],
             "videos_published": d["count"],
+            "videos_published_shorts": d["shorts"],
+            "videos_published_long":   d["long_form"],
             "data_source":      "public",  # views = cumulative per-video, not monthly traffic
         })
         rows.append(base)

@@ -660,7 +660,7 @@ const _curM=`${_now.getFullYear()}-${String(_now.getMonth()+1).padStart(2,'0')}`
 const _curLbl=_now.toLocaleString('en-US',{month:'short'})+`'${String(_now.getFullYear()).slice(2)}`;
 
 // Social channel URLs
-const YT_URLS={cars24_india:'https://www.youtube.com/@Cars24India',teambhp:'https://www.youtube.com/@TeamBHP',cars24_insider:'https://www.youtube.com/@Cars24Insider',cars24_malayalam:'https://www.youtube.com/channel/UCDsx70znq0fGHPjHWD-l5dA',cars24_malayalam2:'https://www.youtube.com/channel/UCyk90jODJw7RPu1WUz6zlQQ',cars24_au:'https://www.youtube.com/@Cars24Australia',cars24_uae:'https://www.youtube.com/@Cars24UAE'};
+const YT_URLS={cars24_india:'https://www.youtube.com/@Cars24India',teambhp:'https://www.youtube.com/@TeamBHPOfficial',cars24_insider:'https://www.youtube.com/@Cars24-Insider',cars24_malayalam:'https://www.youtube.com/channel/UCDsx70znq0fGHPjHWD-l5dA',cars24_malayalam2:'https://www.youtube.com/channel/UCyk90jODJw7RPu1WUz6zlQQ',cars24_au:'https://www.youtube.com/@Cars24Australia',cars24_uae:'https://www.youtube.com/@Cars24UAE'};
 const IG_URLS={cars24_india:'https://www.instagram.com/cars24india/',teambhp:'https://www.instagram.com/teambhp/',cars24_au:'https://www.instagram.com/cars24au/',cars24_uae:'https://www.instagram.com/cars24uae/'};
 
 // Build month <option> list, always injecting current month at top
@@ -1836,7 +1836,7 @@ function renderYT(containerId,key,channelName){
   const isPublic=monthly[0]?.data_source==='public';
   const monthsDesc=[...monthly].reverse();
   const fv=v=>{if(!v&&v!==0)return'—';if(v>=1e6)return(v/1e6).toFixed(2)+'M';if(v>=1e3)return(v/1e3).toFixed(1)+'K';return Math.round(v).toLocaleString();};
-  const fh=h=>h!=null?h.toFixed(1)+'h':'—';
+  const fh=h=>{if(h==null)return'—';if(h>=1e5)return(h/1e5).toFixed(2)+'L hrs';if(h>=1e3)return(h/1e3).toFixed(1)+'K hrs';return h.toFixed(1)+'h';};
   const fd=s=>s?Math.floor(s/60)+'m '+Math.floor(s%60)+'s':'—';
 
   // Build HTML skeleton
@@ -1850,7 +1850,7 @@ function renderYT(containerId,key,channelName){
           ${monthOpts(monthsDesc,true)}
         </select>
       </div>
-      <div class="inf-kpi-strip" style="grid-template-columns:repeat(7,1fr)" id="yt-kpis-${key}"></div>
+      <div class="inf-kpi-strip" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))" id="yt-kpis-${key}"></div>
     </div>
 
     <div class="card">
@@ -1922,7 +1922,7 @@ function renderYT(containerId,key,channelName){
     ${yt.geo?.length?`
     <div class="g2">
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">🌍 City Level</span><span class="title">Top Cities by Views</span><span class="desc">Where your viewers are located. Sorted by total views.</span></div>
+        <div class="sh"><span class="kicker">🌍 City Level</span><span class="title">Top Cities by Views</span><span class="desc">Where your viewers are located, all-time. YouTube's Analytics API doesn't support a period filter for city-level data.</span></div>
         <div class="cw" style="height:340px"><canvas id="yt-geo-${key}"></canvas></div>
       </div>
       <div class="card" style="margin:0">
@@ -1934,7 +1934,7 @@ function renderYT(containerId,key,channelName){
     ${yt.demographics?.length?`
     <div class="g2">
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">📊 Age Groups</span><span class="title">Audience Age Distribution</span><span class="desc">% of viewers in each age band. Helps identify your core demographic.</span></div>
+        <div class="sh"><span class="kicker">📊 Age Groups</span><span class="title">Audience Age Distribution</span><span class="desc">% of viewers in each age band, all-time. YouTube's Analytics API doesn't support a period filter for demographic data.</span></div>
         <div class="cw" style="height:240px"><canvas id="yt-age-${key}"></canvas></div>
       </div>
       <div class="card" style="margin:0">
@@ -1946,7 +1946,10 @@ function renderYT(containerId,key,channelName){
     ${yt.traffic_sources?.length?`
     <div class="g2">
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">🚦 Traffic Sources</span><span class="title">How Viewers Find Your Videos</span><span class="desc">Search, Shorts feed, Browse/Home, Suggested, External and more.</span></div>
+        <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div><span class="kicker">🚦 Traffic Sources</span><span class="title">How Viewers Find Your Videos</span><span class="desc">Search, Shorts feed, Browse/Home, Suggested, External and more.</span></div>
+          <select class="inf-sel" id="yt-traffic-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
+        </div>
         <div class="cw" style="height:300px"><canvas id="yt-traffic-${key}"></canvas></div>
       </div>
       <div class="card" style="margin:0">
@@ -1958,7 +1961,10 @@ function renderYT(containerId,key,channelName){
     ${yt.devices?.length?`
     <div class="g2">
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">📱 Devices</span><span class="title">Device Breakdown</span><span class="desc">Mobile, desktop, tablet and TV split of your viewership.</span></div>
+        <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div><span class="kicker">📱 Devices</span><span class="title">Device Breakdown</span><span class="desc">Mobile, desktop, tablet and TV split of your viewership.</span></div>
+          <select class="inf-sel" id="yt-devices-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
+        </div>
         <div class="cw" style="height:260px"><canvas id="yt-devices-${key}"></canvas></div>
       </div>
       <div class="card" style="margin:0">
@@ -1968,28 +1974,42 @@ function renderYT(containerId,key,channelName){
     </div>`:''}
   `;
 
+  // Ad-attributed views for a period, from the Traffic Sources breakdown (ADVERTISING source)
+  function adViewsFor(period){
+    const src=period==='all'?(yt.traffic_sources||[]):(yt.traffic_sources_monthly?.[period.replace('m:','')]||[]);
+    return src.filter(t=>t.source==='ADVERTISING').reduce((s,t)=>s+(t.views||0),0);
+  }
+
   // ── KPI renderer (period-aware) ──
   function renderKPIs(period){
     let rows=period==='all'?monthly:monthly.filter(r=>r.month===period.replace('m:',''));
     const tv=rows.reduce((s,r)=>s+(r.views||0),0);
+    const adViews=adViewsFor(period);
+    const organicViews=Math.max(0,tv-adViews);
     const tw=rows.reduce((s,r)=>s+(r.watch_time_hours||0),0);
     const ts=rows.reduce((s,r)=>s+(r.subscribers_gained||0),0);
+    const tsl=rows.reduce((s,r)=>s+(r.subscribers_lost||0),0);
     const tl=rows.reduce((s,r)=>s+(r.likes||0),0);
     const tc=rows.reduce((s,r)=>s+(r.comments||0),0);
     const tsh=rows.reduce((s,r)=>s+(r.shares||0),0);
+    const tvid=rows.reduce((s,r)=>s+(r.videos_published||0),0);
+    const tvidS=rows.reduce((s,r)=>s+(r.videos_published_shorts||0),0);
+    const tvidL=rows.reduce((s,r)=>s+(r.videos_published_long||0),0);
     const retRows=rows.filter(r=>r.avg_view_percent>0);
     const avgRet=retRows.length?retRows.reduce((s,r)=>s+r.avg_view_percent,0)/retRows.length:0;
     const durRows=rows.filter(r=>r.avg_view_duration>0);
     const avgDur=durRows.length?durRows.reduce((s,r)=>s+r.avg_view_duration,0)/durRows.length:0;
-    const engRate=tv>0?(tl+tc+tsh)/tv*100:0;
+    const engRate=tv>0?(tl+ts+tsh+tc)/tv*100:0;
+    const netSubs=ts-tsl;
     document.getElementById(`yt-kpis-${key}`).innerHTML=`
-      <div class="ink grn"><span class="ink-icon">👀</span><div class="ink-lbl">Total Views</div><div class="ink-val">${fv(tv)}</div><div class="ink-sub">in period</div></div>
-      <div class="ink"><span class="ink-icon">📹</span><div class="ink-lbl">Videos Live</div><div class="ink-val">${numFmt(snap.videos||0)}</div><div class="ink-sub">on channel</div></div>
+      <div class="ink grn"><span class="ink-icon">👀</span><div class="ink-lbl">Organic Views</div><div class="ink-val">${fv(organicViews)}</div><div class="ink-sub">${adViews>0?`of ${fv(tv)} total · −${fv(adViews)} from Ads`:'= total views · no Ads traffic'}</div></div>
+      <div class="ink"><span class="ink-icon">📹</span><div class="ink-lbl">Videos Published</div><div class="ink-val">${numFmt(tvid)}</div><div class="ink-sub">${tvid?`${numFmt(tvidS)} Shorts · ${numFmt(tvidL)} Long-form`:'in period'}</div></div>
       <div class="ink mint"><span class="ink-icon">👥</span><div class="ink-lbl">Subscribers</div><div class="ink-val">${numFmt(snap.subscribers||0)}</div><div class="ink-sub">total on channel</div></div>
-      <div class="ink pur"><span class="ink-icon">⏱</span><div class="ink-lbl">Watch Time</div><div class="ink-val">${fh(tw)}</div><div class="ink-sub">total hours in period</div></div>
+      <div class="ink mint"><span class="ink-icon">📈</span><div class="ink-lbl">Subs Gained</div><div class="ink-val">${ts>0?'+':''}${numFmt(ts)}</div><div class="ink-sub">in period · net ${netSubs>=0?'+':''}${numFmt(netSubs)}</div></div>
+      <div class="ink pur"><span class="ink-icon">⏱</span><div class="ink-lbl">Watch Time</div><div class="ink-val">${fh(tw)}</div><div class="ink-sub">${tw?'≈ '+numFmt(Math.round(tw/24))+' days watched':'in period'}</div></div>
       <div class="ink or"><span class="ink-icon">⏰</span><div class="ink-lbl">Avg Duration</div><div class="ink-val">${fd(avgDur)}</div><div class="ink-sub">avg per video view</div></div>
       <div class="ink"><span class="ink-icon">🔄</span><div class="ink-lbl">Avg Retention</div><div class="ink-val">${avgRet>0?avgRet.toFixed(1)+'%':'—'}</div><div class="ink-sub">avg % of video watched</div></div>
-      <div class="ink grn"><span class="ink-icon">⚡</span><div class="ink-lbl">Engagement</div><div class="ink-val">${engRate.toFixed(2)}%</div><div class="ink-sub">(likes+cmts+shares)÷views</div></div>`;
+      <div class="ink grn"><span class="ink-icon">⚡</span><div class="ink-lbl">Engagement</div><div class="ink-val">${engRate.toFixed(2)}%</div><div class="ink-sub">(likes+subs+shares+cmts)÷views</div></div>`;
   }
 
   // ── Monthly table (period-filtered) ──
@@ -2050,7 +2070,7 @@ function renderYT(containerId,key,channelName){
     ytTopFill(`yt-top-dur-${key}`,`yt-top-dur-sel-${key}`,'avg_duration_sec',v=>fd(v.avg_duration_sec));
   }
 
-  // ── Geo chart + table ──
+  // ── Geo chart + table (all-time only — see caveat in card header) ──
   if(yt.geo?.length){
     const geo15=yt.geo.slice(0,15);
     const gc=document.getElementById(`yt-geo-${key}`);
@@ -2060,7 +2080,7 @@ function renderYT(containerId,key,channelName){
     if(gt) gt.innerHTML=tbl(`<th>#</th><th>🌍 City</th><th class="nr">👀 Views</th><th class="nr">⏱ Watch Time</th>`,yt.geo.map((g,i)=>`<tr><td>${i+1}</td><td>${g.city}</td><td class="nr">${fv(g.views)}</td><td class="nr">${fh(g.watch_time_hours)}</td></tr>`).join(''));
   }
 
-  // ── Demographics ──
+  // ── Demographics (all-time only — see caveat in card header) ──
   if(yt.demographics?.length){
     const ageMap={};yt.demographics.forEach(d=>{ageMap[d.age_group]=(ageMap[d.age_group]||0)+d.viewer_pct;});
     const ages=Object.keys(ageMap).sort();
@@ -2072,21 +2092,33 @@ function renderYT(containerId,key,channelName){
     if(genc) charts[genck]=new Chart(genc.getContext('2d'),{type:'doughnut',data:{labels:gens,datasets:[{data:gens.map(g=>genMap[g].toFixed(2)),backgroundColor:['#4736FE','#00C951','#F59E0B'],borderWidth:3,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11},generateLabels:chart=>{const ds=chart.data;return ds.labels.map((l,i)=>({text:`${l} ${parseFloat(ds.datasets[0].data[i]).toFixed(1)}%`,fillStyle:ds.datasets[0].backgroundColor[i],index:i}));}}}}}});
   }
 
-  // ── Traffic sources chart + table ──
+  // ── Traffic sources chart + table (period-aware) ──
   if(yt.traffic_sources?.length){
-    const trc=document.getElementById(`yt-traffic-${key}`);const trck=`yt_${key}_traffic`;if(charts[trck])charts[trck].destroy();
-    const trNames=yt.traffic_sources.map(t=>YT_SRC_NAMES[t.source]||t.source);
-    if(trc) charts[trck]=new Chart(trc.getContext('2d'),{type:'bar',data:{labels:trNames,datasets:[{label:'Views',data:yt.traffic_sources.map(t=>t.views),backgroundColor:'rgba(0,201,81,.7)',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>fv(v)},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
-    const trt=document.getElementById(`yt-traffic-tbl-${key}`);
-    if(trt) trt.innerHTML=tbl(`<th>🚦 Source</th><th class="nr">👀 Views</th><th class="nr">Share %</th><th class="nr">⏱ Watch Time</th>`,yt.traffic_sources.map(t=>`<tr><td>${YT_SRC_NAMES[t.source]||t.source}</td><td class="nr">${fv(t.views)}</td><td class="nr">${t.pct}%</td><td class="nr">${fh(t.watch_time_hours)}</td></tr>`).join(''));
+    function renderTraffic(period){
+      const src=period==='all'?yt.traffic_sources:(yt.traffic_sources_monthly?.[period.replace('m:','')]||[]);
+      const rowsT=[...src].sort((a,b)=>b.views-a.views);
+      const trc=document.getElementById(`yt-traffic-${key}`);const trck=`yt_${key}_traffic`;if(charts[trck])charts[trck].destroy();
+      const trNames=rowsT.map(t=>YT_SRC_NAMES[t.source]||t.source);
+      if(trc) charts[trck]=new Chart(trc.getContext('2d'),{type:'bar',data:{labels:trNames,datasets:[{label:'Views',data:rowsT.map(t=>t.views),backgroundColor:'rgba(0,201,81,.7)',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>fv(v)},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
+      const trt=document.getElementById(`yt-traffic-tbl-${key}`);
+      if(trt) trt.innerHTML=rowsT.length?tbl(`<th>🚦 Source</th><th class="nr">👀 Views</th><th class="nr">Share %</th><th class="nr">⏱ Watch Time</th>`,rowsT.map(t=>`<tr><td>${YT_SRC_NAMES[t.source]||t.source}</td><td class="nr">${fv(t.views)}</td><td class="nr">${t.pct}%</td><td class="nr">${fh(t.watch_time_hours)}</td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
+    }
+    bindSel(`yt-traffic-sel-${key}`,renderTraffic);
+    renderTraffic(document.getElementById(`yt-traffic-sel-${key}`)?.value||'all');
   }
 
-  // ── Devices donut + table ──
+  // ── Devices donut + table (period-aware) ──
   if(yt.devices?.length){
-    const dvc=document.getElementById(`yt-devices-${key}`);const dvck=`yt_${key}_devices`;if(charts[dvck])charts[dvck].destroy();
-    if(dvc) charts[dvck]=new Chart(dvc.getContext('2d'),{type:'doughnut',data:{labels:yt.devices.map(d=>d.device),datasets:[{data:yt.devices.map(d=>d.views),backgroundColor:['#4736FE','#00C951','#F59E0B','#8B5CF6'],borderWidth:3,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:11},generateLabels:chart=>{const ds=chart.data;return ds.labels.map((l,i)=>({text:`${l} ${yt.devices[i].pct}%`,fillStyle:ds.datasets[0].backgroundColor[i],index:i}));}}}}}});
-    const dvt=document.getElementById(`yt-devices-tbl-${key}`);
-    if(dvt) dvt.innerHTML=tbl(`<th>📱 Device</th><th class="nr">👀 Views</th><th class="nr">Share %</th><th class="nr">⏱ Watch Time</th>`,yt.devices.map(d=>`<tr><td>${d.device}</td><td class="nr">${fv(d.views)}</td><td class="nr">${d.pct}%</td><td class="nr">${fh(d.watch_time_hours)}</td></tr>`).join(''));
+    function renderDevices(period){
+      const src=period==='all'?yt.devices:(yt.devices_monthly?.[period.replace('m:','')]||[]);
+      const rowsD=[...src].sort((a,b)=>b.views-a.views);
+      const dvc=document.getElementById(`yt-devices-${key}`);const dvck=`yt_${key}_devices`;if(charts[dvck])charts[dvck].destroy();
+      if(dvc) charts[dvck]=new Chart(dvc.getContext('2d'),{type:'doughnut',data:{labels:rowsD.map(d=>d.device),datasets:[{data:rowsD.map(d=>d.views),backgroundColor:['#4736FE','#00C951','#F59E0B','#8B5CF6'],borderWidth:3,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:11},generateLabels:chart=>{const ds=chart.data;return ds.labels.map((l,i)=>({text:`${l} ${rowsD[i].pct}%`,fillStyle:ds.datasets[0].backgroundColor[i],index:i}));}}}}}});
+      const dvt=document.getElementById(`yt-devices-tbl-${key}`);
+      if(dvt) dvt.innerHTML=rowsD.length?tbl(`<th>📱 Device</th><th class="nr">👀 Views</th><th class="nr">Share %</th><th class="nr">⏱ Watch Time</th>`,rowsD.map(d=>`<tr><td>${d.device}</td><td class="nr">${fv(d.views)}</td><td class="nr">${d.pct}%</td><td class="nr">${fh(d.watch_time_hours)}</td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
+    }
+    bindSel(`yt-devices-sel-${key}`,renderDevices);
+    renderDevices(document.getElementById(`yt-devices-sel-${key}`)?.value||'all');
   }
   scanTw(el);
 }

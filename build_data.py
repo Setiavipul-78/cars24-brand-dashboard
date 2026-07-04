@@ -657,8 +657,8 @@ def build_youtube():
                     if ys:
                         yoy_subs = round((subs - ys) / ys * 100, 1)
 
-                # Engagement rate
-                engagement_rate = round((likes + comments + shares) / views * 100, 2) if views > 0 else 0
+                # Engagement rate = (likes + subs gained + shares + comments) / views
+                engagement_rate = round((likes + subs + comments + shares) / views * 100, 2) if views > 0 else 0
 
                 # avg_view_duration in minutes
                 avg_view_duration_min = round(avg_dur / 60, 1) if avg_dur is not None else None
@@ -679,6 +679,9 @@ def build_youtube():
                     "shares":               shares,
                     "impressions":          int(row.get("impressions", 0)),
                     "ctr":                  sf(row.get("ctr")),
+                    "videos_published":         int(row.get("videos_published", 0)),
+                    "videos_published_shorts":  int(row.get("videos_published_shorts", 0)),
+                    "videos_published_long":    int(row.get("videos_published_long", 0)),
                     "data_source":          str(row.get("data_source", "analytics")),
                     "mom_views":            mom_views,
                     "mom_wt":               mom_wt,
@@ -698,6 +701,8 @@ def build_youtube():
                 "demographics":  extra.get("demographics", []),
                 "traffic_sources": extra.get("traffic_sources", []),
                 "devices":       extra.get("devices", []),
+                "traffic_sources_monthly": extra.get("traffic_sources_monthly", {}),
+                "devices_monthly":       extra.get("devices_monthly", {}),
                 "top_videos":    extra.get("top_videos", []),
             }
             print(f"  ✓ YouTube {key}: {len(rows)} months | geo:{len(extra.get('geo',[]))} | demo:{len(extra.get('demographics',[]))} | traffic:{len(extra.get('traffic_sources',[]))} | devices:{len(extra.get('devices',[]))}")
