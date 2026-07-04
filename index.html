@@ -139,7 +139,7 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
 .dt .cc{background:#F5F4FF;font-weight:700;color:var(--blue)}
 .peak-box{display:inline-block;background:rgba(71,54,254,.1);border:2px solid var(--blue);border-radius:5px;padding:1px 8px;color:var(--blue);font-weight:800;font-size:12px}
 .dt .nr{text-align:right;font-variant-numeric:tabular-nums}
-.tw{max-height:460px;overflow-y:auto;border-radius:10px;border:1.5px solid var(--border)}
+.tw{max-height:460px;overflow-y:auto;overflow-x:auto;border-radius:10px;border:1.5px solid var(--border)}
 .tbl-compact .dt thead th{padding:6px 8px;font-size:9.5px}
 .tbl-compact .dt tbody td{padding:6px 8px;font-size:12px}
 
@@ -439,6 +439,9 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
               <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
                 <div class="ms-dd" id="ms-sos"></div>
                 <select class="ctrl-sel" id="sos-m-period-sel"></select>
+                <div class="pp-wrap" id="pp-sos-m">
+                  <button class="pp" data-p="compare" type="button">Compare ▾</button>
+                </div>
                 <div class="cr" id="cr-sos-m">
                   <div class="cr-pair">
                     <div class="cr-row"><span class="cr-lbl" style="color:var(--blue)">Period A</span><input type="month" id="sos-m-a-from"><span class="sep">–</span><input type="month" id="sos-m-a-to"></div>
@@ -462,6 +465,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
                   <button class="pp" data-g="day" type="button">Day</button>
                 </div>
                 <select class="ctrl-sel" id="sos-gran-period-sel"></select>
+                <div class="pp-wrap" id="pp-sos-gran"></div>
                 <div class="cr" id="cr-sos-gran">
                   <div class="cr-pair">
                     <div class="cr-row"><span class="cr-lbl" style="color:var(--blue)">Period A</span><input type="date" id="sos-gran-a-from"><span class="sep">–</span><input type="date" id="sos-gran-a-to"></div>
@@ -477,7 +481,22 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
 
           <!-- TABLE 3: City growth month-on-month (Cars24 only) -->
           <div class="card">
-            <div class="sh"><span class="kicker">📅 City Growth</span><span class="title">Cars24 SoS Growth — All Cities (Month-on-Month)</span><span class="desc">Green cell = higher than 6 months ago.</span></div>
+            <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+              <div><span class="kicker">📅 City Growth</span><span class="title">Cars24 SoS Growth — All Cities (Month-on-Month)</span><span class="desc">Green cell = higher than 6 months ago.</span></div>
+              <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+                <div class="pp-wrap" id="pp-city-growth">
+                  <button class="pp active" data-p="default" type="button">Last 6 Months</button>
+                  <button class="pp" data-p="compare" type="button">Compare ▾</button>
+                </div>
+                <div class="cr" id="cr-city-growth">
+                  <div class="cr-pair">
+                    <div class="cr-row"><span class="cr-lbl" style="color:var(--blue)">Period A</span><input type="month" id="city-growth-a-from"><span class="sep">–</span><input type="month" id="city-growth-a-to"></div>
+                    <div class="cr-row"><span class="cr-lbl" style="color:var(--grey)">vs</span><input type="month" id="city-growth-b-from"><span class="sep">–</span><input type="month" id="city-growth-b-to"></div>
+                    <button class="apply-btn" onclick="applyCompare('city-growth')" style="align-self:flex-end">Compare</button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="tw tbl-compact" id="tbl-city-growth" style="margin-bottom:10px"></div>
             <div class="fb">
               <span class="fl">Cities</span>
@@ -497,6 +516,16 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
                   <button class="pp" data-g="day" type="button">Day</button>
                 </div>
                 <select class="ctrl-sel" id="city-period-sel"></select>
+                <div class="pp-wrap" id="pp-city-battle">
+                  <button class="pp" data-p="compare" type="button">Compare ▾</button>
+                </div>
+                <div class="cr" id="cr-city-battle">
+                  <div class="cr-pair">
+                    <div class="cr-row"><span class="cr-lbl" style="color:var(--blue)">Period A</span><input type="month" id="city-battle-a-from"><span class="sep">–</span><input type="month" id="city-battle-a-to"></div>
+                    <div class="cr-row"><span class="cr-lbl" style="color:var(--grey)">vs</span><input type="month" id="city-battle-b-from"><span class="sep">–</span><input type="month" id="city-battle-b-to"></div>
+                    <button class="apply-btn" onclick="applyCompare('city-battle')" style="align-self:flex-end">Compare</button>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="tw" id="tbl-city-snap" style="margin-bottom:10px"></div>
@@ -599,7 +628,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
 </main>
 <script>
 const BC={Cars24:'#4736FE',Spinny:'#E91E8C',CarWale:'#FF6B6B',Cardekho:'#F97316',MFC:'#7C3AED',MTV:'#059669',OLX:'#0EA5E9'};
-const BN={Cars24:'Cars24',Spinny:'Spinny',CarWale:'CarWale',Cardekho:'CarDekho',MFC:'Mahindra',MTV:'Maruti',OLX:'OLX Auto'};
+const BN={Cars24:'Cars24',Spinny:'Spinny',CarWale:'CarWale',Cardekho:'CarDekho',MFC:'Mahindra First Choice',MTV:'Maruti True Value',OLX:'OLX Auto'};
 const CC=['#4736FE','#00C951','#FF4F01','#E91E8C','#F59E0B','#7C3AED','#0EA5E9','#059669','#FF6B6B','#9CA3AF'];
 
 // Current month (always show in period filters)
@@ -1020,13 +1049,13 @@ function initTab3(){
     document.getElementById('sos-m-b-from').value=prev;document.getElementById('sos-m-b-to').value=prev;
   }
   const sosMSel=document.getElementById('sos-m-period-sel');
-  sosMSel.innerHTML=`<option value="all" selected>All time</option><option value="compare">Compare periods…</option>`+bm.map(r=>`<option value="from:${r.month}">From ${r.label}</option>`).join('');
+  sosMSel.innerHTML=`<option value="all" selected>All time</option>`+bm.map(r=>`<option value="from:${r.month}">From ${r.label}</option>`).join('');
   sosMSel.addEventListener('change',()=>{
-    const v=sosMSel.value;
-    document.getElementById('cr-sos-m').classList.toggle('open',v==='compare');
-    monthlyPaint(v);
+    document.querySelectorAll('#pp-sos-m .pp').forEach(b=>b.classList.remove('active'));
+    document.getElementById('cr-sos-m').classList.remove('open');
+    monthlyPaint(sosMSel.value);
   });
-  buildMultiSelect('ms-sos',compPool,compPool,b=>BN[b]||b,vals=>{sosComps=vals;monthlyPaint(sosMSel.value);});
+  buildMultiSelect('ms-sos',compPool,compPool,b=>BN[b]||b,vals=>{sosComps=vals;const active=document.querySelector('#pp-sos-m .pp.active');monthlyPaint(active?'compare':sosMSel.value);});
   monthlyPaint('all');
 
   // ── TABLE 2: Granular — toggle between Week and Day, individual-period dropdown, shared filter ──
@@ -1037,15 +1066,16 @@ function initTab3(){
   let granPaint=null;
   const granSel=document.getElementById('sos-gran-period-sel');
   granSel.addEventListener('change',()=>{
-    const v=granSel.value;
-    document.getElementById('cr-sos-gran').classList.toggle('open',v==='compare');
-    if(granPaint)granPaint(v);
+    document.querySelectorAll('#pp-sos-gran .pp').forEach(b=>b.classList.remove('active'));
+    document.getElementById('cr-sos-gran').classList.remove('open');
+    if(granPaint)granPaint(granSel.value);
   });
   function activateGranularity(g){
     document.querySelectorAll('#sos-gran-toggle .pp').forEach(b=>b.classList.toggle('active',b.dataset.g===g));
     document.getElementById('cr-sos-gran').classList.remove('open');
+    document.getElementById('pp-sos-gran').innerHTML=`<button class="pp" data-p="compare" type="button">Compare ▾</button>`;
     if(g==='week'){
-      granSel.innerHTML=`<option value="all" selected>All time</option><option value="compare">Compare periods…</option>`+bw.map(r=>`<option value="from:${r.week_start}">From ${r.week}</option>`).join('');
+      granSel.innerHTML=`<option value="all" selected>All time</option>`+bw.map(r=>`<option value="from:${r.week_start}">From ${r.week}</option>`).join('');
       if(bw.length>=8){
         document.getElementById('sos-gran-a-from').value=bw[bw.length-4].week_start;
         document.getElementById('sos-gran-a-to').value=bw[bw.length-1].week_start;
@@ -1054,7 +1084,7 @@ function initTab3(){
       }
       granPaint=renderBsosGranular({data:bw,dateKey:'week_start',labelFn:r=>r.week,deltaSuffix:'_wow',brandsArr:wowBrands,compArr:wowBrands.filter(b=>b!=='Cars24'),tblId:'tbl-sos-gran',chartId:'chart-sos-gran',ckey:'sosGran',prefix:'sos-gran',dateLabel:'Week',deltaLabel:'WoW Δ'});
     } else {
-      granSel.innerHTML=`<option value="all" selected>All time</option><option value="compare">Compare periods…</option>`+bdD.map(r=>`<option value="from:${r.date}">From ${r.label}</option>`).join('');
+      granSel.innerHTML=`<option value="all" selected>All time</option>`+bdD.map(r=>`<option value="from:${r.date}">From ${r.label}</option>`).join('');
       if(bdD.length>=60){
         document.getElementById('sos-gran-a-from').value=bdD[bdD.length-30].date;
         document.getElementById('sos-gran-a-to').value=bdD[bdD.length-1].date;
@@ -1074,18 +1104,48 @@ function initTab3(){
 
   const cities=Object.keys(bc);
   if(!cities.length){['tbl-city-snap','tbl-city-growth'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='<div style="padding:24px;text-align:center;color:var(--grey)">City data not available.</div>';});return;}
-  const CITY_PALETTE=['#4736FE','#E91E8C','#FF6B6B','#F97316','#059669','#7C3AED','#0EA5E9','#EAB308','#DC2626','#0891B2'];
+  const CITY_PALETTE=['#4736FE','#E91E8C','#FF6B6B','#F97316','#059669','#7C3AED','#0EA5E9','#EAB308','#DC2626','#0891B2','#84CC16','#D946EF','#F43F5E','#14B8A6','#8B5CF6','#EA580C','#65A30D','#06B6D4'];
   const allCityMonthlyRows=cities.flatMap(c=>bc[c].monthly||[]);
   const allM=[...new Set(allCityMonthlyRows.map(x=>x.month))].sort();
   const mLabel={};allCityMonthlyRows.forEach(r=>{if(!mLabel[r.month])mLabel[r.month]=r.label;});
 
-  // ── TABLE 3: City growth month-on-month (Cars24 only, last 6 months) + city trend chart ──
+  // ── TABLE 3: City growth month-on-month (Cars24 only, last 6 months) + Compare + city trend chart ──
   const gm=allM.slice(-6);
-  const gth=`<th>City</th>${gm.map((m,i)=>`<th class="nr${i===gm.length-1?' ch':''}">${mLabel[m]||m}</th>`).join('')}<th class="nr ch">MoM Δ</th>`;
   const gr=cities.map(city=>{const vals=gm.map(m=>{const r=bc[city].monthly.find(x=>x.month===m);return r?r.Cars24:null;});const mom=(vals.length>=2&&vals[vals.length-1]!=null&&vals[vals.length-2]!=null)?vals[vals.length-1]-vals[vals.length-2]:null;return{city,vals,last:vals[vals.length-1],mom};}).sort((a,b)=>(b.last||0)-(a.last||0));
-  document.getElementById('tbl-city-growth').innerHTML=tbl(gth,gr.map(({city,vals,mom})=>`<tr><td><strong>${city}</strong></td>${vals.map((v,i)=>{const il=i===vals.length-1;const s=il?'color:var(--blue);font-weight:800;background:#F5F4FF':(v!=null&&vals[0]!=null&&v>vals[0]+0.2?'color:var(--mint);font-weight:600':v!=null&&vals[0]!=null&&v<vals[0]-0.2?'color:var(--red);font-weight:600':'');return`<td class="nr" style="${s}">${fP(v)}</td>`;}).join('')}<td class="nr">${badge(mom,true)}</td></tr>`).join(''));
+  function renderCityGrowthDefaultPivot(){
+    const gth=`<th>City</th>${gm.map((m,i)=>`<th class="nr${i===gm.length-1?' ch':''}">${mLabel[m]||m}</th>`).join('')}<th class="nr ch">MoM Δ</th>`;
+    document.getElementById('tbl-city-growth').innerHTML=tbl(gth,gr.map(({city,vals,mom})=>`<tr><td><strong>${city}</strong></td>${vals.map((v,i)=>{const il=i===vals.length-1;const s=il?'color:var(--blue);font-weight:800;background:#F5F4FF':(v!=null&&vals[0]!=null&&v>vals[0]+0.2?'color:var(--mint);font-weight:600':v!=null&&vals[0]!=null&&v<vals[0]-0.2?'color:var(--red);font-weight:600':'');return`<td class="nr" style="${s}">${fP(v)}</td>`;}).join('')}<td class="nr">${badge(mom,true)}</td></tr>`).join(''));
+  }
+  function avgCars24For(city,from,to){
+    const rows=bc[city].monthly.filter(r=>(!from||r.month>=from)&&(!to||r.month<=to)&&r.Cars24!=null);
+    if(!rows.length)return null;
+    return rows.reduce((s,r)=>s+r.Cars24,0)/rows.length;
+  }
+  function renderCityGrowthCompare(){
+    const aFrom=document.getElementById('city-growth-a-from')?.value||'';
+    const aTo=document.getElementById('city-growth-a-to')?.value||'';
+    const bFrom=document.getElementById('city-growth-b-from')?.value||'';
+    const bTo=document.getElementById('city-growth-b-to')?.value||'';
+    const rows=cities.map(city=>{
+      const a=avgCars24For(city,aFrom,aTo),b=avgCars24For(city,bFrom,bTo);
+      return{city,a,b,delta:(a!=null&&b!=null)?b-a:null};
+    }).sort((x,y)=>(y.b??-999)-(x.b??-999));
+    const th=`<th>City</th><th class="nr" style="color:var(--blue)">Period A</th><th class="nr" style="color:#f90">Period B</th><th class="nr ratio-hi">Δ (B−A)</th>`;
+    const tr=rows.map(({city,a,b,delta})=>`<tr><td><strong>${city}</strong></td><td class="nr">${a!=null?a.toFixed(1)+'%':'—'}</td><td class="nr">${b!=null?b.toFixed(1)+'%':'—'}</td><td class="nr ratio-hi">${delta!=null?(delta>0?'+':'')+delta.toFixed(1)+'pp':'—'}</td></tr>`).join('');
+    document.getElementById('tbl-city-growth').innerHTML=tbl(th,tr);
+  }
+  function paintCityGrowth(p){ p==='compare'?renderCityGrowthCompare():renderCityGrowthDefaultPivot(); }
+  if(allM.length>=6){
+    document.getElementById('city-growth-a-from').value=allM[allM.length-3];
+    document.getElementById('city-growth-a-to').value=allM[allM.length-1];
+    document.getElementById('city-growth-b-from').value=allM[allM.length-6];
+    document.getElementById('city-growth-b-to').value=allM[allM.length-4];
+  }
+  fcbs['city-growth']=paintCityGrowth;
+  wirePills('pp-city-growth','city-growth',paintCityGrowth);
+  paintCityGrowth('default');
 
-  const cityGrowthDefault=gr.slice(0,6).map(r=>r.city);
+  const cityGrowthDefault=gr.map(r=>r.city);
   let cityGrowthSel=[...cityGrowthDefault];
   function renderCityGrowthChart(){
     if(charts.cityGrowth)charts.cityGrowth.destroy();
@@ -1150,7 +1210,7 @@ function initTab3(){
     const rows=cityGranRows(city,'month');const last=rows[rows.length-1];
     const g=(last&&last.Cars24!=null&&last.Spinny!=null)?last.Cars24-last.Spinny:null;
     return{city,g};
-  }).sort((a,b)=>(b.g??-999)-(a.g??-999)).slice(0,6).map(x=>x.city);
+  }).sort((a,b)=>(b.g??-999)-(a.g??-999)).map(x=>x.city);
   let cityBattleSel=[...cityBattleDefault];
   function renderCityBattleChart(){
     if(charts.cityBattle)charts.cityBattle.destroy();
@@ -1165,20 +1225,62 @@ function initTab3(){
   }
   buildMultiSelect('ms-city-battle',cities,cityBattleDefault,c=>c,vals=>{cityBattleSel=vals;renderCityBattleChart();},'All cities');
 
+  function avgGapFor(city,gran,from,to){
+    const dateCol=GRAN_DATECOL[gran];
+    const rows=cityGranRows(city,gran).filter(r=>(!from||r[dateCol]>=from)&&(!to||r[dateCol]<=to)&&r.Cars24!=null&&r.Spinny!=null);
+    if(!rows.length)return null;
+    return rows.reduce((s,r)=>s+(r.Cars24-r.Spinny),0)/rows.length;
+  }
+  function renderCityBattleCompare(){
+    const aFrom=document.getElementById('city-battle-a-from')?.value||'';
+    const aTo=document.getElementById('city-battle-a-to')?.value||'';
+    const bFrom=document.getElementById('city-battle-b-from')?.value||'';
+    const bTo=document.getElementById('city-battle-b-to')?.value||'';
+    const rows=cities.map(city=>{
+      const a=avgGapFor(city,cityGran,aFrom,aTo),b=avgGapFor(city,cityGran,bFrom,bTo);
+      return{city,a,b,delta:(a!=null&&b!=null)?b-a:null};
+    }).sort((x,y)=>(y.b??-999)-(x.b??-999));
+    const th=`<th>City</th><th class="nr" style="color:var(--blue)">Gap · Period A</th><th class="nr" style="color:#f90">Gap · Period B</th><th class="nr ratio-hi">Δ (B−A)</th>`;
+    const tr=rows.map(({city,a,b,delta})=>`<tr><td><strong>${city}</strong></td><td class="nr">${a!=null?(a>0?'+':'')+a.toFixed(1)+'pp':'—'}</td><td class="nr">${b!=null?(b>0?'+':'')+b.toFixed(1)+'pp':'—'}</td><td class="nr ratio-hi">${delta!=null?(delta>0?'+':'')+delta.toFixed(1)+'pp':'—'}</td></tr>`).join('');
+    document.getElementById('tbl-city-snap').innerHTML=tbl(th,tr);
+  }
+  function paintCityBattle(p){ if(p==='compare')renderCityBattleCompare(); }
+  fcbs['city-battle']=paintCityBattle;
+  wirePills('pp-city-battle','city-battle',paintCityBattle);
+
   const citySel=document.getElementById('city-period-sel');
   function populateCityPeriodSelect(gran){
     const periods=cityPeriods[gran];
     citySel.innerHTML=`<option value="__all__">All time</option>`+periods.slice().reverse().map(([v,label],i)=>`<option value="${v}"${i===0?' selected':''}>${label}${i===0?' (latest)':''}</option>`).join('');
   }
+  function setCityBattleCompareDefaults(g){
+    const periods=cityPeriods[g].map(([v])=>v);
+    const n=g==='month'?3:g==='week'?4:14;
+    const inputType=g==='month'?'month':'date';
+    ['a-from','a-to','b-from','b-to'].forEach(suf=>{document.getElementById('city-battle-'+suf).type=inputType;});
+    if(periods.length>=2*n){
+      document.getElementById('city-battle-a-from').value=periods[periods.length-n];
+      document.getElementById('city-battle-a-to').value=periods[periods.length-1];
+      document.getElementById('city-battle-b-from').value=periods[periods.length-2*n];
+      document.getElementById('city-battle-b-to').value=periods[periods.length-n-1];
+    }
+  }
   function activateCityGranularity(g){
     cityGran=g;
     document.querySelectorAll('#city-gran-toggle .pp').forEach(b=>b.classList.toggle('active',b.dataset.g===g));
+    document.querySelectorAll('#pp-city-battle .pp').forEach(b=>b.classList.remove('active'));
+    document.getElementById('cr-city-battle').classList.remove('open');
     populateCityPeriodSelect(g);
+    setCityBattleCompareDefaults(g);
     const periods=cityPeriods[g];
     renderCitySnap(periods.length?periods[periods.length-1][0]:'__all__',g);
     renderCityBattleChart();
   }
-  citySel.addEventListener('change',()=>renderCitySnap(citySel.value,cityGran));
+  citySel.addEventListener('change',()=>{
+    document.querySelectorAll('#pp-city-battle .pp').forEach(b=>b.classList.remove('active'));
+    document.getElementById('cr-city-battle').classList.remove('open');
+    renderCitySnap(citySel.value,cityGran);
+  });
   document.querySelectorAll('#city-gran-toggle .pp').forEach(btn=>btn.addEventListener('click',()=>activateCityGranularity(btn.dataset.g)));
   activateCityGranularity('month');
 }
