@@ -319,6 +319,8 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
         <section class="tabpane active" id="m-search">
   <div class="g3" id="imp-kpis"></div>
 
+  <div class="tab-actions"><a class="card-act-btn" href="https://search.google.com/search-console?resource_id=https%3A%2F%2Fwww.cars24.com%2F" target="_blank" rel="noopener">📄 View in Search Console</a><button class="card-act-btn" type="button" onclick="downloadAllTablesCSV('brand_search_impressions_all.csv',[{title:'Monthly Impressions',tblWrapperId:'tbl-monthly'},{title:'Weekly Impressions',tblWrapperId:'tbl-weekly'}])">⬇ Download all tables (CSV)</button></div>
+
   <div class="card" style="margin-bottom:10px">
     <div class="sh"><span class="kicker">📈 Monthly trend</span><span class="title">Brand Search Impressions</span><span class="desc">Total times Cars24-related searches appeared on Google, India.</span></div>
     <div class="cw tall"><canvas id="chart-imp"></canvas></div>
@@ -346,6 +348,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
           </div>
         </div>
       </div>
+      <div class="card-actions"><a class="card-act-btn" href="https://search.google.com/search-console?resource_id=https%3A%2F%2Fwww.cars24.com%2F" target="_blank" rel="noopener">📄 View in Search Console</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-monthly','brand_impressions_monthly.csv')">⬇ CSV</button></div>
       <div class="tw" id="tbl-monthly" style="flex:1"></div>
     </div>
     <div class="card" style="margin:0;display:flex;flex-direction:column">
@@ -375,6 +378,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
         </div>
       </div>
     </div>
+    <div class="card-actions"><a class="card-act-btn" href="https://search.google.com/search-console?resource_id=https%3A%2F%2Fwww.cars24.com%2F" target="_blank" rel="noopener">📄 View in Search Console</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-weekly','brand_impressions_weekly.csv')">⬇ CSV</button></div>
     <div class="tw" id="tbl-weekly" style="margin-bottom:10px"></div>
     <div class="cw"><canvas id="chart-wow"></canvas></div>
   </div>
@@ -408,6 +412,8 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
         <!-- TAB 2: KEYWORDS -->
         <section class="tabpane" id="m-kw">
 
+          <div class="tab-actions"><a class="card-act-btn" href="https://search.google.com/search-console?resource_id=https%3A%2F%2Fwww.cars24.com%2F" target="_blank" rel="noopener">📄 View in Search Console</a><button class="card-act-btn" type="button" onclick="downloadAllTablesCSV('keyword_volume_all.csv',[{title:'Category Breakdown',tblWrapperId:'tbl-cats'},{title:'Category Volume by Month',tblWrapperId:'tbl-cat-mom'}])">⬇ Download all tables (CSV)</button></div>
+
           <!-- Category Breakdown with month dropdown -->
           <div class="card">
             <div class="sh"><span class="kicker">🍩 Category Breakdown</span><span class="title">Keyword Volume by Category</span><span class="desc">How search impressions split across intent categories for the selected period.</span></div>
@@ -415,6 +421,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
               <span class="fl">Month</span>
               <select class="ctrl-sel" id="cat-period-sel"></select>
             </div>
+            <div class="card-actions"><a class="card-act-btn" href="https://search.google.com/search-console?resource_id=https%3A%2F%2Fwww.cars24.com%2F" target="_blank" rel="noopener">📄 View in Search Console</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-cats','keyword_category_breakdown.csv')">⬇ CSV</button></div>
             <div class="g2" style="align-items:start">
               <div class="tw" id="tbl-cats"></div>
               <div class="dw"><canvas id="chart-donut"></canvas></div>
@@ -424,6 +431,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
           <!-- MoM Category Pivot: months × categories -->
           <div class="card">
             <div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Category Volume by Month</span><span class="desc">Monthly keyword impressions per category — months in rows, categories in columns.</span></div>
+            <div class="card-actions"><a class="card-act-btn" href="https://search.google.com/search-console?resource_id=https%3A%2F%2Fwww.cars24.com%2F" target="_blank" rel="noopener">📄 View in Search Console</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-cat-mom','keyword_category_by_month.csv')">⬇ CSV</button></div>
             <div class="tw" id="tbl-cat-mom"></div>
           </div>
 
@@ -641,6 +649,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
 </main>
 <script>
 const BC={Cars24:'#4736FE',Spinny:'#E91E8C',CarWale:'#FF6B6B',Cardekho:'#F97316',MFC:'#7C3AED',MTV:'#059669',OLX:'#0EA5E9'};
+const GSC_URL='https://search.google.com/search-console?resource_id='+encodeURIComponent('https://www.cars24.com/');
 const BN={Cars24:'Cars24',Spinny:'Spinny',CarWale:'CarWale',Cardekho:'CarDekho',MFC:'Mahindra First Choice',MTV:'Maruti True Value',OLX:'OLX Auto'};
 const CC=['#4736FE','#00C951','#FF4F01','#E91E8C','#F59E0B','#7C3AED','#0EA5E9','#059669','#FF6B6B','#9CA3AF'];
 
@@ -723,6 +732,24 @@ function downloadAllTablesCSV(filename,sections){
 }
 function cardActionsHtml(sheetUrl,tblWrapperId,csvFilename,linkId){
   return`<div class="card-actions"><a class="card-act-btn"${linkId?` id="${linkId}"`:''} href="${sheetUrl}" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('${tblWrapperId}','${csvFilename}')">⬇ CSV</button></div>`;
+}
+
+// Auto-attach a CSV button to any rendered table across the app that doesn't already have
+// custom card-actions (BSOS/Google Index/Tab1/Tab2 add their own with a source link).
+const csvBtnAttached=new WeakSet();
+function attachCsvButton(twEl){
+  if(csvBtnAttached.has(twEl))return;
+  if(twEl.previousElementSibling?.classList?.contains('card-actions'))return;
+  const id=twEl.id;if(!id)return;
+  csvBtnAttached.add(twEl);
+  const div=document.createElement('div');
+  div.className='card-actions';
+  const fname=id.replace(/[^a-z0-9]+/gi,'_').toLowerCase()+'.csv';
+  div.innerHTML=`<button class="card-act-btn" type="button" onclick="downloadTableCSV('${id}','${fname}')">⬇ CSV</button>`;
+  twEl.parentNode.insertBefore(div,twEl);
+}
+function scanTw(scopeEl){
+  (scopeEl||document).querySelectorAll('.tw[id]').forEach(attachCsvButton);
 }
 
 function filterPeriod(data,period,from,to){
@@ -1345,7 +1372,7 @@ function initTab4(){
 
   const GI_SHEET='https://docs.google.com/spreadsheets/d/1d3umTUBQ1vKWzbhfdVr88kr8Stpn832V1mCSkfjQ51A/edit';
   document.getElementById('gi-content').innerHTML=`
-    <div class="tab-actions"><button class="card-act-btn" type="button" onclick="downloadAllTablesCSV('google_index_all.csv',[{title:'Pan-India Brand Index',tblWrapperId:'tbl-gi-pan'},{title:'City-level Index',tblWrapperId:'tbl-gi-city'},{title:'Brand vs Category Comparison',tblWrapperId:'tbl-gi-cmp'}])">⬇ Download all tables (CSV)</button></div>
+    <div class="tab-actions"><button class="card-act-btn" type="button" onclick="downloadAllTablesCSV('google_index_all.csv',[{title:'Pan-India Brand Index',tblWrapperId:'tbl-gi-pan'},{title:'City-level Index',tblWrapperId:'tbl-gi-city'},{title:'Brand vs Category Comparison',tblWrapperId:'tbl-gi-cmp'},{title:'City-wise Brand vs Generic',tblWrapperId:'tbl-gi-city-cmp'}])">⬇ Download all tables (CSV)</button></div>
 
     <div class="card">
       <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
@@ -1368,14 +1395,8 @@ function initTab4(){
     </div>
 
     <div class="card">
-      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
-        <div><span class="kicker">🏙 City-level · Monthly</span><span class="title">Google Search Index by City</span><span class="desc">Toggle between brand-specific and category-level search interest by city.</span></div>
-        <div class="pp-wrap" id="gi-city-toggle">
-          <button class="pp active" data-g="brand" type="button">Brand</button>
-          <button class="pp" data-g="generic" type="button">Generic</button>
-        </div>
-      </div>
-      <div class="card-actions"><a class="card-act-btn" id="sheet-link-gi-city" href="${GI_SHEET}#gid=1878676239" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-city','gindex_city.csv')">⬇ CSV</button></div>
+      <div class="sh"><span class="kicker">🏙 City-level · Monthly</span><span class="title">Google Search Index by City — Cars24 Brand</span><span class="desc">Brand-specific search interest by city, month by month.</span></div>
+      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}#gid=1878676239" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-city','gindex_city_brand.csv')">⬇ CSV</button></div>
       <div class="tw tbl-compact" id="tbl-gi-city" style="margin-bottom:10px"></div>
       <div class="fb"><span class="fl">Cities</span><div class="ms-dd" id="ms-gi-city"></div></div>
       <div class="cw"><canvas id="chart-gi-city"></canvas></div>
@@ -1386,6 +1407,17 @@ function initTab4(){
       <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}#gid=0" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-cmp','gindex_comparison.csv')">⬇ CSV</button></div>
       <div class="tw" id="tbl-gi-cmp" style="margin-bottom:10px"></div>
       <div class="cw"><canvas id="chart-gi-cmp"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+        <div><span class="kicker">🏙 City-wise · Monthly</span><span class="title">Cars24 Brand vs Generic — By City</span><span class="desc">Gap = Cars24 brand index minus Generic category index, per city. Positive = brand outpacing the category in that city.</span></div>
+        <select class="ctrl-sel" id="gi-city-cmp-period-sel"></select>
+      </div>
+      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}#gid=1878676239" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-city-cmp','gindex_city_brand_vs_generic.csv')">⬇ CSV</button></div>
+      <div class="tw" id="tbl-gi-city-cmp" style="margin-bottom:10px"></div>
+      <div class="fb"><span class="fl">Cities</span><div class="ms-dd" id="ms-gi-city-cmp"></div></div>
+      <div class="cw"><canvas id="chart-gi-city-cmp"></canvas></div>
     </div>`;
 
   // ── TABLE 1: Pan-India Brand Index ──
@@ -1448,19 +1480,17 @@ function initTab4(){
   }
   paintGiPan('all');
 
-  // ── TABLE 2: City-level, Brand/Generic toggle ──
-  let giCityGran='brand',giCitySel=[...cities];
+  // ── TABLE 2: City-level, Cars24 Brand only ──
+  let giCitySel=[...cities];
   const allGiMonths=[...new Set(cities.flatMap(c=>cityBrand[c].map(r=>r.month)))].sort();
   const giMonthsShown=allGiMonths;  // full history since Jan'23, not just last 6 months
   const mLabelGi={};
   cities.forEach(c=>cityBrand[c].forEach(r=>{if(!mLabelGi[r.month])mLabelGi[r.month]=r.label;}));
-  const cityDataFor=gran=>gran==='brand'?cityBrand:cityGeneric;
 
   function renderGiCityTable(){
-    const src=cityDataFor(giCityGran);
     const gth=`<th>City</th>${giMonthsShown.map((m,i)=>`<th class="nr${i===giMonthsShown.length-1?' ch':''}">${mLabelGi[m]||m}</th>`).join('')}<th class="nr ch">MoM Δ</th>`;
     const gr=cities.map(city=>{
-      const vals=giMonthsShown.map(m=>{const r=src[city].find(x=>x.month===m);return r?r.index:null;});
+      const vals=giMonthsShown.map(m=>{const r=cityBrand[city].find(x=>x.month===m);return r?r.index:null;});
       const mom=(vals.length>=2&&vals[vals.length-1]!=null&&vals[vals.length-2]!=null)?vals[vals.length-1]-vals[vals.length-2]:null;
       return{city,vals,last:vals[vals.length-1],mom};
     }).sort((a,b)=>(b.last||0)-(a.last||0));
@@ -1469,15 +1499,8 @@ function initTab4(){
   function renderGiCityChart(){
     if(charts.giCity)charts.giCity.destroy();
     const ctx=document.getElementById('chart-gi-city');if(!ctx)return;
-    const src=cityDataFor(giCityGran);
-    charts.giCity=new Chart(ctx.getContext('2d'),{type:'line',data:{labels:giMonthsShown.map(m=>mLabelGi[m]||m),datasets:giCitySel.map((city,i)=>({label:city,data:giMonthsShown.map(m=>{const r=src[city].find(x=>x.month===m);return r?r.index:null;}),borderColor:CITY_PALETTE[i%CITY_PALETTE.length],backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:2}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5},padding:8}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+    charts.giCity=new Chart(ctx.getContext('2d'),{type:'line',data:{labels:giMonthsShown.map(m=>mLabelGi[m]||m),datasets:giCitySel.map((city,i)=>({label:city,data:giMonthsShown.map(m=>{const r=cityBrand[city].find(x=>x.month===m);return r?r.index:null;}),borderColor:CITY_PALETTE[i%CITY_PALETTE.length],backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:2}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5},padding:8}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
   }
-  document.querySelectorAll('#gi-city-toggle .pp').forEach(btn=>btn.addEventListener('click',()=>{
-    giCityGran=btn.dataset.g;
-    document.querySelectorAll('#gi-city-toggle .pp').forEach(b=>b.classList.toggle('active',b===btn));
-    document.getElementById('sheet-link-gi-city').href=`${GI_SHEET}#gid=${giCityGran==='brand'?1878676239:1291535197}`;
-    renderGiCityTable();renderGiCityChart();
-  }));
   buildMultiSelect('ms-gi-city',cities,cities,c=>c,vals=>{giCitySel=vals;renderGiCityChart();},'All cities');
   renderGiCityTable();renderGiCityChart();
 
@@ -1492,6 +1515,46 @@ function initTab4(){
     {label:'Cars24 Brand',data:giM.map(r=>r.Cars24),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.3,spanGaps:true,borderWidth:3,pointRadius:0},
     {label:'Category (Generic)',data:giM.map(r=>r.Category),borderColor:'#FF9500',backgroundColor:'transparent',fill:false,tension:0.3,spanGaps:true,borderWidth:2,borderDash:[5,3],pointRadius:0}
   ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11},usePointStyle:true}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
+
+  // ── TABLE 4: City-wise Cars24 Brand vs Generic comparison ──
+  function gapAt(city,m){
+    const b=cityBrand[city]?.find(x=>x.month===m),g=cityGeneric[city]?.find(x=>x.month===m);
+    return(b&&g&&b.index!=null&&g.index!=null)?b.index-g.index:null;
+  }
+  let giCityCmpSel=[...cities];
+  function renderGiCityCmpTable(sel){
+    const tblEl=document.getElementById('tbl-gi-city-cmp');
+    if(sel==='__all__'){
+      const th=`<th>City</th>${allGiMonths.map((m,i)=>`<th class="nr${i===allGiMonths.length-1?' ch':''}">${mLabelGi[m]||m}</th>`).join('')}`;
+      const rows=cities.map(city=>{
+        const vals=allGiMonths.map(m=>gapAt(city,m));
+        return{city,vals,last:vals.filter(v=>v!=null).pop()};
+      }).sort((a,b)=>(b.last??-999)-(a.last??-999));
+      tblEl.innerHTML=tbl(th,rows.map(({city,vals})=>`<tr><td><strong>${city}</strong></td>${vals.map(v=>gapCell(v)).join('')}</tr>`).join(''));
+      return;
+    }
+    const rows=cities.map(city=>{
+      const b=cityBrand[city].find(x=>x.month===sel),g=cityGeneric[city]?.find(x=>x.month===sel);
+      return(b&&b.index!=null)?{city,brand:b.index,generic:g?g.index:null}:null;
+    }).filter(Boolean).sort((a,b)=>b.brand-a.brand);
+    const th=`<th>City</th><th class="nr ch" style="text-transform:none">Cars24 Brand</th><th class="nr">Generic</th><th class="nr ratio-hi">Gap (Brand−Generic)</th>`;
+    const tr=rows.map((x,i)=>{
+      const g=(x.brand!=null&&x.generic!=null)?x.brand-x.generic:null;
+      return`<tr class="${i===0?'lat':''}"><td><strong>${x.city}</strong></td><td class="nr cc"><strong>${fIdx(x.brand)}</strong></td><td class="nr">${fIdx(x.generic)}</td><td class="nr ratio-hi">${g!=null?(g>0?'+':'')+g.toFixed(1):'—'}</td></tr>`;
+    }).join('');
+    tblEl.innerHTML=tbl(th,tr);
+  }
+  function renderGiCityCmpChart(){
+    if(charts.giCityCmp)charts.giCityCmp.destroy();
+    const ctx=document.getElementById('chart-gi-city-cmp');if(!ctx)return;
+    charts.giCityCmp=new Chart(ctx.getContext('2d'),{type:'line',data:{labels:allGiMonths.map(m=>mLabelGi[m]||m),datasets:giCityCmpSel.map((city,i)=>({label:city,data:allGiMonths.map(m=>gapAt(city,m)),borderColor:CITY_PALETTE[i%CITY_PALETTE.length],backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:2}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5},padding:8}}},scales:{y:{ticks:{callback:v=>(v>0?'+':'')+v},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+  }
+  const giCityCmpPeriodSel=document.getElementById('gi-city-cmp-period-sel');
+  giCityCmpPeriodSel.innerHTML=`<option value="__all__">All time</option>`+allGiMonths.slice().reverse().map((m,i)=>`<option value="${m}"${i===0?' selected':''}>${mLabelGi[m]||m}${i===0?' (latest)':''}</option>`).join('');
+  giCityCmpPeriodSel.addEventListener('change',()=>renderGiCityCmpTable(giCityCmpPeriodSel.value));
+  buildMultiSelect('ms-gi-city-cmp',cities,cities,c=>c,vals=>{giCityCmpSel=vals;renderGiCityCmpChart();},'All cities');
+  renderGiCityCmpTable(allGiMonths[allGiMonths.length-1]);
+  renderGiCityCmpChart();
 }
 
 function initTab5(){
@@ -1796,6 +1859,7 @@ function renderYT(containerId,key,channelName){
     const dvt=document.getElementById(`yt-devices-tbl-${key}`);
     if(dvt) dvt.innerHTML=tbl(`<th>📱 Device</th><th class="nr">👀 Views</th><th class="nr">Share %</th><th class="nr">⏱ Watch Time</th>`,yt.devices.map(d=>`<tr><td>${d.device}</td><td class="nr">${fv(d.views)}</td><td class="nr">${d.pct}%</td><td class="nr">${fh(d.watch_time_hours)}</td></tr>`).join(''));
   }
+  scanTw(el);
 }
 
 /* ── Instagram renderer ── */
@@ -1990,6 +2054,7 @@ function renderIG(containerId,key,handleName){
     bindSel(`ig-type-sel-${key}`,renderIGTypeCharts);
     renderIGTypeCharts('all');
   }
+  scanTw(el);
 }
 
 /* ── LinkedIn renderer ── */
@@ -2093,6 +2158,7 @@ function renderLI(containerId,key,pageName){
     const liPostSel=document.getElementById(`li-posts-sel-${key}`);if(liPostSel)liPostSel.addEventListener('change',e=>renderLIPosts(e.target.value));
     renderLIPosts('all');
   }
+  scanTw(el);
 }
 
 /* ── Influencer renderer ── */
@@ -2297,6 +2363,7 @@ function initInf(){
   renderInfTopEng('all');
   renderInfLowCPV('all');
   renderInfCharts();
+  scanTw(el);
 }
 
 function initYT(){
@@ -2527,6 +2594,7 @@ async function initUAEInf(){
   document.getElementById('uae-inf-sel').addEventListener('change',function(){renderUAEKPIs(this.value);});
   renderUAEKPIs('mo:'+latestMO);
   renderUAEStatic();
+  scanTw(el);
 }
 
 const lazyInit={kw:initTab2,bsos:initTab3,gi:initTab4,impsos:initTab5,inf:initInf,yt:initYT,ig:initIG,li:initLI,'uae-inf':initUAEInf,'au-ig':()=>renderIG('igc-au','cars24_au','Cars24 Australia'),'uae-ig':()=>renderIG('igc-uae','cars24_uae','Cars24 UAE'),'yt-malayalam2':()=>renderYT('ytc-malayalam2','cars24_malayalam2','Cars24 Malayalam')};
