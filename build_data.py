@@ -701,6 +701,8 @@ def build_youtube():
                 "demographics":  extra.get("demographics", []),
                 "traffic_sources": extra.get("traffic_sources", []),
                 "devices":       extra.get("devices", []),
+                "geo_monthly":           extra.get("geo_monthly", {}),
+                "demographics_monthly":  extra.get("demographics_monthly", {}),
                 "traffic_sources_monthly": extra.get("traffic_sources_monthly", {}),
                 "devices_monthly":       extra.get("devices_monthly", {}),
                 "top_videos":    extra.get("top_videos", []),

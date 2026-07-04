@@ -24,7 +24,7 @@ Usage:
 """
 
 import os, csv, json, time, sys, re
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -120,6 +120,13 @@ def _yt_row_template(m, total_subs, total_views, total_videos):
         "data_source": "analytics",
         "total_subscribers": total_subs, "total_views": total_views, "total_videos": total_videos,
     }
+
+def _month_bounds(m: str) -> tuple[str, str]:
+    """'YYYY-MM' -> (first day, last day) as 'YYYY-MM-DD' strings."""
+    y, mo = int(m[:4]), int(m[5:7])
+    start_d = date(y, mo, 1)
+    end_d = date(y + (mo // 12), (mo % 12) + 1, 1) - timedelta(days=1)
+    return start_d.strftime("%Y-%m-%d"), end_d.strftime("%Y-%m-%d")
 
 def _parse_iso8601_duration(s: str) -> int:
     """PT#H#M#S -> total seconds."""
@@ -250,8 +257,12 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
     # Fetch extra dimension data and save to JSON
     extra = {}
 
-    # Geo: top cities (all-time only — confirmed via direct API testing that YouTube
-    # Analytics API does not support combining `city` with any time dimension, day or month)
+    # Geo: top cities — all-time snapshot, plus a genuine per-month breakdown.
+    # `city` cannot be a co-dimension with day/month in one query (confirmed via direct
+    # API testing — every combo is rejected), but a SEPARATE query per month with
+    # startDate/endDate bounded to that month works fine. This is how YouTube Studio's
+    # own UI gets period-filtered geography/demographics too: it re-queries per period
+    # rather than combining dimensions.
     try:
         geo_resp = yta.reports().query(
             ids=f"channel=={channel_id}", startDate=start, endDate=end,
@@ -274,8 +285,34 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
     except Exception as e:
         print(f"    ⚠  Geo fetch failed for {key}: {e}")
 
-    # Demographics: age group + gender (all-time only — same API limitation as city;
-    # ageGroup/gender cannot be combined with a time dimension)
+    geo_by_month = {}
+    for m in [r["month"] for r in rows]:
+        try:
+            ms, me = _month_bounds(m)
+            gm_resp = yta.reports().query(
+                ids=f"channel=={channel_id}", startDate=ms, endDate=me,
+                dimensions="city", metrics="views,estimatedMinutesWatched",
+                sort="-views", maxResults=25,
+            ).execute()
+            gm_headers = [h["name"] for h in gm_resp.get("columnHeaders", [])]
+            month_rows = []
+            for gr in gm_resp.get("rows", []):
+                grow = dict(zip(gm_headers, gr))
+                month_rows.append({
+                    "city":             grow.get("city", ""),
+                    "views":            int(grow.get("views", 0)),
+                    "watch_time_hours": round(float(grow.get("estimatedMinutesWatched", 0)) / 60, 1),
+                })
+            if month_rows:
+                geo_by_month[m] = month_rows
+        except Exception as e:
+            print(f"    ⚠  Geo fetch failed for {key} / {m}: {e}")
+        time.sleep(0.05)
+    extra["geo_monthly"] = geo_by_month
+    print(f"    geo_monthly: {len(geo_by_month)} months")
+
+    # Demographics: age group + gender — all-time snapshot, plus per-month breakdown
+    # via the same bounded-date-range approach as geo above.
     try:
         demo_resp = yta.reports().query(
             ids=f"channel=={channel_id}", startDate=start, endDate=end,
@@ -295,6 +332,31 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
         print(f"    demographics: {len(demo_rows)} segments")
     except Exception as e:
         print(f"    ⚠  Demographics fetch failed for {key}: {e}")
+
+    demo_by_month = {}
+    for m in [r["month"] for r in rows]:
+        try:
+            ms, me = _month_bounds(m)
+            dm_resp = yta.reports().query(
+                ids=f"channel=={channel_id}", startDate=ms, endDate=me,
+                dimensions="ageGroup,gender", metrics="viewerPercentage",
+            ).execute()
+            dm_headers = [h["name"] for h in dm_resp.get("columnHeaders", [])]
+            month_rows = []
+            for dr in dm_resp.get("rows", []):
+                drow = dict(zip(dm_headers, dr))
+                month_rows.append({
+                    "age_group":  drow.get("ageGroup", ""),
+                    "gender":     drow.get("gender", ""),
+                    "viewer_pct": round(float(drow.get("viewerPercentage", 0)), 2),
+                })
+            if month_rows:
+                demo_by_month[m] = month_rows
+        except Exception as e:
+            print(f"    ⚠  Demographics fetch failed for {key} / {m}: {e}")
+        time.sleep(0.05)
+    extra["demographics_monthly"] = demo_by_month
+    print(f"    demographics_monthly: {len(demo_by_month)} months")
 
     # Traffic sources (all-time snapshot + per-month breakdown, via day→month rollup —
     # confirmed `day,insightTrafficSourceType` IS a supported combination, unlike city/demo)

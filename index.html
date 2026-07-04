@@ -1922,7 +1922,10 @@ function renderYT(containerId,key,channelName){
     ${yt.geo?.length?`
     <div class="g2">
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">🌍 City Level</span><span class="title">Top Cities by Views</span><span class="desc">Where your viewers are located, all-time. YouTube's Analytics API doesn't support a period filter for city-level data.</span></div>
+        <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div><span class="kicker">🌍 City Level</span><span class="title">Top Cities by Views</span><span class="desc">Where your viewers are located. Sorted by total views.</span></div>
+          <select class="inf-sel" id="yt-geo-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
+        </div>
         <div class="cw" style="height:340px"><canvas id="yt-geo-${key}"></canvas></div>
       </div>
       <div class="card" style="margin:0">
@@ -1934,7 +1937,10 @@ function renderYT(containerId,key,channelName){
     ${yt.demographics?.length?`
     <div class="g2">
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">📊 Age Groups</span><span class="title">Audience Age Distribution</span><span class="desc">% of viewers in each age band, all-time. YouTube's Analytics API doesn't support a period filter for demographic data.</span></div>
+        <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div><span class="kicker">📊 Age Groups</span><span class="title">Audience Age Distribution</span><span class="desc">% of viewers in each age band. Helps identify your core demographic.</span></div>
+          <select class="inf-sel" id="yt-demo-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
+        </div>
         <div class="cw" style="height:240px"><canvas id="yt-age-${key}"></canvas></div>
       </div>
       <div class="card" style="margin:0">
@@ -2070,26 +2076,37 @@ function renderYT(containerId,key,channelName){
     ytTopFill(`yt-top-dur-${key}`,`yt-top-dur-sel-${key}`,'avg_duration_sec',v=>fd(v.avg_duration_sec));
   }
 
-  // ── Geo chart + table (all-time only — see caveat in card header) ──
+  // ── Geo chart + table (period-aware — per-month bounded-date-range fetch) ──
   if(yt.geo?.length){
-    const geo15=yt.geo.slice(0,15);
-    const gc=document.getElementById(`yt-geo-${key}`);
-    const gck=`yt_${key}_geo`;if(charts[gck])charts[gck].destroy();
-    if(gc) charts[gck]=new Chart(gc.getContext('2d'),{type:'bar',data:{labels:geo15.map(g=>g.city),datasets:[{label:'Views',data:geo15.map(g=>g.views),backgroundColor:'rgba(71,54,254,.7)',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>fv(v)},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
-    const gt=document.getElementById(`yt-geo-tbl-${key}`);
-    if(gt) gt.innerHTML=tbl(`<th>#</th><th>🌍 City</th><th class="nr">👀 Views</th><th class="nr">⏱ Watch Time</th>`,yt.geo.map((g,i)=>`<tr><td>${i+1}</td><td>${g.city}</td><td class="nr">${fv(g.views)}</td><td class="nr">${fh(g.watch_time_hours)}</td></tr>`).join(''));
+    function renderGeo(period){
+      const src=period==='all'?yt.geo:(yt.geo_monthly?.[period.replace('m:','')]||[]);
+      const rowsG=[...src].sort((a,b)=>b.views-a.views);
+      const geo15=rowsG.slice(0,15);
+      const gc=document.getElementById(`yt-geo-${key}`);
+      const gck=`yt_${key}_geo`;if(charts[gck])charts[gck].destroy();
+      if(gc) charts[gck]=new Chart(gc.getContext('2d'),{type:'bar',data:{labels:geo15.map(g=>g.city),datasets:[{label:'Views',data:geo15.map(g=>g.views),backgroundColor:'rgba(71,54,254,.7)',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>fv(v)},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
+      const gt=document.getElementById(`yt-geo-tbl-${key}`);
+      if(gt) gt.innerHTML=rowsG.length?tbl(`<th>#</th><th>🌍 City</th><th class="nr">👀 Views</th><th class="nr">⏱ Watch Time</th>`,rowsG.map((g,i)=>`<tr><td>${i+1}</td><td>${g.city}</td><td class="nr">${fv(g.views)}</td><td class="nr">${fh(g.watch_time_hours)}</td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
+    }
+    bindSel(`yt-geo-sel-${key}`,renderGeo);
+    renderGeo(document.getElementById(`yt-geo-sel-${key}`)?.value||'all');
   }
 
-  // ── Demographics (all-time only — see caveat in card header) ──
+  // ── Demographics (period-aware — per-month bounded-date-range fetch) ──
   if(yt.demographics?.length){
-    const ageMap={};yt.demographics.forEach(d=>{ageMap[d.age_group]=(ageMap[d.age_group]||0)+d.viewer_pct;});
-    const ages=Object.keys(ageMap).sort();
-    const ac=document.getElementById(`yt-age-${key}`);const ack=`yt_${key}_age`;if(charts[ack])charts[ack].destroy();
-    if(ac) charts[ack]=new Chart(ac.getContext('2d'),{type:'bar',data:{labels:ages,datasets:[{label:'Viewer %',data:ages.map(a=>ageMap[a].toFixed(2)),backgroundColor:ages.map((_,i)=>`hsl(${240+i*15},70%,${50+i*3}%)`),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
-    const genMap={};yt.demographics.forEach(d=>{genMap[d.gender]=(genMap[d.gender]||0)+d.viewer_pct;});
-    const gens=Object.keys(genMap);
-    const genc=document.getElementById(`yt-gender-${key}`);const genck=`yt_${key}_gender`;if(charts[genck])charts[genck].destroy();
-    if(genc) charts[genck]=new Chart(genc.getContext('2d'),{type:'doughnut',data:{labels:gens,datasets:[{data:gens.map(g=>genMap[g].toFixed(2)),backgroundColor:['#4736FE','#00C951','#F59E0B'],borderWidth:3,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11},generateLabels:chart=>{const ds=chart.data;return ds.labels.map((l,i)=>({text:`${l} ${parseFloat(ds.datasets[0].data[i]).toFixed(1)}%`,fillStyle:ds.datasets[0].backgroundColor[i],index:i}));}}}}}});
+    function renderDemo(period){
+      const src=period==='all'?yt.demographics:(yt.demographics_monthly?.[period.replace('m:','')]||[]);
+      const ageMap={};src.forEach(d=>{ageMap[d.age_group]=(ageMap[d.age_group]||0)+d.viewer_pct;});
+      const ages=Object.keys(ageMap).sort();
+      const ac=document.getElementById(`yt-age-${key}`);const ack=`yt_${key}_age`;if(charts[ack])charts[ack].destroy();
+      if(ac) charts[ack]=new Chart(ac.getContext('2d'),{type:'bar',data:{labels:ages,datasets:[{label:'Viewer %',data:ages.map(a=>ageMap[a].toFixed(2)),backgroundColor:ages.map((_,i)=>`hsl(${240+i*15},70%,${50+i*3}%)`),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+      const genMap={};src.forEach(d=>{genMap[d.gender]=(genMap[d.gender]||0)+d.viewer_pct;});
+      const gens=Object.keys(genMap);
+      const genc=document.getElementById(`yt-gender-${key}`);const genck=`yt_${key}_gender`;if(charts[genck])charts[genck].destroy();
+      if(genc) charts[genck]=new Chart(genc.getContext('2d'),{type:'doughnut',data:{labels:gens,datasets:[{data:gens.map(g=>genMap[g].toFixed(2)),backgroundColor:['#4736FE','#00C951','#F59E0B'],borderWidth:3,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11},generateLabels:chart=>{const ds=chart.data;return ds.labels.map((l,i)=>({text:`${l} ${parseFloat(ds.datasets[0].data[i]).toFixed(1)}%`,fillStyle:ds.datasets[0].backgroundColor[i],index:i}));}}}}}});
+    }
+    bindSel(`yt-demo-sel-${key}`,renderDemo);
+    renderDemo(document.getElementById(`yt-demo-sel-${key}`)?.value||'all');
   }
 
   // ── Traffic sources chart + table (period-aware) ──
