@@ -935,4 +935,11 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"  ! GSC keywords error: {e}")
 
+    print("\n── BSOS (Share of Search) Sheets ─────────────────────")
+    try:
+        import fetch_bsos_sheets
+        fetch_bsos_sheets.main()
+    except Exception as e:
+        print(f"  ! BSOS sheets fetch error: {e}")
+
     print("\n✅  Done — run: python3 build_data.py")

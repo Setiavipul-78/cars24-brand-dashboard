@@ -118,7 +118,7 @@ def build_bsos_weekly():
         df = pd.read_csv(p)
         if "date" in df.columns:
             df["date"] = pd.to_datetime(df["date"])
-            df["ws"] = df["date"].dt.to_period("W").apply(lambda x: x.start_time)
+            df["ws"] = df["date"].dt.to_period("W-SAT").apply(lambda x: x.start_time)  # Sunday-start weeks, matches BSOS sheet convention
             bc = [c for c in df.columns if c not in ("date","ws","week","week_start")]
             df = df.groupby("ws")[bc].mean().reset_index()
             df["ws"] = pd.to_datetime(df["ws"])
@@ -183,7 +183,7 @@ def _city_monthly(grp, bc):
 
 def _city_weekly(grp, bc):
     g = grp.copy()
-    g["ws"] = g["date"].dt.to_period("W").apply(lambda x: x.start_time)
+    g["ws"] = g["date"].dt.to_period("W-SAT").apply(lambda x: x.start_time)  # Sunday-start weeks, matches BSOS sheet convention
     weekly = g.groupby("ws")[bc].mean().reset_index().sort_values("ws").reset_index(drop=True)
     rows = []
     for i, row in weekly.iterrows():
