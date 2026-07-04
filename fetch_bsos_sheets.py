@@ -57,10 +57,13 @@ class ValidationError(Exception):
 
 
 def load_env():
-    for line in Path(".env").read_text().splitlines():
-        if "=" in line and not line.startswith("#"):
-            k, v = line.split("=", 1)
-            os.environ.setdefault(k.strip(), v.strip())
+    # Local dev reads .env; in CI the secrets are already real env vars and no .env file exists.
+    env_file = Path(".env")
+    if env_file.exists():
+        for line in env_file.read_text().splitlines():
+            if "=" in line and not line.startswith("#"):
+                k, v = line.split("=", 1)
+                os.environ.setdefault(k.strip(), v.strip())
 
 
 def get_token():
