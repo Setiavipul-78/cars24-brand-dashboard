@@ -1521,16 +1521,23 @@ function initTab4(){
     const b=cityBrand[city]?.find(x=>x.month===m),g=cityGeneric[city]?.find(x=>x.month===m);
     return(b&&g&&b.index!=null&&g.index!=null)?b.index-g.index:null;
   }
+  function brandAt(city,m){const r=cityBrand[city]?.find(x=>x.month===m);return r?r.index:null;}
+  function genericAt(city,m){const r=cityGeneric[city]?.find(x=>x.month===m);return r?r.index:null;}
   let giCityCmpSel=[...cities];
   function renderGiCityCmpTable(sel){
     const tblEl=document.getElementById('tbl-gi-city-cmp');
     if(sel==='__all__'){
-      const th=`<th>City</th>${allGiMonths.map((m,i)=>`<th class="nr${i===allGiMonths.length-1?' ch':''}">${mLabelGi[m]||m}</th>`).join('')}`;
+      const th=`<th>City</th><th></th>${allGiMonths.map((m,i)=>`<th class="nr${i===allGiMonths.length-1?' ch':''}">${mLabelGi[m]||m}</th>`).join('')}`;
       const rows=cities.map(city=>{
-        const vals=allGiMonths.map(m=>gapAt(city,m));
-        return{city,vals,last:vals.filter(v=>v!=null).pop()};
+        const brandVals=allGiMonths.map(m=>brandAt(city,m));
+        const genVals=allGiMonths.map(m=>genericAt(city,m));
+        return{city,brandVals,genVals,last:brandVals.filter(v=>v!=null).pop()};
       }).sort((a,b)=>(b.last??-999)-(a.last??-999));
-      tblEl.innerHTML=tbl(th,rows.map(({city,vals})=>`<tr><td><strong>${city}</strong></td>${vals.map(v=>gapCell(v)).join('')}</tr>`).join(''));
+      const trs=rows.map(({city,brandVals,genVals})=>
+        `<tr class="lat"><td rowspan="2"><strong>${city}</strong></td><td style="color:var(--blue);font-weight:700;font-size:11px">Brand</td>${brandVals.map(v=>`<td class="nr cc">${fIdx(v)}</td>`).join('')}</tr>`+
+        `<tr><td style="color:#f90;font-weight:700;font-size:11px">Generic</td>${genVals.map(v=>`<td class="nr">${fIdx(v)}</td>`).join('')}</tr>`
+      ).join('');
+      tblEl.innerHTML=tbl(th,trs);
       return;
     }
     const rows=cities.map(city=>{
@@ -1547,7 +1554,13 @@ function initTab4(){
   function renderGiCityCmpChart(){
     if(charts.giCityCmp)charts.giCityCmp.destroy();
     const ctx=document.getElementById('chart-gi-city-cmp');if(!ctx)return;
-    charts.giCityCmp=new Chart(ctx.getContext('2d'),{type:'line',data:{labels:allGiMonths.map(m=>mLabelGi[m]||m),datasets:giCityCmpSel.map((city,i)=>({label:city,data:allGiMonths.map(m=>gapAt(city,m)),borderColor:CITY_PALETTE[i%CITY_PALETTE.length],backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:2}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5},padding:8}}},scales:{y:{ticks:{callback:v=>(v>0?'+':'')+v},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+    const datasets=[];
+    giCityCmpSel.forEach((city,i)=>{
+      const clr=CITY_PALETTE[i%CITY_PALETTE.length];
+      datasets.push({label:`${city} · Brand`,data:allGiMonths.map(m=>brandAt(city,m)),borderColor:clr,backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:2});
+      datasets.push({label:`${city} · Generic`,data:allGiMonths.map(m=>genericAt(city,m)),borderColor:clr,backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:1.5,borderDash:[5,3],pointRadius:0});
+    });
+    charts.giCityCmp=new Chart(ctx.getContext('2d'),{type:'line',data:{labels:allGiMonths.map(m=>mLabelGi[m]||m),datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10},padding:8}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
   }
   const giCityCmpPeriodSel=document.getElementById('gi-city-cmp-period-sel');
   giCityCmpPeriodSel.innerHTML=`<option value="__all__">All time</option>`+allGiMonths.slice().reverse().map((m,i)=>`<option value="${m}"${i===0?' selected':''}>${mLabelGi[m]||m}${i===0?' (latest)':''}</option>`).join('');
