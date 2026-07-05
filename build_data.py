@@ -741,17 +741,31 @@ def build_instagram():
 
             rows = []
             for _, row in df.iterrows():
+                views    = int(row.get("views", 0))
+                likes    = int(row.get("likes", 0))
+                comments = int(row.get("comments", 0))
+                shares   = int(row.get("shares", 0))
+                saves    = int(row.get("saves", 0))
+                interactions_sum = likes + comments + shares + saves
+                engagement_rate = round(interactions_sum / views * 100, 2) if views > 0 else 0
                 r = {
                     "month":              str(row["month"])[:7],
                     "label":              mlabel(str(row["month"])[:7]),
                     "followers":          int(row.get("followers", 0)),
+                    "followers_gained":   int(row.get("followers_gained", 0)),
+                    "followers_lost":     int(row.get("followers_lost", 0)),
+                    "net_followers":      int(row.get("net_followers", 0)),
+                    "views":              views,
                     "reach":              int(row.get("reach", 0)),
                     "profile_views":      int(row.get("profile_views", 0)),
-                    "website_clicks":     int(row.get("website_clicks", 0)),
                     "accounts_engaged":   int(row.get("accounts_engaged", 0)),
                     "total_interactions": int(row.get("total_interactions", 0)),
-                    "likes":              int(row.get("likes", 0)),
-                    "comments":           int(row.get("comments", 0)),
+                    "likes":              likes,
+                    "comments":           comments,
+                    "shares":             shares,
+                    "saves":              saves,
+                    "content_posted":     int(row.get("content_posted", 0)),
+                    "engagement_rate":    engagement_rate,
                 }
                 rows.append(r)
 
@@ -777,11 +791,23 @@ def build_instagram():
                 except Exception:
                     pass
 
+            # Follower demographics — current-month snapshot only (IG Insights has no
+            # historical time series for this), age/gender/city/country breakdowns
+            demographics = {}
+            dp = DATA / f"instagram_{key}_extra.json"
+            if dp.exists():
+                try:
+                    with open(dp) as df_:
+                        demographics = json.load(df_)
+                except Exception:
+                    pass
+
             result[key] = {
-                "handle":   IG_HANDLES.get(key, key),
-                "snapshot": snap,
-                "monthly":  rows,
-                "posts":    posts,
+                "handle":       IG_HANDLES.get(key, key),
+                "snapshot":     snap,
+                "monthly":      rows,
+                "posts":        posts,
+                "demographics": demographics,
             }
             print(f"  ✓ Instagram {key}: {len(rows)} months, {len(posts)} top posts")
         except Exception as e:
@@ -801,6 +827,14 @@ LI_PAGES = {
     "cars24":         "Cars24 India",
     "cars24_arabia":  "Cars24 Arabia",
     "cars24_au":      "Cars24 Australia",
+}
+
+# LinkedIn's "Followers" export is a daily GAINS report (new followers per day), not a
+# running total — so the CSV's "Total followers" column has to be reconstructed into a
+# cumulative trend by anchoring to a known current total and walking backwards day by day.
+# {page_key: (known_total, "YYYY-MM-DD" the total was true as of)}
+LI_KNOWN_TOTAL_FOLLOWERS = {
+    "cars24": (464282, "2026-07-03"),
 }
 
 def _li_col(df, *candidates):
@@ -849,20 +883,36 @@ def build_linkedin():
                 if date_col:
                     df[date_col] = pd.to_datetime(df[date_col], errors="coerce")
                     df = df.dropna(subset=[date_col])
+                    df = df.sort_values(date_col).reset_index(drop=True)
                     df["_month"] = df[date_col].dt.to_period("M").astype(str)
 
-                    total_col    = _li_col(df, "total followers", "total_followers", "followers (total)")
-                    new_col      = _li_col(df, "new followers", "new_followers", "followers gained")
-                    organic_col  = _li_col(df, "organic followers", "new organic followers")
+                    gain_col = _li_col(df, "total followers", "total_followers", "followers (total)",
+                                        "new followers", "new_followers", "followers gained",
+                                        "organic followers", "new organic followers")
+
+                    if gain_col:
+                        df["_gain"] = df[gain_col].fillna(0).astype(float)
+                        # Reconstruct a cumulative running total: this CSV reports NEW
+                        # followers gained per day, not a running total, so anchor the
+                        # last day to a known real total and walk backwards.
+                        known = LI_KNOWN_TOTAL_FOLLOWERS.get(key)
+                        if known:
+                            known_total, known_date = known
+                            known_ts = pd.Timestamp(known_date)
+                            gains_after = df.loc[df[date_col] > known_ts, "_gain"].sum()
+                            running_end = known_total - gains_after
+                        else:
+                            running_end = int(df["_gain"].sum())
+                        cum_gain = df["_gain"].cumsum()
+                        df["_running_total"] = running_end - (cum_gain.iloc[-1] - cum_gain)
+                        page_data["snapshot"]["followers"] = int(round(df["_running_total"].iloc[-1]))
+                    else:
+                        df["_running_total"] = 0
 
                     monthly_fol = df.groupby("_month").agg(
-                        total_followers=(total_col, "last") if total_col else ("_month", "count"),
-                        new_followers=(new_col, "sum") if new_col else ("_month", "count"),
+                        total_followers=("_running_total", "last"),
+                        new_followers=("_gain", "sum") if gain_col else ("_month", "count"),
                     ).reset_index()
-
-                    if total_col:
-                        snap_val = int(df[total_col].dropna().iloc[-1]) if not df[total_col].dropna().empty else 0
-                        page_data["snapshot"]["followers"] = snap_val
 
                     for _, row in monthly_fol.iterrows():
                         page_data["monthly"].append({

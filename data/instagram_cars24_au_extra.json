@@ -1,0 +1,410 @@
+{
+  "age": [
+    {
+      "key": "13-17",
+      "value": 42
+    },
+    {
+      "key": "18-24",
+      "value": 969
+    },
+    {
+      "key": "25-34",
+      "value": 4219
+    },
+    {
+      "key": "35-44",
+      "value": 3753
+    },
+    {
+      "key": "45-54",
+      "value": 2137
+    },
+    {
+      "key": "55-64",
+      "value": 908
+    },
+    {
+      "key": "65+",
+      "value": 388
+    }
+  ],
+  "gender": [
+    {
+      "key": "F",
+      "value": 3913
+    },
+    {
+      "key": "M",
+      "value": 7044
+    },
+    {
+      "key": "U",
+      "value": 1459
+    }
+  ],
+  "city": [
+    {
+      "key": "Sydney, New South Wales",
+      "value": 2495
+    },
+    {
+      "key": "Bendigo, Victoria",
+      "value": 37
+    },
+    {
+      "key": "Plumpton, Victoria, Victoria",
+      "value": 24
+    },
+    {
+      "key": "Kurunjang, Victoria",
+      "value": 19
+    },
+    {
+      "key": "Geelong, Victoria",
+      "value": 99
+    },
+    {
+      "key": "Pakenham, Victoria",
+      "value": 45
+    },
+    {
+      "key": "Perth, Western Australia",
+      "value": 180
+    },
+    {
+      "key": "Craigieburn, Victoria",
+      "value": 45
+    },
+    {
+      "key": "Pune, Maharashtra",
+      "value": 22
+    },
+    {
+      "key": "Wollongong, New South Wales",
+      "value": 74
+    },
+    {
+      "key": "Ahmedabad, Gujarat",
+      "value": 48
+    },
+    {
+      "key": "Ballarat, Victoria",
+      "value": 45
+    },
+    {
+      "key": "Gold Coast, Queensland",
+      "value": 287
+    },
+    {
+      "key": "Abu Dhabi, Abu Dhabi",
+      "value": 25
+    },
+    {
+      "key": "Sunshine Coast, Queensland",
+      "value": 121
+    },
+    {
+      "key": "Melbourne, Victoria",
+      "value": 3461
+    },
+    {
+      "key": "Gurugram, Haryana",
+      "value": 86
+    },
+    {
+      "key": "Delhi, Delhi",
+      "value": 97
+    },
+    {
+      "key": "Mickleham, Victoria",
+      "value": 55
+    },
+    {
+      "key": "Ipswich, Queensland",
+      "value": 72
+    },
+    {
+      "key": "Mount Cottrell, Victoria",
+      "value": 31
+    },
+    {
+      "key": "Brisbane, Queensland",
+      "value": 537
+    },
+    {
+      "key": "Greenvale, Victoria",
+      "value": 22
+    },
+    {
+      "key": "Adelaide, South Australia",
+      "value": 239
+    },
+    {
+      "key": "Laverton North, Victoria",
+      "value": 19
+    },
+    {
+      "key": "Canberra, Australian Capital Territory",
+      "value": 63
+    },
+    {
+      "key": "Mount Duneed, Victoria",
+      "value": 19
+    },
+    {
+      "key": "Officer, Victoria",
+      "value": 20
+    },
+    {
+      "key": "Marsden Park, New South Wales",
+      "value": 23
+    },
+    {
+      "key": "Chennai, Tamil Nadu",
+      "value": 32
+    },
+    {
+      "key": "Shepparton, Victoria",
+      "value": 20
+    },
+    {
+      "key": "Cairns, Queensland",
+      "value": 30
+    },
+    {
+      "key": "Townsville, Queensland",
+      "value": 33
+    },
+    {
+      "key": "Werribee South, Victoria",
+      "value": 30
+    },
+    {
+      "key": "Rockbank, Victoria",
+      "value": 32
+    },
+    {
+      "key": "Dubai, Dubai",
+      "value": 71
+    },
+    {
+      "key": "Mumbai, Maharashtra",
+      "value": 23
+    },
+    {
+      "key": "Sharjah, Emirate of Sharjah",
+      "value": 26
+    },
+    {
+      "key": "Wallan, Victoria",
+      "value": 19
+    },
+    {
+      "key": "Bangalore, Karnataka",
+      "value": 56
+    },
+    {
+      "key": "Box Hill, New South Wales",
+      "value": 19
+    },
+    {
+      "key": "Hyderabad, Telangana",
+      "value": 25
+    },
+    {
+      "key": "Newcastle, New South Wales",
+      "value": 43
+    },
+    {
+      "key": "Eynesbury, Victoria",
+      "value": 28
+    },
+    {
+      "key": "Melton South, Victoria",
+      "value": 25
+    }
+  ],
+  "country": [
+    {
+      "key": "DE",
+      "value": 11
+    },
+    {
+      "key": "NP",
+      "value": 6
+    },
+    {
+      "key": "BD",
+      "value": 15
+    },
+    {
+      "key": "RU",
+      "value": 5
+    },
+    {
+      "key": "TW",
+      "value": 9
+    },
+    {
+      "key": "HK",
+      "value": 12
+    },
+    {
+      "key": "FJ",
+      "value": 8
+    },
+    {
+      "key": "JO",
+      "value": 5
+    },
+    {
+      "key": "JP",
+      "value": 6
+    },
+    {
+      "key": "NZ",
+      "value": 30
+    },
+    {
+      "key": "SA",
+      "value": 15
+    },
+    {
+      "key": "BR",
+      "value": 16
+    },
+    {
+      "key": "MA",
+      "value": 4
+    },
+    {
+      "key": "SG",
+      "value": 13
+    },
+    {
+      "key": "KE",
+      "value": 5
+    },
+    {
+      "key": "GB",
+      "value": 33
+    },
+    {
+      "key": "ID",
+      "value": 49
+    },
+    {
+      "key": "IE",
+      "value": 6
+    },
+    {
+      "key": "CA",
+      "value": 16
+    },
+    {
+      "key": "US",
+      "value": 53
+    },
+    {
+      "key": "GH",
+      "value": 10
+    },
+    {
+      "key": "EG",
+      "value": 8
+    },
+    {
+      "key": "AE",
+      "value": 154
+    },
+    {
+      "key": "IN",
+      "value": 1059
+    },
+    {
+      "key": "ZA",
+      "value": 5
+    },
+    {
+      "key": "KR",
+      "value": 13
+    },
+    {
+      "key": "IQ",
+      "value": 6
+    },
+    {
+      "key": "CL",
+      "value": 4
+    },
+    {
+      "key": "IR",
+      "value": 33
+    },
+    {
+      "key": "CN",
+      "value": 11
+    },
+    {
+      "key": "KW",
+      "value": 5
+    },
+    {
+      "key": "MY",
+      "value": 15
+    },
+    {
+      "key": "CO",
+      "value": 28
+    },
+    {
+      "key": "ES",
+      "value": 4
+    },
+    {
+      "key": "TH",
+      "value": 17
+    },
+    {
+      "key": "AU",
+      "value": 10455
+    },
+    {
+      "key": "LB",
+      "value": 4
+    },
+    {
+      "key": "VN",
+      "value": 11
+    },
+    {
+      "key": "PH",
+      "value": 23
+    },
+    {
+      "key": "NG",
+      "value": 43
+    },
+    {
+      "key": "PK",
+      "value": 41
+    },
+    {
+      "key": "ZW",
+      "value": 5
+    },
+    {
+      "key": "NL",
+      "value": 6
+    },
+    {
+      "key": "TR",
+      "value": 29
+    },
+    {
+      "key": "LK",
+      "value": 13
+    }
+  ]
+}

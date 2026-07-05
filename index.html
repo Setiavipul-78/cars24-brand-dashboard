@@ -310,7 +310,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
         <button class="tab" data-target="in-inf" data-lazy="inf"><span class="ti">👥</span>Influencers</button>
         <button class="tab" data-target="in-yt" data-lazy="yt"><span class="ti">📺</span>YouTube</button>
         <button class="tab" data-target="in-ig" data-lazy="ig"><span class="ti">📸</span>Instagram</button>
-        <button class="tab" data-target="in-li"><span class="ti">💼</span>LinkedIn</button>
+        <button class="tab" data-target="in-li" data-lazy="li"><span class="ti">💼</span>LinkedIn</button>
       </nav>
 
       <div class="tabpanes">
@@ -1930,7 +1930,10 @@ function renderYT(containerId,key,channelName){
         <div class="cw" style="height:340px"><canvas id="yt-geo-${key}"></canvas></div>
       </div>
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">🗺 City Table</span><span class="title">City Breakdown</span><span class="desc">Views, watch time and % share per city. Top 25 tracked cities — % is of views among these, not total channel views.</span></div>
+        <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div><span class="kicker">🗺 City Table</span><span class="title">City Breakdown</span><span class="desc">Views, watch time and % share per city. Top 25 tracked cities — % is of views among these, not total channel views.</span></div>
+          <select class="inf-sel" id="yt-geo-tbl-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
+        </div>
         <div class="tw" id="yt-geo-tbl-${key}"></div>
       </div>
     </div>`:''}
@@ -1940,12 +1943,15 @@ function renderYT(containerId,key,channelName){
       <div class="card" style="margin:0">
         <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
           <div><span class="kicker">📊 Age Groups</span><span class="title">Audience Age Distribution</span><span class="desc">% of viewers in each age band. Helps identify your core demographic.</span></div>
-          <select class="inf-sel" id="yt-demo-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
+          <select class="inf-sel" id="yt-age-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
         </div>
         <div class="cw" style="height:240px"><canvas id="yt-age-${key}"></canvas></div>
       </div>
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">⚤ Gender Split</span><span class="title">Viewer Gender Breakdown</span><span class="desc">Male vs female audience composition.</span></div>
+        <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div><span class="kicker">⚤ Gender Split</span><span class="title">Viewer Gender Breakdown</span><span class="desc">Male vs female audience composition.</span></div>
+          <select class="inf-sel" id="yt-gender-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
+        </div>
         <div class="cw" style="height:240px"><canvas id="yt-gender-${key}"></canvas></div>
         <div class="tw" id="yt-gender-tbl-${key}" style="margin-top:10px"></div>
       </div>
@@ -1961,7 +1967,10 @@ function renderYT(containerId,key,channelName){
         <div class="cw" style="height:300px"><canvas id="yt-traffic-${key}"></canvas></div>
       </div>
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">📋 Source Table</span><span class="title">Traffic Source Breakdown</span><span class="desc">Views, share %, and watch time per traffic source.</span></div>
+        <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div><span class="kicker">📋 Source Table</span><span class="title">Traffic Source Breakdown</span><span class="desc">Views, share %, and watch time per traffic source.</span></div>
+          <select class="inf-sel" id="yt-traffic-tbl-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
+        </div>
         <div class="tw" id="yt-traffic-tbl-${key}"></div>
       </div>
     </div>`:''}
@@ -1976,7 +1985,10 @@ function renderYT(containerId,key,channelName){
         <div class="cw" style="height:260px"><canvas id="yt-devices-${key}"></canvas></div>
       </div>
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">📋 Device Table</span><span class="title">Views per Device</span><span class="desc">Views, share % and watch time by device type.</span></div>
+        <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div><span class="kicker">📋 Device Table</span><span class="title">Views per Device</span><span class="desc">Views, share % and watch time by device type.</span></div>
+          <select class="inf-sel" id="yt-devices-tbl-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
+        </div>
         <div class="tw" id="yt-devices-tbl-${key}"></div>
       </div>
     </div>`:''}
@@ -2078,31 +2090,44 @@ function renderYT(containerId,key,channelName){
     ytTopFill(`yt-top-dur-${key}`,`yt-top-dur-sel-${key}`,'avg_duration_sec',v=>fd(v.avg_duration_sec));
   }
 
-  // ── Geo chart + table (period-aware — per-month bounded-date-range fetch) ──
+  // ── Geo chart + table — each independently period-filtered ──
   if(yt.geo?.length){
-    function renderGeo(period){
+    function geoRowsFor(period){
       const src=period==='all'?yt.geo:(yt.geo_monthly?.[period.replace('m:','')]||[]);
-      const rowsG=[...src].sort((a,b)=>b.views-a.views);
-      const geo15=rowsG.slice(0,15);
+      return [...src].sort((a,b)=>b.views-a.views);
+    }
+    function renderGeoChart(period){
+      const geo15=geoRowsFor(period).slice(0,15);
       const gc=document.getElementById(`yt-geo-${key}`);
       const gck=`yt_${key}_geo`;if(charts[gck])charts[gck].destroy();
       if(gc) charts[gck]=new Chart(gc.getContext('2d'),{type:'bar',data:{labels:geo15.map(g=>g.city),datasets:[{label:'Views',data:geo15.map(g=>g.views),backgroundColor:'rgba(71,54,254,.7)',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>fv(v)},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
+    }
+    function renderGeoTable(period){
+      const rowsG=geoRowsFor(period);
       const gt=document.getElementById(`yt-geo-tbl-${key}`);
       const geoTotalViews=rowsG.reduce((s,g)=>s+(g.views||0),0)||1;
       if(gt) gt.innerHTML=rowsG.length?tbl(`<th>#</th><th>🌍 City</th><th class="nr">👀 Views</th><th class="nr">% of Views</th><th class="nr">⏱ Watch Time</th>`,rowsG.map((g,i)=>`<tr><td>${i+1}</td><td>${g.city}</td><td class="nr">${fv(g.views)}</td><td class="nr">${(g.views/geoTotalViews*100).toFixed(1)}%</td><td class="nr">${fh(g.watch_time_hours)}</td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
     }
-    bindSel(`yt-geo-sel-${key}`,renderGeo);
-    renderGeo(document.getElementById(`yt-geo-sel-${key}`)?.value||'all');
+    bindSel(`yt-geo-sel-${key}`,renderGeoChart);
+    renderGeoChart(document.getElementById(`yt-geo-sel-${key}`)?.value||'all');
+    bindSel(`yt-geo-tbl-sel-${key}`,renderGeoTable);
+    renderGeoTable(document.getElementById(`yt-geo-tbl-sel-${key}`)?.value||'all');
   }
 
-  // ── Demographics (period-aware — per-month bounded-date-range fetch) ──
+  // ── Demographics — Age and Gender each independently period-filtered ──
   if(yt.demographics?.length){
-    function renderDemo(period){
-      const src=period==='all'?yt.demographics:(yt.demographics_monthly?.[period.replace('m:','')]||[]);
+    function demoRowsFor(period){
+      return period==='all'?yt.demographics:(yt.demographics_monthly?.[period.replace('m:','')]||[]);
+    }
+    function renderAge(period){
+      const src=demoRowsFor(period);
       const ageMap={};src.forEach(d=>{ageMap[d.age_group]=(ageMap[d.age_group]||0)+d.viewer_pct;});
       const ages=Object.keys(ageMap).sort();
       const ac=document.getElementById(`yt-age-${key}`);const ack=`yt_${key}_age`;if(charts[ack])charts[ack].destroy();
       if(ac) charts[ack]=new Chart(ac.getContext('2d'),{type:'bar',data:{labels:ages,datasets:[{label:'Viewer %',data:ages.map(a=>ageMap[a].toFixed(2)),backgroundColor:ages.map((_,i)=>`hsl(${240+i*15},70%,${50+i*3}%)`),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+    }
+    function renderGender(period){
+      const src=demoRowsFor(period);
       const genMap={};src.forEach(d=>{genMap[d.gender]=(genMap[d.gender]||0)+d.viewer_pct;});
       const gens=Object.keys(genMap).sort((a,b)=>genMap[b]-genMap[a]);
       const genc=document.getElementById(`yt-gender-${key}`);const genck=`yt_${key}_gender`;if(charts[genck])charts[genck].destroy();
@@ -2110,37 +2135,55 @@ function renderYT(containerId,key,channelName){
       const gent=document.getElementById(`yt-gender-tbl-${key}`);
       if(gent) gent.innerHTML=gens.length?tbl(`<th>⚤ Gender</th><th class="nr">% of Viewers</th>`,gens.map(g=>`<tr><td>${GENDER_NAMES[g]||g}</td><td class="nr"><strong>${genMap[g].toFixed(1)}%</strong></td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
     }
-    bindSel(`yt-demo-sel-${key}`,renderDemo);
-    renderDemo(document.getElementById(`yt-demo-sel-${key}`)?.value||'all');
+    bindSel(`yt-age-sel-${key}`,renderAge);
+    renderAge(document.getElementById(`yt-age-sel-${key}`)?.value||'all');
+    bindSel(`yt-gender-sel-${key}`,renderGender);
+    renderGender(document.getElementById(`yt-gender-sel-${key}`)?.value||'all');
   }
 
-  // ── Traffic sources chart + table (period-aware) ──
+  // ── Traffic sources chart + table — each independently period-filtered ──
   if(yt.traffic_sources?.length){
-    function renderTraffic(period){
+    function trafficRowsFor(period){
       const src=period==='all'?yt.traffic_sources:(yt.traffic_sources_monthly?.[period.replace('m:','')]||[]);
-      const rowsT=[...src].sort((a,b)=>b.views-a.views);
+      return [...src].sort((a,b)=>b.views-a.views);
+    }
+    function renderTrafficChart(period){
+      const rowsT=trafficRowsFor(period);
       const trc=document.getElementById(`yt-traffic-${key}`);const trck=`yt_${key}_traffic`;if(charts[trck])charts[trck].destroy();
       const trNames=rowsT.map(t=>YT_SRC_NAMES[t.source]||t.source);
       if(trc) charts[trck]=new Chart(trc.getContext('2d'),{type:'bar',data:{labels:trNames,datasets:[{label:'Views',data:rowsT.map(t=>t.views),backgroundColor:'rgba(0,201,81,.7)',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>fv(v)},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
+    }
+    function renderTrafficTable(period){
+      const rowsT=trafficRowsFor(period);
       const trt=document.getElementById(`yt-traffic-tbl-${key}`);
       if(trt) trt.innerHTML=rowsT.length?tbl(`<th>🚦 Source</th><th class="nr">👀 Views</th><th class="nr">Share %</th><th class="nr">⏱ Watch Time</th>`,rowsT.map(t=>`<tr><td>${YT_SRC_NAMES[t.source]||t.source}</td><td class="nr">${fv(t.views)}</td><td class="nr">${t.pct}%</td><td class="nr">${fh(t.watch_time_hours)}</td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
     }
-    bindSel(`yt-traffic-sel-${key}`,renderTraffic);
-    renderTraffic(document.getElementById(`yt-traffic-sel-${key}`)?.value||'all');
+    bindSel(`yt-traffic-sel-${key}`,renderTrafficChart);
+    renderTrafficChart(document.getElementById(`yt-traffic-sel-${key}`)?.value||'all');
+    bindSel(`yt-traffic-tbl-sel-${key}`,renderTrafficTable);
+    renderTrafficTable(document.getElementById(`yt-traffic-tbl-sel-${key}`)?.value||'all');
   }
 
-  // ── Devices donut + table (period-aware) ──
+  // ── Devices donut + table — each independently period-filtered ──
   if(yt.devices?.length){
-    function renderDevices(period){
+    function deviceRowsFor(period){
       const src=period==='all'?yt.devices:(yt.devices_monthly?.[period.replace('m:','')]||[]);
-      const rowsD=[...src].sort((a,b)=>b.views-a.views);
+      return [...src].sort((a,b)=>b.views-a.views);
+    }
+    function renderDevicesChart(period){
+      const rowsD=deviceRowsFor(period);
       const dvc=document.getElementById(`yt-devices-${key}`);const dvck=`yt_${key}_devices`;if(charts[dvck])charts[dvck].destroy();
       if(dvc) charts[dvck]=new Chart(dvc.getContext('2d'),{type:'doughnut',data:{labels:rowsD.map(d=>d.device),datasets:[{data:rowsD.map(d=>d.views),backgroundColor:['#4736FE','#00C951','#F59E0B','#8B5CF6'],borderWidth:3,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:11},generateLabels:chart=>{const ds=chart.data;return ds.labels.map((l,i)=>({text:`${l} ${rowsD[i].pct}%`,fillStyle:ds.datasets[0].backgroundColor[i],index:i}));}}}}}});
+    }
+    function renderDevicesTable(period){
+      const rowsD=deviceRowsFor(period);
       const dvt=document.getElementById(`yt-devices-tbl-${key}`);
       if(dvt) dvt.innerHTML=rowsD.length?tbl(`<th>📱 Device</th><th class="nr">👀 Views</th><th class="nr">Share %</th><th class="nr">⏱ Watch Time</th>`,rowsD.map(d=>`<tr><td>${d.device}</td><td class="nr">${fv(d.views)}</td><td class="nr">${d.pct}%</td><td class="nr">${fh(d.watch_time_hours)}</td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
     }
-    bindSel(`yt-devices-sel-${key}`,renderDevices);
-    renderDevices(document.getElementById(`yt-devices-sel-${key}`)?.value||'all');
+    bindSel(`yt-devices-sel-${key}`,renderDevicesChart);
+    renderDevicesChart(document.getElementById(`yt-devices-sel-${key}`)?.value||'all');
+    bindSel(`yt-devices-tbl-sel-${key}`,renderDevicesTable);
+    renderDevicesTable(document.getElementById(`yt-devices-tbl-sel-${key}`)?.value||'all');
   }
   scanTw(el);
 }
@@ -2172,17 +2215,17 @@ function renderIG(containerId,key,handleName){
           ${monthOpts(monthsDesc,true)}
         </select>
       </div>
-      <div class="inf-kpi-strip" id="ig-kpis-${key}" style="grid-template-columns:repeat(7,1fr)"></div>
+      <div class="inf-kpi-strip" id="ig-kpis-${key}" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"></div>
     </div>
 
     <div class="card">
-      <div class="sh"><span class="kicker">📈 Monthly Trend</span><span class="title">Reach Over Time — ${handleName}</span><span class="desc">Monthly reach (bars, left) and total interactions (line, right). All months shown.</span></div>
+      <div class="sh"><span class="kicker">📈 Monthly Trend</span><span class="title">Views Over Time — ${handleName}</span><span class="desc">Monthly views (bars, left) and total followers (line, right). All months shown.</span></div>
       <div class="cw tall"><canvas id="ig-trend-${key}"></canvas></div>
     </div>
 
     <div class="card">
       <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
-        <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance</span><span class="desc">Reach, profile views, website clicks, engagement and interactions with MoM change.</span></div>
+        <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance</span><span class="desc">Organic views, reach, engagement, profile views and interactions with MoM change.</span></div>
         <select class="inf-sel" id="ig-tbl-sel-${key}">
           <option value="all" selected>All Time</option>
           ${monthOpts(monthsDesc)}
@@ -2235,54 +2278,93 @@ function renderIG(containerId,key,handleName){
         <div class="cw" style="height:260px"><canvas id="ig-types-${key}"></canvas></div>
       </div>
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">📋 Type Performance</span><span class="title">Avg Reach by Content Type</span><span class="desc">Which format drives the most reach on average.</span></div>
+        <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div><span class="kicker">📋 Type Performance</span><span class="title">Avg Reach by Content Type</span><span class="desc">Which format drives the most reach on average.</span></div>
+          <select class="inf-sel" id="ig-typereach-sel-${key}"><option value="all" selected>All Time</option>${monthOpts(monthsDesc)}</select>
+        </div>
         <div class="cw" style="height:260px"><canvas id="ig-typereach-${key}"></canvas></div>
+      </div>
+    </div>`:''}
+
+    ${(ig.demographics?.age?.length||ig.demographics?.gender?.length)?`
+    <div class="g2">
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">📊 Age Groups</span><span class="title">Audience Age Distribution</span><span class="desc">% of followers in each age band, as of latest refresh. Instagram's API only exposes a current snapshot, not a historical trend.</span></div>
+        <div class="cw" style="height:240px"><canvas id="ig-age-${key}"></canvas></div>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">⚤ Gender Split</span><span class="title">Follower Gender Breakdown</span><span class="desc">Male vs female audience composition, as of latest refresh.</span></div>
+        <div class="cw" style="height:240px"><canvas id="ig-gender-${key}"></canvas></div>
+        <div class="tw" id="ig-gender-tbl-${key}" style="margin-top:10px"></div>
+      </div>
+    </div>`:''}
+
+    ${ig.demographics?.city?.length?`
+    <div class="g2">
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">🌍 City Level</span><span class="title">Top Follower Cities</span><span class="desc">Where your followers are located, as of latest refresh.</span></div>
+        <div class="cw" style="height:320px"><canvas id="ig-city-${key}"></canvas></div>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">🗺 City Table</span><span class="title">City Breakdown</span><span class="desc">Follower count and % share per city.</span></div>
+        <div class="tw" id="ig-city-tbl-${key}"></div>
+      </div>
+    </div>`:''}
+
+    ${ig.demographics?.country?.length?`
+    <div class="g2">
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">🌐 Country Level</span><span class="title">Top Follower Countries</span><span class="desc">Where your followers are located, as of latest refresh.</span></div>
+        <div class="cw" style="height:320px"><canvas id="ig-country-${key}"></canvas></div>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">📋 Country Table</span><span class="title">Country Breakdown</span><span class="desc">Follower count and % share per country.</span></div>
+        <div class="tw" id="ig-country-tbl-${key}"></div>
       </div>
     </div>`:''}
   `;
 
-  // ── KPI tiles (period-filtered) ──
+  // ── KPI tiles (period-filtered, "all" genuinely sums the full history) ──
   function renderIGKPIs(period){
-    const m=period.replace('m:','');
-    const row=monthly.find(r=>r.month===m)||monthsDesc[0];
-    const idx=monthly.findIndex(r=>r.month===row.month);
-    const prev=idx>0?monthly[idx-1]:null;
-    const momR=prev&&prev.reach?((row.reach-prev.reach)/prev.reach*100):null;
-    const momE=prev&&prev.total_interactions?((row.total_interactions-prev.total_interactions)/prev.total_interactions*100):null;
-    const momP=prev&&prev.profile_views?((row.profile_views-prev.profile_views)/prev.profile_views*100):null;
-    const momW=prev&&prev.website_clicks?((row.website_clicks-prev.website_clicks)/prev.website_clicks*100):null;
-    const momA=prev&&prev.accounts_engaged?((row.accounts_engaged-prev.accounts_engaged)/prev.accounts_engaged*100):null;
-    const fol=snap.followers||row.followers||0;
-    const engRate=row.reach>0?(row.total_interactions/row.reach*100):0;
+    const rows=period==='all'?monthly:monthly.filter(r=>r.month===period.replace('m:',''));
+    const tv=rows.reduce((s,r)=>s+(r.views||0),0);
+    const tfg=rows.reduce((s,r)=>s+(r.followers_gained||0),0);
+    const tfl=rows.reduce((s,r)=>s+(r.followers_lost||0),0);
+    const tcp=rows.reduce((s,r)=>s+(r.content_posted||0),0);
+    const tae=rows.reduce((s,r)=>s+(r.accounts_engaged||0),0);
+    const tl=rows.reduce((s,r)=>s+(r.likes||0),0);
+    const tc=rows.reduce((s,r)=>s+(r.comments||0),0);
+    const tsh=rows.reduce((s,r)=>s+(r.shares||0),0);
+    const tsv=rows.reduce((s,r)=>s+(r.saves||0),0);
+    const engRate=tv>0?(tl+tc+tsh+tsv)/tv*100:0;
+    const netFol=tfg-tfl;
     document.getElementById(`ig-kpis-${key}`).innerHTML=`
-      <div class="ink mint"><span class="ink-icon">👥</span><div class="ink-lbl">Followers</div><div class="ink-val">${numFmt(fol)}</div><div class="ink-sub">${handleName}</div></div>
-      <div class="ink grn"><span class="ink-icon">👁</span><div class="ink-lbl">Reach</div><div class="ink-val">${numFmt(row.reach)}</div><div class="ink-sub">${badge(momR)} MoM</div></div>
-      <div class="ink"><span class="ink-icon">🏠</span><div class="ink-lbl">Profile Views</div><div class="ink-val">${numFmt(row.profile_views)}</div><div class="ink-sub">${badge(momP)} MoM</div></div>
-      <div class="ink pur"><span class="ink-icon">🔗</span><div class="ink-lbl">Website Clicks</div><div class="ink-val">${numFmt(row.website_clicks)}</div><div class="ink-sub">${badge(momW)} MoM</div></div>
-      <div class="ink or"><span class="ink-icon">💬</span><div class="ink-lbl">Accts Engaged</div><div class="ink-val">${numFmt(row.accounts_engaged)}</div><div class="ink-sub">${badge(momA)} MoM</div></div>
-      <div class="ink red"><span class="ink-icon">❤️</span><div class="ink-lbl">Likes</div><div class="ink-val">${numFmt(row.likes)}</div><div class="ink-sub">${row.label}</div></div>
-      <div class="ink"><span class="ink-icon">⚡</span><div class="ink-lbl">Eng Rate</div><div class="ink-val">${engRate.toFixed(2)}%</div><div class="ink-sub">${badge(momE)} interactions MoM</div></div>`;
+      <div class="ink grn"><span class="ink-icon">👀</span><div class="ink-lbl">Organic Views</div><div class="ink-val">${numFmt(tv)}</div><div class="ink-sub">in period · Instagram API has no ads/organic split</div></div>
+      <div class="ink mint"><span class="ink-icon">📈</span><div class="ink-lbl">Followers Gained</div><div class="ink-val">${tfg>0?'+':''}${numFmt(tfg)}</div><div class="ink-sub">in period · net ${netFol>=0?'+':''}${numFmt(netFol)}</div></div>
+      <div class="ink mint"><span class="ink-icon">👥</span><div class="ink-lbl">Total Followers</div><div class="ink-val">${numFmt(snap.followers||0)}</div><div class="ink-sub">${handleName}</div></div>
+      <div class="ink"><span class="ink-icon">📮</span><div class="ink-lbl">Content Posted</div><div class="ink-val">${numFmt(tcp)}</div><div class="ink-sub">posts in period</div></div>
+      <div class="ink or"><span class="ink-icon">💬</span><div class="ink-lbl">Organic Accts Engaged</div><div class="ink-val">${numFmt(tae)}</div><div class="ink-sub">in period · no ads/organic split</div></div>
+      <div class="ink grn"><span class="ink-icon">⚡</span><div class="ink-lbl">Engagement Rate</div><div class="ink-val">${engRate.toFixed(2)}%</div><div class="ink-sub">(likes+shares+saves+cmts)÷views</div></div>`;
   }
   // ── Monthly table (period-filtered) ──
   function renderIGTable(period){
     const filtered=period==='all'?monthsDesc:monthly.filter(r=>r.month===period.replace('m:','')).reverse();
-    const th=`<th>Month</th><th class="nr ch">👁 Reach</th><th class="nr ch">MoM</th><th class="nr">🏠 Profile Views</th><th class="nr">🔗 Web Clicks</th><th class="nr">💬 Accts Engaged</th><th class="nr">❤️ Likes</th><th class="nr">💬 Comments</th><th class="nr ch">⚡ Interactions</th><th class="nr ch">MoM</th>`;
+    const th=`<th>Month</th><th class="nr ch">👀 Organic Views</th><th class="nr ch">MoM</th><th class="nr">👁 Organic Reach</th><th class="nr">💬 Organic Engagement</th><th class="nr">🏠 Profile Views</th><th class="nr">💬 Comments</th><th class="nr ch">⚡ Organic Interactions</th><th class="nr ch">Eng Rate</th>`;
     const rows=filtered.map(r=>{
       const idx2=monthly.findIndex(x=>x.month===r.month);
       const p=idx2>0?monthly[idx2-1]:null;
-      const mR=p&&p.reach?((r.reach-p.reach)/p.reach*100):null;
-      const mI=p&&p.total_interactions?((r.total_interactions-p.total_interactions)/p.total_interactions*100):null;
+      const mV=p&&p.views?((r.views-p.views)/p.views*100):null;
+      const interactions=(r.likes||0)+(r.comments||0)+(r.shares||0)+(r.saves||0);
       return`<tr class="${r.month===latestM?'lat':''}">
         <td><strong>${r.label}</strong>${r.month===latestM?' <span class="badge bb">Latest</span>':''}</td>
-        <td class="nr cc"><strong>${numFmt(r.reach)}</strong></td>
-        <td class="nr cc">${badge(mR)}</td>
-        <td class="nr">${numFmt(r.profile_views)}</td>
-        <td class="nr">${numFmt(r.website_clicks)}</td>
+        <td class="nr cc"><strong>${numFmt(r.views)}</strong></td>
+        <td class="nr cc">${badge(mV)}</td>
+        <td class="nr">${numFmt(r.reach)}</td>
         <td class="nr">${numFmt(r.accounts_engaged)}</td>
-        <td class="nr">${numFmt(r.likes)}</td>
+        <td class="nr">${numFmt(r.profile_views)}</td>
         <td class="nr">${numFmt(r.comments)}</td>
-        <td class="nr cc"><strong>${numFmt(r.total_interactions)}</strong></td>
-        <td class="nr cc">${badge(mI)}</td>
+        <td class="nr cc"><strong>${numFmt(interactions)}</strong></td>
+        <td class="nr cc">${(r.engagement_rate||0).toFixed(2)}%</td>
       </tr>`;
     }).join('');
     document.getElementById(`ig-mom-tbl-${key}`).innerHTML=filtered.length?tbl(th,rows):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
@@ -2296,7 +2378,7 @@ function renderIG(containerId,key,handleName){
   // ── Trend chart ──
   const ck=`ig_${key}_trend`;if(charts[ck])charts[ck].destroy();
   const tc=document.getElementById(`ig-trend-${key}`);
-  if(tc) charts[ck]=new Chart(tc.getContext('2d'),{type:'bar',data:{labels:monthly.map(r=>r.label),datasets:[{type:'bar',label:'Reach',data:monthly.map(r=>r.reach),backgroundColor:'rgba(233,30,140,.18)',yAxisID:'y',borderRadius:5},{type:'line',label:'Total Interactions',data:monthly.map(r=>r.total_interactions||0),borderColor:'#E91E8C',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Reach'},ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'Interactions'},ticks:{callback:v=>numFmt(v)},grid:{display:false}},x:{grid:{display:false}}}}});
+  if(tc) charts[ck]=new Chart(tc.getContext('2d'),{type:'bar',data:{labels:monthly.map(r=>r.label),datasets:[{type:'bar',label:'Views',data:monthly.map(r=>r.views||0),backgroundColor:'rgba(233,30,140,.18)',yAxisID:'y',borderRadius:5},{type:'line',label:'Total Followers',data:monthly.map(r=>r.followers||0),borderColor:'#E91E8C',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Views'},ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'Followers'},ticks:{callback:v=>numFmt(v)},grid:{display:false}},x:{grid:{display:false}}}}});
 
   // ── Monthly table ──
   renderIGTable('all');
@@ -2321,21 +2403,70 @@ function renderIG(containerId,key,handleName){
     igPostFill(`ig-top-int-${key}`,`ig-top-int-sel-${key}`,'interactions');
   }
 
-  // ── Content type charts with period filter ──
+  // ── Content Mix chart (independent period filter) ──
   if(posts.length){
-    function renderIGTypeCharts(period){
+    function renderIGContentMix(period){
       const fp=period==='all'?posts:posts.filter(p=>p.date&&p.date.slice(0,7)===period.replace('m:',''));
       const tc2={};fp.forEach(p=>{const t=TYPE_LABEL[p.type]||p.type;tc2[t]=(tc2[t]||0)+1;});
-      const types=Object.keys(tc2);if(!types.length)return;
+      const types=Object.keys(tc2);
       const clrs=types.map(t=>TYPE_CLR[Object.keys(TYPE_LABEL).find(k=>TYPE_LABEL[k]===t)]||'#4736FE');
       const el2=document.getElementById(`ig-types-${key}`);const ck2=`ig_${key}_types`;if(charts[ck2])charts[ck2].destroy();
-      if(el2) charts[ck2]=new Chart(el2.getContext('2d'),{type:'doughnut',data:{labels:types,datasets:[{data:types.map(t=>tc2[t]),backgroundColor:clrs,borderWidth:3,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11},generateLabels:ch=>{const ds=ch.data;return ds.labels.map((l,i)=>({text:`${l} (${ds.datasets[0].data[i]})`,fillStyle:ds.datasets[0].backgroundColor[i],index:i}));}}}}}});
+      if(el2&&types.length) charts[ck2]=new Chart(el2.getContext('2d'),{type:'doughnut',data:{labels:types,datasets:[{data:types.map(t=>tc2[t]),backgroundColor:clrs,borderWidth:3,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11},generateLabels:ch=>{const ds=ch.data;return ds.labels.map((l,i)=>({text:`${l} (${ds.datasets[0].data[i]})`,fillStyle:ds.datasets[0].backgroundColor[i],index:i}));}}}}}});
+    }
+    bindSel(`ig-type-sel-${key}`,renderIGContentMix);
+    renderIGContentMix(document.getElementById(`ig-type-sel-${key}`)?.value||'all');
+  }
+
+  // ── Avg Reach by Content Type chart (independent period filter) ──
+  if(posts.length){
+    function renderIGAvgReach(period){
+      const fp=period==='all'?posts:posts.filter(p=>p.date&&p.date.slice(0,7)===period.replace('m:',''));
+      const tc2={};fp.forEach(p=>{const t=TYPE_LABEL[p.type]||p.type;tc2[t]=(tc2[t]||0)+1;});
+      const types=Object.keys(tc2);
+      const clrs=types.map(t=>TYPE_CLR[Object.keys(TYPE_LABEL).find(k=>TYPE_LABEL[k]===t)]||'#4736FE');
       const avgR={};types.forEach(t=>{const ps=fp.filter(p=>(TYPE_LABEL[p.type]||p.type)===t);avgR[t]=ps.length?Math.round(ps.reduce((s,p)=>s+p.reach,0)/ps.length):0;});
       const tr2=document.getElementById(`ig-typereach-${key}`);const trk2=`ig_${key}_typereach`;if(charts[trk2])charts[trk2].destroy();
-      if(tr2) charts[trk2]=new Chart(tr2.getContext('2d'),{type:'bar',data:{labels:types,datasets:[{label:'Avg Reach',data:types.map(t=>avgR[t]),backgroundColor:clrs,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+      if(tr2&&types.length) charts[trk2]=new Chart(tr2.getContext('2d'),{type:'bar',data:{labels:types,datasets:[{label:'Avg Reach',data:types.map(t=>avgR[t]),backgroundColor:clrs,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
     }
-    bindSel(`ig-type-sel-${key}`,renderIGTypeCharts);
-    renderIGTypeCharts('all');
+    bindSel(`ig-typereach-sel-${key}`,renderIGAvgReach);
+    renderIGAvgReach(document.getElementById(`ig-typereach-sel-${key}`)?.value||'all');
+  }
+
+  // ── Follower demographics (current snapshot only — Instagram API limitation) ──
+  const demo=ig.demographics||{};
+  const AGE_ORDER=['13-17','18-24','25-34','35-44','45-54','55-64','65+'];
+  if(demo.age?.length){
+    const ageRows=[...demo.age].sort((a,b)=>AGE_ORDER.indexOf(a.key)-AGE_ORDER.indexOf(b.key));
+    const ac=document.getElementById(`ig-age-${key}`);const ack=`ig_${key}_age`;if(charts[ack])charts[ack].destroy();
+    const ageTotal=ageRows.reduce((s,r)=>s+r.value,0)||1;
+    if(ac) charts[ack]=new Chart(ac.getContext('2d'),{type:'bar',data:{labels:ageRows.map(r=>r.key),datasets:[{label:'Followers %',data:ageRows.map(r=>(r.value/ageTotal*100).toFixed(2)),backgroundColor:ageRows.map((_,i)=>`hsl(${330-i*15},70%,${55+i*2}%)`),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+  }
+  const GENDER_NAMES2={F:'Female',M:'Male',U:'Unspecified'};
+  if(demo.gender?.length){
+    const genRows=[...demo.gender].sort((a,b)=>b.value-a.value);
+    const genTotal=genRows.reduce((s,r)=>s+r.value,0)||1;
+    const genc=document.getElementById(`ig-gender-${key}`);const genck=`ig_${key}_gender`;if(charts[genck])charts[genck].destroy();
+    if(genc) charts[genck]=new Chart(genc.getContext('2d'),{type:'doughnut',data:{labels:genRows.map(r=>GENDER_NAMES2[r.key]||r.key),datasets:[{data:genRows.map(r=>(r.value/genTotal*100).toFixed(2)),backgroundColor:['#E91E8C','#4736FE','#F59E0B'],borderWidth:3,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11},generateLabels:ch=>{const ds=ch.data;return ds.labels.map((l,i)=>({text:`${l} ${parseFloat(ds.datasets[0].data[i]).toFixed(1)}%`,fillStyle:ds.datasets[0].backgroundColor[i],index:i}));}}}}}});
+    const gent=document.getElementById(`ig-gender-tbl-${key}`);
+    if(gent) gent.innerHTML=tbl(`<th>⚤ Gender</th><th class="nr">% of Followers</th>`,genRows.map(r=>`<tr><td>${GENDER_NAMES2[r.key]||r.key}</td><td class="nr"><strong>${(r.value/genTotal*100).toFixed(1)}%</strong></td></tr>`).join(''));
+  }
+  if(demo.city?.length){
+    const cityRows=[...demo.city].sort((a,b)=>b.value-a.value);
+    const cityTotal=cityRows.reduce((s,r)=>s+r.value,0)||1;
+    const city15=cityRows.slice(0,15);
+    const cc=document.getElementById(`ig-city-${key}`);const cck=`ig_${key}_city`;if(charts[cck])charts[cck].destroy();
+    if(cc) charts[cck]=new Chart(cc.getContext('2d'),{type:'bar',data:{labels:city15.map(r=>r.key),datasets:[{label:'Followers',data:city15.map(r=>r.value),backgroundColor:'rgba(233,30,140,.7)',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
+    const cti=document.getElementById(`ig-city-tbl-${key}`);
+    if(cti) cti.innerHTML=tbl(`<th>#</th><th>🌍 City</th><th class="nr">👥 Followers</th><th class="nr">% of Followers</th>`,cityRows.map((r,i)=>`<tr><td>${i+1}</td><td>${r.key}</td><td class="nr">${numFmt(r.value)}</td><td class="nr">${(r.value/cityTotal*100).toFixed(1)}%</td></tr>`).join(''));
+  }
+  if(demo.country?.length){
+    const ctryRows=[...demo.country].sort((a,b)=>b.value-a.value);
+    const ctryTotal=ctryRows.reduce((s,r)=>s+r.value,0)||1;
+    const ctry15=ctryRows.slice(0,15);
+    const cnc=document.getElementById(`ig-country-${key}`);const cnck=`ig_${key}_country`;if(charts[cnck])charts[cnck].destroy();
+    if(cnc) charts[cnck]=new Chart(cnc.getContext('2d'),{type:'bar',data:{labels:ctry15.map(r=>r.key),datasets:[{label:'Followers',data:ctry15.map(r=>r.value),backgroundColor:'rgba(71,54,254,.7)',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
+    const cnti=document.getElementById(`ig-country-tbl-${key}`);
+    if(cnti) cnti.innerHTML=tbl(`<th>#</th><th>🌐 Country</th><th class="nr">👥 Followers</th><th class="nr">% of Followers</th>`,ctryRows.map((r,i)=>`<tr><td>${i+1}</td><td>${r.key}</td><td class="nr">${numFmt(r.value)}</td><td class="nr">${(r.value/ctryTotal*100).toFixed(1)}%</td></tr>`).join(''));
   }
   scanTw(el);
 }

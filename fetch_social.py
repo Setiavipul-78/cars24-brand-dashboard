@@ -669,6 +669,48 @@ def ig_get(path: str, params: dict) -> dict:
         raise RuntimeError(f"IG API {r.status_code}: {r.text[:200]}")
     return r.json()
 
+def fetch_ig_publish_counts(uid: str, tok: str) -> dict:
+    """Paginate the full media list (id + timestamp only, cheap) and bucket by month."""
+    import requests
+    from collections import defaultdict
+    monthly = defaultdict(int)
+    url = f"{BASE_IG}/{uid}/media"
+    params = {"fields": "id,timestamp", "limit": 100, "access_token": tok}
+    for _ in range(30):  # up to 3000 posts
+        r = requests.get(url, params=params, timeout=20)
+        if not r.ok:
+            break
+        d = r.json()
+        for item in d.get("data", []):
+            m = item.get("timestamp", "")[:7]
+            if m:
+                monthly[m] += 1
+        next_url = d.get("paging", {}).get("next")
+        if not next_url:
+            break
+        url, params = next_url, {}
+        time.sleep(0.1)
+    return dict(monthly)
+
+def fetch_ig_demographics(uid: str, tok: str) -> dict:
+    """Follower demographics snapshot (age/gender/city/country) — 'this_month' only,
+    Instagram's Insights API doesn't expose a historical time series for these."""
+    out = {}
+    for bd in ("age", "gender", "city", "country"):
+        try:
+            d = ig_get(f"/{uid}/insights", {
+                "metric": "follower_demographics", "period": "lifetime",
+                "metric_type": "total_value", "breakdown": bd,
+                "timeframe": "this_month", "access_token": tok,
+            })
+            results = d.get("data", [{}])[0].get("total_value", {}).get("breakdowns", [{}])[0].get("results", [])
+            out[bd] = [{"key": r["dimension_values"][0], "value": r.get("value", 0)} for r in results]
+        except Exception as e:
+            print(f"    ⚠  Demographics ({bd}) fetch failed: {str(e)[:100]}")
+            out[bd] = []
+        time.sleep(0.15)
+    return out
+
 def fetch_ig_account(key: str, cfg: dict) -> list[dict]:
     """Pull monthly Instagram metrics for one account."""
     uid = cfg["user_id"]
@@ -682,11 +724,16 @@ def fetch_ig_account(key: str, cfg: dict) -> list[dict]:
     total_followers = snap.get("followers_count", 0)
     total_media = snap.get("media_count", 0)
 
+    publish_counts = fetch_ig_publish_counts(uid, tok)
+
     # v21 IG Insights: all metrics use period=day + metric_type=total_value
     # Returns total_value.value for the queried window (max 30 days)
     # Use 28-day windows (1st to 29th) to stay within 30-day limit for all months
-    ALL_METRICS = ["reach", "profile_views", "website_clicks",
-                   "accounts_engaged", "total_interactions", "likes", "comments"]
+    # website_clicks/phone_call_clicks/text_message_clicks were deprecated by Meta in
+    # Graph API v21 (Jan 2025) and are dropped here rather than fetched and unused.
+    ALL_METRICS = ["views", "reach", "profile_views",
+                   "accounts_engaged", "total_interactions", "likes", "comments",
+                   "shares", "saves"]
 
     # Build months list — IG only keeps 2 years of data
     today = date.today()
@@ -746,17 +793,42 @@ def fetch_ig_account(key: str, cfg: dict) -> list[dict]:
         except Exception:
             pass
 
+        # Follows/unfollows for the month (breakdown=follow_type: FOLLOWER=new follows,
+        # NON_FOLLOWER=unfollows in this window — confirmed via direct API testing)
+        followers_gained, followers_lost = 0, 0
+        try:
+            d4 = ig_get(f"/{uid}/insights", {
+                "metric": "follows_and_unfollows", "period": "day",
+                "metric_type": "total_value", "breakdown": "follow_type",
+                "since": since_ts, "until": until_ts, "access_token": tok,
+            })
+            results = d4.get("data", [{}])[0].get("total_value", {}).get("breakdowns", [{}])[0].get("results", [])
+            for r in results:
+                dv = r.get("dimension_values", [""])[0]
+                if dv == "FOLLOWER":
+                    followers_gained = r.get("value", 0)
+                elif dv == "NON_FOLLOWER":
+                    followers_lost = r.get("value", 0)
+        except Exception as e:
+            print(f"    ⚠  {m} follows_and_unfollows: {str(e)[:80]}")
+
         rows.append({
             "month":              m,
             "label":              mlabel(m),
             "followers":          followers_eom,
+            "followers_gained":   followers_gained,
+            "followers_lost":     followers_lost,
+            "net_followers":      followers_gained - followers_lost,
+            "views":              met.get("views", 0),
             "reach":              met.get("reach", 0),
             "profile_views":      met.get("profile_views", 0),
-            "website_clicks":     met.get("website_clicks", 0),
             "accounts_engaged":   met.get("accounts_engaged", 0),
             "total_interactions": met.get("total_interactions", 0),
             "likes":              met.get("likes", 0),
             "comments":           met.get("comments", 0),
+            "shares":             met.get("shares", 0),
+            "saves":              met.get("saves", 0),
+            "content_posted":     publish_counts.get(m, 0),
             "total_followers":    total_followers,
             "total_media":        total_media,
         })
@@ -849,6 +921,10 @@ def fetch_all_instagram():
             if posts:
                 write_csv(DATA / f"instagram_{key}_posts.csv", posts)
                 print(f"    ✓ top posts: {len(posts)} items")
+            demo = fetch_ig_demographics(cfg["user_id"], cfg["access_token"])
+            with open(DATA / f"instagram_{key}_extra.json", "w") as f:
+                json.dump(demo, f, indent=2)
+            print(f"    ✓ demographics: age:{len(demo.get('age',[]))} gender:{len(demo.get('gender',[]))} city:{len(demo.get('city',[]))} country:{len(demo.get('country',[]))}")
         except Exception as e:
             print(f"  ✗ {key}: {e}")
         time.sleep(1)

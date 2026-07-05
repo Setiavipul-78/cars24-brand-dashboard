@@ -1,0 +1,410 @@
+{
+  "age": [
+    {
+      "key": "13-17",
+      "value": 7805
+    },
+    {
+      "key": "18-24",
+      "value": 70835
+    },
+    {
+      "key": "25-34",
+      "value": 220338
+    },
+    {
+      "key": "35-44",
+      "value": 104623
+    },
+    {
+      "key": "45-54",
+      "value": 22176
+    },
+    {
+      "key": "55-64",
+      "value": 4990
+    },
+    {
+      "key": "65+",
+      "value": 2393
+    }
+  ],
+  "gender": [
+    {
+      "key": "F",
+      "value": 27341
+    },
+    {
+      "key": "M",
+      "value": 350906
+    },
+    {
+      "key": "U",
+      "value": 54913
+    }
+  ],
+  "city": [
+    {
+      "key": "Thane, Maharashtra",
+      "value": 2461
+    },
+    {
+      "key": "Chandigarh, Chandigarh",
+      "value": 1145
+    },
+    {
+      "key": "Coimbatore, Tamil Nadu",
+      "value": 1649
+    },
+    {
+      "key": "Kolhapur, Maharashtra",
+      "value": 825
+    },
+    {
+      "key": "Kochi, Kerala",
+      "value": 2151
+    },
+    {
+      "key": "Kolkata, West Bengal",
+      "value": 3377
+    },
+    {
+      "key": "Amritsar, Punjab region",
+      "value": 815
+    },
+    {
+      "key": "Bhopal, Madhya Pradesh",
+      "value": 1608
+    },
+    {
+      "key": "Meerut City, Uttar Pradesh",
+      "value": 838
+    },
+    {
+      "key": "Mysore, Karnataka",
+      "value": 1720
+    },
+    {
+      "key": "Pune, Maharashtra",
+      "value": 7716
+    },
+    {
+      "key": "Navi Mumbai (New Mumbai), Maharashtra",
+      "value": 2211
+    },
+    {
+      "key": "Lucknow, Uttar Pradesh",
+      "value": 3340
+    },
+    {
+      "key": "Ahmedabad, Gujarat",
+      "value": 13365
+    },
+    {
+      "key": "Madurai, Tamil Nadu",
+      "value": 805
+    },
+    {
+      "key": "Ludhiana, Punjab region",
+      "value": 1978
+    },
+    {
+      "key": "Baiyyappanahalli, Karnataka",
+      "value": 810
+    },
+    {
+      "key": "Indore, Madhya Pradesh",
+      "value": 3006
+    },
+    {
+      "key": "Nashik, Maharashtra",
+      "value": 2740
+    },
+    {
+      "key": "Dulapalli, Telangana",
+      "value": 926
+    },
+    {
+      "key": "Aurangabad, Maharashtra",
+      "value": 1199
+    },
+    {
+      "key": "Gurugram, Haryana",
+      "value": 4558
+    },
+    {
+      "key": "Delhi, Delhi",
+      "value": 19720
+    },
+    {
+      "key": "Chanda Nagar, Telangana",
+      "value": 1765
+    },
+    {
+      "key": "Jodhpur, Rajasthan",
+      "value": 1016
+    },
+    {
+      "key": "Kanpur, Uttar Pradesh",
+      "value": 1474
+    },
+    {
+      "key": "Ghaziabad, Uttar Pradesh",
+      "value": 2832
+    },
+    {
+      "key": "Jaipur, Rajasthan",
+      "value": 3384
+    },
+    {
+      "key": "Vadodara, Gujarat",
+      "value": 3851
+    },
+    {
+      "key": "Pimpri, Maharashtra",
+      "value": 4339
+    },
+    {
+      "key": "Faridabad, Haryana",
+      "value": 1954
+    },
+    {
+      "key": "Chennai, Tamil Nadu",
+      "value": 12100
+    },
+    {
+      "key": "Jammu, Jammu and Kashmir",
+      "value": 795
+    },
+    {
+      "key": "Surat, Gujarat",
+      "value": 7228
+    },
+    {
+      "key": "Greater Noida, Uttar Pradesh",
+      "value": 1701
+    },
+    {
+      "key": "Rajkot, Gujarat",
+      "value": 3077
+    },
+    {
+      "key": "Nagpur, Maharashtra",
+      "value": 3373
+    },
+    {
+      "key": "Dubai, Dubai",
+      "value": 1597
+    },
+    {
+      "key": "Agra, Uttar Pradesh",
+      "value": 1094
+    },
+    {
+      "key": "Patna, Bihar",
+      "value": 1239
+    },
+    {
+      "key": "Mumbai, Maharashtra",
+      "value": 11743
+    },
+    {
+      "key": "Bangalore, Karnataka",
+      "value": 17532
+    },
+    {
+      "key": "Noida, Uttar Pradesh",
+      "value": 2129
+    },
+    {
+      "key": "Hyderabad, Telangana",
+      "value": 5904
+    },
+    {
+      "key": "Upal, Telangana",
+      "value": 811
+    }
+  ],
+  "country": [
+    {
+      "key": "DE",
+      "value": 228
+    },
+    {
+      "key": "NP",
+      "value": 495
+    },
+    {
+      "key": "BD",
+      "value": 635
+    },
+    {
+      "key": "RU",
+      "value": 61
+    },
+    {
+      "key": "FJ",
+      "value": 44
+    },
+    {
+      "key": "PT",
+      "value": 57
+    },
+    {
+      "key": "JP",
+      "value": 52
+    },
+    {
+      "key": "TZ",
+      "value": 69
+    },
+    {
+      "key": "BH",
+      "value": 229
+    },
+    {
+      "key": "FR",
+      "value": 42
+    },
+    {
+      "key": "NZ",
+      "value": 127
+    },
+    {
+      "key": "SA",
+      "value": 1709
+    },
+    {
+      "key": "BR",
+      "value": 118
+    },
+    {
+      "key": "QA",
+      "value": 621
+    },
+    {
+      "key": "UG",
+      "value": 38
+    },
+    {
+      "key": "SG",
+      "value": 161
+    },
+    {
+      "key": "KE",
+      "value": 56
+    },
+    {
+      "key": "ID",
+      "value": 128
+    },
+    {
+      "key": "GB",
+      "value": 898
+    },
+    {
+      "key": "IE",
+      "value": 101
+    },
+    {
+      "key": "OM",
+      "value": 427
+    },
+    {
+      "key": "CA",
+      "value": 948
+    },
+    {
+      "key": "US",
+      "value": 1333
+    },
+    {
+      "key": "GH",
+      "value": 37
+    },
+    {
+      "key": "CD",
+      "value": 57
+    },
+    {
+      "key": "AE",
+      "value": 3256
+    },
+    {
+      "key": "AF",
+      "value": 66
+    },
+    {
+      "key": "IN",
+      "value": 414959
+    },
+    {
+      "key": "MT",
+      "value": 36
+    },
+    {
+      "key": "ZA",
+      "value": 54
+    },
+    {
+      "key": "IQ",
+      "value": 37
+    },
+    {
+      "key": "MU",
+      "value": 52
+    },
+    {
+      "key": "IR",
+      "value": 88
+    },
+    {
+      "key": "CN",
+      "value": 43
+    },
+    {
+      "key": "IT",
+      "value": 108
+    },
+    {
+      "key": "MY",
+      "value": 120
+    },
+    {
+      "key": "KW",
+      "value": 641
+    },
+    {
+      "key": "ES",
+      "value": 73
+    },
+    {
+      "key": "ZM",
+      "value": 40
+    },
+    {
+      "key": "TH",
+      "value": 66
+    },
+    {
+      "key": "AU",
+      "value": 533
+    },
+    {
+      "key": "PH",
+      "value": 48
+    },
+    {
+      "key": "NG",
+      "value": 193
+    },
+    {
+      "key": "PK",
+      "value": 2997
+    },
+    {
+      "key": "LK",
+      "value": 62
+    }
+  ]
+}
