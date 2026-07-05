@@ -834,7 +834,7 @@ LI_PAGES = {
 # cumulative trend by anchoring to a known current total and walking backwards day by day.
 # {page_key: (known_total, "YYYY-MM-DD" the total was true as of)}
 LI_KNOWN_TOTAL_FOLLOWERS = {
-    "cars24": (464282, "2026-07-03"),
+    "cars24": (464286, "2026-07-03"),
 }
 
 def _li_col(df, *candidates):
@@ -936,8 +936,10 @@ def build_linkedin():
                     df = df.dropna(subset=[date_col])
                     df["_month"] = df[date_col].dt.to_period("M").astype(str)
 
-                    pv_col  = _li_col(df, "total page views", "page views (total)", "desktop page views")
-                    uv_col  = _li_col(df, "unique visitors", "desktop unique visitors")
+                    pv_col  = _li_col(df, "total page views", "page views (total)", "desktop page views",
+                                       "total page views (total)", "overview page views (total)")
+                    uv_col  = _li_col(df, "unique visitors", "desktop unique visitors",
+                                       "total unique visitors (total)", "overview unique visitors (total)")
 
                     monthly_vis = df.groupby("_month").agg(
                         page_views=(pv_col, "sum") if pv_col else ("_month", "count"),
@@ -966,7 +968,7 @@ def build_linkedin():
                 cmt_col  = _li_col(df, "comments", "Comments")
                 shr_col  = _li_col(df, "shares", "Shares", "reposts")
                 eng_col  = _li_col(df, "engagement rate", "engagement rate (organic)")
-                ttl_col  = _li_col(df, "content title", "post", "title", "update")
+                ttl_col  = _li_col(df, "content title", "post", "title", "update", "post title")
 
                 if date_col:
                     df[date_col] = pd.to_datetime(df[date_col], errors="coerce")
