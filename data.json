@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "built": "2026-07-05 14:01",
+    "built": "2026-07-05 09:36",
     "latest_month": "2026-06",
     "latest_month_label": "Jun'26"
   },
@@ -52907,9 +52907,9 @@
     },
     {
       "date": "2026-07-04",
-      "impressions": 36016,
-      "clicks": 5780,
-      "dod": -27.23,
+      "impressions": 41850,
+      "clicks": 6662,
+      "dod": -15.44,
       "weekend": true
     }
   ],
@@ -53890,9 +53890,9 @@
     {
       "week_start": "2026-06-29",
       "week_label": "29 Jun \u2013 05 Jul 26",
-      "impressions": 291156,
-      "clicks": 55044,
-      "wow": -20.82
+      "impressions": 296990,
+      "clicks": 55926,
+      "wow": -19.24
     }
   ],
   "google_index": {
@@ -63922,15 +63922,15 @@
         {
           "month": "2026-07",
           "label": "Jul'26",
-          "views": 1753234,
-          "watch_time_hours": 25499.2,
+          "views": 1752463,
+          "watch_time_hours": 25500.7,
           "avg_view_duration": 73.0,
           "avg_view_duration_min": 1.2,
           "avg_view_percent": 53.68,
           "subscribers_gained": 1541,
-          "subscribers_lost": 439,
-          "net_subs": 1102,
-          "likes": 63375,
+          "subscribers_lost": 438,
+          "net_subs": 1103,
+          "likes": 63479,
           "comments": 1197,
           "shares": 4409,
           "impressions": 0,
@@ -63945,7 +63945,7 @@
           "yoy_views": -94.8,
           "yoy_wt": -94.3,
           "yoy_subs": -95.8,
-          "engagement_rate": 4.02
+          "engagement_rate": 4.03
         }
       ],
       "geo": [
@@ -64185,8 +64185,8 @@
       "traffic_sources": [
         {
           "source": "SHORTS",
-          "views": 488698818,
-          "watch_time_hours": 5765566.4,
+          "views": 488694817,
+          "watch_time_hours": 5765529.7,
           "pct": 48.1
         },
         {
@@ -64197,74 +64197,74 @@
         },
         {
           "source": "SUBSCRIBER",
-          "views": 198817007,
-          "watch_time_hours": 3409746.9,
+          "views": 198818469,
+          "watch_time_hours": 3409769.6,
           "pct": 19.6
         },
         {
           "source": "YT_SEARCH",
-          "views": 59682188,
-          "watch_time_hours": 619960.4,
+          "views": 59683266,
+          "watch_time_hours": 619968.9,
           "pct": 5.9
         },
         {
           "source": "YT_CHANNEL",
-          "views": 25331010,
-          "watch_time_hours": 289580.0,
+          "views": 25331752,
+          "watch_time_hours": 289589.9,
           "pct": 2.5
         },
         {
           "source": "RELATED_VIDEO",
-          "views": 9632648,
-          "watch_time_hours": 266768.3,
+          "views": 9632681,
+          "watch_time_hours": 266769.9,
           "pct": 0.9
         },
         {
           "source": "YT_OTHER_PAGE",
-          "views": 7852137,
-          "watch_time_hours": 120522.7,
+          "views": 7852045,
+          "watch_time_hours": 120521.2,
           "pct": 0.8
         },
         {
           "source": "EXT_URL",
-          "views": 4641924,
+          "views": 4641920,
           "watch_time_hours": 41134.8,
           "pct": 0.5
         },
         {
           "source": "NOTIFICATION",
-          "views": 1750837,
-          "watch_time_hours": 35648.0,
+          "views": 1750777,
+          "watch_time_hours": 35646.6,
           "pct": 0.2
         },
         {
           "source": "SHORTS_CONTENT_LINKS",
-          "views": 1464606,
-          "watch_time_hours": 35200.7,
+          "views": 1464637,
+          "watch_time_hours": 35201.4,
           "pct": 0.1
         },
         {
           "source": "PLAYLIST",
-          "views": 413192,
-          "watch_time_hours": 8045.1,
+          "views": 413206,
+          "watch_time_hours": 8045.4,
           "pct": 0.0
         },
         {
           "source": "NO_LINK_OTHER",
-          "views": 295089,
-          "watch_time_hours": 12198.9,
+          "views": 295004,
+          "watch_time_hours": 12194.7,
           "pct": 0.0
         },
         {
           "source": "HASHTAGS",
-          "views": 121042,
-          "watch_time_hours": 1246.3,
+          "views": 121057,
+          "watch_time_hours": 1246.5,
           "pct": 0.0
         },
         {
           "source": "SOUND_PAGE",
-          "views": 89633,
-          "watch_time_hours": 999.2,
+          "views": 89729,
+          "watch_time_hours": 1000.7,
           "pct": 0.0
         },
         {
@@ -64301,26 +64301,26 @@
       "devices": [
         {
           "device": "MOBILE",
-          "views": 897200636,
-          "watch_time_hours": 9975338.4,
+          "views": 897199927,
+          "watch_time_hours": 9975340.0,
           "pct": 88.6
         },
         {
           "device": "TV",
-          "views": 61545108,
-          "watch_time_hours": 765179.0,
+          "views": 61545094,
+          "watch_time_hours": 765178.9,
           "pct": 6.1
         },
         {
           "device": "DESKTOP",
-          "views": 33058656,
-          "watch_time_hours": 536865.2,
+          "views": 33058633,
+          "watch_time_hours": 536865.0,
           "pct": 3.3
         },
         {
           "device": "TABLET",
-          "views": 21059111,
-          "watch_time_hours": 274556.8,
+          "views": 21059085,
+          "watch_time_hours": 274557.0,
           "pct": 2.1
         }
       ],
@@ -74828,80 +74828,80 @@
         "2026-07": [
           {
             "source": "SHORTS",
-            "views": 947852,
-            "watch_time_hours": 12013.099999999999,
-            "pct": 54.1
+            "views": 943851,
+            "watch_time_hours": 11976.4,
+            "pct": 53.9
           },
           {
             "source": "SUBSCRIBER",
-            "views": 488122,
-            "watch_time_hours": 9364.2,
-            "pct": 27.8
+            "views": 489584,
+            "watch_time_hours": 9386.9,
+            "pct": 27.9
           },
           {
             "source": "YT_SEARCH",
-            "views": 237313,
-            "watch_time_hours": 2404.1,
-            "pct": 13.5
+            "views": 238391,
+            "watch_time_hours": 2412.6,
+            "pct": 13.6
           },
           {
             "source": "YT_CHANNEL",
-            "views": 38727,
-            "watch_time_hours": 494.29999999999995,
-            "pct": 2.2
+            "views": 39469,
+            "watch_time_hours": 504.20000000000005,
+            "pct": 2.3
           },
           {
             "source": "YT_OTHER_PAGE",
-            "views": 15836,
-            "watch_time_hours": 274.8,
+            "views": 15744,
+            "watch_time_hours": 273.3,
             "pct": 0.9
           },
           {
             "source": "RELATED_VIDEO",
-            "views": 8025,
-            "watch_time_hours": 546.8,
+            "views": 8058,
+            "watch_time_hours": 548.4000000000001,
             "pct": 0.5
           },
           {
             "source": "NOTIFICATION",
-            "views": 5452,
-            "watch_time_hours": 101.6,
+            "views": 5392,
+            "watch_time_hours": 100.2,
             "pct": 0.3
           },
           {
             "source": "SHORTS_CONTENT_LINKS",
-            "views": 4872,
-            "watch_time_hours": 114.5,
+            "views": 4903,
+            "watch_time_hours": 115.2,
             "pct": 0.3
           },
           {
             "source": "EXT_URL",
-            "views": 4653,
+            "views": 4649,
             "watch_time_hours": 83.6,
             "pct": 0.3
           },
           {
             "source": "PLAYLIST",
-            "views": 1111,
-            "watch_time_hours": 37.0,
+            "views": 1125,
+            "watch_time_hours": 37.2,
             "pct": 0.1
           },
           {
             "source": "NO_LINK_OTHER",
-            "views": 897,
-            "watch_time_hours": 54.4,
-            "pct": 0.1
+            "views": 812,
+            "watch_time_hours": 50.2,
+            "pct": 0.0
           },
           {
             "source": "SOUND_PAGE",
-            "views": 130,
-            "watch_time_hours": 1.7000000000000002,
+            "views": 226,
+            "watch_time_hours": 3.2,
             "pct": 0.0
           },
           {
             "source": "HASHTAGS",
-            "views": 125,
-            "watch_time_hours": 1.0,
+            "views": 140,
+            "watch_time_hours": 1.2,
             "pct": 0.0
           },
           {
@@ -75720,26 +75720,26 @@
         "2026-07": [
           {
             "device": "MOBILE",
-            "views": 1565833,
-            "watch_time_hours": 21974.1,
+            "views": 1565124,
+            "watch_time_hours": 21975.7,
             "pct": 89.4
           },
           {
             "device": "TV",
-            "views": 70111,
+            "views": 70097,
             "watch_time_hours": 1423.8000000000002,
             "pct": 4.0
           },
           {
             "device": "DESKTOP",
-            "views": 68231,
-            "watch_time_hours": 1316.4,
+            "views": 68208,
+            "watch_time_hours": 1316.2,
             "pct": 3.9
           },
           {
             "device": "TABLET",
-            "views": 46682,
-            "watch_time_hours": 740.5,
+            "views": 46656,
+            "watch_time_hours": 740.7,
             "pct": 2.7
           }
         ]
@@ -75751,8 +75751,8 @@
           "published": "2024-09-06",
           "url": "https://www.youtube.com/watch?v=r5pbRxyYt7I",
           "thumbnail": "https://i.ytimg.com/vi/r5pbRxyYt7I/default.jpg",
-          "views": 13523669,
-          "watch_time_hours": 140325.65,
+          "views": 13523665,
+          "watch_time_hours": 140325.63,
           "avg_duration_sec": 42.0,
           "avg_view_pct": 71.5,
           "subs_gained": 12279,
@@ -75767,7 +75767,7 @@
           "published": "2024-10-09",
           "url": "https://www.youtube.com/watch?v=AZCDJpE_HB0",
           "thumbnail": "https://i.ytimg.com/vi/AZCDJpE_HB0/default.jpg",
-          "views": 11010718,
+          "views": 11010715,
           "watch_time_hours": 111637.65,
           "avg_duration_sec": 43.0,
           "avg_view_pct": 75.0,
@@ -75783,7 +75783,7 @@
           "published": "2025-12-10",
           "url": "https://www.youtube.com/watch?v=K_JQRde3j9c",
           "thumbnail": "https://i.ytimg.com/vi/K_JQRde3j9c/default.jpg",
-          "views": 10603159,
+          "views": 10603158,
           "watch_time_hours": 89589.93,
           "avg_duration_sec": 47.0,
           "avg_view_pct": 79.9,
@@ -75798,7 +75798,7 @@
           "title": "Sell Side | Great Price by Dealers| 1200x628",
           "published": "2024-04-15",
           "url": "https://www.youtube.com/watch?v=dmuIKQybq9w",
-          "thumbnail": "https://i9.ytimg.com/vi/dmuIKQybq9w/default.jpg?sqp=CITap9IG&rs=AOn4CLDuToniRHeuI7WQzYm-fU2N5YCKjQ",
+          "thumbnail": "https://i9.ytimg.com/vi/dmuIKQybq9w/default.jpg?sqp=COzFqNIG&rs=AOn4CLA-Eqg7dFZwzO8-hfdKmAB-Sj8QPg",
           "views": 9824184,
           "watch_time_hours": 37827.92,
           "avg_duration_sec": 14.0,
@@ -75815,8 +75815,8 @@
           "published": "2024-06-25",
           "url": "https://www.youtube.com/watch?v=aOcyFgMeB_4",
           "thumbnail": "https://i.ytimg.com/vi/aOcyFgMeB_4/default.jpg",
-          "views": 9440494,
-          "watch_time_hours": 111064.53,
+          "views": 9440492,
+          "watch_time_hours": 111064.52,
           "avg_duration_sec": 50.0,
           "avg_view_pct": 82.4,
           "subs_gained": 7428,
@@ -75847,12 +75847,12 @@
           "published": "2024-10-07",
           "url": "https://www.youtube.com/watch?v=24ISGUgzQ3U",
           "thumbnail": "https://i.ytimg.com/vi/24ISGUgzQ3U/default.jpg",
-          "views": 9089842,
-          "watch_time_hours": 94089.82,
+          "views": 9089841,
+          "watch_time_hours": 94089.8,
           "avg_duration_sec": 42.0,
           "avg_view_pct": 71.2,
           "subs_gained": 8583,
-          "likes": 238300,
+          "likes": 238301,
           "comments": 2157,
           "shares": 2700,
           "engagement_rate": 2.68
@@ -75868,7 +75868,7 @@
           "avg_duration_sec": 67.0,
           "avg_view_pct": 63.6,
           "subs_gained": 25924,
-          "likes": 272890,
+          "likes": 272891,
           "comments": 860,
           "shares": 16410,
           "engagement_rate": 3.64
@@ -75879,8 +75879,8 @@
           "published": "2025-07-12",
           "url": "https://www.youtube.com/watch?v=3BuPTF2o0ig",
           "thumbnail": "https://i.ytimg.com/vi/3BuPTF2o0ig/default.jpg",
-          "views": 6470436,
-          "watch_time_hours": 143563.85,
+          "views": 6470432,
+          "watch_time_hours": 143563.8,
           "avg_duration_sec": 112.0,
           "avg_view_pct": 64.3,
           "subs_gained": 9944,
@@ -75895,12 +75895,12 @@
           "published": "2025-07-30",
           "url": "https://www.youtube.com/watch?v=DLabzJRt5yA",
           "thumbnail": "https://i.ytimg.com/vi/DLabzJRt5yA/default.jpg",
-          "views": 6399642,
-          "watch_time_hours": 125259.55,
+          "views": 6399636,
+          "watch_time_hours": 125259.65,
           "avg_duration_sec": 109.0,
           "avg_view_pct": 61.1,
           "subs_gained": 18465,
-          "likes": 324542,
+          "likes": 324544,
           "comments": 1622,
           "shares": 32250,
           "engagement_rate": 5.6
@@ -75911,7 +75911,7 @@
           "published": "2024-08-28",
           "url": "https://www.youtube.com/watch?v=tKolZcNkOxU",
           "thumbnail": "https://i.ytimg.com/vi/tKolZcNkOxU/default.jpg",
-          "views": 6080990,
+          "views": 6080989,
           "watch_time_hours": 57701.82,
           "avg_duration_sec": 42.0,
           "avg_view_pct": 70.6,
@@ -75927,8 +75927,8 @@
           "published": "2025-10-20",
           "url": "https://www.youtube.com/watch?v=6X1CdIl4wyU",
           "thumbnail": "https://i.ytimg.com/vi/6X1CdIl4wyU/default.jpg",
-          "views": 5979385,
-          "watch_time_hours": 93573.27,
+          "views": 5979381,
+          "watch_time_hours": 93573.35,
           "avg_duration_sec": 92.0,
           "avg_view_pct": 52.3,
           "subs_gained": 16404,
@@ -75943,7 +75943,7 @@
           "published": "2024-10-21",
           "url": "https://www.youtube.com/watch?v=oY7MmpOVwSA",
           "thumbnail": "https://i.ytimg.com/vi/oY7MmpOVwSA/default.jpg",
-          "views": 5879391,
+          "views": 5879387,
           "watch_time_hours": 61584.48,
           "avg_duration_sec": 44.0,
           "avg_view_pct": 73.7,
@@ -76007,8 +76007,8 @@
           "published": "2024-10-27",
           "url": "https://www.youtube.com/watch?v=MKq2vv9IZDU",
           "thumbnail": "https://i.ytimg.com/vi/MKq2vv9IZDU/default.jpg",
-          "views": 5011949,
-          "watch_time_hours": 59647.47,
+          "views": 5011952,
+          "watch_time_hours": 59647.5,
           "avg_duration_sec": 49.0,
           "avg_view_pct": 83.0,
           "subs_gained": 6759,
@@ -76039,7 +76039,7 @@
           "published": "2025-11-13",
           "url": "https://www.youtube.com/watch?v=3Ut7kqEmrrY",
           "thumbnail": "https://i.ytimg.com/vi/3Ut7kqEmrrY/default.jpg",
-          "views": 4852870,
+          "views": 4852865,
           "watch_time_hours": 85862.42,
           "avg_duration_sec": 89.0,
           "avg_view_pct": 54.7,
@@ -76055,7 +76055,7 @@
           "published": "2024-11-11",
           "url": "https://www.youtube.com/watch?v=JXnQfmJ3emk",
           "thumbnail": "https://i.ytimg.com/vi/JXnQfmJ3emk/default.jpg",
-          "views": 4727415,
+          "views": 4727413,
           "watch_time_hours": 50540.35,
           "avg_duration_sec": 45.0,
           "avg_view_pct": 75.2,
@@ -76071,12 +76071,12 @@
           "published": "2025-10-28",
           "url": "https://www.youtube.com/watch?v=aEFqsyPIdNQ",
           "thumbnail": "https://i.ytimg.com/vi/aEFqsyPIdNQ/default.jpg",
-          "views": 4716435,
-          "watch_time_hours": 75769.12,
+          "views": 4716431,
+          "watch_time_hours": 75769.08,
           "avg_duration_sec": 90.0,
           "avg_view_pct": 60.2,
-          "subs_gained": 8090,
-          "likes": 200006,
+          "subs_gained": 8089,
+          "likes": 200008,
           "comments": 2215,
           "shares": 4568,
           "engagement_rate": 4.38
@@ -76092,7 +76092,7 @@
           "avg_duration_sec": 40.0,
           "avg_view_pct": 66.8,
           "subs_gained": 10272,
-          "likes": 196837,
+          "likes": 196838,
           "comments": 711,
           "shares": 3378,
           "engagement_rate": 4.48
@@ -76103,8 +76103,8 @@
           "published": "2024-10-11",
           "url": "https://www.youtube.com/watch?v=YC5q-aBA-YY",
           "thumbnail": "https://i.ytimg.com/vi/YC5q-aBA-YY/default.jpg",
-          "views": 4451248,
-          "watch_time_hours": 48872.87,
+          "views": 4451250,
+          "watch_time_hours": 48872.9,
           "avg_duration_sec": 46.0,
           "avg_view_pct": 75.9,
           "subs_gained": 3959,
@@ -76135,7 +76135,7 @@
           "published": "2024-10-23",
           "url": "https://www.youtube.com/watch?v=q8OLpgRDFKg",
           "thumbnail": "https://i.ytimg.com/vi/q8OLpgRDFKg/default.jpg",
-          "views": 4434278,
+          "views": 4434277,
           "watch_time_hours": 45954.38,
           "avg_duration_sec": 41.0,
           "avg_view_pct": 68.8,
@@ -76166,7 +76166,7 @@
           "title": "20 4 10 Loan Rule 1200 x 628",
           "published": "2025-07-16",
           "url": "https://www.youtube.com/watch?v=OwQLOvaNQAo",
-          "thumbnail": "https://i9.ytimg.com/vi/OwQLOvaNQAo/default.jpg?sqp=CITap9IG&rs=AOn4CLCs6_NduCmMWK5y5QsMc6LAG-X3Aw",
+          "thumbnail": "https://i9.ytimg.com/vi/OwQLOvaNQAo/default.jpg?sqp=COzFqNIG&rs=AOn4CLAR_cObAG_wX-9H6sJAO4zZsD_34Q",
           "views": 4038227,
           "watch_time_hours": 13738.78,
           "avg_duration_sec": 19.0,
@@ -76183,12 +76183,12 @@
           "published": "2024-09-26",
           "url": "https://www.youtube.com/watch?v=Rqx2LvT6Un4",
           "thumbnail": "https://i.ytimg.com/vi/Rqx2LvT6Un4/default.jpg",
-          "views": 3972922,
+          "views": 3972921,
           "watch_time_hours": 40329.93,
           "avg_duration_sec": 39.0,
           "avg_view_pct": 75.9,
           "subs_gained": 7448,
-          "likes": 183969,
+          "likes": 183970,
           "comments": 473,
           "shares": 2352,
           "engagement_rate": 4.7
@@ -76215,12 +76215,12 @@
           "published": "2024-10-26",
           "url": "https://www.youtube.com/watch?v=miYrzTAuI-o",
           "thumbnail": "https://i.ytimg.com/vi/miYrzTAuI-o/default.jpg",
-          "views": 3829532,
+          "views": 3829526,
           "watch_time_hours": 39878.68,
           "avg_duration_sec": 46.0,
           "avg_view_pct": 77.5,
           "subs_gained": 4335,
-          "likes": 180578,
+          "likes": 180579,
           "comments": 1522,
           "shares": 3748,
           "engagement_rate": 4.85
@@ -76231,7 +76231,7 @@
           "published": "2025-05-07",
           "url": "https://www.youtube.com/watch?v=XQbOZc3I5y8",
           "thumbnail": "https://i.ytimg.com/vi/XQbOZc3I5y8/default.jpg",
-          "views": 3819779,
+          "views": 3819780,
           "watch_time_hours": 59003.4,
           "avg_duration_sec": 75.0,
           "avg_view_pct": 61.8,
@@ -76280,7 +76280,7 @@
           "url": "https://www.youtube.com/watch?v=RorwVcHrC24",
           "thumbnail": "https://i.ytimg.com/vi/RorwVcHrC24/default.jpg",
           "views": 3587132,
-          "watch_time_hours": 41066.67,
+          "watch_time_hours": 41066.68,
           "avg_duration_sec": 58.0,
           "avg_view_pct": 64.4,
           "subs_gained": 1638,
@@ -76295,7 +76295,7 @@
           "published": "2024-05-10",
           "url": "https://www.youtube.com/watch?v=m8a9o4HxMBY",
           "thumbnail": "https://i.ytimg.com/vi/m8a9o4HxMBY/default.jpg",
-          "views": 3512945,
+          "views": 3512946,
           "watch_time_hours": 37450.25,
           "avg_duration_sec": 41.0,
           "avg_view_pct": 78.0,
@@ -76311,12 +76311,12 @@
           "published": "2024-09-11",
           "url": "https://www.youtube.com/watch?v=vuIgb3kDWj8",
           "thumbnail": "https://i.ytimg.com/vi/vuIgb3kDWj8/default.jpg",
-          "views": 3507668,
+          "views": 3507666,
           "watch_time_hours": 36133.22,
           "avg_duration_sec": 42.0,
           "avg_view_pct": 72.0,
           "subs_gained": 5022,
-          "likes": 147943,
+          "likes": 147944,
           "comments": 585,
           "shares": 2973,
           "engagement_rate": 4.32
@@ -76326,7 +76326,7 @@
           "title": "A great price for your car in 5 minutes!",
           "published": "2023-02-06",
           "url": "https://www.youtube.com/watch?v=oBUxc7ghYDw",
-          "thumbnail": "https://i9.ytimg.com/vi/oBUxc7ghYDw/default.jpg?sqp=CITap9IG&rs=AOn4CLCHm6bEbwrjdIKS_f1uHzRztHkJtA",
+          "thumbnail": "https://i9.ytimg.com/vi/oBUxc7ghYDw/default.jpg?sqp=COzFqNIG&rs=AOn4CLAEZMTcyOQn7C1RcwwWQHXnPhnEjw",
           "views": 3426627,
           "watch_time_hours": 11310.57,
           "avg_duration_sec": 12.0,
@@ -76375,12 +76375,12 @@
           "published": "2026-02-01",
           "url": "https://www.youtube.com/watch?v=ycnKvPr0MHk",
           "thumbnail": "https://i.ytimg.com/vi/ycnKvPr0MHk/default.jpg",
-          "views": 3349475,
+          "views": 3349474,
           "watch_time_hours": 65422.52,
           "avg_duration_sec": 94.0,
           "avg_view_pct": 53.3,
           "subs_gained": 2627,
-          "likes": 151758,
+          "likes": 151759,
           "comments": 4396,
           "shares": 3177,
           "engagement_rate": 4.76
@@ -76423,7 +76423,7 @@
           "published": "2024-02-22",
           "url": "https://www.youtube.com/watch?v=QreHmkYtEcA",
           "thumbnail": "https://i.ytimg.com/vi/QreHmkYtEcA/default.jpg",
-          "views": 3287265,
+          "views": 3287263,
           "watch_time_hours": 32969.68,
           "avg_duration_sec": 42.0,
           "avg_view_pct": 71.2,
@@ -76439,7 +76439,7 @@
           "published": "2024-11-09",
           "url": "https://www.youtube.com/watch?v=r04Xn_9IHYo",
           "thumbnail": "https://i.ytimg.com/vi/r04Xn_9IHYo/default.jpg",
-          "views": 3256312,
+          "views": 3256310,
           "watch_time_hours": 36384.85,
           "avg_duration_sec": 45.0,
           "avg_view_pct": 74.7,
@@ -76455,8 +76455,8 @@
           "published": "2024-03-21",
           "url": "https://www.youtube.com/watch?v=HAZg466vNno",
           "thumbnail": "https://i.ytimg.com/vi/HAZg466vNno/default.jpg",
-          "views": 3230406,
-          "watch_time_hours": 32201.78,
+          "views": 3230404,
+          "watch_time_hours": 32201.77,
           "avg_duration_sec": 39.0,
           "avg_view_pct": 71.2,
           "subs_gained": 2257,
@@ -76470,7 +76470,7 @@
           "title": "Hatchback Ke Price Me SUV 1080x1920",
           "published": "2025-07-16",
           "url": "https://www.youtube.com/watch?v=oQLLwlr-L1g",
-          "thumbnail": "https://i9.ytimg.com/vi/oQLLwlr-L1g/default.jpg?sqp=CITap9IG&rs=AOn4CLD2pgHAKvyd9Idvo9mGLJc0niK_uA",
+          "thumbnail": "https://i9.ytimg.com/vi/oQLLwlr-L1g/default.jpg?sqp=COzFqNIG&rs=AOn4CLD9of_rbCLuNl5Xx-FlOkKk_ZRJWg",
           "views": 3228603,
           "watch_time_hours": 3498.98,
           "avg_duration_sec": 16.0,
@@ -76486,7 +76486,7 @@
           "title": "Easy Financing - Shrey Ft. | 1200x1200",
           "published": "2023-11-22",
           "url": "https://www.youtube.com/watch?v=CWs5H2M-JnY",
-          "thumbnail": "https://i9.ytimg.com/vi/CWs5H2M-JnY/default.jpg?sqp=CITap9IG&rs=AOn4CLDAwf1yRpxA4K8oA8I_-diaNW83BA",
+          "thumbnail": "https://i9.ytimg.com/vi/CWs5H2M-JnY/default.jpg?sqp=COzFqNIG&rs=AOn4CLAbP8lqiq59AmMu-4RiE3JHfLxoaA",
           "views": 3210249,
           "watch_time_hours": 18501.15,
           "avg_duration_sec": 20.0,
@@ -76518,7 +76518,7 @@
           "title": "Sell Your Car Instantly Performance AD 1200 X 628",
           "published": "2023-08-25",
           "url": "https://www.youtube.com/watch?v=OKEHC7_NlWw",
-          "thumbnail": "https://i9.ytimg.com/vi/OKEHC7_NlWw/default.jpg?sqp=CITap9IG&rs=AOn4CLDKKTlR8-ZVPTQiuywuIylcHyVdFQ",
+          "thumbnail": "https://i9.ytimg.com/vi/OKEHC7_NlWw/default.jpg?sqp=COzFqNIG&rs=AOn4CLCBtBY209I8kwEKpQEOLXKe-LkoSg",
           "views": 3167900,
           "watch_time_hours": 12974.23,
           "avg_duration_sec": 15.0,
@@ -77398,11 +77398,11 @@
         {
           "month": "2026-07",
           "label": "Jul'26",
-          "views": 1912,
+          "views": 1910,
           "watch_time_hours": 65.3,
           "avg_view_duration": 138.0,
           "avg_view_duration_min": 2.3,
-          "avg_view_percent": 26.93,
+          "avg_view_percent": 26.94,
           "subscribers_gained": 26,
           "subscribers_lost": 5,
           "net_subs": 21,
@@ -77418,10 +77418,10 @@
           "mom_views": -98.4,
           "mom_wt": -98.5,
           "mom_subs": -98.3,
-          "yoy_views": -66.1,
+          "yoy_views": -66.2,
           "yoy_wt": 38.6,
           "yoy_subs": -78.7,
-          "engagement_rate": 3.29
+          "engagement_rate": 3.3
         }
       ],
       "geo": [
@@ -77626,8 +77626,8 @@
       "traffic_sources": [
         {
           "source": "SUBSCRIBER",
-          "views": 353985,
-          "watch_time_hours": 13632.7,
+          "views": 353987,
+          "watch_time_hours": 13632.8,
           "pct": 35.2
         },
         {
@@ -77638,32 +77638,32 @@
         },
         {
           "source": "YT_SEARCH",
-          "views": 193269,
-          "watch_time_hours": 3369.5,
+          "views": 193274,
+          "watch_time_hours": 3369.6,
           "pct": 19.2
         },
         {
           "source": "SHORTS",
-          "views": 131297,
+          "views": 131287,
           "watch_time_hours": 691.4,
           "pct": 13.1
         },
         {
           "source": "RELATED_VIDEO",
-          "views": 28405,
+          "views": 28406,
           "watch_time_hours": 1931.7,
           "pct": 2.8
         },
         {
           "source": "YT_CHANNEL",
-          "views": 27931,
+          "views": 27937,
           "watch_time_hours": 608.6,
           "pct": 2.8
         },
         {
           "source": "NO_LINK_OTHER",
-          "views": 18988,
-          "watch_time_hours": 442.1,
+          "views": 18982,
+          "watch_time_hours": 442.0,
           "pct": 1.9
         },
         {
@@ -77724,8 +77724,8 @@
         },
         {
           "device": "DESKTOP",
-          "views": 146867,
-          "watch_time_hours": 3998.3,
+          "views": 146865,
+          "watch_time_hours": 3998.2,
           "pct": 14.6
         },
         {
@@ -82527,15 +82527,15 @@
         "2026-07": [
           {
             "source": "YT_SEARCH",
-            "views": 843,
-            "watch_time_hours": 21.299999999999997,
-            "pct": 44.1
+            "views": 848,
+            "watch_time_hours": 21.4,
+            "pct": 44.4
           },
           {
             "source": "SUBSCRIBER",
-            "views": 553,
-            "watch_time_hours": 26.3,
-            "pct": 28.9
+            "views": 555,
+            "watch_time_hours": 26.4,
+            "pct": 29.1
           },
           {
             "source": "EXT_URL",
@@ -82545,27 +82545,27 @@
           },
           {
             "source": "RELATED_VIDEO",
-            "views": 113,
-            "watch_time_hours": 7.6,
-            "pct": 5.9
+            "views": 114,
+            "watch_time_hours": 7.699999999999999,
+            "pct": 6.0
           },
           {
             "source": "YT_CHANNEL",
-            "views": 75,
+            "views": 81,
             "watch_time_hours": 1.5,
-            "pct": 3.9
+            "pct": 4.2
           },
           {
             "source": "SHORTS",
-            "views": 64,
-            "watch_time_hours": 0.30000000000000004,
-            "pct": 3.3
+            "views": 54,
+            "watch_time_hours": 0.2,
+            "pct": 2.8
           },
           {
             "source": "NO_LINK_OTHER",
-            "views": 36,
-            "watch_time_hours": 1.8,
-            "pct": 1.9
+            "views": 30,
+            "watch_time_hours": 1.7,
+            "pct": 1.6
           },
           {
             "source": "YT_OTHER_PAGE",
@@ -83389,9 +83389,9 @@
           },
           {
             "device": "DESKTOP",
-            "views": 259,
+            "views": 257,
             "watch_time_hours": 10.2,
-            "pct": 13.6
+            "pct": 13.5
           },
           {
             "device": "TV",
@@ -85284,8 +85284,8 @@
       "traffic_sources": [
         {
           "source": "SUBSCRIBER",
-          "views": 228146,
-          "watch_time_hours": 10107.2,
+          "views": 228147,
+          "watch_time_hours": 10107.3,
           "pct": 75.9
         },
         {
@@ -85296,7 +85296,7 @@
         },
         {
           "source": "YT_SEARCH",
-          "views": 12193,
+          "views": 12194,
           "watch_time_hours": 471.3,
           "pct": 4.1
         },
@@ -85314,13 +85314,13 @@
         },
         {
           "source": "YT_OTHER_PAGE",
-          "views": 7507,
+          "views": 7506,
           "watch_time_hours": 395.8,
           "pct": 2.5
         },
         {
           "source": "NO_LINK_OTHER",
-          "views": 5901,
+          "views": 5900,
           "watch_time_hours": 264.1,
           "pct": 2.0
         },
@@ -86674,7 +86674,7 @@
           {
             "age_group": "age35-44",
             "gender": "male",
-            "viewer_pct": 20.1
+            "viewer_pct": 20.0
           },
           {
             "age_group": "age45-54",
@@ -87285,15 +87285,15 @@
         "2026-07": [
           {
             "source": "YT_SEARCH",
-            "views": 300,
+            "views": 301,
             "watch_time_hours": 13.6,
-            "pct": 37.9
+            "pct": 38.0
           },
           {
             "source": "SUBSCRIBER",
-            "views": 183,
-            "watch_time_hours": 7.6,
-            "pct": 23.1
+            "views": 184,
+            "watch_time_hours": 7.7,
+            "pct": 23.2
           },
           {
             "source": "SHORTS",
@@ -87315,15 +87315,15 @@
           },
           {
             "source": "YT_OTHER_PAGE",
-            "views": 28,
+            "views": 27,
             "watch_time_hours": 1.0,
-            "pct": 3.5
+            "pct": 3.4
           },
           {
             "source": "NO_LINK_OTHER",
-            "views": 18,
+            "views": 17,
             "watch_time_hours": 0.8,
-            "pct": 2.3
+            "pct": 2.1
           },
           {
             "source": "EXT_URL",
@@ -88177,7 +88177,7 @@
     "cars24_malayalam": {
       "channel_name": "Cars24 Tamil",
       "snapshot": {
-        "subscribers": 129,
+        "subscribers": 130,
         "total_views": 9167,
         "videos": 9
       },
@@ -90235,7 +90235,7 @@
           "title": "ZERO Road Tax on Private Roads! #cars24tamil",
           "published": "2025-10-31",
           "url": "https://www.youtube.com/watch?v=YhPHEJ1gV2U",
-          "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=CLDcp9IG&rs=AOn4CLC0fpGmFGi8pK9lTIgFs9GVRrFT1Q",
+          "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=COzFqNIG&rs=AOn4CLBmhO5VfcJ9C48I6qARUv2qYCovxQ",
           "views": 54,
           "watch_time_hours": 0.32,
           "avg_duration_sec": 35.0,
@@ -91099,15 +91099,15 @@
         {
           "month": "2026-07",
           "label": "Jul'26",
-          "views": 61999,
+          "views": 61991,
           "watch_time_hours": 565.0,
           "avg_view_duration": 44.0,
           "avg_view_duration_min": 0.7,
-          "avg_view_percent": 68.48,
+          "avg_view_percent": 68.49,
           "subscribers_gained": 104,
           "subscribers_lost": 21,
           "net_subs": 83,
-          "likes": 2290,
+          "likes": 2291,
           "comments": 52,
           "shares": 187,
           "impressions": 0,
@@ -91352,32 +91352,32 @@
       "traffic_sources": [
         {
           "source": "SHORTS",
-          "views": 8376003,
-          "watch_time_hours": 77661.5,
+          "views": 8375958,
+          "watch_time_hours": 77661.2,
           "pct": 64.2
         },
         {
           "source": "SUBSCRIBER",
-          "views": 2784406,
-          "watch_time_hours": 33229.1,
+          "views": 2784433,
+          "watch_time_hours": 33229.4,
           "pct": 21.3
         },
         {
           "source": "YT_SEARCH",
-          "views": 1246702,
-          "watch_time_hours": 10102.1,
+          "views": 1246715,
+          "watch_time_hours": 10102.2,
           "pct": 9.6
         },
         {
           "source": "YT_CHANNEL",
-          "views": 404335,
+          "views": 404333,
           "watch_time_hours": 3367.5,
           "pct": 3.1
         },
         {
           "source": "YT_OTHER_PAGE",
-          "views": 97244,
-          "watch_time_hours": 1065.1,
+          "views": 97249,
+          "watch_time_hours": 1065.2,
           "pct": 0.7
         },
         {
@@ -91394,13 +91394,13 @@
         },
         {
           "source": "NOTIFICATION",
-          "views": 13915,
+          "views": 13910,
           "watch_time_hours": 178.4,
           "pct": 0.1
         },
         {
           "source": "HASHTAGS",
-          "views": 6501,
+          "views": 6498,
           "watch_time_hours": 36.5,
           "pct": 0.0
         },
@@ -91424,7 +91424,7 @@
         },
         {
           "source": "SHORTS_CONTENT_LINKS",
-          "views": 552,
+          "views": 554,
           "watch_time_hours": 3.6,
           "pct": 0.0
         },
@@ -91450,7 +91450,7 @@
       "devices": [
         {
           "device": "MOBILE",
-          "views": 11848170,
+          "views": 11848159,
           "watch_time_hours": 114187.9,
           "pct": 90.9
         },
@@ -91462,7 +91462,7 @@
         },
         {
           "device": "DESKTOP",
-          "views": 463534,
+          "views": 463537,
           "watch_time_hours": 5257.0,
           "pct": 3.6
         },
@@ -97712,25 +97712,25 @@
         "2026-07": [
           {
             "source": "SUBSCRIBER",
-            "views": 40719,
-            "watch_time_hours": 427.6,
+            "views": 40746,
+            "watch_time_hours": 427.9,
             "pct": 65.7
           },
           {
             "source": "SHORTS",
-            "views": 14740,
-            "watch_time_hours": 88.30000000000001,
-            "pct": 23.8
+            "views": 14695,
+            "watch_time_hours": 88.0,
+            "pct": 23.7
           },
           {
             "source": "YT_SEARCH",
-            "views": 3746,
+            "views": 3759,
             "watch_time_hours": 29.0,
-            "pct": 6.0
+            "pct": 6.1
           },
           {
             "source": "YT_CHANNEL",
-            "views": 2038,
+            "views": 2036,
             "watch_time_hours": 12.7,
             "pct": 3.3
           },
@@ -97741,20 +97741,20 @@
             "pct": 0.4
           },
           {
-            "source": "NOTIFICATION",
-            "views": 210,
-            "watch_time_hours": 2.3,
-            "pct": 0.3
-          },
-          {
             "source": "YT_OTHER_PAGE",
-            "views": 203,
+            "views": 208,
             "watch_time_hours": 1.8,
             "pct": 0.3
           },
           {
+            "source": "NOTIFICATION",
+            "views": 205,
+            "watch_time_hours": 2.3,
+            "pct": 0.3
+          },
+          {
             "source": "SHORTS_CONTENT_LINKS",
-            "views": 66,
+            "views": 68,
             "watch_time_hours": 0.2,
             "pct": 0.1
           },
@@ -97772,7 +97772,7 @@
           },
           {
             "source": "HASHTAGS",
-            "views": 8,
+            "views": 5,
             "watch_time_hours": 0.0,
             "pct": 0.0
           },
@@ -98568,13 +98568,13 @@
         "2026-07": [
           {
             "device": "MOBILE",
-            "views": 56769,
+            "views": 56758,
             "watch_time_hours": 508.7,
             "pct": 91.6
           },
           {
             "device": "DESKTOP",
-            "views": 2177,
+            "views": 2180,
             "watch_time_hours": 25.9,
             "pct": 3.5
           },
@@ -98887,8 +98887,8 @@
           "published": "2026-06-01",
           "url": "https://www.youtube.com/watch?v=EXnPQKzcyoQ",
           "thumbnail": "https://i.ytimg.com/vi/EXnPQKzcyoQ/default.jpg",
-          "views": 180555,
-          "watch_time_hours": 1809.7,
+          "views": 180554,
+          "watch_time_hours": 1809.72,
           "avg_duration_sec": 44.0,
           "avg_view_pct": 64.1,
           "subs_gained": 207,
@@ -99095,8 +99095,8 @@
           "published": "2026-06-12",
           "url": "https://www.youtube.com/watch?v=cMYVKSJCOpk",
           "thumbnail": "https://i.ytimg.com/vi/cMYVKSJCOpk/default.jpg",
-          "views": 124364,
-          "watch_time_hours": 1081.58,
+          "views": 124365,
+          "watch_time_hours": 1081.6,
           "avg_duration_sec": 39.0,
           "avg_view_pct": 64.3,
           "subs_gained": 164,
@@ -99351,8 +99351,8 @@
           "published": "2026-06-29",
           "url": "https://www.youtube.com/watch?v=qP22e5q4jnQ",
           "thumbnail": "https://i.ytimg.com/vi/qP22e5q4jnQ/default.jpg",
-          "views": 61018,
-          "watch_time_hours": 495.53,
+          "views": 61014,
+          "watch_time_hours": 495.55,
           "avg_duration_sec": 40.0,
           "avg_view_pct": 69.2,
           "subs_gained": 52,
@@ -99383,7 +99383,7 @@
           "published": "2026-06-21",
           "url": "https://www.youtube.com/watch?v=6HjRN9fJql4",
           "thumbnail": "https://i.ytimg.com/vi/6HjRN9fJql4/default.jpg",
-          "views": 55516,
+          "views": 55517,
           "watch_time_hours": 364.57,
           "avg_duration_sec": 35.0,
           "avg_view_pct": 76.4,
@@ -101382,7 +101382,7 @@
       "channel_name": "Cars24 UAE",
       "snapshot": {
         "subscribers": 3380,
-        "total_views": 21691586,
+        "total_views": 21692604,
         "videos": 417
       },
       "monthly": [
@@ -102229,11 +102229,11 @@
         {
           "month": "2026-07",
           "label": "Jul'26",
-          "views": 1210549,
-          "watch_time_hours": 3367.8,
+          "views": 1209521,
+          "watch_time_hours": 3364.7,
           "avg_view_duration": 20.0,
           "avg_view_duration_min": 0.3,
-          "avg_view_percent": 69.59,
+          "avg_view_percent": 69.58,
           "subscribers_gained": 5,
           "subscribers_lost": 1,
           "net_subs": 4,
@@ -102258,23 +102258,23 @@
       "geo": [
         {
           "city": "Dubai",
-          "views": 6549051,
-          "watch_time_hours": 27848.5
+          "views": 6566705,
+          "watch_time_hours": 27860.3
         },
         {
           "city": "Abu Dhabi",
-          "views": 1342139,
-          "watch_time_hours": 6140.6
+          "views": 1342628,
+          "watch_time_hours": 6140.9
         },
         {
           "city": "Sharjah",
-          "views": 521316,
-          "watch_time_hours": 2347.7
+          "views": 522322,
+          "watch_time_hours": 2348.4
         },
         {
           "city": "Al Ain",
-          "views": 216530,
-          "watch_time_hours": 974.8
+          "views": 216581,
+          "watch_time_hours": 974.9
         },
         {
           "city": "Bengaluru",
@@ -102308,8 +102308,8 @@
         },
         {
           "city": "Ajman",
-          "views": 24005,
-          "watch_time_hours": 111.9
+          "views": 24042,
+          "watch_time_hours": 112.0
         },
         {
           "city": "Ahmedabad",
@@ -102479,30 +102479,115 @@
           "viewer_pct": 0.0
         }
       ],
-      "traffic_sources": [],
+      "traffic_sources": [
+        {
+          "source": "ADVERTISING",
+          "views": 192044246,
+          "watch_time_hours": 666926.7,
+          "pct": 98.9
+        },
+        {
+          "source": "SHORTS",
+          "views": 1091413,
+          "watch_time_hours": 5516.6,
+          "pct": 0.6
+        },
+        {
+          "source": "YT_SEARCH",
+          "views": 830201,
+          "watch_time_hours": 4457.1,
+          "pct": 0.4
+        },
+        {
+          "source": "EXT_URL",
+          "views": 134283,
+          "watch_time_hours": 727.4,
+          "pct": 0.1
+        },
+        {
+          "source": "YT_CHANNEL",
+          "views": 39296,
+          "watch_time_hours": 719.3,
+          "pct": 0.0
+        },
+        {
+          "source": "YT_OTHER_PAGE",
+          "views": 19545,
+          "watch_time_hours": 102.8,
+          "pct": 0.0
+        },
+        {
+          "source": "PLAYLIST",
+          "views": 19088,
+          "watch_time_hours": 189.7,
+          "pct": 0.0
+        },
+        {
+          "source": "SUBSCRIBER",
+          "views": 14614,
+          "watch_time_hours": 111.5,
+          "pct": 0.0
+        },
+        {
+          "source": "NO_LINK_OTHER",
+          "views": 6690,
+          "watch_time_hours": 47.0,
+          "pct": 0.0
+        },
+        {
+          "source": "RELATED_VIDEO",
+          "views": 4941,
+          "watch_time_hours": 165.8,
+          "pct": 0.0
+        },
+        {
+          "source": "HASHTAGS",
+          "views": 2377,
+          "watch_time_hours": 12.2,
+          "pct": 0.0
+        },
+        {
+          "source": "NOTIFICATION",
+          "views": 323,
+          "watch_time_hours": 2.1,
+          "pct": 0.0
+        },
+        {
+          "source": "SOUND_PAGE",
+          "views": 186,
+          "watch_time_hours": 0.6,
+          "pct": 0.0
+        },
+        {
+          "source": "IMMERSIVE_LIVE",
+          "views": 10,
+          "watch_time_hours": 0.1,
+          "pct": 0.0
+        }
+      ],
       "devices": [
         {
           "device": "MOBILE",
-          "views": 156560563,
-          "watch_time_hours": 544813.7,
+          "views": 156559955,
+          "watch_time_hours": 544812.5,
           "pct": 81.4
         },
         {
           "device": "TABLET",
-          "views": 23806453,
-          "watch_time_hours": 52179.7,
+          "views": 23806201,
+          "watch_time_hours": 52179.1,
           "pct": 12.4
         },
         {
           "device": "TV",
-          "views": 11509110,
-          "watch_time_hours": 73358.9,
+          "views": 11508955,
+          "watch_time_hours": 73357.8,
           "pct": 6.0
         },
         {
           "device": "DESKTOP",
-          "views": 544281,
-          "watch_time_hours": 3060.7,
+          "views": 544275,
+          "watch_time_hours": 3060.6,
           "pct": 0.3
         }
       ],
@@ -105530,27 +105615,27 @@
         "2026-02": [
           {
             "city": "Dubai",
-            "views": 186786,
-            "watch_time_hours": 601.9
+            "views": 204440,
+            "watch_time_hours": 613.7
           },
           {
             "city": "Abu Dhabi",
-            "views": 16497,
-            "watch_time_hours": 52.9
+            "views": 16986,
+            "watch_time_hours": 53.2
           },
           {
             "city": "Sharjah",
-            "views": 10682,
-            "watch_time_hours": 35.5
+            "views": 11688,
+            "watch_time_hours": 36.1
           },
           {
             "city": "Al Ain",
-            "views": 3916,
-            "watch_time_hours": 11.8
+            "views": 3967,
+            "watch_time_hours": 11.9
           },
           {
             "city": "Ajman",
-            "views": 548,
+            "views": 585,
             "watch_time_hours": 1.8
           },
           {
@@ -110407,32 +110492,32 @@
         "2026-07": [
           {
             "source": "ADVERTISING",
-            "views": 1206519,
-            "watch_time_hours": 3336.7,
+            "views": 1205504,
+            "watch_time_hours": 3333.7,
             "pct": 99.7
           },
           {
             "source": "YT_SEARCH",
-            "views": 2097,
+            "views": 2103,
             "watch_time_hours": 11.5,
             "pct": 0.2
           },
           {
             "source": "SHORTS",
-            "views": 1417,
-            "watch_time_hours": 6.4,
+            "views": 1408,
+            "watch_time_hours": 6.300000000000001,
             "pct": 0.1
           },
           {
             "source": "RELATED_VIDEO",
-            "views": 197,
-            "watch_time_hours": 11.299999999999999,
+            "views": 199,
+            "watch_time_hours": 11.399999999999999,
             "pct": 0.0
           },
           {
             "source": "EXT_URL",
-            "views": 158,
-            "watch_time_hours": 0.7,
+            "views": 159,
+            "watch_time_hours": 0.8,
             "pct": 0.0
           },
           {
@@ -110448,15 +110533,15 @@
             "pct": 0.0
           },
           {
-            "source": "NO_LINK_OTHER",
-            "views": 24,
-            "watch_time_hours": 0.30000000000000004,
-            "pct": 0.0
-          },
-          {
             "source": "YT_OTHER_PAGE",
             "views": 15,
             "watch_time_hours": 0.1,
+            "pct": 0.0
+          },
+          {
+            "source": "NO_LINK_OTHER",
+            "views": 11,
+            "watch_time_hours": 0.2,
             "pct": 0.0
           },
           {
@@ -111251,26 +111336,26 @@
         "2026-07": [
           {
             "device": "MOBILE",
-            "views": 859021,
-            "watch_time_hours": 2268.5,
+            "views": 858413,
+            "watch_time_hours": 2267.3,
             "pct": 76.2
           },
           {
             "device": "TABLET",
-            "views": 187686,
-            "watch_time_hours": 429.7,
-            "pct": 16.7
+            "views": 187434,
+            "watch_time_hours": 429.0,
+            "pct": 16.6
           },
           {
             "device": "TV",
-            "views": 78077,
-            "watch_time_hours": 445.3,
+            "views": 77922,
+            "watch_time_hours": 444.2,
             "pct": 6.9
           },
           {
             "device": "DESKTOP",
-            "views": 2423,
-            "watch_time_hours": 9.9,
+            "views": 2417,
+            "watch_time_hours": 9.8,
             "pct": 0.2
           }
         ]
@@ -111281,7 +111366,7 @@
           "title": "Don't start the new year with same old car| Buy a luxury pre-owned car with Cars24",
           "published": "2026-01-05",
           "url": "https://www.youtube.com/watch?v=GEmNAm2aEI0",
-          "thumbnail": "https://i9.ytimg.com/vi/GEmNAm2aEI0/default.jpg?sqp=CLDcp9IG&rs=AOn4CLACM_c52hoBkhB0i9p-g6Wc1_Jpew",
+          "thumbnail": "https://i9.ytimg.com/vi/GEmNAm2aEI0/default.jpg?sqp=COzFqNIG&rs=AOn4CLBmj_h4kK0YGZiArW2MTZqiRjyCVw",
           "views": 17694760,
           "watch_time_hours": 17789.35,
           "avg_duration_sec": 20.0,
@@ -111297,7 +111382,7 @@
           "title": "WIDE RANGE OF HIGH QUALITY USED CARS WITH CARS24",
           "published": "2023-07-13",
           "url": "https://www.youtube.com/watch?v=1oWTma88fOc",
-          "thumbnail": "https://i9.ytimg.com/vi/1oWTma88fOc/default.jpg?sqp=CLDcp9IG&rs=AOn4CLA2fQcxeMWb6_3IA7JCBIHuhQMEPA",
+          "thumbnail": "https://i9.ytimg.com/vi/1oWTma88fOc/default.jpg?sqp=COzFqNIG&rs=AOn4CLDxkOJBDWw_6pV5dgi2NPWqoWDGFg",
           "views": 11336475,
           "watch_time_hours": 79037.57,
           "avg_duration_sec": 25.0,
@@ -111314,8 +111399,8 @@
           "published": "2026-01-05",
           "url": "https://www.youtube.com/watch?v=dfPgKsX0bcM",
           "thumbnail": "https://i.ytimg.com/vi/dfPgKsX0bcM/default.jpg",
-          "views": 10260292,
-          "watch_time_hours": 8025.7,
+          "views": 10260215,
+          "watch_time_hours": 8025.65,
           "avg_duration_sec": 20.0,
           "avg_view_pct": 99.3,
           "subs_gained": 1,
@@ -111330,8 +111415,8 @@
           "published": "2025-10-17",
           "url": "https://www.youtube.com/watch?v=TJMGoWgf_eA",
           "thumbnail": "https://i.ytimg.com/vi/TJMGoWgf_eA/default.jpg",
-          "views": 8434100,
-          "watch_time_hours": 32633.67,
+          "views": 8434051,
+          "watch_time_hours": 32633.45,
           "avg_duration_sec": 41.0,
           "avg_view_pct": 87.3,
           "subs_gained": 0,
@@ -111346,8 +111431,8 @@
           "published": "2025-07-29",
           "url": "https://www.youtube.com/watch?v=1xAWb-5F1I8",
           "thumbnail": "https://i.ytimg.com/vi/1xAWb-5F1I8/default.jpg",
-          "views": 7295411,
-          "watch_time_hours": 24759.02,
+          "views": 7295264,
+          "watch_time_hours": 24758.53,
           "avg_duration_sec": 19.0,
           "avg_view_pct": 70.1,
           "subs_gained": 3,
@@ -111362,8 +111447,8 @@
           "published": "2026-02-19",
           "url": "https://www.youtube.com/watch?v=khheCxPAhTw",
           "thumbnail": "https://i.ytimg.com/vi/khheCxPAhTw/default.jpg",
-          "views": 6703555,
-          "watch_time_hours": 18083.25,
+          "views": 6703483,
+          "watch_time_hours": 18083.13,
           "avg_duration_sec": 21.0,
           "avg_view_pct": 81.8,
           "subs_gained": 0,
@@ -111378,8 +111463,8 @@
           "published": "2025-07-29",
           "url": "https://www.youtube.com/watch?v=8ZvKIsVmVWw",
           "thumbnail": "https://i.ytimg.com/vi/8ZvKIsVmVWw/default.jpg",
-          "views": 6301011,
-          "watch_time_hours": 14039.75,
+          "views": 6300948,
+          "watch_time_hours": 14039.6,
           "avg_duration_sec": 17.0,
           "avg_view_pct": 63.9,
           "subs_gained": 0,
@@ -111394,8 +111479,8 @@
           "published": "2025-07-29",
           "url": "https://www.youtube.com/watch?v=dN_e6g7y8qY",
           "thumbnail": "https://i.ytimg.com/vi/dN_e6g7y8qY/default.jpg",
-          "views": 5316825,
-          "watch_time_hours": 17834.22,
+          "views": 5316781,
+          "watch_time_hours": 17834.12,
           "avg_duration_sec": 18.0,
           "avg_view_pct": 67.8,
           "subs_gained": 1,
@@ -111409,7 +111494,7 @@
           "title": "2024 Chevy Tahoe \u2013 Bold & Spacious | Download CARS24 App and Check It Out Now",
           "published": "2025-06-26",
           "url": "https://www.youtube.com/watch?v=oRjspDWvTOo",
-          "thumbnail": "https://i9.ytimg.com/vi/oRjspDWvTOo/default.jpg?sqp=CLDcp9IG&rs=AOn4CLC_XN0ZMzIP7MRpD71KraiJNYyGgQ",
+          "thumbnail": "https://i9.ytimg.com/vi/oRjspDWvTOo/default.jpg?sqp=COzFqNIG&rs=AOn4CLAw3oHYglSP3gcN-FbsPeAkWeyqJw",
           "views": 4831542,
           "watch_time_hours": 10427.1,
           "avg_duration_sec": 41.0,
@@ -111425,7 +111510,7 @@
           "title": "FREE TEST DRIVE LUXURY CARS IN UAE AT CARS24 MRL HUB",
           "published": "2023-06-23",
           "url": "https://www.youtube.com/watch?v=wKy4xKbc7jU",
-          "thumbnail": "https://i9.ytimg.com/vi/wKy4xKbc7jU/default.jpg?sqp=CLDcp9IG&rs=AOn4CLBYqanp6iLqddXbt8TiKeIqd9pNyw",
+          "thumbnail": "https://i9.ytimg.com/vi/wKy4xKbc7jU/default.jpg?sqp=COzFqNIG&rs=AOn4CLCRTUkJlp7K4vcugnLNUT7ToCGUDQ",
           "views": 4426149,
           "watch_time_hours": 12772.92,
           "avg_duration_sec": 14.0,
@@ -111442,8 +111527,8 @@
           "published": "2026-02-02",
           "url": "https://www.youtube.com/watch?v=T86cq0Kj2EQ",
           "thumbnail": "https://i.ytimg.com/vi/T86cq0Kj2EQ/default.jpg",
-          "views": 4386469,
-          "watch_time_hours": 17471.1,
+          "views": 4386431,
+          "watch_time_hours": 17470.92,
           "avg_duration_sec": 20.0,
           "avg_view_pct": 93.7,
           "subs_gained": 1,
@@ -111458,8 +111543,8 @@
           "published": "2025-10-16",
           "url": "https://www.youtube.com/watch?v=o7ScsEH_9EA",
           "thumbnail": "https://i.ytimg.com/vi/o7ScsEH_9EA/default.jpg",
-          "views": 4017011,
-          "watch_time_hours": 4966.43,
+          "views": 4016970,
+          "watch_time_hours": 4966.37,
           "avg_duration_sec": 12.0,
           "avg_view_pct": 104.0,
           "subs_gained": 0,
@@ -111474,8 +111559,8 @@
           "published": "2025-12-04",
           "url": "https://www.youtube.com/watch?v=GBn6fecdvrM",
           "thumbnail": "https://i.ytimg.com/vi/GBn6fecdvrM/default.jpg",
-          "views": 3752094,
-          "watch_time_hours": 18147.72,
+          "views": 3751969,
+          "watch_time_hours": 18146.78,
           "avg_duration_sec": 35.0,
           "avg_view_pct": 68.7,
           "subs_gained": 0,
@@ -111489,7 +111574,7 @@
           "title": "Mini Cooper JCW - Compact Icon, Big Personality | Dowload the CARS24 App Now",
           "published": "2025-06-26",
           "url": "https://www.youtube.com/watch?v=_u2ZpB9LktI",
-          "thumbnail": "https://i9.ytimg.com/vi/_u2ZpB9LktI/default.jpg?sqp=CLDcp9IG&rs=AOn4CLD1ygkvgugL1d4XKc2pGkSH9bTulA",
+          "thumbnail": "https://i9.ytimg.com/vi/_u2ZpB9LktI/default.jpg?sqp=COzFqNIG&rs=AOn4CLDgXXzfsPv6IhCXwV4_QkQsCUA3zQ",
           "views": 3411636,
           "watch_time_hours": 4475.72,
           "avg_duration_sec": 32.0,
@@ -111506,8 +111591,8 @@
           "published": "2025-12-11",
           "url": "https://www.youtube.com/watch?v=J5pa3iXTlpQ",
           "thumbnail": "https://i.ytimg.com/vi/J5pa3iXTlpQ/default.jpg",
-          "views": 2916067,
-          "watch_time_hours": 8277.55,
+          "views": 2915994,
+          "watch_time_hours": 8277.38,
           "avg_duration_sec": 18.0,
           "avg_view_pct": 89.3,
           "subs_gained": 0,
@@ -111521,7 +111606,7 @@
           "title": "TRADE IN YOUR CAR WITH CARS24",
           "published": "2024-02-09",
           "url": "https://www.youtube.com/watch?v=EmHtV8y1r8c",
-          "thumbnail": "https://i9.ytimg.com/vi/EmHtV8y1r8c/default.jpg?sqp=CLDcp9IG&rs=AOn4CLAF81XsIhxAKIA75bPk7672SQjwvw",
+          "thumbnail": "https://i9.ytimg.com/vi/EmHtV8y1r8c/default.jpg?sqp=COzFqNIG&rs=AOn4CLB2Xm2fm5gjUaTtZZgMvv2brBlXfQ",
           "views": 2880524,
           "watch_time_hours": 7576.65,
           "avg_duration_sec": 10.0,
@@ -111537,7 +111622,7 @@
           "title": "TEST DRIVE HIGH QUALITY USED CARS IN UAE",
           "published": "2023-07-26",
           "url": "https://www.youtube.com/watch?v=ED0CwGPoHKo",
-          "thumbnail": "https://i9.ytimg.com/vi/ED0CwGPoHKo/default.jpg?sqp=CLDcp9IG&rs=AOn4CLCL-lTL7QhMeUuCLNkZdhZU6EM4Hg",
+          "thumbnail": "https://i9.ytimg.com/vi/ED0CwGPoHKo/default.jpg?sqp=COzFqNIG&rs=AOn4CLATA83fQOmeEwY_5eXuT2EDz1Zhkg",
           "views": 2648695,
           "watch_time_hours": 10020.6,
           "avg_duration_sec": 13.0,
@@ -111553,7 +111638,7 @@
           "title": "BIG AUTO SALE BY CARS24 LIVE NOW!",
           "published": "2025-10-13",
           "url": "https://www.youtube.com/watch?v=SqhfWKpo0wM",
-          "thumbnail": "https://i9.ytimg.com/vi/SqhfWKpo0wM/default.jpg?sqp=CLDcp9IG&rs=AOn4CLBlXxIe4qTO-8GirovRrKpzjswliQ",
+          "thumbnail": "https://i9.ytimg.com/vi/SqhfWKpo0wM/default.jpg?sqp=COzFqNIG&rs=AOn4CLCKlkWbMDNC9xqkEd0CVkdnbE0iRw",
           "views": 2183528,
           "watch_time_hours": 5449.13,
           "avg_duration_sec": 14.0,
@@ -111570,8 +111655,8 @@
           "published": "2025-10-02",
           "url": "https://www.youtube.com/watch?v=rilTB4nI1og",
           "thumbnail": "https://i.ytimg.com/vi/rilTB4nI1og/default.jpg",
-          "views": 2153935,
-          "watch_time_hours": 3914.02,
+          "views": 2153921,
+          "watch_time_hours": 3913.98,
           "avg_duration_sec": 13.0,
           "avg_view_pct": 102.6,
           "subs_gained": 1,
@@ -111586,8 +111671,8 @@
           "published": "2025-12-04",
           "url": "https://www.youtube.com/watch?v=1I0SF47j-9U",
           "thumbnail": "https://i.ytimg.com/vi/1I0SF47j-9U/default.jpg",
-          "views": 2038764,
-          "watch_time_hours": 5982.23,
+          "views": 2038721,
+          "watch_time_hours": 5982.07,
           "avg_duration_sec": 26.0,
           "avg_view_pct": 92.6,
           "subs_gained": 0,
@@ -111601,7 +111686,7 @@
           "title": "CARS24 : # 1 App to buy quality used cars  #uae #automobile #cars #autodealsuae #dubai",
           "published": "2024-01-03",
           "url": "https://www.youtube.com/watch?v=I9SI5WPOHOw",
-          "thumbnail": "https://i9.ytimg.com/vi/I9SI5WPOHOw/default.jpg?sqp=CLDcp9IG&rs=AOn4CLClH8IHhSgW_ZSxphlr9QalCDaLZA",
+          "thumbnail": "https://i9.ytimg.com/vi/I9SI5WPOHOw/default.jpg?sqp=COzFqNIG&rs=AOn4CLBjpqWXljA3HCwSQmboufX7tDXemw",
           "views": 1954521,
           "watch_time_hours": 14662.65,
           "avg_duration_sec": 28.0,
@@ -111618,7 +111703,7 @@
           "published": "2026-02-02",
           "url": "https://www.youtube.com/watch?v=wvpFNtsRgQo",
           "thumbnail": "https://i.ytimg.com/vi/wvpFNtsRgQo/default.jpg",
-          "views": 1929743,
+          "views": 1929740,
           "watch_time_hours": 4955.32,
           "avg_duration_sec": 36.0,
           "avg_view_pct": 82.5,
@@ -111634,8 +111719,8 @@
           "published": "2026-02-02",
           "url": "https://www.youtube.com/watch?v=d9Axy-n6CWQ",
           "thumbnail": "https://i.ytimg.com/vi/d9Axy-n6CWQ/default.jpg",
-          "views": 1807065,
-          "watch_time_hours": 6683.32,
+          "views": 1807062,
+          "watch_time_hours": 6683.3,
           "avg_duration_sec": 22.0,
           "avg_view_pct": 93.2,
           "subs_gained": 0,
@@ -111649,7 +111734,7 @@
           "title": "TRADE IN YOUR CAR WITH CARS24",
           "published": "2024-02-09",
           "url": "https://www.youtube.com/watch?v=uEz15KAVg50",
-          "thumbnail": "https://i9.ytimg.com/vi/uEz15KAVg50/default.jpg?sqp=CLDcp9IG&rs=AOn4CLBBxeUaWM8k1m6nkiXx2YJKCZsw4Q",
+          "thumbnail": "https://i9.ytimg.com/vi/uEz15KAVg50/default.jpg?sqp=COzFqNIG&rs=AOn4CLCtRSGV4W5Fg4ysUV4PJqfTF4eGVA",
           "views": 1536309,
           "watch_time_hours": 4193.73,
           "avg_duration_sec": 9.0,
@@ -111666,7 +111751,7 @@
           "published": "2024-02-20",
           "url": "https://www.youtube.com/watch?v=gnz4A0pvttI",
           "thumbnail": "https://i.ytimg.com/vi/gnz4A0pvttI/default.jpg",
-          "views": 1416092,
+          "views": 1416091,
           "watch_time_hours": 2960.37,
           "avg_duration_sec": 16.0,
           "avg_view_pct": 62.8,
@@ -111698,8 +111783,8 @@
           "published": "2026-04-29",
           "url": "https://www.youtube.com/watch?v=orb1SvCTwtE",
           "thumbnail": "https://i.ytimg.com/vi/orb1SvCTwtE/default.jpg",
-          "views": 1280277,
-          "watch_time_hours": 2945.38,
+          "views": 1280234,
+          "watch_time_hours": 2945.3,
           "avg_duration_sec": 36.0,
           "avg_view_pct": 77.7,
           "subs_gained": 0,
@@ -111713,7 +111798,7 @@
           "title": "BIG AUTO SALE BY CARS24 LIVE NOW!",
           "published": "2025-10-13",
           "url": "https://www.youtube.com/watch?v=LPqC12YqinE",
-          "thumbnail": "https://i9.ytimg.com/vi/LPqC12YqinE/default.jpg?sqp=CLDcp9IG&rs=AOn4CLC61usPdJPJ3pMdkRaDmJ2qkDLQHA",
+          "thumbnail": "https://i9.ytimg.com/vi/LPqC12YqinE/default.jpg?sqp=COzFqNIG&rs=AOn4CLCMYSrr2VsEy0csnAXrlEH8sNNXtA",
           "views": 1263351,
           "watch_time_hours": 3126.05,
           "avg_duration_sec": 14.0,
@@ -111730,8 +111815,8 @@
           "published": "2026-04-29",
           "url": "https://www.youtube.com/watch?v=OdWjYzyunu8",
           "thumbnail": "https://i.ytimg.com/vi/OdWjYzyunu8/default.jpg",
-          "views": 1206809,
-          "watch_time_hours": 3010.32,
+          "views": 1206744,
+          "watch_time_hours": 3010.17,
           "avg_duration_sec": 28.0,
           "avg_view_pct": 99.8,
           "subs_gained": 1,
@@ -111761,7 +111846,7 @@
           "title": "TRADE IN YOUR CAR WITH CARS24",
           "published": "2024-02-09",
           "url": "https://www.youtube.com/watch?v=gb1nO2DVRQ4",
-          "thumbnail": "https://i9.ytimg.com/vi/gb1nO2DVRQ4/default.jpg?sqp=CLDcp9IG&rs=AOn4CLDRFEHIyon8BwG-VO90gncTfzAjCA",
+          "thumbnail": "https://i9.ytimg.com/vi/gb1nO2DVRQ4/default.jpg?sqp=COzFqNIG&rs=AOn4CLBIlS4_lF7q39nMjj_Vhxp_FTg_SQ",
           "views": 1047016,
           "watch_time_hours": 2923.4,
           "avg_duration_sec": 10.0,
@@ -111810,8 +111895,8 @@
           "published": "2026-04-20",
           "url": "https://www.youtube.com/watch?v=1txZ6IlPwmc",
           "thumbnail": "https://i.ytimg.com/vi/1txZ6IlPwmc/default.jpg",
-          "views": 990525,
-          "watch_time_hours": 2069.5,
+          "views": 990517,
+          "watch_time_hours": 2069.48,
           "avg_duration_sec": 24.0,
           "avg_view_pct": 96.3,
           "subs_gained": 0,
@@ -111890,8 +111975,8 @@
           "published": "2026-06-05",
           "url": "https://www.youtube.com/watch?v=jNjezJsDlyI",
           "thumbnail": "https://i.ytimg.com/vi/jNjezJsDlyI/default.jpg",
-          "views": 600920,
-          "watch_time_hours": 566.37,
+          "views": 600834,
+          "watch_time_hours": 566.33,
           "avg_duration_sec": 20.0,
           "avg_view_pct": 94.5,
           "subs_gained": 0,
@@ -111906,7 +111991,7 @@
           "published": "2026-02-19",
           "url": "https://www.youtube.com/watch?v=ET15IHa48d8",
           "thumbnail": "https://i.ytimg.com/vi/ET15IHa48d8/default.jpg",
-          "views": 599686,
+          "views": 599685,
           "watch_time_hours": 1213.37,
           "avg_duration_sec": 27.0,
           "avg_view_pct": 96.6,
@@ -111921,7 +112006,7 @@
           "title": "FREE TEST DRIVE LUXURY CARS IN UAE AT CARS24 MRL HUB",
           "published": "2023-06-22",
           "url": "https://www.youtube.com/watch?v=zaO2yjx_6HQ",
-          "thumbnail": "https://i9.ytimg.com/vi/zaO2yjx_6HQ/default.jpg?sqp=CLDcp9IG&rs=AOn4CLA71W3OPegelUgS-ZxVcHG-0z6QUQ",
+          "thumbnail": "https://i9.ytimg.com/vi/zaO2yjx_6HQ/default.jpg?sqp=COzFqNIG&rs=AOn4CLCydfC9GiA6wqAix5ZymtU2EWvpaw",
           "views": 547321,
           "watch_time_hours": 1952.1,
           "avg_duration_sec": 14.0,
@@ -111938,8 +112023,8 @@
           "published": "2026-02-26",
           "url": "https://www.youtube.com/watch?v=qXBdwtvkuJ8",
           "thumbnail": "https://i.ytimg.com/vi/qXBdwtvkuJ8/default.jpg",
-          "views": 545128,
-          "watch_time_hours": 1967.85,
+          "views": 545118,
+          "watch_time_hours": 1967.83,
           "avg_duration_sec": 21.0,
           "avg_view_pct": 84.1,
           "subs_gained": 0,
@@ -111953,7 +112038,7 @@
           "title": "TEST DRIVE HIGH QUALITY USED CARS IN UAE",
           "published": "2023-07-26",
           "url": "https://www.youtube.com/watch?v=EbEuemWLxEk",
-          "thumbnail": "https://i9.ytimg.com/vi/EbEuemWLxEk/default.jpg?sqp=CLDcp9IG&rs=AOn4CLC8xMjXGr-y3eN3PJTP-AxAh-Y5dg",
+          "thumbnail": "https://i9.ytimg.com/vi/EbEuemWLxEk/default.jpg?sqp=COzFqNIG&rs=AOn4CLDQxiQyar6vQldQ1RSz6sjDOT5v9g",
           "views": 540962,
           "watch_time_hours": 1840.33,
           "avg_duration_sec": 15.0,
@@ -111985,7 +112070,7 @@
           "title": "TEST DRIVE HIGH QUALITY USED CARS IN UAE",
           "published": "2023-07-26",
           "url": "https://www.youtube.com/watch?v=ZK13ShDV4No",
-          "thumbnail": "https://i9.ytimg.com/vi/ZK13ShDV4No/default.jpg?sqp=CLDcp9IG&rs=AOn4CLCzpde4TzovTkyK1SIsf0WhdFFIeg",
+          "thumbnail": "https://i9.ytimg.com/vi/ZK13ShDV4No/default.jpg?sqp=COzFqNIG&rs=AOn4CLAtmLx0pby6RP4719XjbxKSG5dWdQ",
           "views": 513220,
           "watch_time_hours": 1289.37,
           "avg_duration_sec": 14.0,
@@ -112049,7 +112134,7 @@
           "title": "FLOOD-FREE HIGH QUALITY USED CARS IN THE UAE",
           "published": "2024-04-25",
           "url": "https://www.youtube.com/watch?v=KNC646kU1JE",
-          "thumbnail": "https://i9.ytimg.com/vi/KNC646kU1JE/default.jpg?sqp=CLDcp9IG&rs=AOn4CLAuYxx6YiysTLqwXVMzU47s7Ikntw",
+          "thumbnail": "https://i9.ytimg.com/vi/KNC646kU1JE/default.jpg?sqp=COzFqNIG&rs=AOn4CLCLvLwSsY_4rmHpgPSNq1nUYJo6wQ",
           "views": 435241,
           "watch_time_hours": 1249.38,
           "avg_duration_sec": 10.0,
@@ -112066,8 +112151,8 @@
           "published": "2026-04-03",
           "url": "https://www.youtube.com/watch?v=ZhkzgeDE2ZE",
           "thumbnail": "https://i.ytimg.com/vi/ZhkzgeDE2ZE/default.jpg",
-          "views": 403879,
-          "watch_time_hours": 1575.4,
+          "views": 403871,
+          "watch_time_hours": 1575.35,
           "avg_duration_sec": 49.0,
           "avg_view_pct": 89.9,
           "subs_gained": 0,
@@ -112083,14 +112168,14 @@
     "cars24_india": {
       "handle": "@cars24india",
       "snapshot": {
-        "followers": 435571,
+        "followers": 435726,
         "media": 1798
       },
       "monthly": [
         {
           "month": "2024-08",
           "label": "Aug'24",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -112109,7 +112194,7 @@
         {
           "month": "2024-09",
           "label": "Sep'24",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -112128,7 +112213,7 @@
         {
           "month": "2024-10",
           "label": "Oct'24",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -112147,7 +112232,7 @@
         {
           "month": "2024-11",
           "label": "Nov'24",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -112166,7 +112251,7 @@
         {
           "month": "2024-12",
           "label": "Dec'24",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -112185,7 +112270,7 @@
         {
           "month": "2025-01",
           "label": "Jan'25",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -112204,7 +112289,7 @@
         {
           "month": "2025-02",
           "label": "Feb'25",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -112223,7 +112308,7 @@
         {
           "month": "2025-03",
           "label": "Mar'25",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -112242,7 +112327,7 @@
         {
           "month": "2025-04",
           "label": "Apr'25",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -112261,7 +112346,7 @@
         {
           "month": "2025-05",
           "label": "May'25",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -112280,7 +112365,7 @@
         {
           "month": "2025-06",
           "label": "Jun'25",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -112299,7 +112384,7 @@
         {
           "month": "2025-07",
           "label": "Jul'25",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 8515,
           "followers_lost": 6700,
           "net_followers": 1815,
@@ -112318,7 +112403,7 @@
         {
           "month": "2025-08",
           "label": "Aug'25",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 9185,
           "followers_lost": 6667,
           "net_followers": 2518,
@@ -112337,7 +112422,7 @@
         {
           "month": "2025-09",
           "label": "Sep'25",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 6600,
           "followers_lost": 5984,
           "net_followers": 616,
@@ -112356,7 +112441,7 @@
         {
           "month": "2025-10",
           "label": "Oct'25",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 7248,
           "followers_lost": 5834,
           "net_followers": 1414,
@@ -112375,7 +112460,7 @@
         {
           "month": "2025-11",
           "label": "Nov'25",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 7830,
           "followers_lost": 5562,
           "net_followers": 2268,
@@ -112394,7 +112479,7 @@
         {
           "month": "2025-12",
           "label": "Dec'25",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 8134,
           "followers_lost": 5681,
           "net_followers": 2453,
@@ -112413,7 +112498,7 @@
         {
           "month": "2026-01",
           "label": "Jan'26",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 9168,
           "followers_lost": 6141,
           "net_followers": 3027,
@@ -112432,7 +112517,7 @@
         {
           "month": "2026-02",
           "label": "Feb'26",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 16825,
           "followers_lost": 6571,
           "net_followers": 10254,
@@ -112451,7 +112536,7 @@
         {
           "month": "2026-03",
           "label": "Mar'26",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 16789,
           "followers_lost": 6692,
           "net_followers": 10097,
@@ -112470,7 +112555,7 @@
         {
           "month": "2026-04",
           "label": "Apr'26",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 18441,
           "followers_lost": 7330,
           "net_followers": 11111,
@@ -112489,7 +112574,7 @@
         {
           "month": "2026-05",
           "label": "May'26",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 33682,
           "followers_lost": 9980,
           "net_followers": 23702,
@@ -112512,7 +112597,7 @@
           "followers_gained": 30220,
           "followers_lost": 10569,
           "net_followers": 19651,
-          "views": 130617487,
+          "views": 130617488,
           "reach": 53152806,
           "profile_views": 295429,
           "accounts_engaged": 244186,
@@ -112527,19 +112612,19 @@
         {
           "month": "2026-07",
           "label": "Jul'26",
-          "followers": 435571,
+          "followers": 435726,
           "followers_gained": 3496,
           "followers_lost": 1115,
           "net_followers": 2381,
-          "views": 16101684,
-          "reach": 13485665,
-          "profile_views": 36631,
-          "accounts_engaged": 32643,
-          "total_interactions": 48454,
-          "likes": 42659,
-          "comments": 819,
-          "shares": 1602,
-          "saves": 1497,
+          "views": 16916442,
+          "reach": 13827468,
+          "profile_views": 38522,
+          "accounts_engaged": 35056,
+          "total_interactions": 51153,
+          "likes": 45078,
+          "comments": 847,
+          "shares": 1682,
+          "saves": 1584,
           "content_posted": 1,
           "engagement_rate": 0.29
         }
@@ -112550,12 +112635,12 @@
           "type": "VIDEO",
           "caption": "Generational trust issues, but make it automotive \ud83e\udd72\ud83d\ude97  #carmeme #carjokes #carfun #automotivedaily #c",
           "url": "https://www.instagram.com/reel/DZztIgyy2mq/",
-          "likes": 6537,
+          "likes": 6598,
           "comments": 108,
-          "reach": 246059,
-          "saves": 196,
-          "shares": 886,
-          "interactions": 7727
+          "reach": 247526,
+          "saves": 198,
+          "shares": 895,
+          "interactions": 7799
         },
         {
           "date": "2026-06-21",
@@ -112622,12 +112707,12 @@
           "type": "VIDEO",
           "caption": "Viral claims are easy, but only the results matter. Watch till the end to see whether the viral car ",
           "url": "https://www.instagram.com/reel/DaNwxzEyO5h/",
-          "likes": 592,
-          "comments": 43,
-          "reach": 36262,
+          "likes": 596,
+          "comments": 44,
+          "reach": 36521,
           "saves": 37,
           "shares": 53,
-          "interactions": 725
+          "interactions": 730
         },
         {
           "date": "2026-06-02",
@@ -112648,7 +112733,7 @@
           "url": "https://www.instagram.com/reel/DZaJPSGy_os/",
           "likes": 578,
           "comments": 101,
-          "reach": 32955,
+          "reach": 32976,
           "saves": 41,
           "shares": 47,
           "interactions": 767
@@ -112670,24 +112755,24 @@
           "type": "VIDEO",
           "caption": "Not every missing feature is actually missing \ud83d\udc40\ud83d\ude98  #carfeatures #wiper #carfacts #carradio #carsofind",
           "url": "https://www.instagram.com/reel/DZ46WXOyPNH/",
-          "likes": 602,
+          "likes": 604,
           "comments": 61,
-          "reach": 30930,
+          "reach": 31109,
           "saves": 37,
           "shares": 28,
-          "interactions": 728
+          "interactions": 730
         },
         {
           "date": "2026-06-29",
           "type": "VIDEO",
           "caption": "Your car does a lot more than what meets the eye \ud83d\ude98  #carparts #automotivedaily #carfacts #carsofindi",
           "url": "https://www.instagram.com/reel/DaK-TNEy1WG/",
-          "likes": 888,
+          "likes": 899,
           "comments": 43,
-          "reach": 27654,
-          "saves": 83,
-          "shares": 179,
-          "interactions": 1193
+          "reach": 27994,
+          "saves": 84,
+          "shares": 180,
+          "interactions": 1206
         },
         {
           "date": "2026-05-30",
@@ -112708,7 +112793,7 @@
           "url": "https://www.instagram.com/reel/DZP6YW2Srf_/",
           "likes": 308,
           "comments": 39,
-          "reach": 26040,
+          "reach": 26054,
           "saves": 38,
           "shares": 33,
           "interactions": 418
@@ -112720,7 +112805,7 @@
           "url": "https://www.instagram.com/reel/DZXlPU3SWAu/",
           "likes": 241,
           "comments": 48,
-          "reach": 25984,
+          "reach": 25998,
           "saves": 32,
           "shares": 17,
           "interactions": 338
@@ -112730,12 +112815,12 @@
           "type": "VIDEO",
           "caption": "We all use hazard lights. Very few know when to use them \u26a0\ufe0f  #carlights #carnews #carfacts #carsofin",
           "url": "https://www.instagram.com/reel/DZ-M-JLy1GI/",
-          "likes": 307,
+          "likes": 308,
           "comments": 68,
-          "reach": 25828,
+          "reach": 25970,
           "saves": 22,
           "shares": 21,
-          "interactions": 418
+          "interactions": 419
         },
         {
           "date": "2026-06-19",
@@ -112754,12 +112839,12 @@
           "type": "VIDEO",
           "caption": "Agree or disagree? The comments section is all yours. \ud83d\udc40\ud83d\ude97  #carfacts #carfeatures #carnews #carmemes ",
           "url": "https://www.instagram.com/reel/DZ7lbG7yD1x/",
-          "likes": 371,
+          "likes": 372,
           "comments": 34,
-          "reach": 25508,
+          "reach": 25547,
           "saves": 35,
           "shares": 31,
-          "interactions": 471
+          "interactions": 472
         },
         {
           "date": "2026-06-05",
@@ -112780,7 +112865,7 @@
           "url": "https://www.instagram.com/reel/DZugQAmyex8/",
           "likes": 249,
           "comments": 37,
-          "reach": 23141,
+          "reach": 23185,
           "saves": 25,
           "shares": 24,
           "interactions": 335
@@ -113200,14 +113285,14 @@
     "teambhp": {
       "handle": "@teambhp",
       "snapshot": {
-        "followers": 109054,
+        "followers": 109052,
         "media": 5493
       },
       "monthly": [
         {
           "month": "2024-08",
           "label": "Aug'24",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -113226,7 +113311,7 @@
         {
           "month": "2024-09",
           "label": "Sep'24",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -113245,7 +113330,7 @@
         {
           "month": "2024-10",
           "label": "Oct'24",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -113264,7 +113349,7 @@
         {
           "month": "2024-11",
           "label": "Nov'24",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -113283,7 +113368,7 @@
         {
           "month": "2024-12",
           "label": "Dec'24",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -113302,7 +113387,7 @@
         {
           "month": "2025-01",
           "label": "Jan'25",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -113321,7 +113406,7 @@
         {
           "month": "2025-02",
           "label": "Feb'25",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -113340,7 +113425,7 @@
         {
           "month": "2025-03",
           "label": "Mar'25",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -113359,7 +113444,7 @@
         {
           "month": "2025-04",
           "label": "Apr'25",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -113378,7 +113463,7 @@
         {
           "month": "2025-05",
           "label": "May'25",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -113397,7 +113482,7 @@
         {
           "month": "2025-06",
           "label": "Jun'25",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -113416,7 +113501,7 @@
         {
           "month": "2025-07",
           "label": "Jul'25",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 1777,
           "followers_lost": 1524,
           "net_followers": 253,
@@ -113435,26 +113520,26 @@
         {
           "month": "2025-08",
           "label": "Aug'25",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 1957,
           "followers_lost": 1452,
           "net_followers": 505,
-          "views": 778586,
+          "views": 822064,
           "reach": 298109,
           "profile_views": 6841,
           "accounts_engaged": 0,
-          "total_interactions": 17826,
+          "total_interactions": 17827,
           "likes": 10815,
           "comments": 136,
           "shares": 3175,
           "saves": 499,
           "content_posted": 18,
-          "engagement_rate": 1.88
+          "engagement_rate": 1.78
         },
         {
           "month": "2025-09",
           "label": "Sep'25",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 2267,
           "followers_lost": 1480,
           "net_followers": 787,
@@ -113473,7 +113558,7 @@
         {
           "month": "2025-10",
           "label": "Oct'25",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 2417,
           "followers_lost": 1504,
           "net_followers": 913,
@@ -113492,7 +113577,7 @@
         {
           "month": "2025-11",
           "label": "Nov'25",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 3952,
           "followers_lost": 1473,
           "net_followers": 2479,
@@ -113511,7 +113596,7 @@
         {
           "month": "2025-12",
           "label": "Dec'25",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 2984,
           "followers_lost": 1537,
           "net_followers": 1447,
@@ -113530,7 +113615,7 @@
         {
           "month": "2026-01",
           "label": "Jan'26",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 2306,
           "followers_lost": 1614,
           "net_followers": 692,
@@ -113549,7 +113634,7 @@
         {
           "month": "2026-02",
           "label": "Feb'26",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 2192,
           "followers_lost": 1563,
           "net_followers": 629,
@@ -113568,7 +113653,7 @@
         {
           "month": "2026-03",
           "label": "Mar'26",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 1969,
           "followers_lost": 1565,
           "net_followers": 404,
@@ -113587,7 +113672,7 @@
         {
           "month": "2026-04",
           "label": "Apr'26",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 1641,
           "followers_lost": 1558,
           "net_followers": 83,
@@ -113606,7 +113691,7 @@
         {
           "month": "2026-05",
           "label": "May'26",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 1727,
           "followers_lost": 1833,
           "net_followers": -106,
@@ -113644,21 +113729,21 @@
         {
           "month": "2026-07",
           "label": "Jul'26",
-          "followers": 109054,
+          "followers": 109052,
           "followers_gained": 170,
           "followers_lost": 146,
           "net_followers": 24,
-          "views": 3055,
-          "reach": 12564,
-          "profile_views": 279,
-          "accounts_engaged": 134,
-          "total_interactions": 148,
-          "likes": 116,
+          "views": 3171,
+          "reach": 13242,
+          "profile_views": 298,
+          "accounts_engaged": 143,
+          "total_interactions": 159,
+          "likes": 123,
           "comments": 4,
-          "shares": 14,
+          "shares": 16,
           "saves": 2,
           "content_posted": 0,
-          "engagement_rate": 4.45
+          "engagement_rate": 4.57
         }
       ],
       "posts": [
@@ -114317,14 +114402,14 @@
     "cars24_au": {
       "handle": "@cars24australia",
       "snapshot": {
-        "followers": 12467,
+        "followers": 12470,
         "media": 986
       },
       "monthly": [
         {
           "month": "2024-08",
           "label": "Aug'24",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -114343,7 +114428,7 @@
         {
           "month": "2024-09",
           "label": "Sep'24",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -114362,7 +114447,7 @@
         {
           "month": "2024-10",
           "label": "Oct'24",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -114381,7 +114466,7 @@
         {
           "month": "2024-11",
           "label": "Nov'24",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -114400,7 +114485,7 @@
         {
           "month": "2024-12",
           "label": "Dec'24",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -114419,7 +114504,7 @@
         {
           "month": "2025-01",
           "label": "Jan'25",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -114438,7 +114523,7 @@
         {
           "month": "2025-02",
           "label": "Feb'25",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -114457,7 +114542,7 @@
         {
           "month": "2025-03",
           "label": "Mar'25",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -114476,7 +114561,7 @@
         {
           "month": "2025-04",
           "label": "Apr'25",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -114495,7 +114580,7 @@
         {
           "month": "2025-05",
           "label": "May'25",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -114514,7 +114599,7 @@
         {
           "month": "2025-06",
           "label": "Jun'25",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -114533,7 +114618,7 @@
         {
           "month": "2025-07",
           "label": "Jul'25",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 267,
           "followers_lost": 94,
           "net_followers": 173,
@@ -114552,7 +114637,7 @@
         {
           "month": "2025-08",
           "label": "Aug'25",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 313,
           "followers_lost": 124,
           "net_followers": 189,
@@ -114571,7 +114656,7 @@
         {
           "month": "2025-09",
           "label": "Sep'25",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 184,
           "followers_lost": 119,
           "net_followers": 65,
@@ -114590,7 +114675,7 @@
         {
           "month": "2025-10",
           "label": "Oct'25",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 212,
           "followers_lost": 102,
           "net_followers": 110,
@@ -114609,7 +114694,7 @@
         {
           "month": "2025-11",
           "label": "Nov'25",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 231,
           "followers_lost": 117,
           "net_followers": 114,
@@ -114628,7 +114713,7 @@
         {
           "month": "2025-12",
           "label": "Dec'25",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 296,
           "followers_lost": 110,
           "net_followers": 186,
@@ -114647,7 +114732,7 @@
         {
           "month": "2026-01",
           "label": "Jan'26",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 317,
           "followers_lost": 128,
           "net_followers": 189,
@@ -114666,7 +114751,7 @@
         {
           "month": "2026-02",
           "label": "Feb'26",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 331,
           "followers_lost": 127,
           "net_followers": 204,
@@ -114685,7 +114770,7 @@
         {
           "month": "2026-03",
           "label": "Mar'26",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 465,
           "followers_lost": 144,
           "net_followers": 321,
@@ -114704,7 +114789,7 @@
         {
           "month": "2026-04",
           "label": "Apr'26",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 560,
           "followers_lost": 119,
           "net_followers": 441,
@@ -114723,7 +114808,7 @@
         {
           "month": "2026-05",
           "label": "May'26",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 462,
           "followers_lost": 183,
           "net_followers": 279,
@@ -114761,19 +114846,19 @@
         {
           "month": "2026-07",
           "label": "Jul'26",
-          "followers": 12467,
+          "followers": 12470,
           "followers_gained": 55,
           "followers_lost": 21,
           "net_followers": 34,
-          "views": 363891,
-          "reach": 167858,
-          "profile_views": 1337,
-          "accounts_engaged": 572,
-          "total_interactions": 762,
-          "likes": 477,
+          "views": 388623,
+          "reach": 175803,
+          "profile_views": 1408,
+          "accounts_engaged": 592,
+          "total_interactions": 807,
+          "likes": 495,
           "comments": 14,
-          "shares": 107,
-          "saves": 54,
+          "shares": 120,
+          "saves": 55,
           "content_posted": 1,
           "engagement_rate": 0.18
         }
@@ -114786,7 +114871,7 @@
           "url": "https://www.instagram.com/reel/DaAaTNVgs9B/",
           "likes": 95,
           "comments": 1,
-          "reach": 2696,
+          "reach": 2707,
           "saves": 7,
           "shares": 25,
           "interactions": 128
@@ -114798,7 +114883,7 @@
           "url": "https://www.instagram.com/reel/DaNSNQ0El_7/",
           "likes": 14,
           "comments": 0,
-          "reach": 2630,
+          "reach": 2641,
           "saves": 4,
           "shares": 20,
           "interactions": 38
@@ -114810,7 +114895,7 @@
           "url": "https://www.instagram.com/reel/DZR9Dq8EmUW/",
           "likes": 41,
           "comments": 1,
-          "reach": 2138,
+          "reach": 2141,
           "saves": 2,
           "shares": 1,
           "interactions": 45
@@ -114834,10 +114919,10 @@
           "url": "https://www.instagram.com/reel/DZhnk2uDZq_/",
           "likes": 17,
           "comments": 1,
-          "reach": 955,
+          "reach": 956,
           "saves": 0,
-          "shares": 12,
-          "interactions": 30
+          "shares": 14,
+          "interactions": 32
         },
         {
           "date": "2026-06-05",
@@ -114846,7 +114931,7 @@
           "url": "https://www.instagram.com/reel/DZMRJGKDaDk/",
           "likes": 14,
           "comments": 2,
-          "reach": 950,
+          "reach": 951,
           "saves": 0,
           "shares": 2,
           "interactions": 18
@@ -114858,7 +114943,7 @@
           "url": "https://www.instagram.com/reel/DaIB1ZfgEY6/",
           "likes": 14,
           "comments": 4,
-          "reach": 872,
+          "reach": 879,
           "saves": 0,
           "shares": 1,
           "interactions": 19
@@ -114870,7 +114955,7 @@
           "url": "https://www.instagram.com/reel/DZw9eN_lJ40/",
           "likes": 14,
           "comments": 1,
-          "reach": 857,
+          "reach": 863,
           "saves": 3,
           "shares": 5,
           "interactions": 23
@@ -114882,7 +114967,7 @@
           "url": "https://www.instagram.com/reel/DZrmI-uFTMy/",
           "likes": 13,
           "comments": 1,
-          "reach": 837,
+          "reach": 840,
           "saves": 0,
           "shares": 1,
           "interactions": 15
@@ -114894,22 +114979,10 @@
           "url": "https://www.instagram.com/reel/DZ9nvRAgf3o/",
           "likes": 9,
           "comments": 0,
-          "reach": 721,
+          "reach": 730,
           "saves": 0,
           "shares": 8,
           "interactions": 17
-        },
-        {
-          "date": "2026-06-16",
-          "type": "VIDEO",
-          "caption": "Our Electric Future Has Arrived! | Cars24 News  Nearly half of all new vehicles sold during the mont",
-          "url": "https://www.instagram.com/reel/DZozuW4DbGQ/",
-          "likes": 22,
-          "comments": 0,
-          "reach": 716,
-          "saves": 0,
-          "shares": 0,
-          "interactions": 22
         },
         {
           "date": "2026-07-02",
@@ -114918,10 +114991,22 @@
           "url": "https://www.instagram.com/reel/DaSRfRNlRm5/",
           "likes": 26,
           "comments": 1,
-          "reach": 714,
+          "reach": 721,
           "saves": 3,
           "shares": 2,
           "interactions": 32
+        },
+        {
+          "date": "2026-06-16",
+          "type": "VIDEO",
+          "caption": "Our Electric Future Has Arrived! | Cars24 News  Nearly half of all new vehicles sold during the mont",
+          "url": "https://www.instagram.com/reel/DZozuW4DbGQ/",
+          "likes": 22,
+          "comments": 0,
+          "reach": 717,
+          "saves": 0,
+          "shares": 0,
+          "interactions": 22
         },
         {
           "date": "2026-06-15",
@@ -114930,7 +115015,7 @@
           "url": "https://www.instagram.com/reel/DZmVs7fjW7D/",
           "likes": 18,
           "comments": 1,
-          "reach": 714,
+          "reach": 716,
           "saves": 2,
           "shares": 12,
           "interactions": 33
@@ -115434,14 +115519,14 @@
     "cars24_uae": {
       "handle": "@cars24uae",
       "snapshot": {
-        "followers": 47754,
+        "followers": 47759,
         "media": 892
       },
       "monthly": [
         {
           "month": "2024-08",
           "label": "Aug'24",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -115460,7 +115545,7 @@
         {
           "month": "2024-09",
           "label": "Sep'24",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -115479,7 +115564,7 @@
         {
           "month": "2024-10",
           "label": "Oct'24",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -115498,7 +115583,7 @@
         {
           "month": "2024-11",
           "label": "Nov'24",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -115517,7 +115602,7 @@
         {
           "month": "2024-12",
           "label": "Dec'24",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -115536,7 +115621,7 @@
         {
           "month": "2025-01",
           "label": "Jan'25",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -115555,7 +115640,7 @@
         {
           "month": "2025-02",
           "label": "Feb'25",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -115574,7 +115659,7 @@
         {
           "month": "2025-03",
           "label": "Mar'25",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -115593,7 +115678,7 @@
         {
           "month": "2025-04",
           "label": "Apr'25",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -115612,7 +115697,7 @@
         {
           "month": "2025-05",
           "label": "May'25",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -115631,7 +115716,7 @@
         {
           "month": "2025-06",
           "label": "Jun'25",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 0,
           "followers_lost": 0,
           "net_followers": 0,
@@ -115650,7 +115735,7 @@
         {
           "month": "2025-07",
           "label": "Jul'25",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 919,
           "followers_lost": 357,
           "net_followers": 562,
@@ -115669,7 +115754,7 @@
         {
           "month": "2025-08",
           "label": "Aug'25",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 885,
           "followers_lost": 399,
           "net_followers": 486,
@@ -115677,18 +115762,18 @@
           "reach": 464923,
           "profile_views": 7723,
           "accounts_engaged": 0,
-          "total_interactions": 744,
-          "likes": 404,
+          "total_interactions": 716,
+          "likes": 330,
           "comments": 15,
-          "shares": 113,
-          "saves": 96,
+          "shares": 129,
+          "saves": 111,
           "content_posted": 18,
-          "engagement_rate": 0.14
+          "engagement_rate": 0.13
         },
         {
           "month": "2025-09",
           "label": "Sep'25",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 494,
           "followers_lost": 325,
           "net_followers": 169,
@@ -115707,7 +115792,7 @@
         {
           "month": "2025-10",
           "label": "Oct'25",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 824,
           "followers_lost": 351,
           "net_followers": 473,
@@ -115726,7 +115811,7 @@
         {
           "month": "2025-11",
           "label": "Nov'25",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 661,
           "followers_lost": 360,
           "net_followers": 301,
@@ -115745,7 +115830,7 @@
         {
           "month": "2025-12",
           "label": "Dec'25",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 891,
           "followers_lost": 389,
           "net_followers": 502,
@@ -115764,7 +115849,7 @@
         {
           "month": "2026-01",
           "label": "Jan'26",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 1232,
           "followers_lost": 437,
           "net_followers": 795,
@@ -115783,7 +115868,7 @@
         {
           "month": "2026-02",
           "label": "Feb'26",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 1213,
           "followers_lost": 383,
           "net_followers": 830,
@@ -115802,7 +115887,7 @@
         {
           "month": "2026-03",
           "label": "Mar'26",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 1596,
           "followers_lost": 483,
           "net_followers": 1113,
@@ -115821,7 +115906,7 @@
         {
           "month": "2026-04",
           "label": "Apr'26",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 1377,
           "followers_lost": 430,
           "net_followers": 947,
@@ -115840,7 +115925,7 @@
         {
           "month": "2026-05",
           "label": "May'26",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 1181,
           "followers_lost": 613,
           "net_followers": 568,
@@ -115878,19 +115963,19 @@
         {
           "month": "2026-07",
           "label": "Jul'26",
-          "followers": 47754,
+          "followers": 47759,
           "followers_gained": 151,
           "followers_lost": 58,
           "net_followers": 93,
-          "views": 371728,
-          "reach": 129149,
-          "profile_views": 1434,
-          "accounts_engaged": 403,
-          "total_interactions": 664,
-          "likes": 401,
+          "views": 389727,
+          "reach": 133483,
+          "profile_views": 1488,
+          "accounts_engaged": 411,
+          "total_interactions": 675,
+          "likes": 403,
           "comments": 17,
-          "shares": 91,
-          "saves": 56,
+          "shares": 94,
+          "saves": 59,
           "content_posted": 4,
           "engagement_rate": 0.15
         }
@@ -115939,7 +116024,7 @@
           "url": "https://www.instagram.com/reel/DSZt6RKEwDA/",
           "likes": 30,
           "comments": 2,
-          "reach": 5814,
+          "reach": 5816,
           "saves": 9,
           "shares": 6,
           "interactions": 47
@@ -115987,7 +116072,7 @@
           "url": "https://www.instagram.com/p/DXO3XnlE2tq/",
           "likes": 51,
           "comments": 9,
-          "reach": 4090,
+          "reach": 4097,
           "saves": 18,
           "shares": 0,
           "interactions": 78
@@ -116035,7 +116120,7 @@
           "url": "https://www.instagram.com/reel/DaTCk3foszy/",
           "likes": 49,
           "comments": 5,
-          "reach": 3140,
+          "reach": 3168,
           "saves": 3,
           "shares": 13,
           "interactions": 70
@@ -116071,7 +116156,7 @@
           "url": "https://www.instagram.com/p/DWDqq7JE8GI/",
           "likes": 10,
           "comments": 1,
-          "reach": 2454,
+          "reach": 2457,
           "saves": 10,
           "shares": 0,
           "interactions": 21
@@ -116083,7 +116168,7 @@
           "url": "https://www.instagram.com/p/DWqyEj7E1Rc/",
           "likes": 11,
           "comments": 2,
-          "reach": 2141,
+          "reach": 2144,
           "saves": 11,
           "shares": 0,
           "interactions": 24
@@ -116095,7 +116180,7 @@
           "url": "https://www.instagram.com/p/DW83s6QkxIG/",
           "likes": 10,
           "comments": 0,
-          "reach": 1959,
+          "reach": 1964,
           "saves": 10,
           "shares": 0,
           "interactions": 20
@@ -116107,7 +116192,7 @@
           "url": "https://www.instagram.com/reel/DaRyrtvOKoT/",
           "likes": 39,
           "comments": 0,
-          "reach": 1499,
+          "reach": 1507,
           "saves": 3,
           "shares": 2,
           "interactions": 44
@@ -116119,7 +116204,7 @@
           "url": "https://www.instagram.com/p/DY1xbvOTPUK/",
           "likes": 7,
           "comments": 1,
-          "reach": 1307,
+          "reach": 1314,
           "saves": 5,
           "shares": 0,
           "interactions": 13

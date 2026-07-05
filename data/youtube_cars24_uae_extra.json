@@ -2,23 +2,23 @@
   "geo": [
     {
       "city": "Dubai",
-      "views": 6549051,
-      "watch_time_hours": 27848.5
+      "views": 6566705,
+      "watch_time_hours": 27860.3
     },
     {
       "city": "Abu Dhabi",
-      "views": 1342139,
-      "watch_time_hours": 6140.6
+      "views": 1342628,
+      "watch_time_hours": 6140.9
     },
     {
       "city": "Sharjah",
-      "views": 521316,
-      "watch_time_hours": 2347.7
+      "views": 522322,
+      "watch_time_hours": 2348.4
     },
     {
       "city": "Al Ain",
-      "views": 216530,
-      "watch_time_hours": 974.8
+      "views": 216581,
+      "watch_time_hours": 974.9
     },
     {
       "city": "Bengaluru",
@@ -52,8 +52,8 @@
     },
     {
       "city": "Ajman",
-      "views": 24005,
-      "watch_time_hours": 111.9
+      "views": 24042,
+      "watch_time_hours": 112.0
     },
     {
       "city": "Ahmedabad",
@@ -3150,27 +3150,27 @@
     "2026-02": [
       {
         "city": "Dubai",
-        "views": 186786,
-        "watch_time_hours": 601.9
+        "views": 204440,
+        "watch_time_hours": 613.7
       },
       {
         "city": "Abu Dhabi",
-        "views": 16497,
-        "watch_time_hours": 52.9
+        "views": 16986,
+        "watch_time_hours": 53.2
       },
       {
         "city": "Sharjah",
-        "views": 10682,
-        "watch_time_hours": 35.5
+        "views": 11688,
+        "watch_time_hours": 36.1
       },
       {
         "city": "Al Ain",
-        "views": 3916,
-        "watch_time_hours": 11.8
+        "views": 3967,
+        "watch_time_hours": 11.9
       },
       {
         "city": "Ajman",
-        "views": 548,
+        "views": 585,
         "watch_time_hours": 1.8
       },
       {
@@ -5726,6 +5726,92 @@
       }
     ]
   },
+  "traffic_sources": [
+    {
+      "source": "ADVERTISING",
+      "views": 192044246,
+      "watch_time_hours": 666926.7,
+      "pct": 98.9
+    },
+    {
+      "source": "SHORTS",
+      "views": 1091413,
+      "watch_time_hours": 5516.6,
+      "pct": 0.6
+    },
+    {
+      "source": "YT_SEARCH",
+      "views": 830201,
+      "watch_time_hours": 4457.1,
+      "pct": 0.4
+    },
+    {
+      "source": "EXT_URL",
+      "views": 134283,
+      "watch_time_hours": 727.4,
+      "pct": 0.1
+    },
+    {
+      "source": "YT_CHANNEL",
+      "views": 39296,
+      "watch_time_hours": 719.3,
+      "pct": 0.0
+    },
+    {
+      "source": "YT_OTHER_PAGE",
+      "views": 19545,
+      "watch_time_hours": 102.8,
+      "pct": 0.0
+    },
+    {
+      "source": "PLAYLIST",
+      "views": 19088,
+      "watch_time_hours": 189.7,
+      "pct": 0.0
+    },
+    {
+      "source": "SUBSCRIBER",
+      "views": 14614,
+      "watch_time_hours": 111.5,
+      "pct": 0.0
+    },
+    {
+      "source": "NO_LINK_OTHER",
+      "views": 6690,
+      "watch_time_hours": 47.0,
+      "pct": 0.0
+    },
+    {
+      "source": "RELATED_VIDEO",
+      "views": 4941,
+      "watch_time_hours": 165.8,
+      "pct": 0.0
+    },
+    {
+      "source": "HASHTAGS",
+      "views": 2377,
+      "watch_time_hours": 12.2,
+      "pct": 0.0
+    },
+    {
+      "source": "NOTIFICATION",
+      "views": 323,
+      "watch_time_hours": 2.1,
+      "pct": 0.0
+    },
+    {
+      "source": "SOUND_PAGE",
+      "views": 186,
+      "watch_time_hours": 0.6,
+      "pct": 0.0
+    },
+    {
+      "source": "IMMERSIVE_LIVE",
+      "views": 10,
+      "watch_time_hours": 0.1,
+      "pct": 0.0
+    }
+  ],
   "traffic_sources_monthly": {
     "2024-01": [
       {
@@ -8124,32 +8210,32 @@
     "2026-07": [
       {
         "source": "ADVERTISING",
-        "views": 1206519,
-        "watch_time_hours": 3336.7,
+        "views": 1205504,
+        "watch_time_hours": 3333.7,
         "pct": 99.7
       },
       {
         "source": "YT_SEARCH",
-        "views": 2097,
+        "views": 2103,
         "watch_time_hours": 11.5,
         "pct": 0.2
       },
       {
         "source": "SHORTS",
-        "views": 1417,
-        "watch_time_hours": 6.4,
+        "views": 1408,
+        "watch_time_hours": 6.300000000000001,
         "pct": 0.1
       },
       {
         "source": "RELATED_VIDEO",
-        "views": 197,
-        "watch_time_hours": 11.299999999999999,
+        "views": 199,
+        "watch_time_hours": 11.399999999999999,
         "pct": 0.0
       },
       {
         "source": "EXT_URL",
-        "views": 158,
-        "watch_time_hours": 0.7,
+        "views": 159,
+        "watch_time_hours": 0.8,
         "pct": 0.0
       },
       {
@@ -8165,15 +8251,15 @@
         "pct": 0.0
       },
       {
-        "source": "NO_LINK_OTHER",
-        "views": 24,
-        "watch_time_hours": 0.30000000000000004,
-        "pct": 0.0
-      },
-      {
         "source": "YT_OTHER_PAGE",
         "views": 15,
         "watch_time_hours": 0.1,
+        "pct": 0.0
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 11,
+        "watch_time_hours": 0.2,
         "pct": 0.0
       },
       {
@@ -8187,26 +8273,26 @@
   "devices": [
     {
       "device": "MOBILE",
-      "views": 156560563,
-      "watch_time_hours": 544813.7,
+      "views": 156559955,
+      "watch_time_hours": 544812.5,
       "pct": 81.4
     },
     {
       "device": "TABLET",
-      "views": 23806453,
-      "watch_time_hours": 52179.7,
+      "views": 23806201,
+      "watch_time_hours": 52179.1,
       "pct": 12.4
     },
     {
       "device": "TV",
-      "views": 11509110,
-      "watch_time_hours": 73358.9,
+      "views": 11508955,
+      "watch_time_hours": 73357.8,
       "pct": 6.0
     },
     {
       "device": "DESKTOP",
-      "views": 544281,
-      "watch_time_hours": 3060.7,
+      "views": 544275,
+      "watch_time_hours": 3060.6,
       "pct": 0.3
     }
   ],
@@ -8994,26 +9080,26 @@
     "2026-07": [
       {
         "device": "MOBILE",
-        "views": 859021,
-        "watch_time_hours": 2268.5,
+        "views": 858413,
+        "watch_time_hours": 2267.3,
         "pct": 76.2
       },
       {
         "device": "TABLET",
-        "views": 187686,
-        "watch_time_hours": 429.7,
-        "pct": 16.7
+        "views": 187434,
+        "watch_time_hours": 429.0,
+        "pct": 16.6
       },
       {
         "device": "TV",
-        "views": 78077,
-        "watch_time_hours": 445.3,
+        "views": 77922,
+        "watch_time_hours": 444.2,
         "pct": 6.9
       },
       {
         "device": "DESKTOP",
-        "views": 2423,
-        "watch_time_hours": 9.9,
+        "views": 2417,
+        "watch_time_hours": 9.8,
         "pct": 0.2
       }
     ]
@@ -9024,7 +9110,7 @@
       "title": "Don't start the new year with same old car| Buy a luxury pre-owned car with Cars24",
       "published": "2026-01-05",
       "url": "https://www.youtube.com/watch?v=GEmNAm2aEI0",
-      "thumbnail": "https://i9.ytimg.com/vi/GEmNAm2aEI0/default.jpg?sqp=CLDcp9IG&rs=AOn4CLACM_c52hoBkhB0i9p-g6Wc1_Jpew",
+      "thumbnail": "https://i9.ytimg.com/vi/GEmNAm2aEI0/default.jpg?sqp=COzFqNIG&rs=AOn4CLBmj_h4kK0YGZiArW2MTZqiRjyCVw",
       "views": 17694760,
       "watch_time_hours": 17789.35,
       "avg_duration_sec": 20.0,
@@ -9040,7 +9126,7 @@
       "title": "WIDE RANGE OF HIGH QUALITY USED CARS WITH CARS24",
       "published": "2023-07-13",
       "url": "https://www.youtube.com/watch?v=1oWTma88fOc",
-      "thumbnail": "https://i9.ytimg.com/vi/1oWTma88fOc/default.jpg?sqp=CLDcp9IG&rs=AOn4CLA2fQcxeMWb6_3IA7JCBIHuhQMEPA",
+      "thumbnail": "https://i9.ytimg.com/vi/1oWTma88fOc/default.jpg?sqp=COzFqNIG&rs=AOn4CLDxkOJBDWw_6pV5dgi2NPWqoWDGFg",
       "views": 11336475,
       "watch_time_hours": 79037.57,
       "avg_duration_sec": 25.0,
@@ -9057,8 +9143,8 @@
       "published": "2026-01-05",
       "url": "https://www.youtube.com/watch?v=dfPgKsX0bcM",
       "thumbnail": "https://i.ytimg.com/vi/dfPgKsX0bcM/default.jpg",
-      "views": 10260292,
-      "watch_time_hours": 8025.7,
+      "views": 10260215,
+      "watch_time_hours": 8025.65,
       "avg_duration_sec": 20.0,
       "avg_view_pct": 99.3,
       "subs_gained": 1,
@@ -9073,8 +9159,8 @@
       "published": "2025-10-17",
       "url": "https://www.youtube.com/watch?v=TJMGoWgf_eA",
       "thumbnail": "https://i.ytimg.com/vi/TJMGoWgf_eA/default.jpg",
-      "views": 8434100,
-      "watch_time_hours": 32633.67,
+      "views": 8434051,
+      "watch_time_hours": 32633.45,
       "avg_duration_sec": 41.0,
       "avg_view_pct": 87.3,
       "subs_gained": 0,
@@ -9089,8 +9175,8 @@
       "published": "2025-07-29",
       "url": "https://www.youtube.com/watch?v=1xAWb-5F1I8",
       "thumbnail": "https://i.ytimg.com/vi/1xAWb-5F1I8/default.jpg",
-      "views": 7295411,
-      "watch_time_hours": 24759.02,
+      "views": 7295264,
+      "watch_time_hours": 24758.53,
       "avg_duration_sec": 19.0,
       "avg_view_pct": 70.1,
       "subs_gained": 3,
@@ -9105,8 +9191,8 @@
       "published": "2026-02-19",
       "url": "https://www.youtube.com/watch?v=khheCxPAhTw",
       "thumbnail": "https://i.ytimg.com/vi/khheCxPAhTw/default.jpg",
-      "views": 6703555,
-      "watch_time_hours": 18083.25,
+      "views": 6703483,
+      "watch_time_hours": 18083.13,
       "avg_duration_sec": 21.0,
       "avg_view_pct": 81.8,
       "subs_gained": 0,
@@ -9121,8 +9207,8 @@
       "published": "2025-07-29",
       "url": "https://www.youtube.com/watch?v=8ZvKIsVmVWw",
       "thumbnail": "https://i.ytimg.com/vi/8ZvKIsVmVWw/default.jpg",
-      "views": 6301011,
-      "watch_time_hours": 14039.75,
+      "views": 6300948,
+      "watch_time_hours": 14039.6,
       "avg_duration_sec": 17.0,
       "avg_view_pct": 63.9,
       "subs_gained": 0,
@@ -9137,8 +9223,8 @@
       "published": "2025-07-29",
       "url": "https://www.youtube.com/watch?v=dN_e6g7y8qY",
       "thumbnail": "https://i.ytimg.com/vi/dN_e6g7y8qY/default.jpg",
-      "views": 5316825,
-      "watch_time_hours": 17834.22,
+      "views": 5316781,
+      "watch_time_hours": 17834.12,
       "avg_duration_sec": 18.0,
       "avg_view_pct": 67.8,
       "subs_gained": 1,
@@ -9152,7 +9238,7 @@
       "title": "2024 Chevy Tahoe \u2013 Bold & Spacious | Download CARS24 App and Check It Out Now",
       "published": "2025-06-26",
       "url": "https://www.youtube.com/watch?v=oRjspDWvTOo",
-      "thumbnail": "https://i9.ytimg.com/vi/oRjspDWvTOo/default.jpg?sqp=CLDcp9IG&rs=AOn4CLC_XN0ZMzIP7MRpD71KraiJNYyGgQ",
+      "thumbnail": "https://i9.ytimg.com/vi/oRjspDWvTOo/default.jpg?sqp=COzFqNIG&rs=AOn4CLAw3oHYglSP3gcN-FbsPeAkWeyqJw",
       "views": 4831542,
       "watch_time_hours": 10427.1,
       "avg_duration_sec": 41.0,
@@ -9168,7 +9254,7 @@
       "title": "FREE TEST DRIVE LUXURY CARS IN UAE AT CARS24 MRL HUB",
       "published": "2023-06-23",
       "url": "https://www.youtube.com/watch?v=wKy4xKbc7jU",
-      "thumbnail": "https://i9.ytimg.com/vi/wKy4xKbc7jU/default.jpg?sqp=CLDcp9IG&rs=AOn4CLBYqanp6iLqddXbt8TiKeIqd9pNyw",
+      "thumbnail": "https://i9.ytimg.com/vi/wKy4xKbc7jU/default.jpg?sqp=COzFqNIG&rs=AOn4CLCRTUkJlp7K4vcugnLNUT7ToCGUDQ",
       "views": 4426149,
       "watch_time_hours": 12772.92,
       "avg_duration_sec": 14.0,
@@ -9185,8 +9271,8 @@
       "published": "2026-02-02",
       "url": "https://www.youtube.com/watch?v=T86cq0Kj2EQ",
       "thumbnail": "https://i.ytimg.com/vi/T86cq0Kj2EQ/default.jpg",
-      "views": 4386469,
-      "watch_time_hours": 17471.1,
+      "views": 4386431,
+      "watch_time_hours": 17470.92,
       "avg_duration_sec": 20.0,
       "avg_view_pct": 93.7,
       "subs_gained": 1,
@@ -9201,8 +9287,8 @@
       "published": "2025-10-16",
       "url": "https://www.youtube.com/watch?v=o7ScsEH_9EA",
       "thumbnail": "https://i.ytimg.com/vi/o7ScsEH_9EA/default.jpg",
-      "views": 4017011,
-      "watch_time_hours": 4966.43,
+      "views": 4016970,
+      "watch_time_hours": 4966.37,
       "avg_duration_sec": 12.0,
       "avg_view_pct": 104.0,
       "subs_gained": 0,
@@ -9217,8 +9303,8 @@
       "published": "2025-12-04",
       "url": "https://www.youtube.com/watch?v=GBn6fecdvrM",
       "thumbnail": "https://i.ytimg.com/vi/GBn6fecdvrM/default.jpg",
-      "views": 3752094,
-      "watch_time_hours": 18147.72,
+      "views": 3751969,
+      "watch_time_hours": 18146.78,
       "avg_duration_sec": 35.0,
       "avg_view_pct": 68.7,
       "subs_gained": 0,
@@ -9232,7 +9318,7 @@
       "title": "Mini Cooper JCW - Compact Icon, Big Personality | Dowload the CARS24 App Now",
       "published": "2025-06-26",
       "url": "https://www.youtube.com/watch?v=_u2ZpB9LktI",
-      "thumbnail": "https://i9.ytimg.com/vi/_u2ZpB9LktI/default.jpg?sqp=CLDcp9IG&rs=AOn4CLD1ygkvgugL1d4XKc2pGkSH9bTulA",
+      "thumbnail": "https://i9.ytimg.com/vi/_u2ZpB9LktI/default.jpg?sqp=COzFqNIG&rs=AOn4CLDgXXzfsPv6IhCXwV4_QkQsCUA3zQ",
       "views": 3411636,
       "watch_time_hours": 4475.72,
       "avg_duration_sec": 32.0,
@@ -9249,8 +9335,8 @@
       "published": "2025-12-11",
       "url": "https://www.youtube.com/watch?v=J5pa3iXTlpQ",
       "thumbnail": "https://i.ytimg.com/vi/J5pa3iXTlpQ/default.jpg",
-      "views": 2916067,
-      "watch_time_hours": 8277.55,
+      "views": 2915994,
+      "watch_time_hours": 8277.38,
       "avg_duration_sec": 18.0,
       "avg_view_pct": 89.3,
       "subs_gained": 0,
@@ -9264,7 +9350,7 @@
       "title": "TRADE IN YOUR CAR WITH CARS24",
       "published": "2024-02-09",
       "url": "https://www.youtube.com/watch?v=EmHtV8y1r8c",
-      "thumbnail": "https://i9.ytimg.com/vi/EmHtV8y1r8c/default.jpg?sqp=CLDcp9IG&rs=AOn4CLAF81XsIhxAKIA75bPk7672SQjwvw",
+      "thumbnail": "https://i9.ytimg.com/vi/EmHtV8y1r8c/default.jpg?sqp=COzFqNIG&rs=AOn4CLB2Xm2fm5gjUaTtZZgMvv2brBlXfQ",
       "views": 2880524,
       "watch_time_hours": 7576.65,
       "avg_duration_sec": 10.0,
@@ -9280,7 +9366,7 @@
       "title": "TEST DRIVE HIGH QUALITY USED CARS IN UAE",
       "published": "2023-07-26",
       "url": "https://www.youtube.com/watch?v=ED0CwGPoHKo",
-      "thumbnail": "https://i9.ytimg.com/vi/ED0CwGPoHKo/default.jpg?sqp=CLDcp9IG&rs=AOn4CLCL-lTL7QhMeUuCLNkZdhZU6EM4Hg",
+      "thumbnail": "https://i9.ytimg.com/vi/ED0CwGPoHKo/default.jpg?sqp=COzFqNIG&rs=AOn4CLATA83fQOmeEwY_5eXuT2EDz1Zhkg",
       "views": 2648695,
       "watch_time_hours": 10020.6,
       "avg_duration_sec": 13.0,
@@ -9296,7 +9382,7 @@
       "title": "BIG AUTO SALE BY CARS24 LIVE NOW!",
       "published": "2025-10-13",
       "url": "https://www.youtube.com/watch?v=SqhfWKpo0wM",
-      "thumbnail": "https://i9.ytimg.com/vi/SqhfWKpo0wM/default.jpg?sqp=CLDcp9IG&rs=AOn4CLBlXxIe4qTO-8GirovRrKpzjswliQ",
+      "thumbnail": "https://i9.ytimg.com/vi/SqhfWKpo0wM/default.jpg?sqp=COzFqNIG&rs=AOn4CLCKlkWbMDNC9xqkEd0CVkdnbE0iRw",
       "views": 2183528,
       "watch_time_hours": 5449.13,
       "avg_duration_sec": 14.0,
@@ -9313,8 +9399,8 @@
       "published": "2025-10-02",
       "url": "https://www.youtube.com/watch?v=rilTB4nI1og",
       "thumbnail": "https://i.ytimg.com/vi/rilTB4nI1og/default.jpg",
-      "views": 2153935,
-      "watch_time_hours": 3914.02,
+      "views": 2153921,
+      "watch_time_hours": 3913.98,
       "avg_duration_sec": 13.0,
       "avg_view_pct": 102.6,
       "subs_gained": 1,
@@ -9329,8 +9415,8 @@
       "published": "2025-12-04",
       "url": "https://www.youtube.com/watch?v=1I0SF47j-9U",
       "thumbnail": "https://i.ytimg.com/vi/1I0SF47j-9U/default.jpg",
-      "views": 2038764,
-      "watch_time_hours": 5982.23,
+      "views": 2038721,
+      "watch_time_hours": 5982.07,
       "avg_duration_sec": 26.0,
       "avg_view_pct": 92.6,
       "subs_gained": 0,
@@ -9344,7 +9430,7 @@
       "title": "CARS24 : # 1 App to buy quality used cars  #uae #automobile #cars #autodealsuae #dubai",
       "published": "2024-01-03",
       "url": "https://www.youtube.com/watch?v=I9SI5WPOHOw",
-      "thumbnail": "https://i9.ytimg.com/vi/I9SI5WPOHOw/default.jpg?sqp=CLDcp9IG&rs=AOn4CLClH8IHhSgW_ZSxphlr9QalCDaLZA",
+      "thumbnail": "https://i9.ytimg.com/vi/I9SI5WPOHOw/default.jpg?sqp=COzFqNIG&rs=AOn4CLBjpqWXljA3HCwSQmboufX7tDXemw",
       "views": 1954521,
       "watch_time_hours": 14662.65,
       "avg_duration_sec": 28.0,
@@ -9361,7 +9447,7 @@
       "published": "2026-02-02",
       "url": "https://www.youtube.com/watch?v=wvpFNtsRgQo",
       "thumbnail": "https://i.ytimg.com/vi/wvpFNtsRgQo/default.jpg",
-      "views": 1929743,
+      "views": 1929740,
       "watch_time_hours": 4955.32,
       "avg_duration_sec": 36.0,
       "avg_view_pct": 82.5,
@@ -9377,8 +9463,8 @@
       "published": "2026-02-02",
       "url": "https://www.youtube.com/watch?v=d9Axy-n6CWQ",
       "thumbnail": "https://i.ytimg.com/vi/d9Axy-n6CWQ/default.jpg",
-      "views": 1807065,
-      "watch_time_hours": 6683.32,
+      "views": 1807062,
+      "watch_time_hours": 6683.3,
       "avg_duration_sec": 22.0,
       "avg_view_pct": 93.2,
       "subs_gained": 0,
@@ -9392,7 +9478,7 @@
       "title": "TRADE IN YOUR CAR WITH CARS24",
       "published": "2024-02-09",
       "url": "https://www.youtube.com/watch?v=uEz15KAVg50",
-      "thumbnail": "https://i9.ytimg.com/vi/uEz15KAVg50/default.jpg?sqp=CLDcp9IG&rs=AOn4CLBBxeUaWM8k1m6nkiXx2YJKCZsw4Q",
+      "thumbnail": "https://i9.ytimg.com/vi/uEz15KAVg50/default.jpg?sqp=COzFqNIG&rs=AOn4CLCtRSGV4W5Fg4ysUV4PJqfTF4eGVA",
       "views": 1536309,
       "watch_time_hours": 4193.73,
       "avg_duration_sec": 9.0,
@@ -9409,7 +9495,7 @@
       "published": "2024-02-20",
       "url": "https://www.youtube.com/watch?v=gnz4A0pvttI",
       "thumbnail": "https://i.ytimg.com/vi/gnz4A0pvttI/default.jpg",
-      "views": 1416092,
+      "views": 1416091,
       "watch_time_hours": 2960.37,
       "avg_duration_sec": 16.0,
       "avg_view_pct": 62.8,
@@ -9441,8 +9527,8 @@
       "published": "2026-04-29",
       "url": "https://www.youtube.com/watch?v=orb1SvCTwtE",
       "thumbnail": "https://i.ytimg.com/vi/orb1SvCTwtE/default.jpg",
-      "views": 1280277,
-      "watch_time_hours": 2945.38,
+      "views": 1280234,
+      "watch_time_hours": 2945.3,
       "avg_duration_sec": 36.0,
       "avg_view_pct": 77.7,
       "subs_gained": 0,
@@ -9456,7 +9542,7 @@
       "title": "BIG AUTO SALE BY CARS24 LIVE NOW!",
       "published": "2025-10-13",
       "url": "https://www.youtube.com/watch?v=LPqC12YqinE",
-      "thumbnail": "https://i9.ytimg.com/vi/LPqC12YqinE/default.jpg?sqp=CLDcp9IG&rs=AOn4CLC61usPdJPJ3pMdkRaDmJ2qkDLQHA",
+      "thumbnail": "https://i9.ytimg.com/vi/LPqC12YqinE/default.jpg?sqp=COzFqNIG&rs=AOn4CLCMYSrr2VsEy0csnAXrlEH8sNNXtA",
       "views": 1263351,
       "watch_time_hours": 3126.05,
       "avg_duration_sec": 14.0,
@@ -9473,8 +9559,8 @@
       "published": "2026-04-29",
       "url": "https://www.youtube.com/watch?v=OdWjYzyunu8",
       "thumbnail": "https://i.ytimg.com/vi/OdWjYzyunu8/default.jpg",
-      "views": 1206809,
-      "watch_time_hours": 3010.32,
+      "views": 1206744,
+      "watch_time_hours": 3010.17,
       "avg_duration_sec": 28.0,
       "avg_view_pct": 99.8,
       "subs_gained": 1,
@@ -9504,7 +9590,7 @@
       "title": "TRADE IN YOUR CAR WITH CARS24",
       "published": "2024-02-09",
       "url": "https://www.youtube.com/watch?v=gb1nO2DVRQ4",
-      "thumbnail": "https://i9.ytimg.com/vi/gb1nO2DVRQ4/default.jpg?sqp=CLDcp9IG&rs=AOn4CLDRFEHIyon8BwG-VO90gncTfzAjCA",
+      "thumbnail": "https://i9.ytimg.com/vi/gb1nO2DVRQ4/default.jpg?sqp=COzFqNIG&rs=AOn4CLBIlS4_lF7q39nMjj_Vhxp_FTg_SQ",
       "views": 1047016,
       "watch_time_hours": 2923.4,
       "avg_duration_sec": 10.0,
@@ -9553,8 +9639,8 @@
       "published": "2026-04-20",
       "url": "https://www.youtube.com/watch?v=1txZ6IlPwmc",
       "thumbnail": "https://i.ytimg.com/vi/1txZ6IlPwmc/default.jpg",
-      "views": 990525,
-      "watch_time_hours": 2069.5,
+      "views": 990517,
+      "watch_time_hours": 2069.48,
       "avg_duration_sec": 24.0,
       "avg_view_pct": 96.3,
       "subs_gained": 0,
@@ -9633,8 +9719,8 @@
       "published": "2026-06-05",
       "url": "https://www.youtube.com/watch?v=jNjezJsDlyI",
       "thumbnail": "https://i.ytimg.com/vi/jNjezJsDlyI/default.jpg",
-      "views": 600920,
-      "watch_time_hours": 566.37,
+      "views": 600834,
+      "watch_time_hours": 566.33,
       "avg_duration_sec": 20.0,
       "avg_view_pct": 94.5,
       "subs_gained": 0,
@@ -9649,7 +9735,7 @@
       "published": "2026-02-19",
       "url": "https://www.youtube.com/watch?v=ET15IHa48d8",
       "thumbnail": "https://i.ytimg.com/vi/ET15IHa48d8/default.jpg",
-      "views": 599686,
+      "views": 599685,
       "watch_time_hours": 1213.37,
       "avg_duration_sec": 27.0,
       "avg_view_pct": 96.6,
@@ -9664,7 +9750,7 @@
       "title": "FREE TEST DRIVE LUXURY CARS IN UAE AT CARS24 MRL HUB",
       "published": "2023-06-22",
       "url": "https://www.youtube.com/watch?v=zaO2yjx_6HQ",
-      "thumbnail": "https://i9.ytimg.com/vi/zaO2yjx_6HQ/default.jpg?sqp=CLDcp9IG&rs=AOn4CLA71W3OPegelUgS-ZxVcHG-0z6QUQ",
+      "thumbnail": "https://i9.ytimg.com/vi/zaO2yjx_6HQ/default.jpg?sqp=COzFqNIG&rs=AOn4CLCydfC9GiA6wqAix5ZymtU2EWvpaw",
       "views": 547321,
       "watch_time_hours": 1952.1,
       "avg_duration_sec": 14.0,
@@ -9681,8 +9767,8 @@
       "published": "2026-02-26",
       "url": "https://www.youtube.com/watch?v=qXBdwtvkuJ8",
       "thumbnail": "https://i.ytimg.com/vi/qXBdwtvkuJ8/default.jpg",
-      "views": 545128,
-      "watch_time_hours": 1967.85,
+      "views": 545118,
+      "watch_time_hours": 1967.83,
       "avg_duration_sec": 21.0,
       "avg_view_pct": 84.1,
       "subs_gained": 0,
@@ -9696,7 +9782,7 @@
       "title": "TEST DRIVE HIGH QUALITY USED CARS IN UAE",
       "published": "2023-07-26",
       "url": "https://www.youtube.com/watch?v=EbEuemWLxEk",
-      "thumbnail": "https://i9.ytimg.com/vi/EbEuemWLxEk/default.jpg?sqp=CLDcp9IG&rs=AOn4CLC8xMjXGr-y3eN3PJTP-AxAh-Y5dg",
+      "thumbnail": "https://i9.ytimg.com/vi/EbEuemWLxEk/default.jpg?sqp=COzFqNIG&rs=AOn4CLDQxiQyar6vQldQ1RSz6sjDOT5v9g",
       "views": 540962,
       "watch_time_hours": 1840.33,
       "avg_duration_sec": 15.0,
@@ -9728,7 +9814,7 @@
       "title": "TEST DRIVE HIGH QUALITY USED CARS IN UAE",
       "published": "2023-07-26",
       "url": "https://www.youtube.com/watch?v=ZK13ShDV4No",
-      "thumbnail": "https://i9.ytimg.com/vi/ZK13ShDV4No/default.jpg?sqp=CLDcp9IG&rs=AOn4CLCzpde4TzovTkyK1SIsf0WhdFFIeg",
+      "thumbnail": "https://i9.ytimg.com/vi/ZK13ShDV4No/default.jpg?sqp=COzFqNIG&rs=AOn4CLAtmLx0pby6RP4719XjbxKSG5dWdQ",
       "views": 513220,
       "watch_time_hours": 1289.37,
       "avg_duration_sec": 14.0,
@@ -9792,7 +9878,7 @@
       "title": "FLOOD-FREE HIGH QUALITY USED CARS IN THE UAE",
       "published": "2024-04-25",
       "url": "https://www.youtube.com/watch?v=KNC646kU1JE",
-      "thumbnail": "https://i9.ytimg.com/vi/KNC646kU1JE/default.jpg?sqp=CLDcp9IG&rs=AOn4CLAuYxx6YiysTLqwXVMzU47s7Ikntw",
+      "thumbnail": "https://i9.ytimg.com/vi/KNC646kU1JE/default.jpg?sqp=COzFqNIG&rs=AOn4CLCLvLwSsY_4rmHpgPSNq1nUYJo6wQ",
       "views": 435241,
       "watch_time_hours": 1249.38,
       "avg_duration_sec": 10.0,
@@ -9809,8 +9895,8 @@
       "published": "2026-04-03",
       "url": "https://www.youtube.com/watch?v=ZhkzgeDE2ZE",
       "thumbnail": "https://i.ytimg.com/vi/ZhkzgeDE2ZE/default.jpg",
-      "views": 403879,
-      "watch_time_hours": 1575.4,
+      "views": 403871,
+      "watch_time_hours": 1575.35,
       "avg_duration_sec": 49.0,
       "avg_view_pct": 89.9,
       "subs_gained": 0,

@@ -1468,7 +1468,7 @@
       {
         "age_group": "age35-44",
         "gender": "male",
-        "viewer_pct": 20.1
+        "viewer_pct": 20.0
       },
       {
         "age_group": "age45-54",
@@ -1522,8 +1522,8 @@
   "traffic_sources": [
     {
       "source": "SUBSCRIBER",
-      "views": 228146,
-      "watch_time_hours": 10107.2,
+      "views": 228147,
+      "watch_time_hours": 10107.3,
       "pct": 75.9
     },
     {
@@ -1534,7 +1534,7 @@
     },
     {
       "source": "YT_SEARCH",
-      "views": 12193,
+      "views": 12194,
       "watch_time_hours": 471.3,
       "pct": 4.1
     },
@@ -1552,13 +1552,13 @@
     },
     {
       "source": "YT_OTHER_PAGE",
-      "views": 7507,
+      "views": 7506,
       "watch_time_hours": 395.8,
       "pct": 2.5
     },
     {
       "source": "NO_LINK_OTHER",
-      "views": 5901,
+      "views": 5900,
       "watch_time_hours": 264.1,
       "pct": 2.0
     },
@@ -2171,15 +2171,15 @@
     "2026-07": [
       {
         "source": "YT_SEARCH",
-        "views": 300,
+        "views": 301,
         "watch_time_hours": 13.6,
-        "pct": 37.9
+        "pct": 38.0
       },
       {
         "source": "SUBSCRIBER",
-        "views": 183,
-        "watch_time_hours": 7.6,
-        "pct": 23.1
+        "views": 184,
+        "watch_time_hours": 7.7,
+        "pct": 23.2
       },
       {
         "source": "SHORTS",
@@ -2201,15 +2201,15 @@
       },
       {
         "source": "YT_OTHER_PAGE",
-        "views": 28,
+        "views": 27,
         "watch_time_hours": 1.0,
-        "pct": 3.5
+        "pct": 3.4
       },
       {
         "source": "NO_LINK_OTHER",
-        "views": 18,
+        "views": 17,
         "watch_time_hours": 0.8,
-        "pct": 2.3
+        "pct": 2.1
       },
       {
         "source": "EXT_URL",

@@ -3009,8 +3009,8 @@
   "traffic_sources": [
     {
       "source": "SUBSCRIBER",
-      "views": 353985,
-      "watch_time_hours": 13632.7,
+      "views": 353987,
+      "watch_time_hours": 13632.8,
       "pct": 35.2
     },
     {
@@ -3021,32 +3021,32 @@
     },
     {
       "source": "YT_SEARCH",
-      "views": 193269,
-      "watch_time_hours": 3369.5,
+      "views": 193274,
+      "watch_time_hours": 3369.6,
       "pct": 19.2
     },
     {
       "source": "SHORTS",
-      "views": 131297,
+      "views": 131287,
       "watch_time_hours": 691.4,
       "pct": 13.1
     },
     {
       "source": "RELATED_VIDEO",
-      "views": 28405,
+      "views": 28406,
       "watch_time_hours": 1931.7,
       "pct": 2.8
     },
     {
       "source": "YT_CHANNEL",
-      "views": 27931,
+      "views": 27937,
       "watch_time_hours": 608.6,
       "pct": 2.8
     },
     {
       "source": "NO_LINK_OTHER",
-      "views": 18988,
-      "watch_time_hours": 442.1,
+      "views": 18982,
+      "watch_time_hours": 442.0,
       "pct": 1.9
     },
     {
@@ -5076,15 +5076,15 @@
     "2026-07": [
       {
         "source": "YT_SEARCH",
-        "views": 843,
-        "watch_time_hours": 21.299999999999997,
-        "pct": 44.1
+        "views": 848,
+        "watch_time_hours": 21.4,
+        "pct": 44.4
       },
       {
         "source": "SUBSCRIBER",
-        "views": 553,
-        "watch_time_hours": 26.3,
-        "pct": 28.9
+        "views": 555,
+        "watch_time_hours": 26.4,
+        "pct": 29.1
       },
       {
         "source": "EXT_URL",
@@ -5094,27 +5094,27 @@
       },
       {
         "source": "RELATED_VIDEO",
-        "views": 113,
-        "watch_time_hours": 7.6,
-        "pct": 5.9
+        "views": 114,
+        "watch_time_hours": 7.699999999999999,
+        "pct": 6.0
       },
       {
         "source": "YT_CHANNEL",
-        "views": 75,
+        "views": 81,
         "watch_time_hours": 1.5,
-        "pct": 3.9
+        "pct": 4.2
       },
       {
         "source": "SHORTS",
-        "views": 64,
-        "watch_time_hours": 0.30000000000000004,
-        "pct": 3.3
+        "views": 54,
+        "watch_time_hours": 0.2,
+        "pct": 2.8
       },
       {
         "source": "NO_LINK_OTHER",
-        "views": 36,
-        "watch_time_hours": 1.8,
-        "pct": 1.9
+        "views": 30,
+        "watch_time_hours": 1.7,
+        "pct": 1.6
       },
       {
         "source": "YT_OTHER_PAGE",
@@ -5157,8 +5157,8 @@
     },
     {
       "device": "DESKTOP",
-      "views": 146867,
-      "watch_time_hours": 3998.3,
+      "views": 146865,
+      "watch_time_hours": 3998.2,
       "pct": 14.6
     },
     {
@@ -5964,9 +5964,9 @@
       },
       {
         "device": "DESKTOP",
-        "views": 259,
+        "views": 257,
         "watch_time_hours": 10.2,
-        "pct": 13.6
+        "pct": 13.5
       },
       {
         "device": "TV",
