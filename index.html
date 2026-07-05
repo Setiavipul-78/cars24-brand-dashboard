@@ -1823,6 +1823,7 @@ function initTab5(){
 /* ── YouTube inner-tab styles (injected once) ── */
 /* ── Traffic source name map ── */
 const YT_SRC_NAMES={YT_SEARCH:'YouTube Search',SUGGESTED_VIDEO:'Suggested Videos',SHORTS:'YouTube Shorts',BROWSE_FEATURES:'Browse / Home',EXT_URL:'External Links',NOTIFICATION:'Notifications',PLAYLIST:'Playlists',YT_CHANNEL:'Channel Page',NO_LINK_EMBEDDED:'Embedded',YT_OTHER_PAGE:'Other YouTube',RELATED_VIDEO:'Suggested',NO_LINK_OTHER:'Direct / Other',HASHTAGS:'Hashtags',END_SCREEN:'End Screens',SOUND_PAGE:'Sound Page',SHORTS_CONTENT_LINKS:'Shorts Links',ADVERTISING:'Ads',SUBSCRIBER:'Subscriptions'};
+const GENDER_NAMES={female:'Female',male:'Male',genderOther:'Self-described',genderUserSpecified:'Self-described',user_specified:'Self-described'};
 
 /* ── YouTube renderer ── */
 function renderYT(containerId,key,channelName){
@@ -1929,7 +1930,7 @@ function renderYT(containerId,key,channelName){
         <div class="cw" style="height:340px"><canvas id="yt-geo-${key}"></canvas></div>
       </div>
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">🗺 City Table</span><span class="title">City Breakdown</span><span class="desc">Views and watch time per city.</span></div>
+        <div class="sh"><span class="kicker">🗺 City Table</span><span class="title">City Breakdown</span><span class="desc">Views, watch time and % share per city. Top 25 tracked cities — % is of views among these, not total channel views.</span></div>
         <div class="tw" id="yt-geo-tbl-${key}"></div>
       </div>
     </div>`:''}
@@ -1946,6 +1947,7 @@ function renderYT(containerId,key,channelName){
       <div class="card" style="margin:0">
         <div class="sh"><span class="kicker">⚤ Gender Split</span><span class="title">Viewer Gender Breakdown</span><span class="desc">Male vs female audience composition.</span></div>
         <div class="cw" style="height:240px"><canvas id="yt-gender-${key}"></canvas></div>
+        <div class="tw" id="yt-gender-tbl-${key}" style="margin-top:10px"></div>
       </div>
     </div>`:''}
 
@@ -2086,7 +2088,8 @@ function renderYT(containerId,key,channelName){
       const gck=`yt_${key}_geo`;if(charts[gck])charts[gck].destroy();
       if(gc) charts[gck]=new Chart(gc.getContext('2d'),{type:'bar',data:{labels:geo15.map(g=>g.city),datasets:[{label:'Views',data:geo15.map(g=>g.views),backgroundColor:'rgba(71,54,254,.7)',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>fv(v)},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
       const gt=document.getElementById(`yt-geo-tbl-${key}`);
-      if(gt) gt.innerHTML=rowsG.length?tbl(`<th>#</th><th>🌍 City</th><th class="nr">👀 Views</th><th class="nr">⏱ Watch Time</th>`,rowsG.map((g,i)=>`<tr><td>${i+1}</td><td>${g.city}</td><td class="nr">${fv(g.views)}</td><td class="nr">${fh(g.watch_time_hours)}</td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
+      const geoTotalViews=rowsG.reduce((s,g)=>s+(g.views||0),0)||1;
+      if(gt) gt.innerHTML=rowsG.length?tbl(`<th>#</th><th>🌍 City</th><th class="nr">👀 Views</th><th class="nr">% of Views</th><th class="nr">⏱ Watch Time</th>`,rowsG.map((g,i)=>`<tr><td>${i+1}</td><td>${g.city}</td><td class="nr">${fv(g.views)}</td><td class="nr">${(g.views/geoTotalViews*100).toFixed(1)}%</td><td class="nr">${fh(g.watch_time_hours)}</td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
     }
     bindSel(`yt-geo-sel-${key}`,renderGeo);
     renderGeo(document.getElementById(`yt-geo-sel-${key}`)?.value||'all');
@@ -2101,9 +2104,11 @@ function renderYT(containerId,key,channelName){
       const ac=document.getElementById(`yt-age-${key}`);const ack=`yt_${key}_age`;if(charts[ack])charts[ack].destroy();
       if(ac) charts[ack]=new Chart(ac.getContext('2d'),{type:'bar',data:{labels:ages,datasets:[{label:'Viewer %',data:ages.map(a=>ageMap[a].toFixed(2)),backgroundColor:ages.map((_,i)=>`hsl(${240+i*15},70%,${50+i*3}%)`),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
       const genMap={};src.forEach(d=>{genMap[d.gender]=(genMap[d.gender]||0)+d.viewer_pct;});
-      const gens=Object.keys(genMap);
+      const gens=Object.keys(genMap).sort((a,b)=>genMap[b]-genMap[a]);
       const genc=document.getElementById(`yt-gender-${key}`);const genck=`yt_${key}_gender`;if(charts[genck])charts[genck].destroy();
-      if(genc) charts[genck]=new Chart(genc.getContext('2d'),{type:'doughnut',data:{labels:gens,datasets:[{data:gens.map(g=>genMap[g].toFixed(2)),backgroundColor:['#4736FE','#00C951','#F59E0B'],borderWidth:3,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11},generateLabels:chart=>{const ds=chart.data;return ds.labels.map((l,i)=>({text:`${l} ${parseFloat(ds.datasets[0].data[i]).toFixed(1)}%`,fillStyle:ds.datasets[0].backgroundColor[i],index:i}));}}}}}});
+      if(genc) charts[genck]=new Chart(genc.getContext('2d'),{type:'doughnut',data:{labels:gens.map(g=>GENDER_NAMES[g]||g),datasets:[{data:gens.map(g=>genMap[g].toFixed(2)),backgroundColor:['#4736FE','#00C951','#F59E0B'],borderWidth:3,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11},generateLabels:chart=>{const ds=chart.data;return ds.labels.map((l,i)=>({text:`${l} ${parseFloat(ds.datasets[0].data[i]).toFixed(1)}%`,fillStyle:ds.datasets[0].backgroundColor[i],index:i}));}}}}}});
+      const gent=document.getElementById(`yt-gender-tbl-${key}`);
+      if(gent) gent.innerHTML=gens.length?tbl(`<th>⚤ Gender</th><th class="nr">% of Viewers</th>`,gens.map(g=>`<tr><td>${GENDER_NAMES[g]||g}</td><td class="nr"><strong>${genMap[g].toFixed(1)}%</strong></td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
     }
     bindSel(`yt-demo-sel-${key}`,renderDemo);
     renderDemo(document.getElementById(`yt-demo-sel-${key}`)?.value||'all');
