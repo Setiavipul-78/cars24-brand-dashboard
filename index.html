@@ -254,6 +254,36 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
 .inf-ext-banner{margin-bottom:14px}.inf-kpi-strip{margin-bottom:14px}
 /* tighter card spacing inside g2 grids */
 .g2>.card{margin:0!important}
+
+/* ── Mobile ─────────────────────────────────────────────────────────────── */
+@media(max-width:900px){
+  .ov-strip{grid-template-columns:1fr}
+  .ovm{padding:10px 0;border-right:none;border-bottom:1px solid rgba(255,255,255,.12)}
+  .ovm:first-child{padding-top:0}
+  .ovm:last-child{border-bottom:none;padding-bottom:0}
+}
+@media(max-width:640px){
+  .hdr{padding:0 14px}
+  .hdr .in{height:auto;min-height:56px;padding:8px 0;flex-wrap:wrap;gap:8px}
+  .brand{gap:9px;min-width:0}
+  .brand-logo-wrap{padding:5px 10px}
+  .brand-logo{height:24px}
+  .brand-div{height:26px}
+  .btxt .t1{font-size:15px}
+  .btxt .t2{font-size:10.5px}
+  .fresh{font-size:10px}
+  .wrap{padding:14px 14px 60px}
+  .card{padding:14px 15px}
+  .seg-btn{padding:7px 13px;font-size:12px}
+  .tab{padding:9px 11px;font-size:12px}
+  .tabs.pills .tab{padding:5px 10px;font-size:11.5px}
+  .sh .title{font-size:14px}
+  .ov-strip{padding:16px 18px}
+  .ovv{font-size:22px}
+  .kh .kv{font-size:21px}
+  .inf-ext-banner{flex-direction:column;align-items:flex-start;gap:10px}
+  .card-actions{justify-content:flex-start;flex-wrap:wrap}
+}
 </style>
 </head>
 <body>
@@ -2219,13 +2249,13 @@ function renderIG(containerId,key,handleName){
     </div>
 
     <div class="card">
-      <div class="sh"><span class="kicker">📈 Monthly Trend</span><span class="title">Views Over Time — ${handleName}</span><span class="desc">Monthly views (bars, left) and total followers (line, right). All months shown.</span></div>
+      <div class="sh"><span class="kicker">📈 Monthly Trend</span><span class="title">Views Over Time — ${handleName}</span><span class="desc">Monthly views, summed across posts published that month. All months shown.</span></div>
       <div class="cw tall"><canvas id="ig-trend-${key}"></canvas></div>
     </div>
 
     <div class="card">
       <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
-        <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance</span><span class="desc">Organic views, reach, engagement, profile views and interactions with MoM change.</span></div>
+        <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance</span><span class="desc">Views, reach, accounts engaged, profile views and interactions with MoM change.</span></div>
         <select class="inf-sel" id="ig-tbl-sel-${key}">
           <option value="all" selected>All Time</option>
           ${monthOpts(monthsDesc)}
@@ -2339,17 +2369,17 @@ function renderIG(containerId,key,handleName){
     const engRate=tv>0?(tl+tc+tsh+tsv)/tv*100:0;
     const netFol=tfg-tfl;
     document.getElementById(`ig-kpis-${key}`).innerHTML=`
-      <div class="ink grn"><span class="ink-icon">👀</span><div class="ink-lbl">Organic Views</div><div class="ink-val">${numFmt(tv)}</div><div class="ink-sub">in period · Instagram API has no ads/organic split</div></div>
+      <div class="ink grn"><span class="ink-icon">👀</span><div class="ink-lbl">Views</div><div class="ink-val">${numFmt(tv)}</div><div class="ink-sub">Σ across posts in period</div></div>
       <div class="ink mint"><span class="ink-icon">📈</span><div class="ink-lbl">Followers Gained</div><div class="ink-val">${tfg>0?'+':''}${numFmt(tfg)}</div><div class="ink-sub">in period · net ${netFol>=0?'+':''}${numFmt(netFol)}</div></div>
       <div class="ink mint"><span class="ink-icon">👥</span><div class="ink-lbl">Total Followers</div><div class="ink-val">${numFmt(snap.followers||0)}</div><div class="ink-sub">${handleName}</div></div>
       <div class="ink"><span class="ink-icon">📮</span><div class="ink-lbl">Content Posted</div><div class="ink-val">${numFmt(tcp)}</div><div class="ink-sub">posts in period</div></div>
-      <div class="ink or"><span class="ink-icon">💬</span><div class="ink-lbl">Organic Accts Engaged</div><div class="ink-val">${numFmt(tae)}</div><div class="ink-sub">in period · no ads/organic split</div></div>
+      <div class="ink or"><span class="ink-icon">💬</span><div class="ink-lbl">Accounts Engaged</div><div class="ink-val">${numFmt(tae)}</div><div class="ink-sub">in period</div></div>
       <div class="ink grn"><span class="ink-icon">⚡</span><div class="ink-lbl">Engagement Rate</div><div class="ink-val">${engRate.toFixed(2)}%</div><div class="ink-sub">(likes+shares+saves+cmts)÷views</div></div>`;
   }
   // ── Monthly table (period-filtered) ──
   function renderIGTable(period){
     const filtered=period==='all'?monthsDesc:monthly.filter(r=>r.month===period.replace('m:','')).reverse();
-    const th=`<th>Month</th><th class="nr ch">👀 Organic Views</th><th class="nr ch">MoM</th><th class="nr">👁 Organic Reach</th><th class="nr">💬 Organic Engagement</th><th class="nr">🏠 Profile Views</th><th class="nr">💬 Comments</th><th class="nr ch">⚡ Organic Interactions</th><th class="nr ch">Eng Rate</th>`;
+    const th=`<th>Month</th><th class="nr ch">👀 Views</th><th class="nr ch">MoM</th><th class="nr">👁 Reach</th><th class="nr">💬 Accts Engaged</th><th class="nr">🏠 Profile Views</th><th class="nr">💬 Comments</th><th class="nr ch">⚡ Interactions</th><th class="nr ch">Eng Rate</th>`;
     const rows=filtered.map(r=>{
       const idx2=monthly.findIndex(x=>x.month===r.month);
       const p=idx2>0?monthly[idx2-1]:null;
@@ -2378,7 +2408,7 @@ function renderIG(containerId,key,handleName){
   // ── Trend chart ──
   const ck=`ig_${key}_trend`;if(charts[ck])charts[ck].destroy();
   const tc=document.getElementById(`ig-trend-${key}`);
-  if(tc) charts[ck]=new Chart(tc.getContext('2d'),{type:'bar',data:{labels:monthly.map(r=>r.label),datasets:[{type:'bar',label:'Views',data:monthly.map(r=>r.views||0),backgroundColor:'rgba(233,30,140,.18)',yAxisID:'y',borderRadius:5},{type:'line',label:'Total Followers',data:monthly.map(r=>r.followers||0),borderColor:'#E91E8C',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Views'},ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'Followers'},ticks:{callback:v=>numFmt(v)},grid:{display:false}},x:{grid:{display:false}}}}});
+  if(tc) charts[ck]=new Chart(tc.getContext('2d'),{type:'line',data:{labels:monthly.map(r=>r.label),datasets:[{label:'Views',data:monthly.map(r=>r.views||0),borderColor:'#E91E8C',backgroundColor:'rgba(233,30,140,.10)',fill:true,borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{title:{display:true,text:'Views'},ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
 
   // ── Monthly table ──
   renderIGTable('all');
@@ -2472,6 +2502,27 @@ function renderIG(containerId,key,handleName){
 }
 
 /* ── LinkedIn renderer ── */
+const LI_DEMO_DIMS=[['location','📍','Location'],['job_function','💼','Job Function'],['seniority','🎖','Seniority'],['industry','🏭','Industry'],['company_size','🏢','Company Size']];
+
+function renderLIDemoBlock(prefix,key,dataByDim,title){
+  const any=LI_DEMO_DIMS.some(([d])=>(dataByDim[d]||[]).length);
+  if(!any)return'';
+  const [locDim,locIcon,locLbl]=LI_DEMO_DIMS[0];
+  const rest=LI_DEMO_DIMS.slice(1);
+  return `<div class="card">
+    <div class="sh"><span class="kicker">${title.kicker}</span><span class="title">${title.title}</span><span class="desc">${title.desc}</span></div>
+    ${(dataByDim[locDim]||[]).length?`<div class="g2">
+      <div><div style="font-size:12px;font-weight:800;color:var(--ink-2);margin-bottom:8px">${locIcon} Top ${locLbl}s</div><div class="cw" style="height:300px"><canvas id="${prefix}-${locDim}-${key}"></canvas></div></div>
+      <div class="tw" id="${prefix}-${locDim}-tbl-${key}" style="max-height:300px"></div>
+    </div>`:''}
+    ${rest.filter(([d])=>(dataByDim[d]||[]).length).reduce((acc,[d,icon,lbl],i)=>{
+      if(i%2===0)acc.push([]);
+      acc[acc.length-1].push(`<div><div style="font-size:12px;font-weight:800;color:var(--ink-2);margin-bottom:8px">${icon} ${lbl}</div><div class="cw" style="height:220px"><canvas id="${prefix}-${d}-${key}"></canvas></div></div>`);
+      return acc;
+    },[]).map(pair=>`<div class="g2" style="margin-top:14px">${pair.join('')}</div>`).join('')}
+  </div>`;
+}
+
 function renderLI(containerId,key,pageName){
   const el=document.getElementById(containerId);if(!el)return;
   const li=D.linkedin?.[key];
@@ -2481,6 +2532,9 @@ function renderLI(containerId,key,pageName){
   const snap=li.snapshot||{},liMonthly=li.monthly;
   const liDesc=[...liMonthly].reverse();
   const liLatest=liDesc[0]?.month||liDesc[0]?.label||'';
+  const fDemo=li.follower_demographics||{};
+  const vDemo=li.visitor_demographics||{};
+  const competitors=key==='cars24'?(D.linkedin_competitors||[]):[];
 
   el.innerHTML=`
     <div class="card">
@@ -2491,13 +2545,13 @@ function renderLI(containerId,key,pageName){
           ${liDesc.map((r,i)=>`<option value="i:${liMonthly.length-1-i}"${i===0?' selected':''}>${r.label}</option>`).join('')}
         </select>
       </div>
-      <div class="inf-kpi-strip" id="li-kpis-${key}" style="grid-template-columns:repeat(6,1fr)"></div>
+      <div class="inf-kpi-strip" id="li-kpis-${key}" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"></div>
     </div>
 
-    <div class="card"><div class="sh"><span class="kicker">📈 Monthly Trend</span><span class="title">Impressions & Follower Growth — ${pageName}</span><span class="desc">Bars = impressions (left). Line = new followers (right).</span></div><div class="cw tall"><canvas id="li-chart-${key}"></canvas></div></div>
+    <div class="card"><div class="sh"><span class="kicker">📈 Monthly Trend</span><span class="title">Impressions Over Time — ${pageName}</span><span class="desc">Monthly impressions, all months shown.</span></div><div class="cw tall"><canvas id="li-chart-${key}"></canvas></div></div>
     <div class="card">
       <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
-        <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Metrics — ${pageName}</span></div>
+        <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Metrics — ${pageName}</span><span class="desc">Impressions, visitors, followers, engagement — with MoM change.</span></div>
         <select class="inf-sel" id="li-tbl-sel-${key}">
           <option value="all" selected>All Time</option>
           ${liDesc.map((r,i)=>`<option value="i:${liMonthly.length-1-i}">${r.label}</option>`).join('')}
@@ -2505,7 +2559,19 @@ function renderLI(containerId,key,pageName){
       </div>
       <div class="tw" id="li-tbl-${key}"></div>
     </div>
-    ${li.posts&&li.posts.length?`<div class="card"><div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px"><div><span class="kicker">🔝 Top Posts</span><span class="title">Best Performing Content — ${pageName}</span><span class="desc">Sorted by impressions.</span></div><select class="inf-sel" id="li-posts-sel-${key}"><option value="all" selected>All Time</option>${liDesc.map((r,i)=>`<option value="i:${liMonthly.length-1-i}">${r.label}</option>`).join('')}</select></div><div class="tw" id="li-posts-${key}"></div></div>`:''}`;
+    ${li.posts&&li.posts.length?`<div class="card"><div class="sh"><span class="kicker">🔝 Top 10 Content</span><span class="title">Best Performing Posts — All Time</span><span class="desc">Sorted by impressions across full post history.</span></div><div class="tw" id="li-posts-${key}"></div></div>`:''}
+
+    ${competitors.length?`<div class="card">
+      <div class="sh"><span class="kicker">🆚 Competitor Analysis</span><span class="title">Cars24 vs Other Major Brands on LinkedIn</span><span class="desc">Current snapshot, ranked by total followers. Cars24 row highlighted.</span></div>
+      <div class="g2" style="align-items:start">
+        <div class="tw" id="li-comp-tbl-${key}"></div>
+        <div class="cw" style="height:340px"><canvas id="li-comp-chart-${key}"></canvas></div>
+      </div>
+    </div>`:''}
+
+    ${renderLIDemoBlock('li-fdemo',key,fDemo,{kicker:'👥 Follower Demographics',title:`Who Follows ${pageName}`,desc:'Current snapshot by location, function, seniority, industry & company size.'})}
+    ${renderLIDemoBlock('li-vdemo',key,vDemo,{kicker:'🌐 Visitor Demographics',title:`Who Visits ${pageName}'s Page`,desc:'Current snapshot of page visitors by location, function, seniority, industry & company size.'})}
+  `;
 
   function renderLIKPIs(val){
     const idx=val==='all'?liMonthly.length-1:parseInt(val.replace('i:',''),10);
@@ -2516,30 +2582,28 @@ function renderLI(containerId,key,pageName){
     const momF=p&&p.followers?((r.followers-p.followers)/p.followers*100):null;
     const momE=p&&p.eng_rate?((r.eng_rate-p.eng_rate)/p.eng_rate*100):null;
     document.getElementById(`li-kpis-${key}`).innerHTML=`
-      <div class="ink mint"><span class="ink-icon">👥</span><div class="ink-lbl">Followers</div><div class="ink-val">${numFmt(snap.followers||r.followers)}</div><div class="ink-sub">${badge(momF)} MoM</div></div>
       <div class="ink grn"><span class="ink-icon">📢</span><div class="ink-lbl">Impressions</div><div class="ink-val">${numFmt(r.impressions)}</div><div class="ink-sub">${badge(momI)} MoM</div></div>
       <div class="ink"><span class="ink-icon">🏠</span><div class="ink-lbl">Page Views</div><div class="ink-val">${numFmt(r.page_views)}</div><div class="ink-sub">${badge(momV)} MoM</div></div>
       <div class="ink or"><span class="ink-icon">👤</span><div class="ink-lbl">Unique Visitors</div><div class="ink-val">${numFmt(r.unique_visitors)}</div><div class="ink-sub">${r.label}</div></div>
-      <div class="ink pur"><span class="ink-icon">💬</span><div class="ink-lbl">New Followers</div><div class="ink-val">${r.new_followers!=null?'+'+numFmt(r.new_followers):'—'}</div><div class="ink-sub">${r.label}</div></div>
-      <div class="ink red"><span class="ink-icon">⚡</span><div class="ink-lbl">Eng Rate</div><div class="ink-val">${r.eng_rate!=null?r.eng_rate.toFixed(2)+'%':'—'}</div><div class="ink-sub">${badge(momE)} MoM</div></div>`;
+      <div class="ink mint"><span class="ink-icon">👥</span><div class="ink-lbl">Followers</div><div class="ink-val">${numFmt(snap.followers||r.followers)}</div><div class="ink-sub">${badge(momF)} MoM</div></div>
+      <div class="ink red"><span class="ink-icon">⚡</span><div class="ink-lbl">Eng Rate</div><div class="ink-val">${r.eng_rate!=null?r.eng_rate.toFixed(2)+'%':'—'}</div><div class="ink-sub">${badge(momE)} MoM</div></div>
+      <div class="ink pur"><span class="ink-icon">💬</span><div class="ink-lbl">New Followers</div><div class="ink-val">${r.new_followers!=null?'+'+numFmt(r.new_followers):'—'}</div><div class="ink-sub">${r.label}</div></div>`;
   }
 
   function renderLITable(val){
     const rows=val==='all'?liDesc:[liMonthly[parseInt(val.replace('i:',''),10)]].filter(Boolean);
-    const th=`<th>Month</th><th class="nr ch">👥 Followers</th><th class="nr ch">MoM</th><th class="nr">📢 Impressions</th><th class="nr">MoM</th><th class="nr">🏠 Page Views</th><th class="nr">👤 Visitors</th><th class="nr">💬 New Fol.</th><th class="nr">👍 Likes</th><th class="nr">💬 Comments</th><th class="nr">↗ Shares</th><th class="nr ch">⚡ Eng %</th>`;
+    const th=`<th>Month</th><th class="nr ch">📢 Impressions</th><th class="nr ch">MoM</th><th class="nr">🏠 Page Views</th><th class="nr">👤 Visitors</th><th class="nr">👥 Followers</th><th class="nr">💬 New Fol.</th><th class="nr">👍 Likes</th><th class="nr">💬 Comments</th><th class="nr">↗ Shares</th><th class="nr ch">⚡ Eng %</th>`;
     const tbRows=rows.map(r=>{
       const ri=liMonthly.findIndex(x=>x.label===r.label);
       const p=ri>0?liMonthly[ri-1]:null;
-      const mF=p&&p.followers?((r.followers-p.followers)/p.followers*100):null;
       const mI=p&&p.impressions?((r.impressions-p.impressions)/p.impressions*100):null;
       return`<tr class="${r.label===liDesc[0]?.label?'lat':''}">
         <td><strong>${r.label}</strong>${r.label===liDesc[0]?.label?' <span class="badge bb">Latest</span>':''}</td>
-        <td class="nr cc"><strong>${numFmt(r.followers)}</strong></td>
-        <td class="nr cc">${badge(mF)}</td>
-        <td class="nr">${numFmt(r.impressions)}</td>
-        <td class="nr">${badge(mI)}</td>
+        <td class="nr cc"><strong>${numFmt(r.impressions)}</strong></td>
+        <td class="nr cc">${badge(mI)}</td>
         <td class="nr">${numFmt(r.page_views)}</td>
         <td class="nr">${numFmt(r.unique_visitors)}</td>
+        <td class="nr">${numFmt(r.followers)}</td>
         <td class="nr">${r.new_followers!=null?'+'+numFmt(r.new_followers):'—'}</td>
         <td class="nr">${numFmt(r.likes)}</td>
         <td class="nr">${numFmt(r.comments)}</td>
@@ -2555,23 +2619,51 @@ function renderLI(containerId,key,pageName){
   document.getElementById(`li-tbl-sel-${key}`).addEventListener('change',e=>renderLITable(e.target.value));
   renderLITable('all');
 
-  // Trend chart (always all-time)
+  // Trend chart — single Impressions line (always all-time)
   const liCk=`li_${key}`;if(charts[liCk])charts[liCk].destroy();
   const ctx=document.getElementById(`li-chart-${key}`).getContext('2d');
-  charts[liCk]=new Chart(ctx,{type:'bar',data:{labels:liMonthly.map(r=>r.label),datasets:[{type:'bar',label:'Impressions',data:liMonthly.map(r=>r.impressions||0),backgroundColor:'rgba(71,54,254,.18)',yAxisID:'y',borderRadius:5},{type:'line',label:'New Followers',data:liMonthly.map(r=>r.new_followers||0),borderColor:'#4736FE',backgroundColor:'transparent',yAxisID:'y1',borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{type:'linear',position:'left',title:{display:true,text:'Impressions'},ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y1:{type:'linear',position:'right',title:{display:true,text:'New Followers'},ticks:{callback:v=>numFmt(v)},grid:{display:false}},x:{grid:{display:false}}}}});
+  charts[liCk]=new Chart(ctx,{type:'line',data:{labels:liMonthly.map(r=>r.label),datasets:[{label:'Impressions',data:liMonthly.map(r=>r.impressions||0),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.10)',fill:true,borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{title:{display:true,text:'Impressions'},ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
 
-  // Top posts table (with period filter)
+  // Top 10 posts — fixed all-time, no period filter
   if(li.posts&&li.posts.length){
     const ph=`<th>Date</th><th>Post</th><th class="nr">Impressions</th><th class="nr">Clicks</th><th class="nr">Likes</th><th class="nr">Comments</th><th class="nr">Shares</th><th class="nr">Eng %</th>`;
-    function renderLIPosts(val){
-      let fp=li.posts;
-      if(val!=='all'){const idx=parseInt(val.replace('i:',''),10);const m=liMonthly[idx];if(m)fp=li.posts.filter(p=>p.date&&p.date.startsWith(m.label?.slice(-2)+'/'));}
-      const el2=document.getElementById(`li-posts-${key}`);
-      if(el2)el2.innerHTML=fp.length?tbl(ph,fp.slice(0,10).map(p=>`<tr><td>${p.date}</td><td style="max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${p.title.replace(/"/g,'&quot;')}">${p.title}</td><td class="nr">${numFmt(p.impressions)}</td><td class="nr">${numFmt(p.clicks)}</td><td class="nr">${numFmt(p.likes)}</td><td class="nr">${numFmt(p.comments)}</td><td class="nr">${numFmt(p.shares)}</td><td class="nr">${p.eng_rate!=null?(p.eng_rate*100).toFixed(2)+'%':'—'}</td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No posts in selected period.</p>';
-    }
-    const liPostSel=document.getElementById(`li-posts-sel-${key}`);if(liPostSel)liPostSel.addEventListener('change',e=>renderLIPosts(e.target.value));
-    renderLIPosts('all');
+    const top10=[...li.posts].sort((a,b)=>(b.impressions||0)-(a.impressions||0)).slice(0,10);
+    const el2=document.getElementById(`li-posts-${key}`);
+    if(el2)el2.innerHTML=top10.length?tbl(ph,top10.map(p=>`<tr><td>${p.date}</td><td style="max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${(p.title||'').replace(/"/g,'&quot;')}">${p.title}</td><td class="nr">${numFmt(p.impressions)}</td><td class="nr">${numFmt(p.clicks)}</td><td class="nr">${numFmt(p.likes)}</td><td class="nr">${numFmt(p.comments)}</td><td class="nr">${numFmt(p.shares)}</td><td class="nr">${p.eng_rate!=null?(p.eng_rate*100).toFixed(2)+'%':'—'}</td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No posts.</p>';
   }
+
+  // Competitor analysis (Cars24 India only — data is India-market-specific)
+  if(competitors.length){
+    const th=`<th>#</th><th>Brand</th><th class="nr ch">Followers</th><th class="nr">New Followers</th><th class="nr">Engagements</th><th class="nr">Posts</th>`;
+    const tblEl=document.getElementById(`li-comp-tbl-${key}`);
+    if(tblEl)tblEl.innerHTML=tbl(th,competitors.map((c,i)=>`<tr class="${c.page==='Cars24'?'lat':''}"><td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td><td><strong>${c.page}</strong>${c.page==='Cars24'?' <span class="badge bb">You</span>':''}</td><td class="nr cc"><strong>${numFmt(c.followers)}</strong></td><td class="nr">+${numFmt(c.new_followers)}</td><td class="nr">${numFmt(c.engagements)}</td><td class="nr">${numFmt(c.posts)}</td></tr>`).join(''));
+    const compCk=`li_comp_${key}`;if(charts[compCk])charts[compCk].destroy();
+    const compCanvas=document.getElementById(`li-comp-chart-${key}`);
+    if(compCanvas)charts[compCk]=new Chart(compCanvas.getContext('2d'),{type:'bar',data:{labels:competitors.map(c=>c.page),datasets:[{label:'Followers',data:competitors.map(c=>c.followers),backgroundColor:competitors.map(c=>c.page==='Cars24'?'rgba(71,54,254,.9)':'rgba(71,54,254,.22)'),borderRadius:5}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+  }
+
+  // Follower + visitor demographics — current-snapshot bar chart + table per dimension
+  function renderLIDemo(prefix,dataByDim){
+    LI_DEMO_DIMS.forEach(([dim])=>{
+      const data=dataByDim[dim]||[];
+      if(!data.length)return;
+      const limit=dim==='location'||dim==='industry'?10:dim==='job_function'?8:data.length;
+      const top=data.slice(0,limit);
+      const total=data.reduce((s,d)=>s+d.value,0);
+      const ck=`${prefix}_${dim}_${key}`;if(charts[ck])charts[ck].destroy();
+      const canvas=document.getElementById(`${prefix}-${dim}-${key}`);
+      if(canvas)charts[ck]=new Chart(canvas.getContext('2d'),{type:'bar',data:{labels:top.map(d=>d.category),datasets:[{data:top.map(d=>d.value),backgroundColor:'rgba(71,54,254,.65)',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y:{grid:{display:false},ticks:{font:{size:10.5}}}}}});
+      const tblEl=document.getElementById(`${prefix}-${dim}-tbl-${key}`);
+      if(tblEl){
+        const th=`<th>Category</th><th class="nr">Value</th><th class="nr">% Share</th>`;
+        const rows=data.slice(0,15).map(d=>`<tr><td>${d.category}</td><td class="nr">${numFmt(d.value)}</td><td class="nr">${total>0?(d.value/total*100).toFixed(1)+'%':'—'}</td></tr>`).join('');
+        tblEl.innerHTML=tbl(th,rows);
+      }
+    });
+  }
+  renderLIDemo('li-fdemo',fDemo);
+  renderLIDemo('li-vdemo',vDemo);
+
   scanTw(el);
 }
 

@@ -724,72 +724,103 @@ IG_HANDLES = {
 def build_instagram():
     result = {}
     for key in IG_KEYS:
-        p = DATA / f"instagram_{key}.csv"
-        if not p.exists():
+        p  = DATA / f"instagram_{key}.csv"
+        pp = DATA / f"instagram_{key}_posts.csv"
+        if not p.exists() and not pp.exists():
             continue
         try:
-            df = pd.read_csv(p)
-            if df.empty:
-                continue
-            df = df.sort_values("month").reset_index(drop=True)
-
+            # Account-level only: followers + the two metrics with no per-post
+            # equivalent (profile_views, accounts_engaged).
+            acct_by_month = {}
             snap = {}
-            if "total_followers" in df.columns:
-                snap["followers"] = int(df["total_followers"].iloc[-1])
-            if "total_media" in df.columns:
-                snap["media"] = int(df["total_media"].iloc[-1])
+            if p.exists():
+                df = pd.read_csv(p)
+                if not df.empty:
+                    df = df.sort_values("month").reset_index(drop=True)
+                    if "total_followers" in df.columns:
+                        snap["followers"] = int(df["total_followers"].iloc[-1])
+                    if "total_media" in df.columns:
+                        snap["media"] = int(df["total_media"].iloc[-1])
+                    for _, row in df.iterrows():
+                        acct_by_month[str(row["month"])[:7]] = {
+                            "followers":        int(row.get("followers", 0)),
+                            "followers_gained": int(row.get("followers_gained", 0)),
+                            "followers_lost":   int(row.get("followers_lost", 0)),
+                            "net_followers":    int(row.get("net_followers", 0)),
+                            "profile_views":    int(row.get("profile_views", 0)),
+                            "accounts_engaged": int(row.get("accounts_engaged", 0)),
+                        }
 
+            # Posts — full history. Views/reach/likes/comments/shares/content_posted
+            # are computed by summing every post published in a given month (same
+            # "sum the live content" pattern as the Influencer dashboard) rather than
+            # trusting Instagram's account-level Insights, which blend organic and
+            # paid/boosted delivery with no way to split them.
+            posts = []
+            from collections import defaultdict
+            monthly_from_posts = defaultdict(lambda: {
+                "views": 0, "reach": 0, "likes": 0, "comments": 0,
+                "shares": 0, "saves": 0, "interactions": 0, "content_posted": 0,
+            })
+            if pp.exists():
+                pdf = pd.read_csv(pp)
+                for _, pr in pdf.iterrows():
+                    d = str(pr.get("date", ""))[:10]
+                    post = {
+                        "date":         d,
+                        "type":         str(pr.get("type", "")),
+                        "caption":      str(pr.get("caption", ""))[:100],
+                        "url":          str(pr.get("url", "")),
+                        "likes":        int(pr.get("likes", 0)),
+                        "comments":     int(pr.get("comments", 0)),
+                        "views":        int(pr.get("views", 0)),
+                        "reach":        int(pr.get("reach", 0)),
+                        "saves":        int(pr.get("saves", 0)),
+                        "shares":       int(pr.get("shares", 0)),
+                        "interactions": int(pr.get("interactions", 0)),
+                    }
+                    posts.append(post)
+                    if d[:7]:
+                        agg = monthly_from_posts[d[:7]]
+                        agg["views"]          += post["views"]
+                        agg["reach"]          += post["reach"]
+                        agg["likes"]          += post["likes"]
+                        agg["comments"]       += post["comments"]
+                        agg["shares"]         += post["shares"]
+                        agg["saves"]          += post["saves"]
+                        agg["interactions"]   += post["interactions"]
+                        agg["content_posted"] += 1
+
+            months = sorted(set(acct_by_month) | set(monthly_from_posts))
             rows = []
-            for _, row in df.iterrows():
-                views    = int(row.get("views", 0))
-                likes    = int(row.get("likes", 0))
-                comments = int(row.get("comments", 0))
-                shares   = int(row.get("shares", 0))
-                saves    = int(row.get("saves", 0))
-                interactions_sum = likes + comments + shares + saves
-                engagement_rate = round(interactions_sum / views * 100, 2) if views > 0 else 0
-                r = {
-                    "month":              str(row["month"])[:7],
-                    "label":              mlabel(str(row["month"])[:7]),
-                    "followers":          int(row.get("followers", 0)),
-                    "followers_gained":   int(row.get("followers_gained", 0)),
-                    "followers_lost":     int(row.get("followers_lost", 0)),
-                    "net_followers":      int(row.get("net_followers", 0)),
+            for m in months:
+                a = acct_by_month.get(m, {})
+                c = monthly_from_posts.get(m, {})
+                views    = c.get("views", 0)
+                likes    = c.get("likes", 0)
+                comments = c.get("comments", 0)
+                shares   = c.get("shares", 0)
+                saves    = c.get("saves", 0)
+                engagement_rate = round((likes + comments + shares + saves) / views * 100, 2) if views > 0 else 0
+                rows.append({
+                    "month":              m,
+                    "label":              mlabel(m),
+                    "followers":          a.get("followers", 0),
+                    "followers_gained":   a.get("followers_gained", 0),
+                    "followers_lost":     a.get("followers_lost", 0),
+                    "net_followers":      a.get("net_followers", 0),
                     "views":              views,
-                    "reach":              int(row.get("reach", 0)),
-                    "profile_views":      int(row.get("profile_views", 0)),
-                    "accounts_engaged":   int(row.get("accounts_engaged", 0)),
-                    "total_interactions": int(row.get("total_interactions", 0)),
+                    "reach":              c.get("reach", 0),
+                    "profile_views":      a.get("profile_views", 0),
+                    "accounts_engaged":   a.get("accounts_engaged", 0),
+                    "total_interactions": c.get("interactions", 0),
                     "likes":              likes,
                     "comments":           comments,
                     "shares":             shares,
                     "saves":              saves,
-                    "content_posted":     int(row.get("content_posted", 0)),
+                    "content_posted":     c.get("content_posted", 0),
                     "engagement_rate":    engagement_rate,
-                }
-                rows.append(r)
-
-            # Top posts
-            posts = []
-            pp = DATA / f"instagram_{key}_posts.csv"
-            if pp.exists():
-                try:
-                    pdf = pd.read_csv(pp)
-                    for _, pr in pdf.iterrows():
-                        posts.append({
-                            "date":         str(pr.get("date",""))[:10],
-                            "type":         str(pr.get("type","")),
-                            "caption":      str(pr.get("caption",""))[:100],
-                            "url":          str(pr.get("url","")),
-                            "likes":        int(pr.get("likes",0)),
-                            "comments":     int(pr.get("comments",0)),
-                            "reach":        int(pr.get("reach",0)),
-                            "saves":        int(pr.get("saves",0)),
-                            "shares":       int(pr.get("shares",0)),
-                            "interactions": int(pr.get("interactions",0)),
-                        })
-                except Exception:
-                    pass
+                })
 
             # Follower demographics — current-month snapshot only (IG Insights has no
             # historical time series for this), age/gender/city/country breakdowns
@@ -809,7 +840,7 @@ def build_instagram():
                 "posts":        posts,
                 "demographics": demographics,
             }
-            print(f"  ✓ Instagram {key}: {len(rows)} months, {len(posts)} top posts")
+            print(f"  ✓ Instagram {key}: {len(rows)} months, {len(posts)} posts")
         except Exception as e:
             print(f"  ⚠ Instagram {key}: {e}")
     return result
@@ -862,6 +893,45 @@ def _li_float(row, *cols):
             except: pass
     return None
 
+# Follower/visitor demographic breakdowns — current-snapshot totals only (LinkedIn's
+# exports don't provide a historical time series for these), same pattern as
+# Instagram's age/gender/city/country demographics.
+LI_DEMO_DIMS = ["location", "job_function", "seniority", "industry", "company_size"]
+
+def _li_load_demo_csv(path):
+    if not path.exists():
+        return []
+    try:
+        df = pd.read_csv(path)
+        return [{"category": str(r["category"]), "value": int(r["value"])} for _, r in df.iterrows()]
+    except Exception:
+        return []
+
+def build_linkedin_competitors():
+    """Shared competitor snapshot (not per-page) — Cars24 vs other major brands on
+    LinkedIn Page followers/engagement. Single point-in-time export, no history."""
+    p = DATA / "linkedin_competitor_analytics.csv"
+    if not p.exists():
+        return []
+    try:
+        df = pd.read_csv(p)
+        df.columns = [c.strip() for c in df.columns]
+        rows = []
+        for _, r in df.iterrows():
+            rows.append({
+                "page":          str(r.get("Page", "")),
+                "followers":     _li_int(r, "Total Followers"),
+                "new_followers": _li_int(r, "New Followers"),
+                "engagements":   _li_int(r, "Total post engagements"),
+                "posts":         _li_int(r, "Total posts"),
+            })
+        rows.sort(key=lambda x: x["followers"], reverse=True)
+        print(f"  ✓ LinkedIn competitor analytics: {len(rows)} brands")
+        return rows
+    except Exception as e:
+        print(f"  ⚠ LinkedIn competitor analytics: {e}")
+        return []
+
 def build_linkedin():
     result = {}
     for key, name in LI_PAGES.items():
@@ -872,7 +942,11 @@ def build_linkedin():
         if not fol_p.exists() and not con_p.exists():
             continue
 
-        page_data = {"page_name": name, "snapshot": {}, "monthly": [], "posts": []}
+        page_data = {
+            "page_name": name, "snapshot": {}, "monthly": [], "posts": [],
+            "follower_demographics": {dim: _li_load_demo_csv(DATA / f"linkedin_{key}_followers_by_{dim}.csv") for dim in LI_DEMO_DIMS},
+            "visitor_demographics":  {dim: _li_load_demo_csv(DATA / f"linkedin_{key}_visitors_by_{dim}.csv")  for dim in LI_DEMO_DIMS},
+        }
 
         # ── Followers CSV ──────────────────────────────────────────────────
         if fol_p.exists():
@@ -1044,6 +1118,7 @@ if __name__ == "__main__":
     instagram      = build_instagram()
     influencers    = build_influencers()
     linkedin       = build_linkedin()
+    linkedin_competitors = build_linkedin_competitors()
 
     payload = {
         "_meta": {
@@ -1066,6 +1141,7 @@ if __name__ == "__main__":
         "instagram":          instagram,
         "influencers":        influencers,
         "linkedin":           linkedin,
+        "linkedin_competitors": linkedin_competitors,
     }
 
     with open(OUT, "w") as f:

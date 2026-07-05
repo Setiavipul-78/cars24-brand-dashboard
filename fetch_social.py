@@ -669,29 +669,6 @@ def ig_get(path: str, params: dict) -> dict:
         raise RuntimeError(f"IG API {r.status_code}: {r.text[:200]}")
     return r.json()
 
-def fetch_ig_publish_counts(uid: str, tok: str) -> dict:
-    """Paginate the full media list (id + timestamp only, cheap) and bucket by month."""
-    import requests
-    from collections import defaultdict
-    monthly = defaultdict(int)
-    url = f"{BASE_IG}/{uid}/media"
-    params = {"fields": "id,timestamp", "limit": 100, "access_token": tok}
-    for _ in range(30):  # up to 3000 posts
-        r = requests.get(url, params=params, timeout=20)
-        if not r.ok:
-            break
-        d = r.json()
-        for item in d.get("data", []):
-            m = item.get("timestamp", "")[:7]
-            if m:
-                monthly[m] += 1
-        next_url = d.get("paging", {}).get("next")
-        if not next_url:
-            break
-        url, params = next_url, {}
-        time.sleep(0.1)
-    return dict(monthly)
-
 def fetch_ig_demographics(uid: str, tok: str) -> dict:
     """Follower demographics snapshot (age/gender/city/country) — 'this_month' only,
     Instagram's Insights API doesn't expose a historical time series for these."""
@@ -724,16 +701,15 @@ def fetch_ig_account(key: str, cfg: dict) -> list[dict]:
     total_followers = snap.get("followers_count", 0)
     total_media = snap.get("media_count", 0)
 
-    publish_counts = fetch_ig_publish_counts(uid, tok)
-
     # v21 IG Insights: all metrics use period=day + metric_type=total_value
     # Returns total_value.value for the queried window (max 30 days)
     # Use 28-day windows (1st to 29th) to stay within 30-day limit for all months
-    # website_clicks/phone_call_clicks/text_message_clicks were deprecated by Meta in
-    # Graph API v21 (Jan 2025) and are dropped here rather than fetched and unused.
-    ALL_METRICS = ["views", "reach", "profile_views",
-                   "accounts_engaged", "total_interactions", "likes", "comments",
-                   "shares", "saves"]
+    # profile_views/accounts_engaged are genuinely account-level (no per-post
+    # equivalent). views/reach/likes/comments/shares/saves/content_posted are
+    # instead computed by summing per-post data in build_data.py — Instagram's
+    # account-level Insights blend organic and paid/boosted delivery with no way
+    # to split them, so we compute those from the posts we actually published.
+    ALL_METRICS = ["profile_views", "accounts_engaged"]
 
     # Build months list — IG only keeps 2 years of data
     today = date.today()
@@ -819,16 +795,8 @@ def fetch_ig_account(key: str, cfg: dict) -> list[dict]:
             "followers_gained":   followers_gained,
             "followers_lost":     followers_lost,
             "net_followers":      followers_gained - followers_lost,
-            "views":              met.get("views", 0),
-            "reach":              met.get("reach", 0),
             "profile_views":      met.get("profile_views", 0),
             "accounts_engaged":   met.get("accounts_engaged", 0),
-            "total_interactions": met.get("total_interactions", 0),
-            "likes":              met.get("likes", 0),
-            "comments":           met.get("comments", 0),
-            "shares":             met.get("shares", 0),
-            "saves":              met.get("saves", 0),
-            "content_posted":     publish_counts.get(m, 0),
             "total_followers":    total_followers,
             "total_media":        total_media,
         })
@@ -836,71 +804,191 @@ def fetch_ig_account(key: str, cfg: dict) -> list[dict]:
 
     return rows
 
-def fetch_ig_top_posts(uid: str, tok: str, limit: int = 30) -> list:
-    """Fetch recent posts with per-post insights — returns top 20 by reach."""
-    import requests
-    rows = []
+IG_POST_FRESH_DAYS = 30  # per-post insights are re-fetched only for posts newer than this
+
+def _ig_safe_int(v, default=0):
+    """Coerce a cached CSV cell to int, tolerating None/empty/NaN-ish values from a
+    short or malformed row without raising."""
+    if v is None:
+        return default
+    s = str(v).strip()
+    if s == "" or s.lower() == "nan":
+        return default
     try:
-        # Step 1: recent media basic fields
-        r = requests.get(f"{BASE_IG}/{uid}/media", params={
-            "fields": "id,caption,media_type,timestamp,like_count,comments_count,permalink",
-            "limit":  limit,
-            "access_token": tok,
-        }, timeout=20)
-        if not r.ok:
-            return []
-        media_items = r.json().get("data", [])
-    except Exception:
-        return []
+        return int(float(s))
+    except (TypeError, ValueError):
+        return default
 
-    for item in media_items:
-        mid   = item.get("id", "")
-        mtype = item.get("media_type", "")
-        ts    = item.get("timestamp", "")[:10]
-        cap   = (item.get("caption", "") or "")[:120].replace("\n", " ")
-        likes = item.get("like_count", 0)
-        cmts  = item.get("comments_count", 0)
-        url   = item.get("permalink", "")
-        reach = 0
-        saves = 0
-        shares = 0
+def fetch_ig_all_posts(uid: str, tok: str, cache_path=None) -> list:
+    """Fetch every post's metadata + per-post insights (views/reach/saves/shares).
 
-        # Step 2: insights per post (reach + saves + shares)
+    Monthly views/reach/likes/comments/shares/content_posted are computed by
+    summing these per-post rows in build_data.py — the same "sum the live content"
+    pattern used for the Influencer dashboard — rather than trusting Instagram's
+    account-level Insights, which blend organic and paid/boosted delivery with no
+    way to split them. Paginates the full media history (Instagram retains ~2 years).
+
+    Per-post insights (views/reach/saves/shares) are only re-fetched via the API for
+    new posts, posts published within IG_POST_FRESH_DAYS, or posts whose last fetch
+    never actually succeeded (tracked via the `insights_ok` column so a structurally
+    failing post — e.g. an unsupported metric for its media type — keeps getting
+    retried forever instead of freezing at a stale 0 once it ages past the fresh
+    window). Older, successfully-fetched posts reuse the previous run's values from
+    `cache_path` (that file's own prior output), keeping nightly cost roughly flat
+    instead of growing with total historical post count forever. likes/comments/
+    caption always come fresh from the (free) media list call regardless of age.
+
+    Uses the stdlib csv module (not pandas — this file doesn't otherwise depend on
+    it) to read the cache, so missing/short cells come back as plain None rather than
+    a numpy NaN that silently poisons `int()` calls.
+    """
+    import requests
+
+    cache = {}
+    if cache_path and cache_path.exists():
         try:
-            metrics = "reach,saved"
-            if mtype in ("VIDEO", "REELS"):
-                metrics += ",shares"
-            ins = requests.get(f"{BASE_IG}/{mid}/insights", params={
-                "metric": metrics,
-                "access_token": tok,
-            }, timeout=10)
-            if ins.ok:
-                for m in ins.json().get("data", []):
-                    name = m.get("name")
-                    val  = m.get("values", [{}])[0].get("value", 0) if m.get("values") else m.get("value", 0)
-                    if name == "reach":    reach  = val
-                    elif name == "saved":  saves  = val
-                    elif name == "shares": shares = val
+            with open(cache_path, newline="") as f:
+                for r in csv.DictReader(f):
+                    pid = str(r.get("post_id") or "")
+                    if pid:
+                        cache[pid] = r
         except Exception:
             pass
 
-        rows.append({
-            "post_id":    mid,
-            "date":       ts,
-            "type":       mtype,
-            "caption":    cap,
-            "url":        url,
-            "likes":      likes,
-            "comments":   cmts,
-            "reach":      reach,
-            "saves":      saves,
-            "shares":     shares,
-            "interactions": likes + cmts + saves + shares,
-        })
-        time.sleep(0.15)
+    cutoff_date = date.today() - timedelta(days=IG_POST_FRESH_DAYS)
 
-    # Sort by reach desc, return top 20
-    return sorted(rows, key=lambda x: x["reach"], reverse=True)[:20]
+    rows = []
+    seen_ids = set()
+    truncated = False
+    url = f"{BASE_IG}/{uid}/media"
+    params = {
+        "fields": "id,caption,media_type,timestamp,like_count,comments_count,permalink",
+        "limit":  50,
+        "access_token": tok,
+    }
+    page = 0
+    while url and page < 60:  # safety cap ~3000 posts
+        try:
+            r = requests.get(url, params=params, timeout=20)
+            if not r.ok:
+                truncated = True
+                break
+            body = r.json()
+        except Exception:
+            truncated = True
+            break
+
+        for item in body.get("data", []):
+            mid   = str(item.get("id", ""))
+            mtype = item.get("media_type", "")
+            ts    = item.get("timestamp", "")[:10]
+            cap   = (item.get("caption", "") or "")[:120].replace("\n", " ")
+            likes = item.get("like_count", 0)
+            cmts  = item.get("comments_count", 0)
+            permalink = item.get("permalink", "")
+            seen_ids.add(mid)
+
+            cached = cache.get(mid)
+            cached_ok = bool(cached) and str(cached.get("insights_ok", "")).strip() == "True"
+            try:
+                post_date = date.fromisoformat(ts) if ts else None
+            except ValueError:
+                post_date = None
+            reuse_cache = cached_ok and post_date is not None and post_date < cutoff_date
+
+            if reuse_cache:
+                views        = _ig_safe_int(cached.get("views"))
+                reach        = _ig_safe_int(cached.get("reach"))
+                saves        = _ig_safe_int(cached.get("saves"))
+                shares       = _ig_safe_int(cached.get("shares"))
+                interactions = _ig_safe_int(cached.get("interactions"))
+                insights_ok  = True
+            else:
+                fetched = {}
+                try:
+                    ins = requests.get(f"{BASE_IG}/{mid}/insights", params={
+                        "metric": "views,reach,saved,shares,total_interactions",
+                        "access_token": tok,
+                    }, timeout=10)
+                    if ins.ok:
+                        for m in ins.json().get("data", []):
+                            name = m.get("name")
+                            val  = m.get("values", [{}])[0].get("value") if m.get("values") else m.get("value")
+                            if name and val is not None:
+                                fetched[name] = val
+                except Exception:
+                    pass
+
+                # Only trust this as a real fetch if we actually got at least one
+                # recognized metric back — an HTTP-200-but-empty/malformed response
+                # is treated the same as a failed call, not as "legitimately zero".
+                insights_ok = bool(fetched)
+                if insights_ok:
+                    views        = _ig_safe_int(fetched.get("views"))
+                    reach        = _ig_safe_int(fetched.get("reach"))
+                    saves        = _ig_safe_int(fetched.get("saved"))
+                    shares       = _ig_safe_int(fetched.get("shares"))
+                    interactions = _ig_safe_int(fetched.get("total_interactions"))
+                elif cached:
+                    # This attempt failed — fall back to last-known values instead of
+                    # zeroing out data that was previously fetched successfully.
+                    # insights_ok stays False so the next run keeps retrying rather
+                    # than treating this fallback as trustworthy forever.
+                    views        = _ig_safe_int(cached.get("views"))
+                    reach        = _ig_safe_int(cached.get("reach"))
+                    saves        = _ig_safe_int(cached.get("saves"))
+                    shares       = _ig_safe_int(cached.get("shares"))
+                    interactions = _ig_safe_int(cached.get("interactions"))
+                else:
+                    views = reach = saves = shares = interactions = 0
+                time.sleep(0.12)
+
+            rows.append({
+                "post_id":      mid,
+                "date":         ts,
+                "type":         mtype,
+                "caption":      cap,
+                "url":          permalink,
+                "likes":        likes,
+                "comments":     cmts,
+                "views":        views,
+                "reach":        reach,
+                "saves":        saves,
+                "shares":       shares,
+                "interactions": interactions or (likes + cmts + saves + shares),
+                "insights_ok":  insights_ok,
+            })
+
+        next_url = body.get("paging", {}).get("next")
+        url, params = next_url, None
+        page += 1
+
+    if truncated:
+        # Pagination broke early (rate limit / network blip) before reaching the end
+        # of the account's history — merge in whatever the previous run had for posts
+        # we didn't get to this time, rather than silently dropping them from the
+        # "full history" file that build_data.py sums for monthly totals.
+        for pid, crow in cache.items():
+            if pid in seen_ids:
+                continue
+            rows.append({
+                "post_id":      pid,
+                "date":         crow.get("date", ""),
+                "type":         crow.get("type", ""),
+                "caption":      crow.get("caption", ""),
+                "url":          crow.get("url", ""),
+                "likes":        _ig_safe_int(crow.get("likes")),
+                "comments":     _ig_safe_int(crow.get("comments")),
+                "views":        _ig_safe_int(crow.get("views")),
+                "reach":        _ig_safe_int(crow.get("reach")),
+                "saves":        _ig_safe_int(crow.get("saves")),
+                "shares":       _ig_safe_int(crow.get("shares")),
+                "interactions": _ig_safe_int(crow.get("interactions")),
+                "insights_ok":  str(crow.get("insights_ok", "")).strip() == "True",
+            })
+        print(f"    ⚠  posts pagination stopped early — kept {len(cache) - len(seen_ids)} prior post(s) from cache")
+
+    return rows
 
 def fetch_all_instagram():
     print("\n── Instagram ────────────────────────────────────────")
@@ -917,10 +1005,11 @@ def fetch_all_instagram():
         try:
             rows = fetch_ig_account(key, cfg)
             write_csv(DATA / f"instagram_{key}.csv", rows)
-            posts = fetch_ig_top_posts(cfg["user_id"], cfg["access_token"])
+            posts_csv = DATA / f"instagram_{key}_posts.csv"
+            posts = fetch_ig_all_posts(cfg["user_id"], cfg["access_token"], cache_path=posts_csv)
             if posts:
-                write_csv(DATA / f"instagram_{key}_posts.csv", posts)
-                print(f"    ✓ top posts: {len(posts)} items")
+                write_csv(posts_csv, posts)
+                print(f"    ✓ posts: {len(posts)} items (full history)")
             demo = fetch_ig_demographics(cfg["user_id"], cfg["access_token"])
             with open(DATA / f"instagram_{key}_extra.json", "w") as f:
                 json.dump(demo, f, indent=2)
