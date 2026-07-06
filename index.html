@@ -2511,10 +2511,7 @@ function renderLIDemoBlock(prefix,key,dataByDim,title){
   const rest=LI_DEMO_DIMS.slice(1);
   return `<div class="card">
     <div class="sh"><span class="kicker">${title.kicker}</span><span class="title">${title.title}</span><span class="desc">${title.desc}</span></div>
-    ${(dataByDim[locDim]||[]).length?`<div class="g2">
-      <div><div style="font-size:12px;font-weight:800;color:var(--ink-2);margin-bottom:8px">${locIcon} Top ${locLbl}s</div><div class="cw" style="height:300px"><canvas id="${prefix}-${locDim}-${key}"></canvas></div></div>
-      <div class="tw" id="${prefix}-${locDim}-tbl-${key}" style="max-height:300px"></div>
-    </div>`:''}
+    ${(dataByDim[locDim]||[]).length?`<div style="margin-bottom:14px"><div style="font-size:12px;font-weight:800;color:var(--ink-2);margin-bottom:8px">${locIcon} Top ${locLbl}s</div><div class="cw" style="height:320px"><canvas id="${prefix}-${locDim}-${key}"></canvas></div></div>`:''}
     ${rest.filter(([d])=>(dataByDim[d]||[]).length).reduce((acc,[d,icon,lbl],i)=>{
       if(i%2===0)acc.push([]);
       acc[acc.length-1].push(`<div><div style="font-size:12px;font-weight:800;color:var(--ink-2);margin-bottom:8px">${icon} ${lbl}</div><div class="cw" style="height:220px"><canvas id="${prefix}-${d}-${key}"></canvas></div></div>`);
@@ -2559,14 +2556,11 @@ function renderLI(containerId,key,pageName){
       </div>
       <div class="tw" id="li-tbl-${key}"></div>
     </div>
-    ${li.posts&&li.posts.length?`<div class="card"><div class="sh"><span class="kicker">🔝 Top 10 Content</span><span class="title">Best Performing Posts — All Time</span><span class="desc">Sorted by impressions across full post history.</span></div><div class="tw" id="li-posts-${key}"></div></div>`:''}
+    ${li.posts&&li.posts.length?`<div class="card"><div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px"><div><span class="kicker">🔝 Top 10 Content</span><span class="title">Best Performing Posts</span><span class="desc">Sorted by impressions in selected period.</span></div><select class="inf-sel" id="li-posts-sel-${key}"><option value="all" selected>All Time</option>${liDesc.map((r,i)=>`<option value="i:${liMonthly.length-1-i}">${r.label}</option>`).join('')}</select></div><div class="tw" id="li-posts-${key}"></div></div>`:''}
 
     ${competitors.length?`<div class="card">
-      <div class="sh"><span class="kicker">🆚 Competitor Analysis</span><span class="title">Cars24 vs Other Major Brands on LinkedIn</span><span class="desc">Current snapshot, ranked by total followers. Cars24 row highlighted.</span></div>
-      <div class="g2" style="align-items:start">
-        <div class="tw" id="li-comp-tbl-${key}"></div>
-        <div class="cw" style="height:340px"><canvas id="li-comp-chart-${key}"></canvas></div>
-      </div>
+      <div class="sh"><span class="kicker">🆚 Competitor Analysis</span><span class="title">Cars24 vs Other Major Brands on LinkedIn</span><span class="desc">Current snapshot, ranked by total followers. Cars24 bar highlighted.</span></div>
+      <div class="cw" style="height:360px"><canvas id="li-comp-chart-${key}"></canvas></div>
     </div>`:''}
 
     ${renderLIDemoBlock('li-fdemo',key,fDemo,{kicker:'👥 Follower Demographics',title:`Who Follows ${pageName}`,desc:'Current snapshot by location, function, seniority, industry & company size.'})}
@@ -2624,19 +2618,27 @@ function renderLI(containerId,key,pageName){
   const ctx=document.getElementById(`li-chart-${key}`).getContext('2d');
   charts[liCk]=new Chart(ctx,{type:'line',data:{labels:liMonthly.map(r=>r.label),datasets:[{label:'Impressions',data:liMonthly.map(r=>r.impressions||0),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.10)',fill:true,borderWidth:2.5,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{title:{display:true,text:'Impressions'},ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
 
-  // Top 10 posts — fixed all-time, no period filter
+  // Top 10 posts — with period filter (matches Instagram's Top Posts pattern)
   if(li.posts&&li.posts.length){
     const ph=`<th>Date</th><th>Post</th><th class="nr">Impressions</th><th class="nr">Clicks</th><th class="nr">Likes</th><th class="nr">Comments</th><th class="nr">Shares</th><th class="nr">Eng %</th>`;
-    const top10=[...li.posts].sort((a,b)=>(b.impressions||0)-(a.impressions||0)).slice(0,10);
-    const el2=document.getElementById(`li-posts-${key}`);
-    if(el2)el2.innerHTML=top10.length?tbl(ph,top10.map(p=>`<tr><td>${p.date}</td><td style="max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${(p.title||'').replace(/"/g,'&quot;')}">${p.title}</td><td class="nr">${numFmt(p.impressions)}</td><td class="nr">${numFmt(p.clicks)}</td><td class="nr">${numFmt(p.likes)}</td><td class="nr">${numFmt(p.comments)}</td><td class="nr">${numFmt(p.shares)}</td><td class="nr">${p.eng_rate!=null?(p.eng_rate*100).toFixed(2)+'%':'—'}</td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No posts.</p>';
+    function renderLIPosts(val){
+      let fp=li.posts;
+      if(val!=='all'){
+        const idx=parseInt(val.replace('i:',''),10);
+        const m=liMonthly[idx];
+        if(m)fp=li.posts.filter(p=>p.month===m.month);
+      }
+      const top10=[...fp].sort((a,b)=>(b.impressions||0)-(a.impressions||0)).slice(0,10);
+      const el2=document.getElementById(`li-posts-${key}`);
+      if(el2)el2.innerHTML=top10.length?tbl(ph,top10.map(p=>`<tr><td>${p.date}</td><td style="max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${(p.title||'').replace(/"/g,'&quot;')}">${p.title}</td><td class="nr">${numFmt(p.impressions)}</td><td class="nr">${numFmt(p.clicks)}</td><td class="nr">${numFmt(p.likes)}</td><td class="nr">${numFmt(p.comments)}</td><td class="nr">${numFmt(p.shares)}</td><td class="nr">${p.eng_rate!=null?(p.eng_rate*100).toFixed(2)+'%':'—'}</td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No posts in selected period.</p>';
+    }
+    const liPostSel=document.getElementById(`li-posts-sel-${key}`);
+    if(liPostSel)liPostSel.addEventListener('change',e=>renderLIPosts(e.target.value));
+    renderLIPosts('all');
   }
 
   // Competitor analysis (Cars24 India only — data is India-market-specific)
   if(competitors.length){
-    const th=`<th>#</th><th>Brand</th><th class="nr ch">Followers</th><th class="nr">New Followers</th><th class="nr">Engagements</th><th class="nr">Posts</th>`;
-    const tblEl=document.getElementById(`li-comp-tbl-${key}`);
-    if(tblEl)tblEl.innerHTML=tbl(th,competitors.map((c,i)=>`<tr class="${c.page==='Cars24'?'lat':''}"><td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td><td><strong>${c.page}</strong>${c.page==='Cars24'?' <span class="badge bb">You</span>':''}</td><td class="nr cc"><strong>${numFmt(c.followers)}</strong></td><td class="nr">+${numFmt(c.new_followers)}</td><td class="nr">${numFmt(c.engagements)}</td><td class="nr">${numFmt(c.posts)}</td></tr>`).join(''));
     const compCk=`li_comp_${key}`;if(charts[compCk])charts[compCk].destroy();
     const compCanvas=document.getElementById(`li-comp-chart-${key}`);
     if(compCanvas)charts[compCk]=new Chart(compCanvas.getContext('2d'),{type:'bar',data:{labels:competitors.map(c=>c.page),datasets:[{label:'Followers',data:competitors.map(c=>c.followers),backgroundColor:competitors.map(c=>c.page==='Cars24'?'rgba(71,54,254,.9)':'rgba(71,54,254,.22)'),borderRadius:5}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
@@ -2652,13 +2654,7 @@ function renderLI(containerId,key,pageName){
       const total=data.reduce((s,d)=>s+d.value,0);
       const ck=`${prefix}_${dim}_${key}`;if(charts[ck])charts[ck].destroy();
       const canvas=document.getElementById(`${prefix}-${dim}-${key}`);
-      if(canvas)charts[ck]=new Chart(canvas.getContext('2d'),{type:'bar',data:{labels:top.map(d=>d.category),datasets:[{data:top.map(d=>d.value),backgroundColor:'rgba(71,54,254,.65)',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y:{grid:{display:false},ticks:{font:{size:10.5}}}}}});
-      const tblEl=document.getElementById(`${prefix}-${dim}-tbl-${key}`);
-      if(tblEl){
-        const th=`<th>Category</th><th class="nr">Value</th><th class="nr">% Share</th>`;
-        const rows=data.slice(0,15).map(d=>`<tr><td>${d.category}</td><td class="nr">${numFmt(d.value)}</td><td class="nr">${total>0?(d.value/total*100).toFixed(1)+'%':'—'}</td></tr>`).join('');
-        tblEl.innerHTML=tbl(th,rows);
-      }
+      if(canvas)charts[ck]=new Chart(canvas.getContext('2d'),{type:'bar',data:{labels:top.map(d=>d.category),datasets:[{data:top.map(d=>d.value),backgroundColor:'rgba(71,54,254,.65)',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{tooltip:{callbacks:{label:c=>`${numFmt(c.parsed.x)} (${total>0?(c.parsed.x/total*100).toFixed(1):0}%)`}},legend:{display:false}},scales:{x:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y:{grid:{display:false},ticks:{font:{size:10.5}}}}}});
     });
   }
   renderLIDemo('li-fdemo',fDemo);
