@@ -170,6 +170,72 @@ def build_city_tab(token, tab, out_name):
     print(f"  ✓ {out_name}: {len(out)} months × {len(cities)} cities ({out[0]['month']} → {out[-1]['month']})")
 
 
+# ── UAE / AUS: single-block Cars24-only pan index (no Category/Generic split
+# like India has) ───────────────────────────────────────────────────────────
+def build_pan_simple(token, tab, out_name):
+    rows = fetch_values(token, f"'{tab}'!A1:C1000")
+    hdr_idx = next((i for i, r in enumerate(rows) if len(r) >= 2 and r[0].strip() == "Month" and r[1].strip() == "Index"), None)
+    if hdr_idx is None:
+        raise ValidationError(f"{tab}: could not find 'Month | Index' header row")
+
+    out = []
+    for r in rows[hdr_idx + 1:]:
+        if not r or not r[0].strip():
+            break
+        m = parse_month(r[0])
+        idx = parse_index(r[1]) if len(r) > 1 else None
+        out.append({"month": f"{m.year:04d}-{m.month:02d}", "Cars24": idx})
+
+    if not out:
+        raise ValidationError(f"{tab}: zero data rows parsed")
+    out.sort(key=lambda r: r["month"])
+    path = DATA / out_name
+    check_row_count(len(out), path, f"Google Index {tab}")
+    write_csv(path, ["month", "Cars24"], out)
+    print(f"  ✓ {out_name}: {len(out)} months ({out[0]['month']} → {out[-1]['month']})")
+
+
+# ── UAE-Cities / AUS-Regions: repeating column blocks, each with its own
+# Month/Index/Rounded triplet (different layout from India's city tabs, which
+# use a single Month column + one column per city) ─────────────────────────
+def build_region_blocks(token, tab, out_name):
+    rows = fetch_values(token, f"'{tab}'!A1:Z2000")
+    if len(rows) < 3:
+        raise ValidationError(f"{tab}: expected at least 3 rows (region row, header row, data)")
+    region_row, header_row = rows[0], rows[1]
+    block_starts = [i for i, v in enumerate(region_row) if str(v).strip()]
+    if not block_starts:
+        raise ValidationError(f"{tab}: no region names found in row 0: {region_row!r}")
+
+    out, regions = [], []
+    for bi, start in enumerate(block_starts):
+        region = str(region_row[start]).strip()
+        regions.append(region)
+        if start >= len(header_row) or str(header_row[start]).strip() != "Month":
+            raise ValidationError(f"{tab} region {region!r}: expected 'Month' at column {start}, "
+                                   f"got {header_row[start] if start < len(header_row) else None!r}")
+        idx_col = start + 1
+        if idx_col >= len(header_row) or str(header_row[idx_col]).strip() != "Index":
+            raise ValidationError(f"{tab} region {region!r}: expected 'Index' at column {idx_col}")
+
+        region_out = []
+        for r in rows[2:]:
+            if len(r) <= start or not str(r[start]).strip():
+                continue
+            m = parse_month(r[start])
+            idx = parse_index(r[idx_col]) if idx_col < len(r) else None
+            region_out.append({"region": region, "month": f"{m.year:04d}-{m.month:02d}", "index": idx})
+        if not region_out:
+            raise ValidationError(f"{tab} region {region!r}: zero data rows parsed")
+        out.extend(region_out)
+
+    out.sort(key=lambda r: (r["region"], r["month"]))
+    path = DATA / out_name
+    check_row_count(len(out), path, f"Google Index {tab}")
+    write_csv(path, ["region", "month", "index"], out)
+    print(f"  ✓ {out_name}: {len(out)} rows across {len(regions)} regions ({regions})")
+
+
 def main():
     load_env()
     token = get_token()
@@ -191,6 +257,30 @@ def main():
         build_city_tab(token, "India-City (Generic)", "gindex_city_generic_monthly.csv")
     except (ValidationError, ValueError, KeyError) as e:
         print(f"  ✗ Google Index city generic fetch failed validation, existing CSV left untouched: {e}")
+
+    print("  Fetching Google Index (UAE pan)…")
+    try:
+        build_pan_simple(token, "UAE", "gindex_uae_monthly.csv")
+    except (ValidationError, ValueError, KeyError) as e:
+        print(f"  ✗ Google Index UAE fetch failed validation, existing CSV left untouched: {e}")
+
+    print("  Fetching Google Index (UAE cities)…")
+    try:
+        build_region_blocks(token, "UAE-Cities", "gindex_uae_city_monthly.csv")
+    except (ValidationError, ValueError, KeyError) as e:
+        print(f"  ✗ Google Index UAE cities fetch failed validation, existing CSV left untouched: {e}")
+
+    print("  Fetching Google Index (AUS pan)…")
+    try:
+        build_pan_simple(token, "AUS", "gindex_aus_monthly.csv")
+    except (ValidationError, ValueError, KeyError) as e:
+        print(f"  ✗ Google Index AUS fetch failed validation, existing CSV left untouched: {e}")
+
+    print("  Fetching Google Index (AUS regions)…")
+    try:
+        build_region_blocks(token, "AUS-Regions", "gindex_aus_region_monthly.csv")
+    except (ValidationError, ValueError, KeyError) as e:
+        print(f"  ✗ Google Index AUS regions fetch failed validation, existing CSV left untouched: {e}")
 
 
 if __name__ == "__main__":

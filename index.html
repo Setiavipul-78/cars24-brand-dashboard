@@ -640,15 +640,17 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
   <div class="country" id="country-au">
     <div class="tabset"><nav class="tabs">
       <button class="tab active" data-target="au-s">📊 Brand impressions</button>
-      <button class="tab" data-target="au-sos">🆚 Share of searches</button>
-      <button class="tab" data-target="au-city">🏙 City level</button>
+      <button class="tab" data-target="au-kw" data-lazy="au-kw">🔑 Keywords volume</button>
+      <button class="tab" data-target="au-sos" data-lazy="au-sos">🆚 Share of searches</button>
+      <button class="tab" data-target="au-gi" data-lazy="au-gi">📡 Google indexed</button>
       <button class="tab" data-target="au-yt" data-lazy="yt">📺 YouTube</button>
       <button class="tab" data-target="au-ig" data-lazy="au-ig">📸 Instagram</button>
       <button class="tab" data-target="au-li">💼 LinkedIn</button>
     </nav><div class="tabpanes">
-      <section class="tabpane active" id="au-s"><div class="ph"><div class="ph-mark">📊</div><div class="ph-title">Australia · Brand impressions</div><div class="ph-body">Share the Google Search Console export for Australia to populate.</div></div></section>
-      <section class="tabpane" id="au-sos"><div class="ph"><div class="ph-mark">🆚</div><div class="ph-title">Australia · Share of searches</div><div class="ph-body">Share Brandstack BSOS data (Cars24 vs Carsales, Drive, AutoTrader AU).</div></div></section>
-      <section class="tabpane" id="au-city"><div class="ph"><div class="ph-mark">🏙</div><div class="ph-title">Australia · City level</div><div class="ph-body">Share city-level BSOS data (Sydney, Melbourne, Brisbane) to populate.</div></div></section>
+      <section class="tabpane active" id="au-s"></section>
+      <section class="tabpane" id="au-kw"></section>
+      <section class="tabpane" id="au-sos"></section>
+      <section class="tabpane" id="au-gi"></section>
       <section class="tabpane" id="au-yt"><div id="ytc-au"></div></section>
       <section class="tabpane" id="au-ig"><div id="igc-au"></div></section>
       <section class="tabpane" id="au-li"><div id="lic-cars24_au"></div></section>
@@ -659,16 +661,18 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
   <div class="country" id="country-uae">
     <div class="tabset"><nav class="tabs">
       <button class="tab active" data-target="uae-s">📊 Brand impressions</button>
-      <button class="tab" data-target="uae-sos">🆚 Share of searches</button>
-      <button class="tab" data-target="uae-city">🏙 City level</button>
+      <button class="tab" data-target="uae-kw" data-lazy="uae-kw">🔑 Keywords volume</button>
+      <button class="tab" data-target="uae-sos" data-lazy="uae-sos">🆚 Share of searches</button>
+      <button class="tab" data-target="uae-gi" data-lazy="uae-gi">📡 Google indexed</button>
       <button class="tab" data-target="uae-yt" data-lazy="yt">📺 YouTube</button>
       <button class="tab" data-target="uae-ig" data-lazy="uae-ig">📸 Instagram</button>
       <button class="tab" data-target="uae-li">💼 LinkedIn</button>
       <button class="tab" data-target="uae-inf" data-lazy="uae-inf">👥 Influencers</button>
     </nav><div class="tabpanes">
-      <section class="tabpane active" id="uae-s"><div class="ph"><div class="ph-mark">📊</div><div class="ph-title">UAE · Brand impressions</div><div class="ph-body">Share the Google Search Console export for UAE to populate.</div></div></section>
-      <section class="tabpane" id="uae-sos"><div class="ph"><div class="ph-mark">🆚</div><div class="ph-title">UAE · Share of searches</div><div class="ph-body">Share Brandstack BSOS data (Cars24 vs Dubizzle, Dubicars, YallaMotor).</div></div></section>
-      <section class="tabpane" id="uae-city"><div class="ph"><div class="ph-mark">🏙</div><div class="ph-title">UAE · City level</div><div class="ph-body">Share city-level BSOS data (Dubai, Abu Dhabi, Sharjah) to populate.</div></div></section>
+      <section class="tabpane active" id="uae-s"></section>
+      <section class="tabpane" id="uae-kw"></section>
+      <section class="tabpane" id="uae-sos"></section>
+      <section class="tabpane" id="uae-gi"></section>
       <section class="tabpane" id="uae-yt"><div id="ytc-uae"></div></section>
       <section class="tabpane" id="uae-ig"><div id="igc-uae"></div></section>
       <section class="tabpane" id="uae-li"><div id="lic-cars24_arabia"></div></section>
@@ -852,23 +856,137 @@ function renderOv(){
   document.getElementById('freshness').textContent=`Updated ${D._meta.built}`;
 }
 
-function initTab1(){
-  const k=D.kpis,mon=D.monthly_impressions||[],daily=D.gsc_daily||[],weekly=D.gsc_weekly||[];
+// Reusable Brand Search Impressions markup — used for India's static section
+// (prefix='') and injected for AU/UAE (prefix='au-'/'uae-') into their tabpanes.
+function searchTabHtml(prefix, gscUrl, sourceLabel){
+  const p=prefix;
+  return `
+  <div class="g3" id="${p}imp-kpis"></div>
+
+  <div class="tab-actions"><a class="card-act-btn" href="${gscUrl}" target="_blank" rel="noopener">📄 View in Search Console</a><button class="card-act-btn" type="button" onclick="downloadAllTablesCSV('brand_search_impressions_${p}all.csv',[{title:'Monthly Impressions',tblWrapperId:'${p}tbl-monthly'},{title:'Weekly Impressions',tblWrapperId:'${p}tbl-weekly'}])">⬇ Download all tables (CSV)</button></div>
+
+  <div class="card" style="margin-bottom:10px">
+    <div class="sh"><span class="kicker">📈 Monthly trend</span><span class="title">Brand Search Impressions</span><span class="desc">Total times Cars24-related searches appeared on Google, ${sourceLabel}.</span></div>
+    <div class="cw tall"><canvas id="${p}chart-imp"></canvas></div>
+  </div>
+
+  <div class="g2" style="gap:10px;margin-bottom:10px;align-items:stretch">
+    <div class="card" style="margin:0;display:flex;flex-direction:column">
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+        <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Impressions Table</span></div>
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+          <div class="pp-wrap" id="${p}pp-imp">
+            <button class="pp active" data-p="all">All</button>
+            <button class="pp" data-p="12m">12M</button>
+            <button class="pp" data-p="6m">6M</button>
+            <button class="pp" data-p="3m">3M</button>
+            <button class="pp" data-p="compare">Compare ▾</button>
+          </div>
+          <div class="cr" id="${p}cr-imp">
+            <div class="cr-pair">
+              <div class="cr-row"><span class="cr-lbl" style="color:var(--blue)">Period A</span><input type="month" id="${p}imp-a-from"><span class="sep">–</span><input type="month" id="${p}imp-a-to"></div>
+              <div class="cr-row"><span class="cr-lbl" style="color:var(--grey)">vs</span><input type="month" id="${p}imp-b-from"><span class="sep">–</span><input type="month" id="${p}imp-b-to"></div>
+              <button class="apply-btn" onclick="applyCompare('${p}imp')" style="align-self:flex-end">Compare</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions"><a class="card-act-btn" href="${gscUrl}" target="_blank" rel="noopener">📄 View in Search Console</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-monthly','brand_impressions_monthly_${p}.csv')">⬇ CSV</button></div>
+      <div class="tw" id="${p}tbl-monthly" style="flex:1"></div>
+    </div>
+    <div class="card" style="margin:0;display:flex;flex-direction:column">
+      <div class="sh" style="margin-bottom:8px"><span class="kicker">📊 MoM Chart</span><span class="title">Impressions by Month</span><span class="desc">Blue = grew vs prior month · Red = declined</span></div>
+      <div style="flex:1;min-height:220px"><canvas id="${p}chart-mom-bar"></canvas></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:10px">
+    <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+      <div><span class="kicker">📆 Week-on-Week</span><span class="title">Weekly Brand Search Impressions</span><span class="desc">Total weekly impressions from Google Search Console. Blue = grew, Red = declined.</span></div>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <div class="pp-wrap" id="${p}pp-wow">
+          <button class="pp active" data-p="all">All</button>
+          <button class="pp" data-p="26w">26W</button>
+          <button class="pp" data-p="12w">12W</button>
+          <button class="pp" data-p="8w">8W</button>
+          <button class="pp" data-p="compare">Compare ▾</button>
+        </div>
+        <div class="cr" id="${p}cr-wow">
+          <div class="cr-pair">
+            <div class="cr-row"><span class="cr-lbl" style="color:var(--blue)">Period A</span><input type="date" id="${p}wow-a-from"><span class="sep">–</span><input type="date" id="${p}wow-a-to"></div>
+            <div class="cr-row"><span class="cr-lbl" style="color:var(--grey)">vs</span><input type="date" id="${p}wow-b-from"><span class="sep">–</span><input type="date" id="${p}wow-b-to"></div>
+            <button class="apply-btn" onclick="applyCompare('${p}wow')" style="align-self:flex-end">Compare</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-actions"><a class="card-act-btn" href="${gscUrl}" target="_blank" rel="noopener">📄 View in Search Console</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-weekly','brand_impressions_weekly_${p}.csv')">⬇ CSV</button></div>
+    <div class="tw" id="${p}tbl-weekly" style="margin-bottom:10px"></div>
+    <div class="cw"><canvas id="${p}chart-wow"></canvas></div>
+  </div>
+
+  <div class="card" style="margin-bottom:0">
+    <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+      <div><span class="kicker">📆 Day-on-Day</span><span class="title">Daily Brand Search Impressions</span><span class="desc">Daily impressions from Google Search Console. Blue = grew, Red = declined.</span></div>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <div class="pp-wrap" id="${p}pp-dod">
+          <button class="pp" data-p="all">All</button>
+          <button class="pp active" data-p="90d">90D</button>
+          <button class="pp" data-p="30d">30D</button>
+          <button class="pp" data-p="14d">14D</button>
+          <button class="pp" data-p="7d">7D</button>
+          <button class="pp" data-p="compare">Compare ▾</button>
+        </div>
+        <div class="cr" id="${p}cr-dod">
+          <div class="cr-pair">
+            <div class="cr-row"><span class="cr-lbl" style="color:var(--blue)">Period A</span><input type="date" id="${p}dod-a-from"><span class="sep">–</span><input type="date" id="${p}dod-a-to"></div>
+            <div class="cr-row"><span class="cr-lbl" style="color:var(--grey)">vs</span><input type="date" id="${p}dod-b-from"><span class="sep">–</span><input type="date" id="${p}dod-b-to"></div>
+            <button class="apply-btn" onclick="applyCompare('${p}dod')" style="align-self:flex-end">Compare</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cw tall"><canvas id="${p}chart-dod"></canvas></div>
+  </div>`;
+}
+
+// Lightweight KPI summary derived straight from a monthly_impressions array —
+// used for AU/UAE, which don't have India's build_kpis()/BSOS-mixed KPI object.
+function deriveSimpleKpis(monthly){
+  if(!monthly||!monthly.length) return {};
+  const lat=monthly[monthly.length-1];
+  const peak=monthly.reduce((a,b)=>(b.impressions>a.impressions?b:a),monthly[0]);
+  const fmtL=n=>(n/1e5).toFixed(2)+'L';
+  return {
+    latest_month_label: lat.label,
+    curr_imp_fmt: fmtL(lat.impressions),
+    mom_imp: lat.mom,
+    yoy_imp: lat.yoy,
+    is_ath: lat.impressions===peak.impressions,
+    peak_imp_fmt: fmtL(peak.impressions),
+    peak_month_label: peak.label,
+  };
+}
+
+function initSearchTab(prefix,dataSrc){
+  const k=dataSrc.kpis||{},mon=dataSrc.monthly||[],daily=dataSrc.daily||[],weekly=dataSrc.weekly||[];
+  const id=s=>`${prefix}${s}`;
+  if(!mon.length)return;
   const mC=(k.mom_imp||0)>=0?'kh-green':'kh-red',yC=(k.yoy_imp||0)>=0?'kh-green':'kh-red';
-  document.getElementById('imp-kpis').innerHTML=`
+  document.getElementById(id('imp-kpis')).innerHTML=`
     <div class="kh kh-blue"><div class="kl"><span class="ki">📊</span>Brand Impressions · ${k.latest_month_label}</div><div class="kv">${k.curr_imp_fmt}</div><div class="ks">${badge(k.mom_imp)} MoM &nbsp; ${badge(k.yoy_imp)} YoY ${k.is_ath?'&nbsp;<span class="badge ba">⭐ ATH</span>':''}</div></div>
     <div class="kh ${mC}"><div class="kl"><span class="ki">${(k.mom_imp||0)>=0?'📈':'📉'}</span>Month-on-Month</div><div class="kv">${fM(k.mom_imp)}</div><div class="ks">vs ${mon.length>=2?mon[mon.length-2].label:'—'}</div></div>
     <div class="kh ${yC}"><div class="kl"><span class="ki">${(k.yoy_imp||0)>=0?'📈':'📉'}</span>Year-on-Year</div><div class="kv">${fM(k.yoy_imp)}</div><div class="ks">Peak ${k.peak_imp_fmt} in ${k.peak_month_label}</div></div>`;
 
   if(mon.length){
-    const c=document.getElementById('chart-imp').getContext('2d');
-    charts.imp=new Chart(c,{type:'line',data:{labels:mon.map(r=>r.label),datasets:[{label:'Impressions (L)',data:mon.map(r=>r.imp_lakh),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.35,borderWidth:3,pointRadius:2,pointBackgroundColor:'#4736FE'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'L'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14}}}}});
+    const c=document.getElementById(id('chart-imp')).getContext('2d');
+    charts[id('imp')]=new Chart(c,{type:'line',data:{labels:mon.map(r=>r.label),datasets:[{label:'Impressions (L)',data:mon.map(r=>r.imp_lakh),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.35,borderWidth:3,pointRadius:2,pointBackgroundColor:'#4736FE'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'L'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14}}}}});
   }
 
   // ── MoM table (no Trend column) + right bar chart ──
   function renderMomBar(fdA,fdB){
-    const ck='mom_bar';if(charts[ck])charts[ck].destroy();
-    const c=document.getElementById('chart-mom-bar');if(!c)return;
+    const ck=id('mom_bar');if(charts[ck])charts[ck].destroy();
+    const c=document.getElementById(id('chart-mom-bar'));if(!c)return;
     let datasets,labels;
     if(fdB&&fdB.length){
       // compare mode: two coloured datasets merged by position
@@ -883,17 +1001,17 @@ function initTab1(){
     charts[ck]=new Chart(c.getContext('2d'),{type:'bar',data:{labels,datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'L'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
   }
 
-  function renderMonthlyTable(p){
+  function renderMonthlyTable(period){
     let fdA,fdB=null;
-    if(p==='compare'){
-      const aFrom=document.getElementById('imp-a-from')?.value||'';
-      const aTo=document.getElementById('imp-a-to')?.value||'';
-      const bFrom=document.getElementById('imp-b-from')?.value||'';
-      const bTo=document.getElementById('imp-b-to')?.value||'';
+    if(period==='compare'){
+      const aFrom=document.getElementById(id('imp-a-from'))?.value||'';
+      const aTo=document.getElementById(id('imp-a-to'))?.value||'';
+      const bFrom=document.getElementById(id('imp-b-from'))?.value||'';
+      const bTo=document.getElementById(id('imp-b-to'))?.value||'';
       fdA=mon.filter(r=>(!aFrom||r.month>=aFrom)&&(!aTo||r.month<=aTo));
       fdB=mon.filter(r=>(!bFrom||r.month>=bFrom)&&(!bTo||r.month<=bTo));
     } else {
-      fdA=filterPeriod(mon,p);
+      fdA=filterPeriod(mon,period);
     }
     const th=`<th>Month</th><th></th><th class="nr ch">Impressions</th><th class="nr ch">MoM</th><th class="nr">YoY</th>`;
     let rows;
@@ -904,31 +1022,31 @@ function initTab1(){
     } else {
       rows=[...fdA].reverse().map((r,i)=>`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td>${tia(r.mom)}</td><td class="nr cc"><strong>${r.imp_lakh.toFixed(2)}L</strong></td><td class="nr cc">${badge(r.mom)}</td><td class="nr">${badge(r.yoy)}</td></tr>`).join('');
     }
-    document.getElementById('tbl-monthly').innerHTML=(fdA.length||(fdB?.length))?tbl(th,rows):'<p style="padding:16px;color:var(--grey);font-size:13px">No data for selected period.</p>';
+    document.getElementById(id('tbl-monthly')).innerHTML=(fdA.length||(fdB?.length))?tbl(th,rows):'<p style="padding:16px;color:var(--grey);font-size:13px">No data for selected period.</p>';
     renderMomBar(fdA,fdB);
   }
   // default compare inputs: Period A = latest month, Period B = prev month
   if(mon.length>=2){
     const latest=mon[mon.length-1].month,prev=mon[mon.length-2].month;
-    document.getElementById('imp-a-from').value=latest;document.getElementById('imp-a-to').value=latest;
-    document.getElementById('imp-b-from').value=prev;document.getElementById('imp-b-to').value=prev;
+    document.getElementById(id('imp-a-from')).value=latest;document.getElementById(id('imp-a-to')).value=latest;
+    document.getElementById(id('imp-b-from')).value=prev;document.getElementById(id('imp-b-to')).value=prev;
   }
-  fcbs['imp']=renderMonthlyTable;wirePills('pp-imp','imp',renderMonthlyTable);renderMonthlyTable('all');
+  fcbs[id('imp')]=renderMonthlyTable;wirePills(id('pp-imp'),id('imp'),renderMonthlyTable);renderMonthlyTable('all');
 
   // ── WoW: weekly impressions — line chart ──
-  function renderWoW(p){
+  function renderWoW(period){
     let fdA,fdB=null;
-    if(p==='compare'){
-      const aFrom=document.getElementById('wow-a-from')?.value||'';
-      const aTo=document.getElementById('wow-a-to')?.value||'';
-      const bFrom=document.getElementById('wow-b-from')?.value||'';
-      const bTo=document.getElementById('wow-b-to')?.value||'';
+    if(period==='compare'){
+      const aFrom=document.getElementById(id('wow-a-from'))?.value||'';
+      const aTo=document.getElementById(id('wow-a-to'))?.value||'';
+      const bFrom=document.getElementById(id('wow-b-from'))?.value||'';
+      const bTo=document.getElementById(id('wow-b-to'))?.value||'';
       fdA=weekly.filter(r=>(!aFrom||r.week_start>=aFrom)&&(!aTo||r.week_start<=aTo));
       fdB=weekly.filter(r=>(!bFrom||r.week_start>=bFrom)&&(!bTo||r.week_start<=bTo));
     } else {
-      fdA=filterPeriod(weekly,p);
+      fdA=filterPeriod(weekly,period);
     }
-    const tblEl=document.getElementById('tbl-weekly');
+    const tblEl=document.getElementById(id('tbl-weekly'));
     if(!fdA.length&&!fdB?.length){tblEl.innerHTML='<p style="padding:16px;color:var(--grey);font-size:13px">No weekly data available.</p>';return;}
     const th=`<th>Week</th><th></th><th class="nr ch">Impressions</th><th class="nr">WoW Δ</th>`;
     let rows;
@@ -940,69 +1058,99 @@ function initTab1(){
       rows=[...fdA].reverse().map((r,i)=>`<tr class="${i===0?'lat':''}"><td style="font-size:12px;white-space:nowrap">${r.week_label}</td><td>${tia(r.wow)}</td><td class="nr cc"><strong>${numFmt(r.impressions)}</strong></td><td class="nr">${badge(r.wow)}</td></tr>`).join('');
     }
     tblEl.innerHTML=tbl(th,rows);
-    if(charts.wow)charts.wow.destroy();
-    const c=document.getElementById('chart-wow');if(!c)return;
-    if(p==='compare'){
+    const wowCk=id('wow');if(charts[wowCk])charts[wowCk].destroy();
+    const c=document.getElementById(id('chart-wow'));if(!c)return;
+    if(period==='compare'){
       const len=Math.max(fdA.length,(fdB||[]).length);
       const lbls=Array.from({length:len},(_,i)=>`Wk ${i+1}`);
-      charts.wow=new Chart(c.getContext('2d'),{type:'line',data:{labels:lbls,datasets:[
+      charts[wowCk]=new Chart(c.getContext('2d'),{type:'line',data:{labels:lbls,datasets:[
         {label:'Period A',data:fdA.map(r=>r.impressions),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.1)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#4736FE'},
         {label:'Period B',data:(fdB||[]).map(r=>r.impressions),borderColor:'#FF9500',backgroundColor:'rgba(255,149,0,.08)',fill:false,tension:0.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#FF9500',segment:{borderDash:ctx=>ctx.p0DataIndex%2===0?[6,3]:undefined}}
       ]},options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{display:true,position:'top',labels:{boxWidth:12,font:{size:11},usePointStyle:true}}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16}}}}});
     } else {
-      charts.wow=new Chart(c.getContext('2d'),{type:'line',data:{labels:fdA.map(r=>r.week_label.split('–')[0].trim()),datasets:[{label:'Impressions',data:fdA.map(r=>r.impressions),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.07)',fill:true,tension:0.3,borderWidth:2,pointRadius:fdA.length>40?0:2,pointBackgroundColor:'#4736FE'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16,maxRotation:45}}}}});
+      charts[wowCk]=new Chart(c.getContext('2d'),{type:'line',data:{labels:fdA.map(r=>r.week_label.split('–')[0].trim()),datasets:[{label:'Impressions',data:fdA.map(r=>r.impressions),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.07)',fill:true,tension:0.3,borderWidth:2,pointRadius:fdA.length>40?0:2,pointBackgroundColor:'#4736FE'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16,maxRotation:45}}}}});
     }
   }
   // default wow compare inputs: Period A = last 4 weeks, Period B = 4 weeks before that
   if(weekly.length>=8){
     const w=weekly;
-    document.getElementById('wow-a-from').value=w[w.length-4].week_start;
-    document.getElementById('wow-a-to').value=w[w.length-1].week_start;
-    document.getElementById('wow-b-from').value=w[w.length-8].week_start;
-    document.getElementById('wow-b-to').value=w[w.length-5].week_start;
+    document.getElementById(id('wow-a-from')).value=w[w.length-4].week_start;
+    document.getElementById(id('wow-a-to')).value=w[w.length-1].week_start;
+    document.getElementById(id('wow-b-from')).value=w[w.length-8].week_start;
+    document.getElementById(id('wow-b-to')).value=w[w.length-5].week_start;
   }
-  fcbs['wow']=renderWoW;wirePills('pp-wow','wow',renderWoW);renderWoW('all');
+  fcbs[id('wow')]=renderWoW;wirePills(id('pp-wow'),id('wow'),renderWoW);renderWoW('all');
 
   // ── DoD: daily impressions — line chart only ──
-  function renderDoD(p){
+  function renderDoD(period){
     let fdA,fdB=null;
-    if(p==='compare'){
-      const aFrom=document.getElementById('dod-a-from')?.value||'';
-      const aTo=document.getElementById('dod-a-to')?.value||'';
-      const bFrom=document.getElementById('dod-b-from')?.value||'';
-      const bTo=document.getElementById('dod-b-to')?.value||'';
+    if(period==='compare'){
+      const aFrom=document.getElementById(id('dod-a-from'))?.value||'';
+      const aTo=document.getElementById(id('dod-a-to'))?.value||'';
+      const bFrom=document.getElementById(id('dod-b-from'))?.value||'';
+      const bTo=document.getElementById(id('dod-b-to'))?.value||'';
       fdA=daily.filter(r=>(!aFrom||r.date>=aFrom)&&(!aTo||r.date<=aTo));
       fdB=daily.filter(r=>(!bFrom||r.date>=bFrom)&&(!bTo||r.date<=bTo));
     } else {
-      fdA=filterPeriod(daily,p);
+      fdA=filterPeriod(daily,period);
     }
-    if(charts.dod)charts.dod.destroy();
-    const c=document.getElementById('chart-dod');if(!c)return;
+    const dodCk=id('dod');if(charts[dodCk])charts[dodCk].destroy();
+    const c=document.getElementById(id('chart-dod'));if(!c)return;
     if(!fdA.length)return;
-    if(p==='compare'){
+    if(period==='compare'){
       const len=Math.max(fdA.length,(fdB||[]).length);
       const lbls=Array.from({length:len},(_,i)=>`Day ${i+1}`);
-      charts.dod=new Chart(c.getContext('2d'),{type:'line',data:{labels:lbls,datasets:[
+      charts[dodCk]=new Chart(c.getContext('2d'),{type:'line',data:{labels:lbls,datasets:[
         {label:'Period A',data:fdA.map(r=>r.impressions),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.1)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:fdA.length>60?0:2,pointBackgroundColor:'#4736FE'},
         {label:'Period B',data:(fdB||[]).map(r=>r.impressions),borderColor:'#FF9500',backgroundColor:'rgba(255,149,0,.08)',fill:false,tension:0.3,borderWidth:2.5,pointRadius:(fdB||[]).length>60?0:2,pointBackgroundColor:'#FF9500',segment:{borderDash:ctx=>ctx.p0DataIndex%2===0?[6,3]:undefined}}
       ]},options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{display:true,position:'top',labels:{boxWidth:12,font:{size:11},usePointStyle:true}}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:20}}}}});
     } else {
-      charts.dod=new Chart(c.getContext('2d'),{type:'line',data:{labels:fdA.map(r=>r.date.slice(5)),datasets:[{label:'Daily Impressions',data:fdA.map(r=>r.impressions),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.07)',fill:true,tension:0.3,borderWidth:2,pointRadius:fdA.length>60?0:2,pointBackgroundColor:'#4736FE'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:20,maxRotation:45}}}}});
+      charts[dodCk]=new Chart(c.getContext('2d'),{type:'line',data:{labels:fdA.map(r=>r.date.slice(5)),datasets:[{label:'Daily Impressions',data:fdA.map(r=>r.impressions),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.07)',fill:true,tension:0.3,borderWidth:2,pointRadius:fdA.length>60?0:2,pointBackgroundColor:'#4736FE'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:20,maxRotation:45}}}}});
     }
   }
   // default dod compare inputs: Period A = last 30 days, Period B = prior 30 days
   if(daily.length>=60){
-    document.getElementById('dod-a-from').value=daily[daily.length-30].date;
-    document.getElementById('dod-a-to').value=daily[daily.length-1].date;
-    document.getElementById('dod-b-from').value=daily[daily.length-60].date;
-    document.getElementById('dod-b-to').value=daily[daily.length-31].date;
+    document.getElementById(id('dod-a-from')).value=daily[daily.length-30].date;
+    document.getElementById(id('dod-a-to')).value=daily[daily.length-1].date;
+    document.getElementById(id('dod-b-from')).value=daily[daily.length-60].date;
+    document.getElementById(id('dod-b-to')).value=daily[daily.length-31].date;
   }
-  fcbs['dod']=renderDoD;wirePills('pp-dod','dod',renderDoD);renderDoD('90d');
+  fcbs[id('dod')]=renderDoD;wirePills(id('pp-dod'),id('dod'),renderDoD);renderDoD('90d');
 }
 
-function initTab2(){
-  const kw=D.keywords;
-  if(!kw||!kw.monthly?.length){document.getElementById('m-kw').innerHTML='<div class="card"><div class="ph"><div class="ph-title">Keyword data not available</div></div></div>';return;}
+function keywordsTabHtml(prefix,gscUrl){
+  const p=prefix;
+  return `
+  <div class="tab-actions"><a class="card-act-btn" href="${gscUrl}" target="_blank" rel="noopener">📄 View in Search Console</a><button class="card-act-btn" type="button" onclick="downloadAllTablesCSV('keyword_volume_${p}all.csv',[{title:'Category Breakdown',tblWrapperId:'${p}tbl-cats'},{title:'Category Volume by Month',tblWrapperId:'${p}tbl-cat-mom'}])">⬇ Download all tables (CSV)</button></div>
+
+  <div class="card">
+    <div class="sh"><span class="kicker">🍩 Category Breakdown</span><span class="title">Keyword Volume by Category</span><span class="desc">How search impressions split across intent categories for the selected period.</span></div>
+    <div class="fb">
+      <span class="fl">Month</span>
+      <select class="ctrl-sel" id="${p}cat-period-sel"></select>
+    </div>
+    <div class="card-actions"><a class="card-act-btn" href="${gscUrl}" target="_blank" rel="noopener">📄 View in Search Console</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-cats','keyword_category_breakdown_${p}.csv')">⬇ CSV</button></div>
+    <div class="g2" style="align-items:start">
+      <div class="tw" id="${p}tbl-cats"></div>
+      <div class="dw"><canvas id="${p}chart-donut"></canvas></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Category Volume by Month</span><span class="desc">Monthly keyword impressions per category — months in rows, categories in columns.</span></div>
+    <div class="card-actions"><a class="card-act-btn" href="${gscUrl}" target="_blank" rel="noopener">📄 View in Search Console</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-cat-mom','keyword_category_by_month_${p}.csv')">⬇ CSV</button></div>
+    <div class="tw" id="${p}tbl-cat-mom"></div>
+  </div>
+
+  <div class="card">
+    <div class="sh"><span class="kicker">📊 Last 12 months</span><span class="title">Category Trends Over Time</span><span class="desc">How each search category has grown or shrunk over the past year.</span></div>
+    <div class="cw tall"><canvas id="${p}chart-cat-trends"></canvas></div>
+  </div>`;
+}
+
+function initKeywordsTab(prefix,kw){
+  const id=s=>`${prefix}${s}`;
+  if(!kw||!kw.monthly?.length)return;
 
   const matrix=kw.cat_matrix||[],catMonths=kw.cat_months||[],cats=kw.categories||[];
   const allCats=cats.map(c=>c.category);
@@ -1020,15 +1168,15 @@ function initTab2(){
   function renderCat(mons){
     const aggData=aggCats(mons);
     const cth=`<th>Category</th><th class="nr">Volume</th><th class="nr">Share</th>`;
-    document.getElementById('tbl-cats').innerHTML=tbl(cth,aggData.map(c=>`<tr><td><span class="bdot" style="background:${c.color}"></span>${c.category}</td><td class="nr">${(c.impressions/1e5).toFixed(2)}L</td><td class="nr">${c.share.toFixed(1)}%</td></tr>`).join(''));
-    if(charts.donut)charts.donut.destroy();
-    const c3=document.getElementById('chart-donut').getContext('2d');
-    charts.donut=new Chart(c3,{type:'doughnut',data:{labels:aggData.map(c=>c.category),datasets:[{data:aggData.map(c=>c.impressions),backgroundColor:aggData.map(c=>c.color),borderWidth:3,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:11},padding:8}}}}});
+    document.getElementById(id('tbl-cats')).innerHTML=tbl(cth,aggData.map(c=>`<tr><td><span class="bdot" style="background:${c.color}"></span>${c.category}</td><td class="nr">${(c.impressions/1e5).toFixed(2)}L</td><td class="nr">${c.share.toFixed(1)}%</td></tr>`).join(''));
+    const donutCk=id('donut');if(charts[donutCk])charts[donutCk].destroy();
+    const c3=document.getElementById(id('chart-donut')).getContext('2d');
+    charts[donutCk]=new Chart(c3,{type:'doughnut',data:{labels:aggData.map(c=>c.category),datasets:[{data:aggData.map(c=>c.impressions),backgroundColor:aggData.map(c=>c.color),borderWidth:3,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:11},padding:8}}}}});
   }
 
   // Build month dropdown — newest first, default = latest month
   const latestM=catMonths.length?catMonths[catMonths.length-1]:'';
-  const catSel=document.getElementById('cat-period-sel');
+  const catSel=document.getElementById(id('cat-period-sel'));
   catSel.innerHTML=`<option value="all">All time</option>`+
     [...catMonths].sort().reverse().map(m=>`<option value="${m}"${m===latestM?' selected':''}>${mLbl(m)}</option>`).join('');
   catSel.addEventListener('change',e=>{
@@ -1039,7 +1187,6 @@ function initTab2(){
   renderCat(latestM?catMonths.filter(m=>m===latestM):catMonths);
 
   // MoM Category Pivot: months (rows) × categories (columns)
-  // Precompute totals to find peak month
   const sortedMons=[...catMonths].sort().reverse();
   const monthTotals=sortedMons.map(m=>({m,total:allCats.reduce((s,cat)=>{const r=matrix.find(x=>x.category===cat)||{};return s+(r[m]||0);},0)}));
   const peakM=monthTotals.reduce((a,b)=>b.total>a.total?b:a,monthTotals[0]||{m:''}).m;
@@ -1047,21 +1194,198 @@ function initTab2(){
   const momTh=`<th>Month</th>${allCats.map(c=>`<th class="nr" style="font-size:10px;white-space:nowrap;text-transform:none;letter-spacing:0">${c}</th>`).join('')}<th class="nr ch">Total</th>`;
   const momRows=monthTotals.map(({m,total},i)=>{
     const isPeak=m===peakM;
-    let acc=0;
-    const cells=allCats.map(cat=>{const r=matrix.find(x=>x.category===cat)||{};const v=r[m];if(v!=null)acc+=v;return`<td class="nr">${v!=null?(v/1e5).toFixed(2)+'L':'—'}</td>`;}).join('');
+    const cells=allCats.map(cat=>{const r=matrix.find(x=>x.category===cat)||{};const v=r[m];return`<td class="nr">${v!=null?(v/1e5).toFixed(2)+'L':'—'}</td>`;}).join('');
     const totalCell=isPeak
       ?`<td class="nr"><span class="peak-box">${(total/1e5).toFixed(2)}L ⭐ Peak</span></td>`
       :`<td class="nr cc"><strong>${(total/1e5).toFixed(2)}L</strong></td>`;
     return`<tr class="${i===0?'lat':''}"><td><strong>${mLbl(m)}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td>${cells}${totalCell}</tr>`;
   }).join('');
-  document.getElementById('tbl-cat-mom').innerHTML=tbl(momTh,momRows);
+  document.getElementById(id('tbl-cat-mom')).innerHTML=tbl(momTh,momRows);
 
   // Category Trends line chart
   const topCats=cats.slice(0,6).map(c=>c.category);
   if(topCats.length&&catMonths.length){
-    const c4=document.getElementById('chart-cat-trends').getContext('2d');
-    charts.catTr=new Chart(c4,{type:'line',data:{labels:catMonths.map(m=>mLbl(m)),datasets:topCats.map((cat,i)=>{const row=matrix.find(r=>r.category===cat)||{};return{label:cat,data:catMonths.map(m=>row[m]!=null?(row[m]/1e5):null),borderColor:CC[i],backgroundColor:'transparent',borderWidth:2,tension:0.3,pointRadius:2,spanGaps:true};})},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{ticks:{callback:v=>v.toFixed(1)+'L'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+    const c4=document.getElementById(id('chart-cat-trends')).getContext('2d');
+    charts[id('catTr')]=new Chart(c4,{type:'line',data:{labels:catMonths.map(m=>mLbl(m)),datasets:topCats.map((cat,i)=>{const row=matrix.find(r=>r.category===cat)||{};return{label:cat,data:catMonths.map(m=>row[m]!=null?(row[m]/1e5):null),borderColor:CC[i],backgroundColor:'transparent',borderWidth:2,tension:0.3,pointRadius:2,spanGaps:true};})},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{ticks:{callback:v=>v.toFixed(1)+'L'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
   }
+}
+
+function initTab2(){
+  initKeywordsTab('',D.keywords);
+}
+
+function initCountryKeywordsTab(prefix,paneId,gscSiteUrl,kwData){
+  const pane=document.getElementById(paneId);
+  if(!pane||!kwData?.monthly?.length){if(pane)pane.innerHTML='<div class="card"><div class="ph"><div class="ph-title">Keyword data not available</div></div></div>';return;}
+  pane.innerHTML=keywordsTabHtml(prefix,gscSiteUrl);
+  initKeywordsTab(prefix,kwData);
+}
+
+// ── Simplified Share of Search + Google Indexed tabs for AU/UAE ────────────
+// Not a full clone of India's BSOS tab (initTab3) — that one has India-specific
+// concepts (multi-select competitor picker, a hardcoded Cars24÷Spinny ratio
+// column, city growth/battle tables) that don't translate to AU's/UAE's
+// different competitor sets. This covers the essentials: KPIs, monthly/weekly/
+// (daily where available) trend with every tracked competitor, and a region
+// breakdown selector where the source data has one.
+function bsosTabHtml(prefix,hasDaily,hasRegions,regionLabel){
+  const p=prefix;
+  return `
+  <div class="g3" id="${p}sos-kpis"></div>
+  <div class="card">
+    <div class="sh"><span class="kicker">📈 Monthly Trend</span><span class="title">Share of Search — All Competitors</span><span class="desc">Cars24 vs tracked competitors, monthly.</span></div>
+    <div class="cw tall"><canvas id="${p}bsos-chart-monthly"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Share of Search Table</span></div>
+    <div class="tw" id="${p}bsos-tbl-monthly"></div>
+  </div>
+  <div class="card">
+    <div class="sh"><span class="kicker">📆 Weekly Trend</span><span class="title">Share of Search — Recent Weeks</span></div>
+    <div class="cw"><canvas id="${p}bsos-chart-weekly"></canvas></div>
+    <div class="tw" id="${p}bsos-tbl-weekly" style="margin-top:10px"></div>
+  </div>
+  ${hasDaily?`<div class="card"><div class="sh"><span class="kicker">📆 Daily Trend</span><span class="title">Share of Search — Recent Days</span></div><div class="cw"><canvas id="${p}bsos-chart-daily"></canvas></div></div>`:''}
+  ${hasRegions?`<div class="card">
+    <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+      <div><span class="kicker">🗺 ${regionLabel} Level</span><span class="title">Share of Search by ${regionLabel}</span></div>
+      <select class="ctrl-sel" id="${p}bsos-region-sel"></select>
+    </div>
+    <div class="cw"><canvas id="${p}bsos-region-chart"></canvas></div>
+    <div class="tw" id="${p}bsos-region-tbl" style="margin-top:10px"></div>
+  </div>`:''}`;
+}
+
+function initBsosTab(prefix,bsos){
+  const id=s=>`${prefix}${s}`;
+  if(!bsos||!bsos.monthly?.length)return;
+  const monthly=bsos.monthly,weekly=bsos.weekly||[],daily=bsos.daily||[],regions=bsos.regions||{};
+  const brands=Object.keys(monthly[0]).filter(k=>k!=='month'&&k!=='label'&&!k.endsWith('_mom'));
+  const lat=monthly[monthly.length-1];
+  const ranked=[...brands].sort((a,b)=>(lat[b]||0)-(lat[a]||0));
+  const rank=ranked.indexOf('Cars24')+1;
+  const leader=ranked[0];
+  document.getElementById(id('sos-kpis')).innerHTML=`
+    <div class="kh kh-blue"><div class="kl"><span class="ki">🆚</span>Cars24 SoS · ${lat.label}</div><div class="kv">${lat.Cars24!=null?lat.Cars24.toFixed(1)+'%':'—'}</div><div class="ks">${badge(lat.Cars24_mom,true)} vs last month</div></div>
+    <div class="kh kh-purple"><div class="kl"><span class="ki">🏆</span>Rank Among Tracked Brands</div><div class="kv">#${rank||'—'}</div><div class="ks">Leader: ${leader} at ${lat[leader]!=null?lat[leader].toFixed(1):'—'}%</div></div>
+    <div class="kh kh-teal"><div class="kl"><span class="ki">📊</span>Competitors Tracked</div><div class="kv">${brands.length}</div><div class="ks">${brands.filter(b=>b!=='Cars24').join(', ')}</div></div>`;
+
+  function lineDatasets(rows){
+    return brands.map((b,i)=>({label:b,data:rows.map(r=>r[b]),borderColor:b==='Cars24'?'#4736FE':CC[(i+1)%CC.length],backgroundColor:'transparent',borderWidth:b==='Cars24'?3:1.5,tension:0.3,pointRadius:0}));
+  }
+
+  const ck1=id('bsos_m');if(charts[ck1])charts[ck1].destroy();
+  const c1=document.getElementById(id('bsos-chart-monthly'));
+  if(c1)charts[ck1]=new Chart(c1.getContext('2d'),{type:'line',data:{labels:monthly.map(r=>r.label),datasets:lineDatasets(monthly)},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5}}}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14}}}}});
+
+  const th1=`<th>Month</th>${brands.map(b=>`<th class="nr${b==='Cars24'?' ch':''}">${b}</th>`).join('')}`;
+  const rows1=[...monthly].reverse().map((r,i)=>`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td>${brands.map(b=>`<td class="nr${b==='Cars24'?' cc':''}">${r[b]!=null?r[b].toFixed(1)+'%':'—'}</td>`).join('')}</tr>`).join('');
+  document.getElementById(id('bsos-tbl-monthly')).innerHTML=tbl(th1,rows1);
+
+  if(weekly.length){
+    const ck2=id('bsos_w');if(charts[ck2])charts[ck2].destroy();
+    const c2=document.getElementById(id('bsos-chart-weekly'));
+    if(c2)charts[ck2]=new Chart(c2.getContext('2d'),{type:'line',data:{labels:weekly.map(r=>r.week||r.week_start),datasets:lineDatasets(weekly)},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5}}}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:12}}}}});
+    const th2=`<th>Week</th>${brands.map(b=>`<th class="nr${b==='Cars24'?' ch':''}">${b}</th>`).join('')}`;
+    const rows2=[...weekly].reverse().slice(0,12).map((r,i)=>`<tr class="${i===0?'lat':''}"><td style="font-size:12px">${r.week||r.week_start}</td>${brands.map(b=>`<td class="nr${b==='Cars24'?' cc':''}">${r[b]!=null?r[b].toFixed(1)+'%':'—'}</td>`).join('')}</tr>`).join('');
+    document.getElementById(id('bsos-tbl-weekly')).innerHTML=tbl(th2,rows2);
+  }
+
+  if(daily.length){
+    const ck3=id('bsos_d');if(charts[ck3])charts[ck3].destroy();
+    const c3=document.getElementById(id('bsos-chart-daily'));
+    if(c3)charts[ck3]=new Chart(c3.getContext('2d'),{type:'line',data:{labels:daily.map(r=>r.date.slice(5)),datasets:lineDatasets(daily)},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5}}}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16}}}}});
+  }
+
+  const regionKeys=Object.keys(regions);
+  if(regionKeys.length){
+    const sel=document.getElementById(id('bsos-region-sel'));
+    sel.innerHTML=regionKeys.map(r=>`<option value="${r}">${r}</option>`).join('');
+    function renderRegion(region){
+      const rm=(regions[region]||{}).monthly||[];
+      const ck4=id('bsos_region');if(charts[ck4])charts[ck4].destroy();
+      const c4=document.getElementById(id('bsos-region-chart'));
+      if(c4&&rm.length)charts[ck4]=new Chart(c4.getContext('2d'),{type:'line',data:{labels:rm.map(r=>r.label),datasets:lineDatasets(rm)},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5}}}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+      const th4=`<th>Month</th>${brands.map(b=>`<th class="nr${b==='Cars24'?' ch':''}">${b}</th>`).join('')}`;
+      const rows4=[...rm].reverse().map((r,i)=>`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong></td>${brands.map(b=>`<td class="nr${b==='Cars24'?' cc':''}">${r[b]!=null?r[b].toFixed(1)+'%':'—'}</td>`).join('')}</tr>`).join('');
+      document.getElementById(id('bsos-region-tbl')).innerHTML=tbl(th4,rows4);
+    }
+    sel.addEventListener('change',e=>renderRegion(e.target.value));
+    renderRegion(regionKeys[0]);
+  }
+}
+
+function initCountryBsosTab(prefix,paneId,bsosData,regionLabel){
+  const pane=document.getElementById(paneId);
+  if(!pane||!bsosData?.monthly?.length){if(pane)pane.innerHTML='<div class="card"><div class="ph"><div class="ph-title">Share of Search data not available</div></div></div>';return;}
+  const hasDaily=(bsosData.daily||[]).length>0;
+  const hasRegions=Object.keys(bsosData.regions||{}).length>0;
+  pane.innerHTML=bsosTabHtml(prefix,hasDaily,hasRegions,regionLabel||'Region');
+  initBsosTab(prefix,bsosData);
+}
+
+function gindexTabHtml(prefix,hasRegions,regionLabel){
+  const p=prefix;
+  return `
+  <div class="g3" id="${p}gi-kpis"></div>
+  <div class="card">
+    <div class="sh"><span class="kicker">📈 Monthly Trend</span><span class="title">Google Search Index — Cars24</span><span class="desc">Google Trends-style relative index (0-100), not a percentage share.</span></div>
+    <div class="cw tall"><canvas id="${p}gi-chart"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Index Table</span></div>
+    <div class="tw" id="${p}gi-tbl"></div>
+  </div>
+  ${hasRegions?`<div class="card">
+    <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+      <div><span class="kicker">🗺 ${regionLabel} Level</span><span class="title">Google Search Index by ${regionLabel}</span></div>
+      <select class="ctrl-sel" id="${p}gi-region-sel"></select>
+    </div>
+    <div class="cw"><canvas id="${p}gi-region-chart"></canvas></div>
+    <div class="tw" id="${p}gi-region-tbl" style="margin-top:10px"></div>
+  </div>`:''}`;
+}
+
+function initGindexTab(prefix,gindex){
+  const id=s=>`${prefix}${s}`;
+  if(!gindex||!gindex.monthly?.length)return;
+  const monthly=gindex.monthly,regions=gindex.regions||{};
+  const lat=monthly[monthly.length-1];
+  document.getElementById(id('gi-kpis')).innerHTML=`
+    <div class="kh kh-blue"><div class="kl"><span class="ki">📡</span>Google Index · ${lat.label}</div><div class="kv">${lat.Cars24!=null?lat.Cars24.toFixed(1):'—'}</div><div class="ks">${badge(lat.Cars24_mom,true)} vs last month</div></div>`;
+
+  const ck1=id('gi_m');if(charts[ck1])charts[ck1].destroy();
+  const c1=document.getElementById(id('gi-chart'));
+  if(c1)charts[ck1]=new Chart(c1.getContext('2d'),{type:'line',data:{labels:monthly.map(r=>r.label),datasets:[{label:'Cars24 Index',data:monthly.map(r=>r.Cars24),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14}}}}});
+
+  const th=`<th>Month</th><th class="nr ch">Index</th><th class="nr">MoM</th>`;
+  const rows=[...monthly].reverse().map((r,i)=>`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td class="nr cc"><strong>${r.Cars24!=null?r.Cars24.toFixed(1):'—'}</strong></td><td class="nr">${badge(r.Cars24_mom,true)}</td></tr>`).join('');
+  document.getElementById(id('gi-tbl')).innerHTML=tbl(th,rows);
+
+  const regionKeys=Object.keys(regions);
+  if(regionKeys.length){
+    const sel=document.getElementById(id('gi-region-sel'));
+    sel.innerHTML=regionKeys.map(r=>`<option value="${r}">${r}</option>`).join('');
+    function renderRegion(region){
+      const rm=regions[region]||[];
+      const ck2=id('gi_region');if(charts[ck2])charts[ck2].destroy();
+      const c2=document.getElementById(id('gi-region-chart'));
+      if(c2&&rm.length)charts[ck2]=new Chart(c2.getContext('2d'),{type:'line',data:{labels:rm.map(r=>r.label),datasets:[{label:region,data:rm.map(r=>r.index),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+      const th2=`<th>Month</th><th class="nr ch">Index</th><th class="nr">MoM</th>`;
+      const rows2=[...rm].reverse().map((r,i)=>`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong></td><td class="nr cc"><strong>${r.index!=null?r.index.toFixed(1):'—'}</strong></td><td class="nr">${badge(r.index_mom,true)}</td></tr>`).join('');
+      document.getElementById(id('gi-region-tbl')).innerHTML=tbl(th2,rows2);
+    }
+    sel.addEventListener('change',e=>renderRegion(e.target.value));
+    renderRegion(regionKeys[0]);
+  }
+}
+
+function initCountryGindexTab(prefix,paneId,gindexData,regionLabel){
+  const pane=document.getElementById(paneId);
+  if(!pane||!gindexData?.monthly?.length){if(pane)pane.innerHTML='<div class="card"><div class="ph"><div class="ph-title">Google Index data not available</div></div></div>';return;}
+  const hasRegions=Object.keys(gindexData.regions||{}).length>0;
+  pane.innerHTML=gindexTabHtml(prefix,hasRegions,regionLabel||'Region');
+  initGindexTab(prefix,gindexData);
 }
 
 function initTab3(){
@@ -3099,7 +3423,26 @@ async function initUAEInf(){
   scanTw(el);
 }
 
-const lazyInit={kw:initTab2,bsos:initTab3,gi:initTab4,impsos:initTab5,inf:initInf,yt:initYT,ig:initIG,li:initLI,'uae-inf':initUAEInf,'au-ig':()=>renderIG('igc-au','cars24_au','Cars24 Australia'),'uae-ig':()=>renderIG('igc-uae','cars24_uae','Cars24 UAE'),'yt-malayalam2':()=>renderYT('ytc-malayalam2','cars24_malayalam2','Cars24 Malayalam')};
+const lazyInit={kw:initTab2,bsos:initTab3,gi:initTab4,impsos:initTab5,inf:initInf,yt:initYT,ig:initIG,li:initLI,'uae-inf':initUAEInf,'au-ig':()=>renderIG('igc-au','cars24_au','Cars24 Australia'),'uae-ig':()=>renderIG('igc-uae','cars24_uae','Cars24 UAE'),'yt-malayalam2':()=>renderYT('ytc-malayalam2','cars24_malayalam2','Cars24 Malayalam'),
+  'au-kw':()=>initCountryKeywordsTab('au-','au-kw','https://search.google.com/search-console?resource_id=sc-domain%3Acars24.com.au',D.gsc_au?.keywords),
+  'uae-kw':()=>initCountryKeywordsTab('uae-','uae-kw','https://search.google.com/search-console?resource_id=sc-domain%3Acars24.ae',D.gsc_uae?.keywords),
+  'au-sos':()=>initCountryBsosTab('au-','au-sos',D.gsc_au?.bsos,'Region'),
+  'uae-sos':()=>initCountryBsosTab('uae-','uae-sos',D.gsc_uae?.bsos,'City'),
+  'au-gi':()=>initCountryGindexTab('au-','au-gi',D.gsc_au?.gindex,'Region'),
+  'uae-gi':()=>initCountryGindexTab('uae-','uae-gi',D.gsc_uae?.gindex,'City'),
+};
+
+function initCountrySearchTab(prefix,paneId,gscSiteUrl,sourceLabel,gscData){
+  const pane=document.getElementById(paneId);
+  if(!pane||!gscData?.monthly_impressions?.length)return;
+  pane.innerHTML=searchTabHtml(prefix,gscSiteUrl,sourceLabel);
+  initSearchTab(prefix,{
+    kpis: deriveSimpleKpis(gscData.monthly_impressions),
+    monthly: gscData.monthly_impressions,
+    daily: gscData.gsc_daily,
+    weekly: gscData.gsc_weekly,
+  });
+}
 
 async function main(){
   try{
@@ -3108,7 +3451,11 @@ async function main(){
     D=await r.json();
     Chart.defaults.font.family="'Geist',system-ui,sans-serif";
     Chart.defaults.color='#6B7280';
-    renderOv();initTabs();initTab1();inited.search=true;
+    renderOv();initTabs();
+    initSearchTab('',{kpis:D.kpis,monthly:D.monthly_impressions,daily:D.gsc_daily,weekly:D.gsc_weekly});
+    initCountrySearchTab('au-','au-s','https://search.google.com/search-console?resource_id=sc-domain%3Acars24.com.au','Australia',D.gsc_au);
+    initCountrySearchTab('uae-','uae-s','https://search.google.com/search-console?resource_id=sc-domain%3Acars24.ae','UAE',D.gsc_uae);
+    inited.search=true;
   }catch(e){
     document.querySelector('.wrap').innerHTML=`<div class="ph" style="margin-top:48px"><div class="ph-title">Could not load dashboard data</div><div class="ph-body">${e.message}<br><br>Run <code>python3 build_data.py</code> then serve with <code>python3 -m http.server 8080</code></div></div>`;
   }

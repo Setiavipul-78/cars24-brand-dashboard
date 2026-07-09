@@ -328,6 +328,318 @@ def build_gindex():
           f"{len(city_brand)} cities (brand) | {len(city_generic)} cities (generic)")
     return {"monthly": monthly, "city_brand": city_brand, "city_generic": city_generic}
 
+# ── BSOS for AU / UAE (dedicated Brandstack sheets, separate competitor sets
+# from India's — see fetch_bsos_intl.py) ────────────────────────────────────
+def build_bsos_monthly_from(csv_name):
+    p = DATA / csv_name
+    if not p.exists(): return []
+    df = pd.read_csv(p).sort_values("month").reset_index(drop=True)
+    bc = [c for c in df.columns if c != "month"]
+    rows = []
+    for i, row in df.iterrows():
+        pr = df.iloc[i-1] if i > 0 else None
+        r = {"month": row["month"], "label": mlabel(row["month"])}
+        for b in bc:
+            v = sf(row.get(b))
+            r[b] = v
+            r[f"{b}_mom"] = pp_ch(v, sf(pr.get(b)) if pr is not None else None)
+        rows.append(r)
+    return rows
+
+def build_bsos_weekly_from(csv_name):
+    p = DATA / csv_name
+    if not p.exists(): return []
+    df = pd.read_csv(p).sort_values("week_start").reset_index(drop=True)
+    bc = [c for c in df.columns if c not in ("week_start","week")]
+    rows = []
+    for i, row in df.iterrows():
+        pr = df.iloc[i-1] if i > 0 else None
+        r = {"week_start": row["week_start"], "week": row.get("week","")}
+        for b in bc:
+            v = sf(row.get(b))
+            r[b] = v
+            r[f"{b}_wow"] = pp_ch(v, sf(pr.get(b)) if pr is not None else None)
+        rows.append(r)
+    return rows[-26:]
+
+def build_bsos_daily_from(csv_name):
+    p = DATA / csv_name
+    if not p.exists(): return []
+    df = pd.read_csv(p).sort_values("date").reset_index(drop=True)
+    bc = [c for c in df.columns if c != "date"]
+    rows = []
+    for _, row in df.iterrows():
+        r = {"date": row["date"]}
+        for b in bc:
+            r[b] = sf(row.get(b))
+        rows.append(r)
+    return rows[-180:]
+
+def build_bsos_regions(monthly_csv, weekly_csv):
+    """Region-level BSOS (AUS: NSW/QLD/VIC) -> {region: {"monthly":[...], "weekly":[...]}}"""
+    mp, wp = DATA / monthly_csv, DATA / weekly_csv
+    mdf = pd.read_csv(mp) if mp.exists() else pd.DataFrame(columns=["region","month"])
+    wdf = pd.read_csv(wp) if wp.exists() else pd.DataFrame(columns=["region","week_start"])
+    regions = sorted(set(mdf.get("region", [])) | set(wdf.get("region", [])))
+    m_bc = [c for c in mdf.columns if c not in ("region","month")]
+    w_bc = [c for c in wdf.columns if c not in ("region","week_start","week")]
+    result = {}
+    for region in regions:
+        m_rows = []
+        g = mdf[mdf["region"] == region].sort_values("month").reset_index(drop=True)
+        for i, row in g.iterrows():
+            pr = g.iloc[i-1] if i > 0 else None
+            r = {"month": row["month"], "label": mlabel(row["month"])}
+            for b in m_bc:
+                v = sf(row.get(b))
+                r[b] = v
+                r[f"{b}_mom"] = pp_ch(v, sf(pr.get(b)) if pr is not None else None)
+            m_rows.append(r)
+        w_rows = []
+        g = wdf[wdf["region"] == region].sort_values("week_start").reset_index(drop=True)
+        for i, row in g.iterrows():
+            pr = g.iloc[i-1] if i > 0 else None
+            r = {"week_start": row["week_start"], "week": row.get("week","")}
+            for b in w_bc:
+                v = sf(row.get(b))
+                r[b] = v
+                r[f"{b}_wow"] = pp_ch(v, sf(pr.get(b)) if pr is not None else None)
+            w_rows.append(r)
+        result[region] = {"monthly": m_rows[-24:], "weekly": w_rows[-26:]}
+    return result
+
+# ── Google Index for AU / UAE (dedicated sheet tabs, Cars24-only pan index —
+# no Category/Generic split like India has) ─────────────────────────────────
+def build_gindex_simple(csv_name):
+    p = DATA / csv_name
+    if not p.exists(): return []
+    today_period = str(pd.Timestamp("today").to_period("M"))
+    df = pd.read_csv(p).sort_values("month").reset_index(drop=True)
+    df = df[df["month"] != today_period].reset_index(drop=True)
+    rows = []
+    for i, row in df.iterrows():
+        pr = df.iloc[i-1] if i > 0 else None
+        v = sf(row.get("Cars24"))
+        rows.append({
+            "month": row["month"], "label": mlabel(row["month"]),
+            "Cars24": v,
+            "Cars24_mom": pp_ch(v, sf(pr.get("Cars24")) if pr is not None else None),
+        })
+    return rows
+
+def build_gindex_regions(csv_name):
+    """Region-level Google Index (UAE cities / AUS regions) -> {region: [...]}"""
+    p = DATA / csv_name
+    if not p.exists(): return {}
+    today_period = str(pd.Timestamp("today").to_period("M"))
+    df = pd.read_csv(p)
+    df = df[df["month"] != today_period]
+    result = {}
+    for region, grp in df.groupby("region"):
+        grp = grp.sort_values("month").reset_index(drop=True)
+        rows = []
+        for i, row in grp.iterrows():
+            pr = grp.iloc[i-1] if i > 0 else None
+            v = sf(row.get("index"))
+            rows.append({
+                "month": row["month"], "label": mlabel(row["month"]),
+                "index": v,
+                "index_mom": pp_ch(v, sf(pr.get("index")) if pr is not None else None),
+            })
+        result[region] = rows[-24:]
+    return result
+
+def build_country_extras(key):
+    """BSOS + Google Index for AU/UAE — dedicated Brandstack/GIndex sheets,
+    separate from India's (see fetch_bsos_intl.py, fetch_gindex_sheets.py)."""
+    if key == "uae":
+        bsos = {
+            "monthly": build_bsos_monthly_from("bsos_uae_monthly.csv"),
+            "weekly":  build_bsos_weekly_from("bsos_uae_weekly.csv"),
+            "daily":   build_bsos_daily_from("bsos_uae_daily.csv"),
+            "regions": {},  # no per-city BSOS breakdown for UAE
+        }
+        gindex = {
+            "monthly": build_gindex_simple("gindex_uae_monthly.csv"),
+            "regions": build_gindex_regions("gindex_uae_city_monthly.csv"),
+        }
+    elif key == "au":
+        bsos = {
+            "monthly": build_bsos_monthly_from("bsos_aus_monthly.csv"),
+            "weekly":  build_bsos_weekly_from("bsos_aus_weekly.csv"),
+            "daily":   [],  # no Daily tab exists for AUS
+            "regions": build_bsos_regions("bsos_aus_region_monthly.csv", "bsos_aus_region_weekly.csv"),
+        }
+        gindex = {
+            "monthly": build_gindex_simple("gindex_aus_monthly.csv"),
+            "regions": build_gindex_regions("gindex_aus_region_monthly.csv"),
+        }
+    else:
+        return {"bsos": {}, "gindex": {}}
+    print(f"  ✓ BSOS [{key}]: {len(bsos['monthly'])} months | {len(bsos['weekly'])} weeks | "
+          f"{len(bsos['daily'])} days | {len(bsos['regions'])} regions")
+    print(f"  ✓ Google Index [{key}]: {len(gindex['monthly'])} months | {len(gindex['regions'])} regions")
+    return {"bsos": bsos, "gindex": gindex}
+
+# ── AU / UAE GSC (same shape as India's daily/weekly/monthly, no historical_totals
+# baseline — these countries only have live GSC data, no pre-API history) ──────
+def build_monthly_country(csv_name):
+    p = DATA / csv_name
+    if not p.exists():
+        return []
+    df = pd.read_csv(p)
+    df["date"] = pd.to_datetime(df["date"])
+    df["month"] = df["date"].dt.to_period("M").astype(str)
+    today_period = str(pd.Timestamp("today").to_period("M"))
+    mon = (df[df["month"] != today_period]
+           .groupby("month")["impressions"].sum().reset_index()
+           .sort_values("month").reset_index(drop=True))
+    rows = []
+    for i, row in mon.iterrows():
+        prev_imp = float(mon.iloc[i-1]["impressions"]) if i > 0 else None
+        yoy_m = str(pd.Period(row["month"], freq="M") - 12)
+        yoy_r = mon[mon["month"] == yoy_m]
+        yoy_imp = float(yoy_r["impressions"].iloc[0]) if not yoy_r.empty else None
+        rows.append({
+            "month":     row["month"],
+            "label":     mlabel(row["month"]),
+            "impressions": int(row["impressions"]),
+            "imp_lakh":  round(float(row["impressions"]) / 1e5, 2),
+            "mom":       pct_ch(float(row["impressions"]), prev_imp),
+            "yoy":       pct_ch(float(row["impressions"]), yoy_imp),
+        })
+    return rows
+
+def build_gsc_daily_country(csv_name):
+    p = DATA / csv_name
+    if not p.exists():
+        return []
+    df = pd.read_csv(p)
+    df["date"] = pd.to_datetime(df["date"])
+    df = df.sort_values("date").reset_index(drop=True)
+    rows = []
+    for i, row in df.iterrows():
+        prev_imp = int(df.iloc[i-1]["impressions"]) if i > 0 else None
+        rows.append({
+            "date":        row["date"].strftime("%Y-%m-%d"),
+            "impressions": int(row["impressions"]),
+            "clicks":      int(row["clicks"]) if "clicks" in row and pd.notna(row["clicks"]) else 0,
+            "dod":         pct_ch(int(row["impressions"]), prev_imp),
+            "weekend":     row["date"].weekday() >= 5,
+        })
+    return rows
+
+def build_gsc_weekly_country(csv_name):
+    p = DATA / csv_name
+    if not p.exists():
+        return []
+    df = pd.read_csv(p)
+    df["date"] = pd.to_datetime(df["date"])
+    df = df.sort_values("date")
+    df["week_start"] = df["date"] - pd.to_timedelta(df["date"].dt.weekday, unit="D")
+    weekly = df.groupby("week_start").agg(impressions=("impressions","sum"), clicks=("clicks","sum")).reset_index()
+    weekly = weekly.sort_values("week_start").reset_index(drop=True)
+    rows = []
+    for i, row in weekly.iterrows():
+        prev = int(weekly.iloc[i-1]["impressions"]) if i > 0 else None
+        ws = row["week_start"]
+        we = ws + pd.Timedelta(days=6)
+        rows.append({
+            "week_start": ws.strftime("%Y-%m-%d"),
+            "week_label": f"{ws.strftime('%d %b')} – {we.strftime('%d %b %y')}",
+            "impressions": int(row["impressions"]),
+            "clicks":      int(row.get("clicks", 0) or 0),
+            "wow":         pct_ch(int(row["impressions"]), prev),
+        })
+    return rows
+
+def build_keywords_country(prefix):
+    files = sorted(DATA.glob(f"{prefix}20*.csv"))
+    if not files:
+        return {"monthly": [], "categories": [], "cat_months": [], "cat_matrix": []}
+    dfs = []
+    for f in files:
+        try:
+            df = pd.read_csv(f)
+            if "impressions" in df.columns and "category" in df.columns:
+                month = f.stem[len(prefix):] if prefix else f.stem
+                df["month"] = month
+                dfs.append(df[["keyword","category","impressions","month"]])
+        except Exception as e:
+            print(f"  ⚠ Skipping {f.name}: {e}")
+    if not dfs:
+        return {"monthly": [], "categories": [], "cat_months": [], "cat_matrix": []}
+    kw = pd.concat(dfs, ignore_index=True)
+    kw["impressions"] = pd.to_numeric(kw["impressions"], errors="coerce").fillna(0)
+
+    mon = kw.groupby("month")["impressions"].sum().reset_index().sort_values("month").reset_index(drop=True)
+    mon_rows = []
+    for i, row in mon.iterrows():
+        pr = mon.iloc[i-1] if i > 0 else None
+        yoy_m = str(pd.Period(row["month"], freq="M") - 12)
+        yoy_r = mon[mon["month"] == yoy_m]
+        yoy_v = float(yoy_r["impressions"].iloc[0]) if not yoy_r.empty else None
+        mon_rows.append({
+            "month": row["month"],
+            "label": mlabel(row["month"]),
+            "impressions": int(row["impressions"]),
+            "imp_lakh": round(float(row["impressions"]) / 1e5, 2),
+            "mom": pct_ch(float(row["impressions"]), float(pr["impressions"]) if pr is not None else None),
+            "yoy": pct_ch(float(row["impressions"]), yoy_v),
+        })
+
+    latest_m = mon["month"].max()
+    cat_df = kw[kw["month"] == latest_m].groupby("category")["impressions"].sum().reset_index()
+    total_cat = cat_df["impressions"].sum()
+    cat_df["share"] = (cat_df["impressions"] / total_cat * 100).round(1) if total_cat else 0
+    cat_df = cat_df.sort_values("impressions", ascending=False)
+    prev_m_cats = sorted(kw["month"].unique())
+    prev_m_cats = [m for m in prev_m_cats if m < latest_m]
+    prev_m = prev_m_cats[-1] if prev_m_cats else None
+    cat_prev = {}
+    if prev_m:
+        cp = kw[kw["month"] == prev_m].groupby("category")["impressions"].sum().to_dict()
+        prev_total = sum(cp.values())
+        cat_prev = {k: {"imp": v, "share": v/prev_total*100 if prev_total else 0} for k,v in cp.items()}
+
+    cat_rows = []
+    for _, row in cat_df.iterrows():
+        cat = row["category"]
+        prev = cat_prev.get(cat, {})
+        cat_rows.append({
+            "category":   cat,
+            "impressions": int(row["impressions"]),
+            "imp_lakh":   round(float(row["impressions"])/1e5, 2),
+            "share":      float(row["share"]),
+            "mom_imp":    pct_ch(float(row["impressions"]), float(prev["imp"])) if prev else None,
+            "mom_share":  pp_ch(float(row["share"]), float(prev["share"])) if prev else None,
+        })
+
+    all_months = sorted(kw["month"].unique())[-12:]
+    all_cats = kw["category"].unique().tolist()
+    cat_matrix = []
+    for cat in all_cats:
+        row = {"category": cat}
+        for m in all_months:
+            v = kw[(kw["month"]==m) & (kw["category"]==cat)]["impressions"].sum()
+            row[m] = int(v) if v > 0 else 0
+        cat_matrix.append(row)
+
+    return {"monthly": mon_rows, "categories": cat_rows, "cat_months": all_months, "cat_matrix": cat_matrix}
+
+def build_gsc_country(key, csv_name, kw_prefix):
+    monthly  = build_monthly_country(csv_name)
+    daily    = build_gsc_daily_country(csv_name)
+    weekly   = build_gsc_weekly_country(csv_name)
+    keywords = build_keywords_country(kw_prefix)
+    extras   = build_country_extras(key)
+    print(f"  ✓ GSC [{key}]: {len(monthly)} months | {len(daily)} days | {len(weekly)} weeks | "
+          f"keywords: {len(keywords['monthly'])} months, {len(keywords['categories'])} categories")
+    return {
+        "monthly_impressions": monthly, "gsc_daily": daily, "gsc_weekly": weekly, "keywords": keywords,
+        "bsos": extras["bsos"], "gindex": extras["gindex"],
+    }
+
 def build_city_tiers():
     p = DATA / "city_tiers.csv"
     if not p.exists():
@@ -1119,6 +1431,8 @@ if __name__ == "__main__":
     influencers    = build_influencers()
     linkedin       = build_linkedin()
     linkedin_competitors = build_linkedin_competitors()
+    gsc_au         = build_gsc_country("au", "gsc_daily_au.csv", "au_")
+    gsc_uae        = build_gsc_country("uae", "gsc_daily_uae.csv", "uae_")
 
     payload = {
         "_meta": {
@@ -1142,6 +1456,8 @@ if __name__ == "__main__":
         "influencers":        influencers,
         "linkedin":           linkedin,
         "linkedin_competitors": linkedin_competitors,
+        "gsc_au":             gsc_au,
+        "gsc_uae":            gsc_uae,
     }
 
     with open(OUT, "w") as f:

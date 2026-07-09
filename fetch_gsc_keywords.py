@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
-Fetch brand keyword impressions from GSC (query dimension, India) and classify
-into categories using classifier.py. Writes data/YYYY-MM.csv files.
+Fetch brand keyword impressions from GSC (query dimension) for India,
+Australia and UAE, and classify into categories using classifier.py.
+Writes data/YYYY-MM.csv (India, unchanged) and data/{au,uae}_YYYY-MM.csv.
 
 Run:
-  python3 fetch_gsc_keywords.py           # incremental: last 2 months + any gaps
-  python3 fetch_gsc_keywords.py --full    # all available GSC history (~16 months)
+  python3 fetch_gsc_keywords.py           # incremental: last 2 months + any gaps, all countries
+  python3 fetch_gsc_keywords.py --full    # all available GSC history, all countries
 """
 
 import os, csv, sys, requests
@@ -18,10 +19,21 @@ sys.path.insert(0, str(Path(__file__).parent))
 from classifier import classify_keyword
 
 DATA        = Path("data")
-SITE        = "https://www.cars24.com/"
 BRAND_REGEX = r"car 24|cars24|cars 24|24 car|cara 24|carz 24|card24|car24|24 cars"
 TOKEN_URL   = "https://oauth2.googleapis.com/token"
-GSC_URL     = f"https://www.googleapis.com/webmasters/v3/sites/{quote(SITE, safe='')}/searchAnalytics/query"
+
+# India is a URL-prefix property needing a country filter; AU/UAE are their
+# own ccTLD domain properties (already country-scoped). File prefix is ""
+# for India (keeps the existing data/YYYY-MM.csv naming untouched) and
+# "au_"/"uae_" for the others so they don't collide with India's files.
+COUNTRIES = {
+    "india": {"site": "https://www.cars24.com/", "country": "ind", "prefix": "",
+              "full_months_back": 16},
+    "au":    {"site": "sc-domain:cars24.com.au",  "country": None,  "prefix": "au_",
+              "full_months_back": 16},
+    "uae":   {"site": "sc-domain:cars24.ae",      "country": None,  "prefix": "uae_",
+              "full_months_back": 16},
+}
 
 
 def _load_env():
@@ -46,13 +58,18 @@ def get_token():
     return token
 
 
-def fetch_month_queries(token, year, month):
-    """Return list of {keyword, impressions} for a given month, India, brand regex."""
+def fetch_month_queries(token, site, country, year, month):
+    """Return list of {keyword, impressions} for a given month/site, brand regex."""
     _, last_day = monthrange(year, month)
     start = date(year, month, 1)
     end   = min(date(year, month, last_day), date.today() - timedelta(days=1))
     if start > end:
         return []
+
+    gsc_url = f"https://www.googleapis.com/webmasters/v3/sites/{quote(site, safe='')}/searchAnalytics/query"
+    filters = [{"dimension": "query", "operator": "includingRegex", "expression": BRAND_REGEX}]
+    if country:
+        filters.insert(0, {"dimension": "country", "operator": "equals", "expression": country})
 
     all_rows, start_row = [], 0
     while True:
@@ -60,15 +77,12 @@ def fetch_month_queries(token, year, month):
             "startDate":  str(start),
             "endDate":    str(end),
             "dimensions": ["query"],
-            "dimensionFilterGroups": [{"filters": [
-                {"dimension": "country", "operator": "equals",         "expression": "ind"},
-                {"dimension": "query",   "operator": "includingRegex", "expression": BRAND_REGEX},
-            ]}],
+            "dimensionFilterGroups": [{"filters": filters}],
             "rowLimit":  25000,
             "startRow":  start_row,
             "dataState": "all",
         }
-        r = requests.post(GSC_URL,
+        r = requests.post(gsc_url,
                           headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
                           json=body)
         if r.status_code != 200:
@@ -86,9 +100,9 @@ def fetch_month_queries(token, year, month):
     return all_rows
 
 
-def write_csv(year, month, query_rows):
+def write_csv(prefix, year, month, query_rows):
     month_str = f"{year}-{month:02d}"
-    out = DATA / f"{month_str}.csv"
+    out = DATA / f"{prefix}{month_str}.csv"
     with open(out, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["keyword", "impressions", "category", "month"])
         w.writeheader()
@@ -100,7 +114,7 @@ def write_csv(year, month, query_rows):
                 "month":       month_str,
             })
     total = sum(r["impressions"] for r in query_rows)
-    print(f"  ✓ {month_str}.csv: {len(query_rows)} keywords · {total/1e5:.2f}L impressions")
+    print(f"  ✓ {out.name}: {len(query_rows)} keywords · {total/1e5:.2f}L impressions")
 
 
 def months_range(from_y, from_m, to_y, to_m):
@@ -110,6 +124,50 @@ def months_range(from_y, from_m, to_y, to_m):
         m += 1
         if m == 13:
             m, y = 1, y + 1
+
+
+def fetch_country_keywords(key, cfg, token, full_refresh, last_y, last_m):
+    site, country, prefix = cfg["site"], cfg["country"], cfg["prefix"]
+
+    if full_refresh:
+        cutoff = date.today().replace(day=1) - timedelta(days=cfg["full_months_back"] * 30)
+        to_fetch = list(months_range(cutoff.year, cutoff.month, last_y, last_m))
+    else:
+        existing = set()
+        for f in DATA.glob(f"{prefix}20*.csv"):
+            stem = f.stem[len(prefix):] if prefix else f.stem
+            try:
+                y, m = stem.split("-")
+                existing.add((int(y), int(m)))
+            except Exception:
+                pass
+
+        to_fetch = set()
+        for delta in range(1, 3):
+            d = date.today().replace(day=1) - timedelta(days=delta * 28)
+            to_fetch.add((d.year, d.month))
+        if existing:
+            first_y, first_m = min(existing)
+            for y, m in months_range(first_y, first_m, last_y, last_m):
+                if (y, m) not in existing:
+                    to_fetch.add((y, m))
+        to_fetch = sorted(to_fetch)
+
+    if not to_fetch:
+        print(f"  GSC Keywords [{key}]: nothing to fetch")
+        return
+
+    print(f"  GSC Keywords [{key}]: fetching {len(to_fetch)} month(s): "
+          f"{to_fetch[0][0]}-{to_fetch[0][1]:02d} → {to_fetch[-1][0]}-{to_fetch[-1][1]:02d}")
+
+    for (y, m) in to_fetch:
+        rows = fetch_month_queries(token, site, country, y, m)
+        if rows is None:
+            continue
+        if not rows:
+            print(f"  - [{key}] {y}-{m:02d}: no data returned")
+            continue
+        write_csv(prefix, y, m, rows)
 
 
 def main():
@@ -124,44 +182,8 @@ def main():
     prev_end = today.replace(day=1) - timedelta(days=1)  # last day of previous month
     last_y, last_m = prev_end.year, prev_end.month
 
-    if full_refresh:
-        # GSC keeps ~16 months of query-level history
-        cutoff = today.replace(day=1) - timedelta(days=16 * 30)
-        to_fetch = list(months_range(cutoff.year, cutoff.month, last_y, last_m))
-    else:
-        # Find which months are already written
-        existing = set()
-        for f in DATA.glob("20*.csv"):
-            try:
-                y, m = f.stem.split("-")
-                existing.add((int(y), int(m)))
-            except Exception:
-                pass
-
-        to_fetch = set()
-        # Refresh the previous 2 complete months (GSC data revises for ~7 days)
-        for delta in range(1, 3):
-            d = today.replace(day=1) - timedelta(days=delta * 28)
-            to_fetch.add((d.year, d.month))
-        # Fetch any gap months since the earliest existing file
-        if existing:
-            first_y, first_m = min(existing)
-            for y, m in months_range(first_y, first_m, last_y, last_m):
-                if (y, m) not in existing:
-                    to_fetch.add((y, m))
-        to_fetch = sorted(to_fetch)
-
-    print(f"  GSC Keywords: fetching {len(to_fetch)} month(s): "
-          f"{to_fetch[0][0]}-{to_fetch[0][1]:02d} → {to_fetch[-1][0]}-{to_fetch[-1][1]:02d}")
-
-    for (y, m) in to_fetch:
-        rows = fetch_month_queries(token, y, m)
-        if rows is None:
-            continue
-        if not rows:
-            print(f"  - {y}-{m:02d}: no data returned")
-            continue
-        write_csv(y, m, rows)
+    for key, cfg in COUNTRIES.items():
+        fetch_country_keywords(key, cfg, token, full_refresh, last_y, last_m)
 
 
 if __name__ == "__main__":
