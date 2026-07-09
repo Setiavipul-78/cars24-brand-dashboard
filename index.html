@@ -641,7 +641,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
       <button class="tab" data-target="au-gi" data-lazy="au-gi">📡 Google indexed</button>
       <button class="tab" data-target="au-yt" data-lazy="yt">📺 YouTube</button>
       <button class="tab" data-target="au-ig" data-lazy="au-ig">📸 Instagram</button>
-      <button class="tab" data-target="au-li">💼 LinkedIn</button>
+      <button class="tab" data-target="au-li" data-lazy="li">💼 LinkedIn</button>
     </nav><div class="tabpanes">
       <section class="tabpane active" id="au-s"></section>
       <section class="tabpane" id="au-kw"></section>
@@ -662,7 +662,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
       <button class="tab" data-target="uae-gi" data-lazy="uae-gi">📡 Google indexed</button>
       <button class="tab" data-target="uae-yt" data-lazy="yt">📺 YouTube</button>
       <button class="tab" data-target="uae-ig" data-lazy="uae-ig">📸 Instagram</button>
-      <button class="tab" data-target="uae-li">💼 LinkedIn</button>
+      <button class="tab" data-target="uae-li" data-lazy="li">💼 LinkedIn</button>
       <button class="tab" data-target="uae-inf" data-lazy="uae-inf">👥 Influencers</button>
     </nav><div class="tabpanes">
       <section class="tabpane active" id="uae-s"></section>
@@ -2650,19 +2650,32 @@ function renderIG(containerId,key,handleName){
 /* ── LinkedIn renderer ── */
 const LI_DEMO_DIMS=[['location','📍','Location'],['job_function','💼','Job Function'],['seniority','🎖','Seniority'],['industry','🏭','Industry'],['company_size','🏢','Company Size']];
 
-function renderLIDemoBlock(prefix,key,dataByDim,title){
+function renderLIDemoInner(prefix,key,dataByDim){
   const any=LI_DEMO_DIMS.some(([d])=>(dataByDim[d]||[]).length);
-  if(!any)return'';
+  if(!any)return'<p style="padding:16px;color:var(--grey);font-size:13px">No demographic data available.</p>';
   const [locDim,locIcon,locLbl]=LI_DEMO_DIMS[0];
   const rest=LI_DEMO_DIMS.slice(1);
-  return `<div class="card">
-    <div class="sh"><span class="kicker">${title.kicker}</span><span class="title">${title.title}</span><span class="desc">${title.desc}</span></div>
+  return `
     ${(dataByDim[locDim]||[]).length?`<div style="margin-bottom:14px"><div style="font-size:12px;font-weight:800;color:var(--ink-2);margin-bottom:8px">${locIcon} Top ${locLbl}s</div><div class="cw" style="height:320px"><canvas id="${prefix}-${locDim}-${key}"></canvas></div></div>`:''}
     ${rest.filter(([d])=>(dataByDim[d]||[]).length).reduce((acc,[d,icon,lbl],i)=>{
       if(i%2===0)acc.push([]);
       acc[acc.length-1].push(`<div><div style="font-size:12px;font-weight:800;color:var(--ink-2);margin-bottom:8px">${icon} ${lbl}</div><div class="cw" style="height:220px"><canvas id="${prefix}-${d}-${key}"></canvas></div></div>`);
       return acc;
     },[]).map(pair=>`<div class="g2" style="margin-top:14px">${pair.join('')}</div>`).join('')}
+  `;
+}
+
+function renderLIDemoCard(key,pageName,fDemo,vDemo){
+  const fAny=LI_DEMO_DIMS.some(([d])=>(fDemo[d]||[]).length);
+  const vAny=LI_DEMO_DIMS.some(([d])=>(vDemo[d]||[]).length);
+  if(!fAny&&!vAny)return'';
+  return `<div class="card">
+    <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+      <div><span class="kicker">👥 Demographics</span><span class="title">${pageName} Audience</span><span class="desc">Current snapshot by location, function, seniority, industry &amp; company size.</span></div>
+      ${(fAny&&vAny)?`<div class="pp-wrap" id="li-demo-toggle-${key}"><button class="pp active" data-d="follower" type="button">Followers</button><button class="pp" data-d="visitor" type="button">Visitors</button></div>`:''}
+    </div>
+    ${fAny?`<div id="li-demo-follower-${key}">${renderLIDemoInner('li-fdemo',key,fDemo)}</div>`:''}
+    ${vAny?`<div id="li-demo-visitor-${key}">${renderLIDemoInner('li-vdemo',key,vDemo)}</div>`:''}
   </div>`;
 }
 
@@ -2691,7 +2704,13 @@ function renderLI(containerId,key,pageName){
       <div class="inf-kpi-strip" id="li-kpis-${key}" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"></div>
     </div>
 
-    <div class="card"><div class="sh"><span class="kicker">📈 Monthly Trend</span><span class="title">Impressions Over Time — ${pageName}</span><span class="desc">Monthly impressions, all months shown.</span></div><div class="cw tall"><canvas id="li-chart-${key}"></canvas></div></div>
+    ${competitors.length?`
+    <div class="g2" style="gap:10px;margin-bottom:10px;align-items:stretch">
+      <div class="card" style="margin:0"><div class="sh"><span class="kicker">📈 Monthly Trend</span><span class="title">Impressions Over Time — ${pageName}</span><span class="desc">Monthly impressions, all months shown.</span></div><div class="cw tall"><canvas id="li-chart-${key}"></canvas></div></div>
+      <div class="card" style="margin:0"><div class="sh"><span class="kicker">🆚 Competitor Analysis</span><span class="title">Cars24 vs Other Major Brands</span><span class="desc">Current snapshot, ranked by total followers. Cars24 bar highlighted.</span></div><div class="cw tall"><canvas id="li-comp-chart-${key}"></canvas></div></div>
+    </div>`:`
+    <div class="card"><div class="sh"><span class="kicker">📈 Monthly Trend</span><span class="title">Impressions Over Time — ${pageName}</span><span class="desc">Monthly impressions, all months shown.</span></div><div class="cw tall"><canvas id="li-chart-${key}"></canvas></div></div>`}
+
     <div class="card">
       <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
         <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Metrics — ${pageName}</span><span class="desc">Impressions, visitors, followers, engagement — with MoM change.</span></div>
@@ -2704,13 +2723,7 @@ function renderLI(containerId,key,pageName){
     </div>
     ${li.posts&&li.posts.length?`<div class="card"><div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px"><div><span class="kicker">🔝 Top 10 Content</span><span class="title">Best Performing Posts</span><span class="desc">Sorted by impressions in selected period.</span></div><select class="inf-sel" id="li-posts-sel-${key}"><option value="all" selected>All Time</option>${liDesc.map((r,i)=>`<option value="i:${liMonthly.length-1-i}">${r.label}</option>`).join('')}</select></div><div class="tw" id="li-posts-${key}"></div></div>`:''}
 
-    ${competitors.length?`<div class="card">
-      <div class="sh"><span class="kicker">🆚 Competitor Analysis</span><span class="title">Cars24 vs Other Major Brands on LinkedIn</span><span class="desc">Current snapshot, ranked by total followers. Cars24 bar highlighted.</span></div>
-      <div class="cw" style="height:360px"><canvas id="li-comp-chart-${key}"></canvas></div>
-    </div>`:''}
-
-    ${renderLIDemoBlock('li-fdemo',key,fDemo,{kicker:'👥 Follower Demographics',title:`Who Follows ${pageName}`,desc:'Current snapshot by location, function, seniority, industry & company size.'})}
-    ${renderLIDemoBlock('li-vdemo',key,vDemo,{kicker:'🌐 Visitor Demographics',title:`Who Visits ${pageName}'s Page`,desc:'Current snapshot of page visitors by location, function, seniority, industry & company size.'})}
+    ${renderLIDemoCard(key,pageName,fDemo,vDemo)}
   `;
 
   function renderLIKPIs(val){
@@ -2805,6 +2818,20 @@ function renderLI(containerId,key,pageName){
   }
   renderLIDemo('li-fdemo',fDemo);
   renderLIDemo('li-vdemo',vDemo);
+
+  // Followers/Visitors toggle — both blocks are built (and their charts sized)
+  // while visible, then the non-default one is hidden, so Chart.js never has to
+  // size a canvas that starts out at display:none.
+  const liDemoToggle=document.getElementById(`li-demo-toggle-${key}`);
+  if(liDemoToggle){
+    document.getElementById(`li-demo-visitor-${key}`).style.display='none';
+    liDemoToggle.querySelectorAll('.pp').forEach(btn=>btn.addEventListener('click',()=>{
+      liDemoToggle.querySelectorAll('.pp').forEach(b=>b.classList.toggle('active',b===btn));
+      const d=btn.dataset.d;
+      document.getElementById(`li-demo-follower-${key}`).style.display=d==='follower'?'':'none';
+      document.getElementById(`li-demo-visitor-${key}`).style.display=d==='visitor'?'':'none';
+    }));
+  }
 
   scanTw(el);
 }
