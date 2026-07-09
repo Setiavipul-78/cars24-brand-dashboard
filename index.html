@@ -2505,17 +2505,6 @@ function renderIG(containerId,key,handleName){
       </div>
     </div>`:''}
 
-    ${ig.demographics?.country?.length?`
-    <div class="g2">
-      <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">🌐 Country Level</span><span class="title">Top Follower Countries</span><span class="desc">Where your followers are located, as of latest refresh.</span></div>
-        <div class="cw" style="height:320px"><canvas id="ig-country-${key}"></canvas></div>
-      </div>
-      <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">📋 Country Table</span><span class="title">Country Breakdown</span><span class="desc">Follower count and % share per country.</span></div>
-        <div class="tw" id="ig-country-tbl-${key}"></div>
-      </div>
-    </div>`:''}
   `;
 
   // ── KPI tiles (period-filtered, "all" genuinely sums the full history) ──
@@ -2654,15 +2643,6 @@ function renderIG(containerId,key,handleName){
     if(cc) charts[cck]=new Chart(cc.getContext('2d'),{type:'bar',data:{labels:city15.map(r=>r.key),datasets:[{label:'Followers',data:city15.map(r=>r.value),backgroundColor:'rgba(233,30,140,.7)',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
     const cti=document.getElementById(`ig-city-tbl-${key}`);
     if(cti) cti.innerHTML=tbl(`<th>#</th><th>🌍 City</th><th class="nr">👥 Followers</th><th class="nr">% of Followers</th>`,cityRows.map((r,i)=>`<tr><td>${i+1}</td><td>${r.key}</td><td class="nr">${numFmt(r.value)}</td><td class="nr">${(r.value/cityTotal*100).toFixed(1)}%</td></tr>`).join(''));
-  }
-  if(demo.country?.length){
-    const ctryRows=[...demo.country].sort((a,b)=>b.value-a.value);
-    const ctryTotal=ctryRows.reduce((s,r)=>s+r.value,0)||1;
-    const ctry15=ctryRows.slice(0,15);
-    const cnc=document.getElementById(`ig-country-${key}`);const cnck=`ig_${key}_country`;if(charts[cnck])charts[cnck].destroy();
-    if(cnc) charts[cnck]=new Chart(cnc.getContext('2d'),{type:'bar',data:{labels:ctry15.map(r=>r.key),datasets:[{label:'Followers',data:ctry15.map(r=>r.value),backgroundColor:'rgba(71,54,254,.7)',borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>numFmt(v)},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
-    const cnti=document.getElementById(`ig-country-tbl-${key}`);
-    if(cnti) cnti.innerHTML=tbl(`<th>#</th><th>🌐 Country</th><th class="nr">👥 Followers</th><th class="nr">% of Followers</th>`,ctryRows.map((r,i)=>`<tr><td>${i+1}</td><td>${r.key}</td><td class="nr">${numFmt(r.value)}</td><td class="nr">${(r.value/ctryTotal*100).toFixed(1)}%</td></tr>`).join(''));
   }
   scanTw(el);
 }

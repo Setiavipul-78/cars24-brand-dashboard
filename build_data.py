@@ -1175,6 +1175,16 @@ def build_instagram():
                     "engagement_rate":    engagement_rate,
                 })
 
+            # Drop leading months with no views data. Instagram only started
+            # exposing the unified "views" insight metric in 2023 — older posts
+            # predate it, so early months show views=0 not because there was no
+            # activity but because the metric didn't exist yet. Trim the series to
+            # start from the first month it actually has views, rather than padding
+            # every chart/KPI total with a long flat run of misleading zeros.
+            first_views_idx = next((i for i, r in enumerate(rows) if r["views"] > 0), None)
+            if first_views_idx:
+                rows = rows[first_views_idx:]
+
             # Follower demographics — current-month snapshot only (IG Insights has no
             # historical time series for this), age/gender/city/country breakdowns
             demographics = {}
