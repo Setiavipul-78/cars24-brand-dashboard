@@ -336,7 +336,6 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
         <button class="tab" data-target="m-kw" data-lazy="kw"><span class="ti">🔑</span>Keywords volume</button>
         <button class="tab" data-target="m-bsos" data-lazy="bsos"><span class="ti">🆚</span>Share of searches</button>
         <button class="tab" data-target="m-gi" data-lazy="gi"><span class="ti">📡</span>Google indexed</button>
-        <button class="tab" data-target="m-impsos" data-lazy="impsos"><span class="ti">📈</span>Impressions × SoS</button>
         <button class="tab" data-target="in-inf" data-lazy="inf"><span class="ti">👥</span>Influencers</button>
         <button class="tab" data-target="in-yt" data-lazy="yt"><span class="ti">📺</span>YouTube</button>
         <button class="tab" data-target="in-ig" data-lazy="ig"><span class="ti">📸</span>Instagram</button>
@@ -588,11 +587,8 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
           </div>
         </section>
 
-        <!-- TAB 4: GOOGLE INDEXED -->
+        <!-- TAB 4: GOOGLE INDEXED (merged w/ former Impressions × SoS) -->
         <section class="tabpane" id="m-gi"><div id="gi-content"></div></section>
-
-        <!-- TAB 5: IMP × SoS -->
-        <section class="tabpane" id="m-impsos"><div id="impsos-content"></div></section>
 
         <!-- INFLUENCERS -->
         <section class="tabpane" id="in-inf" data-lazy="inf">
@@ -1721,220 +1717,14 @@ function initTab3(){
 function initTab4(){
   const Dgi=D.google_index;
   if(!Dgi||!Dgi.monthly?.length){document.getElementById('gi-content').innerHTML=`<div class="ph"><div class="ph-mark">📡</div><div class="ph-title">Google Index data not loaded</div><div class="ph-body">Share the Google Index sheet to populate this tab.</div></div>`;return;}
-  const giM=Dgi.monthly,cityBrand=Dgi.city_brand||{},cityGeneric=Dgi.city_generic||{};
-  const cities=Object.keys(cityBrand);
-  const fIdx=v=>v==null?'—':v.toFixed(1);
-  const CITY_PALETTE=['#4736FE','#E91E8C','#FF6B6B','#F97316','#059669','#7C3AED','#0EA5E9','#EAB308','#DC2626','#0891B2','#84CC16','#D946EF','#F43F5E','#14B8A6','#8B5CF6','#EA580C','#65A30D','#06B6D4'];
-
-  document.getElementById('gi-content').innerHTML=`
-    <div class="tab-actions"><button class="card-act-btn" type="button" onclick="downloadAllTablesCSV('google_index_all.csv',[{title:'Pan-India Brand Index',tblWrapperId:'tbl-gi-pan'},{title:'City-level Index',tblWrapperId:'tbl-gi-city'},{title:'Brand vs Category Comparison',tblWrapperId:'tbl-gi-cmp'},{title:'City-wise Brand vs Generic',tblWrapperId:'tbl-gi-city-cmp'}])">⬇ Download all tables (CSV)</button></div>
-
-    <div class="card">
-      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
-        <div><span class="kicker">📡 Pan-India · Monthly</span><span class="title">Google Search Index — Cars24 Brand</span><span class="desc">Google's relative search-interest index (0-100 scale) for the Cars24 brand, month by month.</span></div>
-        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
-          <select class="ctrl-sel" id="gi-pan-period-sel"></select>
-          <div class="pp-wrap" id="pp-gi-pan"><button class="pp" data-p="12m" type="button">Last 12 Months</button><button class="pp" data-p="compare" type="button">Compare ▾</button></div>
-          <div class="cr" id="cr-gi-pan">
-            <div class="cr-pair">
-              <div class="cr-row"><span class="cr-lbl" style="color:var(--blue)">Period A</span><input type="month" id="gi-pan-a-from"><span class="sep">–</span><input type="month" id="gi-pan-a-to"></div>
-              <div class="cr-row"><span class="cr-lbl" style="color:var(--grey)">vs</span><input type="month" id="gi-pan-b-from"><span class="sep">–</span><input type="month" id="gi-pan-b-to"></div>
-              <button class="apply-btn" onclick="applyCompare('gi-pan')" style="align-self:flex-end">Compare</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}?gid=0#gid=0" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-pan','gindex_pan_india.csv')">⬇ CSV</button></div>
-      <div class="tw" id="tbl-gi-pan" style="margin-bottom:10px"></div>
-      <div class="cw"><canvas id="chart-gi-pan"></canvas></div>
-    </div>
-
-    <div class="card">
-      <div class="sh"><span class="kicker">🏙 City-level · Monthly</span><span class="title">Google Search Index by City — Cars24 Brand</span><span class="desc">Brand-specific search interest by city, month by month.</span></div>
-      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}?gid=1878676239#gid=1878676239" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-city','gindex_city_brand.csv')">⬇ CSV</button></div>
-      <div class="tw tbl-compact" id="tbl-gi-city" style="margin-bottom:10px"></div>
-      <div class="fb"><span class="fl">Cities</span><div class="ms-dd" id="ms-gi-city"></div></div>
-      <div class="cw"><canvas id="chart-gi-city"></canvas></div>
-    </div>
-
-    <div class="card">
-      <div class="sh"><span class="kicker">⚖️ Comparison · Monthly</span><span class="title">Cars24 Brand vs Category Search Interest</span><span class="desc">Gap = Cars24 index minus Category index. Positive = brand outpacing the category.</span></div>
-      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}?gid=0#gid=0" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-cmp','gindex_comparison.csv')">⬇ CSV</button></div>
-      <div class="tw" id="tbl-gi-cmp" style="margin-bottom:10px"></div>
-      <div class="cw"><canvas id="chart-gi-cmp"></canvas></div>
-    </div>
-
-    <div class="card">
-      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
-        <div><span class="kicker">🏙 City-wise · Monthly</span><span class="title">Cars24 Brand vs Generic — By City</span><span class="desc">Gap = Cars24 brand index minus Generic category index, per city. Positive = brand outpacing the category in that city.</span></div>
-        <select class="ctrl-sel" id="gi-city-cmp-period-sel"></select>
-      </div>
-      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}?gid=1878676239#gid=1878676239" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-city-cmp','gindex_city_brand_vs_generic.csv')">⬇ CSV</button></div>
-      <div class="tw" id="tbl-gi-city-cmp" style="margin-bottom:10px"></div>
-      <div class="fb"><span class="fl">Cities</span><div class="ms-dd" id="ms-gi-city-cmp"></div></div>
-      <div class="cw"><canvas id="chart-gi-city-cmp"></canvas></div>
-    </div>`;
-
-  // ── TABLE 1: Pan-India Brand Index ──
-  function rowHtmlGiPan(r,tag,isLatest){
-    const tagHtml=tag?` <span style="font-size:10px;color:${tag==='A'?'var(--blue)':'#f90'};font-weight:800">${tag}</span>`:(isLatest?' <span class="badge bb">Latest</span>':'');
-    return `<tr class="${isLatest&&!tag?'lat':''}"><td><strong>${r.label}</strong>${tagHtml}</td><td>${tia(r.Cars24_mom)}</td><td class="nr cc"><strong>${fIdx(r.Cars24)}</strong></td><td class="nr cc">${badge(r.Cars24_mom,true)}</td></tr>`;
-  }
-  function paintGiPan(p){
-    let fdA,fdB=null;
-    if(p==='compare'){
-      const aFrom=document.getElementById('gi-pan-a-from')?.value||'';
-      const aTo=document.getElementById('gi-pan-a-to')?.value||'';
-      const bFrom=document.getElementById('gi-pan-b-from')?.value||'';
-      const bTo=document.getElementById('gi-pan-b-to')?.value||'';
-      fdA=giM.filter(r=>(!aFrom||r.month>=aFrom)&&(!aTo||r.month<=aTo));
-      fdB=giM.filter(r=>(!bFrom||r.month>=bFrom)&&(!bTo||r.month<=bTo));
-    } else if(typeof p==='string'&&p.startsWith('from:')){
-      fdA=giM.filter(r=>r.month>=p.slice(5));
-    } else {
-      fdA=filterPeriod(giM,p);
-    }
-    const tblEl=document.getElementById('tbl-gi-pan');
-    if(!fdA.length&&!fdB?.length){tblEl.innerHTML='<p style="padding:16px;color:var(--grey);font-size:13px">No data for selected period.</p>';return;}
-    const th=`<th>Month</th><th></th><th class="nr ch" style="text-transform:none">Index</th><th class="nr ch">MoM Δ</th>`;
-    let rows;
-    if(fdB){
-      const rA=[...fdA].reverse().map(r=>rowHtmlGiPan(r,'A',false)).join('');
-      const rB=[...fdB].reverse().map(r=>rowHtmlGiPan(r,'B',false)).join('');
-      rows=rA+`<tr style="background:var(--bg)"><td colspan="4" style="padding:3px 8px;font-size:10px;color:var(--grey);letter-spacing:.5px">── Period B ──</td></tr>`+rB;
-    } else {
-      rows=[...fdA].reverse().map((r,i)=>rowHtmlGiPan(r,null,i===0)).join('');
-    }
-    tblEl.innerHTML=tbl(th,rows);
-    if(charts.giPan)charts.giPan.destroy();
-    const c=document.getElementById('chart-gi-pan');if(!c)return;
-    if(p==='compare'){
-      const len=Math.max(fdA.length,(fdB||[]).length);
-      const lbls=Array.from({length:len},(_,i)=>`${i+1}`);
-      charts.giPan=new Chart(c.getContext('2d'),{type:'line',data:{labels:lbls,datasets:[
-        {label:'Period A',data:fdA.map(r=>r.Cars24),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.1)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#4736FE'},
-        {label:'Period B',data:(fdB||[]).map(r=>r.Cars24),borderColor:'#FF9500',backgroundColor:'rgba(255,149,0,.08)',fill:false,tension:0.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#FF9500',segment:{borderDash:ctx=>ctx.p0DataIndex%2===0?[6,3]:undefined}}
-      ]},options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{display:true,position:'top',labels:{boxWidth:12,font:{size:11},usePointStyle:true}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16}}}}});
-    } else {
-      charts.giPan=new Chart(c.getContext('2d'),{type:'line',data:{labels:fdA.map(r=>r.label),datasets:[{label:'Cars24 Index',data:fdA.map(r=>r.Cars24),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.3,spanGaps:true,borderWidth:3,pointRadius:fdA.length>40?0:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
-    }
-  }
-  const giPanSel=document.getElementById('gi-pan-period-sel');
-  giPanSel.innerHTML=`<option value="all" selected>All time</option>`+giM.map(r=>`<option value="from:${r.month}">From ${r.label}</option>`).join('');
-  giPanSel.addEventListener('change',()=>{
-    document.querySelectorAll('#pp-gi-pan .pp').forEach(b=>b.classList.remove('active'));
-    document.getElementById('cr-gi-pan').classList.remove('open');
-    paintGiPan(giPanSel.value);
-  });
-  fcbs['gi-pan']=paintGiPan;
-  wirePills('pp-gi-pan','gi-pan',paintGiPan);
-  if(giM.length>=2){
-    const latest=giM[giM.length-1].month,prev=giM[giM.length-2].month;
-    document.getElementById('gi-pan-a-from').value=latest;document.getElementById('gi-pan-a-to').value=latest;
-    document.getElementById('gi-pan-b-from').value=prev;document.getElementById('gi-pan-b-to').value=prev;
-  }
-  paintGiPan('all');
-
-  // ── TABLE 2: City-level, Cars24 Brand only ──
-  let giCitySel=[...cities];
-  const allGiMonths=[...new Set(cities.flatMap(c=>cityBrand[c].map(r=>r.month)))].sort();
-  const giMonthsShown=allGiMonths;  // full history since Jan'23, not just last 6 months
-  const mLabelGi={};
-  cities.forEach(c=>cityBrand[c].forEach(r=>{if(!mLabelGi[r.month])mLabelGi[r.month]=r.label;}));
-
-  function renderGiCityTable(){
-    const gth=`<th>City</th>${giMonthsShown.map((m,i)=>`<th class="nr${i===giMonthsShown.length-1?' ch':''}">${mLabelGi[m]||m}</th>`).join('')}<th class="nr ch">MoM Δ</th>`;
-    const gr=cities.map(city=>{
-      const vals=giMonthsShown.map(m=>{const r=cityBrand[city].find(x=>x.month===m);return r?r.index:null;});
-      const mom=(vals.length>=2&&vals[vals.length-1]!=null&&vals[vals.length-2]!=null)?vals[vals.length-1]-vals[vals.length-2]:null;
-      return{city,vals,last:vals[vals.length-1],mom};
-    }).sort((a,b)=>(b.last||0)-(a.last||0));
-    document.getElementById('tbl-gi-city').innerHTML=tbl(gth,gr.map(({city,vals,mom})=>`<tr><td><strong>${city}</strong></td>${vals.map((v,i)=>{const il=i===vals.length-1;const s=il?'color:var(--blue);font-weight:800;background:#F5F4FF':(v!=null&&vals[0]!=null&&v>vals[0]+0.2?'color:var(--mint);font-weight:600':v!=null&&vals[0]!=null&&v<vals[0]-0.2?'color:var(--red);font-weight:600':'');return`<td class="nr" style="${s}">${fIdx(v)}</td>`;}).join('')}<td class="nr">${badge(mom,true)}</td></tr>`).join(''));
-  }
-  function renderGiCityChart(){
-    if(charts.giCity)charts.giCity.destroy();
-    const ctx=document.getElementById('chart-gi-city');if(!ctx)return;
-    charts.giCity=new Chart(ctx.getContext('2d'),{type:'line',data:{labels:giMonthsShown.map(m=>mLabelGi[m]||m),datasets:giCitySel.map((city,i)=>({label:city,data:giMonthsShown.map(m=>{const r=cityBrand[city].find(x=>x.month===m);return r?r.index:null;}),borderColor:CITY_PALETTE[i%CITY_PALETTE.length],backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:2}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5},padding:8}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
-  }
-  buildMultiSelect('ms-gi-city',cities,cities,c=>c,vals=>{giCitySel=vals;renderGiCityChart();},'All cities');
-  renderGiCityTable();renderGiCityChart();
-
-  // ── TABLE 3: Brand vs Generic comparison (pan-India) ──
-  const gth3=`<th>Month</th><th class="nr ch" style="text-transform:none">Cars24</th><th class="nr">Category</th><th class="nr ratio-hi">Gap (Brand−Category)</th>`;
-  const rows3=[...giM].reverse().map((r,i)=>{
-    const g=(r.Cars24!=null&&r.Category!=null)?r.Cars24-r.Category:null;
-    return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td class="nr cc"><strong>${fIdx(r.Cars24)}</strong></td><td class="nr">${fIdx(r.Category)}</td><td class="nr ratio-hi">${g!=null?(g>0?'+':'')+g.toFixed(1):'—'}</td></tr>`;
-  }).join('');
-  document.getElementById('tbl-gi-cmp').innerHTML=tbl(gth3,rows3);
-  charts.giCmp=new Chart(document.getElementById('chart-gi-cmp').getContext('2d'),{type:'line',data:{labels:giM.map(r=>r.label),datasets:[
-    {label:'Cars24 Brand',data:giM.map(r=>r.Cars24),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.3,spanGaps:true,borderWidth:3,pointRadius:0},
-    {label:'Category (Generic)',data:giM.map(r=>r.Category),borderColor:'#FF9500',backgroundColor:'transparent',fill:false,tension:0.3,spanGaps:true,borderWidth:2,borderDash:[5,3],pointRadius:0}
-  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11},usePointStyle:true}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
-
-  // ── TABLE 4: City-wise Cars24 Brand vs Generic comparison ──
-  function gapAt(city,m){
-    const b=cityBrand[city]?.find(x=>x.month===m),g=cityGeneric[city]?.find(x=>x.month===m);
-    return(b&&g&&b.index!=null&&g.index!=null)?b.index-g.index:null;
-  }
-  function brandAt(city,m){const r=cityBrand[city]?.find(x=>x.month===m);return r?r.index:null;}
-  function genericAt(city,m){const r=cityGeneric[city]?.find(x=>x.month===m);return r?r.index:null;}
-  let giCityCmpSel=[...cities];
-  function renderGiCityCmpTable(sel){
-    const tblEl=document.getElementById('tbl-gi-city-cmp');
-    if(sel==='__all__'){
-      const th=`<th>City</th><th></th>${allGiMonths.map((m,i)=>`<th class="nr${i===allGiMonths.length-1?' ch':''}">${mLabelGi[m]||m}</th>`).join('')}`;
-      const rows=cities.map(city=>{
-        const brandVals=allGiMonths.map(m=>brandAt(city,m));
-        const genVals=allGiMonths.map(m=>genericAt(city,m));
-        return{city,brandVals,genVals,last:brandVals.filter(v=>v!=null).pop()};
-      }).sort((a,b)=>(b.last??-999)-(a.last??-999));
-      const trs=rows.map(({city,brandVals,genVals})=>
-        `<tr class="lat"><td rowspan="2"><strong>${city}</strong></td><td style="color:var(--blue);font-weight:700;font-size:11px">Brand</td>${brandVals.map(v=>`<td class="nr cc">${fIdx(v)}</td>`).join('')}</tr>`+
-        `<tr><td style="color:#f90;font-weight:700;font-size:11px">Generic</td>${genVals.map(v=>`<td class="nr">${fIdx(v)}</td>`).join('')}</tr>`
-      ).join('');
-      tblEl.innerHTML=tbl(th,trs);
-      return;
-    }
-    const rows=cities.map(city=>{
-      const b=cityBrand[city].find(x=>x.month===sel),g=cityGeneric[city]?.find(x=>x.month===sel);
-      return(b&&b.index!=null)?{city,brand:b.index,generic:g?g.index:null}:null;
-    }).filter(Boolean).sort((a,b)=>b.brand-a.brand);
-    const th=`<th>City</th><th class="nr ch" style="text-transform:none">Cars24 Brand</th><th class="nr">Generic</th><th class="nr ratio-hi">Gap (Brand−Generic)</th>`;
-    const tr=rows.map((x,i)=>{
-      const g=(x.brand!=null&&x.generic!=null)?x.brand-x.generic:null;
-      return`<tr class="${i===0?'lat':''}"><td><strong>${x.city}</strong></td><td class="nr cc"><strong>${fIdx(x.brand)}</strong></td><td class="nr">${fIdx(x.generic)}</td><td class="nr ratio-hi">${g!=null?(g>0?'+':'')+g.toFixed(1):'—'}</td></tr>`;
-    }).join('');
-    tblEl.innerHTML=tbl(th,tr);
-  }
-  function renderGiCityCmpChart(){
-    if(charts.giCityCmp)charts.giCityCmp.destroy();
-    const ctx=document.getElementById('chart-gi-city-cmp');if(!ctx)return;
-    const datasets=[];
-    giCityCmpSel.forEach((city,i)=>{
-      const clr=CITY_PALETTE[i%CITY_PALETTE.length];
-      datasets.push({label:`${city} · Brand`,data:allGiMonths.map(m=>brandAt(city,m)),borderColor:clr,backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:2});
-      datasets.push({label:`${city} · Generic`,data:allGiMonths.map(m=>genericAt(city,m)),borderColor:clr,backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:1.5,borderDash:[5,3],pointRadius:0});
-    });
-    charts.giCityCmp=new Chart(ctx.getContext('2d'),{type:'line',data:{labels:allGiMonths.map(m=>mLabelGi[m]||m),datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10},padding:8}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
-  }
-  const giCityCmpPeriodSel=document.getElementById('gi-city-cmp-period-sel');
-  giCityCmpPeriodSel.innerHTML=`<option value="__all__">All time</option>`+allGiMonths.slice().reverse().map((m,i)=>`<option value="${m}"${i===0?' selected':''}>${mLabelGi[m]||m}${i===0?' (latest)':''}</option>`).join('');
-  giCityCmpPeriodSel.addEventListener('change',()=>renderGiCityCmpTable(giCityCmpPeriodSel.value));
-  buildMultiSelect('ms-gi-city-cmp',cities,cities,c=>c,vals=>{giCityCmpSel=vals;renderGiCityCmpChart();},'All cities');
-  renderGiCityCmpTable(allGiMonths[allGiMonths.length-1]);
-  renderGiCityCmpChart();
-}
-
-function initTab5(){
-  const Dgi=D.google_index;
-  if(!Dgi||!Dgi.monthly?.length){document.getElementById('impsos-content').innerHTML=`<div class="ph"><div class="ph-mark">📈</div><div class="ph-title">India Branded Search Index — needs Google Index data</div><div class="ph-body">Once the Google Index sheet is populated this builds the full performance dashboard automatically.</div></div>`;return;}
   const giM=Dgi.monthly;                       // already complete-month-filtered in build_data.py
   const cityBrand=Dgi.city_brand||{};
+  const cityGeneric=Dgi.city_generic||{};
   const cities=Object.keys(cityBrand);
+  const allGiMonths=[...new Set(cities.flatMap(c=>cityBrand[c].map(r=>r.month)))].sort();
+  const mLabelGi={};
+  cities.forEach(c=>cityBrand[c].forEach(r=>{if(!mLabelGi[r.month])mLabelGi[r.month]=r.label;}));
   const tiers=D.city_tiers||{};
-  const mon=D.monthly_impressions||[];
-  const bsosM=D.bsos_monthly||[];
-  const bsosCities=D.bsos_cities||{};
   const fIdx=v=>v==null?'—':v.toFixed(1);
   const fPct=v=>v==null?'—':(v>0?'+':'')+v.toFixed(1)+'%';
   const CITY_PALETTE=['#4736FE','#E91E8C','#FF6B6B','#F97316','#059669','#7C3AED','#0EA5E9','#EAB308','#DC2626','#0891B2','#84CC16','#D946EF','#F43F5E','#14B8A6','#8B5CF6','#EA580C','#65A30D','#06B6D4'];
@@ -1982,7 +1772,7 @@ function initTab5(){
   const priorYtdGrowth=yearAvgs.length>1?yearAvgs[yearAvgs.length-2].yoyPct:null;
   const ytdTrend=(ytdGrowth!=null&&priorYtdGrowth!=null)?(ytdGrowth>=priorYtdGrowth?'re-accelerating':'decelerating'):'';
 
-  document.getElementById('impsos-content').innerHTML=`
+  document.getElementById('gi-content').innerHTML=`
     <div class="g4" id="idx-kpis"></div>
 
     <div class="g2" style="gap:10px;margin-bottom:10px;align-items:stretch">
@@ -2045,9 +1835,22 @@ function initTab5(){
       <div class="tw" id="tbl-idx-detail"></div>
     </div>
 
-    <div class="card" id="idx-insights">
-      <div class="sh"><span class="kicker">💡 Auto-generated</span><span class="title">Summary &amp; Insights</span><span class="desc">Recomputed automatically from the latest data — read on indexed demand only (trajectory and share, not absolute volume).</span></div>
-      <div id="idx-insights-body"></div>
+    <div class="card">
+      <div class="sh"><span class="kicker">⚖️ Comparison · Monthly</span><span class="title">Cars24 Brand vs Category Search Interest</span><span class="desc">Gap = Cars24 index minus Category index. Positive = brand outpacing the category.</span></div>
+      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}?gid=0#gid=0" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-cmp','gindex_comparison.csv')">⬇ CSV</button></div>
+      <div class="tw" id="tbl-gi-cmp" style="margin-bottom:10px"></div>
+      <div class="cw"><canvas id="chart-gi-cmp"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+        <div><span class="kicker">🏙 City-wise · Monthly</span><span class="title">Cars24 Brand vs Generic — By City</span><span class="desc">Gap = Cars24 brand index minus Generic category index, per city. Positive = brand outpacing the category in that city.</span></div>
+        <select class="ctrl-sel" id="gi-city-cmp-period-sel"></select>
+      </div>
+      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}?gid=1878676239#gid=1878676239" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-city-cmp','gindex_city_brand_vs_generic.csv')">⬇ CSV</button></div>
+      <div class="tw" id="tbl-gi-city-cmp" style="margin-bottom:10px"></div>
+      <div class="fb"><span class="fl">Cities</span><div class="ms-dd" id="ms-gi-city-cmp"></div></div>
+      <div class="cw"><canvas id="chart-gi-city-cmp"></canvas></div>
     </div>`;
 
   // ── KPI strip ──
@@ -2109,7 +1912,7 @@ function initTab5(){
         const alpha=0.12+t*0.55;
         const isPeak=v===c.peak;
         const style=`background:rgba(71,54,254,${alpha.toFixed(2)});${isPeak?'box-shadow:inset 0 0 0 2px var(--mint);font-weight:800;':''}color:${t>0.6?'#fff':'var(--ink)'}`;
-        return`<td class="nr" style="${style}">${v.toFixed(0)}</td>`;
+        return`<td class="nr" style="${style}">${fIdx(v)}</td>`;
       }).join('');
       return`<tr${highlight?' style="outline:2px solid var(--blue)"':''}><td><strong>${c.city}</strong> <span class="tier-chip" style="background:${TIER_CLR[c.tier]}22;color:${TIER_CLR[c.tier]}">${c.tier}</span></td>${cells}</tr>`;
     }).join('');
@@ -2147,32 +1950,68 @@ function initTab5(){
   window.__idxSort=(key)=>{ sortDir=(sortKey===key)?-sortDir:-1; sortKey=key; renderIdxDetail(); };
   renderIdxDetail();
 
-  // ── Auto-generated insights ──
-  const worstOffPeak=[...cityStats].filter(c=>c.pctOffPeak!=null&&c.pctOffPeak<-15).sort((a,b)=>a.pctOffPeak-b.pctOffPeak).slice(0,3);
-  const bestYoy=[...cityStats].filter(c=>c.yoy!=null).sort((a,b)=>b.yoy-a.yoy).slice(0,3);
-  const worstYoy=[...cityStats].filter(c=>c.yoy!=null&&c.yoy<0).sort((a,b)=>a.yoy-b.yoy).slice(0,2);
-  let bullets=[];
-  bullets.push(`<li>India branded search ${isAtPeak?`hit its <strong>all-time peak in ${latest.label}</strong>`:`is at ${fIdx(latest.Cars24)} in ${latest.label}, off its all-time peak of ${fIdx(allTimeMax)}`}, ${fPct(sinceStartPct)} since ${first.label}.</li>`);
-  bullets.push(`<li>Rolling 12-month demand is ${fPct(rolling12Growth)} vs the prior 12 months. Annual mean index moved ${yearAvgs.map(y=>y.avg!=null?y.avg.toFixed(1):'—').join(' → ')}; ${latestYear} YTD is ${fPct(ytdGrowth)} vs full-year ${latestYear-1}${ytdTrend?` (${ytdTrend})`:''}.</li>`);
-  bullets.push(`<li><strong>${citiesAtPeak} of ${cities.length} cities are at their all-time high</strong> in ${latest.label}. ${cities.length-citiesAtPeak} are off-peak.</li>`);
-  if(bestYoy.length)bullets.push(`<li>Fastest-growing cities YoY: ${bestYoy.map(c=>`<strong>${c.city}</strong> (${fPct(c.yoy)})`).join(', ')}.</li>`);
-  if(worstOffPeak.length)bullets.push(`<li>Furthest below their own peak: ${worstOffPeak.map(c=>`<strong>${c.city}</strong> (${c.pctOffPeak.toFixed(1)}%, peaked ${c.peakLabel})`).join(', ')} — worth checking whether this is supply-side (fewer listings/activity) or genuine demand softness.</li>`);
-  if(worstYoy.length)bullets.push(`<li>Declining YoY: ${worstYoy.map(c=>`<strong>${c.city}</strong> (${fPct(c.yoy)})`).join(', ')}.</li>`);
+  // ── TABLE: Brand vs Generic comparison (pan-India) ──
+  const gth3=`<th>Month</th><th class="nr ch" style="text-transform:none">Cars24</th><th class="nr">Category</th><th class="nr ratio-hi">Gap (Brand−Category)</th>`;
+  const rows3=[...giM].reverse().map((r,i)=>{
+    const g=(r.Cars24!=null&&r.Category!=null)?r.Cars24-r.Category:null;
+    return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td class="nr cc"><strong>${fIdx(r.Cars24)}</strong></td><td class="nr">${fIdx(r.Category)}</td><td class="nr ratio-hi">${g!=null?(g>0?'+':'')+g.toFixed(1):'—'}</td></tr>`;
+  }).join('');
+  document.getElementById('tbl-gi-cmp').innerHTML=tbl(gth3,rows3);
+  charts.giCmp=new Chart(document.getElementById('chart-gi-cmp').getContext('2d'),{type:'line',data:{labels:giM.map(r=>r.label),datasets:[
+    {label:'Cars24 Brand',data:giM.map(r=>r.Cars24),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.3,spanGaps:true,borderWidth:3,pointRadius:0},
+    {label:'Category (Generic)',data:giM.map(r=>r.Category),borderColor:'#FF9500',backgroundColor:'transparent',fill:false,tension:0.3,spanGaps:true,borderWidth:2,borderDash:[5,3],pointRadius:0}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11},usePointStyle:true}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
 
-  const catLast12=avgVals(giM.slice(-12).map(r=>({Cars24:r.Category}))),catPrior12=avgVals(giM.slice(-24,-12).map(r=>({Cars24:r.Category})));
-  const catGrowth=(catLast12!=null&&catPrior12)?(catLast12-catPrior12)/catPrior12*100:null;
-  if(rolling12Growth!=null&&catGrowth!=null)bullets.push(`<li>Cross-read with the category: over the last 12 months Cars24's index grew ${fPct(rolling12Growth)} while the overall category grew ${fPct(catGrowth)} — ${rolling12Growth>catGrowth?'Cars24 is gaining share of a moving category':'the category is outpacing Cars24'}.</li>`);
-  if(bsosM.length){
-    const latestBsos=bsosM[bsosM.length-1];
-    const p0Cities=cities.filter(c=>tiers[c]==='P0');
-    const p0Rows=p0Cities.map(c=>bsosCities[c]?.[bsosCities[c].length-1]).filter(Boolean);
-    if(p0Rows.length){
-      const p0Avg=b=>{const vals=p0Rows.map(r=>r[b]).filter(v=>v!=null);return vals.length?vals.reduce((a,x)=>a+x,0)/vals.length:null;};
-      bullets.push(`<li>On absolute share-of-search (Brandstack panel, ${latestBsos.label}): Cars24 ~${fIdx(latestBsos.Cars24)}%, CarWale ~${fIdx(latestBsos.CarWale)}%, Spinny ~${fIdx(latestBsos.Spinny)}% pan-India. In P0 metros specifically: Cars24 ~${fIdx(p0Avg('Cars24'))}%, CarWale ~${fIdx(p0Avg('CarWale'))}%, Spinny ~${fIdx(p0Avg('Spinny'))}%. The Google Index rise reflects real demand growth — it is not the same as competitive share-of-search leadership.</li>`);
+  // ── TABLE: City-wise Cars24 Brand vs Generic comparison ──
+  function brandAt(city,m){const r=cityBrand[city]?.find(x=>x.month===m);return r?r.index:null;}
+  function genericAt(city,m){const r=cityGeneric[city]?.find(x=>x.month===m);return r?r.index:null;}
+  let giCityCmpSel=[...cities];
+  function renderGiCityCmpTable(sel){
+    const tblEl=document.getElementById('tbl-gi-city-cmp');
+    if(sel==='__all__'){
+      const th=`<th>City</th><th></th>${allGiMonths.map((m,i)=>`<th class="nr${i===allGiMonths.length-1?' ch':''}">${mLabelGi[m]||m}</th>`).join('')}`;
+      const rows=cities.map(city=>{
+        const brandVals=allGiMonths.map(m=>brandAt(city,m));
+        const genVals=allGiMonths.map(m=>genericAt(city,m));
+        return{city,brandVals,genVals,last:brandVals.filter(v=>v!=null).pop()};
+      }).sort((a,b)=>(b.last??-999)-(a.last??-999));
+      const trs=rows.map(({city,brandVals,genVals})=>
+        `<tr class="lat"><td rowspan="2"><strong>${city}</strong></td><td style="color:var(--blue);font-weight:700;font-size:11px">Brand</td>${brandVals.map(v=>`<td class="nr cc">${fIdx(v)}</td>`).join('')}</tr>`+
+        `<tr><td style="color:#f90;font-weight:700;font-size:11px">Generic</td>${genVals.map(v=>`<td class="nr">${fIdx(v)}</td>`).join('')}</tr>`
+      ).join('');
+      tblEl.innerHTML=tbl(th,trs);
+      return;
     }
+    const rows=cities.map(city=>{
+      const b=cityBrand[city].find(x=>x.month===sel),g=cityGeneric[city]?.find(x=>x.month===sel);
+      return(b&&b.index!=null)?{city,brand:b.index,generic:g?g.index:null}:null;
+    }).filter(Boolean).sort((a,b)=>b.brand-a.brand);
+    const th=`<th>City</th><th class="nr ch" style="text-transform:none">Cars24 Brand</th><th class="nr">Generic</th><th class="nr ratio-hi">Gap (Brand−Generic)</th>`;
+    const tr=rows.map((x,i)=>{
+      const g=(x.brand!=null&&x.generic!=null)?x.brand-x.generic:null;
+      return`<tr class="${i===0?'lat':''}"><td><strong>${x.city}</strong></td><td class="nr cc"><strong>${fIdx(x.brand)}</strong></td><td class="nr">${fIdx(x.generic)}</td><td class="nr ratio-hi">${g!=null?(g>0?'+':'')+g.toFixed(1):'—'}</td></tr>`;
+    }).join('');
+    tblEl.innerHTML=tbl(th,tr);
   }
-  document.getElementById('idx-insights-body').innerHTML=`<ul style="margin:0;padding-left:20px;line-height:1.9;font-size:13.5px;color:var(--ink)">${bullets.join('')}</ul>`;
-  scanTw(document.getElementById('impsos-content'));
+  function renderGiCityCmpChart(){
+    if(charts.giCityCmp)charts.giCityCmp.destroy();
+    const ctx=document.getElementById('chart-gi-city-cmp');if(!ctx)return;
+    const datasets=[];
+    giCityCmpSel.forEach((city,i)=>{
+      const clr=CITY_PALETTE[i%CITY_PALETTE.length];
+      datasets.push({label:`${city} · Brand`,data:allGiMonths.map(m=>brandAt(city,m)),borderColor:clr,backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:2});
+      datasets.push({label:`${city} · Generic`,data:allGiMonths.map(m=>genericAt(city,m)),borderColor:clr,backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:1.5,borderDash:[5,3],pointRadius:0});
+    });
+    charts.giCityCmp=new Chart(ctx.getContext('2d'),{type:'line',data:{labels:allGiMonths.map(m=>mLabelGi[m]||m),datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10},padding:8}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+  }
+  const giCityCmpPeriodSel=document.getElementById('gi-city-cmp-period-sel');
+  giCityCmpPeriodSel.innerHTML=`<option value="__all__">All time</option>`+allGiMonths.slice().reverse().map((m,i)=>`<option value="${m}"${i===0?' selected':''}>${mLabelGi[m]||m}${i===0?' (latest)':''}</option>`).join('');
+  giCityCmpPeriodSel.addEventListener('change',()=>renderGiCityCmpTable(giCityCmpPeriodSel.value));
+  buildMultiSelect('ms-gi-city-cmp',cities,cities,c=>c,vals=>{giCityCmpSel=vals;renderGiCityCmpChart();},'All cities');
+  renderGiCityCmpTable(allGiMonths[allGiMonths.length-1]);
+  renderGiCityCmpChart();
+
+  scanTw(document.getElementById('gi-content'));
 }
 
 /* ── YouTube inner-tab styles (injected once) ── */
@@ -3426,7 +3265,7 @@ async function initUAEInf(){
   scanTw(el);
 }
 
-const lazyInit={kw:initTab2,bsos:initTab3,gi:initTab4,impsos:initTab5,inf:initInf,yt:initYT,ig:initIG,li:initLI,'uae-inf':initUAEInf,'au-ig':()=>renderIG('igc-au','cars24_au','Cars24 Australia'),'uae-ig':()=>renderIG('igc-uae','cars24_uae','Cars24 UAE'),'yt-malayalam2':()=>renderYT('ytc-malayalam2','cars24_malayalam2','Cars24 Malayalam'),
+const lazyInit={kw:initTab2,bsos:initTab3,gi:initTab4,inf:initInf,yt:initYT,ig:initIG,li:initLI,'uae-inf':initUAEInf,'au-ig':()=>renderIG('igc-au','cars24_au','Cars24 Australia'),'uae-ig':()=>renderIG('igc-uae','cars24_uae','Cars24 UAE'),'yt-malayalam2':()=>renderYT('ytc-malayalam2','cars24_malayalam2','Cars24 Malayalam'),
   'au-kw':()=>initCountryKeywordsTab('au-','au-kw','https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Acars24.com.au&metrics=IMPRESSIONS&breakdown=date&time_granularity=MONTH&query=~car%2024%7Ccars24%7Ccars%2024%7C%2024%20car%7Ccara%2024%7Ccarz%2024%7Ccard24%7Ccar24%7C24%20cars',D.gsc_au?.keywords),
   'uae-kw':()=>initCountryKeywordsTab('uae-','uae-kw','https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Acars24.ae&metrics=IMPRESSIONS&breakdown=date&time_granularity=MONTH&query=~car%2024%7Ccars24%7Ccars%2024%7C%2024%20car%7Ccara%2024%7Ccarz%2024%7Ccard24%7Ccar24%7C24%20cars',D.gsc_uae?.keywords),
   'au-sos':()=>initCountryBsosTab('au-','au-sos',D.gsc_au?.bsos,'Region'),
