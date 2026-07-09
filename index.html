@@ -2665,14 +2665,19 @@ function renderLIDemoInner(prefix,key,dataByDim){
   `;
 }
 
-function renderLIDemoCard(key,pageName,fDemo,vDemo){
+function renderLIDemoCard(key,pageName,fDemo,vDemo,fMonthly,vMonthly){
   const fAny=LI_DEMO_DIMS.some(([d])=>(fDemo[d]||[]).length);
   const vAny=LI_DEMO_DIMS.some(([d])=>(vDemo[d]||[]).length);
   if(!fAny&&!vAny)return'';
+  const allMonths=[...new Set([...Object.keys(fMonthly||{}),...Object.keys(vMonthly||{})])].sort();
+  const monthLabel=m=>(fMonthly||{})[m]?.label||(vMonthly||{})[m]?.label||m;
   return `<div class="card">
     <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
-      <div><span class="kicker">👥 Demographics</span><span class="title">${pageName} Audience</span><span class="desc">Current snapshot by location, function, seniority, industry &amp; company size.</span></div>
-      ${(fAny&&vAny)?`<div class="pp-wrap" id="li-demo-toggle-${key}"><button class="pp active" data-d="follower" type="button">Followers</button><button class="pp" data-d="visitor" type="button">Visitors</button></div>`:''}
+      <div><span class="kicker">👥 Demographics</span><span class="title">${pageName} Audience</span><span class="desc">Snapshot by location, function, seniority, industry &amp; company size. LinkedIn's export has no history, so this archives one snapshot per month going forward.</span></div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        ${allMonths.length>1?`<select class="ctrl-sel" id="li-demo-period-${key}">${[...allMonths].reverse().map((m,i)=>`<option value="${m}"${i===0?' selected':''}>${monthLabel(m)}${i===0?' (latest)':''}</option>`).join('')}</select>`:''}
+        ${(fAny&&vAny)?`<div class="pp-wrap" id="li-demo-toggle-${key}"><button class="pp active" data-d="follower" type="button">Followers</button><button class="pp" data-d="visitor" type="button">Visitors</button></div>`:''}
+      </div>
     </div>
     ${fAny?`<div id="li-demo-follower-${key}">${renderLIDemoInner('li-fdemo',key,fDemo)}</div>`:''}
     ${vAny?`<div id="li-demo-visitor-${key}">${renderLIDemoInner('li-vdemo',key,vDemo)}</div>`:''}
@@ -2690,6 +2695,8 @@ function renderLI(containerId,key,pageName){
   const liLatest=liDesc[0]?.month||liDesc[0]?.label||'';
   const fDemo=li.follower_demographics||{};
   const vDemo=li.visitor_demographics||{};
+  const fDemoMonthly=li.follower_demographics_monthly||{};
+  const vDemoMonthly=li.visitor_demographics_monthly||{};
   const competitors=key==='cars24'?(D.linkedin_competitors||[]):[];
 
   el.innerHTML=`
@@ -2723,7 +2730,7 @@ function renderLI(containerId,key,pageName){
     </div>
     ${li.posts&&li.posts.length?`<div class="card"><div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px"><div><span class="kicker">🔝 Top 10 Content</span><span class="title">Best Performing Posts</span><span class="desc">Sorted by impressions in selected period.</span></div><select class="inf-sel" id="li-posts-sel-${key}"><option value="all" selected>All Time</option>${liDesc.map((r,i)=>`<option value="i:${liMonthly.length-1-i}">${r.label}</option>`).join('')}</select></div><div class="tw" id="li-posts-${key}"></div></div>`:''}
 
-    ${renderLIDemoCard(key,pageName,fDemo,vDemo)}
+    ${renderLIDemoCard(key,pageName,fDemo,vDemo,fDemoMonthly,vDemoMonthly)}
   `;
 
   function renderLIKPIs(val){
@@ -2831,6 +2838,19 @@ function renderLI(containerId,key,pageName){
       document.getElementById(`li-demo-follower-${key}`).style.display=d==='follower'?'':'none';
       document.getElementById(`li-demo-visitor-${key}`).style.display=d==='visitor'?'':'none';
     }));
+  }
+
+  // Demographics period filter — LinkedIn's export itself has no history, so
+  // this only has more than the latest month once a few build_data.py runs
+  // have archived a snapshot each. Re-draws both blocks from that month's
+  // archive; canvases already exist from the initial render above.
+  const liDemoPeriodSel=document.getElementById(`li-demo-period-${key}`);
+  if(liDemoPeriodSel){
+    liDemoPeriodSel.addEventListener('change',()=>{
+      const m=liDemoPeriodSel.value;
+      renderLIDemo('li-fdemo',fDemoMonthly[m]||fDemo);
+      renderLIDemo('li-vdemo',vDemoMonthly[m]||vDemo);
+    });
   }
 
   scanTw(el);

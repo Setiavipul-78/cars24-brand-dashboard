@@ -1256,10 +1256,14 @@ def _li_float(row, *cols):
             except: pass
     return None
 
-# Follower/visitor demographic breakdowns — current-snapshot totals only (LinkedIn's
-# exports don't provide a historical time series for these), same pattern as
-# Instagram's age/gender/city/country demographics.
+# Follower/visitor demographic breakdowns — LinkedIn's own export is a current-
+# snapshot CSV with no date column, so there's no historical time series built
+# in. We build one ourselves by archiving one snapshot per calendar month as
+# build_data.py runs (re-running within the same month overwrites that month's
+# archive with the latest export rather than adding a duplicate entry), so a
+# period filter becomes meaningful once a few months have accumulated.
 LI_DEMO_DIMS = ["location", "job_function", "seniority", "industry", "company_size"]
+LI_DEMO_SNAP_DIR = DATA / "li_demo_snapshots"
 
 def _li_load_demo_csv(path):
     if not path.exists():
@@ -1269,6 +1273,29 @@ def _li_load_demo_csv(path):
         return [{"category": str(r["category"]), "value": int(r["value"])} for _, r in df.iterrows()]
     except Exception:
         return []
+
+def _li_snapshot_demo(key, kind, dims_data, month):
+    if not any(dims_data.values()):
+        return
+    LI_DEMO_SNAP_DIR.mkdir(exist_ok=True)
+    path = LI_DEMO_SNAP_DIR / f"{key}_{kind}_{month}.json"
+    with open(path, "w") as f:
+        json.dump(dims_data, f)
+
+def _li_load_demo_history(key, kind):
+    """{month: {...dim: [...] for each LI_DEMO_DIMS}} for every archived snapshot,
+    sorted ascending by month."""
+    if not LI_DEMO_SNAP_DIR.exists():
+        return {}
+    history = {}
+    prefix = f"{key}_{kind}_"
+    for p in sorted(LI_DEMO_SNAP_DIR.glob(f"{prefix}*.json")):
+        month = p.stem[len(prefix):]
+        try:
+            history[month] = json.loads(p.read_text())
+        except Exception:
+            continue
+    return history
 
 def build_linkedin_competitors():
     """Shared competitor snapshot (not per-page) — Cars24 vs other major brands on
@@ -1305,10 +1332,20 @@ def build_linkedin():
         if not fol_p.exists() and not con_p.exists():
             continue
 
+        fol_demo = {dim: _li_load_demo_csv(DATA / f"linkedin_{key}_followers_by_{dim}.csv") for dim in LI_DEMO_DIMS}
+        vis_demo = {dim: _li_load_demo_csv(DATA / f"linkedin_{key}_visitors_by_{dim}.csv")  for dim in LI_DEMO_DIMS}
+        current_month = str(pd.Timestamp("today").to_period("M"))
+        _li_snapshot_demo(key, "followers", fol_demo, current_month)
+        _li_snapshot_demo(key, "visitors", vis_demo, current_month)
+        fol_demo_history = _li_load_demo_history(key, "followers")
+        vis_demo_history = _li_load_demo_history(key, "visitors")
+
         page_data = {
             "page_name": name, "snapshot": {}, "monthly": [], "posts": [],
-            "follower_demographics": {dim: _li_load_demo_csv(DATA / f"linkedin_{key}_followers_by_{dim}.csv") for dim in LI_DEMO_DIMS},
-            "visitor_demographics":  {dim: _li_load_demo_csv(DATA / f"linkedin_{key}_visitors_by_{dim}.csv")  for dim in LI_DEMO_DIMS},
+            "follower_demographics": fol_demo,
+            "visitor_demographics":  vis_demo,
+            "follower_demographics_monthly": {m: {**d, "label": mlabel(m)} for m, d in fol_demo_history.items()},
+            "visitor_demographics_monthly":  {m: {**d, "label": mlabel(m)} for m, d in vis_demo_history.items()},
         }
 
         # ── Followers CSV ──────────────────────────────────────────────────
