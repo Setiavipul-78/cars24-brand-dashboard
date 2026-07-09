@@ -2690,7 +2690,8 @@ function renderIG(containerId,key,handleName){
     const tc=rows.reduce((s,r)=>s+(r.comments||0),0);
     const tsh=rows.reduce((s,r)=>s+(r.shares||0),0);
     const tsv=rows.reduce((s,r)=>s+(r.saves||0),0);
-    const engRate=tv>0?(tl+tc+tsh+tsv)/tv*100:0;
+    const tint=tl+tc+tsh+tsv;
+    const engRate=tv>0?tint/tv*100:0;
     const netFol=tfg-tfl;
     document.getElementById(`ig-kpis-${key}`).innerHTML=`
       <div class="ink grn"><span class="ink-icon">👀</span><div class="ink-lbl">Views</div><div class="ink-val">${numFmt(tv)}</div><div class="ink-sub">Σ across posts in period</div></div>
@@ -2698,6 +2699,7 @@ function renderIG(containerId,key,handleName){
       <div class="ink mint"><span class="ink-icon">👥</span><div class="ink-lbl">Total Followers</div><div class="ink-val">${numFmt(snap.followers||0)}</div><div class="ink-sub">${handleName}</div></div>
       <div class="ink"><span class="ink-icon">📮</span><div class="ink-lbl">Content Posted</div><div class="ink-val">${numFmt(tcp)}</div><div class="ink-sub">posts in period</div></div>
       <div class="ink or"><span class="ink-icon">💬</span><div class="ink-lbl">Accounts Engaged</div><div class="ink-val">${numFmt(tae)}</div><div class="ink-sub">in period</div></div>
+      <div class="ink pur"><span class="ink-icon">🔥</span><div class="ink-lbl">Interactions</div><div class="ink-val">${numFmt(tint)}</div><div class="ink-sub">likes+comments+shares+saves</div></div>
       <div class="ink grn"><span class="ink-icon">⚡</span><div class="ink-lbl">Engagement Rate</div><div class="ink-val">${engRate.toFixed(2)}%</div><div class="ink-sub">(likes+shares+saves+cmts)÷views</div></div>`;
   }
   // ── Monthly table (period-filtered) ──
