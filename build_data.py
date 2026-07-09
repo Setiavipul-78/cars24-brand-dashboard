@@ -4,7 +4,7 @@ Build data.json for the Cars24 static HTML dashboard.
 Run: python3 build_data.py
 """
 
-import json, math, sys
+import json, math, sys, calendar
 import pandas as pd
 from pathlib import Path
 from datetime import datetime
@@ -85,6 +85,46 @@ def build_monthly():
     return rows
 
 # ── BSOS Monthly ──────────────────────────────────────────────────────────────
+def _drop_incomplete_trailing_months(df, daily_csv_name, label):
+    """Drop trailing month rows not yet fully covered by the daily feed.
+
+    Brandstack's own "Month" tab can get a row added for the current month
+    before that month has been tracked day-by-day for its full length — which
+    would otherwise show a partial-month average (e.g. 8 days of June) as if
+    it were the complete month's figure. We only trust a month once the daily
+    feed has (nearly) every calendar day for it — checked fresh on every run,
+    so this applies to whichever month is actually latest, not just today's.
+    """
+    if "month" not in df.columns or not len(df):
+        return df
+    daily_p = DATA / daily_csv_name
+    if not daily_p.exists():
+        return df
+    ddf = pd.read_csv(daily_p)
+    if "date" not in ddf.columns:
+        return df
+    ddf["date"] = pd.to_datetime(ddf["date"])
+    day_counts = ddf.groupby(ddf["date"].dt.to_period("M").astype(str)).size()
+
+    def is_complete(m):
+        have = day_counts.get(m, 0)
+        if have == 0:
+            return True  # no daily coverage to check against — trust the monthly row as-is
+        try:
+            year, mo = int(m[:4]), int(m[5:7])
+            days_in_month = calendar.monthrange(year, mo)[1]
+        except Exception:
+            return True
+        return have >= days_in_month - 1  # allow ~1 day of reporting lag
+
+    while len(df) and not is_complete(df.iloc[-1]["month"]):
+        dropped = df.iloc[-1]["month"]
+        have = day_counts.get(dropped, 0)
+        df = df.iloc[:-1]
+        print(f"  ⚠ BSOS monthly ({label}): excluding {dropped} — only {have} day(s) "
+              f"tracked in the daily feed so far, not a full month yet")
+    return df
+
 def build_bsos_monthly():
     for fname in ["bsos_pan_monthly.csv", "bsos_india_5b_daily.csv", "bsos_india_daily.csv"]:
         p = DATA / fname
@@ -96,6 +136,7 @@ def build_bsos_monthly():
             bc = [c for c in df.columns if c not in ("date","month")]
             df = df.groupby("month")[bc].mean().reset_index()
         df = df.sort_values("month").reset_index(drop=True)
+        df = _drop_incomplete_trailing_months(df, "bsos_pan_india_daily.csv", "pan-India")
         bc = [c for c in df.columns if c != "month"]
         rows = []
         for i, row in df.iterrows():

@@ -1390,11 +1390,12 @@ function initCountryGindexTab(prefix,paneId,gindexData,regionLabel){
 
 function initTab3(){
   const k=D.kpis,bm=D.bsos_monthly||[],bw=D.bsos_weekly||[],bd=D.bsos_daily||[],bc=D.bsos_cities||{};
+  const bsosLatestLabel=bm.length?bm[bm.length-1].label:k.latest_month_label;
 
   const leader=Object.entries(k.brand_sos||{}).sort((a,b)=>b[1]-a[1])[0];
   document.getElementById('sos-kpis').innerHTML=`
-    <div class="kh kh-blue"><div class="kl"><span class="ki">🆚</span>Cars24 SoS · ${k.latest_month_label}</div><div class="kv">${fP(k.c24_sos)}</div><div class="ks">${badge(k.c24_sos_mom,true)} vs last month</div></div>
-    <div class="kh kh-purple"><div class="kl"><span class="ki">🏆</span>Our Rank · ${k.latest_month_label}</div><div class="kv">${k.c24_rank!=null?'#'+k.c24_rank:'—'}</div><div class="ks">${leader?`Leader: ${BN[leader[0]]||leader[0]} at ${leader[1].toFixed(1)}%`:''}</div></div>
+    <div class="kh kh-blue"><div class="kl"><span class="ki">🆚</span>Cars24 SoS · ${bsosLatestLabel}</div><div class="kv">${fP(k.c24_sos)}</div><div class="ks">${badge(k.c24_sos_mom,true)} vs last month</div></div>
+    <div class="kh kh-purple"><div class="kl"><span class="ki">🏆</span>Our Rank · ${bsosLatestLabel}</div><div class="kv">${k.c24_rank!=null?'#'+k.c24_rank:'—'}</div><div class="ks">${leader?`Leader: ${BN[leader[0]]||leader[0]} at ${leader[1].toFixed(1)}%`:''}</div></div>
     <div class="kh ${(k.c24_vs_spinny||0)>0?'kh-green':'kh-red'}"><div class="kl"><span class="ki">${(k.c24_vs_spinny||0)>0?'✅':'⚠️'}</span>vs Spinny Gap</div><div class="kv">${k.c24_vs_spinny!=null?`${k.c24_vs_spinny>0?'+':''}${k.c24_vs_spinny.toFixed(1)}pp`:'—'}</div><div class="ks">${(k.c24_vs_spinny||0)>0?'Cars24 leads':'Spinny leads'}</div></div>
     <div class="kh ${(k.c24_vs_carwale||0)>0?'kh-green':'kh-red'}"><div class="kl"><span class="ki">${(k.c24_vs_carwale||0)>0?'✅':'⚠️'}</span>vs CarWale Gap</div><div class="kv">${k.c24_vs_carwale!=null?`${k.c24_vs_carwale>0?'+':''}${k.c24_vs_carwale.toFixed(1)}pp`:'—'}</div><div class="ks">${(k.c24_vs_carwale||0)>0?'Cars24 leads':'CarWale leads'}</div></div>`;
 
