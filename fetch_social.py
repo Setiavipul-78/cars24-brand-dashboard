@@ -47,6 +47,30 @@ def write_csv(path: Path, rows: list[dict]) -> None:
         w.writeheader(); w.writerows(rows)
     print(f"  ✓  {path.name}  ({len(rows)} rows)")
 
+def write_extra_json(path: Path, fresh: dict, monthly_keys=(), snapshot_keys=()) -> dict:
+    """Write a `_extra.json` sidecar, backed up against source APIs that only expose
+    a bounded lookback window (YouTube city/demo/traffic/device breakdowns, Instagram
+    demographics). Older months or breakdowns that age out of that window would
+    otherwise be silently dropped on the next overwrite — instead we merge the fresh
+    pull over whatever was last saved, so a month/breakdown only ever disappears if
+    it was never successfully fetched in the first place."""
+    prev = {}
+    if path.exists():
+        try:
+            prev = json.loads(path.read_text())
+        except Exception:
+            prev = {}
+    merged = dict(prev)
+    for key in monthly_keys:
+        if key in fresh or key in prev:
+            merged[key] = {**prev.get(key, {}), **fresh.get(key, {})}
+    for key in snapshot_keys:
+        if fresh.get(key):
+            merged[key] = fresh[key]
+    with open(path, "w") as f:
+        json.dump(merged, f, indent=2)
+    return merged
+
 # ── YouTube Analytics API ─────────────────────────────────────────────────────
 YT_CHANNELS = {
     "cars24_india":      os.getenv("YT_CHANNEL_ID_CARS24_INDIA"),
@@ -512,10 +536,14 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
     except Exception as e:
         print(f"    ⚠  Top videos fetch failed for {key}: {e}")
 
-    # Save extra data to JSON
+    # Save extra data to JSON, backed up against months/breakdowns that fall out of
+    # the Analytics API's lookback window on this run (see write_extra_json).
     extra_path = DATA / f"youtube_{key}_extra.json"
-    with open(extra_path, "w") as f:
-        json.dump(extra, f, indent=2)
+    write_extra_json(
+        extra_path, extra,
+        monthly_keys=("geo_monthly", "demographics_monthly", "traffic_sources_monthly", "devices_monthly"),
+        snapshot_keys=("geo", "demographics", "traffic_sources", "devices", "top_videos"),
+    )
     print(f"    ✓  {extra_path.name}")
 
     return rows
@@ -1011,9 +1039,11 @@ def fetch_all_instagram():
                 write_csv(posts_csv, posts)
                 print(f"    ✓ posts: {len(posts)} items (full history)")
             demo = fetch_ig_demographics(cfg["user_id"], cfg["access_token"])
-            with open(DATA / f"instagram_{key}_extra.json", "w") as f:
-                json.dump(demo, f, indent=2)
-            print(f"    ✓ demographics: age:{len(demo.get('age',[]))} gender:{len(demo.get('gender',[]))} city:{len(demo.get('city',[]))} country:{len(demo.get('country',[]))}")
+            merged_demo = write_extra_json(
+                DATA / f"instagram_{key}_extra.json", demo,
+                snapshot_keys=("age", "gender", "city", "country"),
+            )
+            print(f"    ✓ demographics: age:{len(merged_demo.get('age',[]))} gender:{len(merged_demo.get('gender',[]))} city:{len(merged_demo.get('city',[]))} country:{len(merged_demo.get('country',[]))}")
         except Exception as e:
             print(f"  ✗ {key}: {e}")
         time.sleep(1)
