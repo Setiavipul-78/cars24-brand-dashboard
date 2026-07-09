@@ -3293,8 +3293,8 @@ async function initUAEInf(){
 }
 
 const lazyInit={kw:initTab2,bsos:initTab3,gi:initTab4,inf:initInf,yt:initYT,ig:initIG,li:initLI,'uae-inf':initUAEInf,'au-ig':()=>renderIG('igc-au','cars24_au','Cars24 Australia'),'uae-ig':()=>renderIG('igc-uae','cars24_uae','Cars24 UAE'),'yt-malayalam2':()=>renderYT('ytc-malayalam2','cars24_malayalam2','Cars24 Malayalam'),
-  'au-kw':()=>initCountryKeywordsTab('au-','au-kw','https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Acars24.com.au&metrics=IMPRESSIONS&breakdown=date&time_granularity=MONTH&query=~car%2024%7Ccars24%7Ccars%2024%7C%2024%20car%7Ccara%2024%7Ccarz%2024%7Ccard24%7Ccar24%7C24%20cars',D.gsc_au?.keywords),
-  'uae-kw':()=>initCountryKeywordsTab('uae-','uae-kw','https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Acars24.ae&metrics=IMPRESSIONS&breakdown=date&time_granularity=MONTH&query=~car%2024%7Ccars24%7Ccars%2024%7C%2024%20car%7Ccara%2024%7Ccarz%2024%7Ccard24%7Ccar24%7C24%20cars',D.gsc_uae?.keywords),
+  'au-kw':()=>initCountryKeywordsTab('au-','au-kw','https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Acars24.com.au&metrics=IMPRESSIONS&breakdown=date&time_granularity=MONTH&country=aus&query=~car%2024%7Ccars24%7Ccars%2024%7C%2024%20car%7Ccara%2024%7Ccarz%2024%7Ccard24%7Ccar24%7C24%20cars',D.gsc_au?.keywords),
+  'uae-kw':()=>initCountryKeywordsTab('uae-','uae-kw','https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Acars24.ae&metrics=IMPRESSIONS&breakdown=date&time_granularity=MONTH&country=are&query=~car%2024%7Ccars24%7Ccars%2024%7C%2024%20car%7Ccara%2024%7Ccarz%2024%7Ccard24%7Ccar24%7C24%20cars',D.gsc_uae?.keywords),
   'au-sos':()=>initCountryBsosTab('au-','au-sos',D.gsc_au?.bsos,'Region'),
   'uae-sos':()=>initCountryBsosTab('uae-','uae-sos',D.gsc_uae?.bsos,'City'),
   'au-gi':()=>initCountryGindexTab('au-','au-gi',D.gsc_au?.gindex,'Region'),
@@ -3322,8 +3322,8 @@ async function main(){
     Chart.defaults.color='#6B7280';
     renderOv();initTabs();
     initSearchTab('',{kpis:D.kpis,monthly:D.monthly_impressions,daily:D.gsc_daily,weekly:D.gsc_weekly});
-    initCountrySearchTab('au-','au-s','https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Acars24.com.au&metrics=IMPRESSIONS&breakdown=date&time_granularity=MONTH&query=~car%2024%7Ccars24%7Ccars%2024%7C%2024%20car%7Ccara%2024%7Ccarz%2024%7Ccard24%7Ccar24%7C24%20cars','Australia',D.gsc_au);
-    initCountrySearchTab('uae-','uae-s','https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Acars24.ae&metrics=IMPRESSIONS&breakdown=date&time_granularity=MONTH&query=~car%2024%7Ccars24%7Ccars%2024%7C%2024%20car%7Ccara%2024%7Ccarz%2024%7Ccard24%7Ccar24%7C24%20cars','UAE',D.gsc_uae);
+    initCountrySearchTab('au-','au-s','https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Acars24.com.au&metrics=IMPRESSIONS&breakdown=date&time_granularity=MONTH&country=aus&query=~car%2024%7Ccars24%7Ccars%2024%7C%2024%20car%7Ccara%2024%7Ccarz%2024%7Ccard24%7Ccar24%7C24%20cars','Australia',D.gsc_au);
+    initCountrySearchTab('uae-','uae-s','https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Acars24.ae&metrics=IMPRESSIONS&breakdown=date&time_granularity=MONTH&country=are&query=~car%2024%7Ccars24%7Ccars%2024%7C%2024%20car%7Ccara%2024%7Ccarz%2024%7Ccard24%7Ccar24%7C24%20cars','UAE',D.gsc_uae);
     inited.search=true;
   }catch(e){
     document.querySelector('.wrap').innerHTML=`<div class="ph" style="margin-top:48px"><div class="ph-title">Could not load dashboard data</div><div class="ph-body">${e.message}<br><br>Run <code>python3 build_data.py</code> then serve with <code>python3 -m http.server 8080</code></div></div>`;

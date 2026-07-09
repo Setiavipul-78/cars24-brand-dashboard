@@ -25,16 +25,22 @@ BRAND_REGEX = r"car 24|cars24|cars 24|24 car|cara 24|carz 24|card24|car24|24 car
 
 # India is a URL-prefix property serving multiple countries, so it needs the
 # "country" filter to isolate India traffic. AU/UAE are their own ccTLD
-# domain properties (sc-domain:), so the whole property is already
-# country-scoped — no country filter needed there. Each has its own daily
-# CSV and its own full-history start date (only India has GSC access since
-# Nov 2023; AU/UAE access was only granted more recently).
+# domain properties (sc-domain:) — but a ccTLD domain property is NOT
+# inherently country-scoped: GSC's "country" dimension reflects the
+# SEARCHER's location, not the site's TLD, so users anywhere (confirmed:
+# largely India-based searchers) can generate impressions on cars24.com.au
+# or cars24.ae. Verified live: without a country filter, AU's June 2026
+# brand impressions were 97,003 vs 38,282 with country=aus (India searchers
+# alone accounted for 53,537) — UAE was a smaller but still real 76,005 vs
+# 66,990 with country=are. Each has its own daily CSV and its own
+# full-history start date (only India has GSC access since Nov 2023; AU/UAE
+# access was only granted more recently).
 COUNTRIES = {
     "india": {"site": "https://www.cars24.com/", "country": "ind", "csv": "gsc_daily_india.csv",
               "full_start": date(2023, 11, 1)},
-    "au":    {"site": "sc-domain:cars24.com.au",  "country": None,  "csv": "gsc_daily_au.csv",
+    "au":    {"site": "sc-domain:cars24.com.au",  "country": "aus", "csv": "gsc_daily_au.csv",
               "full_start": date(2025, 1, 1)},
-    "uae":   {"site": "sc-domain:cars24.ae",      "country": None,  "csv": "gsc_daily_uae.csv",
+    "uae":   {"site": "sc-domain:cars24.ae",      "country": "are", "csv": "gsc_daily_uae.csv",
               "full_start": date(2025, 1, 1)},
 }
 
@@ -126,7 +132,12 @@ def fetch_country(key, cfg, access_token, full_refresh):
     csv_out = DATA / cfg["csv"]
     site, country, full_start = cfg["site"], cfg["country"], cfg["full_start"]
 
-    existing = {} if full_refresh else load_existing(csv_out)
+    # Always merge onto whatever's already cached, even in --full mode. GSC's
+    # searchAnalytics API only retains ~500 days regardless of the requested
+    # start date, so blindly overwriting on --full silently discards any older
+    # history the CSV had accumulated via incremental runs (this happened once
+    # to India's 2023-11-01 start — restored from git, hence this fix).
+    existing = load_existing(csv_out)
 
     end_date = date.today() - timedelta(days=1)  # yesterday (dataState=all)
     if full_refresh or not existing:

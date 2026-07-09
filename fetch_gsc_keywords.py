@@ -22,16 +22,20 @@ DATA        = Path("data")
 BRAND_REGEX = r"car 24|cars24|cars 24|24 car|cara 24|carz 24|card24|car24|24 cars"
 TOKEN_URL   = "https://oauth2.googleapis.com/token"
 
-# India is a URL-prefix property needing a country filter; AU/UAE are their
-# own ccTLD domain properties (already country-scoped). File prefix is ""
-# for India (keeps the existing data/YYYY-MM.csv naming untouched) and
+# India is a URL-prefix property needing a country filter. AU/UAE are their
+# own ccTLD domain properties, but that does NOT make them country-scoped —
+# GSC's "country" dimension reflects the searcher's location, not the site's
+# TLD, so e.g. India-based searchers generate real impressions on
+# cars24.com.au too (confirmed live: dropping this filter roughly doubled
+# AU's brand impressions vs the country=aus figure). File prefix is "" for
+# India (keeps the existing data/YYYY-MM.csv naming untouched) and
 # "au_"/"uae_" for the others so they don't collide with India's files.
 COUNTRIES = {
     "india": {"site": "https://www.cars24.com/", "country": "ind", "prefix": "",
               "full_months_back": 16},
-    "au":    {"site": "sc-domain:cars24.com.au",  "country": None,  "prefix": "au_",
+    "au":    {"site": "sc-domain:cars24.com.au",  "country": "aus", "prefix": "au_",
               "full_months_back": 16},
-    "uae":   {"site": "sc-domain:cars24.ae",      "country": None,  "prefix": "uae_",
+    "uae":   {"site": "sc-domain:cars24.ae",      "country": "are", "prefix": "uae_",
               "full_months_back": 16},
 }
 
