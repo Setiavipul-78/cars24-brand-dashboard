@@ -782,20 +782,15 @@ def fetch_ig_account(key: str, cfg: dict) -> list[dict]:
             print(f"    ⚠  {m}: {str(e)[:80]}")
             continue
 
-        # follower_count: use day period snapshot at end of window
+        # Instagram's follower_count metric with period=day returns that day's
+        # NET CHANGE in followers, not an absolute total (confirmed by a real
+        # incident: it silently returned a small delta like 10/32/53 for one
+        # month across every tracked account, which got stored as if it were
+        # the whole month's follower total, corrupting that month with a tiny
+        # number sandwiched between two normal ones). The Graph API has no
+        # endpoint for a true historical follower total, so the current live
+        # snapshot is the only reliable value — used for every month.
         followers_eom = total_followers
-        try:
-            d3 = ig_get(f"/{uid}/insights", {
-                "metric": "follower_count", "period": "day",
-                "since": until_ts - 86400, "until": until_ts, "access_token": tok,
-            })
-            for item in d3.get("data", []):
-                if item["name"] == "follower_count":
-                    vals = item.get("values", [])
-                    if vals:
-                        followers_eom = vals[-1].get("value", total_followers)
-        except Exception:
-            pass
 
         # Follows/unfollows for the month (breakdown=follow_type: FOLLOWER=new follows,
         # NON_FOLLOWER=unfollows in this window — confirmed via direct API testing)
