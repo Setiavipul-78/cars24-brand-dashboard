@@ -1354,7 +1354,7 @@ function initCountrySosTab(prefix,paneId,bsosData,cfg){
   let sosComps=[...compPool];
 
   // ── TABLE 1: Monthly benchmark — table + chart, competitor multiselect + period dropdown + compare ──
-  const monthlyPaint=renderBsosGranular({data:bm,dateKey:'month',labelFn:r=>r.label,deltaSuffix:'_mom',brandsArr:()=>['Cars24',...sosComps],compArr:()=>[...sosComps],tblId:p+'tbl-comp',chartId:p+'chart-sos',ckey:p+'sos',prefix:p+'sos-m',dateLabel:'Month',deltaLabel:'MoM Δ',gapBrand});
+  const monthlyPaint=renderBsosGranular({data:bm,dateKey:'month',labelFn:r=>r.label,deltaSuffix:'_mom',brandsArr:()=>['Cars24',...sosComps],compArr:()=>[...sosComps],tblId:p+'tbl-comp',chartId:p+'chart-sos',ckey:p+'sos',prefix:p+'sos-m',dateLabel:'Month',deltaLabel:'MoM Δ',gapBrand,logScale:true});
   if(bm.length>=2){
     const latest=bm[bm.length-1].month,prev=bm[bm.length-2].month;
     document.getElementById(p+'sos-m-a-from').value=latest;document.getElementById(p+'sos-m-a-to').value=latest;
@@ -1391,7 +1391,7 @@ function initCountrySosTab(prefix,paneId,bsosData,cfg){
         document.getElementById(p+'sos-gran-b-from').value=bw[bw.length-8].week_start;
         document.getElementById(p+'sos-gran-b-to').value=bw[bw.length-5].week_start;
       }
-      granPaint=renderBsosGranular({data:bw,dateKey:'week_start',labelFn:r=>r.week,deltaSuffix:'_wow',brandsArr:wowBrands,compArr:wowBrands.filter(b=>b!=='Cars24'),tblId:p+'tbl-sos-gran',chartId:p+'chart-sos-gran',ckey:p+'sosGran',prefix:p+'sos-gran',dateLabel:'Week',deltaLabel:'WoW Δ',gapBrand});
+      granPaint=renderBsosGranular({data:bw,dateKey:'week_start',labelFn:r=>r.week,deltaSuffix:'_wow',brandsArr:wowBrands,compArr:wowBrands.filter(b=>b!=='Cars24'),tblId:p+'tbl-sos-gran',chartId:p+'chart-sos-gran',ckey:p+'sosGran',prefix:p+'sos-gran',dateLabel:'Week',deltaLabel:'WoW Δ',gapBrand,logScale:true});
     } else {
       const dodBrandKeys=brands.filter(b=>bd.some(r=>r[b]!=null));
       const bdD=withDailyDeltas(bd,dodBrandKeys);
@@ -1403,7 +1403,7 @@ function initCountrySosTab(prefix,paneId,bsosData,cfg){
         document.getElementById(p+'sos-gran-b-from').value=bdD[bdD.length-60].date;
         document.getElementById(p+'sos-gran-b-to').value=bdD[bdD.length-31].date;
       }
-      granPaint=renderBsosGranular({data:bdD,dateKey:'date',labelFn:r=>r.label,deltaSuffix:'_dod',brandsArr:dodBrands,compArr:dodBrands.filter(b=>b!=='Cars24'),tblId:p+'tbl-sos-gran',chartId:p+'chart-sos-gran',ckey:p+'sosGran',prefix:p+'sos-gran',dateLabel:'Day',deltaLabel:'DoD Δ',gapBrand});
+      granPaint=renderBsosGranular({data:bdD,dateKey:'date',labelFn:r=>r.label,deltaSuffix:'_dod',brandsArr:dodBrands,compArr:dodBrands.filter(b=>b!=='Cars24'),tblId:p+'tbl-sos-gran',chartId:p+'chart-sos-gran',ckey:p+'sosGran',prefix:p+'sos-gran',dateLabel:'Day',deltaLabel:'DoD Δ',gapBrand,logScale:true});
     }
     granPaint('all');
   }
@@ -1424,6 +1424,11 @@ function initCountrySosTab(prefix,paneId,bsosData,cfg){
   const allM=[...new Set(allRegionMonthlyRows.map(x=>x.month))].sort();
   const rLabel={};allRegionMonthlyRows.forEach(r=>{if(!rLabel[r.month])rLabel[r.month]=r.label;});
   const REGION_PALETTE=['#4736FE','#E91E8C','#FF6B6B','#F97316','#059669','#7C3AED','#0EA5E9','#EAB308','#DC2626','#0891B2','#84CC16','#D946EF','#F43F5E','#14B8A6','#8B5CF6','#EA580C','#65A30D','#06B6D4'];
+  // Distinct marker shapes per line — with few regions (e.g. NSW vs QLD tracking
+  // near-identical SoS%), overlapping lines of similar color are hard to tell
+  // apart; distinguishable point shapes plus an index-mode tooltip let you
+  // separate them even when the lines themselves sit on top of each other.
+  const POINT_STYLES=['circle','rect','triangle','rectRot','star','crossRot','cross'];
 
   const gm=allM.slice(-6);
   const gr=regionKeys.map(rk=>{const vals=gm.map(m=>{const r=(regions[rk].monthly||[]).find(x=>x.month===m);return r?r.Cars24:null;});const mom=(vals.length>=2&&vals[vals.length-1]!=null&&vals[vals.length-2]!=null)?vals[vals.length-1]-vals[vals.length-2]:null;return{rk,vals,last:vals[vals.length-1],mom};}).sort((a,b)=>(b.last||0)-(a.last||0));
@@ -1467,8 +1472,8 @@ function initCountrySosTab(prefix,paneId,bsosData,cfg){
     const ctx=document.getElementById(p+'chart-region-growth');if(!ctx)return;
     charts[ck]=new Chart(ctx.getContext('2d'),{type:'line',data:{labels:gm.map(m=>rLabel[m]||m),datasets:regionGrowthSel.map((rk,i)=>{
       const vals=gm.map(m=>{const r=(regions[rk].monthly||[]).find(x=>x.month===m);return r?r.Cars24:null;});
-      return{label:rk,data:vals,borderColor:REGION_PALETTE[i%REGION_PALETTE.length],backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:2};
-    })},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5},padding:8}}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+      return{label:rk,data:vals,borderColor:REGION_PALETTE[i%REGION_PALETTE.length],backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:3,pointStyle:POINT_STYLES[i%POINT_STYLES.length]};
+    })},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5},padding:8,usePointStyle:true}}},scales:{y:{ticks:{callback:v=>v.toFixed(1)+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
   }
   buildMultiSelect(p+'ms-region-growth',regionKeys,regionGrowthDefault,rk=>rk,vals=>{regionGrowthSel=vals;renderRegionGrowthChart();},'All '+regionLabel.toLowerCase()+'s');
   renderRegionGrowthChart();
@@ -1529,8 +1534,8 @@ function initCountrySosTab(prefix,paneId,bsosData,cfg){
     charts[ck]=new Chart(ctx.getContext('2d'),{type:'line',data:{labels:periods.map(([,label])=>label),datasets:regionBattleSel.map((rk,i)=>{
       const rrows=regionGranRows(rk,regionGran);
       const vals=periods.map(([v])=>{const r=rrows.find(x=>x[dateCol]===v);return(r&&r.Cars24!=null&&gapBrand&&r[gapBrand]!=null)?r.Cars24-r[gapBrand]:null;});
-      return{label:rk,data:vals,borderColor:REGION_PALETTE[i%REGION_PALETTE.length],backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:2};
-    })},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5},padding:8}}},scales:{y:{ticks:{callback:v=>(v>0?'+':'')+v+'pp'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16,maxRotation:45}}}}});
+      return{label:rk,data:vals,borderColor:REGION_PALETTE[i%REGION_PALETTE.length],backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:3,pointStyle:POINT_STYLES[i%POINT_STYLES.length]};
+    })},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5},padding:8,usePointStyle:true}}},scales:{y:{ticks:{callback:v=>(v>0?'+':'')+v.toFixed(1)+'pp'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16,maxRotation:45}}}}});
   }
   buildMultiSelect(p+'ms-region-battle',regionKeys,regionBattleDefault,rk=>rk,vals=>{regionBattleSel=vals;renderRegionBattleChart();},'All '+regionLabel.toLowerCase()+'s');
 
@@ -1800,6 +1805,7 @@ function withDailyDeltas(rows,brandKeys){
     return o;
   });
 }
+const POINT_STYLES_BSOS=['rect','triangle','rectRot','star','crossRot','cross'];
 function renderBsosGranular(cfg){
   const {data,dateKey,labelFn,deltaSuffix,tblId,chartId,ckey,prefix,dateLabel,deltaLabel}=cfg;
   const gapBrand=cfg.gapBrand||'Spinny';
@@ -1846,10 +1852,24 @@ function renderBsosGranular(cfg){
       charts[ckey]=new Chart(c.getContext('2d'),{type:'line',data:{labels:lbls,datasets:[
         {label:'Cars24 — Period A',data:fdA.map(r=>r.Cars24),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.1)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#4736FE'},
         {label:'Cars24 — Period B',data:(fdB||[]).map(r=>r.Cars24),borderColor:'#FF9500',backgroundColor:'rgba(255,149,0,.08)',fill:false,tension:0.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#FF9500',segment:{borderDash:ctx=>ctx.p0DataIndex%2===0?[6,3]:undefined}}
-      ]},options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{display:true,position:'top',labels:{boxWidth:12,font:{size:11},usePointStyle:true}}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16}}}}});
+      ]},options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{display:true,position:'top',labels:{boxWidth:12,font:{size:11},usePointStyle:true}}},scales:{y:{ticks:{callback:v=>v.toFixed(1)+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16}}}}});
     } else {
       const brandsArr=getBrandsArr();
-      charts[ckey]=new Chart(c.getContext('2d'),{type:'line',data:{labels:fdA.map(labelFn),datasets:brandsArr.map(b=>({label:BN[b]||b,data:fdA.map(r=>r[b]),borderColor:BC[b],backgroundColor:b==='Cars24'?'rgba(71,54,254,.07)':'transparent',fill:b==='Cars24',tension:0.3,spanGaps:true,borderWidth:b==='Cars24'?3:1.8,pointRadius:fdA.length>40?0:2}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:12,font:{size:11},padding:10}}},scales:{y:{min:0,ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
+      // When one competitor dominates (e.g. Carsales ~93% vs Cars24 ~2% in AU),
+      // a linear 0-based scale squashes every other line flat against the
+      // x-axis. logScale keeps proportional moves visible for every brand
+      // regardless of how small its share is. Opt-in via cfg since India's
+      // own chart hasn't shown this problem and stays on the linear scale.
+      const yScale=cfg.logScale?{
+        type:'logarithmic',
+        ticks:{callback:v=>{const s=String(v);return(s[0]==='1'||s[0]==='2'||s[0]==='5')?v+'%':'';}},
+        grid:{color:'#E5E3F8'},
+      }:{
+        min:0,
+        ticks:{callback:v=>v.toFixed(1)+'%'},
+        grid:{color:'#E5E3F8'},
+      };
+      charts[ckey]=new Chart(c.getContext('2d'),{type:'line',data:{labels:fdA.map(labelFn),datasets:brandsArr.map((b,i)=>({label:BN[b]||b,data:fdA.map(r=>r[b]),borderColor:BC[b],backgroundColor:b==='Cars24'?'rgba(71,54,254,.07)':'transparent',fill:b==='Cars24',tension:0.3,spanGaps:true,borderWidth:b==='Cars24'?3:1.8,pointRadius:fdA.length>40?0:2,pointStyle:b==='Cars24'?'circle':POINT_STYLES_BSOS[i%POINT_STYLES_BSOS.length]}))},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'top',labels:{boxWidth:12,font:{size:11},padding:10,usePointStyle:true}}},scales:{y:yScale,x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
     }
   }
   fcbs[prefix]=paint;
