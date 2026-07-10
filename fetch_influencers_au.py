@@ -1,18 +1,22 @@
 #!/usr/bin/env python3
 """
-Fetch Australia influencer campaign data from the "Previous Efforts" tab of
-the AU influencer tracker sheet, and write it into data/influencers_au.csv.
+Fetch Australia influencer data from two tabs of the AU influencer tracker
+sheet: "Previous Efforts" (post-level views/spend) and "Reachouts" (creator
+partnership terms), writing data/influencers_au.csv and
+data/influencers_au_creators.csv respectively.
 
 Uses the same read-only Sheets OAuth token as fetch_bsos_sheets.py /
 fetch_gindex_sheets.py (SHEETS_REFRESH_TOKEN — set up once via
 setup_sheets_auth.py).
 
-Sheet: 1VDcKBUNwFacleZFdN_By-qAeroheo3mlqOItat1ZQM8, tab "Previous Efforts"
+Sheet: 1VDcKBUNwFacleZFdN_By-qAeroheo3mlqOItat1ZQM8
 
-Only "Previous Efforts" is used — the sheet's other tabs (Reachouts, Google
-Data, Marketplaces, Universe Mapping) are creator-prospecting/research
-trackers, not campaign results, per an explicit instruction to only use
-Previous Efforts.
+"Previous Efforts" and "Reachouts" are the only tabs used — the sheet's
+other tabs (Google Data, Marketplaces, Universe Mapping) are reference
+lists/creator-research trackers with no campaign results. "Reachouts" is
+mostly a prospecting log too (most rows are "Hold"/"Dropped"/no terms
+agreed yet) — only rows with a populated "Total Cost in AUD" represent an
+actual negotiated creator partnership, so only those are kept.
 
 Layout quirks handled here:
   - Column A (Month) is only filled on each month's first row; blank on
@@ -155,6 +159,40 @@ def build_previous_efforts(token):
     print(f"  ✓ influencers_au.csv: {len(out)} posts across {len(months)} months ({months[0]} → {months[-1]})")
 
 
+def build_reachouts(token):
+    rows = fetch_values(token, "Reachouts!A1:L300")
+    if not rows or [c.strip() for c in rows[0][:3]] != ["", "Category", "Channel Name"]:
+        raise ValidationError("Reachouts: unexpected header row — sheet layout may have changed")
+
+    out = []
+    for r in rows[1:]:
+        if len(r) <= 10 or not r[10].strip():
+            continue  # no agreed "Total Cost in AUD" yet — still just a prospect, not a real deal
+        out.append({
+            "platform":     r[0].strip() if len(r) > 0 else "",
+            "category":     r[1].strip() if len(r) > 1 else "",
+            "creator":      r[2].strip() if len(r) > 2 else "",
+            "followers":    r[3].strip() if len(r) > 3 else "",
+            "link":         r[4].strip() if len(r) > 4 else "",
+            "recent_views": parse_number(r[5]) if len(r) > 5 else None,
+            "status":       r[6].strip() if len(r) > 6 else "",
+            "cost_aud":     parse_number(r[10]),
+            "cpv_aud":      parse_number(r[11]) if len(r) > 11 else None,
+        })
+
+    if not out:
+        raise ValidationError("Reachouts: zero rows with an agreed Total Cost found")
+    out.sort(key=lambda r: r["cost_aud"], reverse=True)
+    path = DATA / "influencers_au_creators.csv"
+    check_row_count(len(out), path, "AU influencer creators (Reachouts)")
+    DATA.mkdir(exist_ok=True)
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=["platform", "category", "creator", "followers", "link", "recent_views", "status", "cost_aud", "cpv_aud"])
+        w.writeheader()
+        w.writerows(out)
+    print(f"  ✓ influencers_au_creators.csv: {len(out)} creator partnerships with agreed terms")
+
+
 def main():
     load_env()
     token = get_token()
@@ -163,6 +201,12 @@ def main():
         build_previous_efforts(token)
     except (ValidationError, ValueError, KeyError) as e:
         print(f"  ✗ AU influencers fetch failed validation, existing CSV left untouched: {e}")
+
+    print("  Fetching AU influencer creator partnerships (Reachouts)…")
+    try:
+        build_reachouts(token)
+    except (ValidationError, ValueError, KeyError) as e:
+        print(f"  ✗ AU influencer creators fetch failed validation, existing CSV left untouched: {e}")
 
 
 if __name__ == "__main__":

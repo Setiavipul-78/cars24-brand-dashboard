@@ -3760,7 +3760,12 @@ function initAUInf(){
 
     <div class="inf-kpi-strip" id="au-inf-kpis"></div>
 
-    <p style="font-size:12px;color:var(--grey);margin:0 0 10px">Sourced from the "Previous Efforts" tab — tracks post link + views per campaign and one total spend figure per month. Per-creator names, likes/comments and engagement rate aren't tracked in this sheet yet.</p>
+    <p style="font-size:12px;color:var(--grey);margin:0 0 10px">Monthly trend is sourced from the "Previous Efforts" tab — post link + views per campaign and one total spend figure per month; likes/comments and engagement rate aren't tracked in this sheet yet. Creator partnerships below are from "Reachouts" — only the ${inf.creators?.length||0} with agreed terms are shown (most rows there are still prospects with no deal done).</p>
+
+    ${inf.creators?.length?`<div class="card">
+      <div class="sh"><span class="kicker">🎯 Creator Partnerships</span><span class="title">Agreed Deals</span><span class="desc">Negotiated cost + CPV, based on estimated reach. Status reflects where the deal stands.</span></div>
+      <div class="tw" id="au-inf-creators-tbl"></div>
+    </div>`:''}
 
     <div class="card">
       <div class="sh"><span class="kicker">📈 Monthly trend</span><span class="title">Views Over Time</span><span class="desc">Total influencer views per month across all AU campaigns.</span></div>
@@ -3801,6 +3806,26 @@ function initAUInf(){
   }
 
   function renderAUStatic(){
+    // Creator partnerships table
+    const creatorsEl=document.getElementById('au-inf-creators-tbl');
+    if(creatorsEl&&inf.creators?.length){
+      const cth=`<th>Creator</th><th>Category</th><th class="nr">Followers</th><th class="nr">Recent Views</th><th>Status</th><th class="nr ch">Cost</th><th class="nr ch">CPV</th>`;
+      const crows=inf.creators.map((c,i)=>{
+        const costInr=c.cost_aud!=null?c.cost_aud*AUD_TO_INR:null;
+        const cpvInr=c.cpv_aud!=null?c.cpv_aud*AUD_TO_INR:null;
+        return`<tr class="${i===0?'lat':''}">
+          <td><a href="${c.link||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${c.creator}</a><br><span style="font-size:11px;color:var(--grey)">${c.platform}</span></td>
+          <td>${c.category||'—'}</td>
+          <td class="nr">${c.followers||'—'}</td>
+          <td class="nr">${fv(c.recent_views)}</td>
+          <td>${c.status||'—'}</td>
+          <td class="nr cc"><strong>${fc(costInr)}</strong></td>
+          <td class="nr cc">${fcpv(cpvInr)}</td>
+        </tr>`;
+      }).join('');
+      creatorsEl.innerHTML=tbl(cth,crows);
+    }
+
     // Trend chart
     const tcx=document.getElementById('au-inf-chart-trend').getContext('2d');
     new Chart(tcx,{type:'bar',data:{

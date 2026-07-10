@@ -925,16 +925,18 @@ def build_influencers():
 
 # ── Influencers (Australia) ────────────────────────────────────────────────────
 def build_influencers_au():
-    """AU influencer campaign data from data/influencers_au.csv (fetch_influencers_au.py,
-    "Previous Efforts" tab only — a thinner dataset than India/UAE: no creator name,
-    likes/comments, or per-post cost, just a link + views per post and one total
-    AUD spend figure per month. Currency conversion to INR happens client-side."""
+    """AU influencer data from fetch_influencers_au.py's two CSVs — a thinner
+    dataset than India/UAE: "Previous Efforts" gives post-level views + one
+    total AUD spend per month (no creator name or per-post cost), and
+    "Reachouts" gives a handful of actual creator partnerships (name,
+    followers, agreed cost, CPV) for the ones with terms agreed so far.
+    Currency conversion to INR happens client-side."""
     p = DATA / "influencers_au.csv"
     if not p.exists():
-        return {"rows": [], "monthly": []}
+        return {"rows": [], "monthly": [], "creators": []}
     df = pd.read_csv(p)
     if df.empty:
-        return {"rows": [], "monthly": []}
+        return {"rows": [], "monthly": [], "creators": []}
 
     month_key = pd.to_datetime(df["month"], format="%B %Y").dt.strftime("%Y-%m")
     df = df.assign(month_key=month_key)
@@ -952,8 +954,20 @@ def build_influencers_au():
             "cost_aud": cost_aud,
         })
     monthly.sort(key=lambda r: r["month"])
-    print(f"  ✓ AU influencers: {len(rows)} posts across {len(monthly)} months")
-    return {"rows": rows, "monthly": monthly}
+
+    creators = []
+    cp = DATA / "influencers_au_creators.csv"
+    if cp.exists():
+        cdf = pd.read_csv(cp)
+        creators = [{
+            "platform": r.platform, "category": r.category, "creator": r.creator,
+            "followers": r.followers, "link": r.link,
+            "recent_views": sf(r.recent_views), "status": r.status,
+            "cost_aud": sf(r.cost_aud), "cpv_aud": sf(r.cpv_aud),
+        } for r in cdf.itertuples()]
+
+    print(f"  ✓ AU influencers: {len(rows)} posts across {len(monthly)} months, {len(creators)} creator partnerships")
+    return {"rows": rows, "monthly": monthly, "creators": creators}
 
 # ── YouTube ───────────────────────────────────────────────────────────────────
 YT_CHANNEL_KEYS = [
