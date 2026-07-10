@@ -59,10 +59,17 @@ jobs:
           SHEETS_REFRESH_TOKEN:            ${{ secrets.SHEETS_REFRESH_TOKEN }}
         run: python3 fetch_social.py
 
+      # Build + commit run even if the fetch step reported token/auth issues
+      # (it still exits 0 for individual channels/sources that DID succeed) —
+      # a broken token for one channel shouldn't block committing everything
+      # else that refreshed fine. The overall run still shows red/failed
+      # because of the fetch step, so the problem stays visible either way.
       - name: Build data.json
+        if: always()
         run: python3 build_data.py
 
       - name: Commit and push if data changed
+        if: always()
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

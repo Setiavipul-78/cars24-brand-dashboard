@@ -1280,38 +1280,89 @@ def fetch_all_linkedin():
         time.sleep(1)
 
 # ── Main ─────────────────────────────────────────────────────────────────────
+# ── Token/auth health monitoring ──────────────────────────────────────────
+# Every credential failure below (YouTube OAuth, GSC/Sheets OAuth, Instagram)
+# already prints a "  ! ..." warning and keeps going — which is exactly how
+# the AU Instagram gap went unnoticed for 6 months: the workflow still
+# reported "success" with silently stale data. Tee stdout into a buffer, scan
+# it for known failure signatures at the end, and exit(1) if any are found so
+# the GitHub Actions run itself goes red and (if notifications are on) emails
+# whoever's watching the repo — instead of relying on someone reading logs.
+_FAILURE_SIGNATURES = [
+    "! No refresh token", "! OAuth refresh failed", "invalid_grant",
+    "Token has been expired or revoked", "! GSC_REFRESH_TOKEN not set",
+    "! GOOGLE_CLIENT_ID", "! Skipping", "Token refresh failed",
+    "! GSC fetch error", "! GSC keywords error", "! BSOS sheets fetch error",
+    "! BSOS intl fetch error", "! Google Index sheets fetch error",
+    "! No data fetched", "SHEETS_REFRESH_TOKEN not set",
+]
+
+class _Tee:
+    def __init__(self, *streams): self.streams = streams
+    def write(self, data):
+        for s in self.streams: s.write(data)
+    def flush(self):
+        for s in self.streams: s.flush()
+
 if __name__ == "__main__":
-    print("═══ fetch_social.py ═══")
-    fetch_all_youtube()
-    fetch_all_instagram()
-    fetch_all_linkedin()
-
-    print("\n── Google Search Console ────────────────────────────")
+    import sys, io
+    _captured = io.StringIO()
+    _real_stdout = sys.stdout
+    sys.stdout = _Tee(_real_stdout, _captured)
     try:
-        import fetch_gsc
-        fetch_gsc.main()
-    except Exception as e:
-        print(f"  ! GSC fetch error: {e}")
+        print("═══ fetch_social.py ═══")
+        fetch_all_youtube()
+        fetch_all_instagram()
+        fetch_all_linkedin()
 
-    print("\n── GSC Keywords ─────────────────────────────────────")
-    try:
-        import fetch_gsc_keywords
-        fetch_gsc_keywords.main()
-    except Exception as e:
-        print(f"  ! GSC keywords error: {e}")
+        print("\n── Google Search Console ────────────────────────────")
+        try:
+            import fetch_gsc
+            fetch_gsc.main()
+        except Exception as e:
+            print(f"  ! GSC fetch error: {e}")
 
-    print("\n── BSOS (Share of Search) Sheets ─────────────────────")
-    try:
-        import fetch_bsos_sheets
-        fetch_bsos_sheets.main()
-    except Exception as e:
-        print(f"  ! BSOS sheets fetch error: {e}")
+        print("\n── GSC Keywords ─────────────────────────────────────")
+        try:
+            import fetch_gsc_keywords
+            fetch_gsc_keywords.main()
+        except Exception as e:
+            print(f"  ! GSC keywords error: {e}")
 
-    print("\n── Google Search Index Sheets ─────────────────────────")
-    try:
-        import fetch_gindex_sheets
-        fetch_gindex_sheets.main()
-    except Exception as e:
-        print(f"  ! Google Index sheets fetch error: {e}")
+        print("\n── BSOS (Share of Search) Sheets ─────────────────────")
+        try:
+            import fetch_bsos_sheets
+            fetch_bsos_sheets.main()
+        except Exception as e:
+            print(f"  ! BSOS sheets fetch error: {e}")
 
-    print("\n✅  Done — run: python3 build_data.py")
+        print("\n── BSOS Intl (AU / UAE) ───────────────────────────────")
+        try:
+            import fetch_bsos_intl
+            fetch_bsos_intl.main()
+        except Exception as e:
+            print(f"  ! BSOS intl fetch error: {e}")
+
+        print("\n── Google Search Index Sheets ─────────────────────────")
+        try:
+            import fetch_gindex_sheets
+            fetch_gindex_sheets.main()
+        except Exception as e:
+            print(f"  ! Google Index sheets fetch error: {e}")
+
+        print("\n✅  Done — run: python3 build_data.py")
+    finally:
+        sys.stdout = _real_stdout
+
+    _lines = _captured.getvalue().splitlines()
+    _failures = sorted(set(l.strip() for l in _lines if any(p in l for p in _FAILURE_SIGNATURES)))
+
+    print("\n" + "=" * 70)
+    if _failures:
+        print(f"⚠️  TOKEN/AUTH HEALTH: {len(_failures)} issue(s) this run — see below:")
+        for f in _failures:
+            print(f"   {f}")
+        print("=" * 70)
+        sys.exit(1)
+    print("✅ TOKEN/AUTH HEALTH: no credential issues detected this run.")
+    print("=" * 70)
