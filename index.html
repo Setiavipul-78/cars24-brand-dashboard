@@ -1662,6 +1662,92 @@ function renderGiPanCompare(cfg){
   return paint;
 }
 
+// ── Pearson correlation + month-on-month directional match, used by the
+// Google Index vs GSC Search Impressions comparison below ──────────────────
+function pearsonR(xs,ys){
+  const n=xs.length;
+  if(n<2)return null;
+  const mx=xs.reduce((a,b)=>a+b,0)/n,my=ys.reduce((a,b)=>a+b,0)/n;
+  let num=0,dx2=0,dy2=0;
+  for(let i=0;i<n;i++){const dx=xs[i]-mx,dy=ys[i]-my;num+=dx*dy;dx2+=dx*dx;dy2+=dy*dy;}
+  const den=Math.sqrt(dx2*dy2);
+  return den===0?null:num/den;
+}
+function momMatch(xs,ys){
+  let match=0,total=0;
+  for(let i=1;i<xs.length;i++){
+    if(xs[i]==null||xs[i-1]==null||ys[i]==null||ys[i-1]==null)continue;
+    total++;
+    if(Math.sign(xs[i]-xs[i-1])===Math.sign(ys[i]-ys[i-1]))match++;
+  }
+  return{match,total};
+}
+
+// ── Google Index vs GSC Search Impressions: does the 0-100 Trends-style
+// index actually track real branded search impressions? Shared by
+// India/AU/UAE Google Indexed tabs — joins the two monthly series on
+// month, then shows correlation + MoM-direction-match stats, a combined
+// table, and a dual-axis chart.
+function renderGiVsGscCompare(cfg){
+  const{giMonthly,gscMonthly,tblId,chartId,ckey,prefix,kpiId,insightId,countryLabel}=cfg;
+  const gscByMonth={};
+  (gscMonthly||[]).forEach(r=>{gscByMonth[r.month]=r.impressions;});
+  const joined=(giMonthly||[]).filter(r=>r.Cars24!=null&&gscByMonth[r.month]!=null).map(r=>({
+    month:r.month,label:r.label,gi:r.Cars24,gsc:gscByMonth[r.month]
+  }));
+  const noData=`<p style="padding:16px;color:var(--grey);font-size:13px">Not enough overlapping months between Google Index and GSC impressions to compare.</p>`;
+  if(joined.length<3){
+    document.getElementById(kpiId).innerHTML='';
+    document.getElementById(tblId).innerHTML=noData;
+    document.getElementById(insightId).innerHTML='';
+    return null;
+  }
+  function paint(p){
+    const fd=(typeof p==='string'&&p.startsWith('from:'))?joined.filter(r=>r.month>=p.slice(5)):joined;
+    if(fd.length<3){document.getElementById(tblId).innerHTML=noData;return;}
+    const giVals=fd.map(r=>r.gi),gscVals=fd.map(r=>r.gsc);
+    const rIdx=pearsonR(giVals,gscVals);
+    const idxMatch=momMatch(giVals,gscVals);
+
+    // KPI strip
+    const fR=v=>v==null?'—':(v>=0?'':'−')+Math.abs(v).toFixed(2);
+    document.getElementById(kpiId).innerHTML=`
+      <div class="kh kh-blue"><div class="kl"><span class="ki">🔗</span>Google Index vs GSC</div><div class="kv">r = ${fR(rIdx)}</div><div class="ks">Pearson correlation, ${fd.length} months</div></div>
+      <div class="kh ${idxMatch.total&&idxMatch.match/idxMatch.total>=0.6?'kh-green':'kh-amber'}"><div class="kl"><span class="ki">📊</span>MoM Direction Match</div><div class="kv">${idxMatch.match}/${idxMatch.total}</div><div class="ks">months moving same direction as GSC</div></div>`;
+
+    // Insight callout
+    document.getElementById(insightId).innerHTML=`Google Index moves with GSC in ${idxMatch.match} of ${idxMatch.total} months for ${countryLabel} (r=${fR(rIdx)}).`;
+
+    // Table
+    const th=`<th>Month</th><th class="nr">GSC Impressions</th><th class="nr ch" style="text-transform:none">Google Index</th><th></th>`;
+    const rows=[...fd].reverse().map((r,i,arr)=>{
+      const next=arr[i+1];
+      return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td class="nr">${r.gsc.toLocaleString()}</td><td class="nr cc"><strong>${r.gi.toFixed(1)}</strong></td><td>${tia(next?r.gi-next.gi:null)}</td></tr>`;
+    }).join('');
+    document.getElementById(tblId).innerHTML=tbl(th,rows);
+
+    // Dual-axis chart: GSC Total (K, left) vs Google Index (0-100, right)
+    if(charts[ckey])charts[ckey].destroy();
+    const c=document.getElementById(chartId);
+    if(c){
+      charts[ckey]=new Chart(c.getContext('2d'),{type:'line',data:{labels:fd.map(r=>r.label),datasets:[
+        {label:'GSC Total (K)',data:fd.map(r=>r.gsc/1000),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:3,yAxisID:'y'},
+        {label:'Google Index (0-100)',data:fd.map(r=>r.gi),borderColor:'#FF6B35',backgroundColor:'transparent',tension:0.3,borderWidth:2.5,pointRadius:3,yAxisID:'y1'}
+      ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5},usePointStyle:true}}},scales:{
+        y:{position:'left',grid:{color:'#E5E3F8'},ticks:{callback:v=>v.toFixed(0)+'K'}},
+        y1:{position:'right',grid:{display:false},ticks:{callback:v=>v.toFixed(0)}},
+        x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
+    }
+  }
+  const selEl=document.getElementById(prefix+'-period-sel');
+  if(selEl){
+    selEl.innerHTML=`<option value="all" selected>All time</option>`+joined.map(r=>`<option value="from:${r.month}">From ${r.label}</option>`).join('');
+    selEl.addEventListener('change',()=>paint(selEl.value));
+  }
+  paint('all');
+  return paint;
+}
+
 // ── Full-depth Google Indexed tab, shared by India-equivalent country tabs
 // (AU/UAE) — KPIs, national+calendar-year trend, region-level trend with
 // multiselect, region×month heatmap, demand-mix/momentum, and a sortable
@@ -1672,6 +1758,18 @@ function countryGiTabHtml(prefix,cfg){
   const p=prefix,regionLabel=(cfg&&cfg.regionLabel)||'Region',regionGid=cfg&&cfg.regionSheetGid;
   return `
   <div class="g4" id="${p}gi-kpis"></div>
+
+  <div class="card">
+    <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+      <div><span class="kicker">⚖️ National · Monthly</span><span class="title">Google Index vs Search Impressions</span><span class="desc">Does the 0-100 Trends-style index actually track real branded GSC impressions?</span></div>
+      <select class="ctrl-sel" id="${p}gi-vs-gsc-period-sel"></select>
+    </div>
+    <div class="g2" id="${p}gi-vs-gsc-kpis" style="margin-bottom:10px"></div>
+    <p id="${p}gi-vs-gsc-insight" style="font-size:12.5px;color:var(--ink-2);background:var(--mint-lt);border-left:3px solid var(--mint);border-radius:6px;padding:8px 12px;margin:0 0 10px"></p>
+    <div class="card-actions"><button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-gi-vs-gsc','gindex_vs_gsc.csv')">⬇ CSV</button></div>
+    <div class="tw" id="${p}tbl-gi-vs-gsc" style="margin-bottom:10px"></div>
+    <div class="cw"><canvas id="${p}chart-gi-vs-gsc"></canvas></div>
+  </div>
 
   <div class="card">
     <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
@@ -1790,6 +1888,8 @@ function initCountryGiTab(prefix,paneId,gindexData,cfg){
     <div class="kh ${(rolling12Growth||0)>=0?'kh-green':'kh-red'}"><div class="kl"><span class="ki">${(rolling12Growth||0)>=0?'📈':'📉'}</span>Rolling 12-Mo Demand</div><div class="kv">${fPct(rolling12Growth)}</div><div class="ks">vs prior 12 months</div></div>
     <div class="kh kh-purple"><div class="kl"><span class="ki">🗺</span>${regionLabel}s at All-Time High</div><div class="kv">${regionsAtPeak}<span style="font-size:16px;color:rgba(255,255,255,.6)">/${regionKeys.length}</span></div><div class="ks">in ${latest.label}</div></div>`;
 
+  renderGiVsGscCompare({giMonthly:giM,gscMonthly:(cfg&&cfg.gscMonthly)||[],tblId:p+'tbl-gi-vs-gsc',chartId:p+'chart-gi-vs-gsc',ckey:p+'giVsGsc',prefix:p+'gi-vs-gsc',kpiId:p+'gi-vs-gsc-kpis',insightId:p+'gi-vs-gsc-insight',countryLabel:(cfg&&cfg.countryLabel)||regionLabel});
+
   const nationalPaint=renderGiPanCompare({data:giM,tblId:p+'tbl-gi-national',chartId:p+'chart-idx-national',ckey:p+'idxNational',prefix:p+'gi-national',seriesLabel:'National',fIdx});
   if(giM.length>=2){
     const gLatest=giM[giM.length-1].month,gPrev=giM[giM.length-2].month;
@@ -1869,8 +1969,8 @@ function initCountryGiTab(prefix,paneId,gindexData,cfg){
   renderIdxDetail();
 }
 
-function initCountryGindexTab(prefix,paneId,gindexData,regionLabel,regionSheetGid){
-  initCountryGiTab(prefix,paneId,gindexData,{regionLabel,regionSheetGid});
+function initCountryGindexTab(prefix,paneId,gindexData,regionLabel,regionSheetGid,gscMonthly,countryLabel){
+  initCountryGiTab(prefix,paneId,gindexData,{regionLabel,regionSheetGid,gscMonthly,countryLabel});
 }
 
 // ── Shared by India's SoS tab and country-level SoS tabs (gapBrand parametrized:
@@ -2284,6 +2384,18 @@ function initTab4(){
 
     <div class="card">
       <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+        <div><span class="kicker">⚖️ National · Monthly</span><span class="title">Google Index vs Search Impressions</span><span class="desc">Does the 0-100 Trends-style index actually track real branded GSC impressions?</span></div>
+        <select class="ctrl-sel" id="gi-vs-gsc-period-sel"></select>
+      </div>
+      <div class="g2" id="gi-vs-gsc-kpis" style="margin-bottom:10px"></div>
+      <p id="gi-vs-gsc-insight" style="font-size:12.5px;color:var(--ink-2);background:var(--mint-lt);border-left:3px solid var(--mint);border-radius:6px;padding:8px 12px;margin:0 0 10px"></p>
+      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}?gid=0#gid=0" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-vs-gsc','india_gindex_vs_gsc.csv')">⬇ CSV</button></div>
+      <div class="tw" id="tbl-gi-vs-gsc" style="margin-bottom:10px"></div>
+      <div class="cw"><canvas id="chart-gi-vs-gsc"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
         <div><span class="kicker">📈 National · Monthly</span><span class="title">Branded Search Trend</span><span class="desc">Monthly index, Jan'23 – ${latest.label} (100 = all-time peak).</span></div>
         <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
           <select class="ctrl-sel" id="gi-national-period-sel"></select>
@@ -2380,6 +2492,9 @@ function initTab4(){
     <div class="kh ${(ytdGrowth||0)>=0?'kh-green':'kh-red'}"><div class="kl"><span class="ki">${(ytdGrowth||0)>=0?'📈':'📉'}</span>${latestYear} YTD Growth</div><div class="kv">${fPct(ytdGrowth)}</div><div class="ks">vs full-year ${latestYear-1}${ytdTrend?' · '+ytdTrend:''}</div></div>
     <div class="kh ${(rolling12Growth||0)>=0?'kh-green':'kh-red'}"><div class="kl"><span class="ki">${(rolling12Growth||0)>=0?'📈':'📉'}</span>Rolling 12-Mo Demand</div><div class="kv">${fPct(rolling12Growth)}</div><div class="ks">vs prior 12 months</div></div>
     <div class="kh kh-purple"><div class="kl"><span class="ki">🏙</span>Cities at All-Time High</div><div class="kv">${citiesAtPeak}<span style="font-size:16px;color:rgba(255,255,255,.6)">/${cities.length}</span></div><div class="ks">in ${latest.label}</div></div>`;
+
+  // ── Google Index vs GSC Search Impressions ──
+  renderGiVsGscCompare({giMonthly:giM,gscMonthly:D.monthly_impressions||[],tblId:'tbl-gi-vs-gsc',chartId:'chart-gi-vs-gsc',ckey:'giVsGsc',prefix:'gi-vs-gsc',kpiId:'gi-vs-gsc-kpis',insightId:'gi-vs-gsc-insight',countryLabel:'India'});
 
   // ── National trend chart ──
   const nationalPaint=renderGiPanCompare({data:giM,tblId:'tbl-gi-national',chartId:'chart-idx-national',ckey:'idxNational',prefix:'gi-national',seriesLabel:'India (national)',fIdx});
@@ -3836,8 +3951,8 @@ const lazyInit={kw:initTab2,bsos:initTab3,gi:initTab4,inf:initInf,yt:initYT,ig:i
   'uae-kw':()=>initCountryKeywordsTab('uae-','uae-kw','https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Acars24.ae&metrics=IMPRESSIONS&breakdown=date&time_granularity=MONTH&country=are&query=~car%2024%7Ccars24%7Ccars%2024%7C%2024%20car%7Ccara%2024%7Ccarz%2024%7Ccard24%7Ccar24%7C24%20cars',D.gsc_uae?.keywords),
   'au-sos':()=>initCountryBsosTab('au-','au-sos',D.gsc_au?.bsos,'Region'),
   'uae-sos':()=>initCountryBsosTab('uae-','uae-sos',D.gsc_uae?.bsos,'City'),
-  'au-gi':()=>initCountryGindexTab('au-','au-gi',D.gsc_au?.gindex,'Region',906560602),
-  'uae-gi':()=>initCountryGindexTab('uae-','uae-gi',D.gsc_uae?.gindex,'City',858918292),
+  'au-gi':()=>initCountryGindexTab('au-','au-gi',D.gsc_au?.gindex,'Region',906560602,D.gsc_au?.monthly_impressions,'Australia'),
+  'uae-gi':()=>initCountryGindexTab('uae-','uae-gi',D.gsc_uae?.gindex,'City',858918292,D.gsc_uae?.monthly_impressions,'UAE'),
 };
 
 function initCountrySearchTab(prefix,paneId,gscSiteUrl,sourceLabel,gscData){
