@@ -204,11 +204,27 @@ CITIES: Set[str] = {
     "maharashtra", "punjab", "kerala", "gujarat", "goa",
     "meerut", "agartala", "muzaffarpur", "purnia",
     "vizag",
+    # Australia (this classifier is shared across all countries' keyword
+    # fetches — without these, real AU city keywords like "cars24 sydney"
+    # fell through to the generic "Cars24" bucket instead of "Cars24 Cities")
+    "sydney", "melbourne", "brisbane", "perth", "adelaide", "canberra",
+    "hobart", "darwin", "newcastle", "wollongong", "geelong", "townsville",
+    "cairns", "toowoomba", "ballarat", "bendigo", "launceston", "mackay",
+    "rockhampton", "bunbury", "bundaberg", "logan", "ipswich", "maitland",
+    "shepparton", "gladstone", "tamworth", "traralgon", "orange", "dubbo",
+    "geraldton", "albury", "wodonga", "warrnambool", "mildura", "nowra",
+    # UAE — cities/emirates
+    "dubai", "sharjah", "ajman", "fujairah",
 }
 
 MULTI_WORD_CITIES = [
     "navi mumbai", "greater noida", "delhi ncr", "rajouri garden",
     "s.g. highway",
+    # Australia
+    "gold coast", "sunshine coast", "wagga wagga", "coffs harbour",
+    "port macquarie", "alice springs", "central coast",
+    # UAE
+    "abu dhabi", "ras al khaimah", "umm al quwain", "al ain",
 ]
 
 
