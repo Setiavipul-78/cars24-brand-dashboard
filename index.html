@@ -1606,6 +1606,62 @@ function initCountryBsosTab(prefix,paneId,bsosData,regionLabel){
   initCountrySosTab(prefix,paneId,bsosData,{regionLabel});
 }
 
+// ── Shared table+chart for a single index series (Cars24 national/pan
+// index) with a period dropdown + A/B compare mode — the same pattern every
+// other tab (Brand Search Impressions, Keywords Volume, SoS Monthly
+// Benchmark) already has. Restores what the old pre-merge India Google
+// Indexed tab's "Pan-India Brand Index" table had, generalized with a
+// prefix so India and the AU/UAE country tabs share one implementation.
+function renderGiPanCompare(cfg){
+  const {data,tblId,chartId,ckey,prefix,seriesLabel,fIdx}=cfg;
+  function rowHtml(r,tag,isLatest){
+    const tagHtml=tag?` <span style="font-size:10px;color:${tag==='A'?'var(--blue)':'#f90'};font-weight:800">${tag}</span>`:(isLatest?' <span class="badge bb">Latest</span>':'');
+    return `<tr class="${isLatest&&!tag?'lat':''}"><td><strong>${r.label}</strong>${tagHtml}</td><td>${tia(r.Cars24_mom)}</td><td class="nr cc"><strong>${fIdx(r.Cars24)}</strong></td><td class="nr cc">${badge(r.Cars24_mom,true)}</td></tr>`;
+  }
+  function paint(p){
+    let fdA,fdB=null;
+    if(p==='compare'){
+      const aFrom=document.getElementById(`${prefix}-a-from`)?.value||'';
+      const aTo=document.getElementById(`${prefix}-a-to`)?.value||'';
+      const bFrom=document.getElementById(`${prefix}-b-from`)?.value||'';
+      const bTo=document.getElementById(`${prefix}-b-to`)?.value||'';
+      fdA=data.filter(r=>(!aFrom||r.month>=aFrom)&&(!aTo||r.month<=aTo));
+      fdB=data.filter(r=>(!bFrom||r.month>=bFrom)&&(!bTo||r.month<=bTo));
+    } else if(typeof p==='string'&&p.startsWith('from:')){
+      fdA=data.filter(r=>r.month>=p.slice(5));
+    } else {
+      fdA=filterPeriod(data,p);
+    }
+    const tblEl=document.getElementById(tblId);
+    if(!fdA.length&&!fdB?.length){tblEl.innerHTML='<p style="padding:16px;color:var(--grey);font-size:13px">No data for selected period.</p>';return;}
+    const th=`<th>Month</th><th></th><th class="nr ch" style="text-transform:none">Index</th><th class="nr ch">MoM Δ</th>`;
+    let rows;
+    if(fdB){
+      const rA=[...fdA].reverse().map(r=>rowHtml(r,'A',false)).join('');
+      const rB=[...fdB].reverse().map(r=>rowHtml(r,'B',false)).join('');
+      rows=rA+`<tr style="background:var(--bg)"><td colspan="4" style="padding:3px 8px;font-size:10px;color:var(--grey);letter-spacing:.5px">── Period B ──</td></tr>`+rB;
+    } else {
+      rows=[...fdA].reverse().map((r,i)=>rowHtml(r,null,i===0)).join('');
+    }
+    tblEl.innerHTML=tbl(th,rows);
+    if(charts[ckey])charts[ckey].destroy();
+    const c=document.getElementById(chartId);if(!c)return;
+    if(p==='compare'){
+      const len=Math.max(fdA.length,(fdB||[]).length);
+      const lbls=Array.from({length:len},(_,i)=>`${i+1}`);
+      charts[ckey]=new Chart(c.getContext('2d'),{type:'line',data:{labels:lbls,datasets:[
+        {label:'Period A',data:fdA.map(r=>r.Cars24),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.1)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#4736FE'},
+        {label:'Period B',data:(fdB||[]).map(r=>r.Cars24),borderColor:'#FF9500',backgroundColor:'rgba(255,149,0,.08)',fill:false,tension:0.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#FF9500',segment:{borderDash:ctx=>ctx.p0DataIndex%2===0?[6,3]:undefined}}
+      ]},options:{responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{display:true,position:'top',labels:{boxWidth:12,font:{size:11},usePointStyle:true}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16}}}}});
+    } else {
+      charts[ckey]=new Chart(c.getContext('2d'),{type:'line',data:{labels:fdA.map(r=>r.label),datasets:[{label:seriesLabel||'Cars24 Index',data:fdA.map(r=>r.Cars24),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.3,spanGaps:true,borderWidth:3,pointRadius:fdA.length>40?0:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11},usePointStyle:true}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
+    }
+  }
+  fcbs[prefix]=paint;
+  wirePills('pp-'+prefix,prefix,paint);
+  return paint;
+}
+
 // ── Full-depth Google Indexed tab, shared by India-equivalent country tabs
 // (AU/UAE) — KPIs, national+calendar-year trend, region-level trend with
 // multiselect, region×month heatmap, demand-mix/momentum, and a sortable
@@ -1613,19 +1669,33 @@ function initCountryBsosTab(prefix,paneId,bsosData,regionLabel){
 // (Brand vs Category, Brand vs Generic) since AU/UAE's Google Index data has
 // no category/generic series at all — those were never fetched for them.
 function countryGiTabHtml(prefix,cfg){
-  const p=prefix,regionLabel=(cfg&&cfg.regionLabel)||'Region';
+  const p=prefix,regionLabel=(cfg&&cfg.regionLabel)||'Region',regionGid=cfg&&cfg.regionSheetGid;
   return `
   <div class="g4" id="${p}gi-kpis"></div>
 
-  <div class="g2" style="gap:10px;margin-bottom:10px;align-items:stretch">
-    <div class="card" style="margin:0">
-      <div class="sh"><span class="kicker">📈 National · Monthly</span><span class="title">Branded Search Trend</span><span class="desc" id="${p}gi-national-desc"></span></div>
-      <div class="cw"><canvas id="${p}chart-idx-national"></canvas></div>
+  <div class="card">
+    <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+      <div><span class="kicker">📈 National · Monthly</span><span class="title">Branded Search Trend</span><span class="desc" id="${p}gi-national-desc"></span></div>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <select class="ctrl-sel" id="${p}gi-national-period-sel"></select>
+        <div class="pp-wrap" id="pp-${p}gi-national"><button class="pp" data-p="12m" type="button">Last 12 Months</button><button class="pp" data-p="compare" type="button">Compare ▾</button></div>
+        <div class="cr" id="cr-${p}gi-national">
+          <div class="cr-pair">
+            <div class="cr-row"><span class="cr-lbl" style="color:var(--blue)">Period A</span><input type="month" id="${p}gi-national-a-from"><span class="sep">–</span><input type="month" id="${p}gi-national-a-to"></div>
+            <div class="cr-row"><span class="cr-lbl" style="color:var(--grey)">vs</span><input type="month" id="${p}gi-national-b-from"><span class="sep">–</span><input type="month" id="${p}gi-national-b-to"></div>
+            <button class="apply-btn" onclick="applyCompare('${p}gi-national')" style="align-self:flex-end">Compare</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="card" style="margin:0">
-      <div class="sh"><span class="kicker">📅 Calendar Year</span><span class="title">Annual Average Index</span><span class="desc" id="${p}gi-years-desc"></span></div>
-      <div class="cw"><canvas id="${p}chart-idx-years"></canvas></div>
-    </div>
+    <div class="card-actions"><button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-gi-national','branded_search_national.csv')">⬇ CSV</button></div>
+    <div class="tw" id="${p}tbl-gi-national" style="margin-bottom:10px"></div>
+    <div class="cw"><canvas id="${p}chart-idx-national"></canvas></div>
+  </div>
+
+  <div class="card">
+    <div class="sh"><span class="kicker">📅 Calendar Year</span><span class="title">Annual Average Index</span><span class="desc" id="${p}gi-years-desc"></span></div>
+    <div class="cw"><canvas id="${p}chart-idx-years"></canvas></div>
   </div>
 
   <div class="card">
@@ -1655,7 +1725,7 @@ function countryGiTabHtml(prefix,cfg){
 
   <div class="card">
     <div class="sh"><span class="kicker">📋 Detail</span><span class="title">${regionLabel}-level Detail</span><span class="desc">Click any column header to sort.</span></div>
-    <div class="card-actions"><button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-idx-detail','branded_search_${regionLabel.toLowerCase()}_detail.csv')">⬇ CSV</button></div>
+    <div class="card-actions">${regionGid?`<a class="card-act-btn" href="${GI_SHEET}?gid=${regionGid}#gid=${regionGid}" target="_blank" rel="noopener">📄 View sheet</a>`:''}<button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-idx-detail','branded_search_${regionLabel.toLowerCase()}_detail.csv')">⬇ CSV</button></div>
     <div class="tw" id="${p}tbl-idx-detail"></div>
   </div>`;
 }
@@ -1708,7 +1778,7 @@ function initCountryGiTab(prefix,paneId,gindexData,cfg){
   const priorYtdGrowth=yearAvgs.length>1?yearAvgs[yearAvgs.length-2].yoyPct:null;
   const ytdTrend=(ytdGrowth!=null&&priorYtdGrowth!=null)?(ytdGrowth>=priorYtdGrowth?'re-accelerating':'decelerating'):'';
 
-  pane.innerHTML=countryGiTabHtml(p,{regionLabel});
+  pane.innerHTML=countryGiTabHtml(p,{regionLabel,regionSheetGid:cfg&&cfg.regionSheetGid});
   document.getElementById(p+'gi-national-desc').textContent=`Monthly index, ${first.label} – ${latest.label} (100 = all-time peak).`;
   document.getElementById(p+'gi-years-desc').textContent=`Annual mean with year-on-year growth. ${latestYear} is Jan–${latest.label.split("'")[0]} to date.`;
   document.getElementById(p+'gi-mix-desc').textContent=`Each ${regionLabel.toLowerCase()}'s slice of branded search across all tracked ${regionLabel.toLowerCase()}s, ${latest.label}.`;
@@ -1720,7 +1790,20 @@ function initCountryGiTab(prefix,paneId,gindexData,cfg){
     <div class="kh ${(rolling12Growth||0)>=0?'kh-green':'kh-red'}"><div class="kl"><span class="ki">${(rolling12Growth||0)>=0?'📈':'📉'}</span>Rolling 12-Mo Demand</div><div class="kv">${fPct(rolling12Growth)}</div><div class="ks">vs prior 12 months</div></div>
     <div class="kh kh-purple"><div class="kl"><span class="ki">🗺</span>${regionLabel}s at All-Time High</div><div class="kv">${regionsAtPeak}<span style="font-size:16px;color:rgba(255,255,255,.6)">/${regionKeys.length}</span></div><div class="ks">in ${latest.label}</div></div>`;
 
-  charts[p+'idxNational']=new Chart(document.getElementById(p+'chart-idx-national').getContext('2d'),{type:'line',data:{labels:giM.map(r=>r.label),datasets:[{label:'National',data:giM.map(r=>r.Cars24),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.3,spanGaps:true,borderWidth:3,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11},usePointStyle:true}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
+  const nationalPaint=renderGiPanCompare({data:giM,tblId:p+'tbl-gi-national',chartId:p+'chart-idx-national',ckey:p+'idxNational',prefix:p+'gi-national',seriesLabel:'National',fIdx});
+  if(giM.length>=2){
+    const gLatest=giM[giM.length-1].month,gPrev=giM[giM.length-2].month;
+    document.getElementById(p+'gi-national-a-from').value=gLatest;document.getElementById(p+'gi-national-a-to').value=gLatest;
+    document.getElementById(p+'gi-national-b-from').value=gPrev;document.getElementById(p+'gi-national-b-to').value=gPrev;
+  }
+  const giNationalSel=document.getElementById(p+'gi-national-period-sel');
+  giNationalSel.innerHTML=`<option value="all" selected>All time</option>`+giM.map(r=>`<option value="from:${r.month}">From ${r.label}</option>`).join('');
+  giNationalSel.addEventListener('change',()=>{
+    document.querySelectorAll(`#pp-${p}gi-national .pp`).forEach(b=>b.classList.remove('active'));
+    document.getElementById(`cr-${p}gi-national`).classList.remove('open');
+    nationalPaint(giNationalSel.value);
+  });
+  nationalPaint('all');
 
   charts[p+'idxYears']=new Chart(document.getElementById(p+'chart-idx-years').getContext('2d'),{type:'bar',data:{labels:years,datasets:[{label:'Avg index',data:yearAvgs.map(y=>y.avg),backgroundColor:yearAvgs.map((y,i)=>i===yearAvgs.length-1?'#059669':'#4736FE'),borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{afterLabel:ctx=>{const y=yearAvgs[ctx.dataIndex];return y.yoyPct!=null?`YoY: ${fPct(y.yoyPct)}`:'';}}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
 
@@ -1786,8 +1869,8 @@ function initCountryGiTab(prefix,paneId,gindexData,cfg){
   renderIdxDetail();
 }
 
-function initCountryGindexTab(prefix,paneId,gindexData,regionLabel){
-  initCountryGiTab(prefix,paneId,gindexData,{regionLabel});
+function initCountryGindexTab(prefix,paneId,gindexData,regionLabel,regionSheetGid){
+  initCountryGiTab(prefix,paneId,gindexData,{regionLabel,regionSheetGid});
 }
 
 // ── Shared by India's SoS tab and country-level SoS tabs (gapBrand parametrized:
@@ -2199,15 +2282,29 @@ function initTab4(){
   document.getElementById('gi-content').innerHTML=`
     <div class="g4" id="idx-kpis"></div>
 
-    <div class="g2" style="gap:10px;margin-bottom:10px;align-items:stretch">
-      <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">📈 National · Monthly</span><span class="title">Branded Search Trend</span><span class="desc">Monthly index, Jan'23 – ${latest.label} (100 = all-time peak).</span></div>
-        <div class="cw"><canvas id="chart-idx-national"></canvas></div>
+    <div class="card">
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+        <div><span class="kicker">📈 National · Monthly</span><span class="title">Branded Search Trend</span><span class="desc">Monthly index, Jan'23 – ${latest.label} (100 = all-time peak).</span></div>
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+          <select class="ctrl-sel" id="gi-national-period-sel"></select>
+          <div class="pp-wrap" id="pp-gi-national"><button class="pp" data-p="12m" type="button">Last 12 Months</button><button class="pp" data-p="compare" type="button">Compare ▾</button></div>
+          <div class="cr" id="cr-gi-national">
+            <div class="cr-pair">
+              <div class="cr-row"><span class="cr-lbl" style="color:var(--blue)">Period A</span><input type="month" id="gi-national-a-from"><span class="sep">–</span><input type="month" id="gi-national-a-to"></div>
+              <div class="cr-row"><span class="cr-lbl" style="color:var(--grey)">vs</span><input type="month" id="gi-national-b-from"><span class="sep">–</span><input type="month" id="gi-national-b-to"></div>
+              <button class="apply-btn" onclick="applyCompare('gi-national')" style="align-self:flex-end">Compare</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">📅 Calendar Year</span><span class="title">Annual Average Index</span><span class="desc">Annual mean with year-on-year growth. ${latestYear} is Jan–${latest.label.split("'")[0]} to date.</span></div>
-        <div class="cw"><canvas id="chart-idx-years"></canvas></div>
-      </div>
+      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}?gid=0#gid=0" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-national','india_branded_search_national.csv')">⬇ CSV</button></div>
+      <div class="tw" id="tbl-gi-national" style="margin-bottom:10px"></div>
+      <div class="cw"><canvas id="chart-idx-national"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="sh"><span class="kicker">📅 Calendar Year</span><span class="title">Annual Average Index</span><span class="desc">Annual mean with year-on-year growth. ${latestYear} is Jan–${latest.label.split("'")[0]} to date.</span></div>
+      <div class="cw"><canvas id="chart-idx-years"></canvas></div>
     </div>
 
     <div class="card">
@@ -2285,7 +2382,20 @@ function initTab4(){
     <div class="kh kh-purple"><div class="kl"><span class="ki">🏙</span>Cities at All-Time High</div><div class="kv">${citiesAtPeak}<span style="font-size:16px;color:rgba(255,255,255,.6)">/${cities.length}</span></div><div class="ks">in ${latest.label}</div></div>`;
 
   // ── National trend chart ──
-  charts.idxNational=new Chart(document.getElementById('chart-idx-national').getContext('2d'),{type:'line',data:{labels:giM.map(r=>r.label),datasets:[{label:'India (national)',data:giM.map(r=>r.Cars24),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.3,spanGaps:true,borderWidth:3,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11},usePointStyle:true}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
+  const nationalPaint=renderGiPanCompare({data:giM,tblId:'tbl-gi-national',chartId:'chart-idx-national',ckey:'idxNational',prefix:'gi-national',seriesLabel:'India (national)',fIdx});
+  if(giM.length>=2){
+    const gLatest=giM[giM.length-1].month,gPrev=giM[giM.length-2].month;
+    document.getElementById('gi-national-a-from').value=gLatest;document.getElementById('gi-national-a-to').value=gLatest;
+    document.getElementById('gi-national-b-from').value=gPrev;document.getElementById('gi-national-b-to').value=gPrev;
+  }
+  const giNationalSel=document.getElementById('gi-national-period-sel');
+  giNationalSel.innerHTML=`<option value="all" selected>All time</option>`+giM.map(r=>`<option value="from:${r.month}">From ${r.label}</option>`).join('');
+  giNationalSel.addEventListener('change',()=>{
+    document.querySelectorAll('#pp-gi-national .pp').forEach(b=>b.classList.remove('active'));
+    document.getElementById('cr-gi-national').classList.remove('open');
+    nationalPaint(giNationalSel.value);
+  });
+  nationalPaint('all');
 
   // ── Calendar-year bar chart ──
   charts.idxYears=new Chart(document.getElementById('chart-idx-years').getContext('2d'),{type:'bar',data:{labels:years,datasets:[{label:'Avg index',data:yearAvgs.map(y=>y.avg),backgroundColor:yearAvgs.map((y,i)=>i===yearAvgs.length-1?'#059669':'#4736FE'),borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{afterLabel:ctx=>{const y=yearAvgs[ctx.dataIndex];return y.yoyPct!=null?`YoY: ${fPct(y.yoyPct)}`:'';}}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
@@ -3726,8 +3836,8 @@ const lazyInit={kw:initTab2,bsos:initTab3,gi:initTab4,inf:initInf,yt:initYT,ig:i
   'uae-kw':()=>initCountryKeywordsTab('uae-','uae-kw','https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Acars24.ae&metrics=IMPRESSIONS&breakdown=date&time_granularity=MONTH&country=are&query=~car%2024%7Ccars24%7Ccars%2024%7C%2024%20car%7Ccara%2024%7Ccarz%2024%7Ccard24%7Ccar24%7C24%20cars',D.gsc_uae?.keywords),
   'au-sos':()=>initCountryBsosTab('au-','au-sos',D.gsc_au?.bsos,'Region'),
   'uae-sos':()=>initCountryBsosTab('uae-','uae-sos',D.gsc_uae?.bsos,'City'),
-  'au-gi':()=>initCountryGindexTab('au-','au-gi',D.gsc_au?.gindex,'Region'),
-  'uae-gi':()=>initCountryGindexTab('uae-','uae-gi',D.gsc_uae?.gindex,'City'),
+  'au-gi':()=>initCountryGindexTab('au-','au-gi',D.gsc_au?.gindex,'Region',906560602),
+  'uae-gi':()=>initCountryGindexTab('uae-','uae-gi',D.gsc_uae?.gindex,'City',858918292),
 };
 
 function initCountrySearchTab(prefix,paneId,gscSiteUrl,sourceLabel,gscData){

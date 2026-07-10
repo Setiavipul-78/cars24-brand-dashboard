@@ -416,8 +416,15 @@ def build_bsos_daily_from(csv_name):
         rows.append(r)
     return rows[-180:]
 
-def build_bsos_regions(monthly_csv, weekly_csv):
-    """Region-level BSOS (AUS: NSW/QLD/VIC) -> {region: {"monthly":[...], "weekly":[...]}}"""
+AU_REGION_NAMES = {"NSW": "New South Wales", "QLD": "Queensland", "VIC": "Victoria"}
+
+def build_bsos_regions(monthly_csv, weekly_csv, region_names=None):
+    """Region-level BSOS (AUS: NSW/QLD/VIC) -> {region: {"monthly":[...], "weekly":[...]}}
+    region_names optionally maps the sheet's own abbreviated block names (e.g.
+    Brandstack's "NSW") to a display-friendly full name, so the frontend's
+    Object.keys(regions) already shows full state names everywhere with no
+    per-call-site translation needed."""
+    region_names = region_names or {}
     mp, wp = DATA / monthly_csv, DATA / weekly_csv
     mdf = pd.read_csv(mp) if mp.exists() else pd.DataFrame(columns=["region","month"])
     wdf = pd.read_csv(wp) if wp.exists() else pd.DataFrame(columns=["region","week_start"])
@@ -446,7 +453,7 @@ def build_bsos_regions(monthly_csv, weekly_csv):
                 r[b] = v
                 r[f"{b}_wow"] = pp_ch(v, sf(pr.get(b)) if pr is not None else None)
             w_rows.append(r)
-        result[region] = {"monthly": m_rows[-24:], "weekly": w_rows[-26:]}
+        result[region_names.get(region, region)] = {"monthly": m_rows, "weekly": w_rows[-26:]}
     return result
 
 # ── Google Index for AU / UAE (dedicated sheet tabs, Cars24-only pan index —
@@ -487,7 +494,7 @@ def build_gindex_regions(csv_name):
                 "index": v,
                 "index_mom": pp_ch(v, sf(pr.get("index")) if pr is not None else None),
             })
-        result[region] = rows[-24:]
+        result[region] = rows
     return result
 
 def build_country_extras(key):
@@ -509,7 +516,7 @@ def build_country_extras(key):
             "monthly": build_bsos_monthly_from("bsos_aus_monthly.csv"),
             "weekly":  build_bsos_weekly_from("bsos_aus_weekly.csv"),
             "daily":   [],  # no Daily tab exists for AUS
-            "regions": build_bsos_regions("bsos_aus_region_monthly.csv", "bsos_aus_region_weekly.csv"),
+            "regions": build_bsos_regions("bsos_aus_region_monthly.csv", "bsos_aus_region_weekly.csv", AU_REGION_NAMES),
         }
         gindex = {
             "monthly": build_gindex_simple("gindex_aus_monthly.csv"),
