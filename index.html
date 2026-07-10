@@ -1691,7 +1691,7 @@ function momMatch(xs,ys){
 // month, then shows correlation + MoM-direction-match stats, a combined
 // table, and a dual-axis chart.
 function renderGiVsGscCompare(cfg){
-  const{giMonthly,gscMonthly,tblId,chartId,ckey,prefix,kpiId,insightId,countryLabel}=cfg;
+  const{giMonthly,gscMonthly,tblId,chartId,ckey,prefix,insightId,countryLabel}=cfg;
   const gscByMonth={};
   (gscMonthly||[]).forEach(r=>{gscByMonth[r.month]=r.impressions;});
   const joined=(giMonthly||[]).filter(r=>r.Cars24!=null&&gscByMonth[r.month]!=null).map(r=>({
@@ -1699,7 +1699,6 @@ function renderGiVsGscCompare(cfg){
   }));
   const noData=`<p style="padding:16px;color:var(--grey);font-size:13px">Not enough overlapping months between Google Index and GSC impressions to compare.</p>`;
   if(joined.length<3){
-    document.getElementById(kpiId).innerHTML='';
     document.getElementById(tblId).innerHTML=noData;
     document.getElementById(insightId).innerHTML='';
     return null;
@@ -1710,12 +1709,7 @@ function renderGiVsGscCompare(cfg){
     const giVals=fd.map(r=>r.gi),gscVals=fd.map(r=>r.gsc);
     const rIdx=pearsonR(giVals,gscVals);
     const idxMatch=momMatch(giVals,gscVals);
-
-    // KPI strip
     const fR=v=>v==null?'—':(v>=0?'':'−')+Math.abs(v).toFixed(2);
-    document.getElementById(kpiId).innerHTML=`
-      <div class="kh kh-blue"><div class="kl"><span class="ki">🔗</span>Google Index vs GSC</div><div class="kv">r = ${fR(rIdx)}</div><div class="ks">Pearson correlation, ${fd.length} months</div></div>
-      <div class="kh ${idxMatch.total&&idxMatch.match/idxMatch.total>=0.6?'kh-green':'kh-amber'}"><div class="kl"><span class="ki">📊</span>MoM Direction Match</div><div class="kv">${idxMatch.match}/${idxMatch.total}</div><div class="ks">months moving same direction as GSC</div></div>`;
 
     // Insight callout
     document.getElementById(insightId).innerHTML=`Google Index moves with GSC in ${idxMatch.match} of ${idxMatch.total} months for ${countryLabel} (r=${fR(rIdx)}).`;
@@ -1766,11 +1760,12 @@ function countryGiTabHtml(prefix,cfg){
       <div><span class="kicker">⚖️ National · Monthly</span><span class="title">Google Index vs Search Impressions</span><span class="desc">Does the 0-100 Trends-style index actually track real branded GSC impressions?</span></div>
       <select class="ctrl-sel" id="${p}gi-vs-gsc-period-sel"></select>
     </div>
-    <div class="g2" id="${p}gi-vs-gsc-kpis" style="margin-bottom:10px"></div>
     <p id="${p}gi-vs-gsc-insight" style="font-size:12.5px;color:var(--ink-2);background:var(--mint-lt);border-left:3px solid var(--mint);border-radius:6px;padding:8px 12px;margin:0 0 10px"></p>
     <div class="card-actions"><button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-gi-vs-gsc','gindex_vs_gsc.csv')">⬇ CSV</button></div>
-    <div class="tw" id="${p}tbl-gi-vs-gsc" style="margin-bottom:10px"></div>
-    <div class="cw"><canvas id="${p}chart-gi-vs-gsc"></canvas></div>
+    <div class="g2" style="gap:10px;margin-bottom:0;align-items:stretch">
+      <div class="tw tbl-compact" id="${p}tbl-gi-vs-gsc" style="max-height:280px"></div>
+      <div class="cw"><canvas id="${p}chart-gi-vs-gsc"></canvas></div>
+    </div>
   </div>
 
   <div class="card">
@@ -1789,13 +1784,18 @@ function countryGiTabHtml(prefix,cfg){
       </div>
     </div>
     <div class="card-actions"><button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-gi-national','branded_search_national.csv')">⬇ CSV</button></div>
-    <div class="tw" id="${p}tbl-gi-national" style="margin-bottom:10px"></div>
-    <div class="cw"><canvas id="${p}chart-idx-national"></canvas></div>
+    <div class="g2" style="gap:10px;margin-bottom:0;align-items:stretch">
+      <div class="tw tbl-compact" id="${p}tbl-gi-national" style="max-height:280px"></div>
+      <div class="cw"><canvas id="${p}chart-idx-national"></canvas></div>
+    </div>
   </div>
 
   <div class="card">
     <div class="sh"><span class="kicker">📅 Calendar Year</span><span class="title">Annual Average Index</span><span class="desc" id="${p}gi-years-desc"></span></div>
-    <div class="cw"><canvas id="${p}chart-idx-years"></canvas></div>
+    <div class="g2" style="gap:10px;margin-bottom:0;align-items:stretch">
+      <div class="tw tbl-compact" id="${p}tbl-idx-years" style="max-height:280px"></div>
+      <div class="cw"><canvas id="${p}chart-idx-years"></canvas></div>
+    </div>
   </div>
 
   <div class="card">
@@ -1890,7 +1890,7 @@ function initCountryGiTab(prefix,paneId,gindexData,cfg){
     <div class="kh ${(rolling12Growth||0)>=0?'kh-green':'kh-red'}"><div class="kl"><span class="ki">${(rolling12Growth||0)>=0?'📈':'📉'}</span>Rolling 12-Mo Demand</div><div class="kv">${fPct(rolling12Growth)}</div><div class="ks">vs prior 12 months</div></div>
     <div class="kh kh-purple"><div class="kl"><span class="ki">🗺</span>${regionLabel}s at All-Time High</div><div class="kv">${regionsAtPeak}<span style="font-size:16px;color:rgba(255,255,255,.6)">/${regionKeys.length}</span></div><div class="ks">in ${latest.label}</div></div>`;
 
-  renderGiVsGscCompare({giMonthly:giM,gscMonthly:(cfg&&cfg.gscMonthly)||[],tblId:p+'tbl-gi-vs-gsc',chartId:p+'chart-gi-vs-gsc',ckey:p+'giVsGsc',prefix:p+'gi-vs-gsc',kpiId:p+'gi-vs-gsc-kpis',insightId:p+'gi-vs-gsc-insight',countryLabel:(cfg&&cfg.countryLabel)||regionLabel});
+  renderGiVsGscCompare({giMonthly:giM,gscMonthly:(cfg&&cfg.gscMonthly)||[],tblId:p+'tbl-gi-vs-gsc',chartId:p+'chart-gi-vs-gsc',ckey:p+'giVsGsc',prefix:p+'gi-vs-gsc',insightId:p+'gi-vs-gsc-insight',countryLabel:(cfg&&cfg.countryLabel)||regionLabel});
 
   const nationalPaint=renderGiPanCompare({data:giM,tblId:p+'tbl-gi-national',chartId:p+'chart-idx-national',ckey:p+'idxNational',prefix:p+'gi-national',seriesLabel:'National',fIdx});
   if(giM.length>=2){
@@ -1908,6 +1908,10 @@ function initCountryGiTab(prefix,paneId,gindexData,cfg){
   nationalPaint('all');
 
   charts[p+'idxYears']=new Chart(document.getElementById(p+'chart-idx-years').getContext('2d'),{type:'bar',data:{labels:years,datasets:[{label:'Avg index',data:yearAvgs.map(y=>y.avg),backgroundColor:yearAvgs.map((y,i)=>i===yearAvgs.length-1?'#059669':'#4736FE'),borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{afterLabel:ctx=>{const y=yearAvgs[ctx.dataIndex];return y.yoyPct!=null?`YoY: ${fPct(y.yoyPct)}`:'';}}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+  document.getElementById(p+'tbl-idx-years').innerHTML=tbl(
+    `<th>Year</th><th class="nr ch">Avg Index</th><th class="nr">YoY Growth</th>`,
+    [...yearAvgs].reverse().map((y,i)=>`<tr class="${i===0?'lat':''}"><td><strong>${y.year}${y.partial?' (YTD)':''}</strong></td><td class="nr cc"><strong>${fIdx(y.avg)}</strong></td><td class="nr">${y.yoyPct!=null?badge(y.yoyPct,true):'—'}</td></tr>`).join('')
+  );
 
   let idxRegionSel=[...regionKeys];
   function renderIdxRegionChart(){
@@ -2389,11 +2393,12 @@ function initTab4(){
         <div><span class="kicker">⚖️ National · Monthly</span><span class="title">Google Index vs Search Impressions</span><span class="desc">Does the 0-100 Trends-style index actually track real branded GSC impressions?</span></div>
         <select class="ctrl-sel" id="gi-vs-gsc-period-sel"></select>
       </div>
-      <div class="g2" id="gi-vs-gsc-kpis" style="margin-bottom:10px"></div>
       <p id="gi-vs-gsc-insight" style="font-size:12.5px;color:var(--ink-2);background:var(--mint-lt);border-left:3px solid var(--mint);border-radius:6px;padding:8px 12px;margin:0 0 10px"></p>
       <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}?gid=0#gid=0" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-vs-gsc','india_gindex_vs_gsc.csv')">⬇ CSV</button></div>
-      <div class="tw" id="tbl-gi-vs-gsc" style="margin-bottom:10px"></div>
-      <div class="cw"><canvas id="chart-gi-vs-gsc"></canvas></div>
+      <div class="g2" style="gap:10px;margin-bottom:0;align-items:stretch">
+        <div class="tw tbl-compact" id="tbl-gi-vs-gsc" style="max-height:280px"></div>
+        <div class="cw"><canvas id="chart-gi-vs-gsc"></canvas></div>
+      </div>
     </div>
 
     <div class="card">
@@ -2412,13 +2417,18 @@ function initTab4(){
         </div>
       </div>
       <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}?gid=0#gid=0" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-national','india_branded_search_national.csv')">⬇ CSV</button></div>
-      <div class="tw" id="tbl-gi-national" style="margin-bottom:10px"></div>
-      <div class="cw"><canvas id="chart-idx-national"></canvas></div>
+      <div class="g2" style="gap:10px;margin-bottom:0;align-items:stretch">
+        <div class="tw tbl-compact" id="tbl-gi-national" style="max-height:280px"></div>
+        <div class="cw"><canvas id="chart-idx-national"></canvas></div>
+      </div>
     </div>
 
     <div class="card">
       <div class="sh"><span class="kicker">📅 Calendar Year</span><span class="title">Annual Average Index</span><span class="desc">Annual mean with year-on-year growth. ${latestYear} is Jan–${latest.label.split("'")[0]} to date.</span></div>
-      <div class="cw"><canvas id="chart-idx-years"></canvas></div>
+      <div class="g2" style="gap:10px;margin-bottom:0;align-items:stretch">
+        <div class="tw tbl-compact" id="tbl-idx-years" style="max-height:280px"></div>
+        <div class="cw"><canvas id="chart-idx-years"></canvas></div>
+      </div>
     </div>
 
     <div class="card">
@@ -2496,7 +2506,7 @@ function initTab4(){
     <div class="kh kh-purple"><div class="kl"><span class="ki">🏙</span>Cities at All-Time High</div><div class="kv">${citiesAtPeak}<span style="font-size:16px;color:rgba(255,255,255,.6)">/${cities.length}</span></div><div class="ks">in ${latest.label}</div></div>`;
 
   // ── Google Index vs GSC Search Impressions ──
-  renderGiVsGscCompare({giMonthly:giM,gscMonthly:D.monthly_impressions||[],tblId:'tbl-gi-vs-gsc',chartId:'chart-gi-vs-gsc',ckey:'giVsGsc',prefix:'gi-vs-gsc',kpiId:'gi-vs-gsc-kpis',insightId:'gi-vs-gsc-insight',countryLabel:'India'});
+  renderGiVsGscCompare({giMonthly:giM,gscMonthly:D.monthly_impressions||[],tblId:'tbl-gi-vs-gsc',chartId:'chart-gi-vs-gsc',ckey:'giVsGsc',prefix:'gi-vs-gsc',insightId:'gi-vs-gsc-insight',countryLabel:'India'});
 
   // ── National trend chart ──
   const nationalPaint=renderGiPanCompare({data:giM,tblId:'tbl-gi-national',chartId:'chart-idx-national',ckey:'idxNational',prefix:'gi-national',seriesLabel:'India (national)',fIdx});
@@ -2516,6 +2526,10 @@ function initTab4(){
 
   // ── Calendar-year bar chart ──
   charts.idxYears=new Chart(document.getElementById('chart-idx-years').getContext('2d'),{type:'bar',data:{labels:years,datasets:[{label:'Avg index',data:yearAvgs.map(y=>y.avg),backgroundColor:yearAvgs.map((y,i)=>i===yearAvgs.length-1?'#059669':'#4736FE'),borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{afterLabel:ctx=>{const y=yearAvgs[ctx.dataIndex];return y.yoyPct!=null?`YoY: ${fPct(y.yoyPct)}`:'';}}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+  document.getElementById('tbl-idx-years').innerHTML=tbl(
+    `<th>Year</th><th class="nr ch">Avg Index</th><th class="nr">YoY Growth</th>`,
+    [...yearAvgs].reverse().map((y,i)=>`<tr class="${i===0?'lat':''}"><td><strong>${y.year}${y.partial?' (YTD)':''}</strong></td><td class="nr cc"><strong>${fIdx(y.avg)}</strong></td><td class="nr">${y.yoyPct!=null?badge(y.yoyPct,true):'—'}</td></tr>`).join('')
+  );
 
   // ── City trend chart with quick-select + multiselect ──
   let idxCitySel=[...cities];
