@@ -923,6 +923,38 @@ def build_influencers():
         "refreshed_at": raw.get("refreshedAt", ""),
     }
 
+# ── Influencers (Australia) ────────────────────────────────────────────────────
+def build_influencers_au():
+    """AU influencer campaign data from data/influencers_au.csv (fetch_influencers_au.py,
+    "Previous Efforts" tab only — a thinner dataset than India/UAE: no creator name,
+    likes/comments, or per-post cost, just a link + views per post and one total
+    AUD spend figure per month. Currency conversion to INR happens client-side."""
+    p = DATA / "influencers_au.csv"
+    if not p.exists():
+        return {"rows": [], "monthly": []}
+    df = pd.read_csv(p)
+    if df.empty:
+        return {"rows": [], "monthly": []}
+
+    month_key = pd.to_datetime(df["month"], format="%B %Y").dt.strftime("%Y-%m")
+    df = df.assign(month_key=month_key)
+    rows = [{"month": r.month_key, "label": mlabel(r.month_key), "link": r.link, "views": sf(r.views)}
+            for r in df.itertuples()]
+
+    monthly = []
+    for mk, grp in df.groupby("month_key", sort=True):
+        cost_vals = grp["cost_aud"].dropna()
+        cost_aud = sf(cost_vals.iloc[0]) if len(cost_vals) else None
+        monthly.append({
+            "month": mk, "label": mlabel(mk),
+            "posts": int(len(grp)),
+            "views": int(grp["views"].sum()),
+            "cost_aud": cost_aud,
+        })
+    monthly.sort(key=lambda r: r["month"])
+    print(f"  ✓ AU influencers: {len(rows)} posts across {len(monthly)} months")
+    return {"rows": rows, "monthly": monthly}
+
 # ── YouTube ───────────────────────────────────────────────────────────────────
 YT_CHANNEL_KEYS = [
     "cars24_india", "teambhp", "cars24_insider", "cars24_malayalam",
@@ -1524,6 +1556,7 @@ if __name__ == "__main__":
     youtube        = build_youtube()
     instagram      = build_instagram()
     influencers    = build_influencers()
+    influencers_au = build_influencers_au()
     linkedin       = build_linkedin()
     linkedin_competitors = build_linkedin_competitors()
     gsc_au         = build_gsc_country("au", "gsc_daily_au.csv", "au_")
@@ -1549,6 +1582,7 @@ if __name__ == "__main__":
         "youtube":            youtube,
         "instagram":          instagram,
         "influencers":        influencers,
+        "influencers_au":     influencers_au,
         "linkedin":           linkedin,
         "linkedin_competitors": linkedin_competitors,
         "gsc_au":             gsc_au,

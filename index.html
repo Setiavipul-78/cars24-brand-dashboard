@@ -3732,7 +3732,123 @@ function initLI(){
 
 function initAUInf(){
   const el=document.getElementById('au-inf-content');if(!el)return;
-  el.innerHTML=`<div class="ph"><div class="ph-mark">👥</div><div class="ph-title">Australia influencer data not connected yet</div><div class="ph-body">Share the Google Sheet with Australia's influencer campaign data (same format as the UAE tab) to populate this section.</div></div>`;
+  const inf=D.influencers_au;
+  if(!inf||!inf.rows?.length){
+    el.innerHTML=`<div class="ph"><div class="ph-mark">👥</div><div class="ph-title">Australia influencer data not connected yet</div><div class="ph-body">Share the Google Sheet with Australia's influencer campaign data to populate this section.</div></div>`;return;
+  }
+  const allRows=inf.rows||[];
+  const allMonthly=(inf.monthly||[]).slice();
+  const monthsDesc=[...allMonthly].reverse();
+  const latestMonth=monthsDesc[0]?.month;
+
+  // Formatters (₹, Cr/L/K scale — cost is AUD converted to INR via AUD_TO_INR)
+  const fv=v=>{if(v==null||isNaN(v))return'—';if(v>=1e6)return(v/1e6).toFixed(2)+'M';if(v>=1e3)return(v/1e3).toFixed(1)+'K';return Math.round(v).toLocaleString();};
+  const fc=v=>{if(v==null||isNaN(v))return'—';if(v>=1e7)return'₹'+(v/1e7).toFixed(2)+'Cr';if(v>=1e5)return'₹'+(v/1e5).toFixed(2)+'L';if(v>=1e3)return'₹'+(v/1e3).toFixed(1)+'K';return'₹'+Math.round(v).toLocaleString();};
+  const fcpv=v=>v==null||isNaN(v)?'—':'₹'+Number(v).toFixed(2);
+
+  el.innerHTML=`
+    <div class="inf-period-bar" style="gap:12px">
+      <span class="fl">PERIOD</span>
+      <div style="position:relative;display:inline-block">
+        <select id="au-inf-sel" style="appearance:none;-webkit-appearance:none;background:var(--card);border:2px solid var(--blue);border-radius:8px;padding:7px 36px 7px 14px;font:700 13px var(--font);color:var(--ink);cursor:pointer;min-width:160px;outline:none">
+          <option value="all">All Time</option>
+          ${monthsDesc.map(m=>`<option value="mo:${m.month}"${m.month===latestMonth?' selected':''}>${m.label}</option>`).join('')}
+        </select>
+        <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--blue);font-size:10px">▼</span>
+      </div>
+    </div>
+
+    <div class="inf-kpi-strip" id="au-inf-kpis"></div>
+
+    <p style="font-size:12px;color:var(--grey);margin:0 0 10px">Sourced from the "Previous Efforts" tab — tracks post link + views per campaign and one total spend figure per month. Per-creator names, likes/comments and engagement rate aren't tracked in this sheet yet.</p>
+
+    <div class="card">
+      <div class="sh"><span class="kicker">📈 Monthly trend</span><span class="title">Views Over Time</span><span class="desc">Total influencer views per month across all AU campaigns.</span></div>
+      <div class="cw tall"><canvas id="au-inf-chart-trend"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance Table</span><span class="desc">Posts, views, spend and blended CPV per month.</span></div>
+      <div class="tw" id="au-inf-mom-tbl"></div>
+    </div>
+
+    <div class="g2" style="margin-bottom:0">
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">🏆 Top posts</span><span class="title">Top 10 by Views</span></div>
+        <div class="tw" id="au-inf-top-views"></div>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">📉 Cost efficiency</span><span class="title">Blended CPV by Month</span><span class="desc">Total spend ÷ total views. Lower = more efficient.</span></div>
+        <div class="cw tall" style="height:260px"><canvas id="au-inf-chart-cpv"></canvas></div>
+      </div>
+    </div>`;
+
+  function renderAUKPIs(val){
+    const monthKey=val==='all'?null:val.replace('mo:','');
+    const monthsSel=monthKey?allMonthly.filter(m=>m.month===monthKey):allMonthly;
+    const rowsSel=monthKey?allRows.filter(r=>r.month===monthKey):allRows;
+    const tv=rowsSel.reduce((s,r)=>s+r.views,0);
+    const costAud=monthsSel.reduce((s,m)=>s+(m.cost_aud||0),0);
+    const hasCost=monthsSel.some(m=>m.cost_aud!=null);
+    const tc=hasCost?costAud*AUD_TO_INR:null;
+    const bcpv=(tc!=null&&tv>0)?(tc/tv):null;
+    document.getElementById('au-inf-kpis').innerHTML=`
+      <div class="ink"><span class="ink-icon">📅</span><div class="ink-lbl">Active Months</div><div class="ink-val">${monthsSel.length}</div><div class="ink-sub">months with live posts</div></div>
+      <div class="ink mint"><span class="ink-icon">📝</span><div class="ink-lbl">Posts</div><div class="ink-val">${rowsSel.length}</div><div class="ink-sub">total in period</div></div>
+      <div class="ink grn"><span class="ink-icon">👁️</span><div class="ink-lbl">Total Views</div><div class="ink-val">${fv(tv)}</div><div class="ink-sub">plays in period</div></div>
+      <div class="ink or"><span class="ink-icon">💸</span><div class="ink-lbl">Total Spend</div><div class="ink-val">${fc(tc)}</div><div class="ink-sub">budget in period</div></div>
+      <div class="ink pur"><span class="ink-icon">📉</span><div class="ink-lbl">Blended CPV</div><div class="ink-val">${fcpv(bcpv)}</div><div class="ink-sub">spend ÷ views</div></div>`;
+  }
+
+  function renderAUStatic(){
+    // Trend chart
+    const tcx=document.getElementById('au-inf-chart-trend').getContext('2d');
+    new Chart(tcx,{type:'bar',data:{
+      labels:allMonthly.map(m=>m.label),
+      datasets:[{label:'Total Views',data:allMonthly.map(m=>m.views/1000),backgroundColor:allMonthly.map((_,i)=>i===allMonthly.length-1?'rgba(71,54,254,.75)':'rgba(71,54,254,.22)'),borderRadius:6}]
+    },options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.parsed.y?.toFixed(1)}K views`}}},
+      scales:{y:{title:{display:true,text:'Views (K)'},ticks:{callback:v=>v+'K'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+
+    // MoM table
+    const mth=`<th>Month</th><th class="nr ch">Posts</th><th class="nr">Total Views</th><th class="nr ch">Total Spend</th><th class="nr ch">Blended CPV</th>`;
+    document.getElementById('au-inf-mom-tbl').innerHTML=tbl(mth,[...allMonthly].reverse().map((m,i)=>{
+      const costInr=m.cost_aud!=null?m.cost_aud*AUD_TO_INR:null;
+      const bcpv=(costInr!=null&&m.views>0)?(costInr/m.views):null;
+      return`<tr class="${i===0?'lat':''}">
+        <td><strong>${m.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td>
+        <td class="nr cc"><strong>${m.posts}</strong></td>
+        <td class="nr">${fv(m.views)}</td>
+        <td class="nr cc">${fc(costInr)}</td>
+        <td class="nr cc">${fcpv(bcpv)}</td>
+      </tr>`;
+    }).join(''));
+
+    // Top 10 posts by views
+    const top10V=[...allRows].sort((a,b)=>b.views-a.views).slice(0,10);
+    document.getElementById('au-inf-top-views').innerHTML=tbl(
+      `<th>#</th><th>Post</th><th class="nr ch">Views</th>`,
+      top10V.map((r,i)=>`<tr class="${i===0?'lat':''}">
+        <td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td>
+        <td><a href="${r.link}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">View post ↗</a><br><span style="font-size:11px;color:var(--grey)">${r.label}</span></td>
+        <td class="nr cc"><strong>${fv(r.views)}</strong></td>
+      </tr>`).join(''));
+
+    // CPV by month chart
+    const ccx=document.getElementById('au-inf-chart-cpv').getContext('2d');
+    const bcpvData=allMonthly.map(m=>(m.cost_aud==null||!m.views)?null:parseFloat(((m.cost_aud*AUD_TO_INR)/m.views).toFixed(2)));
+    new Chart(ccx,{type:'bar',data:{
+      labels:allMonthly.map(m=>m.label),
+      datasets:[{label:'Blended CPV (₹)',data:bcpvData,backgroundColor:bcpvData.map((_,i)=>i===allMonthly.length-1?'rgba(71,54,254,.85)':'rgba(71,54,254,.28)'),borderRadius:6}]
+    },options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y==null?'No spend logged':`₹${c.parsed.y.toFixed(2)}`}}},
+      scales:{y:{title:{display:true,text:'Blended CPV (₹)'},ticks:{callback:v=>'₹'+v},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+  }
+
+  const sel=document.getElementById('au-inf-sel');
+  sel.addEventListener('change',()=>renderAUKPIs(sel.value));
+  renderAUKPIs(sel.value);
+  renderAUStatic();
 }
 
 async function initUAEInf(){

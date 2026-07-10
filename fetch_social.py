@@ -1294,7 +1294,7 @@ _FAILURE_SIGNATURES = [
     "! GOOGLE_CLIENT_ID", "! Skipping", "Token refresh failed",
     "! GSC fetch error", "! GSC keywords error", "! BSOS sheets fetch error",
     "! BSOS intl fetch error", "! Google Index sheets fetch error",
-    "! No data fetched", "SHEETS_REFRESH_TOKEN not set",
+    "! AU influencers fetch error", "! No data fetched", "SHEETS_REFRESH_TOKEN not set",
 ]
 
 class _Tee:
@@ -1349,6 +1349,13 @@ if __name__ == "__main__":
             fetch_gindex_sheets.main()
         except Exception as e:
             print(f"  ! Google Index sheets fetch error: {e}")
+
+        print("\n── AU Influencers Sheet ───────────────────────────────")
+        try:
+            import fetch_influencers_au
+            fetch_influencers_au.main()
+        except Exception as e:
+            print(f"  ! AU influencers fetch error: {e}")
 
         print("\n✅  Done — run: python3 build_data.py")
     finally:
