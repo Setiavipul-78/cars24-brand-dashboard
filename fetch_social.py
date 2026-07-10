@@ -76,13 +76,14 @@ YT_CHANNELS = {
     "cars24_india":      os.getenv("YT_CHANNEL_ID_CARS24_INDIA"),
     "teambhp":           os.getenv("YT_CHANNEL_ID_TEAMBHP"),
     "cars24_insider":    os.getenv("YT_CHANNEL_ID_INSIDER"),
-    "cars24_malayalam":  os.getenv("YT_CHANNEL_ID_CARS24_MALAYALAM"),
-    # cars24_tamil's underlying env vars are still named "MALAYALAM2" (the
-    # channel was originally mislabeled when the tokens/secrets were first
-    # created) — the actual content is Tamil, already reflected everywhere
-    # this shows up in the dashboard. Renaming the GitHub Secrets themselves
-    # is a separate, deliberately out-of-scope change.
-    "cars24_tamil":      os.getenv("YT_CHANNEL_ID_CARS24_MALAYALAM2"),
+    # The GitHub Secrets/env vars named "MALAYALAM"/"MALAYALAM2" were swapped
+    # vs. their actual channel content when first created — verified directly
+    # against each channel's real YouTube title ("Cars24 தமிழ்" vs "Cars24
+    # മലയാളം"): MALAYALAM's channel ID is actually the Tamil channel, and
+    # MALAYALAM2's channel ID is actually the Malayalam channel. Renaming the
+    # secrets themselves is a separate, deliberately out-of-scope change.
+    "cars24_tamil":      os.getenv("YT_CHANNEL_ID_CARS24_MALAYALAM"),
+    "cars24_malayalam":  os.getenv("YT_CHANNEL_ID_CARS24_MALAYALAM2"),
     "cars24_au":         os.getenv("YT_CHANNEL_ID_AU"),
     "cars24_uae":        os.getenv("YT_CHANNEL_ID_UAE"),
 }
@@ -93,8 +94,8 @@ YT_TOKEN_KEYS = {
     "cars24_india":     "YT_REFRESH_TOKEN_INDIA",
     "teambhp":          "YT_REFRESH_TOKEN_TEAMBHP",
     "cars24_insider":   "YT_REFRESH_TOKEN_INSIDER",
-    "cars24_malayalam": "YT_REFRESH_TOKEN_MALAYALAM",   # Cars24.tamil@cars24.com
-    "cars24_tamil":     "YT_REFRESH_TOKEN_MALAYALAM2",  # vipul.setia@cars24.com
+    "cars24_tamil":     "YT_REFRESH_TOKEN_MALAYALAM",   # Cars24.tamil@cars24.com
+    "cars24_malayalam": "YT_REFRESH_TOKEN_MALAYALAM2",  # vipul.setia@cars24.com
 }
 
 def get_yt_credentials(channel_key: str = None):
