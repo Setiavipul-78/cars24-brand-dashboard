@@ -925,14 +925,14 @@ def build_influencers():
 
 # ── YouTube ───────────────────────────────────────────────────────────────────
 YT_CHANNEL_KEYS = [
-    "cars24_india", "teambhp", "cars24_insider", "cars24_malayalam",
+    "cars24_india", "teambhp", "cars24_insider", "cars24_tamil",
     "cars24_malayalam2", "cars24_au", "cars24_uae",
 ]
 YT_CHANNEL_NAMES = {
     "cars24_india":      "Cars24 India",
     "teambhp":           "TeamBHP",
     "cars24_insider":    "Cars24 Insider",
-    "cars24_malayalam":  "Cars24 Tamil",
+    "cars24_tamil":      "Cars24 Tamil",
     "cars24_malayalam2": "Cars24 Malayalam",
     "cars24_au":         "Cars24 Australia",
     "cars24_uae":        "Cars24 UAE",
