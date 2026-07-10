@@ -683,6 +683,8 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
 const BC={Cars24:'#4736FE',Spinny:'#E91E8C',CarWale:'#FF6B6B',Cardekho:'#F97316',MFC:'#7C3AED',MTV:'#059669',OLX:'#0EA5E9',Autotrader:'#F59E0B',Carma:'#7C3AED',Carsales:'#FF4F01',Easyauto123:'#059669'};
 const GSC_URL='https://search.google.com/search-console/performance/search-analytics?resource_id='+encodeURIComponent('https://www.cars24.com/')+'&metrics=IMPRESSIONS&breakdown=date&time_granularity=MONTH&country=ind&query='+encodeURIComponent('~car 24|cars24|cars 24| 24 car|cara 24|carz 24|card24|car24|24 cars');
 const GI_SHEET='https://docs.google.com/spreadsheets/d/1d3umTUBQ1vKWzbhfdVr88kr8Stpn832V1mCSkfjQ51A/edit';
+const AED_TO_INR=23.3; // approx market rate — all UAE influencer spend/CPV figures are shown converted to INR
+const AUD_TO_INR=56.5; // approx market rate — for AU influencer spend/CPV figures once that tab is connected
 const BN={Cars24:'Cars24',Spinny:'Spinny',CarWale:'CarWale',Cardekho:'CarDekho',MFC:'Mahindra First Choice',MTV:'Maruti True Value',OLX:'OLX Auto',Autotrader:'Autotrader',Carma:'Carma',Carsales:'carsales.com',Easyauto123:'EasyAuto123'};
 const CC=['#4736FE','#00C951','#FF4F01','#E91E8C','#F59E0B','#7C3AED','#0EA5E9','#059669','#FF6B6B','#9CA3AF'];
 
@@ -3758,7 +3760,7 @@ async function initUAEInf(){
       const comments=+(gv(row,'total_comments')||gv(row,'comments')||0);
       const shares =+(gv(row,'total_shares')||gv(row,'shares')||0);
       const saves  =+(gv(row,'saves')||0);
-      const cost   =+(gv(row,'creator_cost_aed')||gv(row,'cost')||0);
+      const cost   =+(gv(row,'creator_cost_aed')||gv(row,'cost')||0)*AED_TO_INR; // AED converted to INR
       const month  =String(gv(row,'month')||'').trim();
       const campaign=String(gv(row,'campaign')||'').trim();
       const link   =gv(row,'post_url')||gv(row,'url')||'';
@@ -3790,10 +3792,10 @@ async function initUAEInf(){
   const monthsDesc=[...allMonthly].reverse();
   const latestMO=monthsDesc[0]?.moNum;
 
-  // Formatters (AED, K/M scale)
+  // Formatters (₹, Cr/L/K scale — cost is already converted from AED to INR above)
   const fv=v=>{if(v==null||isNaN(v))return'—';if(v>=1e6)return(v/1e6).toFixed(2)+'M';if(v>=1e3)return(v/1e3).toFixed(1)+'K';return Math.round(v).toLocaleString();};
-  const fc=v=>{if(v==null||isNaN(v)||v===0)return'—';if(v>=1e6)return'AED '+(v/1e6).toFixed(2)+'M';if(v>=1e3)return'AED '+(v/1e3).toFixed(1)+'K';return'AED '+Math.round(v).toLocaleString();};
-  const fcpv=v=>v==null||isNaN(v)?'—':'AED '+Number(v).toFixed(3);
+  const fc=v=>{if(v==null||isNaN(v))return'—';if(v>=1e7)return'₹'+(v/1e7).toFixed(2)+'Cr';if(v>=1e5)return'₹'+(v/1e5).toFixed(2)+'L';if(v>=1e3)return'₹'+(v/1e3).toFixed(1)+'K';return'₹'+Math.round(v).toLocaleString();};
+  const fcpv=v=>v==null||isNaN(v)?'—':'₹'+Number(v).toFixed(2);
 
   el.innerHTML=`
     <div class="inf-ext-banner">
@@ -3841,7 +3843,7 @@ async function initUAEInf(){
         <div class="tw" id="uae-inf-top-eng"></div>
       </div>
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">💰 Lowest CPV</span><span class="title">Top 10 Most Efficient Creators</span><span class="desc">Lowest AED CPV (min 5K views)</span></div>
+        <div class="sh"><span class="kicker">💰 Lowest CPV</span><span class="title">Top 10 Most Efficient Creators</span><span class="desc">Lowest ₹ CPV (min 5K views)</span></div>
         <div class="tw" id="uae-inf-low-cpv"></div>
       </div>
     </div>`;
@@ -3905,13 +3907,13 @@ async function initUAEInf(){
 
     // CPV by month chart
     const cc=document.getElementById('uae-inf-chart-cpv').getContext('2d');
-    const bcpvData=allMonthly.map(m=>m.views>0?parseFloat((m.cost/m.views).toFixed(3)):null);
+    const bcpvData=allMonthly.map(m=>m.views>0?parseFloat((m.cost/m.views).toFixed(2)):null);
     new Chart(cc,{type:'bar',data:{
       labels:allMonthly.map(m=>m.month),
-      datasets:[{label:'Blended CPV (AED)',data:bcpvData,backgroundColor:bcpvData.map((_,i)=>i===allMonthly.length-1?'rgba(71,54,254,.85)':'rgba(71,54,254,.28)'),borderRadius:6}]
+      datasets:[{label:'Blended CPV (₹)',data:bcpvData,backgroundColor:bcpvData.map((_,i)=>i===allMonthly.length-1?'rgba(71,54,254,.85)':'rgba(71,54,254,.28)'),borderRadius:6}]
     },options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`AED ${c.parsed.y?.toFixed(3)}`}}},
-      scales:{y:{title:{display:true,text:'Blended CPV (AED)'},ticks:{callback:v=>'AED '+v},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`₹${c.parsed.y?.toFixed(2)}`}}},
+      scales:{y:{title:{display:true,text:'Blended CPV (₹)'},ticks:{callback:v=>'₹'+v},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
 
     // Top 10 Engagement
     const top10E=[...allRows].filter(r=>r.eng>0).sort((a,b)=>b.eng-a.eng).slice(0,10);
