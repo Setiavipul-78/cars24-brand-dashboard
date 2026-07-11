@@ -775,7 +775,11 @@ function cardActionsHtml(sheetUrl,tblWrapperId,csvFilename,linkId){
 const csvBtnAttached=new WeakSet();
 function attachCsvButton(twEl){
   if(csvBtnAttached.has(twEl))return;
-  if(twEl.previousElementSibling?.classList?.contains('card-actions'))return;
+  // A .tw can now sit nested one level deeper inside a .g2 table+chart grid
+  // (side-by-side layout) rather than directly after .card-actions — check
+  // the grid wrapper's previous sibling too in that case.
+  const priorSibling=twEl.previousElementSibling||(twEl.parentElement?.classList.contains('g2')?twEl.parentElement.previousElementSibling:null);
+  if(priorSibling?.classList?.contains('card-actions'))return;
   const id=twEl.id;if(!id)return;
   csvBtnAttached.add(twEl);
   const div=document.createElement('div');
