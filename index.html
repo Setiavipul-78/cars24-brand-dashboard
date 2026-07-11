@@ -1763,7 +1763,7 @@ function countryGiTabHtml(prefix,cfg){
     </div>
     <p id="${p}gi-vs-gsc-insight" style="font-size:12.5px;color:var(--ink-2);background:var(--mint-lt);border-left:3px solid var(--mint);border-radius:6px;padding:8px 12px;margin:0 0 10px"></p>
     <div class="card-actions"><button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-gi-vs-gsc','gindex_vs_gsc.csv')">⬇ CSV</button></div>
-    <div class="g2" style="gap:10px;margin-bottom:0;align-items:stretch">
+    <div class="g2" style="gap:10px;margin-bottom:0;height:280px">
       <div class="tw tbl-compact" id="${p}tbl-gi-vs-gsc" style="max-height:280px"></div>
       <div class="cw"><canvas id="${p}chart-gi-vs-gsc"></canvas></div>
     </div>
@@ -1785,7 +1785,7 @@ function countryGiTabHtml(prefix,cfg){
       </div>
     </div>
     <div class="card-actions"><button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-gi-national','branded_search_national.csv')">⬇ CSV</button></div>
-    <div class="g2" style="gap:10px;margin-bottom:0;align-items:stretch">
+    <div class="g2" style="gap:10px;margin-bottom:0;height:280px">
       <div class="tw tbl-compact" id="${p}tbl-gi-national" style="max-height:280px"></div>
       <div class="cw"><canvas id="${p}chart-idx-national"></canvas></div>
     </div>
@@ -1793,7 +1793,7 @@ function countryGiTabHtml(prefix,cfg){
 
   <div class="card">
     <div class="sh"><span class="kicker">📅 Calendar Year</span><span class="title">Annual Average Index</span><span class="desc" id="${p}gi-years-desc"></span></div>
-    <div class="g2" style="gap:10px;margin-bottom:0;align-items:stretch">
+    <div class="g2" style="gap:10px;margin-bottom:0;height:280px">
       <div class="tw tbl-compact" id="${p}tbl-idx-years" style="max-height:280px"></div>
       <div class="cw"><canvas id="${p}chart-idx-years"></canvas></div>
     </div>
@@ -2396,7 +2396,7 @@ function initTab4(){
       </div>
       <p id="gi-vs-gsc-insight" style="font-size:12.5px;color:var(--ink-2);background:var(--mint-lt);border-left:3px solid var(--mint);border-radius:6px;padding:8px 12px;margin:0 0 10px"></p>
       <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}?gid=0#gid=0" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-vs-gsc','india_gindex_vs_gsc.csv')">⬇ CSV</button></div>
-      <div class="g2" style="gap:10px;margin-bottom:0;align-items:stretch">
+      <div class="g2" style="gap:10px;margin-bottom:0;height:280px">
         <div class="tw tbl-compact" id="tbl-gi-vs-gsc" style="max-height:280px"></div>
         <div class="cw"><canvas id="chart-gi-vs-gsc"></canvas></div>
       </div>
@@ -2418,7 +2418,7 @@ function initTab4(){
         </div>
       </div>
       <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}?gid=0#gid=0" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-gi-national','india_branded_search_national.csv')">⬇ CSV</button></div>
-      <div class="g2" style="gap:10px;margin-bottom:0;align-items:stretch">
+      <div class="g2" style="gap:10px;margin-bottom:0;height:280px">
         <div class="tw tbl-compact" id="tbl-gi-national" style="max-height:280px"></div>
         <div class="cw"><canvas id="chart-idx-national"></canvas></div>
       </div>
@@ -2426,7 +2426,7 @@ function initTab4(){
 
     <div class="card">
       <div class="sh"><span class="kicker">📅 Calendar Year</span><span class="title">Annual Average Index</span><span class="desc">Annual mean with year-on-year growth. ${latestYear} is Jan–${latest.label.split("'")[0]} to date.</span></div>
-      <div class="g2" style="gap:10px;margin-bottom:0;align-items:stretch">
+      <div class="g2" style="gap:10px;margin-bottom:0;height:280px">
         <div class="tw tbl-compact" id="tbl-idx-years" style="max-height:280px"></div>
         <div class="cw"><canvas id="chart-idx-years"></canvas></div>
       </div>
