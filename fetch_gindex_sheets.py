@@ -236,6 +236,77 @@ def build_region_blocks(token, tab, out_name):
     print(f"  ✓ {out_name}: {len(out)} rows across {len(regions)} regions ({regions})")
 
 
+# ── UAE (Brand) / UAE (Generic): each tab now bundles the national "UAE"
+# block alongside city blocks (Abu Dhabi/Dubai/Sharjah) side by side, replacing
+# the old separate single-block "UAE" tab + standalone "UAE-Cities" tab. Reuses
+# the same block layout as build_region_blocks but keeps the "UAE" block
+# separate as national data instead of writing it out as just another region.
+def parse_uae_gindex_blocks(token, tab):
+    rows = fetch_values(token, f"'{tab}'!A1:Z2000")
+    if len(rows) < 3:
+        raise ValidationError(f"{tab}: expected at least 3 rows (region row, header row, data)")
+    region_row, header_row = rows[0], rows[1]
+    block_starts = [i for i, v in enumerate(region_row) if str(v).strip()]
+    if not block_starts:
+        raise ValidationError(f"{tab}: no region names found in row 0: {region_row!r}")
+
+    blocks = {}
+    for bi, start in enumerate(block_starts):
+        region = str(region_row[start]).strip()
+        if start >= len(header_row) or str(header_row[start]).strip() != "Month":
+            raise ValidationError(f"{tab} region {region!r}: expected 'Month' at column {start}, "
+                                   f"got {header_row[start] if start < len(header_row) else None!r}")
+        idx_col = start + 1
+        if idx_col >= len(header_row) or str(header_row[idx_col]).strip() != "Index":
+            raise ValidationError(f"{tab} region {region!r}: expected 'Index' at column {idx_col}")
+
+        region_out = []
+        for r in rows[2:]:
+            if len(r) <= start or not str(r[start]).strip():
+                continue
+            m = parse_month(r[start])
+            idx = parse_index(r[idx_col]) if idx_col < len(r) else None
+            region_out.append((f"{m.year:04d}-{m.month:02d}", idx))
+        if not region_out:
+            raise ValidationError(f"{tab} region {region!r}: zero data rows parsed")
+        blocks[region] = region_out
+    return blocks
+
+
+def build_uae_gindex(token):
+    brand = parse_uae_gindex_blocks(token, "UAE (Brand)")
+    generic = parse_uae_gindex_blocks(token, "UAE (Generic)")
+
+    nat_brand = brand.pop("UAE", None)
+    if nat_brand is None:
+        raise ValidationError("UAE (Brand): no national 'UAE' block found")
+    nat_generic = generic.pop("UAE", None)
+    if nat_generic is None:
+        raise ValidationError("UAE (Generic): no national 'UAE' block found")
+
+    generic_by_month = dict(nat_generic)
+    nat_rows = [{"month": m, "Cars24": idx, "Category": generic_by_month.get(m)} for m, idx in nat_brand]
+    nat_rows.sort(key=lambda r: r["month"])
+    path = DATA / "gindex_uae_monthly.csv"
+    check_row_count(len(nat_rows), path, "Google Index UAE national")
+    write_csv(path, ["month", "Cars24", "Category"], nat_rows)
+    print(f"  ✓ gindex_uae_monthly.csv: {len(nat_rows)} months, brand+category ({nat_rows[0]['month']} → {nat_rows[-1]['month']})")
+
+    city_brand_rows = [{"region": region, "month": m, "index": idx} for region, data in brand.items() for m, idx in data]
+    city_brand_rows.sort(key=lambda r: (r["region"], r["month"]))
+    path = DATA / "gindex_uae_city_monthly.csv"
+    check_row_count(len(city_brand_rows), path, "Google Index UAE city brand")
+    write_csv(path, ["region", "month", "index"], city_brand_rows)
+    print(f"  ✓ gindex_uae_city_monthly.csv: {len(city_brand_rows)} rows across {sorted(brand.keys())}")
+
+    city_generic_rows = [{"region": region, "month": m, "index": idx} for region, data in generic.items() for m, idx in data]
+    city_generic_rows.sort(key=lambda r: (r["region"], r["month"]))
+    path = DATA / "gindex_uae_city_generic_monthly.csv"
+    check_row_count(len(city_generic_rows), path, "Google Index UAE city generic")
+    write_csv(path, ["region", "month", "index"], city_generic_rows)
+    print(f"  ✓ gindex_uae_city_generic_monthly.csv: {len(city_generic_rows)} rows across {sorted(generic.keys())}")
+
+
 def main():
     load_env()
     token = get_token()
@@ -258,17 +329,11 @@ def main():
     except (ValidationError, ValueError, KeyError) as e:
         print(f"  ✗ Google Index city generic fetch failed validation, existing CSV left untouched: {e}")
 
-    print("  Fetching Google Index (UAE pan)…")
+    print("  Fetching Google Index (UAE brand + generic, national + city)…")
     try:
-        build_pan_simple(token, "UAE", "gindex_uae_monthly.csv")
+        build_uae_gindex(token)
     except (ValidationError, ValueError, KeyError) as e:
-        print(f"  ✗ Google Index UAE fetch failed validation, existing CSV left untouched: {e}")
-
-    print("  Fetching Google Index (UAE cities)…")
-    try:
-        build_region_blocks(token, "UAE-Cities", "gindex_uae_city_monthly.csv")
-    except (ValidationError, ValueError, KeyError) as e:
-        print(f"  ✗ Google Index UAE cities fetch failed validation, existing CSV left untouched: {e}")
+        print(f"  ✗ Google Index UAE fetch failed validation, existing CSVs left untouched: {e}")
 
     print("  Fetching Google Index (AUS pan)…")
     try:

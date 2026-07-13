@@ -681,12 +681,12 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
 
 </main>
 <script>
-const BC={Cars24:'#4736FE',Spinny:'#E91E8C',CarWale:'#FF6B6B',Cardekho:'#F97316',MFC:'#7C3AED',MTV:'#059669',OLX:'#0EA5E9',Autotrader:'#F59E0B',Carma:'#7C3AED',Carsales:'#FF4F01',Easyauto123:'#059669'};
+const BC={Cars24:'#4736FE',Spinny:'#E91E8C',CarWale:'#FF6B6B',Cardekho:'#F97316',MFC:'#7C3AED',MTV:'#059669',OLX:'#0EA5E9',Autotrader:'#F59E0B',Carma:'#7C3AED',Carsales:'#FF4F01',Easyauto123:'#059669',AlbaCars:'#14B8A6',Automall:'#EAB308',Dubizzle:'#DC2626',Kavak:'#84CC16',RMAMotors:'#D946EF'};
 const GSC_URL='https://search.google.com/search-console/performance/search-analytics?resource_id='+encodeURIComponent('https://www.cars24.com/')+'&metrics=IMPRESSIONS&breakdown=date&time_granularity=MONTH&country=ind&query='+encodeURIComponent('~car 24|cars24|cars 24| 24 car|cara 24|carz 24|card24|car24|24 cars');
 const GI_SHEET='https://docs.google.com/spreadsheets/d/1d3umTUBQ1vKWzbhfdVr88kr8Stpn832V1mCSkfjQ51A/edit';
 const AED_TO_INR=23.3; // approx market rate — all UAE influencer spend/CPV figures are shown converted to INR
 const AUD_TO_INR=56.5; // approx market rate — for AU influencer spend/CPV figures once that tab is connected
-const BN={Cars24:'Cars24',Spinny:'Spinny',CarWale:'CarWale',Cardekho:'CarDekho',MFC:'Mahindra First Choice',MTV:'Maruti True Value',OLX:'OLX Auto',Autotrader:'Autotrader',Carma:'Carma',Carsales:'carsales.com',Easyauto123:'EasyAuto123'};
+const BN={Cars24:'Cars24',Spinny:'Spinny',CarWale:'CarWale',Cardekho:'CarDekho',MFC:'Mahindra First Choice',MTV:'Maruti True Value',OLX:'OLX Auto',Autotrader:'Autotrader',Carma:'Carma',Carsales:'carsales.com',Easyauto123:'EasyAuto123',AlbaCars:'Alba Cars',Automall:'Automall',Dubizzle:'Dubizzle',Kavak:'Kavak',RMAMotors:'RMA Motors'};
 const CC=['#4736FE','#00C951','#FF4F01','#E91E8C','#F59E0B','#7C3AED','#0EA5E9','#059669','#FF6B6B','#9CA3AF'];
 
 // Current month (always show in period filters)
@@ -2028,7 +2028,7 @@ function renderBsosGranular(cfg){
     }
     const tblEl=document.getElementById(tblId);
     if(!fdA.length&&!fdB?.length){tblEl.innerHTML='<p style="padding:16px;color:var(--grey);font-size:13px">No data for selected period.</p>';return;}
-    const th=`<th>${dateLabel}</th><th></th><th class="nr ch" style="text-transform:none">Cars24</th><th class="nr ch">${deltaLabel}</th>${compArr.map(b=>`<th class="nr" style="color:${BC[b]};text-transform:none">${bdot(b)}${BN[b]}</th>`).join('')}<th class="nr ratio-hi" style="text-transform:none">C24÷${gapBrand}</th>`;
+    const th=`<th>${dateLabel}</th><th></th><th class="nr ch" style="text-transform:none">Cars24</th><th class="nr ch">${deltaLabel}</th>${compArr.map(b=>`<th class="nr" style="color:${BC[b]||'#999'};text-transform:none">${bdot(b)}${BN[b]||b}</th>`).join('')}<th class="nr ratio-hi" style="text-transform:none">C24÷${gapBrand}</th>`;
     let rows;
     if(fdB){
       const rA=[...fdA].reverse().map(r=>rowHtml(r,'A',false,compArr)).join('');

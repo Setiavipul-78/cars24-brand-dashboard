@@ -459,20 +459,23 @@ def build_bsos_regions(monthly_csv, weekly_csv, region_names=None):
 # ── Google Index for AU / UAE (dedicated sheet tabs, Cars24-only pan index —
 # no Category/Generic split like India has) ─────────────────────────────────
 def build_gindex_simple(csv_name):
+    """Cars24-only pan index (AU), or Cars24+Category if the CSV has a
+    Category column too (UAE, since its Brand/Generic tabs split)."""
     p = DATA / csv_name
     if not p.exists(): return []
     today_period = str(pd.Timestamp("today").to_period("M"))
     df = pd.read_csv(p).sort_values("month").reset_index(drop=True)
     df = df[df["month"] != today_period].reset_index(drop=True)
+    bc = [c for c in df.columns if c != "month"]
     rows = []
     for i, row in df.iterrows():
         pr = df.iloc[i-1] if i > 0 else None
-        v = sf(row.get("Cars24"))
-        rows.append({
-            "month": row["month"], "label": mlabel(row["month"]),
-            "Cars24": v,
-            "Cars24_mom": pp_ch(v, sf(pr.get("Cars24")) if pr is not None else None),
-        })
+        r = {"month": row["month"], "label": mlabel(row["month"])}
+        for b in bc:
+            v = sf(row.get(b))
+            r[b] = v
+            r[f"{b}_mom"] = pp_ch(v, sf(pr.get(b)) if pr is not None else None)
+        rows.append(r)
     return rows
 
 def build_gindex_regions(csv_name):
@@ -510,6 +513,7 @@ def build_country_extras(key):
         gindex = {
             "monthly": build_gindex_simple("gindex_uae_monthly.csv"),
             "regions": build_gindex_regions("gindex_uae_city_monthly.csv"),
+            "regions_generic": build_gindex_regions("gindex_uae_city_generic_monthly.csv"),
         }
     elif key == "au":
         bsos = {

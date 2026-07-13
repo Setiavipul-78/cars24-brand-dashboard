@@ -169,7 +169,7 @@ def fetch_uae_tab(token, tab, date_col_name):
 
 def build_uae_daily(token):
     parsed = fetch_uae_tab(token, "BSOS Trend - Daily", "Date")
-    rows = [{"date": parse_date_cell(d, ["%b %d, %Y"]).isoformat(), **v} for d, v in parsed]
+    rows = [{"date": parse_date_cell(d, ["%b %d, %Y", "%B %d, %Y"]).isoformat(), **v} for d, v in parsed]
     rows.sort(key=lambda r: r["date"])
     path = DATA / "bsos_uae_daily.csv"
     check_row_count(len(rows), path, "BSOS UAE daily")
@@ -181,7 +181,7 @@ def build_uae_weekly(token):
     parsed = fetch_uae_tab(token, "BSOS Trend - Weekly", "Week of")
     rows = []
     for d, v in parsed:
-        ws = parse_date_cell(d, ["%b %d, %Y"])
+        ws = parse_date_cell(d, ["%b %d, %Y", "%B %d, %Y"])
         we = ws + timedelta(days=6)
         rows.append({"week_start": ws.isoformat(), "week": f"{ws.strftime('%d %b')} – {we.strftime('%d %b %Y')}", **v})
     rows.sort(key=lambda r: r["week_start"])
@@ -195,7 +195,7 @@ def build_uae_monthly(token):
     parsed = fetch_uae_tab(token, "BSOS Trend - Monthly", "Month")
     rows = []
     for d, v in parsed:
-        m = parse_date_cell(d, ["%b %Y"])
+        m = parse_date_cell(d, ["%b %Y", "%B %Y"])
         rows.append({"month": f"{m.year:04d}-{m.month:02d}", **v})
     rows.sort(key=lambda r: r["month"])
     path = DATA / "bsos_uae_monthly.csv"
@@ -206,15 +206,26 @@ def build_uae_monthly(token):
 
 # ── AUS: 4 side-by-side region blocks (AUS/NSW/QLD/VIC) per tab ────────────
 def parse_region_blocks(rows, date_col_name):
-    """Row 0 = region names (one per block start), row 1 = header
-    (Month/Week + brand cols) repeated per block, blank column separates
-    blocks. Returns {region: [(date_str, {brand: pct}), ...]}."""
+    """Row 0 = region names (one per block start). Somewhere below that is
+    the real header row (Month/Week + brand cols) repeated per block,
+    blank column separates blocks — found dynamically by scanning for a
+    row whose first block-start cell matches date_col_name, since the
+    sheet has grown an extra leftover pivot-table row ("SUM of Queries" /
+    "QuerySetName") in between that must be skipped rather than assumed
+    to always be exactly one row below the region row. Returns
+    {region: [(date_str, {brand: pct}), ...]}."""
     if len(rows) < 3:
         raise ValidationError("expected at least 3 rows (region row, header row, data)")
-    region_row, header_row = rows[0], rows[1]
+    region_row = rows[0]
     block_starts = [i for i, v in enumerate(region_row) if str(v).strip()]
     if not block_starts:
         raise ValidationError(f"no region names found in row 0: {region_row!r}")
+
+    hdr_i = next((i for i in range(1, min(len(rows), 6))
+                   if block_starts[0] < len(rows[i]) and str(rows[i][block_starts[0]]).strip().lower() == date_col_name.lower()), None)
+    if hdr_i is None:
+        raise ValidationError(f"could not find a header row with {date_col_name!r} at column {block_starts[0]} in the first few rows below the region row")
+    header_row = rows[hdr_i]
 
     blocks = {}
     for bi, start in enumerate(block_starts):
@@ -235,7 +246,7 @@ def parse_region_blocks(rows, date_col_name):
             raise ValidationError(f"region {region!r}: missing expected brand columns: {sorted(missing)}")
 
         data = []
-        for r in rows[2:]:
+        for r in rows[hdr_i + 1:]:
             if len(r) <= start or not str(r[start]).strip():
                 continue
             vals = {brand: (pct(r[i]) if i < len(r) else None) for i, brand in brand_cols.items()}
@@ -250,12 +261,12 @@ def build_aus_monthly(token):
     rows = fetch_values(token, SHEET_AUS, "'BSOS - Monthly'!A1:AB2000")
     blocks = parse_region_blocks(rows, "Month")
 
-    national = blocks.pop("AUS", None)
+    national = blocks.pop("AUS", None) or blocks.pop("Australia", None)
     if national is None:
-        raise ValidationError("AUS - Monthly: no 'AUS' national block found")
+        raise ValidationError("AUS - Monthly: no 'AUS'/'Australia' national block found")
     nat_rows = []
     for d, v in national:
-        m = parse_date_cell(d, ["%b %Y"])
+        m = parse_date_cell(d, ["%b %Y", "%B %Y"])
         nat_rows.append({"month": f"{m.year:04d}-{m.month:02d}", **v})
     nat_rows.sort(key=lambda r: r["month"])
     path = DATA / "bsos_aus_monthly.csv"
@@ -266,7 +277,7 @@ def build_aus_monthly(token):
     region_rows = []
     for region, data in blocks.items():
         for d, v in data:
-            m = parse_date_cell(d, ["%b %Y"])
+            m = parse_date_cell(d, ["%b %Y", "%B %Y"])
             region_rows.append({"region": region, "month": f"{m.year:04d}-{m.month:02d}", **v})
     region_rows.sort(key=lambda r: (r["region"], r["month"]))
     path = DATA / "bsos_aus_region_monthly.csv"
@@ -277,14 +288,14 @@ def build_aus_monthly(token):
 
 def build_aus_weekly(token):
     rows = fetch_values(token, SHEET_AUS, "'BSOS - Weekly'!A1:AB2000")
-    blocks = parse_region_blocks(rows, "Week")
+    blocks = parse_region_blocks(rows, "Week of")
 
-    national = blocks.pop("AUS", None)
+    national = blocks.pop("AUS", None) or blocks.pop("Australia", None)
     if national is None:
-        raise ValidationError("AUS - Weekly: no 'AUS' national block found")
+        raise ValidationError("AUS - Weekly: no 'AUS'/'Australia' national block found")
     nat_rows = []
     for d, v in national:
-        ws = parse_date_cell(d, ["%b %d, %Y"])
+        ws = parse_date_cell(d, ["%b %d, %Y", "%B %d, %Y"])
         we = ws + timedelta(days=6)
         nat_rows.append({"week_start": ws.isoformat(), "week": f"{ws.strftime('%d %b')} – {we.strftime('%d %b %Y')}", **v})
     nat_rows.sort(key=lambda r: r["week_start"])
@@ -296,7 +307,7 @@ def build_aus_weekly(token):
     region_rows = []
     for region, data in blocks.items():
         for d, v in data:
-            ws = parse_date_cell(d, ["%b %d, %Y"])
+            ws = parse_date_cell(d, ["%b %d, %Y", "%B %d, %Y"])
             region_rows.append({"region": region, "week_start": ws.isoformat(), **v})
     region_rows.sort(key=lambda r: (r["region"], r["week_start"]))
     path = DATA / "bsos_aus_region_weekly.csv"
