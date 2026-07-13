@@ -3779,7 +3779,7 @@ function initAUInf(){
 
     <div class="inf-kpi-strip" id="au-inf-kpis"></div>
 
-    <p style="font-size:12px;color:var(--grey);margin:0 0 10px">Monthly trend is sourced from the "Previous Efforts" tab — post link + views per campaign and one total spend figure per month; likes/comments and engagement rate aren't tracked in this sheet yet. Creator partnerships below are from "Reachouts" — only the ${inf.creators?.length||0} with agreed terms are shown (most rows there are still prospects with no deal done).</p>
+    <p style="font-size:12px;color:var(--grey);margin:0 0 10px">Per-creator detail is sourced from "Pan Australia POA - Instagram" — creator, followers, views per campaign and one total spend figure per month; likes/comments and engagement rate aren't populated in this sheet yet (unlike UAE's equivalent tab). The ${inf.creators?.length||0} entries below are from "Reachouts" — separate deals still being negotiated, not yet live campaigns.</p>
 
     ${inf.creators?.length?`<div class="card">
       <div class="sh"><span class="kicker">🎯 Creator Partnerships</span><span class="title">Agreed Deals</span><span class="desc">Negotiated cost + CPV, based on estimated reach. Status reflects where the deal stands.</span></div>
@@ -3798,7 +3798,7 @@ function initAUInf(){
 
     <div class="g2" style="margin-bottom:0">
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">🏆 Top posts</span><span class="title">Top 10 by Views</span></div>
+        <div class="sh"><span class="kicker">🏆 Top creators</span><span class="title">Top 10 by Views</span></div>
         <div class="tw" id="au-inf-top-views"></div>
       </div>
       <div class="card" style="margin:0">
@@ -3868,13 +3868,14 @@ function initAUInf(){
       </tr>`;
     }).join(''));
 
-    // Top 10 posts by views
+    // Top 10 creators by views
     const top10V=[...allRows].sort((a,b)=>b.views-a.views).slice(0,10);
     document.getElementById('au-inf-top-views').innerHTML=tbl(
-      `<th>#</th><th>Post</th><th class="nr ch">Views</th>`,
+      `<th>#</th><th>Creator</th><th class="nr">Followers</th><th class="nr ch">Views</th>`,
       top10V.map((r,i)=>`<tr class="${i===0?'lat':''}">
         <td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td>
-        <td><a href="${r.link}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">View post ↗</a><br><span style="font-size:11px;color:var(--grey)">${r.label}</span></td>
+        <td><a href="${r.video_link||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.creator}</a><br><span style="font-size:11px;color:var(--grey)">${r.label}</span></td>
+        <td class="nr">${r.followers||'—'}</td>
         <td class="nr cc"><strong>${fv(r.views)}</strong></td>
       </tr>`).join(''));
 
@@ -3912,22 +3913,25 @@ async function initUAEInf(){
     const hmap={};
     tbl.cols.forEach((c,i)=>{const k=(c.label||c.id||'').toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/_+$/,'');if(k)hmap[k]=i;});
     const gv=(row,k)=>{const i=hmap[k]??-1;return i>=0&&row.c[i]?row.c[i].v:null;};
+    const money=v=>{if(v==null)return 0;const n=parseFloat(String(v).replace(/[^\d.]/g,''));return isNaN(n)?0:n;};
     allRows=tbl.rows.map(row=>{
       if(!row||!row.c)return null;
-      const name   =gv(row,'creator_name')||gv(row,'creator')||gv(row,'influencer');
-      const views  =+(gv(row,'total_views')||gv(row,'views')||0);
-      const likes  =+(gv(row,'total_likes')||gv(row,'likes')||0);
-      const comments=+(gv(row,'total_comments')||gv(row,'comments')||0);
-      const shares =+(gv(row,'total_shares')||gv(row,'shares')||0);
+      const name   =gv(row,'name')||gv(row,'creator_name')||gv(row,'creator')||gv(row,'influencer');
+      const views  =+(gv(row,'views')||gv(row,'total_views')||0);
+      const likes  =+(gv(row,'likes')||gv(row,'total_likes')||0);
+      const comments=+(gv(row,'comments')||gv(row,'total_comments')||0);
+      const shares =+(gv(row,'shares')||gv(row,'total_shares')||0);
       const saves  =+(gv(row,'saves')||0);
-      const cost   =+(gv(row,'creator_cost_aed')||gv(row,'cost')||0)*AED_TO_INR; // AED converted to INR
-      const month  =String(gv(row,'month')||'').trim();
-      const campaign=String(gv(row,'campaign')||'').trim();
-      const link   =gv(row,'post_url')||gv(row,'url')||'';
+      // "Avg Views" holds the actual per-post cost and "Final Cost" holds CPV —
+      // verified directly against the sheet, a mislabeling in the source data
+      // (not this parser) that's been consistent across every row checked.
+      const cost   =money(gv(row,'avg_views')||gv(row,'creator_cost_aed')||gv(row,'cost'))*AED_TO_INR; // AED converted to INR
+      const month  =String(gv(row,'live_month')||gv(row,'month')||'').trim();
+      const link   =gv(row,'video_live_link')||gv(row,'post_url')||gv(row,'url')||'';
       const moNum  =MO[month.toLowerCase()]||0;
       const eng    =views>0?((likes+comments+saves)/views*100):null;
       const cpv    =views>0&&cost>0?(cost/views):null;
-      return name?{name,views,likes,comments,shares,saves,cost,month,campaign,link,moNum,eng,cpv}:null;
+      return name?{name,views,likes,comments,shares,saves,cost,month,link,moNum,eng,cpv}:null;
     }).filter(Boolean);
   }catch(e){
     el.innerHTML=`<div class="ph"><div class="ph-mark">⚠️</div><div class="ph-title">Could not load UAE influencer data</div><div class="ph-body">${e.message}</div></div>`;return;

@@ -929,12 +929,15 @@ def build_influencers():
 
 # ── Influencers (Australia) ────────────────────────────────────────────────────
 def build_influencers_au():
-    """AU influencer data from fetch_influencers_au.py's two CSVs — a thinner
-    dataset than India/UAE: "Previous Efforts" gives post-level views + one
-    total AUD spend per month (no creator name or per-post cost), and
-    "Reachouts" gives a handful of actual creator partnerships (name,
-    followers, agreed cost, CPV) for the ones with terms agreed so far.
-    Currency conversion to INR happens client-side."""
+    """AU influencer data from fetch_influencers_au.py's two CSVs:
+    "Pan Australia POA - Instagram" gives per-post creator detail (name,
+    followers, views) + one total AUD spend per month (mirrors UAE's
+    "Pan UAE POA - Instagram", though AU's Likes/Comments/Shares/Saves
+    columns aren't populated there yet, so engagement rate isn't
+    available for AU the way it is for UAE), and "Reachouts" gives a
+    handful of separate creator partnerships (name, followers, agreed
+    cost, CPV) still being negotiated. Currency conversion to INR
+    happens client-side."""
     p = DATA / "influencers_au.csv"
     if not p.exists():
         return {"rows": [], "monthly": [], "creators": []}
@@ -944,7 +947,9 @@ def build_influencers_au():
 
     month_key = pd.to_datetime(df["month"], format="%B %Y").dt.strftime("%Y-%m")
     df = df.assign(month_key=month_key)
-    rows = [{"month": r.month_key, "label": mlabel(r.month_key), "link": r.link, "views": sf(r.views)}
+    rows = [{"month": r.month_key, "label": mlabel(r.month_key), "creator": r.creator,
+             "followers": r.followers, "video_link": r.video_link, "status": r.status,
+             "views": sf(r.views)}
             for r in df.itertuples()]
 
     monthly = []
