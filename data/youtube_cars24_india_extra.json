@@ -7489,8 +7489,8 @@
   "traffic_sources": [
     {
       "source": "SHORTS",
-      "views": 492823909,
-      "watch_time_hours": 5816142.8,
+      "views": 492823802,
+      "watch_time_hours": 5816143.9,
       "pct": 48.2
     },
     {
@@ -7501,37 +7501,37 @@
     },
     {
       "source": "SUBSCRIBER",
-      "views": 200156181,
-      "watch_time_hours": 3435658.8,
+      "views": 200156195,
+      "watch_time_hours": 3435660.0,
       "pct": 19.6
     },
     {
       "source": "YT_SEARCH",
-      "views": 60756544,
-      "watch_time_hours": 630743.5,
+      "views": 60756511,
+      "watch_time_hours": 630743.9,
       "pct": 5.9
     },
     {
       "source": "YT_CHANNEL",
-      "views": 25477847,
-      "watch_time_hours": 291456.1,
+      "views": 25477839,
+      "watch_time_hours": 291456.0,
       "pct": 2.5
     },
     {
       "source": "RELATED_VIDEO",
-      "views": 9673128,
-      "watch_time_hours": 269925.2,
+      "views": 9673130,
+      "watch_time_hours": 269925.3,
       "pct": 0.9
     },
     {
       "source": "YT_OTHER_PAGE",
-      "views": 7916727,
-      "watch_time_hours": 121770.2,
+      "views": 7916725,
+      "watch_time_hours": 121770.6,
       "pct": 0.8
     },
     {
       "source": "EXT_URL",
-      "views": 4656723,
+      "views": 4656721,
       "watch_time_hours": 41406.8,
       "pct": 0.5
     },
@@ -7543,8 +7543,8 @@
     },
     {
       "source": "SHORTS_CONTENT_LINKS",
-      "views": 1483536,
-      "watch_time_hours": 35664.4,
+      "views": 1483534,
+      "watch_time_hours": 35664.5,
       "pct": 0.1
     },
     {
@@ -7556,7 +7556,7 @@
     {
       "source": "NO_LINK_OTHER",
       "views": 298764,
-      "watch_time_hours": 12486.0,
+      "watch_time_hours": 12486.1,
       "pct": 0.0
     },
     {
@@ -10858,43 +10858,43 @@
     "2026-07": [
       {
         "source": "SHORTS",
-        "views": 5072943,
-        "watch_time_hours": 62589.50000000001,
+        "views": 5072836,
+        "watch_time_hours": 62590.600000000006,
         "pct": 59.0
       },
       {
         "source": "SUBSCRIBER",
-        "views": 1827296,
-        "watch_time_hours": 35275.9,
+        "views": 1827310,
+        "watch_time_hours": 35277.1,
         "pct": 21.2
       },
       {
         "source": "YT_SEARCH",
-        "views": 1311669,
-        "watch_time_hours": 13187.1,
+        "views": 1311636,
+        "watch_time_hours": 13187.4,
         "pct": 15.2
       },
       {
         "source": "YT_CHANNEL",
-        "views": 185564,
+        "views": 185556,
         "watch_time_hours": 2370.2999999999997,
         "pct": 2.2
       },
       {
         "source": "YT_OTHER_PAGE",
-        "views": 80426,
-        "watch_time_hours": 1522.2,
+        "views": 80424,
+        "watch_time_hours": 1522.6,
         "pct": 0.9
       },
       {
         "source": "RELATED_VIDEO",
-        "views": 48505,
-        "watch_time_hours": 3703.7000000000003,
+        "views": 48507,
+        "watch_time_hours": 3703.8,
         "pct": 0.6
       },
       {
         "source": "SHORTS_CONTENT_LINKS",
-        "views": 23802,
+        "views": 23800,
         "watch_time_hours": 578.1,
         "pct": 0.3
       },
@@ -10906,7 +10906,7 @@
       },
       {
         "source": "EXT_URL",
-        "views": 19452,
+        "views": 19450,
         "watch_time_hours": 355.40000000000003,
         "pct": 0.2
       },
@@ -10969,8 +10969,8 @@
   "devices": [
     {
       "device": "MOBILE",
-      "views": 903396773,
-      "watch_time_hours": 10057029.1,
+      "views": 903396647,
+      "watch_time_hours": 10057031.8,
       "pct": 88.6
     },
     {
@@ -10981,14 +10981,14 @@
     },
     {
       "device": "DESKTOP",
-      "views": 33293350,
-      "watch_time_hours": 541836.5,
+      "views": 33293345,
+      "watch_time_hours": 541836.8,
       "pct": 3.3
     },
     {
       "device": "TABLET",
-      "views": 21224794,
-      "watch_time_hours": 277334.5,
+      "views": 21224787,
+      "watch_time_hours": 277334.7,
       "pct": 2.1
     }
   ],
@@ -11776,8 +11776,8 @@
     "2026-07": [
       {
         "device": "MOBILE",
-        "views": 7761970,
-        "watch_time_hours": 103664.8,
+        "views": 7761844,
+        "watch_time_hours": 103667.5,
         "pct": 90.3
       },
       {
@@ -11788,14 +11788,14 @@
       },
       {
         "device": "DESKTOP",
-        "views": 302925,
-        "watch_time_hours": 6287.700000000001,
+        "views": 302920,
+        "watch_time_hours": 6288.1,
         "pct": 3.5
       },
       {
         "device": "TABLET",
-        "views": 212365,
-        "watch_time_hours": 3518.1,
+        "views": 212358,
+        "watch_time_hours": 3518.3,
         "pct": 2.5
       }
     ]
@@ -11854,7 +11854,7 @@
       "title": "Sell Side | Great Price by Dealers| 1200x628",
       "published": "2024-04-15",
       "url": "https://www.youtube.com/watch?v=dmuIKQybq9w",
-      "thumbnail": "https://i9.ytimg.com/vi/dmuIKQybq9w/default.jpg?sqp=CMjp0tIG&rs=AOn4CLDH1BMHKd_-lvNnPlPtNNyLPFBPUw",
+      "thumbnail": "https://i9.ytimg.com/vi/dmuIKQybq9w/default.jpg?sqp=CIDi1NIG&rs=AOn4CLBuWuk3-arQstAEZFODFz5I5a_u-g",
       "views": 9824184,
       "watch_time_hours": 37827.92,
       "avg_duration_sec": 14.0,
@@ -12222,7 +12222,7 @@
       "title": "20 4 10 Loan Rule 1200 x 628",
       "published": "2025-07-16",
       "url": "https://www.youtube.com/watch?v=OwQLOvaNQAo",
-      "thumbnail": "https://i9.ytimg.com/vi/OwQLOvaNQAo/default.jpg?sqp=CMjp0tIG&rs=AOn4CLBXasg9BCQiRVwLUFlSbXPXTiGtGQ",
+      "thumbnail": "https://i9.ytimg.com/vi/OwQLOvaNQAo/default.jpg?sqp=CIDi1NIG&rs=AOn4CLA087igZHMR_97zvJvfA9c2PbtjDg",
       "views": 4038227,
       "watch_time_hours": 13738.78,
       "avg_duration_sec": 19.0,
@@ -12382,7 +12382,7 @@
       "title": "A great price for your car in 5 minutes!",
       "published": "2023-02-06",
       "url": "https://www.youtube.com/watch?v=oBUxc7ghYDw",
-      "thumbnail": "https://i9.ytimg.com/vi/oBUxc7ghYDw/default.jpg?sqp=CMjp0tIG&rs=AOn4CLBq97_Fiz5yjIMpkXhgjLgttxv6Rg",
+      "thumbnail": "https://i9.ytimg.com/vi/oBUxc7ghYDw/default.jpg?sqp=CIDi1NIG&rs=AOn4CLDVY-jezm2ZXxNw93ukUgs070sz8Q",
       "views": 3426627,
       "watch_time_hours": 11310.57,
       "avg_duration_sec": 12.0,
@@ -12526,7 +12526,7 @@
       "title": "Hatchback Ke Price Me SUV 1080x1920",
       "published": "2025-07-16",
       "url": "https://www.youtube.com/watch?v=oQLLwlr-L1g",
-      "thumbnail": "https://i9.ytimg.com/vi/oQLLwlr-L1g/default.jpg?sqp=CMjp0tIG&rs=AOn4CLCZ9No0plm4oSYCCclbk-UH1xkgMA",
+      "thumbnail": "https://i9.ytimg.com/vi/oQLLwlr-L1g/default.jpg?sqp=CIDi1NIG&rs=AOn4CLDqtFC1RwdRPsAaoVGUXDGBmY_Yww",
       "views": 3228603,
       "watch_time_hours": 3498.98,
       "avg_duration_sec": 16.0,
@@ -12542,7 +12542,7 @@
       "title": "Easy Financing - Shrey Ft. | 1200x1200",
       "published": "2023-11-22",
       "url": "https://www.youtube.com/watch?v=CWs5H2M-JnY",
-      "thumbnail": "https://i9.ytimg.com/vi/CWs5H2M-JnY/default.jpg?sqp=CMjp0tIG&rs=AOn4CLCUodoLem8e9kj70kJ9ynOcnsILyQ",
+      "thumbnail": "https://i9.ytimg.com/vi/CWs5H2M-JnY/default.jpg?sqp=CIDi1NIG&rs=AOn4CLDj0hYWQgI73VPW-TZ7mgxWZyvP-Q",
       "views": 3210249,
       "watch_time_hours": 18501.15,
       "avg_duration_sec": 20.0,
@@ -12574,7 +12574,7 @@
       "title": "Sell Your Car Instantly Performance AD 1200 X 628",
       "published": "2023-08-25",
       "url": "https://www.youtube.com/watch?v=OKEHC7_NlWw",
-      "thumbnail": "https://i9.ytimg.com/vi/OKEHC7_NlWw/default.jpg?sqp=CMjp0tIG&rs=AOn4CLBRX5nMhZKmUN06AyL3JkuXA28EJA",
+      "thumbnail": "https://i9.ytimg.com/vi/OKEHC7_NlWw/default.jpg?sqp=CIDi1NIG&rs=AOn4CLDABK1zmq-1rAY9--Yw6eiOjA1Jdg",
       "views": 3167900,
       "watch_time_hours": 12974.23,
       "avg_duration_sec": 15.0,
