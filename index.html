@@ -3759,11 +3759,16 @@ function initAUInf(){
   const allMonthly=(inf.monthly||[]).slice();
   const monthsDesc=[...allMonthly].reverse();
   const latestMonth=monthsDesc[0]?.month;
+  let curMode='inr'; // 'inr' | 'local' — toggled by the currency pills below
 
-  // Formatters (₹, Cr/L/K scale — cost is AUD converted to INR via AUD_TO_INR)
   const fv=v=>{if(v==null||isNaN(v))return'—';if(v>=1e6)return(v/1e6).toFixed(2)+'M';if(v>=1e3)return(v/1e3).toFixed(1)+'K';return Math.round(v).toLocaleString();};
-  const fc=v=>{if(v==null||isNaN(v))return'—';if(v>=1e7)return'₹'+(v/1e7).toFixed(2)+'Cr';if(v>=1e5)return'₹'+(v/1e5).toFixed(2)+'L';if(v>=1e3)return'₹'+(v/1e3).toFixed(1)+'K';return'₹'+Math.round(v).toLocaleString();};
-  const fcpv=v=>v==null||isNaN(v)?'—':'₹'+Number(v).toFixed(2);
+  // Formatters take the RAW AUD value and convert/format based on curMode
+  const fc=v=>{
+    if(v==null||isNaN(v))return'—';
+    if(curMode==='inr'){const r=v*AUD_TO_INR;if(r>=1e7)return'₹'+(r/1e7).toFixed(2)+'Cr';if(r>=1e5)return'₹'+(r/1e5).toFixed(2)+'L';if(r>=1e3)return'₹'+(r/1e3).toFixed(1)+'K';return'₹'+Math.round(r).toLocaleString();}
+    if(v>=1e6)return'A$'+(v/1e6).toFixed(2)+'M';if(v>=1e3)return'A$'+(v/1e3).toFixed(1)+'K';return'A$'+Math.round(v).toLocaleString();
+  };
+  const fcpv=v=>{if(v==null||isNaN(v))return'—';return curMode==='inr'?'₹'+Number(v*AUD_TO_INR).toFixed(2):'A$'+Number(v).toFixed(2);};
 
   el.innerHTML=`
     <div class="inf-period-bar" style="gap:12px">
@@ -3774,6 +3779,11 @@ function initAUInf(){
           ${monthsDesc.map(m=>`<option value="mo:${m.month}"${m.month===latestMonth?' selected':''}>${m.label}</option>`).join('')}
         </select>
         <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--blue);font-size:10px">▼</span>
+      </div>
+      <span class="fl" style="margin-left:10px">CURRENCY</span>
+      <div class="pp-wrap" id="au-inf-currency">
+        <button class="pp active" data-c="inr" type="button">₹ INR</button>
+        <button class="pp" data-c="local" type="button">A$ AUD</button>
       </div>
     </div>
 
@@ -3814,7 +3824,7 @@ function initAUInf(){
     const tv=rowsSel.reduce((s,r)=>s+r.views,0);
     const costAud=monthsSel.reduce((s,m)=>s+(m.cost_aud||0),0);
     const hasCost=monthsSel.some(m=>m.cost_aud!=null);
-    const tc=hasCost?costAud*AUD_TO_INR:null;
+    const tc=hasCost?costAud:null;
     const bcpv=(tc!=null&&tv>0)?(tc/tv):null;
     document.getElementById('au-inf-kpis').innerHTML=`
       <div class="ink"><span class="ink-icon">📅</span><div class="ink-lbl">Active Months</div><div class="ink-val">${monthsSel.length}</div><div class="ink-sub">months with live posts</div></div>
@@ -3830,24 +3840,23 @@ function initAUInf(){
     if(creatorsEl&&inf.creators?.length){
       const cth=`<th>Creator</th><th>Category</th><th class="nr">Followers</th><th class="nr">Recent Views</th><th>Status</th><th class="nr ch">Cost</th><th class="nr ch">CPV</th>`;
       const crows=inf.creators.map((c,i)=>{
-        const costInr=c.cost_aud!=null?c.cost_aud*AUD_TO_INR:null;
-        const cpvInr=c.cpv_aud!=null?c.cpv_aud*AUD_TO_INR:null;
         return`<tr class="${i===0?'lat':''}">
           <td><a href="${c.link||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${c.creator}</a><br><span style="font-size:11px;color:var(--grey)">${c.platform}</span></td>
           <td>${c.category||'—'}</td>
           <td class="nr">${c.followers||'—'}</td>
           <td class="nr">${fv(c.recent_views)}</td>
           <td>${c.status||'—'}</td>
-          <td class="nr cc"><strong>${fc(costInr)}</strong></td>
-          <td class="nr cc">${fcpv(cpvInr)}</td>
+          <td class="nr cc"><strong>${fc(c.cost_aud)}</strong></td>
+          <td class="nr cc">${fcpv(c.cpv_aud)}</td>
         </tr>`;
       }).join('');
       creatorsEl.innerHTML=tbl(cth,crows);
     }
 
     // Trend chart
+    if(charts.auInfTrend)charts.auInfTrend.destroy();
     const tcx=document.getElementById('au-inf-chart-trend').getContext('2d');
-    new Chart(tcx,{type:'bar',data:{
+    charts.auInfTrend=new Chart(tcx,{type:'bar',data:{
       labels:allMonthly.map(m=>m.label),
       datasets:[{label:'Total Views',data:allMonthly.map(m=>m.views/1000),backgroundColor:allMonthly.map((_,i)=>i===allMonthly.length-1?'rgba(71,54,254,.75)':'rgba(71,54,254,.22)'),borderRadius:6}]
     },options:{responsive:true,maintainAspectRatio:false,
@@ -3857,13 +3866,12 @@ function initAUInf(){
     // MoM table
     const mth=`<th>Month</th><th class="nr ch">Posts</th><th class="nr">Total Views</th><th class="nr ch">Total Spend</th><th class="nr ch">Blended CPV</th>`;
     document.getElementById('au-inf-mom-tbl').innerHTML=tbl(mth,[...allMonthly].reverse().map((m,i)=>{
-      const costInr=m.cost_aud!=null?m.cost_aud*AUD_TO_INR:null;
-      const bcpv=(costInr!=null&&m.views>0)?(costInr/m.views):null;
+      const bcpv=(m.cost_aud!=null&&m.views>0)?(m.cost_aud/m.views):null;
       return`<tr class="${i===0?'lat':''}">
         <td><strong>${m.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td>
         <td class="nr cc"><strong>${m.posts}</strong></td>
         <td class="nr">${fv(m.views)}</td>
-        <td class="nr cc">${fc(costInr)}</td>
+        <td class="nr cc">${fc(m.cost_aud)}</td>
         <td class="nr cc">${fcpv(bcpv)}</td>
       </tr>`;
     }).join(''));
@@ -3880,18 +3888,30 @@ function initAUInf(){
       </tr>`).join(''));
 
     // CPV by month chart
+    if(charts.auInfCpv)charts.auInfCpv.destroy();
     const ccx=document.getElementById('au-inf-chart-cpv').getContext('2d');
-    const bcpvData=allMonthly.map(m=>(m.cost_aud==null||!m.views)?null:parseFloat(((m.cost_aud*AUD_TO_INR)/m.views).toFixed(2)));
-    new Chart(ccx,{type:'bar',data:{
+    const cpvSym=curMode==='inr'?'₹':'A$';
+    const bcpvData=allMonthly.map(m=>{
+      if(m.cost_aud==null||!m.views)return null;
+      const raw=m.cost_aud/m.views;
+      return parseFloat((curMode==='inr'?raw*AUD_TO_INR:raw).toFixed(2));
+    });
+    charts.auInfCpv=new Chart(ccx,{type:'bar',data:{
       labels:allMonthly.map(m=>m.label),
-      datasets:[{label:'Blended CPV (₹)',data:bcpvData,backgroundColor:bcpvData.map((_,i)=>i===allMonthly.length-1?'rgba(71,54,254,.85)':'rgba(71,54,254,.28)'),borderRadius:6}]
+      datasets:[{label:`Blended CPV (${cpvSym})`,data:bcpvData,backgroundColor:bcpvData.map((_,i)=>i===allMonthly.length-1?'rgba(71,54,254,.85)':'rgba(71,54,254,.28)'),borderRadius:6}]
     },options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y==null?'No spend logged':`₹${c.parsed.y.toFixed(2)}`}}},
-      scales:{y:{title:{display:true,text:'Blended CPV (₹)'},ticks:{callback:v=>'₹'+v},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y==null?'No spend logged':`${cpvSym}${c.parsed.y.toFixed(2)}`}}},
+      scales:{y:{title:{display:true,text:`Blended CPV (${cpvSym})`},ticks:{callback:v=>cpvSym+v},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
   }
 
   const sel=document.getElementById('au-inf-sel');
   sel.addEventListener('change',()=>renderAUKPIs(sel.value));
+  document.querySelectorAll('#au-inf-currency .pp').forEach(btn=>btn.addEventListener('click',()=>{
+    document.querySelectorAll('#au-inf-currency .pp').forEach(b=>b.classList.toggle('active',b===btn));
+    curMode=btn.dataset.c;
+    renderAUKPIs(sel.value);
+    renderAUStatic();
+  }));
   renderAUKPIs(sel.value);
   renderAUStatic();
 }
@@ -3925,7 +3945,9 @@ async function initUAEInf(){
       // "Avg Views" holds the actual per-post cost and "Final Cost" holds CPV —
       // verified directly against the sheet, a mislabeling in the source data
       // (not this parser) that's been consistent across every row checked.
-      const cost   =money(gv(row,'avg_views')||gv(row,'creator_cost_aed')||gv(row,'cost'))*AED_TO_INR; // AED converted to INR
+      // Kept in raw AED here — converted to INR only at display time (fc/fcpv),
+      // since the currency toggle needs both.
+      const cost   =money(gv(row,'avg_views')||gv(row,'creator_cost_aed')||gv(row,'cost'));
       const month  =String(gv(row,'live_month')||gv(row,'month')||'').trim();
       const link   =gv(row,'video_live_link')||gv(row,'post_url')||gv(row,'url')||'';
       const moNum  =MO[month.toLowerCase()]||0;
@@ -3955,11 +3977,16 @@ async function initUAEInf(){
 
   const monthsDesc=[...allMonthly].reverse();
   const latestMO=monthsDesc[0]?.moNum;
+  let curMode='inr'; // 'inr' | 'local' — toggled by the currency pills below
 
-  // Formatters (₹, Cr/L/K scale — cost is already converted from AED to INR above)
+  // Formatters take the RAW AED value and convert/format based on curMode
   const fv=v=>{if(v==null||isNaN(v))return'—';if(v>=1e6)return(v/1e6).toFixed(2)+'M';if(v>=1e3)return(v/1e3).toFixed(1)+'K';return Math.round(v).toLocaleString();};
-  const fc=v=>{if(v==null||isNaN(v))return'—';if(v>=1e7)return'₹'+(v/1e7).toFixed(2)+'Cr';if(v>=1e5)return'₹'+(v/1e5).toFixed(2)+'L';if(v>=1e3)return'₹'+(v/1e3).toFixed(1)+'K';return'₹'+Math.round(v).toLocaleString();};
-  const fcpv=v=>v==null||isNaN(v)?'—':'₹'+Number(v).toFixed(2);
+  const fc=v=>{
+    if(v==null||isNaN(v))return'—';
+    if(curMode==='inr'){const r=v*AED_TO_INR;if(r>=1e7)return'₹'+(r/1e7).toFixed(2)+'Cr';if(r>=1e5)return'₹'+(r/1e5).toFixed(2)+'L';if(r>=1e3)return'₹'+(r/1e3).toFixed(1)+'K';return'₹'+Math.round(r).toLocaleString();}
+    if(v>=1e6)return'AED '+(v/1e6).toFixed(2)+'M';if(v>=1e3)return'AED '+(v/1e3).toFixed(1)+'K';return'AED '+Math.round(v).toLocaleString();
+  };
+  const fcpv=v=>{if(v==null||isNaN(v))return'—';return curMode==='inr'?'₹'+Number(v*AED_TO_INR).toFixed(2):'AED '+Number(v).toFixed(3);};
 
   el.innerHTML=`
     <div class="inf-ext-banner">
@@ -3975,6 +4002,11 @@ async function initUAEInf(){
           ${monthsDesc.map(m=>`<option value="mo:${m.moNum}"${m.moNum===latestMO?' selected':''}>${m.month}</option>`).join('')}
         </select>
         <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--blue);font-size:10px">▼</span>
+      </div>
+      <span class="fl" style="margin-left:10px">CURRENCY</span>
+      <div class="pp-wrap" id="uae-inf-currency">
+        <button class="pp active" data-c="inr" type="button">₹ INR</button>
+        <button class="pp" data-c="local" type="button">AED</button>
       </div>
     </div>
 
@@ -4007,7 +4039,7 @@ async function initUAEInf(){
         <div class="tw" id="uae-inf-top-eng"></div>
       </div>
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">💰 Lowest CPV</span><span class="title">Top 10 Most Efficient Creators</span><span class="desc">Lowest ₹ CPV (min 5K views)</span></div>
+        <div class="sh"><span class="kicker">💰 Lowest CPV</span><span class="title">Top 10 Most Efficient Creators</span><span class="desc">Lowest CPV (min 5K views)</span></div>
         <div class="tw" id="uae-inf-low-cpv"></div>
       </div>
     </div>`;
@@ -4032,8 +4064,9 @@ async function initUAEInf(){
 
   function renderUAEStatic(){
     // Trend chart
+    if(charts.uaeInfTrend)charts.uaeInfTrend.destroy();
     const tc=document.getElementById('uae-inf-chart-trend').getContext('2d');
-    new Chart(tc,{type:'bar',data:{
+    charts.uaeInfTrend=new Chart(tc,{type:'bar',data:{
       labels:allMonthly.map(m=>m.month),
       datasets:[{label:'Total Views',data:allMonthly.map(m=>m.views/1000),backgroundColor:allMonthly.map((_,i)=>i===allMonthly.length-1?'rgba(71,54,254,.75)':'rgba(71,54,254,.22)'),borderRadius:6}]
     },options:{responsive:true,maintainAspectRatio:false,
@@ -4070,14 +4103,20 @@ async function initUAEInf(){
       </tr>`).join(''));
 
     // CPV by month chart
+    if(charts.uaeInfCpv)charts.uaeInfCpv.destroy();
     const cc=document.getElementById('uae-inf-chart-cpv').getContext('2d');
-    const bcpvData=allMonthly.map(m=>m.views>0?parseFloat((m.cost/m.views).toFixed(2)):null);
-    new Chart(cc,{type:'bar',data:{
+    const cpvSym=curMode==='inr'?'₹':'AED ';
+    const bcpvData=allMonthly.map(m=>{
+      if(!(m.views>0))return null;
+      const raw=m.cost/m.views;
+      return parseFloat((curMode==='inr'?raw*AED_TO_INR:raw).toFixed(curMode==='inr'?2:3));
+    });
+    charts.uaeInfCpv=new Chart(cc,{type:'bar',data:{
       labels:allMonthly.map(m=>m.month),
-      datasets:[{label:'Blended CPV (₹)',data:bcpvData,backgroundColor:bcpvData.map((_,i)=>i===allMonthly.length-1?'rgba(71,54,254,.85)':'rgba(71,54,254,.28)'),borderRadius:6}]
+      datasets:[{label:`Blended CPV (${cpvSym.trim()})`,data:bcpvData,backgroundColor:bcpvData.map((_,i)=>i===allMonthly.length-1?'rgba(71,54,254,.85)':'rgba(71,54,254,.28)'),borderRadius:6}]
     },options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`₹${c.parsed.y?.toFixed(2)}`}}},
-      scales:{y:{title:{display:true,text:'Blended CPV (₹)'},ticks:{callback:v=>'₹'+v},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${cpvSym}${c.parsed.y}`}}},
+      scales:{y:{title:{display:true,text:`Blended CPV (${cpvSym.trim()})`},ticks:{callback:v=>cpvSym+v},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
 
     // Top 10 Engagement
     const top10E=[...allRows].filter(r=>r.eng>0).sort((a,b)=>b.eng-a.eng).slice(0,10);
@@ -4107,6 +4146,12 @@ async function initUAEInf(){
   }
 
   document.getElementById('uae-inf-sel').addEventListener('change',function(){renderUAEKPIs(this.value);});
+  document.querySelectorAll('#uae-inf-currency .pp').forEach(btn=>btn.addEventListener('click',()=>{
+    document.querySelectorAll('#uae-inf-currency .pp').forEach(b=>b.classList.toggle('active',b===btn));
+    curMode=btn.dataset.c;
+    renderUAEKPIs(document.getElementById('uae-inf-sel').value);
+    renderUAEStatic();
+  }));
   renderUAEKPIs('mo:'+latestMO);
   renderUAEStatic();
   scanTw(el);
