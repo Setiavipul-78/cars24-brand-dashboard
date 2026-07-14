@@ -1845,7 +1845,26 @@ function countryGiTabHtml(prefix,cfg){
     <div class="sh"><span class="kicker">📋 Detail</span><span class="title">${regionLabel}-level Detail</span><span class="desc">Click any column header to sort.</span></div>
     <div class="card-actions">${regionGid?`<a class="card-act-btn" href="${GI_SHEET}?gid=${regionGid}#gid=${regionGid}" target="_blank" rel="noopener">📄 View sheet</a>`:''}<button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-idx-detail','branded_search_${regionLabel.toLowerCase()}_detail.csv')">⬇ CSV</button></div>
     <div class="tw" id="${p}tbl-idx-detail"></div>
-  </div>`;
+  </div>
+
+  ${cfg&&cfg.hasCategory?`
+  <div class="card">
+    <div class="sh"><span class="kicker">⚖️ Comparison · Monthly</span><span class="title">Cars24 Brand vs Category Search Interest</span><span class="desc">Gap = Cars24 index minus Category index. Positive = brand outpacing the category.</span></div>
+    <div class="card-actions">${natSheetLink}<button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-gi-cmp','gindex_comparison.csv')">⬇ CSV</button></div>
+    <div class="tw" id="${p}tbl-gi-cmp" style="margin-bottom:10px"></div>
+    <div class="cw"><canvas id="${p}chart-gi-cmp"></canvas></div>
+  </div>
+
+  <div class="card">
+    <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+      <div><span class="kicker">🗺 ${regionLabel}-wise · Monthly</span><span class="title">Cars24 Brand vs Generic — By ${regionLabel}</span><span class="desc">Gap = Cars24 brand index minus Generic category index, per ${regionLabel.toLowerCase()}. Positive = brand outpacing the category there.</span></div>
+      <select class="ctrl-sel" id="${p}gi-region-cmp-period-sel"></select>
+    </div>
+    <div class="card-actions">${regionGid?`<a class="card-act-btn" href="${GI_SHEET}?gid=${regionGid}#gid=${regionGid}" target="_blank" rel="noopener">📄 View sheet</a>`:''}<button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-gi-region-cmp','gindex_region_brand_vs_generic.csv')">⬇ CSV</button></div>
+    <div class="tw" id="${p}tbl-gi-region-cmp" style="margin-bottom:10px"></div>
+    <div class="fb"><span class="fl">${regionLabel}s</span><div class="ms-dd" id="${p}ms-gi-region-cmp"></div></div>
+    <div class="cw"><canvas id="${p}chart-gi-region-cmp"></canvas></div>
+  </div>`:''}`;
 }
 
 function initCountryGiTab(prefix,paneId,gindexData,cfg){
@@ -1853,7 +1872,9 @@ function initCountryGiTab(prefix,paneId,gindexData,cfg){
   if(!pane||!gindexData?.monthly?.length){if(pane)pane.innerHTML='<div class="card"><div class="ph"><div class="ph-title">Google Index data not available</div></div></div>';return;}
   const p=prefix,regionLabel=(cfg&&cfg.regionLabel)||'Region';
   const giM=gindexData.monthly,regions=gindexData.regions||{};
+  const regionsGeneric=gindexData.regions_generic||{};
   const regionKeys=Object.keys(regions);
+  const hasCategory=giM.some(r=>r.Category!=null);
   const fIdx=v=>v==null?'—':v.toFixed(1);
   const fPct=v=>v==null?'—':(v>0?'+':'')+v.toFixed(1)+'%';
   const REGION_PALETTE=['#4736FE','#E91E8C','#FF6B6B','#F97316','#059669','#7C3AED','#0EA5E9','#EAB308','#DC2626','#0891B2','#84CC16','#D946EF','#F43F5E','#14B8A6','#8B5CF6','#EA580C','#65A30D','#06B6D4'];
@@ -1900,7 +1921,7 @@ function initCountryGiTab(prefix,paneId,gindexData,cfg){
   const priorYtdGrowth=yearAvgs.length>1?yearAvgs[yearAvgs.length-2].yoyPct:null;
   const ytdTrend=(ytdGrowth!=null&&priorYtdGrowth!=null)?(ytdGrowth>=priorYtdGrowth?'re-accelerating':'decelerating'):'';
 
-  pane.innerHTML=countryGiTabHtml(p,{regionLabel,regionSheetGid:cfg&&cfg.regionSheetGid,nationalGid:cfg&&cfg.nationalGid});
+  pane.innerHTML=countryGiTabHtml(p,{regionLabel,regionSheetGid:cfg&&cfg.regionSheetGid,nationalGid:cfg&&cfg.nationalGid,hasCategory});
   document.getElementById(p+'gi-national-desc').textContent=`Monthly index, ${first.label} – ${latest.label} (100 = all-time peak).`;
   document.getElementById(p+'gi-years-desc').textContent=`Annual mean with year-on-year growth. ${latestYear} is Jan–${latest.label.split("'")[0]} to date.`;
   document.getElementById(p+'gi-mix-desc').textContent=`Each ${regionLabel.toLowerCase()}'s slice of branded search across all tracked ${regionLabel.toLowerCase()}s, ${latest.label}.`;
@@ -1995,6 +2016,74 @@ function initCountryGiTab(prefix,paneId,gindexData,cfg){
   }
   window['__idxSort_'+p.replace(/-/g,'_')]=(key)=>{ sortDir=(sortKey===key)?-sortDir:-1; sortKey=key; renderIdxDetail(); };
   renderIdxDetail();
+
+  // ── Brand vs Category/Generic comparison — only where the source sheet
+  // actually has a Category split (UAE's "UAE (Brand)"/"UAE (Generic)" tabs;
+  // AU's sheet has no Category series at all, so hasCategory is false there
+  // and none of this renders). ──
+  if(hasCategory){
+    const gth3=`<th>Month</th><th class="nr ch" style="text-transform:none">Cars24</th><th class="nr">Category</th><th class="nr ratio-hi">Gap (Brand−Category)</th>`;
+    const rows3=[...giM].reverse().map((r,i)=>{
+      const g=(r.Cars24!=null&&r.Category!=null)?r.Cars24-r.Category:null;
+      return`<tr class="${i===0?'lat':''}"><td><strong>${r.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td class="nr cc"><strong>${fIdx(r.Cars24)}</strong></td><td class="nr">${fIdx(r.Category)}</td><td class="nr ratio-hi">${g!=null?(g>0?'+':'')+g.toFixed(1):'—'}</td></tr>`;
+    }).join('');
+    document.getElementById(p+'tbl-gi-cmp').innerHTML=tbl(gth3,rows3);
+    charts[p+'giCmp']=new Chart(document.getElementById(p+'chart-gi-cmp').getContext('2d'),{type:'line',data:{labels:giM.map(r=>r.label),datasets:[
+      {label:'Cars24 Brand',data:giM.map(r=>r.Cars24),borderColor:'#4736FE',backgroundColor:'rgba(71,54,254,.08)',fill:true,tension:0.3,spanGaps:true,borderWidth:3,pointRadius:0},
+      {label:'Category (Generic)',data:giM.map(r=>r.Category),borderColor:'#FF9500',backgroundColor:'transparent',fill:false,tension:0.3,spanGaps:true,borderWidth:2,borderDash:[5,3],pointRadius:0}
+    ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11},usePointStyle:true}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
+
+    const allGiMonths=[...new Set(regionKeys.flatMap(rk=>(regions[rk]||[]).map(r=>r.month)))].sort();
+    const mLabelGi={};
+    regionKeys.forEach(rk=>(regions[rk]||[]).forEach(r=>{if(!mLabelGi[r.month])mLabelGi[r.month]=r.label;}));
+    function brandAt(rk,m){const r=regions[rk]?.find(x=>x.month===m);return r?r.index:null;}
+    function genericAt(rk,m){const r=regionsGeneric[rk]?.find(x=>x.month===m);return r?r.index:null;}
+    let giRegionCmpSel=[...regionKeys];
+    function renderGiRegionCmpTable(sel){
+      const tblEl=document.getElementById(p+'tbl-gi-region-cmp');
+      if(sel==='__all__'){
+        const th=`<th>${regionLabel}</th><th></th>${allGiMonths.map((m,i)=>`<th class="nr${i===allGiMonths.length-1?' ch':''}">${mLabelGi[m]||m}</th>`).join('')}`;
+        const rows=regionKeys.map(rk=>{
+          const brandVals=allGiMonths.map(m=>brandAt(rk,m));
+          const genVals=allGiMonths.map(m=>genericAt(rk,m));
+          return{rk,brandVals,genVals,last:brandVals.filter(v=>v!=null).pop()};
+        }).sort((a,b)=>(b.last??-999)-(a.last??-999));
+        const trs=rows.map(({rk,brandVals,genVals})=>
+          `<tr class="lat"><td rowspan="2"><strong>${rk}</strong></td><td style="color:var(--blue);font-weight:700;font-size:11px">Brand</td>${brandVals.map(v=>`<td class="nr cc">${fIdx(v)}</td>`).join('')}</tr>`+
+          `<tr><td style="color:#f90;font-weight:700;font-size:11px">Generic</td>${genVals.map(v=>`<td class="nr">${fIdx(v)}</td>`).join('')}</tr>`
+        ).join('');
+        tblEl.innerHTML=tbl(th,trs);
+        return;
+      }
+      const rows=regionKeys.map(rk=>{
+        const b=regions[rk].find(x=>x.month===sel),g=regionsGeneric[rk]?.find(x=>x.month===sel);
+        return(b&&b.index!=null)?{rk,brand:b.index,generic:g?g.index:null}:null;
+      }).filter(Boolean).sort((a,b)=>b.brand-a.brand);
+      const th=`<th>${regionLabel}</th><th class="nr ch" style="text-transform:none">Cars24 Brand</th><th class="nr">Generic</th><th class="nr ratio-hi">Gap (Brand−Generic)</th>`;
+      const tr=rows.map((x,i)=>{
+        const g=(x.brand!=null&&x.generic!=null)?x.brand-x.generic:null;
+        return`<tr class="${i===0?'lat':''}"><td><strong>${x.rk}</strong></td><td class="nr cc"><strong>${fIdx(x.brand)}</strong></td><td class="nr">${fIdx(x.generic)}</td><td class="nr ratio-hi">${g!=null?(g>0?'+':'')+g.toFixed(1):'—'}</td></tr>`;
+      }).join('');
+      tblEl.innerHTML=tbl(th,tr);
+    }
+    function renderGiRegionCmpChart(){
+      if(charts[p+'giRegionCmp'])charts[p+'giRegionCmp'].destroy();
+      const ctx=document.getElementById(p+'chart-gi-region-cmp');if(!ctx)return;
+      const datasets=[];
+      giRegionCmpSel.forEach((rk,i)=>{
+        const clr=REGION_PALETTE[i%REGION_PALETTE.length];
+        datasets.push({label:`${rk} · Brand`,data:allGiMonths.map(m=>brandAt(rk,m)),borderColor:clr,backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:2});
+        datasets.push({label:`${rk} · Generic`,data:allGiMonths.map(m=>genericAt(rk,m)),borderColor:clr,backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:1.5,borderDash:[5,3],pointRadius:0});
+      });
+      charts[p+'giRegionCmp']=new Chart(ctx.getContext('2d'),{type:'line',data:{labels:allGiMonths.map(m=>mLabelGi[m]||m),datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10},padding:8}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
+    }
+    const giRegionCmpPeriodSel=document.getElementById(p+'gi-region-cmp-period-sel');
+    giRegionCmpPeriodSel.innerHTML=`<option value="__all__">All time</option>`+allGiMonths.slice().reverse().map((m,i)=>`<option value="${m}"${i===0?' selected':''}>${mLabelGi[m]||m}${i===0?' (latest)':''}</option>`).join('');
+    giRegionCmpPeriodSel.addEventListener('change',()=>renderGiRegionCmpTable(giRegionCmpPeriodSel.value));
+    buildMultiSelect(p+'ms-gi-region-cmp',regionKeys,regionKeys,rk=>rk,vals=>{giRegionCmpSel=vals;renderGiRegionCmpChart();},`All ${regionLabel.toLowerCase()}s`);
+    renderGiRegionCmpTable(allGiMonths[allGiMonths.length-1]);
+    renderGiRegionCmpChart();
+  }
 }
 
 function initCountryGindexTab(prefix,paneId,gindexData,regionLabel,regionSheetGid,gscMonthly,countryLabel,nationalGid){
