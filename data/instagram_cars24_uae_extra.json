@@ -2,27 +2,27 @@
   "age": [
     {
       "key": "13-17",
-      "value": 431
+      "value": 430
     },
     {
       "key": "18-24",
-      "value": 2745
+      "value": 2742
     },
     {
       "key": "25-34",
-      "value": 18136
+      "value": 18151
     },
     {
       "key": "35-44",
-      "value": 18664
+      "value": 18676
     },
     {
       "key": "45-54",
-      "value": 6121
+      "value": 6123
     },
     {
       "key": "55-64",
-      "value": 1313
+      "value": 1315
     },
     {
       "key": "65+",
@@ -32,29 +32,29 @@
   "gender": [
     {
       "key": "F",
-      "value": 7586
+      "value": 7596
     },
     {
       "key": "M",
-      "value": 32386
+      "value": 32400
     },
     {
       "key": "U",
-      "value": 7867
+      "value": 7870
     }
   ],
   "city": [
     {
       "key": "Al-Sib, Muscat Governorate",
-      "value": 108
+      "value": 110
     },
     {
       "key": "Kochi, Kerala",
-      "value": 75
+      "value": 78
     },
     {
       "key": "Kolkata, West Bengal",
-      "value": 75
+      "value": 73
     },
     {
       "key": " Al Lusayli, Dubai",
@@ -62,67 +62,67 @@
     },
     {
       "key": "Lagos, Lagos State",
-      "value": 124
+      "value": 123
     },
     {
       "key": "Al Jazirah al Hamra', Ras al-Khaimah",
-      "value": 90
+      "value": 93
     },
     {
       "key": "As Shahamah, Abu Dhabi",
-      "value": 422
+      "value": 419
     },
     {
       "key": "Pune, Maharashtra",
-      "value": 83
+      "value": 84
     },
     {
       "key": "Madha, Fujairah",
-      "value": 107
+      "value": 103
     },
     {
       "key": "Ahmedabad, Gujarat",
-      "value": 134
+      "value": 135
     },
     {
       "key": "Madinat Zayed, Abu Dhabi",
-      "value": 247
+      "value": 249
     },
     {
       "key": "Karachi, Sindh",
-      "value": 215
+      "value": 216
     },
     {
       "key": "Dar es Salaam, Dar es Salaam",
-      "value": 66
+      "value": 65
     },
     {
       "key": "Al Ain, Abu Dhabi",
-      "value": 1147
+      "value": 1152
     },
     {
       "key": "Accra, Greater Accra Region",
-      "value": 73
+      "value": 72
     },
     {
       "key": "Umm al Qaiwain, Umm al-Quwain",
-      "value": 269
+      "value": 274
     },
     {
       "key": "Ras al-Khaimah, Ras al-Khaimah",
-      "value": 418
+      "value": 423
     },
     {
       "key": "Al Ajman, Emirate of Ajman",
-      "value": 1739
+      "value": 1749
     },
     {
       "key": "Jeddah, Makkah Region",
-      "value": 162
+      "value": 161
     },
     {
       "key": "Kalba, Emirate of Sharjah",
-      "value": 206
+      "value": 195
     },
     {
       "key": "Rashidiyah, Dubai",
@@ -130,79 +130,79 @@
     },
     {
       "key": "Doha, Doha",
-      "value": 104
+      "value": 103
     },
     {
       "key": "Abu Dhabi, Abu Dhabi",
-      "value": 6355
+      "value": 6357
     },
     {
       "key": "Gurugram, Haryana",
-      "value": 139
+      "value": 135
     },
     {
       "key": "Delhi, Delhi",
-      "value": 298
+      "value": 301
     },
     {
       "key": "Lahore, Punjab",
-      "value": 150
+      "value": 153
     },
     {
       "key": "Muscat, Muscat Governorate",
-      "value": 100
+      "value": 98
     },
     {
       "key": "Amman, Amman Governorate",
-      "value": 128
+      "value": 132
     },
     {
       "key": "Chennai, Tamil Nadu",
-      "value": 202
+      "value": 204
     },
     {
       "key": "Alexandria, Alexandria Governorate",
-      "value": 85
-    },
-    {
-      "key": "Baghdad, Baghdad Governorate",
-      "value": 91
-    },
-    {
-      "key": "Riyadh, Riyadh Region",
-      "value": 277
-    },
-    {
-      "key": "Qatara, Abu Dhabi",
-      "value": 165
-    },
-    {
-      "key": "Musaffah, Abu Dhabi",
-      "value": 261
-    },
-    {
-      "key": "Khor Fakkan, Emirate of Sharjah",
-      "value": 73
-    },
-    {
-      "key": "Tehran, Tehran Province",
       "value": 82
     },
     {
+      "key": "Baghdad, Baghdad Governorate",
+      "value": 92
+    },
+    {
+      "key": "Riyadh, Riyadh Region",
+      "value": 285
+    },
+    {
+      "key": "Qatara, Abu Dhabi",
+      "value": 162
+    },
+    {
+      "key": "Musaffah, Abu Dhabi",
+      "value": 258
+    },
+    {
+      "key": "Khor Fakkan, Emirate of Sharjah",
+      "value": 70
+    },
+    {
+      "key": "Tehran, Tehran Province",
+      "value": 84
+    },
+    {
       "key": "Cairo, Cairo Governorate",
-      "value": 208
+      "value": 199
     },
     {
       "key": "Dubai, Dubai",
-      "value": 14906
+      "value": 14891
     },
     {
       "key": "Mumbai, Maharashtra",
-      "value": 200
+      "value": 201
     },
     {
       "key": "Sharjah, Emirate of Sharjah",
-      "value": 4754
+      "value": 4759
     },
     {
       "key": "Fujairah, Fujairah",
@@ -210,37 +210,37 @@
     },
     {
       "key": "Bangalore, Karnataka",
-      "value": 287
+      "value": 284
     },
     {
       "key": "Al Daid, Emirate of Sharjah",
-      "value": 88
+      "value": 93
     },
     {
       "key": "Hyderabad, Telangana",
-      "value": 172
+      "value": 167
     },
     {
       "key": "Ruwais, Abu Dhabi",
-      "value": 231
+      "value": 237
     }
   ],
   "country": [
     {
       "key": "DE",
-      "value": 86
+      "value": 87
     },
     {
       "key": "BD",
-      "value": 175
+      "value": 174
     },
     {
       "key": "RU",
-      "value": 81
+      "value": 82
     },
     {
       "key": "JO",
-      "value": 186
+      "value": 190
     },
     {
       "key": "TZ",
@@ -248,7 +248,7 @@
     },
     {
       "key": "BH",
-      "value": 124
+      "value": 122
     },
     {
       "key": "YE",
@@ -256,15 +256,15 @@
     },
     {
       "key": "FR",
-      "value": 60
-    },
-    {
-      "key": "LY",
       "value": 62
     },
     {
+      "key": "LY",
+      "value": 63
+    },
+    {
       "key": "SA",
-      "value": 749
+      "value": 753
     },
     {
       "key": "BR",
@@ -272,7 +272,7 @@
     },
     {
       "key": "QA",
-      "value": 171
+      "value": 170
     },
     {
       "key": "UG",
@@ -280,7 +280,7 @@
     },
     {
       "key": "MA",
-      "value": 147
+      "value": 145
     },
     {
       "key": "DZ",
@@ -288,7 +288,7 @@
     },
     {
       "key": "KE",
-      "value": 128
+      "value": 127
     },
     {
       "key": "ID",
@@ -312,23 +312,23 @@
     },
     {
       "key": "GH",
-      "value": 144
+      "value": 143
     },
     {
       "key": "EG",
-      "value": 889
+      "value": 882
     },
     {
       "key": "AE",
-      "value": 32444
+      "value": 32457
     },
     {
       "key": "UZ",
-      "value": 84
+      "value": 85
     },
     {
       "key": "IN",
-      "value": 5460
+      "value": 5454
     },
     {
       "key": "SY",
@@ -336,7 +336,7 @@
     },
     {
       "key": "ZA",
-      "value": 112
+      "value": 113
     },
     {
       "key": "IQ",
@@ -344,7 +344,7 @@
     },
     {
       "key": "IR",
-      "value": 468
+      "value": 469
     },
     {
       "key": "IT",
@@ -360,7 +360,7 @@
     },
     {
       "key": "KW",
-      "value": 120
+      "value": 118
     },
     {
       "key": "ES",
@@ -368,11 +368,11 @@
     },
     {
       "key": "ET",
-      "value": 47
+      "value": 48
     },
     {
       "key": "TH",
-      "value": 51
+      "value": 53
     },
     {
       "key": "AU",
@@ -380,7 +380,7 @@
     },
     {
       "key": "LB",
-      "value": 128
+      "value": 134
     },
     {
       "key": "PH",
@@ -392,19 +392,19 @@
     },
     {
       "key": "TN",
-      "value": 58
+      "value": 59
     },
     {
       "key": "PK",
-      "value": 940
+      "value": 941
     },
     {
       "key": "TR",
-      "value": 96
+      "value": 97
     },
     {
       "key": "LK",
-      "value": 115
+      "value": 117
     }
   ]
 }

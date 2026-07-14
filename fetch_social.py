@@ -487,30 +487,56 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
     except Exception as e:
         print(f"    ⚠  Devices (monthly) fetch failed for {key}: {e}")
 
-    # Top videos (per-video analytics + metadata)
+    # Top videos (per-video analytics + metadata). A single "top N by
+    # all-time views" query systematically excludes recently-published
+    # videos — they're competing against a channel's entire back-catalog
+    # and haven't had time to accumulate comparable views, so filtering
+    # this list to a recent month (e.g. the current one) often found
+    # nothing even though the monthly aggregate correctly counted videos
+    # published that month. Confirmed live: for a mature channel, even
+    # maxResults=200 on the whole-history query returned zero of that
+    # month's uploads, while the SAME query scoped to just the last 60
+    # days surfaced them immediately (no longer competing against years
+    # of history). So we run both and merge, deduping by video ID.
     try:
+        metrics = "views,estimatedMinutesWatched,averageViewDuration,averageViewPercentage,subscribersGained,likes,comments,shares"
         vid_resp = yta.reports().query(
             ids=f"channel=={channel_id}",
             startDate=start, endDate=today.strftime("%Y-%m-%d"),
-            dimensions="video",
-            metrics="views,estimatedMinutesWatched,averageViewDuration,averageViewPercentage,subscribersGained,likes,comments,shares",
-            sort="-views", maxResults=50,
+            dimensions="video", metrics=metrics,
+            sort="-views", maxResults=200,
         ).execute()
         vid_headers = [h["name"] for h in vid_resp.get("columnHeaders", [])]
         vid_rows = vid_resp.get("rows", [])
+
+        recent_start = (today - timedelta(days=60)).strftime("%Y-%m-%d")
+        recent_resp = yta.reports().query(
+            ids=f"channel=={channel_id}",
+            startDate=recent_start, endDate=today.strftime("%Y-%m-%d"),
+            dimensions="video", metrics=metrics,
+            sort="-views", maxResults=200,
+        ).execute()
+        seen_ids = {r[0] for r in vid_rows}
+        vid_rows += [r for r in recent_resp.get("rows", []) if r[0] not in seen_ids]
+
         vid_ids = [r[0] for r in vid_rows]
         meta = {}
-        if vid_ids:
+        # YouTube Data API's id= param caps at 50 IDs/call — batch through
+        # all of them instead of silently dropping metadata (title/published
+        # date/duration) for everything past the first 50.
+        for i in range(0, len(vid_ids), 50):
+            batch = vid_ids[i:i + 50]
             meta_resp = ytd.videos().list(
-                part="snippet,contentDetails", id=",".join(vid_ids[:50])
+                part="snippet,contentDetails", id=",".join(batch)
             ).execute()
-            meta = {v["id"]: v for v in meta_resp.get("items", [])}
+            meta.update({v["id"]: v for v in meta_resp.get("items", [])})
         videos = []
         for r in vid_rows:
             row = dict(zip(vid_headers, r))
             vid_id = row.get("video", "")
             m = meta.get(vid_id, {})
             snippet = m.get("snippet", {})
+            duration_sec = _parse_iso8601_duration(m.get("contentDetails", {}).get("duration", ""))
             views = int(row.get("views", 0))
             likes = int(row.get("likes", 0))
             comments = int(row.get("comments", 0))
@@ -530,6 +556,7 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
                 "comments":        comments,
                 "shares":          shares,
                 "engagement_rate": round((likes + comments + shares) / views * 100, 2) if views else 0,
+                "is_short":        duration_sec > 0 and duration_sec <= 60,
             })
         extra["top_videos"] = videos
         print(f"    top_videos: {len(videos)} videos")

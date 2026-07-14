@@ -54,18 +54,13 @@ ACCOUNT_CONFIG = {
         "label": "Cars24 Insider",
     },
     "tamil": {
-        "token_key": "YT_REFRESH_TOKEN_MALAYALAM",
-        "login_hint": "vipul.setia@cars24.com",
-        "label": "Cars24 Tamil (+ Malayalam)",
-    },
-    "malayalam2": {
-        "token_key": "YT_REFRESH_TOKEN_MALAYALAM2",
-        "login_hint": "vipul.setia@cars24.com",
-        "label": "Cars24 Malayalam",
+        "token_key": "YT_REFRESH_TOKEN_TAMIL",
+        "login_hint": "Cars24.tamil@cars24.com",
+        "label": "Cars24 Tamil",
     },
     "malayalam": {
         "token_key": "YT_REFRESH_TOKEN_MALAYALAM",
-        "login_hint": "Cars24.tamil@cars24.com",
+        "login_hint": "vipul.setia@cars24.com",
         "label": "Cars24 Malayalam",
     },
 }
@@ -73,7 +68,7 @@ ACCOUNT_CONFIG = {
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--account", default="au", choices=list(ACCOUNT_CONFIG.keys()),
-                        # au | uae | india | teambhp | insider | tamil | malayalam
+                        # au | uae | india | teambhp | insider | malayalam | tamil
                         help="Which account to authenticate")
     parser.add_argument("--email", default=None,
                         help="Google account email to pre-fill in browser login")
@@ -119,10 +114,11 @@ def main():
 
     flow = InstalledAppFlow.from_client_secrets_file(str(CREDS_FILE), SCOPES)
     server_kwargs = dict(
-        port=0,
+        port=8765,
         open_browser=True,
         authorization_prompt_message='',
-        prompt='select_account',
+        prompt='select_account consent',
+        access_type='offline',
     )
     if login_hint:
         server_kwargs["login_hint"] = login_hint
@@ -135,6 +131,11 @@ def main():
     refresh_token = creds.refresh_token
     client_id = c["client_id"]
     client_secret = c["client_secret"]
+
+    if not refresh_token:
+        print("  ✗  No refresh token returned! Google only issues one on first auth.")
+        print("     Revoke app access at https://myaccount.google.com/permissions then retry.")
+        return
 
     print(f"""
   ✓  Auth successful for {label}!

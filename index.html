@@ -3130,7 +3130,8 @@ function renderYT(containerId,key,channelName){
   if(yt.top_videos?.length){
     const vids=yt.top_videos;
     const thV='<th>Video</th><th class="nr">Value</th>';
-    const vRow=(v,valHtml)=>`<tr><td style="max-width:280px"><a href="${v.url}" target="_blank" style="color:var(--blue);font-size:12px;line-height:1.4;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:none" title="${v.title}">${v.title}</a><span style="font-size:10.5px;color:#9CA3AF">${v.published}</span></td><td class="nr"><strong>${valHtml}</strong></td></tr>`;
+    const fmtBadge=v=>v.is_short?'<span style="font-size:9.5px;font-weight:700;color:#7C3AED;background:#EDE9FE;border-radius:4px;padding:1px 5px;margin-left:5px">SHORT</span>':'<span style="font-size:9.5px;font-weight:700;color:#0891B2;background:#E0F7FA;border-radius:4px;padding:1px 5px;margin-left:5px">LONG</span>';
+    const vRow=(v,valHtml)=>`<tr><td style="max-width:280px"><a href="${v.url}" target="_blank" style="color:var(--blue);font-size:12px;line-height:1.4;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:none" title="${v.title}">${v.title}</a><span style="font-size:10.5px;color:#9CA3AF">${v.published}</span>${fmtBadge(v)}</td><td class="nr"><strong>${valHtml}</strong></td></tr>`;
     const noData='<p style="padding:20px;color:var(--grey);font-size:13px">No videos published in selected period.</p>';
     function ytTopFill(elId,selId,vf,sf){
       function render(period){
