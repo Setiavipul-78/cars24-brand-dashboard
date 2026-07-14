@@ -1832,11 +1832,21 @@ function countryGiTabHtml(prefix,cfg){
 
   <div class="g2" style="gap:10px;margin-bottom:10px;align-items:stretch">
     <div class="card" style="margin:0">
-      <div class="sh"><span class="kicker">🥧 Demand Mix</span><span class="title">${regionLabel} Scale — Demand Mix</span><span class="desc" id="${p}gi-mix-desc"></span></div>
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+        <div><span class="kicker">🥧 Demand Mix</span><span class="title">${regionLabel} Scale — Demand Mix</span><span class="desc" id="${p}gi-mix-desc"></span></div>
+        <select class="ctrl-sel" id="${p}gi-mix-period-sel"></select>
+      </div>
       <div class="cw"><canvas id="${p}chart-idx-mix"></canvas></div>
     </div>
     <div class="card" style="margin:0">
-      <div class="sh"><span class="kicker">🚀 Momentum</span><span class="title">${regionLabel} Momentum — YoY Growth</span><span class="desc" id="${p}gi-yoy-desc"></span></div>
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+        <div><span class="kicker">🚀 Momentum</span><span class="title">${regionLabel} Momentum — Growth</span><span class="desc">Compare any two months.</span></div>
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+          <select class="ctrl-sel" id="${p}gi-yoy-a-sel"></select>
+          <span style="font-size:11px;color:var(--grey)">vs</span>
+          <select class="ctrl-sel" id="${p}gi-yoy-b-sel"></select>
+        </div>
+      </div>
       <div class="cw"><canvas id="${p}chart-idx-yoy"></canvas></div>
     </div>
   </div>
@@ -1924,8 +1934,6 @@ function initCountryGiTab(prefix,paneId,gindexData,cfg){
   pane.innerHTML=countryGiTabHtml(p,{regionLabel,regionSheetGid:cfg&&cfg.regionSheetGid,nationalGid:cfg&&cfg.nationalGid,hasCategory});
   document.getElementById(p+'gi-national-desc').textContent=`Monthly index, ${first.label} – ${latest.label} (100 = all-time peak).`;
   document.getElementById(p+'gi-years-desc').textContent=`Annual mean with year-on-year growth. ${latestYear} is Jan–${latest.label.split("'")[0]} to date.`;
-  document.getElementById(p+'gi-mix-desc').textContent=`Each ${regionLabel.toLowerCase()}'s slice of branded search across all tracked ${regionLabel.toLowerCase()}s, ${latest.label}.`;
-  document.getElementById(p+'gi-yoy-desc').textContent=`${latest.label} vs same month last year.`;
 
   document.getElementById(p+'gi-kpis').innerHTML=`
     <div class="kh kh-blue"><div class="kl"><span class="ki">📡</span>Latest Index (${latest.label})</div><div class="kv">${fIdx(latest.Cars24)}</div><div class="ks">${isAtPeak?'⭐ All-time peak':'Below peak'} · ${fPct(sinceStartPct)} since ${first.label}</div></div>
@@ -1997,10 +2005,44 @@ function initCountryGiTab(prefix,paneId,gindexData,cfg){
   idxMatrixPeakSel.addEventListener('change',renderIdxMatrix);
   renderIdxMatrix();
 
-  const mixSorted=[...regionStats].sort((a,b)=>(b.demandMix||0)-(a.demandMix||0));
-  charts[p+'idxMix']=new Chart(document.getElementById(p+'chart-idx-mix').getContext('2d'),{type:'bar',data:{labels:mixSorted.map(r=>r.rk),datasets:[{data:mixSorted.map(r=>r.demandMix),backgroundColor:mixSorted.map((_,i)=>REGION_PALETTE[i%REGION_PALETTE.length]),borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
-  const yoySorted=[...regionStats].filter(r=>r.yoy!=null).sort((a,b)=>b.yoy-a.yoy);
-  charts[p+'idxYoy']=new Chart(document.getElementById(p+'chart-idx-yoy').getContext('2d'),{type:'bar',data:{labels:yoySorted.map(r=>r.rk),datasets:[{data:yoySorted.map(r=>r.yoy),backgroundColor:yoySorted.map(r=>r.yoy>=0?'#4736FE':'#E7000B'),borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
+  function regionIdxAt(rk,m){const r=(regions[rk]||[]).find(x=>x.month===m);return r?r.index:null;}
+  const allRegionMonths=[...new Set(regionKeys.flatMap(rk=>(regions[rk]||[]).map(r=>r.month)))].sort();
+  const regionMonthLabel={};
+  regionKeys.forEach(rk=>(regions[rk]||[]).forEach(r=>{if(!regionMonthLabel[r.month])regionMonthLabel[r.month]=r.label;}));
+
+  function paintMix(m){
+    const vals=regionKeys.map(rk=>({rk,v:regionIdxAt(rk,m)}));
+    const sum=vals.reduce((s,x)=>s+(x.v||0),0);
+    const mixSorted=vals.map(x=>({rk:x.rk,mix:(sum>0&&x.v!=null)?x.v/sum*100:null})).filter(x=>x.mix!=null).sort((a,b)=>b.mix-a.mix);
+    if(charts[p+'idxMix'])charts[p+'idxMix'].destroy();
+    charts[p+'idxMix']=new Chart(document.getElementById(p+'chart-idx-mix').getContext('2d'),{type:'bar',data:{labels:mixSorted.map(r=>r.rk),datasets:[{data:mixSorted.map(r=>r.mix),backgroundColor:mixSorted.map((_,i)=>REGION_PALETTE[i%REGION_PALETTE.length]),borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
+  }
+  function paintYoy(mA,mB){
+    const growSorted=regionKeys.map(rk=>{
+      const a=regionIdxAt(rk,mA),b=regionIdxAt(rk,mB);
+      const g=(a!=null&&b)?(a-b)/b*100:null;
+      return{rk,g};
+    }).filter(x=>x.g!=null).sort((a,b)=>b.g-a.g);
+    if(charts[p+'idxYoy'])charts[p+'idxYoy'].destroy();
+    charts[p+'idxYoy']=new Chart(document.getElementById(p+'chart-idx-yoy').getContext('2d'),{type:'bar',data:{labels:growSorted.map(r=>r.rk),datasets:[{data:growSorted.map(r=>r.g),backgroundColor:growSorted.map(r=>r.g>=0?'#4736FE':'#E7000B'),borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
+  }
+  function updateMixDesc(m){document.getElementById(p+'gi-mix-desc').textContent=`Each ${regionLabel.toLowerCase()}'s slice of branded search across all tracked ${regionLabel.toLowerCase()}s, ${regionMonthLabel[m]||m}.`;}
+  const giMixSel=document.getElementById(p+'gi-mix-period-sel');
+  giMixSel.innerHTML=allRegionMonths.slice().reverse().map((m,i)=>`<option value="${m}"${i===0?' selected':''}>${regionMonthLabel[m]||m}${i===0?' (latest)':''}</option>`).join('');
+  giMixSel.addEventListener('change',()=>{updateMixDesc(giMixSel.value);paintMix(giMixSel.value);});
+  updateMixDesc(allRegionMonths[allRegionMonths.length-1]);
+  paintMix(allRegionMonths[allRegionMonths.length-1]);
+
+  const yoyASel=document.getElementById(p+'gi-yoy-a-sel'),yoyBSel=document.getElementById(p+'gi-yoy-b-sel');
+  const monthOpts=allRegionMonths.slice().reverse().map(m=>`<option value="${m}">${regionMonthLabel[m]||m}</option>`).join('');
+  yoyASel.innerHTML=monthOpts;yoyBSel.innerHTML=monthOpts;
+  const yoyDefaultA=allRegionMonths[allRegionMonths.length-1];
+  const yoyDefaultBIdx=allRegionMonths.length-13;
+  const yoyDefaultB=yoyDefaultBIdx>=0?allRegionMonths[yoyDefaultBIdx]:allRegionMonths[0];
+  yoyASel.value=yoyDefaultA;yoyBSel.value=yoyDefaultB;
+  yoyASel.addEventListener('change',()=>paintYoy(yoyASel.value,yoyBSel.value));
+  yoyBSel.addEventListener('change',()=>paintYoy(yoyASel.value,yoyBSel.value));
+  paintYoy(yoyDefaultA,yoyDefaultB);
 
   let sortKey='index',sortDir=-1;
   function renderIdxDetail(){
@@ -2581,11 +2623,21 @@ function initTab4(){
 
     <div class="g2" style="gap:10px;margin-bottom:10px;align-items:stretch">
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">🥧 Demand Mix</span><span class="title">City Scale — Demand Mix</span><span class="desc">Each city's slice of branded search across all tracked cities, ${latest.label}.</span></div>
+        <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+          <div><span class="kicker">🥧 Demand Mix</span><span class="title">City Scale — Demand Mix</span><span class="desc" id="gi-mix-desc"></span></div>
+          <select class="ctrl-sel" id="gi-mix-period-sel"></select>
+        </div>
         <div class="cw"><canvas id="chart-idx-mix"></canvas></div>
       </div>
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">🚀 Momentum</span><span class="title">City Momentum — YoY Growth</span><span class="desc">${latest.label} vs same month last year.</span></div>
+        <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+          <div><span class="kicker">🚀 Momentum</span><span class="title">City Momentum — Growth</span><span class="desc">Compare any two months.</span></div>
+          <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+            <select class="ctrl-sel" id="gi-yoy-a-sel"></select>
+            <span style="font-size:11px;color:var(--grey)">vs</span>
+            <select class="ctrl-sel" id="gi-yoy-b-sel"></select>
+          </div>
+        </div>
         <div class="cw"><canvas id="chart-idx-yoy"></canvas></div>
       </div>
     </div>
@@ -2709,11 +2761,43 @@ function initTab4(){
   idxMatrixPeakSel.addEventListener('change',renderIdxMatrix);
   renderIdxMatrix();
 
-  // ── Demand mix + YoY momentum charts ──
-  const mixSorted=[...cityStats].sort((a,b)=>(b.demandMix||0)-(a.demandMix||0));
-  charts.idxMix=new Chart(document.getElementById('chart-idx-mix').getContext('2d'),{type:'bar',data:{labels:mixSorted.map(c=>c.city),datasets:[{data:mixSorted.map(c=>c.demandMix),backgroundColor:mixSorted.map(c=>TIER_CLR[c.tier]||'#999'),borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
-  const yoySorted=[...cityStats].filter(c=>c.yoy!=null).sort((a,b)=>b.yoy-a.yoy);
-  charts.idxYoy=new Chart(document.getElementById('chart-idx-yoy').getContext('2d'),{type:'bar',data:{labels:yoySorted.map(c=>c.city),datasets:[{data:yoySorted.map(c=>c.yoy),backgroundColor:yoySorted.map(c=>c.yoy>=0?'#4736FE':'#E7000B'),borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
+  // ── Demand mix + momentum charts — comparison filters (any month for mix,
+  // any two months for growth) instead of being locked to the latest month ──
+  function cityIdxAt(city,m){const r=(cityBrand[city]||[]).find(x=>x.month===m);return r?r.index:null;}
+
+  function paintCityMix(m){
+    const vals=cities.map(city=>({city,tier:tiers[city]||'—',v:cityIdxAt(city,m)}));
+    const sum=vals.reduce((s,x)=>s+(x.v||0),0);
+    const mixSorted=vals.map(x=>({city:x.city,tier:x.tier,mix:(sum>0&&x.v!=null)?x.v/sum*100:null})).filter(x=>x.mix!=null).sort((a,b)=>b.mix-a.mix);
+    if(charts.idxMix)charts.idxMix.destroy();
+    charts.idxMix=new Chart(document.getElementById('chart-idx-mix').getContext('2d'),{type:'bar',data:{labels:mixSorted.map(c=>c.city),datasets:[{data:mixSorted.map(c=>c.mix),backgroundColor:mixSorted.map(c=>TIER_CLR[c.tier]||'#999'),borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
+  }
+  function paintCityGrowth(mA,mB){
+    const growSorted=cities.map(city=>{
+      const a=cityIdxAt(city,mA),b=cityIdxAt(city,mB);
+      const g=(a!=null&&b)?(a-b)/b*100:null;
+      return{city,g};
+    }).filter(x=>x.g!=null).sort((a,b)=>b.g-a.g);
+    if(charts.idxYoy)charts.idxYoy.destroy();
+    charts.idxYoy=new Chart(document.getElementById('chart-idx-yoy').getContext('2d'),{type:'bar',data:{labels:growSorted.map(c=>c.city),datasets:[{data:growSorted.map(c=>c.g),backgroundColor:growSorted.map(c=>c.g>=0?'#4736FE':'#E7000B'),borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>v+'%'},grid:{color:'#E5E3F8'}},y:{grid:{display:false}}}}});
+  }
+  function updateCityMixDesc(m){document.getElementById('gi-mix-desc').textContent=`Each city's slice of branded search across all tracked cities, ${mLabelGi[m]||m}.`;}
+  const giMixSel=document.getElementById('gi-mix-period-sel');
+  giMixSel.innerHTML=allGiMonths.slice().reverse().map((m,i)=>`<option value="${m}"${i===0?' selected':''}>${mLabelGi[m]||m}${i===0?' (latest)':''}</option>`).join('');
+  giMixSel.addEventListener('change',()=>{updateCityMixDesc(giMixSel.value);paintCityMix(giMixSel.value);});
+  updateCityMixDesc(allGiMonths[allGiMonths.length-1]);
+  paintCityMix(allGiMonths[allGiMonths.length-1]);
+
+  const giYoyASel=document.getElementById('gi-yoy-a-sel'),giYoyBSel=document.getElementById('gi-yoy-b-sel');
+  const giMonthOpts=allGiMonths.slice().reverse().map(m=>`<option value="${m}">${mLabelGi[m]||m}</option>`).join('');
+  giYoyASel.innerHTML=giMonthOpts;giYoyBSel.innerHTML=giMonthOpts;
+  const giYoyDefaultA=allGiMonths[allGiMonths.length-1];
+  const giYoyDefaultBIdx=allGiMonths.length-13;
+  const giYoyDefaultB=giYoyDefaultBIdx>=0?allGiMonths[giYoyDefaultBIdx]:allGiMonths[0];
+  giYoyASel.value=giYoyDefaultA;giYoyBSel.value=giYoyDefaultB;
+  giYoyASel.addEventListener('change',()=>paintCityGrowth(giYoyASel.value,giYoyBSel.value));
+  giYoyBSel.addEventListener('change',()=>paintCityGrowth(giYoyASel.value,giYoyBSel.value));
+  paintCityGrowth(giYoyDefaultA,giYoyDefaultB);
 
   // ── Sortable city detail table ──
   let sortKey='index',sortDir=-1;
