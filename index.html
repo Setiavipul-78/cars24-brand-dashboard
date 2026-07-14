@@ -776,17 +776,19 @@ const csvBtnAttached=new WeakSet();
 function attachCsvButton(twEl){
   if(csvBtnAttached.has(twEl))return;
   // A .tw can now sit nested one level deeper inside a .g2 table+chart grid
-  // (side-by-side layout) rather than directly after .card-actions — check
-  // the grid wrapper's previous sibling too in that case.
-  const priorSibling=twEl.previousElementSibling||(twEl.parentElement?.classList.contains('g2')?twEl.parentElement.previousElementSibling:null);
-  if(priorSibling?.classList?.contains('card-actions'))return;
+  // (side-by-side layout) rather than directly after .card-actions. Anchor
+  // on the .g2 itself when present, both for the "already has a button"
+  // check AND for where a new one gets inserted — inserting inside the
+  // grid would add a 3rd child and break the intended 2-column layout.
+  const anchor=twEl.parentElement?.classList.contains('g2')?twEl.parentElement:twEl;
+  if(anchor.previousElementSibling?.classList?.contains('card-actions'))return;
   const id=twEl.id;if(!id)return;
   csvBtnAttached.add(twEl);
   const div=document.createElement('div');
   div.className='card-actions';
   const fname=id.replace(/[^a-z0-9]+/gi,'_').toLowerCase()+'.csv';
   div.innerHTML=`<button class="card-act-btn" type="button" onclick="downloadTableCSV('${id}','${fname}')">⬇ CSV</button>`;
-  twEl.parentNode.insertBefore(div,twEl);
+  anchor.parentNode.insertBefore(div,anchor);
 }
 function scanTw(scopeEl){
   (scopeEl||document).querySelectorAll('.tw[id]').forEach(attachCsvButton);
@@ -1845,7 +1847,11 @@ function initCountryGiTab(prefix,paneId,gindexData,cfg){
   const fPct=v=>v==null?'—':(v>0?'+':'')+v.toFixed(1)+'%';
   const REGION_PALETTE=['#4736FE','#E91E8C','#FF6B6B','#F97316','#059669','#7C3AED','#0EA5E9','#EAB308','#DC2626','#0891B2','#84CC16','#D946EF','#F43F5E','#14B8A6','#8B5CF6','#EA580C','#65A30D','#06B6D4'];
 
-  const latest=giM[giM.length-1],first=giM[0];
+  // A trailing month can exist as a row (e.g. Category already filled in)
+  // before Cars24's own index has been entered for it yet — "latest" should
+  // mean the latest month with real Cars24 data, not just the latest row.
+  const giMHasData=giM.filter(r=>r.Cars24!=null);
+  const latest=giMHasData[giMHasData.length-1]||giM[giM.length-1],first=giMHasData[0]||giM[0];
   const allTimeMax=Math.max(...giM.map(r=>r.Cars24).filter(v=>v!=null));
   const isAtPeak=latest.Cars24===allTimeMax;
   const sinceStartPct=first.Cars24?(latest.Cars24-first.Cars24)/first.Cars24*100:null;
@@ -2349,7 +2355,11 @@ function initTab4(){
   const TIER_CLR={P0:'#4736FE',P1:'#059669',P2:'#F97316'};
 
   // ── National-level computed metrics ──
-  const latest=giM[giM.length-1],first=giM[0];
+  // A trailing month can exist as a row (e.g. Category already filled in)
+  // before Cars24's own index has been entered for it yet — "latest" should
+  // mean the latest month with real Cars24 data, not just the latest row.
+  const giMHasData=giM.filter(r=>r.Cars24!=null);
+  const latest=giMHasData[giMHasData.length-1]||giM[giM.length-1],first=giMHasData[0]||giM[0];
   const allTimeMax=Math.max(...giM.map(r=>r.Cars24).filter(v=>v!=null));
   const isAtPeak=latest.Cars24===allTimeMax;
   const sinceStartPct=first.Cars24?(latest.Cars24-first.Cars24)/first.Cars24*100:null;
@@ -3950,7 +3960,11 @@ async function initUAEInf(){
       const cost   =money(gv(row,'avg_views')||gv(row,'creator_cost_aed')||gv(row,'cost'));
       const month  =String(gv(row,'live_month')||gv(row,'month')||'').trim();
       const link   =gv(row,'video_live_link')||gv(row,'post_url')||gv(row,'url')||'';
-      const moNum  =MO[month.toLowerCase()]||0;
+      // month is "March 2026" — MO only maps bare month names, so it must be
+      // split from the year first, else every row collapses to moNum=0
+      // (MO["march 2026"] is undefined) and all months merge into one bucket.
+      const [moNameRaw,moYearRaw]=month.toLowerCase().split(' ');
+      const moNum  =(parseInt(moYearRaw,10)||0)*100+(MO[moNameRaw]||0);
       const eng    =views>0?((likes+comments+saves)/views*100):null;
       const cpv    =views>0&&cost>0?(cost/views):null;
       return name?{name,views,likes,comments,shares,saves,cost,month,link,moNum,eng,cpv}:null;
