@@ -22,6 +22,14 @@ def sf(v):
     except (TypeError, ValueError):
         return None
 
+def ss(v):
+    """Safe string: return None for NaN/None (an empty CSV cell in an
+    otherwise-string column reads back as float('nan'), which json.dump
+    writes as a bare, non-standard NaN literal — invalid JSON), else str(v)."""
+    if v is None: return None
+    if isinstance(v, float) and math.isnan(v): return None
+    return str(v)
+
 def pct_ch(curr, prev):
     if prev is None or curr is None or prev == 0: return None
     try: return round((curr - prev) / abs(prev) * 100, 2)
@@ -947,8 +955,8 @@ def build_influencers_au():
 
     month_key = pd.to_datetime(df["month"], format="%B %Y").dt.strftime("%Y-%m")
     df = df.assign(month_key=month_key)
-    rows = [{"month": r.month_key, "label": mlabel(r.month_key), "creator": r.creator,
-             "followers": r.followers, "video_link": r.video_link, "status": r.status,
+    rows = [{"month": r.month_key, "label": mlabel(r.month_key), "creator": ss(r.creator),
+             "followers": ss(r.followers), "video_link": ss(r.video_link), "status": ss(r.status),
              "views": sf(r.views)}
             for r in df.itertuples()]
 
@@ -969,9 +977,9 @@ def build_influencers_au():
     if cp.exists():
         cdf = pd.read_csv(cp)
         creators = [{
-            "platform": r.platform, "category": r.category, "creator": r.creator,
-            "followers": r.followers, "link": r.link,
-            "recent_views": sf(r.recent_views), "status": r.status,
+            "platform": ss(r.platform), "category": ss(r.category), "creator": ss(r.creator),
+            "followers": ss(r.followers), "link": ss(r.link),
+            "recent_views": sf(r.recent_views), "status": ss(r.status),
             "cost_aud": sf(r.cost_aud), "cpv_aud": sf(r.cpv_aud),
         } for r in cdf.itertuples()]
 
