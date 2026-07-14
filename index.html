@@ -684,8 +684,16 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
 const BC={Cars24:'#4736FE',Spinny:'#E91E8C',CarWale:'#FF6B6B',Cardekho:'#F97316',MFC:'#7C3AED',MTV:'#059669',OLX:'#0EA5E9',Autotrader:'#F59E0B',Carma:'#7C3AED',Carsales:'#FF4F01',Easyauto123:'#059669',AlbaCars:'#14B8A6',Automall:'#EAB308',Dubizzle:'#DC2626',Kavak:'#84CC16',RMAMotors:'#D946EF'};
 const GSC_URL='https://search.google.com/search-console/performance/search-analytics?resource_id='+encodeURIComponent('https://www.cars24.com/')+'&metrics=IMPRESSIONS&breakdown=date&time_granularity=MONTH&country=ind&query='+encodeURIComponent('~car 24|cars24|cars 24| 24 car|cara 24|carz 24|card24|car24|24 cars');
 const GI_SHEET='https://docs.google.com/spreadsheets/d/1d3umTUBQ1vKWzbhfdVr88kr8Stpn832V1mCSkfjQ51A/edit';
+const BSOS_SHEET_UAE='https://docs.google.com/spreadsheets/d/1XrDtorf_obSYex1NSuSXcoawbfneuTi1JxVLxlmA8rw/edit';
+const BSOS_SHEET_AUS='https://docs.google.com/spreadsheets/d/1oXgpR60cC22qQOzjMS1-n-LCXMXDC1TzE8JH8OCeDvA/edit';
+const BSOS_GIDS_UAE={monthly:38589749,weekly:1728471007,daily:1692430578};
+const BSOS_GIDS_AUS={monthly:1193590955,weekly:131010752};
 const AED_TO_INR=23.3; // approx market rate — all UAE influencer spend/CPV figures are shown converted to INR
 const AUD_TO_INR=56.5; // approx market rate — for AU influencer spend/CPV figures once that tab is connected
+const AU_INF_SHEET='https://docs.google.com/spreadsheets/d/1VDcKBUNwFacleZFdN_By-qAeroheo3mlqOItat1ZQM8/edit';
+const AU_INF_GIDS={poa:713202607,reachouts:87462823};
+const UAE_INF_SHEET='https://docs.google.com/spreadsheets/d/1_DEKX02I3Dh41B8nBtwPR1G-_4nt98WgDILZjzg3sp4/edit';
+const UAE_INF_GID=211709974;
 const BN={Cars24:'Cars24',Spinny:'Spinny',CarWale:'CarWale',Cardekho:'CarDekho',MFC:'Mahindra First Choice',MTV:'Maruti True Value',OLX:'OLX Auto',Autotrader:'Autotrader',Carma:'Carma',Carsales:'carsales.com',Easyauto123:'EasyAuto123',AlbaCars:'Alba Cars',Automall:'Automall',Dubizzle:'Dubizzle',Kavak:'Kavak',RMAMotors:'RMA Motors'};
 const CC=['#4736FE','#00C951','#FF4F01','#E91E8C','#F59E0B','#7C3AED','#0EA5E9','#059669','#FF6B6B','#9CA3AF'];
 
@@ -1236,7 +1244,8 @@ function initCountryKeywordsTab(prefix,paneId,gscSiteUrl,kwData){
 // vs-the-actual-market-leader per country (gapBrand) since Spinny doesn't exist
 // outside India's competitor set.
 function countrySosTabHtml(prefix,cfg){
-  const p=prefix,{hasDaily,hasRegions,regionLabel,gapBrand}=cfg;
+  const p=prefix,{hasDaily,hasRegions,regionLabel,gapBrand,bsosSheetUrl,bsosGids}=cfg;
+  const sheetLink=gid=>bsosSheetUrl?`<a class="card-act-btn" href="${bsosSheetUrl}?gid=${gid}#gid=${gid}" target="_blank" rel="noopener">📄 View sheet</a>`:'';
   return `
   <div class="g4" id="${p}sos-kpis"></div>
 
@@ -1259,7 +1268,7 @@ function countrySosTabHtml(prefix,cfg){
         </div>
       </div>
     </div>
-    <div class="card-actions"><button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-comp','sos_monthly_benchmark.csv')">⬇ CSV</button></div>
+    <div class="card-actions">${sheetLink(bsosGids?.monthly)}<button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-comp','sos_monthly_benchmark.csv')">⬇ CSV</button></div>
     <div class="tw" id="${p}tbl-comp" style="margin-bottom:10px"></div>
     <div class="cw"><canvas id="${p}chart-sos"></canvas></div>
   </div>
@@ -1280,7 +1289,7 @@ function countrySosTabHtml(prefix,cfg){
         </div>
       </div>
     </div>
-    <div class="card-actions"><button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-sos-gran','sos_granular.csv')">⬇ CSV</button></div>
+    <div class="card-actions">${sheetLink(bsosGids?.weekly)}<button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-sos-gran','sos_granular.csv')">⬇ CSV</button></div>
     <div class="tw" id="${p}tbl-sos-gran" style="margin-bottom:10px"></div>
     <div class="cw"><canvas id="${p}chart-sos-gran"></canvas></div>
   </div>
@@ -1303,7 +1312,7 @@ function countrySosTabHtml(prefix,cfg){
         </div>
       </div>
     </div>
-    <div class="card-actions"><button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-region-growth','sos_region_growth.csv')">⬇ CSV</button></div>
+    <div class="card-actions">${sheetLink(bsosGids?.monthly)}<button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-region-growth','sos_region_growth.csv')">⬇ CSV</button></div>
     <div class="tw tbl-compact" id="${p}tbl-region-growth" style="margin-bottom:10px"></div>
     <div class="fb"><span class="fl">${regionLabel}s</span><div class="ms-dd" id="${p}ms-region-growth"></div></div>
     <div class="cw"><canvas id="${p}chart-region-growth"></canvas></div>
@@ -1325,7 +1334,7 @@ function countrySosTabHtml(prefix,cfg){
         </div>
       </div>
     </div>
-    <div class="card-actions"><button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-region-snap','sos_region_battle.csv')">⬇ CSV</button></div>
+    <div class="card-actions">${sheetLink(bsosGids?.monthly)}<button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-region-snap','sos_region_battle.csv')">⬇ CSV</button></div>
     <div class="tw" id="${p}tbl-region-snap" style="margin-bottom:10px"></div>
     <div class="fb"><span class="fl">${regionLabel}s</span><div class="ms-dd" id="${p}ms-region-battle"></div></div>
     <div class="cw"><canvas id="${p}chart-region-battle"></canvas></div>
@@ -1347,7 +1356,7 @@ function initCountrySosTab(prefix,paneId,bsosData,cfg){
   const gapBrand=rankedRivals[0],secondBrand=rankedRivals[1];
   const compPool=brands.filter(b=>b!=='Cars24');
 
-  pane.innerHTML=countrySosTabHtml(p,{hasDaily,hasRegions,regionLabel,gapBrand});
+  pane.innerHTML=countrySosTabHtml(p,{hasDaily,hasRegions,regionLabel,gapBrand,bsosSheetUrl:cfg&&cfg.bsosSheetUrl,bsosGids:cfg&&cfg.bsosGids});
 
   // ── KPI strip ──
   const rankAll=[...brands].sort((a,b)=>(lat[b]||0)-(lat[a]||0));
@@ -1611,8 +1620,8 @@ function initCountrySosTab(prefix,paneId,bsosData,cfg){
   activateRegionGranularity('month');
 }
 
-function initCountryBsosTab(prefix,paneId,bsosData,regionLabel){
-  initCountrySosTab(prefix,paneId,bsosData,{regionLabel});
+function initCountryBsosTab(prefix,paneId,bsosData,regionLabel,bsosSheetUrl,bsosGids){
+  initCountrySosTab(prefix,paneId,bsosData,{regionLabel,bsosSheetUrl,bsosGids});
 }
 
 // ── Shared table+chart for a single index series (Cars24 national/pan
@@ -1758,7 +1767,8 @@ function renderGiVsGscCompare(cfg){
 // (Brand vs Category, Brand vs Generic) since AU/UAE's Google Index data has
 // no category/generic series at all — those were never fetched for them.
 function countryGiTabHtml(prefix,cfg){
-  const p=prefix,regionLabel=(cfg&&cfg.regionLabel)||'Region',regionGid=cfg&&cfg.regionSheetGid;
+  const p=prefix,regionLabel=(cfg&&cfg.regionLabel)||'Region',regionGid=cfg&&cfg.regionSheetGid,nationalGid=cfg&&cfg.nationalGid;
+  const natSheetLink=nationalGid?`<a class="card-act-btn" href="${GI_SHEET}?gid=${nationalGid}#gid=${nationalGid}" target="_blank" rel="noopener">📄 View sheet</a>`:'';
   return `
   <div class="g4" id="${p}gi-kpis"></div>
 
@@ -1768,7 +1778,7 @@ function countryGiTabHtml(prefix,cfg){
       <select class="ctrl-sel" id="${p}gi-vs-gsc-period-sel"></select>
     </div>
     <p id="${p}gi-vs-gsc-insight" style="font-size:12.5px;color:var(--ink-2);background:var(--mint-lt);border-left:3px solid var(--mint);border-radius:6px;padding:8px 12px;margin:0 0 10px"></p>
-    <div class="card-actions"><button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-gi-vs-gsc','gindex_vs_gsc.csv')">⬇ CSV</button></div>
+    <div class="card-actions">${natSheetLink}<button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-gi-vs-gsc','gindex_vs_gsc.csv')">⬇ CSV</button></div>
     <div class="g2" style="gap:10px;margin-bottom:0;height:280px">
       <div class="tw tbl-compact" id="${p}tbl-gi-vs-gsc" style="max-height:280px"></div>
       <div class="cw"><canvas id="${p}chart-gi-vs-gsc"></canvas></div>
@@ -1790,7 +1800,7 @@ function countryGiTabHtml(prefix,cfg){
         </div>
       </div>
     </div>
-    <div class="card-actions"><button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-gi-national','branded_search_national.csv')">⬇ CSV</button></div>
+    <div class="card-actions">${natSheetLink}<button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-gi-national','branded_search_national.csv')">⬇ CSV</button></div>
     <div class="g2" style="gap:10px;margin-bottom:0;height:280px">
       <div class="tw tbl-compact" id="${p}tbl-gi-national" style="max-height:280px"></div>
       <div class="cw"><canvas id="${p}chart-idx-national"></canvas></div>
@@ -1799,6 +1809,7 @@ function countryGiTabHtml(prefix,cfg){
 
   <div class="card">
     <div class="sh"><span class="kicker">📅 Calendar Year</span><span class="title">Annual Average Index</span><span class="desc" id="${p}gi-years-desc"></span></div>
+    <div class="card-actions">${natSheetLink}<button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-idx-years','branded_search_annual.csv')">⬇ CSV</button></div>
     <div class="g2" style="gap:10px;margin-bottom:0;height:280px">
       <div class="tw tbl-compact" id="${p}tbl-idx-years" style="max-height:280px"></div>
       <div class="cw"><canvas id="${p}chart-idx-years"></canvas></div>
@@ -1889,7 +1900,7 @@ function initCountryGiTab(prefix,paneId,gindexData,cfg){
   const priorYtdGrowth=yearAvgs.length>1?yearAvgs[yearAvgs.length-2].yoyPct:null;
   const ytdTrend=(ytdGrowth!=null&&priorYtdGrowth!=null)?(ytdGrowth>=priorYtdGrowth?'re-accelerating':'decelerating'):'';
 
-  pane.innerHTML=countryGiTabHtml(p,{regionLabel,regionSheetGid:cfg&&cfg.regionSheetGid});
+  pane.innerHTML=countryGiTabHtml(p,{regionLabel,regionSheetGid:cfg&&cfg.regionSheetGid,nationalGid:cfg&&cfg.nationalGid});
   document.getElementById(p+'gi-national-desc').textContent=`Monthly index, ${first.label} – ${latest.label} (100 = all-time peak).`;
   document.getElementById(p+'gi-years-desc').textContent=`Annual mean with year-on-year growth. ${latestYear} is Jan–${latest.label.split("'")[0]} to date.`;
   document.getElementById(p+'gi-mix-desc').textContent=`Each ${regionLabel.toLowerCase()}'s slice of branded search across all tracked ${regionLabel.toLowerCase()}s, ${latest.label}.`;
@@ -1986,8 +1997,8 @@ function initCountryGiTab(prefix,paneId,gindexData,cfg){
   renderIdxDetail();
 }
 
-function initCountryGindexTab(prefix,paneId,gindexData,regionLabel,regionSheetGid,gscMonthly,countryLabel){
-  initCountryGiTab(prefix,paneId,gindexData,{regionLabel,regionSheetGid,gscMonthly,countryLabel});
+function initCountryGindexTab(prefix,paneId,gindexData,regionLabel,regionSheetGid,gscMonthly,countryLabel,nationalGid){
+  initCountryGiTab(prefix,paneId,gindexData,{regionLabel,regionSheetGid,gscMonthly,countryLabel,nationalGid});
 }
 
 // ── Shared by India's SoS tab and country-level SoS tabs (gapBrand parametrized:
@@ -2440,6 +2451,7 @@ function initTab4(){
 
     <div class="card">
       <div class="sh"><span class="kicker">📅 Calendar Year</span><span class="title">Annual Average Index</span><span class="desc">Annual mean with year-on-year growth. ${latestYear} is Jan–${latest.label.split("'")[0]} to date.</span></div>
+      <div class="card-actions"><a class="card-act-btn" href="${GI_SHEET}?gid=0#gid=0" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('tbl-idx-years','india_branded_search_annual.csv')">⬇ CSV</button></div>
       <div class="g2" style="gap:10px;margin-bottom:0;height:280px">
         <div class="tw tbl-compact" id="tbl-idx-years" style="max-height:280px"></div>
         <div class="cw"><canvas id="chart-idx-years"></canvas></div>
@@ -3803,22 +3815,26 @@ function initAUInf(){
 
     ${inf.creators?.length?`<div class="card">
       <div class="sh"><span class="kicker">🎯 Creator Partnerships</span><span class="title">Agreed Deals</span><span class="desc">Negotiated cost + CPV, based on estimated reach. Status reflects where the deal stands.</span></div>
+      <div class="card-actions"><a class="card-act-btn" href="${AU_INF_SHEET}?gid=${AU_INF_GIDS.reachouts}#gid=${AU_INF_GIDS.reachouts}" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('au-inf-creators-tbl','au_influencer_creators.csv')">⬇ CSV</button></div>
       <div class="tw" id="au-inf-creators-tbl"></div>
     </div>`:''}
 
     <div class="card">
       <div class="sh"><span class="kicker">📈 Monthly trend</span><span class="title">Views Over Time</span><span class="desc">Total influencer views per month across all AU campaigns.</span></div>
+      <div class="card-actions"><a class="card-act-btn" href="${AU_INF_SHEET}?gid=${AU_INF_GIDS.poa}#gid=${AU_INF_GIDS.poa}" target="_blank" rel="noopener">📄 View sheet</a></div>
       <div class="cw tall"><canvas id="au-inf-chart-trend"></canvas></div>
     </div>
 
     <div class="card">
       <div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance Table</span><span class="desc">Posts, views, spend and blended CPV per month.</span></div>
+      <div class="card-actions"><a class="card-act-btn" href="${AU_INF_SHEET}?gid=${AU_INF_GIDS.poa}#gid=${AU_INF_GIDS.poa}" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('au-inf-mom-tbl','au_influencer_monthly.csv')">⬇ CSV</button></div>
       <div class="tw" id="au-inf-mom-tbl"></div>
     </div>
 
     <div class="g2" style="margin-bottom:0">
       <div class="card" style="margin:0">
         <div class="sh"><span class="kicker">🏆 Top creators</span><span class="title">Top 10 by Views</span></div>
+        <div class="card-actions"><a class="card-act-btn" href="${AU_INF_SHEET}?gid=${AU_INF_GIDS.poa}#gid=${AU_INF_GIDS.poa}" target="_blank" rel="noopener">📄 View sheet</a></div>
         <div class="tw" id="au-inf-top-views"></div>
       </div>
       <div class="card" style="margin:0">
@@ -4028,17 +4044,20 @@ async function initUAEInf(){
 
     <div class="card">
       <div class="sh"><span class="kicker">📈 Monthly trend</span><span class="title">Views Over Time</span><span class="desc">Total influencer views per month across all UAE campaigns.</span></div>
+      <div class="card-actions"><a class="card-act-btn" href="${UAE_INF_SHEET}?gid=${UAE_INF_GID}#gid=${UAE_INF_GID}" target="_blank" rel="noopener">📄 View sheet</a></div>
       <div class="cw tall"><canvas id="uae-inf-chart-trend"></canvas></div>
     </div>
 
     <div class="card">
       <div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance Table</span><span class="desc">Views, likes, comments, spend and blended CPV per month.</span></div>
+      <div class="card-actions"><a class="card-act-btn" href="${UAE_INF_SHEET}?gid=${UAE_INF_GID}#gid=${UAE_INF_GID}" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('uae-inf-mom-tbl','uae_influencer_monthly.csv')">⬇ CSV</button></div>
       <div class="tw" id="uae-inf-mom-tbl"></div>
     </div>
 
     <div class="g2" style="margin-bottom:0">
       <div class="card" style="margin:0">
         <div class="sh"><span class="kicker">🏆 Top creators</span><span class="title">Top 10 by Views</span></div>
+        <div class="card-actions"><a class="card-act-btn" href="${UAE_INF_SHEET}?gid=${UAE_INF_GID}#gid=${UAE_INF_GID}" target="_blank" rel="noopener">📄 View sheet</a></div>
         <div class="tw" id="uae-inf-top-views"></div>
       </div>
       <div class="card" style="margin:0">
@@ -4050,10 +4069,12 @@ async function initUAEInf(){
     <div class="g2" style="margin-top:14px">
       <div class="card" style="margin:0">
         <div class="sh"><span class="kicker">⚡ Best engagement</span><span class="title">Top 10 by Engagement Rate</span><span class="desc">(likes + comments + saves) ÷ views</span></div>
+        <div class="card-actions"><a class="card-act-btn" href="${UAE_INF_SHEET}?gid=${UAE_INF_GID}#gid=${UAE_INF_GID}" target="_blank" rel="noopener">📄 View sheet</a></div>
         <div class="tw" id="uae-inf-top-eng"></div>
       </div>
       <div class="card" style="margin:0">
         <div class="sh"><span class="kicker">💰 Lowest CPV</span><span class="title">Top 10 Most Efficient Creators</span><span class="desc">Lowest CPV (min 5K views)</span></div>
+        <div class="card-actions"><a class="card-act-btn" href="${UAE_INF_SHEET}?gid=${UAE_INF_GID}#gid=${UAE_INF_GID}" target="_blank" rel="noopener">📄 View sheet</a></div>
         <div class="tw" id="uae-inf-low-cpv"></div>
       </div>
     </div>`;
@@ -4174,10 +4195,10 @@ async function initUAEInf(){
 const lazyInit={kw:initTab2,bsos:initTab3,gi:initTab4,inf:initInf,yt:initYT,ig:initIG,li:initLI,'au-inf':initAUInf,'uae-inf':initUAEInf,'au-ig':()=>renderIG('igc-au','cars24_au','Cars24 Australia'),'uae-ig':()=>renderIG('igc-uae','cars24_uae','Cars24 UAE'),'yt-tamil':()=>renderYT('ytc-tamil','cars24_tamil','Cars24 Tamil'),
   'au-kw':()=>initCountryKeywordsTab('au-','au-kw','https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Acars24.com.au&metrics=IMPRESSIONS&breakdown=date&time_granularity=MONTH&country=aus&query=~car%2024%7Ccars24%7Ccars%2024%7C%2024%20car%7Ccara%2024%7Ccarz%2024%7Ccard24%7Ccar24%7C24%20cars',D.gsc_au?.keywords),
   'uae-kw':()=>initCountryKeywordsTab('uae-','uae-kw','https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Acars24.ae&metrics=IMPRESSIONS&breakdown=date&time_granularity=MONTH&country=are&query=~car%2024%7Ccars24%7Ccars%2024%7C%2024%20car%7Ccara%2024%7Ccarz%2024%7Ccard24%7Ccar24%7C24%20cars',D.gsc_uae?.keywords),
-  'au-sos':()=>initCountryBsosTab('au-','au-sos',D.gsc_au?.bsos,'Region'),
-  'uae-sos':()=>initCountryBsosTab('uae-','uae-sos',D.gsc_uae?.bsos,'City'),
-  'au-gi':()=>initCountryGindexTab('au-','au-gi',D.gsc_au?.gindex,'Region',906560602,D.gsc_au?.monthly_impressions,'Australia'),
-  'uae-gi':()=>initCountryGindexTab('uae-','uae-gi',D.gsc_uae?.gindex,'City',858918292,D.gsc_uae?.monthly_impressions,'UAE'),
+  'au-sos':()=>initCountryBsosTab('au-','au-sos',D.gsc_au?.bsos,'Region',BSOS_SHEET_AUS,BSOS_GIDS_AUS),
+  'uae-sos':()=>initCountryBsosTab('uae-','uae-sos',D.gsc_uae?.bsos,'City',BSOS_SHEET_UAE,BSOS_GIDS_UAE),
+  'au-gi':()=>initCountryGindexTab('au-','au-gi',D.gsc_au?.gindex,'Region',906560602,D.gsc_au?.monthly_impressions,'Australia',1757116664),
+  'uae-gi':()=>initCountryGindexTab('uae-','uae-gi',D.gsc_uae?.gindex,'City',911988834,D.gsc_uae?.monthly_impressions,'UAE',911988834),
 };
 
 function initCountrySearchTab(prefix,paneId,gscSiteUrl,sourceLabel,gscData){
