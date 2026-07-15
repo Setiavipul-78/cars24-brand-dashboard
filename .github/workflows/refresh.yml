@@ -34,6 +34,7 @@ jobs:
           GOOGLE_CLIENT_ID:                ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET:            ${{ secrets.GOOGLE_CLIENT_SECRET }}
           YT_REFRESH_TOKEN:                ${{ secrets.YT_REFRESH_TOKEN }}
+          YT_REFRESH_TOKEN_AU:             ${{ secrets.YT_REFRESH_TOKEN_AU }}
           YT_REFRESH_TOKEN_INDIA:          ${{ secrets.YT_REFRESH_TOKEN_INDIA }}
           YT_REFRESH_TOKEN_TEAMBHP:        ${{ secrets.YT_REFRESH_TOKEN_TEAMBHP }}
           YT_REFRESH_TOKEN_INSIDER:        ${{ secrets.YT_REFRESH_TOKEN_INSIDER }}
