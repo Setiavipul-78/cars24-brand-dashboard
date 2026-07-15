@@ -1628,9 +1628,13 @@ function initCountryBsosTab(prefix,paneId,bsosData,regionLabel,bsosSheetUrl,bsos
 // prefix so India and the AU/UAE country tabs share one implementation.
 function renderGiPanCompare(cfg){
   const {data,tblId,chartId,ckey,prefix,seriesLabel,fIdx}=cfg;
+  // Always-on YoY: match each month to the same calendar month a year earlier
+  // (by month key, so gaps in the series don't misalign it) and show % growth.
+  const valByMonth={};data.forEach(r=>{if(r.Cars24!=null)valByMonth[r.month]=r.Cars24;});
+  const yoyOf=m=>{const [y,mo]=m.split('-');const cur=valByMonth[m],prev=valByMonth[`${+y-1}-${mo}`];return(cur!=null&&prev!=null&&prev!==0)?((cur-prev)/prev*100):null;};
   function rowHtml(r,tag,isLatest){
     const tagHtml=tag?` <span style="font-size:10px;color:${tag==='A'?'var(--blue)':'#f90'};font-weight:800">${tag}</span>`:(isLatest?' <span class="badge bb">Latest</span>':'');
-    return `<tr class="${isLatest&&!tag?'lat':''}"><td><strong>${r.label}</strong>${tagHtml}</td><td>${tia(r.Cars24_mom)}</td><td class="nr cc"><strong>${fIdx(r.Cars24)}</strong></td><td class="nr cc">${badge(r.Cars24_mom,true)}</td></tr>`;
+    return `<tr class="${isLatest&&!tag?'lat':''}"><td><strong>${r.label}</strong>${tagHtml}</td><td>${tia(r.Cars24_mom)}</td><td class="nr cc"><strong>${fIdx(r.Cars24)}</strong></td><td class="nr cc">${badge(r.Cars24_mom,true)}</td><td class="nr cc">${badge(yoyOf(r.month),false)}</td></tr>`;
   }
   function paint(p){
     let fdA,fdB=null;
@@ -1648,12 +1652,12 @@ function renderGiPanCompare(cfg){
     }
     const tblEl=document.getElementById(tblId);
     if(!fdA.length&&!fdB?.length){tblEl.innerHTML='<p style="padding:16px;color:var(--grey);font-size:13px">No data for selected period.</p>';return;}
-    const th=`<th>Month</th><th></th><th class="nr ch" style="text-transform:none">Index</th><th class="nr ch">MoM Δ</th>`;
+    const th=`<th>Month</th><th></th><th class="nr ch" style="text-transform:none">Index</th><th class="nr ch">MoM Δ</th><th class="nr ch">YoY %</th>`;
     let rows;
     if(fdB){
       const rA=[...fdA].reverse().map(r=>rowHtml(r,'A',false)).join('');
       const rB=[...fdB].reverse().map(r=>rowHtml(r,'B',false)).join('');
-      rows=rA+`<tr style="background:var(--bg)"><td colspan="4" style="padding:3px 8px;font-size:10px;color:var(--grey);letter-spacing:.5px">── Period B ──</td></tr>`+rB;
+      rows=rA+`<tr style="background:var(--bg)"><td colspan="5" style="padding:3px 8px;font-size:10px;color:var(--grey);letter-spacing:.5px">── Period B ──</td></tr>`+rB;
     } else {
       rows=[...fdA].reverse().map((r,i)=>rowHtml(r,null,i===0)).join('');
     }

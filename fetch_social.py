@@ -71,6 +71,88 @@ def write_extra_json(path: Path, fresh: dict, monthly_keys=(), snapshot_keys=())
         json.dump(merged, f, indent=2)
     return merged
 
+
+def _yt_query(request_fn, tries: int = 5):
+    """Execute a YouTube Analytics reports().query() with retry on transient
+    500/503/backendError responses. Large date ranges (full channel history)
+    intermittently return 'Internal error encountered.' — a plain retry with
+    backoff clears it, confirmed live."""
+    for attempt in range(tries):
+        try:
+            return request_fn().execute()
+        except Exception as e:
+            msg = str(e)
+            transient = any(s in msg for s in ("500", "503", "backendError", "Internal error"))
+            if transient and attempt < tries - 1:
+                time.sleep(2 * (attempt + 1))
+                continue
+            raise
+
+
+def write_monthly_csv_merged(path: Path, fresh_rows: list[dict],
+                             data_cols: tuple, source_rank=None) -> None:
+    """Anti-regression writer for a monthly CSV (keyed by 'month'). Merges fresh
+    rows over whatever is already stored so accumulated history is never lost to a
+    failed or degraded fetch:
+      • a month already on file is NEVER dropped just because this run didn't
+        return it (partial fetch; or a source like Instagram that only serves a
+        bounded lookback — the merge accumulates an archive that outlives it);
+      • a stored-only month is kept only if it carries real data in `data_cols`,
+        so zero-padding (e.g. months before a channel existed) is discarded once
+        the fetch stops returning it;
+      • if `source_rank` is given (row -> int), a lower-ranked source never
+        overwrites a higher-ranked one for the same month (YouTube: real
+        'analytics' is never downgraded to 'public' fallback).
+    Git history is the durable backup underneath; this protects the working copy
+    before it is committed so a bad nightly run can't erase good history."""
+    if not fresh_rows:
+        print(f"  ⚠  no rows for {path.name} — keeping existing file untouched")
+        return
+    stored = {}
+    if path.exists():
+        with open(path, newline="") as f:
+            for row in csv.DictReader(f):
+                if row.get("month"):
+                    stored[row["month"]] = row
+    def _has_data(row):
+        try:
+            return any(float(row.get(k) or 0) != 0 for k in data_cols)
+        except (TypeError, ValueError):
+            return True  # unparseable → keep, don't risk losing real data
+
+    fresh_months = {r["month"] for r in fresh_rows}
+    merged = {}
+    # Seed with stored months that are either refreshed this run, or hold real
+    # data worth backing up.
+    for m, row in stored.items():
+        if m in fresh_months or _has_data(row):
+            merged[m] = row
+    for r in fresh_rows:
+        m = r["month"]
+        old = merged.get(m)
+        if old is not None and source_rank and source_rank(r) < source_rank(old):
+            continue  # never downgrade to a lower-quality source
+        merged[m] = r
+    kept_only = [m for m in merged if m not in fresh_months]
+    out = [merged[m] for m in sorted(merged)]
+    fieldnames = list(fresh_rows[0].keys())
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore", restval="")
+        w.writeheader()
+        w.writerows(out)
+    extra = f", {len(kept_only)} preserved from backup" if kept_only else ""
+    print(f"  ✓  {path.name}  ({len(out)} months; {len(fresh_rows)} fresh{extra})")
+
+
+def write_yt_csv_merged(path: Path, fresh_rows: list[dict]) -> None:
+    """YouTube monthly CSV: full-history merge, never downgrading real analytics
+    to public-fallback data (see write_monthly_csv_merged)."""
+    write_monthly_csv_merged(
+        path, fresh_rows,
+        data_cols=("views", "watch_time_hours", "subscribers_gained", "likes"),
+        source_rank=lambda r: 1 if str(r.get("data_source", "")) == "analytics" else 0,
+    )
+
 # ── YouTube Analytics API ─────────────────────────────────────────────────────
 YT_CHANNELS = {
     "cars24_india":      os.getenv("YT_CHANNEL_ID_CARS24_INDIA"),
@@ -215,26 +297,35 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
     yta = build("youtubeAnalytics", "v2", credentials=creds, cache_discovery=False)
     ytd = build("youtube", "v3", credentials=creds, cache_discovery=False)
 
-    snap = ytd.channels().list(part="statistics", id=channel_id).execute()
-    stats = snap["items"][0]["statistics"] if snap.get("items") else {}
+    snap = ytd.channels().list(part="statistics,snippet", id=channel_id).execute()
+    item = snap["items"][0] if snap.get("items") else {}
+    stats = item.get("statistics", {})
     total_subs   = int(stats.get("subscriberCount", 0))
     total_views  = int(stats.get("viewCount", 0))
     total_videos = int(stats.get("videoCount", 0))
 
-    start = datetime(datetime.today().year - 2, 1, 1).strftime("%Y-%m-%d")
+    # Full history since the channel was created (Studio keeps everything).
+    # dimensions=month requires month-aligned bounds, so snap the creation date
+    # to the 1st of its month. Fall back to 2 years if it's somehow missing.
+    published = item.get("snippet", {}).get("publishedAt", "")
+    if published:
+        start = published[:7] + "-01"
+    else:
+        start = datetime(datetime.today().year - 2, 1, 1).strftime("%Y-%m-%d")
     today = date.today()
     # Use first of NEXT month so current partial month is included
     _nm = today.replace(day=1)
     _nm = date(_nm.year + (_nm.month // 12), (_nm.month % 12) + 1, 1)
     end = _nm.strftime("%Y-%m-%d")
 
-    # Monthly metrics including averageViewPercentage
-    resp  = yta.reports().query(
+    # Monthly metrics including averageViewPercentage (retry: full-history ranges
+    # intermittently 500 with a transient backendError)
+    resp = _yt_query(lambda: yta.reports().query(
         ids=f"channel=={channel_id}", startDate=start, endDate=end,
         dimensions="month",
         metrics="views,estimatedMinutesWatched,averageViewDuration,averageViewPercentage,subscribersGained,subscribersLost,likes,comments,shares",
         sort="month",
-    ).execute()
+    ))
 
     headers = [h["name"] for h in resp.get("columnHeaders", [])]
     rows = []
@@ -282,6 +373,24 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
     # Fetch extra dimension data and save to JSON
     extra = {}
 
+    # Per-month geo/demographics can't co-dimension with month, so each needs its
+    # own bounded query — for a 10-year channel that's ~120 calls each. They never
+    # change once a month is closed, and write_extra_json already merges fresh over
+    # saved, so we only (re)fetch a month's breakdown if it isn't already stored,
+    # plus always the latest 2 months (still settling). First run captures all
+    # history; nightly runs then just top up the newest months.
+    extra_path = DATA / f"youtube_{key}_extra.json"
+    prev_extra = {}
+    if extra_path.exists():
+        try:
+            prev_extra = json.loads(extra_path.read_text())
+        except Exception:
+            prev_extra = {}
+    all_months = [r["month"] for r in rows]
+    recent_months = set(all_months[-2:])  # re-fetch the 2 newest even if already saved
+    def _need_month(prev_key, m):
+        return m in recent_months or m not in prev_extra.get(prev_key, {})
+
     # Geo: top cities — all-time snapshot, plus a genuine per-month breakdown.
     # `city` cannot be a co-dimension with day/month in one query (confirmed via direct
     # API testing — every combo is rejected), but a SEPARATE query per month with
@@ -289,13 +398,13 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
     # own UI gets period-filtered geography/demographics too: it re-queries per period
     # rather than combining dimensions.
     try:
-        geo_resp = yta.reports().query(
+        geo_resp = _yt_query(lambda: yta.reports().query(
             ids=f"channel=={channel_id}", startDate=start, endDate=end,
             dimensions="city",
             metrics="views,estimatedMinutesWatched",
             sort="-views",
             maxResults=25,
-        ).execute()
+        ))
         geo_headers = [h["name"] for h in geo_resp.get("columnHeaders", [])]
         geo_rows = []
         for gr in geo_resp.get("rows", []):
@@ -311,14 +420,16 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
         print(f"    ⚠  Geo fetch failed for {key}: {e}")
 
     geo_by_month = {}
-    for m in [r["month"] for r in rows]:
+    for m in all_months:
+        if not _need_month("geo_monthly", m):
+            continue  # already captured; write_extra_json merge preserves it
         try:
             ms, me = _month_bounds(m)
-            gm_resp = yta.reports().query(
+            gm_resp = _yt_query(lambda: yta.reports().query(
                 ids=f"channel=={channel_id}", startDate=ms, endDate=me,
                 dimensions="city", metrics="views,estimatedMinutesWatched",
                 sort="-views", maxResults=25,
-            ).execute()
+            ))
             gm_headers = [h["name"] for h in gm_resp.get("columnHeaders", [])]
             month_rows = []
             for gr in gm_resp.get("rows", []):
@@ -339,11 +450,11 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
     # Demographics: age group + gender — all-time snapshot, plus per-month breakdown
     # via the same bounded-date-range approach as geo above.
     try:
-        demo_resp = yta.reports().query(
+        demo_resp = _yt_query(lambda: yta.reports().query(
             ids=f"channel=={channel_id}", startDate=start, endDate=end,
             dimensions="ageGroup,gender",
             metrics="viewerPercentage",
-        ).execute()
+        ))
         demo_headers = [h["name"] for h in demo_resp.get("columnHeaders", [])]
         demo_rows = []
         for dr in demo_resp.get("rows", []):
@@ -359,13 +470,15 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
         print(f"    ⚠  Demographics fetch failed for {key}: {e}")
 
     demo_by_month = {}
-    for m in [r["month"] for r in rows]:
+    for m in all_months:
+        if not _need_month("demographics_monthly", m):
+            continue  # already captured; write_extra_json merge preserves it
         try:
             ms, me = _month_bounds(m)
-            dm_resp = yta.reports().query(
+            dm_resp = _yt_query(lambda: yta.reports().query(
                 ids=f"channel=={channel_id}", startDate=ms, endDate=me,
                 dimensions="ageGroup,gender", metrics="viewerPercentage",
-            ).execute()
+            ))
             dm_headers = [h["name"] for h in dm_resp.get("columnHeaders", [])]
             month_rows = []
             for dr in dm_resp.get("rows", []):
@@ -386,12 +499,12 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
     # Traffic sources (all-time snapshot + per-month breakdown, via day→month rollup —
     # confirmed `day,insightTrafficSourceType` IS a supported combination, unlike city/demo)
     try:
-        traffic_resp = yta.reports().query(
+        traffic_resp = _yt_query(lambda: yta.reports().query(
             ids=f"channel=={channel_id}", startDate=start, endDate=end,
             dimensions="insightTrafficSourceType",
             metrics="views,estimatedMinutesWatched",
             sort="-views",
-        ).execute()
+        ))
         traffic_headers = [h["name"] for h in traffic_resp.get("columnHeaders", [])]
         traffic_raw = []
         for tr in traffic_resp.get("rows", []):
@@ -409,7 +522,7 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
     except Exception as e:
         print(f"    ⚠  Traffic sources fetch failed for {key}: {e}")
     try:
-        traffic_m_resp = yta.reports().query(
+        traffic_m_resp = _yt_query(lambda: yta.reports().query(
             ids=f"channel=={channel_id}", startDate=start, endDate=end,
             dimensions="day,insightTrafficSourceType",
             metrics="views,estimatedMinutesWatched",
@@ -417,7 +530,7 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
             # No maxResults: with it set, the API silently truncates (confirmed via
             # testing — e.g. maxResults=4000 + sort=day kept only the OLDEST 9 months
             # and dropped everything since). Omitting it returns the full row set.
-        ).execute()
+        ))
         traffic_m_headers = [h["name"] for h in traffic_m_resp.get("columnHeaders", [])]
         traffic_by_month = defaultdict(lambda: defaultdict(lambda: {"views": 0, "watch_time_hours": 0.0}))
         for tr in traffic_m_resp.get("rows", []):
@@ -439,12 +552,12 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
 
     # Devices
     try:
-        device_resp = yta.reports().query(
+        device_resp = _yt_query(lambda: yta.reports().query(
             ids=f"channel=={channel_id}", startDate=start, endDate=end,
             dimensions="deviceType",
             metrics="views,estimatedMinutesWatched",
             sort="-views",
-        ).execute()
+        ))
         device_headers = [h["name"] for h in device_resp.get("columnHeaders", [])]
         device_raw = []
         for dr in device_resp.get("rows", []):
@@ -462,13 +575,13 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
     except Exception as e:
         print(f"    ⚠  Devices fetch failed for {key}: {e}")
     try:
-        device_m_resp = yta.reports().query(
+        device_m_resp = _yt_query(lambda: yta.reports().query(
             ids=f"channel=={channel_id}", startDate=start, endDate=end,
             dimensions="day,deviceType",
             metrics="views,estimatedMinutesWatched",
             sort="day",
             # No maxResults — see comment on the traffic-sources query above.
-        ).execute()
+        ))
         device_m_headers = [h["name"] for h in device_m_resp.get("columnHeaders", [])]
         device_by_month = defaultdict(lambda: defaultdict(lambda: {"views": 0, "watch_time_hours": 0.0}))
         for dr in device_m_resp.get("rows", []):
@@ -501,22 +614,22 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
     # of history). So we run both and merge, deduping by video ID.
     try:
         metrics = "views,estimatedMinutesWatched,averageViewDuration,averageViewPercentage,subscribersGained,likes,comments,shares"
-        vid_resp = yta.reports().query(
+        vid_resp = _yt_query(lambda: yta.reports().query(
             ids=f"channel=={channel_id}",
             startDate=start, endDate=today.strftime("%Y-%m-%d"),
             dimensions="video", metrics=metrics,
             sort="-views", maxResults=200,
-        ).execute()
+        ))
         vid_headers = [h["name"] for h in vid_resp.get("columnHeaders", [])]
         vid_rows = vid_resp.get("rows", [])
 
         recent_start = (today - timedelta(days=60)).strftime("%Y-%m-%d")
-        recent_resp = yta.reports().query(
+        recent_resp = _yt_query(lambda: yta.reports().query(
             ids=f"channel=={channel_id}",
             startDate=recent_start, endDate=today.strftime("%Y-%m-%d"),
             dimensions="video", metrics=metrics,
             sort="-views", maxResults=200,
-        ).execute()
+        ))
         seen_ids = {r[0] for r in vid_rows}
         vid_rows += [r for r in recent_resp.get("rows", []) if r[0] not in seen_ids]
 
@@ -566,7 +679,7 @@ def fetch_yt_channel_analytics(key: str, channel_id: str, creds) -> list[dict]:
 
     # Save extra data to JSON, backed up against months/breakdowns that fall out of
     # the Analytics API's lookback window on this run (see write_extra_json).
-    extra_path = DATA / f"youtube_{key}_extra.json"
+    # extra_path was defined above (used for the per-month incremental skip).
     write_extra_json(
         extra_path, extra,
         monthly_keys=("geo_monthly", "demographics_monthly", "traffic_sources_monthly", "devices_monthly"),
@@ -687,7 +800,9 @@ def fetch_all_youtube():
             continue
         try:
             rows = fetch_yt_channel(key, channel_id, creds)
-            write_csv(DATA / f"youtube_{key}.csv", rows)
+            # Merge over stored history rather than blind-overwrite, so a failed or
+            # public-fallback run can never erase months already captured with analytics.
+            write_yt_csv_merged(DATA / f"youtube_{key}.csv", rows)
         except Exception as e:
             print(f"  ✗ {key}: {e}")
         time.sleep(0.5)
@@ -1055,7 +1170,13 @@ def fetch_all_instagram():
         print(f"  Fetching {cfg['handle']} ({key})…")
         try:
             rows = fetch_ig_account(key, cfg)
-            write_csv(DATA / f"instagram_{key}.csv", rows)
+            # Instagram only serves ~2 years of account insights; merge over stored
+            # history so months accumulate into an archive that outlives that window
+            # (and a failed fetch can't erase what we already captured).
+            write_monthly_csv_merged(
+                DATA / f"instagram_{key}.csv", rows,
+                data_cols=("followers", "profile_views", "accounts_engaged"),
+            )
             posts_csv = DATA / f"instagram_{key}_posts.csv"
             posts = fetch_ig_all_posts(cfg["user_id"], cfg["access_token"], cache_path=posts_csv)
             if posts:

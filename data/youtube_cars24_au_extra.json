@@ -2,53 +2,53 @@
   "geo": [
     {
       "city": "Sydney",
-      "views": 18402,
-      "watch_time_hours": 203.3
+      "views": 48989,
+      "watch_time_hours": 448.1
     },
     {
       "city": "Melbourne",
-      "views": 18161,
-      "watch_time_hours": 116.3
-    },
-    {
-      "city": "Bengaluru",
-      "views": 9219,
-      "watch_time_hours": 29.8
+      "views": 43798,
+      "watch_time_hours": 317.9
     },
     {
       "city": "Brisbane",
-      "views": 7559,
-      "watch_time_hours": 45.2
+      "views": 23440,
+      "watch_time_hours": 172.8
+    },
+    {
+      "city": "Bengaluru",
+      "views": 9748,
+      "watch_time_hours": 32.0
     },
     {
       "city": "Hyderabad",
-      "views": 4720,
-      "watch_time_hours": 14.2
+      "views": 5091,
+      "watch_time_hours": 15.7
     },
     {
       "city": "Chennai",
-      "views": 3948,
-      "watch_time_hours": 10.8
+      "views": 4185,
+      "watch_time_hours": 11.7
     },
     {
       "city": "London",
-      "views": 3429,
-      "watch_time_hours": 31.4
+      "views": 3458,
+      "watch_time_hours": 31.5
     },
     {
       "city": "Mumbai",
-      "views": 3010,
-      "watch_time_hours": 10.3
+      "views": 3251,
+      "watch_time_hours": 11.1
     },
     {
       "city": "Delhi",
-      "views": 2817,
-      "watch_time_hours": 9.5
+      "views": 3174,
+      "watch_time_hours": 11.2
     },
     {
       "city": "Pune",
-      "views": 2641,
-      "watch_time_hours": 8.8
+      "views": 2907,
+      "watch_time_hours": 9.8
     },
     {
       "city": "Perth",
@@ -57,27 +57,27 @@
     },
     {
       "city": "Singapore",
-      "views": 2321,
-      "watch_time_hours": 23.5
+      "views": 2343,
+      "watch_time_hours": 23.6
     },
     {
       "city": "Kochi",
-      "views": 1995,
-      "watch_time_hours": 6.5
+      "views": 2129,
+      "watch_time_hours": 7.0
     },
     {
       "city": "Kuala Lumpur",
-      "views": 1544,
+      "views": 1563,
       "watch_time_hours": 16.6
     },
     {
       "city": "Adelaide",
-      "views": 1503,
-      "watch_time_hours": 7.9
+      "views": 1518,
+      "watch_time_hours": 8.0
     },
     {
       "city": "Toronto",
-      "views": 1446,
+      "views": 1459,
       "watch_time_hours": 11.7
     },
     {
@@ -96,14 +96,14 @@
       "watch_time_hours": 8.0
     },
     {
-      "city": "Jakarta",
-      "views": 956,
-      "watch_time_hours": 8.3
+      "city": "Guwahati",
+      "views": 1022,
+      "watch_time_hours": 4.9
     },
     {
-      "city": "Guwahati",
-      "views": 950,
-      "watch_time_hours": 4.7
+      "city": "Jakarta",
+      "views": 987,
+      "watch_time_hours": 8.5
     },
     {
       "city": "Pretoria",
@@ -111,19 +111,19 @@
       "watch_time_hours": 10.2
     },
     {
+      "city": "Kolkata",
+      "views": 839,
+      "watch_time_hours": 3.3
+    },
+    {
       "city": "New York",
-      "views": 803,
+      "views": 815,
       "watch_time_hours": 7.0
     },
     {
-      "city": "Kolkata",
-      "views": 717,
-      "watch_time_hours": 2.8
-    },
-    {
-      "city": "Karachi",
-      "views": 653,
-      "watch_time_hours": 4.6
+      "city": "Ahmedabad",
+      "views": 785,
+      "watch_time_hours": 3.0
     }
   ],
   "demographics": [
@@ -135,17 +135,17 @@
     {
       "age_group": "age13-17",
       "gender": "male",
-      "viewer_pct": 2.2
+      "viewer_pct": 2.0
     },
     {
       "age_group": "age18-24",
       "gender": "female",
-      "viewer_pct": 3.4
+      "viewer_pct": 3.5
     },
     {
       "age_group": "age18-24",
       "gender": "male",
-      "viewer_pct": 17.1
+      "viewer_pct": 15.8
     },
     {
       "age_group": "age18-24",
@@ -155,12 +155,12 @@
     {
       "age_group": "age25-34",
       "gender": "female",
-      "viewer_pct": 5.4
+      "viewer_pct": 7.1
     },
     {
       "age_group": "age25-34",
       "gender": "male",
-      "viewer_pct": 32.1
+      "viewer_pct": 30.2
     },
     {
       "age_group": "age25-34",
@@ -170,127 +170,127 @@
     {
       "age_group": "age35-44",
       "gender": "female",
-      "viewer_pct": 4.8
+      "viewer_pct": 6.1
     },
     {
       "age_group": "age35-44",
       "gender": "male",
-      "viewer_pct": 18.4
+      "viewer_pct": 18.2
     },
     {
       "age_group": "age45-54",
       "gender": "female",
-      "viewer_pct": 1.6
+      "viewer_pct": 1.8
     },
     {
       "age_group": "age45-54",
       "gender": "male",
-      "viewer_pct": 8.5
+      "viewer_pct": 8.2
     },
     {
       "age_group": "age55-64",
       "gender": "female",
-      "viewer_pct": 0.3
+      "viewer_pct": 0.7
     },
     {
       "age_group": "age55-64",
       "gender": "male",
-      "viewer_pct": 3.3
+      "viewer_pct": 3.2
     },
     {
       "age_group": "age65-",
       "gender": "female",
-      "viewer_pct": 0.3
+      "viewer_pct": 0.5
     },
     {
       "age_group": "age65-",
       "gender": "male",
-      "viewer_pct": 1.9
+      "viewer_pct": 2.0
     }
   ],
   "traffic_sources": [
     {
       "source": "ADVERTISING",
-      "views": 4747068,
-      "watch_time_hours": 18133.5,
-      "pct": 87.4
+      "views": 16385365,
+      "watch_time_hours": 66330.4,
+      "pct": 95.7
     },
     {
       "source": "SHORTS",
-      "views": 374571,
-      "watch_time_hours": 1797.8,
-      "pct": 6.9
+      "views": 379661,
+      "watch_time_hours": 1814.5,
+      "pct": 2.2
     },
     {
       "source": "YT_SEARCH",
-      "views": 203169,
-      "watch_time_hours": 1560.7,
-      "pct": 3.7
+      "views": 210364,
+      "watch_time_hours": 1658.7,
+      "pct": 1.2
     },
     {
       "source": "EXT_URL",
-      "views": 35599,
-      "watch_time_hours": 600.9,
-      "pct": 0.7
+      "views": 57419,
+      "watch_time_hours": 735.2,
+      "pct": 0.3
     },
     {
       "source": "SUBSCRIBER",
-      "views": 27803,
-      "watch_time_hours": 726.5,
-      "pct": 0.5
-    },
-    {
-      "source": "PLAYLIST",
-      "views": 12413,
-      "watch_time_hours": 374.8,
-      "pct": 0.2
-    },
-    {
-      "source": "YT_OTHER_PAGE",
-      "views": 10511,
-      "watch_time_hours": 93.3,
+      "views": 29641,
+      "watch_time_hours": 743.2,
       "pct": 0.2
     },
     {
       "source": "YT_CHANNEL",
-      "views": 10361,
-      "watch_time_hours": 68.8,
-      "pct": 0.2
-    },
-    {
-      "source": "RELATED_VIDEO",
-      "views": 4560,
-      "watch_time_hours": 281.5,
+      "views": 13292,
+      "watch_time_hours": 100.9,
       "pct": 0.1
     },
     {
+      "source": "PLAYLIST",
+      "views": 12791,
+      "watch_time_hours": 379.8,
+      "pct": 0.1
+    },
+    {
+      "source": "YT_OTHER_PAGE",
+      "views": 11056,
+      "watch_time_hours": 97.8,
+      "pct": 0.1
+    },
+    {
+      "source": "RELATED_VIDEO",
+      "views": 7224,
+      "watch_time_hours": 310.3,
+      "pct": 0.0
+    },
+    {
       "source": "NO_LINK_OTHER",
-      "views": 2624,
-      "watch_time_hours": 42.1,
+      "views": 4746,
+      "watch_time_hours": 63.5,
       "pct": 0.0
     },
     {
       "source": "NOTIFICATION",
-      "views": 356,
-      "watch_time_hours": 3.0,
+      "views": 379,
+      "watch_time_hours": 3.3,
       "pct": 0.0
     },
     {
       "source": "SHORTS_CONTENT_LINKS",
-      "views": 311,
+      "views": 312,
       "watch_time_hours": 3.6,
       "pct": 0.0
     },
     {
       "source": "HASHTAGS",
-      "views": 277,
+      "views": 278,
       "watch_time_hours": 1.2,
       "pct": 0.0
     },
     {
       "source": "END_SCREEN",
-      "views": 43,
-      "watch_time_hours": 0.8,
+      "views": 117,
+      "watch_time_hours": 1.8,
       "pct": 0.0
     },
     {
@@ -303,30 +303,132 @@
   "devices": [
     {
       "device": "MOBILE",
-      "views": 4045454,
-      "watch_time_hours": 17579.8,
-      "pct": 74.6
+      "views": 9313746,
+      "watch_time_hours": 39317.7,
+      "pct": 56.9
     },
     {
       "device": "TABLET",
-      "views": 1083884,
-      "watch_time_hours": 3562.9,
-      "pct": 20.0
+      "views": 2607692,
+      "watch_time_hours": 9992.1,
+      "pct": 15.9
     },
     {
       "device": "TV",
-      "views": 201389,
-      "watch_time_hours": 1632.3,
-      "pct": 3.7
+      "views": 2527932,
+      "watch_time_hours": 11360.1,
+      "pct": 15.4
     },
     {
       "device": "DESKTOP",
-      "views": 92420,
-      "watch_time_hours": 884.7,
-      "pct": 1.7
+      "views": 1920751,
+      "watch_time_hours": 8510.9,
+      "pct": 11.7
     }
   ],
   "top_videos": [
+    {
+      "id": "tMXVPAUBuY4",
+      "title": "The Benefits of Buying Your Next Used Car From CARS24",
+      "published": "2022-02-24",
+      "url": "https://www.youtube.com/watch?v=tMXVPAUBuY4",
+      "thumbnail": "https://i.ytimg.com/vi/tMXVPAUBuY4/default.jpg",
+      "views": 2688680,
+      "watch_time_hours": 10997.9,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 98.2,
+      "subs_gained": 40,
+      "likes": 27,
+      "comments": 3,
+      "shares": 16,
+      "engagement_rate": 0.0,
+      "is_short": true
+    },
+    {
+      "id": "pvBnylMfjUk",
+      "title": "CARS24 Trust - 15sec",
+      "published": "2021-09-14",
+      "url": "https://www.youtube.com/watch?v=pvBnylMfjUk",
+      "thumbnail": "https://i.ytimg.com/vi/pvBnylMfjUk/default.jpg",
+      "views": 2041728,
+      "watch_time_hours": 8495.42,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 99.9,
+      "subs_gained": 2,
+      "likes": 12,
+      "comments": 1,
+      "shares": 4,
+      "engagement_rate": 0.0,
+      "is_short": true
+    },
+    {
+      "id": "0gPMFIzvAWw",
+      "title": "CARS24 Convenience - 15sec",
+      "published": "2021-09-14",
+      "url": "https://www.youtube.com/watch?v=0gPMFIzvAWw",
+      "thumbnail": "https://i.ytimg.com/vi/0gPMFIzvAWw/default.jpg",
+      "views": 1985998,
+      "watch_time_hours": 8260.07,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 99.8,
+      "subs_gained": 34,
+      "likes": 42,
+      "comments": 3,
+      "shares": 22,
+      "engagement_rate": 0.0,
+      "is_short": true
+    },
+    {
+      "id": "lh6fbRDLi8Q",
+      "title": "Lemon - 15 sec",
+      "published": "2022-06-17",
+      "url": "https://www.youtube.com/watch?v=lh6fbRDLi8Q",
+      "thumbnail": "https://i.ytimg.com/vi/lh6fbRDLi8Q/default.jpg",
+      "views": 1375004,
+      "watch_time_hours": 5677.8,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 99.1,
+      "subs_gained": 62,
+      "likes": 30,
+      "comments": 2,
+      "shares": 8,
+      "engagement_rate": 0.0,
+      "is_short": true
+    },
+    {
+      "id": "OC6WiLjnLqs",
+      "title": "CARS24 Launch - 15sec",
+      "published": "2021-09-14",
+      "url": "https://www.youtube.com/watch?v=OC6WiLjnLqs",
+      "thumbnail": "https://i.ytimg.com/vi/OC6WiLjnLqs/default.jpg",
+      "views": 1255104,
+      "watch_time_hours": 5118.9,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 97.9,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.0,
+      "is_short": true
+    },
+    {
+      "id": "Bc9ANU6Scek",
+      "title": "The Future of Used Cars is Here",
+      "published": "2022-04-14",
+      "url": "https://www.youtube.com/watch?v=Bc9ANU6Scek",
+      "thumbnail": "https://i.ytimg.com/vi/Bc9ANU6Scek/default.jpg",
+      "views": 1188244,
+      "watch_time_hours": 4880.62,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 98.6,
+      "subs_gained": 28,
+      "likes": 18,
+      "comments": 1,
+      "shares": 13,
+      "engagement_rate": 0.0,
+      "is_short": true
+    },
     {
       "id": "breGosTdhZo",
       "title": "Value-Prop | Portrait | 15 Seconds",
@@ -376,6 +478,23 @@
       "comments": 0,
       "shares": 21,
       "engagement_rate": 0.0,
+      "is_short": true
+    },
+    {
+      "id": "w4FgTmz3lYw",
+      "title": "Dodgy Dealer - 15 sec",
+      "published": "2022-06-17",
+      "url": "https://www.youtube.com/watch?v=w4FgTmz3lYw",
+      "thumbnail": "https://i.ytimg.com/vi/w4FgTmz3lYw/default.jpg",
+      "views": 354997,
+      "watch_time_hours": 1450.55,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 98.2,
+      "subs_gained": 15,
+      "likes": 24,
+      "comments": 4,
+      "shares": 23,
+      "engagement_rate": 0.01,
       "is_short": true
     },
     {
@@ -430,6 +549,23 @@
       "is_short": true
     },
     {
+      "id": "CJAI5lKRuOs",
+      "title": "Why Buy Your Next Used Car From CARS24",
+      "published": "2022-02-24",
+      "url": "https://www.youtube.com/watch?v=CJAI5lKRuOs",
+      "thumbnail": "https://i.ytimg.com/vi/CJAI5lKRuOs/default.jpg",
+      "views": 164372,
+      "watch_time_hours": 675.03,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 98.6,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.0,
+      "is_short": true
+    },
+    {
       "id": "5Vfb-9BULvY",
       "title": "USP-New | Landscape | 15 Seconds",
       "published": "2024-07-08",
@@ -443,6 +579,23 @@
       "likes": 4,
       "comments": 0,
       "shares": 4,
+      "engagement_rate": 0.01,
+      "is_short": true
+    },
+    {
+      "id": "tMbILg3PCUU",
+      "title": "High Quality Used Cars -100% Money-back Guarantee",
+      "published": "2022-10-17",
+      "url": "https://www.youtube.com/watch?v=tMbILg3PCUU",
+      "thumbnail": "https://i.ytimg.com/vi/tMbILg3PCUU/default.jpg",
+      "views": 127378,
+      "watch_time_hours": 517.07,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 97.4,
+      "subs_gained": 13,
+      "likes": 7,
+      "comments": 0,
+      "shares": 2,
       "engagement_rate": 0.01,
       "is_short": true
     },
@@ -498,6 +651,23 @@
       "is_short": true
     },
     {
+      "id": "DIps843bo6k",
+      "title": "CARS24 - Order Your Next Car Online From The Bathtub",
+      "published": "2022-05-06",
+      "url": "https://www.youtube.com/watch?v=DIps843bo6k",
+      "thumbnail": "https://i.ytimg.com/vi/DIps843bo6k/default.jpg",
+      "views": 91946,
+      "watch_time_hours": 707.07,
+      "avg_duration_sec": 28.0,
+      "avg_view_pct": 92.4,
+      "subs_gained": 5,
+      "likes": 20,
+      "comments": 1,
+      "shares": 55,
+      "engagement_rate": 0.08,
+      "is_short": true
+    },
+    {
       "id": "o7MMbK2ozoM",
       "title": "USP-New | 4:5  | 15 Seconds",
       "published": "2024-07-08",
@@ -546,6 +716,74 @@
       "comments": 0,
       "shares": 0,
       "engagement_rate": 0.0,
+      "is_short": true
+    },
+    {
+      "id": "dO8BmW-lcQg",
+      "title": "Skip the Dodgy Dealer & Buy Online with CARS24",
+      "published": "2022-10-18",
+      "url": "https://www.youtube.com/watch?v=dO8BmW-lcQg",
+      "thumbnail": "https://i.ytimg.com/vi/dO8BmW-lcQg/default.jpg",
+      "views": 83829,
+      "watch_time_hours": 339.2,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 97.1,
+      "subs_gained": 2,
+      "likes": 6,
+      "comments": 2,
+      "shares": 3,
+      "engagement_rate": 0.01,
+      "is_short": true
+    },
+    {
+      "id": "fP5ZD7Jw7UQ",
+      "title": "Order Your Next Used Car from Anywhere with CARS24",
+      "published": "2022-02-24",
+      "url": "https://www.youtube.com/watch?v=fP5ZD7Jw7UQ",
+      "thumbnail": "https://i.ytimg.com/vi/fP5ZD7Jw7UQ/default.jpg",
+      "views": 81756,
+      "watch_time_hours": 336.27,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 98.7,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.0,
+      "is_short": true
+    },
+    {
+      "id": "KCL7lUmHNcA",
+      "title": "The Future of Used Car Buying is Here with CARS24",
+      "published": "2022-02-24",
+      "url": "https://www.youtube.com/watch?v=KCL7lUmHNcA",
+      "thumbnail": "https://i.ytimg.com/vi/KCL7lUmHNcA/default.jpg",
+      "views": 81348,
+      "watch_time_hours": 333.9,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 98.5,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.0,
+      "is_short": true
+    },
+    {
+      "id": "2_Ig7PgcSls",
+      "title": "August_App 9x16",
+      "published": "2023-08-29",
+      "url": "https://www.youtube.com/watch?v=2_Ig7PgcSls",
+      "thumbnail": "https://i.ytimg.com/vi/2_Ig7PgcSls/default.jpg",
+      "views": 73383,
+      "watch_time_hours": 330.02,
+      "avg_duration_sec": 16.0,
+      "avg_view_pct": 161.9,
+      "subs_gained": 0,
+      "likes": 825,
+      "comments": 0,
+      "shares": 9,
+      "engagement_rate": 1.14,
       "is_short": true
     },
     {
@@ -600,6 +838,23 @@
       "is_short": true
     },
     {
+      "id": "eKK8MiqNiJ0",
+      "title": "August_App 16x9",
+      "published": "2023-08-29",
+      "url": "https://www.youtube.com/watch?v=eKK8MiqNiJ0",
+      "thumbnail": "https://i.ytimg.com/vi/eKK8MiqNiJ0/default.jpg",
+      "views": 56457,
+      "watch_time_hours": 159.68,
+      "avg_duration_sec": 10.0,
+      "avg_view_pct": 101.8,
+      "subs_gained": 1,
+      "likes": 27,
+      "comments": 0,
+      "shares": 12,
+      "engagement_rate": 0.07,
+      "is_short": true
+    },
+    {
       "id": "OwWVMC_EqS4",
       "title": "Should you buy a  Mazda CX-3? #CARS24",
       "published": "2025-07-10",
@@ -614,6 +869,23 @@
       "comments": 9,
       "shares": 60,
       "engagement_rate": 1.02,
+      "is_short": true
+    },
+    {
+      "id": "qeJY7JqToaY",
+      "title": "CARS24 - Yoga 15sec",
+      "published": "2022-05-06",
+      "url": "https://www.youtube.com/watch?v=qeJY7JqToaY",
+      "thumbnail": "https://i.ytimg.com/vi/qeJY7JqToaY/default.jpg",
+      "views": 53411,
+      "watch_time_hours": 221.12,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 93.2,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.0,
       "is_short": true
     },
     {
@@ -685,23 +957,6 @@
       "is_short": true
     },
     {
-      "id": "2_Ig7PgcSls",
-      "title": "August_App 9x16",
-      "published": "2023-08-29",
-      "url": "https://www.youtube.com/watch?v=2_Ig7PgcSls",
-      "thumbnail": "https://i.ytimg.com/vi/2_Ig7PgcSls/default.jpg",
-      "views": 39667,
-      "watch_time_hours": 185.58,
-      "avg_duration_sec": 16.0,
-      "avg_view_pct": 168.4,
-      "subs_gained": 0,
-      "likes": 436,
-      "comments": 0,
-      "shares": 1,
-      "engagement_rate": 1.1,
-      "is_short": true
-    },
-    {
       "id": "cAqN7oIwpVY",
       "title": "30 Day return",
       "published": "2026-03-31",
@@ -716,6 +971,23 @@
       "comments": 0,
       "shares": 0,
       "engagement_rate": 0.02,
+      "is_short": true
+    },
+    {
+      "id": "3x8EcULpRR8",
+      "title": "CARS24 - Bath 15sec",
+      "published": "2022-05-06",
+      "url": "https://www.youtube.com/watch?v=3x8EcULpRR8",
+      "thumbnail": "https://i.ytimg.com/vi/3x8EcULpRR8/default.jpg",
+      "views": 34629,
+      "watch_time_hours": 139.12,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 90.4,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.0,
       "is_short": true
     },
     {
@@ -770,23 +1042,6 @@
       "is_short": true
     },
     {
-      "id": "eKK8MiqNiJ0",
-      "title": "August_App 16x9",
-      "published": "2023-08-29",
-      "url": "https://www.youtube.com/watch?v=eKK8MiqNiJ0",
-      "thumbnail": "https://i.ytimg.com/vi/eKK8MiqNiJ0/default.jpg",
-      "views": 29090,
-      "watch_time_hours": 82.77,
-      "avg_duration_sec": 10.0,
-      "avg_view_pct": 102.4,
-      "subs_gained": 1,
-      "likes": 18,
-      "comments": 0,
-      "shares": 6,
-      "engagement_rate": 0.08,
-      "is_short": true
-    },
-    {
       "id": "3wVaUM6KlgY",
       "title": "5 Things We Like About the Kia Picanto! #CARS24",
       "published": "2025-07-04",
@@ -838,6 +1093,23 @@
       "is_short": true
     },
     {
+      "id": "VY92BDTDYpM",
+      "title": "August_App 1x1",
+      "published": "2023-08-29",
+      "url": "https://www.youtube.com/watch?v=VY92BDTDYpM",
+      "thumbnail": "https://i.ytimg.com/vi/VY92BDTDYpM/default.jpg",
+      "views": 23314,
+      "watch_time_hours": 75.38,
+      "avg_duration_sec": 11.0,
+      "avg_view_pct": 116.4,
+      "subs_gained": 0,
+      "likes": 57,
+      "comments": 0,
+      "shares": 3,
+      "engagement_rate": 0.26,
+      "is_short": true
+    },
+    {
       "id": "HoX6LsfQMx0",
       "title": "Value-Prop | Landscape | 10 Seconds",
       "published": "2024-07-08",
@@ -872,21 +1144,21 @@
       "is_short": true
     },
     {
-      "id": "DIps843bo6k",
-      "title": "CARS24 - Order Your Next Car Online From The Bathtub",
-      "published": "2022-05-06",
-      "url": "https://www.youtube.com/watch?v=DIps843bo6k",
-      "thumbnail": "https://i.ytimg.com/vi/DIps843bo6k/default.jpg",
-      "views": 20440,
-      "watch_time_hours": 134.8,
-      "avg_duration_sec": 27.0,
-      "avg_view_pct": 89.8,
-      "subs_gained": 0,
-      "likes": 0,
+      "id": "Tkiw_aN1kC0",
+      "title": "CARS24 - How to Buy",
+      "published": "2022-08-10",
+      "url": "https://www.youtube.com/watch?v=Tkiw_aN1kC0",
+      "thumbnail": "https://i.ytimg.com/vi/Tkiw_aN1kC0/default.jpg",
+      "views": 21414,
+      "watch_time_hours": 127.12,
+      "avg_duration_sec": 21.0,
+      "avg_view_pct": 24.9,
+      "subs_gained": 10,
+      "likes": 14,
       "comments": 0,
-      "shares": 4,
-      "engagement_rate": 0.02,
-      "is_short": true
+      "shares": 45,
+      "engagement_rate": 0.28,
+      "is_short": false
     },
     {
       "id": "ky9BdR1P84s",
@@ -1008,23 +1280,6 @@
       "is_short": true
     },
     {
-      "id": "VY92BDTDYpM",
-      "title": "August_App 1x1",
-      "published": "2023-08-29",
-      "url": "https://www.youtube.com/watch?v=VY92BDTDYpM",
-      "thumbnail": "https://i.ytimg.com/vi/VY92BDTDYpM/default.jpg",
-      "views": 13221,
-      "watch_time_hours": 38.18,
-      "avg_duration_sec": 10.0,
-      "avg_view_pct": 104.0,
-      "subs_gained": 0,
-      "likes": 0,
-      "comments": 0,
-      "shares": 3,
-      "engagement_rate": 0.02,
-      "is_short": true
-    },
-    {
       "id": "FA2ypyrx6nM",
       "title": "USP-New | Square | 10 Seconds",
       "published": "2024-07-08",
@@ -1091,23 +1346,6 @@
       "shares": 6,
       "engagement_rate": 1.27,
       "is_short": true
-    },
-    {
-      "id": "Tkiw_aN1kC0",
-      "title": "CARS24 - How to Buy",
-      "published": "2022-08-10",
-      "url": "https://www.youtube.com/watch?v=Tkiw_aN1kC0",
-      "thumbnail": "https://i.ytimg.com/vi/Tkiw_aN1kC0/default.jpg",
-      "views": 10981,
-      "watch_time_hours": 69.0,
-      "avg_duration_sec": 22.0,
-      "avg_view_pct": 26.3,
-      "subs_gained": 5,
-      "likes": 10,
-      "comments": 0,
-      "shares": 19,
-      "engagement_rate": 0.26,
-      "is_short": false
     },
     {
       "id": "faXE0OmYikY",
@@ -1195,40 +1433,6 @@
       "is_short": true
     },
     {
-      "id": "w4FgTmz3lYw",
-      "title": "Dodgy Dealer - 15 sec",
-      "published": "2022-06-17",
-      "url": "https://www.youtube.com/watch?v=w4FgTmz3lYw",
-      "thumbnail": "https://i.ytimg.com/vi/w4FgTmz3lYw/default.jpg",
-      "views": 10197,
-      "watch_time_hours": 39.97,
-      "avg_duration_sec": 14.0,
-      "avg_view_pct": 98.5,
-      "subs_gained": 0,
-      "likes": -1,
-      "comments": 0,
-      "shares": 0,
-      "engagement_rate": -0.01,
-      "is_short": true
-    },
-    {
-      "id": "Bc9ANU6Scek",
-      "title": "The Future of Used Cars is Here",
-      "published": "2022-04-14",
-      "url": "https://www.youtube.com/watch?v=Bc9ANU6Scek",
-      "thumbnail": "https://i.ytimg.com/vi/Bc9ANU6Scek/default.jpg",
-      "views": 9897,
-      "watch_time_hours": 36.62,
-      "avg_duration_sec": 14.0,
-      "avg_view_pct": 93.5,
-      "subs_gained": 2,
-      "likes": 3,
-      "comments": 0,
-      "shares": 3,
-      "engagement_rate": 0.06,
-      "is_short": true
-    },
-    {
       "id": "3HHMeGlhSIg",
       "title": "Street Interview Car Logo Quiz #shorts #streetinterview",
       "published": "2024-04-25",
@@ -1260,23 +1464,6 @@
       "comments": 3,
       "shares": 2,
       "engagement_rate": 3.13,
-      "is_short": true
-    },
-    {
-      "id": "pvBnylMfjUk",
-      "title": "CARS24 Trust - 15sec",
-      "published": "2021-09-14",
-      "url": "https://www.youtube.com/watch?v=pvBnylMfjUk",
-      "thumbnail": "https://i.ytimg.com/vi/pvBnylMfjUk/default.jpg",
-      "views": 9205,
-      "watch_time_hours": 37.63,
-      "avg_duration_sec": 14.0,
-      "avg_view_pct": 98.2,
-      "subs_gained": 0,
-      "likes": 1,
-      "comments": 0,
-      "shares": 1,
-      "engagement_rate": 0.02,
       "is_short": true
     },
     {
@@ -1397,6 +1584,23 @@
       "shares": 2,
       "engagement_rate": 0.04,
       "is_short": true
+    },
+    {
+      "id": "z3H9R8Y7vKA",
+      "title": "CARS24 Delivers a CAR Across Sydney via Helicopter!",
+      "published": "2022-04-06",
+      "url": "https://www.youtube.com/watch?v=z3H9R8Y7vKA",
+      "thumbnail": "https://i.ytimg.com/vi/z3H9R8Y7vKA/default.jpg",
+      "views": 7836,
+      "watch_time_hours": 128.97,
+      "avg_duration_sec": 59.0,
+      "avg_view_pct": 84.7,
+      "subs_gained": 30,
+      "likes": 53,
+      "comments": 6,
+      "shares": 218,
+      "engagement_rate": 3.53,
+      "is_short": false
     },
     {
       "id": "chLlIMMQLPE",
@@ -1535,6 +1739,23 @@
       "is_short": true
     },
     {
+      "id": "jNpaQfl5Zas",
+      "title": "Swiping phone video - Cars24 Australia",
+      "published": "2023-08-21",
+      "url": "https://www.youtube.com/watch?v=jNpaQfl5Zas",
+      "thumbnail": "https://i.ytimg.com/vi/jNpaQfl5Zas/default.jpg",
+      "views": 5455,
+      "watch_time_hours": 24.78,
+      "avg_duration_sec": 16.0,
+      "avg_view_pct": 96.3,
+      "subs_gained": 0,
+      "likes": 2,
+      "comments": 0,
+      "shares": 1,
+      "engagement_rate": 0.05,
+      "is_short": true
+    },
+    {
       "id": "DdROehhjzhc",
       "title": "2017 Ford Ranger Wildtrak Review (UNCUT) | Australia's Favourite For A Reason | Pre-loved Gems",
       "published": "2025-05-07",
@@ -1566,6 +1787,23 @@
       "comments": 1,
       "shares": 13,
       "engagement_rate": 0.77,
+      "is_short": false
+    },
+    {
+      "id": "t033gNYAToQ",
+      "title": "CARS24 9NEWS Melbourne",
+      "published": "2021-09-06",
+      "url": "https://www.youtube.com/watch?v=t033gNYAToQ",
+      "thumbnail": "https://i.ytimg.com/vi/t033gNYAToQ/default.jpg",
+      "views": 4969,
+      "watch_time_hours": 118.1,
+      "avg_duration_sec": 85.0,
+      "avg_view_pct": 71.9,
+      "subs_gained": 9,
+      "likes": 30,
+      "comments": 6,
+      "shares": 68,
+      "engagement_rate": 2.09,
       "is_short": false
     },
     {
@@ -1705,6 +1943,40 @@
       "is_short": true
     },
     {
+      "id": "LIISaltAWOA",
+      "title": "Dodge the Dodgy Dealers with CARS24",
+      "published": "2022-06-20",
+      "url": "https://www.youtube.com/watch?v=LIISaltAWOA",
+      "thumbnail": "https://i.ytimg.com/vi/LIISaltAWOA/default.jpg",
+      "views": 3970,
+      "watch_time_hours": 31.03,
+      "avg_duration_sec": 28.0,
+      "avg_view_pct": 92.7,
+      "subs_gained": 4,
+      "likes": 21,
+      "comments": 3,
+      "shares": 100,
+      "engagement_rate": 3.12,
+      "is_short": true
+    },
+    {
+      "id": "io2A-pdIL2k",
+      "title": "CARS24 - Order Your Next Car Online While Doing Yoga",
+      "published": "2022-05-06",
+      "url": "https://www.youtube.com/watch?v=io2A-pdIL2k",
+      "thumbnail": "https://i.ytimg.com/vi/io2A-pdIL2k/default.jpg",
+      "views": 3954,
+      "watch_time_hours": 24.48,
+      "avg_duration_sec": 22.0,
+      "avg_view_pct": 72.0,
+      "subs_gained": 14,
+      "likes": 24,
+      "comments": 3,
+      "shares": 36,
+      "engagement_rate": 1.59,
+      "is_short": true
+    },
+    {
       "id": "OsydWUeL5Tg",
       "title": "What our performance cars sound like \ud83e\udd29  #CARS24 #UsedCars",
       "published": "2025-07-27",
@@ -1722,38 +1994,38 @@
       "is_short": true
     },
     {
-      "id": "lh6fbRDLi8Q",
-      "title": "Lemon - 15 sec",
-      "published": "2022-06-17",
-      "url": "https://www.youtube.com/watch?v=lh6fbRDLi8Q",
-      "thumbnail": "https://i.ytimg.com/vi/lh6fbRDLi8Q/default.jpg",
-      "views": 3906,
-      "watch_time_hours": 15.73,
-      "avg_duration_sec": 14.0,
-      "avg_view_pct": 97.8,
-      "subs_gained": 0,
-      "likes": -4,
+      "id": "r3akZryPKQc",
+      "title": "Meet Carl",
+      "published": "2021-09-06",
+      "url": "https://www.youtube.com/watch?v=r3akZryPKQc",
+      "thumbnail": "https://i.ytimg.com/vi/r3akZryPKQc/default.jpg",
+      "views": 3802,
+      "watch_time_hours": 32.4,
+      "avg_duration_sec": 30.0,
+      "avg_view_pct": 102.3,
+      "subs_gained": 6,
+      "likes": 17,
       "comments": 0,
-      "shares": 0,
-      "engagement_rate": -0.1,
+      "shares": 92,
+      "engagement_rate": 2.87,
       "is_short": true
     },
     {
-      "id": "z3H9R8Y7vKA",
-      "title": "CARS24 Delivers a CAR Across Sydney via Helicopter!",
-      "published": "2022-04-06",
-      "url": "https://www.youtube.com/watch?v=z3H9R8Y7vKA",
-      "thumbnail": "https://i.ytimg.com/vi/z3H9R8Y7vKA/default.jpg",
-      "views": 3707,
-      "watch_time_hours": 78.7,
-      "avg_duration_sec": 76.0,
-      "avg_view_pct": 109.2,
-      "subs_gained": 3,
-      "likes": 7,
-      "comments": 0,
-      "shares": 43,
-      "engagement_rate": 1.35,
-      "is_short": false
+      "id": "VyLph52fJG8",
+      "title": "Avoid Bringing Home a Lemon with CARS24",
+      "published": "2022-06-20",
+      "url": "https://www.youtube.com/watch?v=VyLph52fJG8",
+      "thumbnail": "https://i.ytimg.com/vi/VyLph52fJG8/default.jpg",
+      "views": 3555,
+      "watch_time_hours": 31.18,
+      "avg_duration_sec": 31.0,
+      "avg_view_pct": 103.8,
+      "subs_gained": 6,
+      "likes": 26,
+      "comments": 6,
+      "shares": 103,
+      "engagement_rate": 3.8,
+      "is_short": true
     },
     {
       "id": "8vxasZxRX58",
@@ -1770,6 +2042,23 @@
       "comments": 0,
       "shares": 0,
       "engagement_rate": 1.14,
+      "is_short": true
+    },
+    {
+      "id": "KddprpTnU2c",
+      "title": "The Future of Used Cars is here! \ud83d\ude98\ud83e\udd2f",
+      "published": "2023-09-14",
+      "url": "https://www.youtube.com/watch?v=KddprpTnU2c",
+      "thumbnail": "https://i.ytimg.com/vi/KddprpTnU2c/default.jpg",
+      "views": 3309,
+      "watch_time_hours": 12.53,
+      "avg_duration_sec": 14.0,
+      "avg_view_pct": 68.9,
+      "subs_gained": 5,
+      "likes": 53,
+      "comments": 2,
+      "shares": 5,
+      "engagement_rate": 1.81,
       "is_short": true
     },
     {
@@ -1943,6 +2232,23 @@
       "is_short": true
     },
     {
+      "id": "BV90oGqywDo",
+      "title": "Finance Pre-Approval with CARS24",
+      "published": "2022-01-04",
+      "url": "https://www.youtube.com/watch?v=BV90oGqywDo",
+      "thumbnail": "https://i.ytimg.com/vi/BV90oGqywDo/default.jpg",
+      "views": 2653,
+      "watch_time_hours": 21.13,
+      "avg_duration_sec": 28.0,
+      "avg_view_pct": 79.8,
+      "subs_gained": 5,
+      "likes": 5,
+      "comments": 0,
+      "shares": 4,
+      "engagement_rate": 0.34,
+      "is_short": true
+    },
+    {
       "id": "KhWXxcvb4oE",
       "title": "2015 Holden Cascada Review | Best Affordable Convertible? | Pre-loved Gems @ CARS24",
       "published": "2025-04-13",
@@ -2045,20 +2351,37 @@
       "is_short": true
     },
     {
-      "id": "t033gNYAToQ",
-      "title": "CARS24 9NEWS Melbourne",
-      "published": "2021-09-06",
-      "url": "https://www.youtube.com/watch?v=t033gNYAToQ",
-      "thumbnail": "https://i.ytimg.com/vi/t033gNYAToQ/default.jpg",
-      "views": 2307,
-      "watch_time_hours": 61.15,
-      "avg_duration_sec": 95.0,
-      "avg_view_pct": 80.2,
-      "subs_gained": 0,
-      "likes": 7,
-      "comments": 3,
-      "shares": 22,
-      "engagement_rate": 1.39,
+      "id": "CIVva_OMkZA",
+      "title": "It\u2019s the small things in life that truly matter. #cars24 #cars24au #trending",
+      "published": "2023-11-18",
+      "url": "https://www.youtube.com/watch?v=CIVva_OMkZA",
+      "thumbnail": "https://i.ytimg.com/vi/CIVva_OMkZA/default.jpg",
+      "views": 2364,
+      "watch_time_hours": 6.6,
+      "avg_duration_sec": 10.0,
+      "avg_view_pct": 84.4,
+      "subs_gained": 3,
+      "likes": 69,
+      "comments": 0,
+      "shares": 4,
+      "engagement_rate": 3.09,
+      "is_short": true
+    },
+    {
+      "id": "ZaXk4fOJWR8",
+      "title": "Case Study: How startup, Cars24 Delivered The Future of Used Cars",
+      "published": "2022-08-29",
+      "url": "https://www.youtube.com/watch?v=ZaXk4fOJWR8",
+      "thumbnail": "https://i.ytimg.com/vi/ZaXk4fOJWR8/default.jpg",
+      "views": 2295,
+      "watch_time_hours": 66.68,
+      "avg_duration_sec": 104.0,
+      "avg_view_pct": 74.7,
+      "subs_gained": 4,
+      "likes": 8,
+      "comments": 2,
+      "shares": 33,
+      "engagement_rate": 1.87,
       "is_short": false
     },
     {
@@ -2164,6 +2487,23 @@
       "is_short": true
     },
     {
+      "id": "SE0XKCgPY8I",
+      "title": "CARS24 7NEWS Sydney Exclusive",
+      "published": "2021-09-01",
+      "url": "https://www.youtube.com/watch?v=SE0XKCgPY8I",
+      "thumbnail": "https://i.ytimg.com/vi/SE0XKCgPY8I/default.jpg",
+      "views": 1873,
+      "watch_time_hours": 29.63,
+      "avg_duration_sec": 56.0,
+      "avg_view_pct": 67.8,
+      "subs_gained": 6,
+      "likes": 9,
+      "comments": 0,
+      "shares": 27,
+      "engagement_rate": 1.92,
+      "is_short": false
+    },
+    {
       "id": "jbx8qPcxLGU",
       "title": "Living the dream, literally. \ud83d\ude4f\u2728\u2060@Cars24_Australia",
       "published": "2026-04-26",
@@ -2195,23 +2535,6 @@
       "comments": 0,
       "shares": 0,
       "engagement_rate": 1.03,
-      "is_short": true
-    },
-    {
-      "id": "BV90oGqywDo",
-      "title": "Finance Pre-Approval with CARS24",
-      "published": "2022-01-04",
-      "url": "https://www.youtube.com/watch?v=BV90oGqywDo",
-      "thumbnail": "https://i.ytimg.com/vi/BV90oGqywDo/default.jpg",
-      "views": 1840,
-      "watch_time_hours": 15.95,
-      "avg_duration_sec": 31.0,
-      "avg_view_pct": 86.8,
-      "subs_gained": 0,
-      "likes": -1,
-      "comments": 0,
-      "shares": 0,
-      "engagement_rate": -0.05,
       "is_short": true
     },
     {
@@ -2300,23 +2623,6 @@
       "is_short": true
     },
     {
-      "id": "ZaXk4fOJWR8",
-      "title": "Case Study: How startup, Cars24 Delivered The Future of Used Cars",
-      "published": "2022-08-29",
-      "url": "https://www.youtube.com/watch?v=ZaXk4fOJWR8",
-      "thumbnail": "https://i.ytimg.com/vi/ZaXk4fOJWR8/default.jpg",
-      "views": 1695,
-      "watch_time_hours": 54.57,
-      "avg_duration_sec": 115.0,
-      "avg_view_pct": 82.8,
-      "subs_gained": 2,
-      "likes": 1,
-      "comments": 0,
-      "shares": 9,
-      "engagement_rate": 0.59,
-      "is_short": false
-    },
-    {
       "id": "Gl_eARhuja0",
       "title": "Top 5 Cars of the Week!",
       "published": "2025-04-10",
@@ -2366,6 +2672,23 @@
       "shares": 1,
       "engagement_rate": 0.73,
       "is_short": true
+    },
+    {
+      "id": "m-CPIjOZvy4",
+      "title": "How to Buy from CARS24",
+      "published": "2021-11-28",
+      "url": "https://www.youtube.com/watch?v=m-CPIjOZvy4",
+      "thumbnail": "https://i.ytimg.com/vi/m-CPIjOZvy4/default.jpg",
+      "views": 1638,
+      "watch_time_hours": 17.63,
+      "avg_duration_sec": 38.0,
+      "avg_view_pct": 42.7,
+      "subs_gained": 5,
+      "likes": 12,
+      "comments": 2,
+      "shares": 32,
+      "engagement_rate": 2.81,
+      "is_short": false
     },
     {
       "id": "YTpmN58Za60",
@@ -2538,23 +2861,6 @@
       "is_short": false
     },
     {
-      "id": "LIISaltAWOA",
-      "title": "Dodge the Dodgy Dealers with CARS24",
-      "published": "2022-06-20",
-      "url": "https://www.youtube.com/watch?v=LIISaltAWOA",
-      "thumbnail": "https://i.ytimg.com/vi/LIISaltAWOA/default.jpg",
-      "views": 1469,
-      "watch_time_hours": 11.65,
-      "avg_duration_sec": 28.0,
-      "avg_view_pct": 92.2,
-      "subs_gained": 0,
-      "likes": 0,
-      "comments": 0,
-      "shares": 4,
-      "engagement_rate": 0.27,
-      "is_short": true
-    },
-    {
       "id": "OuBsKFiTkB4",
       "title": "Kia EV6 \u26a1\ufe0f #worldenvironmentday",
       "published": "2025-06-04",
@@ -2589,23 +2895,6 @@
       "is_short": true
     },
     {
-      "id": "VyLph52fJG8",
-      "title": "Avoid Bringing Home a Lemon with CARS24",
-      "published": "2022-06-20",
-      "url": "https://www.youtube.com/watch?v=VyLph52fJG8",
-      "thumbnail": "https://i.ytimg.com/vi/VyLph52fJG8/default.jpg",
-      "views": 1414,
-      "watch_time_hours": 11.13,
-      "avg_duration_sec": 28.0,
-      "avg_view_pct": 91.6,
-      "subs_gained": 1,
-      "likes": 1,
-      "comments": 0,
-      "shares": 8,
-      "engagement_rate": 0.64,
-      "is_short": true
-    },
-    {
       "id": "jB43k51d1Cc",
       "title": "How Not to Pronounce Car Brands  #automobile #cartok #fyp",
       "published": "2026-04-22",
@@ -2621,6 +2910,23 @@
       "shares": 1,
       "engagement_rate": 1.23,
       "is_short": true
+    },
+    {
+      "id": "bT0e0vO32AM",
+      "title": "CARS24 - How to Buy",
+      "published": "2023-12-13",
+      "url": "https://www.youtube.com/watch?v=bT0e0vO32AM",
+      "thumbnail": "https://i.ytimg.com/vi/bT0e0vO32AM/default.jpg",
+      "views": 1348,
+      "watch_time_hours": 7.5,
+      "avg_duration_sec": 20.0,
+      "avg_view_pct": 23.3,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 7,
+      "engagement_rate": 0.52,
+      "is_short": false
     },
     {
       "id": "l8qgWyJeLmM",
@@ -2654,23 +2960,6 @@
       "comments": 5,
       "shares": 5,
       "engagement_rate": 3.07,
-      "is_short": false
-    },
-    {
-      "id": "bT0e0vO32AM",
-      "title": "CARS24 - How to Buy",
-      "published": "2023-12-13",
-      "url": "https://www.youtube.com/watch?v=bT0e0vO32AM",
-      "thumbnail": "https://i.ytimg.com/vi/bT0e0vO32AM/default.jpg",
-      "views": 1333,
-      "watch_time_hours": 7.45,
-      "avg_duration_sec": 20.0,
-      "avg_view_pct": 23.4,
-      "subs_gained": 0,
-      "likes": 0,
-      "comments": 0,
-      "shares": 2,
-      "engagement_rate": 0.15,
       "is_short": false
     },
     {
@@ -2757,23 +3046,6 @@
       "shares": 1,
       "engagement_rate": 3.06,
       "is_short": false
-    },
-    {
-      "id": "io2A-pdIL2k",
-      "title": "CARS24 - Order Your Next Car Online While Doing Yoga",
-      "published": "2022-05-06",
-      "url": "https://www.youtube.com/watch?v=io2A-pdIL2k",
-      "thumbnail": "https://i.ytimg.com/vi/io2A-pdIL2k/default.jpg",
-      "views": 1305,
-      "watch_time_hours": 10.38,
-      "avg_duration_sec": 28.0,
-      "avg_view_pct": 92.5,
-      "subs_gained": 0,
-      "likes": 0,
-      "comments": 0,
-      "shares": 5,
-      "engagement_rate": 0.38,
-      "is_short": true
     },
     {
       "id": "-Q3yVYEr8js",
@@ -3456,142 +3728,6 @@
       "is_short": true
     },
     {
-      "id": "k1R8W9SBcq4",
-      "title": "CARS24 makes upgrading your car so easy!",
-      "published": "2026-01-25",
-      "url": "https://www.youtube.com/watch?v=k1R8W9SBcq4",
-      "thumbnail": "https://i.ytimg.com/vi/k1R8W9SBcq4/default.jpg",
-      "views": 934,
-      "watch_time_hours": 1.68,
-      "avg_duration_sec": 16.0,
-      "avg_view_pct": 26.7,
-      "subs_gained": 0,
-      "likes": 12,
-      "comments": 2,
-      "shares": 1,
-      "engagement_rate": 1.61,
-      "is_short": true
-    },
-    {
-      "id": "TdhiJw7PfFo",
-      "title": "We Get the Language. We Fix the Process.",
-      "published": "2026-02-16",
-      "url": "https://www.youtube.com/watch?v=TdhiJw7PfFo",
-      "thumbnail": "https://i.ytimg.com/vi/TdhiJw7PfFo/default.jpg",
-      "views": 923,
-      "watch_time_hours": 1.87,
-      "avg_duration_sec": 16.0,
-      "avg_view_pct": 74.6,
-      "subs_gained": 2,
-      "likes": 19,
-      "comments": 1,
-      "shares": 0,
-      "engagement_rate": 2.17,
-      "is_short": true
-    },
-    {
-      "id": "BQvcSnMihL0",
-      "title": "Tesla drivers in 2025 be like... #teslamemes",
-      "published": "2025-06-12",
-      "url": "https://www.youtube.com/watch?v=BQvcSnMihL0",
-      "thumbnail": "https://i.ytimg.com/vi/BQvcSnMihL0/default.jpg",
-      "views": 922,
-      "watch_time_hours": 4.03,
-      "avg_duration_sec": 33.0,
-      "avg_view_pct": 56.0,
-      "subs_gained": 0,
-      "likes": 18,
-      "comments": 0,
-      "shares": 0,
-      "engagement_rate": 1.95,
-      "is_short": true
-    },
-    {
-      "id": "rFm321UjNKI",
-      "title": "Keep your ride running smooth with this checklist.",
-      "published": "2026-02-27",
-      "url": "https://www.youtube.com/watch?v=rFm321UjNKI",
-      "thumbnail": "https://i.ytimg.com/vi/rFm321UjNKI/default.jpg",
-      "views": 916,
-      "watch_time_hours": 1.3,
-      "avg_duration_sec": 12.0,
-      "avg_view_pct": 50.5,
-      "subs_gained": 1,
-      "likes": 9,
-      "comments": 1,
-      "shares": 1,
-      "engagement_rate": 1.2,
-      "is_short": true
-    },
-    {
-      "id": "jNpaQfl5Zas",
-      "title": "Swiping phone video - Cars24 Australia",
-      "published": "2023-08-21",
-      "url": "https://www.youtube.com/watch?v=jNpaQfl5Zas",
-      "thumbnail": "https://i.ytimg.com/vi/jNpaQfl5Zas/default.jpg",
-      "views": 905,
-      "watch_time_hours": 3.75,
-      "avg_duration_sec": 14.0,
-      "avg_view_pct": 87.9,
-      "subs_gained": 0,
-      "likes": 0,
-      "comments": 0,
-      "shares": 0,
-      "engagement_rate": 0.0,
-      "is_short": true
-    },
-    {
-      "id": "_TY923qVs4s",
-      "title": "Time for a Bigger Car? Sell Your Old One on Cars24",
-      "published": "2026-03-23",
-      "url": "https://www.youtube.com/watch?v=_TY923qVs4s",
-      "thumbnail": "https://i.ytimg.com/vi/_TY923qVs4s/default.jpg",
-      "views": 886,
-      "watch_time_hours": 2.05,
-      "avg_duration_sec": 15.0,
-      "avg_view_pct": 42.7,
-      "subs_gained": 0,
-      "likes": 16,
-      "comments": 0,
-      "shares": 0,
-      "engagement_rate": 1.81,
-      "is_short": true
-    },
-    {
-      "id": "MBHW7qH12rY",
-      "title": "Real talk: financial advice you actually need \ud83d\udcb8\ud83e\udde0",
-      "published": "2026-03-30",
-      "url": "https://www.youtube.com/watch?v=MBHW7qH12rY",
-      "thumbnail": "https://i.ytimg.com/vi/MBHW7qH12rY/default.jpg",
-      "views": 879,
-      "watch_time_hours": 1.73,
-      "avg_duration_sec": 17.0,
-      "avg_view_pct": 42.8,
-      "subs_gained": 0,
-      "likes": 6,
-      "comments": 0,
-      "shares": 0,
-      "engagement_rate": 0.68,
-      "is_short": true
-    },
-    {
-      "id": "PyuVG9UMHpU",
-      "title": "Shopping cars on the way to uni with Cars24",
-      "published": "2026-04-01",
-      "url": "https://www.youtube.com/watch?v=PyuVG9UMHpU",
-      "thumbnail": "https://i.ytimg.com/vi/PyuVG9UMHpU/default.jpg",
-      "views": 874,
-      "watch_time_hours": 1.32,
-      "avg_duration_sec": 12.0,
-      "avg_view_pct": 43.1,
-      "subs_gained": 0,
-      "likes": 16,
-      "comments": 0,
-      "shares": 0,
-      "engagement_rate": 1.83,
-      "is_short": true
-    },
-    {
       "id": "tG5h_DJeGe4",
       "title": "Your date pulls up and it's giving old money \ud83d\udcb0 #funny #cars24 #nepobaby #dateideas",
       "published": "2026-05-19",
@@ -3609,40 +3745,6 @@
       "is_short": true
     },
     {
-      "id": "jCo6vgrJjiQ",
-      "title": "How to Fill in and Sign Your Cars24 Contract | Step-by-Step Guide \ud83d\ude97\ud83d\udcc4",
-      "published": "2026-03-09",
-      "url": "https://www.youtube.com/watch?v=jCo6vgrJjiQ",
-      "thumbnail": "https://i.ytimg.com/vi/jCo6vgrJjiQ/default.jpg",
-      "views": 852,
-      "watch_time_hours": 12.0,
-      "avg_duration_sec": 50.0,
-      "avg_view_pct": 62.7,
-      "subs_gained": 0,
-      "likes": 0,
-      "comments": 0,
-      "shares": 8,
-      "engagement_rate": 0.94,
-      "is_short": false
-    },
-    {
-      "id": "68aL3L4mjNQ",
-      "title": "What's it like to drive a Tesla Model 3?  #automobile #carbuying #teslamodel3 #fyp",
-      "published": "2026-04-20",
-      "url": "https://www.youtube.com/watch?v=68aL3L4mjNQ",
-      "thumbnail": "https://i.ytimg.com/vi/68aL3L4mjNQ/default.jpg",
-      "views": 847,
-      "watch_time_hours": 4.65,
-      "avg_duration_sec": 34.0,
-      "avg_view_pct": 40.1,
-      "subs_gained": 1,
-      "likes": 8,
-      "comments": 0,
-      "shares": 0,
-      "engagement_rate": 0.94,
-      "is_short": false
-    },
-    {
       "id": "elic_q0tC88",
       "title": "Best Value 4WD in Australia? | GWM Tank 300 Review  #cars24 #automobile #cartok #carbuying",
       "published": "2026-06-04",
@@ -3658,74 +3760,6 @@
       "shares": 1,
       "engagement_rate": 1.18,
       "is_short": false
-    },
-    {
-      "id": "XRsgFfq6Tpg",
-      "title": "Find a car should be fun, so let\u2019s find your perfect ride together\ud83d\udc4f@Cars24_Australia",
-      "published": "2026-04-29",
-      "url": "https://www.youtube.com/watch?v=XRsgFfq6Tpg",
-      "thumbnail": "https://i.ytimg.com/vi/XRsgFfq6Tpg/default.jpg",
-      "views": 844,
-      "watch_time_hours": 1.58,
-      "avg_duration_sec": 15.0,
-      "avg_view_pct": 42.1,
-      "subs_gained": 1,
-      "likes": 5,
-      "comments": 0,
-      "shares": 0,
-      "engagement_rate": 0.59,
-      "is_short": true
-    },
-    {
-      "id": "JVZZoOrurjE",
-      "title": "Australia\u2019s first 30-Day Car Return \ud83e\udd2f",
-      "published": "2026-03-17",
-      "url": "https://www.youtube.com/watch?v=JVZZoOrurjE",
-      "thumbnail": "https://i.ytimg.com/vi/JVZZoOrurjE/default.jpg",
-      "views": 838,
-      "watch_time_hours": 2.3,
-      "avg_duration_sec": 20.0,
-      "avg_view_pct": 21.9,
-      "subs_gained": 0,
-      "likes": 14,
-      "comments": 0,
-      "shares": 0,
-      "engagement_rate": 1.67,
-      "is_short": false
-    },
-    {
-      "id": "PMegcAo4aqQ",
-      "title": "What car did you buy today? #shorts",
-      "published": "2024-06-07",
-      "url": "https://www.youtube.com/watch?v=PMegcAo4aqQ",
-      "thumbnail": "https://i.ytimg.com/vi/PMegcAo4aqQ/default.jpg",
-      "views": 837,
-      "watch_time_hours": 4.2,
-      "avg_duration_sec": 18.0,
-      "avg_view_pct": 66.0,
-      "subs_gained": 1,
-      "likes": 10,
-      "comments": 0,
-      "shares": 0,
-      "engagement_rate": 1.19,
-      "is_short": true
-    },
-    {
-      "id": "bJUut_Cx2iM",
-      "title": "Why struggle on Marketplace when Cars24 exists? \ud83e\udd14\ud83d\ude97",
-      "published": "2026-03-27",
-      "url": "https://www.youtube.com/watch?v=bJUut_Cx2iM",
-      "thumbnail": "https://i.ytimg.com/vi/bJUut_Cx2iM/default.jpg",
-      "views": 830,
-      "watch_time_hours": 1.9,
-      "avg_duration_sec": 18.0,
-      "avg_view_pct": 30.4,
-      "subs_gained": 0,
-      "likes": 7,
-      "comments": 0,
-      "shares": 0,
-      "engagement_rate": 0.84,
-      "is_short": true
     },
     {
       "id": "Vy7MDCWCnVo",
@@ -3895,6 +3929,23 @@
       "comments": 1,
       "shares": 0,
       "engagement_rate": 1.74,
+      "is_short": false
+    },
+    {
+      "id": "jCo6vgrJjiQ",
+      "title": "How to Fill in and Sign Your Cars24 Contract | Step-by-Step Guide \ud83d\ude97\ud83d\udcc4",
+      "published": "2026-03-09",
+      "url": "https://www.youtube.com/watch?v=jCo6vgrJjiQ",
+      "thumbnail": "https://i.ytimg.com/vi/jCo6vgrJjiQ/default.jpg",
+      "views": 343,
+      "watch_time_hours": 4.57,
+      "avg_duration_sec": 47.0,
+      "avg_view_pct": 59.2,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 2,
+      "engagement_rate": 0.58,
       "is_short": false
     },
     {
@@ -4221,21 +4272,21 @@
       "is_short": false
     },
     {
-      "id": "KddprpTnU2c",
-      "title": "The Future of Used Cars is here! \ud83d\ude98\ud83e\udd2f",
-      "published": "2023-09-14",
-      "url": "https://www.youtube.com/watch?v=KddprpTnU2c",
-      "thumbnail": "https://i.ytimg.com/vi/KddprpTnU2c/default.jpg",
+      "id": "JVZZoOrurjE",
+      "title": "Australia\u2019s first 30-Day Car Return \ud83e\udd2f",
+      "published": "2026-03-17",
+      "url": "https://www.youtube.com/watch?v=JVZZoOrurjE",
+      "thumbnail": "https://i.ytimg.com/vi/JVZZoOrurjE/default.jpg",
       "views": 23,
-      "watch_time_hours": 0.03,
-      "avg_duration_sec": 14.0,
-      "avg_view_pct": 68.6,
+      "watch_time_hours": 0.1,
+      "avg_duration_sec": 28.0,
+      "avg_view_pct": 29.9,
       "subs_gained": 0,
       "likes": 0,
       "comments": 0,
       "shares": 0,
       "engagement_rate": 0.0,
-      "is_short": true
+      "is_short": false
     },
     {
       "id": "ymwD19yMVWA",
@@ -4391,23 +4442,6 @@
       "is_short": true
     },
     {
-      "id": "r3akZryPKQc",
-      "title": "Meet Carl",
-      "published": "2021-09-06",
-      "url": "https://www.youtube.com/watch?v=r3akZryPKQc",
-      "thumbnail": "https://i.ytimg.com/vi/r3akZryPKQc/default.jpg",
-      "views": 12,
-      "watch_time_hours": 0.05,
-      "avg_duration_sec": 16.0,
-      "avg_view_pct": 54.1,
-      "subs_gained": 0,
-      "likes": -1,
-      "comments": 0,
-      "shares": 0,
-      "engagement_rate": -8.33,
-      "is_short": true
-    },
-    {
       "id": "uYllqKuhSow",
       "title": "Buying a high-mileage used car? Watch this first! #CARS24",
       "published": "2025-06-02",
@@ -4417,6 +4451,23 @@
       "watch_time_hours": 0.0,
       "avg_duration_sec": 8.0,
       "avg_view_pct": 49.2,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.0,
+      "is_short": true
+    },
+    {
+      "id": "_TY923qVs4s",
+      "title": "Time for a Bigger Car? Sell Your Old One on Cars24",
+      "published": "2026-03-23",
+      "url": "https://www.youtube.com/watch?v=_TY923qVs4s",
+      "thumbnail": "https://i.ytimg.com/vi/_TY923qVs4s/default.jpg",
+      "views": 12,
+      "watch_time_hours": 0.05,
+      "avg_duration_sec": 26.0,
+      "avg_view_pct": 72.5,
       "subs_gained": 0,
       "likes": 0,
       "comments": 0,
@@ -4544,6 +4595,23 @@
       "is_short": true
     },
     {
+      "id": "BQvcSnMihL0",
+      "title": "Tesla drivers in 2025 be like... #teslamemes",
+      "published": "2025-06-12",
+      "url": "https://www.youtube.com/watch?v=BQvcSnMihL0",
+      "thumbnail": "https://i.ytimg.com/vi/BQvcSnMihL0/default.jpg",
+      "views": 9,
+      "watch_time_hours": 0.05,
+      "avg_duration_sec": 37.0,
+      "avg_view_pct": 62.4,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.0,
+      "is_short": true
+    },
+    {
       "id": "djkbVIsGddk",
       "title": "This Is What 5-Star Car Buying Looks Like",
       "published": "2026-02-06",
@@ -4646,6 +4714,23 @@
       "is_short": true
     },
     {
+      "id": "XRsgFfq6Tpg",
+      "title": "Find a car should be fun, so let\u2019s find your perfect ride together\ud83d\udc4f@Cars24_Australia",
+      "published": "2026-04-29",
+      "url": "https://www.youtube.com/watch?v=XRsgFfq6Tpg",
+      "thumbnail": "https://i.ytimg.com/vi/XRsgFfq6Tpg/default.jpg",
+      "views": 6,
+      "watch_time_hours": 0.0,
+      "avg_duration_sec": 21.0,
+      "avg_view_pct": 55.7,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.0,
+      "is_short": true
+    },
+    {
       "id": "7tCUva8y4T4",
       "title": "Put it to the test - 30 days, zero pressure with Cars24.",
       "published": "2026-04-20",
@@ -4678,6 +4763,23 @@
       "shares": 0,
       "engagement_rate": 0.0,
       "is_short": true
+    },
+    {
+      "id": "68aL3L4mjNQ",
+      "title": "What's it like to drive a Tesla Model 3?  #automobile #carbuying #teslamodel3 #fyp",
+      "published": "2026-04-20",
+      "url": "https://www.youtube.com/watch?v=68aL3L4mjNQ",
+      "thumbnail": "https://i.ytimg.com/vi/68aL3L4mjNQ/default.jpg",
+      "views": 6,
+      "watch_time_hours": 0.03,
+      "avg_duration_sec": 51.0,
+      "avg_view_pct": 59.0,
+      "subs_gained": 0,
+      "likes": -1,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": -16.67,
+      "is_short": false
     },
     {
       "id": "yAGpaRsIM_k",
@@ -4867,23 +4969,6 @@
       "is_short": true
     },
     {
-      "id": "SE0XKCgPY8I",
-      "title": "CARS24 7NEWS Sydney Exclusive",
-      "published": "2021-09-01",
-      "url": "https://www.youtube.com/watch?v=SE0XKCgPY8I",
-      "thumbnail": "https://i.ytimg.com/vi/SE0XKCgPY8I/default.jpg",
-      "views": 4,
-      "watch_time_hours": 0.02,
-      "avg_duration_sec": 23.0,
-      "avg_view_pct": 27.4,
-      "subs_gained": 0,
-      "likes": 0,
-      "comments": 0,
-      "shares": 0,
-      "engagement_rate": 0.0,
-      "is_short": false
-    },
-    {
       "id": "u_xRLsehNDs",
       "title": "Buy Online | Landscape | 14 Seconds",
       "published": "2025-05-26",
@@ -4995,6 +5080,23 @@
       "watch_time_hours": 0.0,
       "avg_duration_sec": 0.0,
       "avg_view_pct": 0.0,
+      "subs_gained": 0,
+      "likes": 0,
+      "comments": 0,
+      "shares": 0,
+      "engagement_rate": 0.0,
+      "is_short": true
+    },
+    {
+      "id": "k1R8W9SBcq4",
+      "title": "CARS24 makes upgrading your car so easy!",
+      "published": "2026-01-25",
+      "url": "https://www.youtube.com/watch?v=k1R8W9SBcq4",
+      "thumbnail": "https://i.ytimg.com/vi/k1R8W9SBcq4/default.jpg",
+      "views": 3,
+      "watch_time_hours": 0.02,
+      "avg_duration_sec": 65.0,
+      "avg_view_pct": 109.0,
       "subs_gained": 0,
       "likes": 0,
       "comments": 0,
@@ -7038,6 +7140,878 @@
         "views": 0,
         "watch_time_hours": 0.0
       }
+    ],
+    "2021-06": [
+      {
+        "city": "Brisbane",
+        "views": 14,
+        "watch_time_hours": 0.1
+      }
+    ],
+    "2021-09": [
+      {
+        "city": "Sydney",
+        "views": 127,
+        "watch_time_hours": 1.0
+      },
+      {
+        "city": "Melbourne",
+        "views": 90,
+        "watch_time_hours": 0.6
+      }
+    ],
+    "2021-10": [
+      {
+        "city": "Melbourne",
+        "views": 62,
+        "watch_time_hours": 0.4
+      },
+      {
+        "city": "Sydney",
+        "views": 26,
+        "watch_time_hours": 0.2
+      },
+      {
+        "city": "Brisbane",
+        "views": 12,
+        "watch_time_hours": 0.3
+      }
+    ],
+    "2021-11": [
+      {
+        "city": "Brisbane",
+        "views": 14,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Melbourne",
+        "views": 10,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Sydney",
+        "views": 10,
+        "watch_time_hours": 0.1
+      }
+    ],
+    "2022-01": [
+      {
+        "city": "Bengaluru",
+        "views": 10,
+        "watch_time_hours": 0.1
+      }
+    ],
+    "2022-04": [
+      {
+        "city": "Melbourne",
+        "views": 83,
+        "watch_time_hours": 1.3
+      },
+      {
+        "city": "Delhi",
+        "views": 12,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Sydney",
+        "views": 0,
+        "watch_time_hours": 0.0
+      }
+    ],
+    "2022-05": [
+      {
+        "city": "Sydney",
+        "views": 21355,
+        "watch_time_hours": 171.0
+      },
+      {
+        "city": "Melbourne",
+        "views": 15653,
+        "watch_time_hours": 124.7
+      },
+      {
+        "city": "Brisbane",
+        "views": 11073,
+        "watch_time_hours": 88.1
+      },
+      {
+        "city": "Faridabad",
+        "views": 31,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "Gold Coast",
+        "views": 30,
+        "watch_time_hours": 0.2
+      },
+      {
+        "city": "Delhi",
+        "views": 16,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Adelaide",
+        "views": 15,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Wollongong",
+        "views": 13,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Bengaluru",
+        "views": 12,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Gurugram",
+        "views": 10,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Newcastle",
+        "views": 10,
+        "watch_time_hours": 0.1
+      }
+    ],
+    "2022-06": [
+      {
+        "city": "Sydney",
+        "views": 4695,
+        "watch_time_hours": 37.5
+      },
+      {
+        "city": "Melbourne",
+        "views": 4252,
+        "watch_time_hours": 34.2
+      },
+      {
+        "city": "Brisbane",
+        "views": 2487,
+        "watch_time_hours": 19.6
+      },
+      {
+        "city": "Bengaluru",
+        "views": 177,
+        "watch_time_hours": 0.8
+      },
+      {
+        "city": "Hyderabad",
+        "views": 157,
+        "watch_time_hours": 0.7
+      },
+      {
+        "city": "Delhi",
+        "views": 137,
+        "watch_time_hours": 0.6
+      },
+      {
+        "city": "Ahmedabad",
+        "views": 93,
+        "watch_time_hours": 0.4
+      },
+      {
+        "city": "Pune",
+        "views": 91,
+        "watch_time_hours": 0.4
+      },
+      {
+        "city": "Chennai",
+        "views": 87,
+        "watch_time_hours": 0.4
+      },
+      {
+        "city": "Nagpur",
+        "views": 86,
+        "watch_time_hours": 0.3
+      },
+      {
+        "city": "Mumbai",
+        "views": 70,
+        "watch_time_hours": 0.3
+      },
+      {
+        "city": "Lucknow",
+        "views": 60,
+        "watch_time_hours": 0.3
+      },
+      {
+        "city": "Agra",
+        "views": 53,
+        "watch_time_hours": 0.2
+      },
+      {
+        "city": "Jaipur",
+        "views": 39,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Patna",
+        "views": 36,
+        "watch_time_hours": 0.2
+      },
+      {
+        "city": "Kochi",
+        "views": 33,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Kolkata",
+        "views": 31,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Coimbatore",
+        "views": 31,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Ludhiana",
+        "views": 29,
+        "watch_time_hours": 0.2
+      },
+      {
+        "city": "Indore",
+        "views": 27,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Gurugram",
+        "views": 24,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Visakhapatnam",
+        "views": 23,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Panipat",
+        "views": 21,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "Chandigarh",
+        "views": 17,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "New Delhi",
+        "views": 16,
+        "watch_time_hours": 0.0
+      }
+    ],
+    "2022-07": [
+      {
+        "city": "Melbourne",
+        "views": 570,
+        "watch_time_hours": 5.2
+      },
+      {
+        "city": "Sydney",
+        "views": 566,
+        "watch_time_hours": 4.8
+      },
+      {
+        "city": "Brisbane",
+        "views": 240,
+        "watch_time_hours": 2.7
+      }
+    ],
+    "2022-08": [
+      {
+        "city": "Melbourne",
+        "views": 138,
+        "watch_time_hours": 1.1
+      },
+      {
+        "city": "Brisbane",
+        "views": 86,
+        "watch_time_hours": 0.7
+      },
+      {
+        "city": "Sydney",
+        "views": 47,
+        "watch_time_hours": 0.4
+      }
+    ],
+    "2022-09": [
+      {
+        "city": "Sydney",
+        "views": 1405,
+        "watch_time_hours": 11.3
+      },
+      {
+        "city": "Melbourne",
+        "views": 1232,
+        "watch_time_hours": 9.9
+      },
+      {
+        "city": "Brisbane",
+        "views": 740,
+        "watch_time_hours": 6.0
+      },
+      {
+        "city": "Jakarta",
+        "views": 20,
+        "watch_time_hours": 0.2
+      },
+      {
+        "city": "Delhi",
+        "views": 10,
+        "watch_time_hours": 0.1
+      }
+    ],
+    "2022-10": [
+      {
+        "city": "Sydney",
+        "views": 1249,
+        "watch_time_hours": 10.3
+      },
+      {
+        "city": "Melbourne",
+        "views": 1141,
+        "watch_time_hours": 9.4
+      },
+      {
+        "city": "Brisbane",
+        "views": 689,
+        "watch_time_hours": 5.7
+      },
+      {
+        "city": "Bengaluru",
+        "views": 11,
+        "watch_time_hours": 0.1
+      }
+    ],
+    "2022-11": [
+      {
+        "city": "Melbourne",
+        "views": 46,
+        "watch_time_hours": 0.4
+      },
+      {
+        "city": "Delhi",
+        "views": 13,
+        "watch_time_hours": 0.1
+      }
+    ],
+    "2022-12": [
+      {
+        "city": "Sydney",
+        "views": 32,
+        "watch_time_hours": 0.2
+      },
+      {
+        "city": "Melbourne",
+        "views": 24,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Brisbane",
+        "views": 14,
+        "watch_time_hours": 0.1
+      }
+    ],
+    "2023-01": [
+      {
+        "city": "Melbourne",
+        "views": 47,
+        "watch_time_hours": 0.4
+      },
+      {
+        "city": "Sydney",
+        "views": 38,
+        "watch_time_hours": 0.3
+      },
+      {
+        "city": "Brisbane",
+        "views": 22,
+        "watch_time_hours": 0.2
+      }
+    ],
+    "2023-02": [
+      {
+        "city": "Melbourne",
+        "views": 63,
+        "watch_time_hours": 0.3
+      },
+      {
+        "city": "Dombivli",
+        "views": 14,
+        "watch_time_hours": 0.1
+      }
+    ],
+    "2023-03": [
+      {
+        "city": "Melbourne",
+        "views": 139,
+        "watch_time_hours": 0.7
+      },
+      {
+        "city": "Sydney",
+        "views": 32,
+        "watch_time_hours": 0.2
+      }
+    ],
+    "2023-04": [
+      {
+        "city": "Melbourne",
+        "views": 59,
+        "watch_time_hours": 0.2
+      },
+      {
+        "city": "Sydney",
+        "views": 33,
+        "watch_time_hours": 0.1
+      }
+    ],
+    "2023-05": [
+      {
+        "city": "Sydney",
+        "views": 699,
+        "watch_time_hours": 5.6
+      },
+      {
+        "city": "Melbourne",
+        "views": 479,
+        "watch_time_hours": 3.8
+      },
+      {
+        "city": "Brisbane",
+        "views": 437,
+        "watch_time_hours": 3.6
+      },
+      {
+        "city": "Gold Coast",
+        "views": 21,
+        "watch_time_hours": 0.2
+      },
+      {
+        "city": "Central Coast",
+        "views": 10,
+        "watch_time_hours": 0.1
+      }
+    ],
+    "2023-06": [
+      {
+        "city": "Melbourne",
+        "views": 313,
+        "watch_time_hours": 2.1
+      },
+      {
+        "city": "Sydney",
+        "views": 125,
+        "watch_time_hours": 1.1
+      },
+      {
+        "city": "Brisbane",
+        "views": 28,
+        "watch_time_hours": 0.2
+      }
+    ],
+    "2023-07": [
+      {
+        "city": "Melbourne",
+        "views": 141,
+        "watch_time_hours": 0.7
+      },
+      {
+        "city": "Sydney",
+        "views": 24,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Ghaziabad",
+        "views": 13,
+        "watch_time_hours": 0.1
+      }
+    ],
+    "2023-08": [
+      {
+        "city": "Melbourne",
+        "views": 97,
+        "watch_time_hours": 0.5
+      },
+      {
+        "city": "Sydney",
+        "views": 11,
+        "watch_time_hours": 0.0
+      }
+    ],
+    "2023-09": [
+      {
+        "city": "Bengaluru",
+        "views": 217,
+        "watch_time_hours": 0.8
+      },
+      {
+        "city": "Hyderabad",
+        "views": 152,
+        "watch_time_hours": 0.6
+      },
+      {
+        "city": "Pune",
+        "views": 125,
+        "watch_time_hours": 0.5
+      },
+      {
+        "city": "Delhi",
+        "views": 124,
+        "watch_time_hours": 0.5
+      },
+      {
+        "city": "Mumbai",
+        "views": 121,
+        "watch_time_hours": 0.4
+      },
+      {
+        "city": "Chennai",
+        "views": 85,
+        "watch_time_hours": 0.3
+      },
+      {
+        "city": "Kochi",
+        "views": 82,
+        "watch_time_hours": 0.3
+      },
+      {
+        "city": "Patna",
+        "views": 76,
+        "watch_time_hours": 0.3
+      },
+      {
+        "city": "Ahmedabad",
+        "views": 73,
+        "watch_time_hours": 0.3
+      },
+      {
+        "city": "Bhubaneswar",
+        "views": 70,
+        "watch_time_hours": 0.2
+      },
+      {
+        "city": "Lucknow",
+        "views": 68,
+        "watch_time_hours": 0.2
+      },
+      {
+        "city": "Nagpur",
+        "views": 68,
+        "watch_time_hours": 0.2
+      },
+      {
+        "city": "Kolkata",
+        "views": 65,
+        "watch_time_hours": 0.2
+      },
+      {
+        "city": "Indore",
+        "views": 64,
+        "watch_time_hours": 0.2
+      },
+      {
+        "city": "Jaipur",
+        "views": 53,
+        "watch_time_hours": 0.2
+      },
+      {
+        "city": "Guwahati",
+        "views": 50,
+        "watch_time_hours": 0.2
+      },
+      {
+        "city": "Coimbatore",
+        "views": 50,
+        "watch_time_hours": 0.2
+      },
+      {
+        "city": "Ludhiana",
+        "views": 44,
+        "watch_time_hours": 0.2
+      },
+      {
+        "city": "Melbourne",
+        "views": 43,
+        "watch_time_hours": 0.3
+      },
+      {
+        "city": "Agra",
+        "views": 39,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Agartala",
+        "views": 29,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Gurugram",
+        "views": 23,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Navi Mumbai",
+        "views": 22,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Panipat",
+        "views": 21,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Mysuru",
+        "views": 21,
+        "watch_time_hours": 0.1
+      }
+    ],
+    "2023-10": [
+      {
+        "city": "Melbourne",
+        "views": 201,
+        "watch_time_hours": 0.9
+      },
+      {
+        "city": "Bengaluru",
+        "views": 51,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Bhubaneswar",
+        "views": 37,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Lucknow",
+        "views": 35,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Patna",
+        "views": 33,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Indore",
+        "views": 31,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Hyderabad",
+        "views": 30,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Delhi",
+        "views": 29,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Nagpur",
+        "views": 27,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Mumbai",
+        "views": 27,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Pune",
+        "views": 26,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Ahmedabad",
+        "views": 25,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Guwahati",
+        "views": 22,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Chennai",
+        "views": 17,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Jaipur",
+        "views": 16,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "Agra",
+        "views": 16,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "Brisbane",
+        "views": 15,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Agartala",
+        "views": 14,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "Kolkata",
+        "views": 13,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "Coimbatore",
+        "views": 13,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "Sydney",
+        "views": 12,
+        "watch_time_hours": 0.1
+      }
+    ],
+    "2023-11": [
+      {
+        "city": "Melbourne",
+        "views": 449,
+        "watch_time_hours": 2.6
+      },
+      {
+        "city": "Sydney",
+        "views": 70,
+        "watch_time_hours": 0.3
+      },
+      {
+        "city": "Bengaluru",
+        "views": 51,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Chennai",
+        "views": 48,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Hyderabad",
+        "views": 32,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "London",
+        "views": 29,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Pune",
+        "views": 24,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Coimbatore",
+        "views": 23,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Mumbai",
+        "views": 23,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Singapore",
+        "views": 22,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Kuala Lumpur",
+        "views": 19,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Kochi",
+        "views": 19,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "Delhi",
+        "views": 16,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "Moscow",
+        "views": 16,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "Nairobi",
+        "views": 13,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "Kolkata",
+        "views": 13,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "Colombo",
+        "views": 13,
+        "watch_time_hours": 0.1
+      },
+      {
+        "city": "Toronto",
+        "views": 13,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "Istanbul",
+        "views": 12,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "Bhubaneswar",
+        "views": 12,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "New York",
+        "views": 12,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "Jakarta",
+        "views": 11,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "Agartala",
+        "views": 11,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "Dhaka",
+        "views": 11,
+        "watch_time_hours": 0.0
+      },
+      {
+        "city": "Jaipur",
+        "views": 11,
+        "watch_time_hours": 0.0
+      }
+    ],
+    "2023-12": [
+      {
+        "city": "Melbourne",
+        "views": 305,
+        "watch_time_hours": 1.4
+      },
+      {
+        "city": "Sydney",
+        "views": 31,
+        "watch_time_hours": 0.2
+      }
     ]
   },
   "demographics_monthly": {
@@ -8503,6 +9477,650 @@
         "age_group": "age65-",
         "gender": "male",
         "viewer_pct": 4.1
+      }
+    ],
+    "2021-06": [
+      {
+        "age_group": "age18-24",
+        "gender": "female",
+        "viewer_pct": 1.5
+      },
+      {
+        "age_group": "age18-24",
+        "gender": "male",
+        "viewer_pct": 4.2
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "female",
+        "viewer_pct": 11.0
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "male",
+        "viewer_pct": 23.8
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "female",
+        "viewer_pct": 12.0
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "male",
+        "viewer_pct": 20.3
+      },
+      {
+        "age_group": "age45-54",
+        "gender": "female",
+        "viewer_pct": 8.7
+      },
+      {
+        "age_group": "age45-54",
+        "gender": "male",
+        "viewer_pct": 14.4
+      },
+      {
+        "age_group": "age55-64",
+        "gender": "female",
+        "viewer_pct": 1.0
+      },
+      {
+        "age_group": "age55-64",
+        "gender": "male",
+        "viewer_pct": 1.9
+      },
+      {
+        "age_group": "age65-",
+        "gender": "female",
+        "viewer_pct": 0.4
+      },
+      {
+        "age_group": "age65-",
+        "gender": "male",
+        "viewer_pct": 0.9
+      }
+    ],
+    "2021-09": [
+      {
+        "age_group": "age25-34",
+        "gender": "female",
+        "viewer_pct": 10.7
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "male",
+        "viewer_pct": 53.7
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "female",
+        "viewer_pct": 8.3
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "male",
+        "viewer_pct": 27.3
+      }
+    ],
+    "2021-10": [
+      {
+        "age_group": "age45-54",
+        "gender": "male",
+        "viewer_pct": 100.0
+      }
+    ],
+    "2022-04": [
+      {
+        "age_group": "age35-44",
+        "gender": "male",
+        "viewer_pct": 100.0
+      }
+    ],
+    "2022-05": [
+      {
+        "age_group": "age13-17",
+        "gender": "female",
+        "viewer_pct": 0.3
+      },
+      {
+        "age_group": "age13-17",
+        "gender": "male",
+        "viewer_pct": 0.4
+      },
+      {
+        "age_group": "age18-24",
+        "gender": "female",
+        "viewer_pct": 4.7
+      },
+      {
+        "age_group": "age18-24",
+        "gender": "male",
+        "viewer_pct": 4.1
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "female",
+        "viewer_pct": 23.5
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "male",
+        "viewer_pct": 12.5
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "female",
+        "viewer_pct": 17.7
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "male",
+        "viewer_pct": 14.7
+      },
+      {
+        "age_group": "age45-54",
+        "gender": "female",
+        "viewer_pct": 3.9
+      },
+      {
+        "age_group": "age45-54",
+        "gender": "male",
+        "viewer_pct": 5.2
+      },
+      {
+        "age_group": "age55-64",
+        "gender": "female",
+        "viewer_pct": 3.7
+      },
+      {
+        "age_group": "age55-64",
+        "gender": "male",
+        "viewer_pct": 2.9
+      },
+      {
+        "age_group": "age65-",
+        "gender": "female",
+        "viewer_pct": 2.9
+      },
+      {
+        "age_group": "age65-",
+        "gender": "male",
+        "viewer_pct": 3.4
+      }
+    ],
+    "2022-06": [
+      {
+        "age_group": "age18-24",
+        "gender": "female",
+        "viewer_pct": 4.3
+      },
+      {
+        "age_group": "age18-24",
+        "gender": "male",
+        "viewer_pct": 5.4
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "female",
+        "viewer_pct": 21.0
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "male",
+        "viewer_pct": 17.1
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "female",
+        "viewer_pct": 15.4
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "male",
+        "viewer_pct": 18.1
+      },
+      {
+        "age_group": "age45-54",
+        "gender": "female",
+        "viewer_pct": 3.1
+      },
+      {
+        "age_group": "age45-54",
+        "gender": "male",
+        "viewer_pct": 5.9
+      },
+      {
+        "age_group": "age55-64",
+        "gender": "female",
+        "viewer_pct": 2.6
+      },
+      {
+        "age_group": "age55-64",
+        "gender": "male",
+        "viewer_pct": 2.7
+      },
+      {
+        "age_group": "age65-",
+        "gender": "female",
+        "viewer_pct": 2.2
+      },
+      {
+        "age_group": "age65-",
+        "gender": "male",
+        "viewer_pct": 2.2
+      }
+    ],
+    "2022-07": [
+      {
+        "age_group": "age25-34",
+        "gender": "female",
+        "viewer_pct": 10.1
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "male",
+        "viewer_pct": 36.0
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "female",
+        "viewer_pct": 12.3
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "male",
+        "viewer_pct": 41.7
+      }
+    ],
+    "2022-08": [
+      {
+        "age_group": "age25-34",
+        "gender": "female",
+        "viewer_pct": 47.6
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "male",
+        "viewer_pct": 52.4
+      }
+    ],
+    "2022-09": [
+      {
+        "age_group": "age18-24",
+        "gender": "female",
+        "viewer_pct": 5.0
+      },
+      {
+        "age_group": "age18-24",
+        "gender": "male",
+        "viewer_pct": 18.0
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "female",
+        "viewer_pct": 12.6
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "male",
+        "viewer_pct": 24.2
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "female",
+        "viewer_pct": 8.5
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "male",
+        "viewer_pct": 16.5
+      },
+      {
+        "age_group": "age45-54",
+        "gender": "female",
+        "viewer_pct": 1.6
+      },
+      {
+        "age_group": "age45-54",
+        "gender": "male",
+        "viewer_pct": 6.9
+      },
+      {
+        "age_group": "age55-64",
+        "gender": "female",
+        "viewer_pct": 1.9
+      },
+      {
+        "age_group": "age55-64",
+        "gender": "male",
+        "viewer_pct": 2.8
+      },
+      {
+        "age_group": "age65-",
+        "gender": "female",
+        "viewer_pct": 0.6
+      },
+      {
+        "age_group": "age65-",
+        "gender": "male",
+        "viewer_pct": 1.5
+      }
+    ],
+    "2022-10": [
+      {
+        "age_group": "age18-24",
+        "gender": "female",
+        "viewer_pct": 6.5
+      },
+      {
+        "age_group": "age18-24",
+        "gender": "male",
+        "viewer_pct": 18.1
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "female",
+        "viewer_pct": 13.6
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "male",
+        "viewer_pct": 30.9
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "female",
+        "viewer_pct": 5.3
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "male",
+        "viewer_pct": 19.0
+      },
+      {
+        "age_group": "age45-54",
+        "gender": "female",
+        "viewer_pct": 0.8
+      },
+      {
+        "age_group": "age45-54",
+        "gender": "male",
+        "viewer_pct": 3.9
+      },
+      {
+        "age_group": "age55-64",
+        "gender": "female",
+        "viewer_pct": 0.7
+      },
+      {
+        "age_group": "age55-64",
+        "gender": "male",
+        "viewer_pct": 1.1
+      }
+    ],
+    "2022-11": [
+      {
+        "age_group": "age45-54",
+        "gender": "male",
+        "viewer_pct": 100.0
+      }
+    ],
+    "2023-01": [
+      {
+        "age_group": "age25-34",
+        "gender": "male",
+        "viewer_pct": 44.0
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "male",
+        "viewer_pct": 56.0
+      }
+    ],
+    "2023-05": [
+      {
+        "age_group": "age18-24",
+        "gender": "male",
+        "viewer_pct": 3.5
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "female",
+        "viewer_pct": 0.7
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "male",
+        "viewer_pct": 12.2
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "female",
+        "viewer_pct": 1.0
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "male",
+        "viewer_pct": 15.0
+      },
+      {
+        "age_group": "age45-54",
+        "gender": "female",
+        "viewer_pct": 0.7
+      },
+      {
+        "age_group": "age45-54",
+        "gender": "male",
+        "viewer_pct": 16.1
+      },
+      {
+        "age_group": "age55-64",
+        "gender": "female",
+        "viewer_pct": 3.0
+      },
+      {
+        "age_group": "age55-64",
+        "gender": "male",
+        "viewer_pct": 22.1
+      },
+      {
+        "age_group": "age65-",
+        "gender": "female",
+        "viewer_pct": 1.6
+      },
+      {
+        "age_group": "age65-",
+        "gender": "male",
+        "viewer_pct": 23.9
+      }
+    ],
+    "2023-06": [
+      {
+        "age_group": "age25-34",
+        "gender": "female",
+        "viewer_pct": 21.3
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "male",
+        "viewer_pct": 31.9
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "female",
+        "viewer_pct": 23.4
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "male",
+        "viewer_pct": 23.4
+      }
+    ],
+    "2023-09": [
+      {
+        "age_group": "age13-17",
+        "gender": "female",
+        "viewer_pct": 0.7
+      },
+      {
+        "age_group": "age13-17",
+        "gender": "male",
+        "viewer_pct": 7.8
+      },
+      {
+        "age_group": "age18-24",
+        "gender": "female",
+        "viewer_pct": 2.7
+      },
+      {
+        "age_group": "age18-24",
+        "gender": "male",
+        "viewer_pct": 35.8
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "female",
+        "viewer_pct": 2.8
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "male",
+        "viewer_pct": 28.8
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "female",
+        "viewer_pct": 5.0
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "male",
+        "viewer_pct": 10.2
+      },
+      {
+        "age_group": "age45-54",
+        "gender": "female",
+        "viewer_pct": 1.6
+      },
+      {
+        "age_group": "age45-54",
+        "gender": "male",
+        "viewer_pct": 4.5
+      }
+    ],
+    "2023-10": [
+      {
+        "age_group": "age13-17",
+        "gender": "male",
+        "viewer_pct": 5.2
+      },
+      {
+        "age_group": "age18-24",
+        "gender": "female",
+        "viewer_pct": 3.4
+      },
+      {
+        "age_group": "age18-24",
+        "gender": "male",
+        "viewer_pct": 28.0
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "female",
+        "viewer_pct": 2.4
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "male",
+        "viewer_pct": 32.0
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "female",
+        "viewer_pct": 8.1
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "male",
+        "viewer_pct": 14.8
+      },
+      {
+        "age_group": "age45-54",
+        "gender": "male",
+        "viewer_pct": 6.0
+      }
+    ],
+    "2023-11": [
+      {
+        "age_group": "age13-17",
+        "gender": "female",
+        "viewer_pct": 1.4
+      },
+      {
+        "age_group": "age13-17",
+        "gender": "male",
+        "viewer_pct": 2.8
+      },
+      {
+        "age_group": "age18-24",
+        "gender": "female",
+        "viewer_pct": 7.2
+      },
+      {
+        "age_group": "age18-24",
+        "gender": "male",
+        "viewer_pct": 19.3
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "female",
+        "viewer_pct": 7.6
+      },
+      {
+        "age_group": "age25-34",
+        "gender": "male",
+        "viewer_pct": 23.5
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "female",
+        "viewer_pct": 5.0
+      },
+      {
+        "age_group": "age35-44",
+        "gender": "male",
+        "viewer_pct": 14.8
+      },
+      {
+        "age_group": "age45-54",
+        "gender": "female",
+        "viewer_pct": 2.7
+      },
+      {
+        "age_group": "age45-54",
+        "gender": "male",
+        "viewer_pct": 8.0
+      },
+      {
+        "age_group": "age55-64",
+        "gender": "female",
+        "viewer_pct": 1.5
+      },
+      {
+        "age_group": "age55-64",
+        "gender": "male",
+        "viewer_pct": 3.5
+      },
+      {
+        "age_group": "age65-",
+        "gender": "female",
+        "viewer_pct": 0.7
+      },
+      {
+        "age_group": "age65-",
+        "gender": "male",
+        "viewer_pct": 2.0
       }
     ]
   },
@@ -11070,6 +12688,1906 @@
         "watch_time_hours": 0.0,
         "pct": 0.0
       }
+    ],
+    "2021-05": [
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 5,
+        "watch_time_hours": 0.0,
+        "pct": 100.0
+      }
+    ],
+    "2021-06": [
+      {
+        "source": "ADVERTISING",
+        "views": 13725,
+        "watch_time_hours": 56.60000000000001,
+        "pct": 99.6
+      },
+      {
+        "source": "EXT_URL",
+        "views": 22,
+        "watch_time_hours": 0.1,
+        "pct": 0.2
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 11,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 8,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 7,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2021-07": [
+      {
+        "source": "YT_CHANNEL",
+        "views": 22,
+        "watch_time_hours": 0.0,
+        "pct": 61.1
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 11,
+        "watch_time_hours": 0.0,
+        "pct": 30.6
+      },
+      {
+        "source": "EXT_URL",
+        "views": 2,
+        "watch_time_hours": 0.0,
+        "pct": 5.6
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 2.8
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 0,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2021-08": [
+      {
+        "source": "YT_CHANNEL",
+        "views": 27,
+        "watch_time_hours": 0.0,
+        "pct": 62.8
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 7,
+        "watch_time_hours": 0.0,
+        "pct": 16.3
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 3,
+        "watch_time_hours": 0.0,
+        "pct": 7.0
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 3,
+        "watch_time_hours": 0.0,
+        "pct": 7.0
+      },
+      {
+        "source": "EXT_URL",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 2.3
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 2.3
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 2.3
+      }
+    ],
+    "2021-09": [
+      {
+        "source": "ADVERTISING",
+        "views": 1924387,
+        "watch_time_hours": 8032.0999999999985,
+        "pct": 99.9
+      },
+      {
+        "source": "EXT_URL",
+        "views": 613,
+        "watch_time_hours": 5.1999999999999975,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 143,
+        "watch_time_hours": 2.1,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 95,
+        "watch_time_hours": 0.8999999999999999,
+        "pct": 0.0
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 87,
+        "watch_time_hours": 0.5,
+        "pct": 0.0
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 24,
+        "watch_time_hours": 0.1,
+        "pct": 0.0
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 7,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 5,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 5,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 4,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2021-10": [
+      {
+        "source": "ADVERTISING",
+        "views": 1200413,
+        "watch_time_hours": 4973.400000000001,
+        "pct": 99.9
+      },
+      {
+        "source": "EXT_URL",
+        "views": 203,
+        "watch_time_hours": 0.7000000000000001,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 182,
+        "watch_time_hours": 1.6,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 171,
+        "watch_time_hours": 3.100000000000001,
+        "pct": 0.0
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 94,
+        "watch_time_hours": 1.2,
+        "pct": 0.0
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 92,
+        "watch_time_hours": 0.4,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 81,
+        "watch_time_hours": 0.1,
+        "pct": 0.0
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 26,
+        "watch_time_hours": 0.1,
+        "pct": 0.0
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 2,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 2,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2021-11": [
+      {
+        "source": "ADVERTISING",
+        "views": 623035,
+        "watch_time_hours": 2588.7,
+        "pct": 99.9
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 172,
+        "watch_time_hours": 2.8000000000000003,
+        "pct": 0.0
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 84,
+        "watch_time_hours": 0.5,
+        "pct": 0.0
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 82,
+        "watch_time_hours": 1.0999999999999999,
+        "pct": 0.0
+      },
+      {
+        "source": "EXT_URL",
+        "views": 71,
+        "watch_time_hours": 0.6,
+        "pct": 0.0
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 44,
+        "watch_time_hours": 0.1,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 44,
+        "watch_time_hours": 0.6,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 15,
+        "watch_time_hours": 0.2,
+        "pct": 0.0
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 5,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2021-12": [
+      {
+        "source": "ADVERTISING",
+        "views": 127420,
+        "watch_time_hours": 528.5,
+        "pct": 99.6
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 150,
+        "watch_time_hours": 2.2000000000000006,
+        "pct": 0.1
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 112,
+        "watch_time_hours": 1.6000000000000003,
+        "pct": 0.1
+      },
+      {
+        "source": "EXT_URL",
+        "views": 103,
+        "watch_time_hours": 0.9999999999999999,
+        "pct": 0.1
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 50,
+        "watch_time_hours": 0.5,
+        "pct": 0.0
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 23,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 22,
+        "watch_time_hours": 0.1,
+        "pct": 0.0
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 5,
+        "watch_time_hours": 0.1,
+        "pct": 0.0
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 3,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 2,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2022-01": [
+      {
+        "source": "ADVERTISING",
+        "views": 16812,
+        "watch_time_hours": 69.49999999999999,
+        "pct": 95.8
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 375,
+        "watch_time_hours": 3.500000000000001,
+        "pct": 2.1
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 178,
+        "watch_time_hours": 2.7000000000000015,
+        "pct": 1.0
+      },
+      {
+        "source": "EXT_URL",
+        "views": 62,
+        "watch_time_hours": 0.5,
+        "pct": 0.4
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 56,
+        "watch_time_hours": 0.30000000000000004,
+        "pct": 0.3
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 21,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 16,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 14,
+        "watch_time_hours": 0.2,
+        "pct": 0.1
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 8,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 3,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2022-02": [
+      {
+        "source": "ADVERTISING",
+        "views": 210035,
+        "watch_time_hours": 871.1999999999999,
+        "pct": 99.8
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 138,
+        "watch_time_hours": 1.900000000000001,
+        "pct": 0.1
+      },
+      {
+        "source": "EXT_URL",
+        "views": 94,
+        "watch_time_hours": 0.4,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 87,
+        "watch_time_hours": 0.7999999999999999,
+        "pct": 0.0
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 83,
+        "watch_time_hours": 0.5,
+        "pct": 0.0
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 43,
+        "watch_time_hours": 0.2,
+        "pct": 0.0
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 29,
+        "watch_time_hours": 0.1,
+        "pct": 0.0
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 18,
+        "watch_time_hours": 0.2,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 8,
+        "watch_time_hours": 0.1,
+        "pct": 0.0
+      }
+    ],
+    "2022-03": [
+      {
+        "source": "ADVERTISING",
+        "views": 3037918,
+        "watch_time_hours": 12389.6,
+        "pct": 100.0
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 242,
+        "watch_time_hours": 4.1000000000000005,
+        "pct": 0.0
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 237,
+        "watch_time_hours": 0.5,
+        "pct": 0.0
+      },
+      {
+        "source": "EXT_URL",
+        "views": 184,
+        "watch_time_hours": 1.5,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 104,
+        "watch_time_hours": 1.2,
+        "pct": 0.0
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 92,
+        "watch_time_hours": 0.7999999999999999,
+        "pct": 0.0
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 23,
+        "watch_time_hours": 0.1,
+        "pct": 0.0
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 16,
+        "watch_time_hours": 0.30000000000000004,
+        "pct": 0.0
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2022-04": [
+      {
+        "source": "ADVERTISING",
+        "views": 2153053,
+        "watch_time_hours": 8860.199999999999,
+        "pct": 99.9
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 560,
+        "watch_time_hours": 7.8999999999999995,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 228,
+        "watch_time_hours": 2.0,
+        "pct": 0.0
+      },
+      {
+        "source": "EXT_URL",
+        "views": 197,
+        "watch_time_hours": 1.8000000000000005,
+        "pct": 0.0
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 176,
+        "watch_time_hours": 1.7000000000000006,
+        "pct": 0.0
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 84,
+        "watch_time_hours": 0.30000000000000004,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 79,
+        "watch_time_hours": 0.1,
+        "pct": 0.0
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 38,
+        "watch_time_hours": 0.1,
+        "pct": 0.0
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 14,
+        "watch_time_hours": 0.30000000000000004,
+        "pct": 0.0
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 7,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "NOTIFICATION",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2022-05": [
+      {
+        "source": "ADVERTISING",
+        "views": 195420,
+        "watch_time_hours": 986.3000000000002,
+        "pct": 99.0
+      },
+      {
+        "source": "EXT_URL",
+        "views": 705,
+        "watch_time_hours": 5.599999999999997,
+        "pct": 0.4
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 369,
+        "watch_time_hours": 4.3999999999999995,
+        "pct": 0.2
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 341,
+        "watch_time_hours": 2.7000000000000006,
+        "pct": 0.2
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 236,
+        "watch_time_hours": 2.1000000000000005,
+        "pct": 0.1
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 196,
+        "watch_time_hours": 1.5000000000000004,
+        "pct": 0.1
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 43,
+        "watch_time_hours": 0.2,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 23,
+        "watch_time_hours": 0.1,
+        "pct": 0.0
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 23,
+        "watch_time_hours": 0.2,
+        "pct": 0.0
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 5,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "NOTIFICATION",
+        "views": 5,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2022-06": [
+      {
+        "source": "ADVERTISING",
+        "views": 696097,
+        "watch_time_hours": 2909.3999999999996,
+        "pct": 99.4
+      },
+      {
+        "source": "EXT_URL",
+        "views": 2586,
+        "watch_time_hours": 14.7,
+        "pct": 0.4
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 475,
+        "watch_time_hours": 4.0,
+        "pct": 0.1
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 406,
+        "watch_time_hours": 5.0,
+        "pct": 0.1
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 320,
+        "watch_time_hours": 2.2000000000000006,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 302,
+        "watch_time_hours": 2.3000000000000003,
+        "pct": 0.0
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 100,
+        "watch_time_hours": 0.5,
+        "pct": 0.0
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 63,
+        "watch_time_hours": 0.7999999999999999,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 37,
+        "watch_time_hours": 0.30000000000000004,
+        "pct": 0.0
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2022-07": [
+      {
+        "source": "ADVERTISING",
+        "views": 1104883,
+        "watch_time_hours": 4556.2,
+        "pct": 99.7
+      },
+      {
+        "source": "EXT_URL",
+        "views": 1294,
+        "watch_time_hours": 9.699999999999998,
+        "pct": 0.1
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 703,
+        "watch_time_hours": 9.599999999999998,
+        "pct": 0.1
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 385,
+        "watch_time_hours": 2.7000000000000006,
+        "pct": 0.0
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 294,
+        "watch_time_hours": 2.3000000000000007,
+        "pct": 0.0
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 210,
+        "watch_time_hours": 1.8000000000000003,
+        "pct": 0.0
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 148,
+        "watch_time_hours": 1.2,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 121,
+        "watch_time_hours": 0.5,
+        "pct": 0.0
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 64,
+        "watch_time_hours": 0.9,
+        "pct": 0.0
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 7,
+        "watch_time_hours": 0.1,
+        "pct": 0.0
+      }
+    ],
+    "2022-08": [
+      {
+        "source": "ADVERTISING",
+        "views": 3576,
+        "watch_time_hours": 15.199999999999996,
+        "pct": 63.4
+      },
+      {
+        "source": "EXT_URL",
+        "views": 1406,
+        "watch_time_hours": 6.4,
+        "pct": 24.9
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 300,
+        "watch_time_hours": 3.5000000000000018,
+        "pct": 5.3
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 110,
+        "watch_time_hours": 1.1,
+        "pct": 2.0
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 83,
+        "watch_time_hours": 0.30000000000000004,
+        "pct": 1.5
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 71,
+        "watch_time_hours": 0.4,
+        "pct": 1.3
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 58,
+        "watch_time_hours": 0.4,
+        "pct": 1.0
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 18,
+        "watch_time_hours": 0.0,
+        "pct": 0.3
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 8,
+        "watch_time_hours": 0.1,
+        "pct": 0.1
+      },
+      {
+        "source": "NOTIFICATION",
+        "views": 4,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 4,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      }
+    ],
+    "2022-09": [
+      {
+        "source": "ADVERTISING",
+        "views": 4910,
+        "watch_time_hours": 33.9,
+        "pct": 63.4
+      },
+      {
+        "source": "EXT_URL",
+        "views": 2099,
+        "watch_time_hours": 9.499999999999998,
+        "pct": 27.1
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 211,
+        "watch_time_hours": 2.500000000000001,
+        "pct": 2.7
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 169,
+        "watch_time_hours": 1.3,
+        "pct": 2.2
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 120,
+        "watch_time_hours": 0.7999999999999999,
+        "pct": 1.5
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 120,
+        "watch_time_hours": 1.2,
+        "pct": 1.5
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 64,
+        "watch_time_hours": 0.5,
+        "pct": 0.8
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 34,
+        "watch_time_hours": 0.2,
+        "pct": 0.4
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 14,
+        "watch_time_hours": 0.1,
+        "pct": 0.2
+      },
+      {
+        "source": "NOTIFICATION",
+        "views": 4,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      }
+    ],
+    "2022-10": [
+      {
+        "source": "ADVERTISING",
+        "views": 177093,
+        "watch_time_hours": 731.5999999999999,
+        "pct": 98.9
+      },
+      {
+        "source": "EXT_URL",
+        "views": 1080,
+        "watch_time_hours": 5.799999999999999,
+        "pct": 0.6
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 282,
+        "watch_time_hours": 3.5000000000000013,
+        "pct": 0.2
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 235,
+        "watch_time_hours": 2.3000000000000007,
+        "pct": 0.1
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 234,
+        "watch_time_hours": 2.600000000000001,
+        "pct": 0.1
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 110,
+        "watch_time_hours": 1.1000000000000003,
+        "pct": 0.1
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 51,
+        "watch_time_hours": 0.30000000000000004,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 33,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 4,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 4,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "NOTIFICATION",
+        "views": 3,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2022-11": [
+      {
+        "source": "ADVERTISING",
+        "views": 41250,
+        "watch_time_hours": 167.49999999999997,
+        "pct": 95.4
+      },
+      {
+        "source": "EXT_URL",
+        "views": 1395,
+        "watch_time_hours": 6.499999999999999,
+        "pct": 3.2
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 203,
+        "watch_time_hours": 2.1000000000000005,
+        "pct": 0.5
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 166,
+        "watch_time_hours": 1.4,
+        "pct": 0.4
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 82,
+        "watch_time_hours": 0.5,
+        "pct": 0.2
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 72,
+        "watch_time_hours": 0.30000000000000004,
+        "pct": 0.2
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 51,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 11,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 8,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 2,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2022-12": [
+      {
+        "source": "EXT_URL",
+        "views": 597,
+        "watch_time_hours": 3.6000000000000014,
+        "pct": 41.6
+      },
+      {
+        "source": "ADVERTISING",
+        "views": 457,
+        "watch_time_hours": 1.4,
+        "pct": 31.8
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 207,
+        "watch_time_hours": 2.500000000000001,
+        "pct": 14.4
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 51,
+        "watch_time_hours": 0.7999999999999999,
+        "pct": 3.6
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 50,
+        "watch_time_hours": 0.4,
+        "pct": 3.5
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 46,
+        "watch_time_hours": 0.30000000000000004,
+        "pct": 3.2
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 10,
+        "watch_time_hours": 0.0,
+        "pct": 0.7
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 9,
+        "watch_time_hours": 0.1,
+        "pct": 0.6
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 8,
+        "watch_time_hours": 0.0,
+        "pct": 0.6
+      }
+    ],
+    "2023-01": [
+      {
+        "source": "ADVERTISING",
+        "views": 1789,
+        "watch_time_hours": 5.299999999999999,
+        "pct": 62.9
+      },
+      {
+        "source": "EXT_URL",
+        "views": 687,
+        "watch_time_hours": 4.000000000000002,
+        "pct": 24.1
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 186,
+        "watch_time_hours": 2.2000000000000006,
+        "pct": 6.5
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 48,
+        "watch_time_hours": 0.4,
+        "pct": 1.7
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 47,
+        "watch_time_hours": 0.6,
+        "pct": 1.7
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 44,
+        "watch_time_hours": 0.7999999999999999,
+        "pct": 1.5
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 24,
+        "watch_time_hours": 0.4,
+        "pct": 0.8
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 10,
+        "watch_time_hours": 0.0,
+        "pct": 0.4
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 10,
+        "watch_time_hours": 0.1,
+        "pct": 0.4
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2023-02": [
+      {
+        "source": "EXT_URL",
+        "views": 639,
+        "watch_time_hours": 3.100000000000001,
+        "pct": 61.6
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 225,
+        "watch_time_hours": 2.900000000000001,
+        "pct": 21.7
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 51,
+        "watch_time_hours": 0.4,
+        "pct": 4.9
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 44,
+        "watch_time_hours": 0.5,
+        "pct": 4.2
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 41,
+        "watch_time_hours": 0.1,
+        "pct": 4.0
+      },
+      {
+        "source": "ADVERTISING",
+        "views": 12,
+        "watch_time_hours": 0.0,
+        "pct": 1.2
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 10,
+        "watch_time_hours": 0.2,
+        "pct": 1.0
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 7,
+        "watch_time_hours": 0.0,
+        "pct": 0.7
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 5,
+        "watch_time_hours": 0.0,
+        "pct": 0.5
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 3,
+        "watch_time_hours": 0.0,
+        "pct": 0.3
+      }
+    ],
+    "2023-03": [
+      {
+        "source": "EXT_URL",
+        "views": 704,
+        "watch_time_hours": 3.2000000000000015,
+        "pct": 63.4
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 222,
+        "watch_time_hours": 2.600000000000001,
+        "pct": 20.0
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 60,
+        "watch_time_hours": 0.5,
+        "pct": 5.4
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 60,
+        "watch_time_hours": 0.7,
+        "pct": 5.4
+      },
+      {
+        "source": "ADVERTISING",
+        "views": 20,
+        "watch_time_hours": 0.0,
+        "pct": 1.8
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 16,
+        "watch_time_hours": 0.1,
+        "pct": 1.4
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 11,
+        "watch_time_hours": 0.2,
+        "pct": 1.0
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 10,
+        "watch_time_hours": 0.0,
+        "pct": 0.9
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 4,
+        "watch_time_hours": 0.0,
+        "pct": 0.4
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 3,
+        "watch_time_hours": 0.0,
+        "pct": 0.3
+      }
+    ],
+    "2023-04": [
+      {
+        "source": "EXT_URL",
+        "views": 659,
+        "watch_time_hours": 3.300000000000002,
+        "pct": 61.5
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 160,
+        "watch_time_hours": 2.2000000000000006,
+        "pct": 14.9
+      },
+      {
+        "source": "ADVERTISING",
+        "views": 106,
+        "watch_time_hours": 0.4,
+        "pct": 9.9
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 59,
+        "watch_time_hours": 0.8999999999999999,
+        "pct": 5.5
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 39,
+        "watch_time_hours": 0.30000000000000004,
+        "pct": 3.6
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 26,
+        "watch_time_hours": 0.4,
+        "pct": 2.4
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 15,
+        "watch_time_hours": 0.0,
+        "pct": 1.4
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 6,
+        "watch_time_hours": 0.0,
+        "pct": 0.6
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      }
+    ],
+    "2023-05": [
+      {
+        "source": "ADVERTISING",
+        "views": 5417,
+        "watch_time_hours": 30.700000000000006,
+        "pct": 83.1
+      },
+      {
+        "source": "EXT_URL",
+        "views": 780,
+        "watch_time_hours": 5.2,
+        "pct": 12.0
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 188,
+        "watch_time_hours": 2.600000000000001,
+        "pct": 2.9
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 45,
+        "watch_time_hours": 0.6,
+        "pct": 0.7
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 38,
+        "watch_time_hours": 0.30000000000000004,
+        "pct": 0.6
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 19,
+        "watch_time_hours": 0.1,
+        "pct": 0.3
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 17,
+        "watch_time_hours": 0.0,
+        "pct": 0.3
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 9,
+        "watch_time_hours": 0.1,
+        "pct": 0.1
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 5,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 2,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2023-06": [
+      {
+        "source": "ADVERTISING",
+        "views": 1356,
+        "watch_time_hours": 7.299999999999999,
+        "pct": 51.6
+      },
+      {
+        "source": "EXT_URL",
+        "views": 871,
+        "watch_time_hours": 5.200000000000001,
+        "pct": 33.1
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 174,
+        "watch_time_hours": 2.500000000000001,
+        "pct": 6.6
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 78,
+        "watch_time_hours": 0.8999999999999999,
+        "pct": 3.0
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 71,
+        "watch_time_hours": 0.4,
+        "pct": 2.7
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 59,
+        "watch_time_hours": 0.6,
+        "pct": 2.2
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 7,
+        "watch_time_hours": 0.1,
+        "pct": 0.3
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 7,
+        "watch_time_hours": 0.1,
+        "pct": 0.3
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 3,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "SHORTS",
+        "views": 3,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2023-07": [
+      {
+        "source": "EXT_URL",
+        "views": 744,
+        "watch_time_hours": 4.9,
+        "pct": 44.6
+      },
+      {
+        "source": "ADVERTISING",
+        "views": 537,
+        "watch_time_hours": 2.1,
+        "pct": 32.2
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 200,
+        "watch_time_hours": 2.7,
+        "pct": 12.0
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 76,
+        "watch_time_hours": 0.8999999999999999,
+        "pct": 4.6
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 57,
+        "watch_time_hours": 0.4,
+        "pct": 3.4
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 21,
+        "watch_time_hours": 0.1,
+        "pct": 1.3
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 15,
+        "watch_time_hours": 0.2,
+        "pct": 0.9
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 11,
+        "watch_time_hours": 0.1,
+        "pct": 0.7
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 5,
+        "watch_time_hours": 0.1,
+        "pct": 0.3
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      }
+    ],
+    "2023-08": [
+      {
+        "source": "ADVERTISING",
+        "views": 4230,
+        "watch_time_hours": 15.600000000000001,
+        "pct": 79.8
+      },
+      {
+        "source": "EXT_URL",
+        "views": 663,
+        "watch_time_hours": 3.900000000000002,
+        "pct": 12.5
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 241,
+        "watch_time_hours": 3.1000000000000014,
+        "pct": 4.5
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 78,
+        "watch_time_hours": 1.1,
+        "pct": 1.5
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 35,
+        "watch_time_hours": 0.1,
+        "pct": 0.7
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 25,
+        "watch_time_hours": 0.2,
+        "pct": 0.5
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 22,
+        "watch_time_hours": 0.1,
+        "pct": 0.4
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 7,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 3,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      }
+    ],
+    "2023-09": [
+      {
+        "source": "ADVERTISING",
+        "views": 22293,
+        "watch_time_hours": 90.99999999999996,
+        "pct": 86.6
+      },
+      {
+        "source": "SHORTS",
+        "views": 2295,
+        "watch_time_hours": 8.7,
+        "pct": 8.9
+      },
+      {
+        "source": "EXT_URL",
+        "views": 639,
+        "watch_time_hours": 4.300000000000002,
+        "pct": 2.5
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 351,
+        "watch_time_hours": 2.900000000000001,
+        "pct": 1.4
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 68,
+        "watch_time_hours": 0.7,
+        "pct": 0.3
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 26,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 25,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 20,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 7,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 4,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "NOTIFICATION",
+        "views": 3,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2023-10": [
+      {
+        "source": "ADVERTISING",
+        "views": 12886,
+        "watch_time_hours": 48.699999999999996,
+        "pct": 87.5
+      },
+      {
+        "source": "EXT_URL",
+        "views": 823,
+        "watch_time_hours": 4.800000000000001,
+        "pct": 5.6
+      },
+      {
+        "source": "SHORTS",
+        "views": 631,
+        "watch_time_hours": 2.1,
+        "pct": 4.3
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 266,
+        "watch_time_hours": 2.400000000000001,
+        "pct": 1.8
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 62,
+        "watch_time_hours": 0.2,
+        "pct": 0.4
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 18,
+        "watch_time_hours": 0.1,
+        "pct": 0.1
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 17,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 13,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 8,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 7,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 2,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2023-11": [
+      {
+        "source": "ADVERTISING",
+        "views": 23298,
+        "watch_time_hours": 90.69999999999999,
+        "pct": 86.3
+      },
+      {
+        "source": "SHORTS",
+        "views": 2161,
+        "watch_time_hours": 6.0,
+        "pct": 8.0
+      },
+      {
+        "source": "EXT_URL",
+        "views": 1042,
+        "watch_time_hours": 5.5,
+        "pct": 3.9
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 336,
+        "watch_time_hours": 3.100000000000001,
+        "pct": 1.2
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 59,
+        "watch_time_hours": 0.30000000000000004,
+        "pct": 0.2
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 40,
+        "watch_time_hours": 0.2,
+        "pct": 0.1
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 23,
+        "watch_time_hours": 0.1,
+        "pct": 0.1
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 21,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 10,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 8,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 3,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "NOTIFICATION",
+        "views": 3,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "SHORTS_CONTENT_LINKS",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "SOUND_PAGE",
+        "views": 0,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
+    ],
+    "2023-12": [
+      {
+        "source": "ADVERTISING",
+        "views": 35869,
+        "watch_time_hours": 127.0,
+        "pct": 96.9
+      },
+      {
+        "source": "EXT_URL",
+        "views": 855,
+        "watch_time_hours": 4.200000000000001,
+        "pct": 2.3
+      },
+      {
+        "source": "YT_SEARCH",
+        "views": 182,
+        "watch_time_hours": 2.0000000000000004,
+        "pct": 0.5
+      },
+      {
+        "source": "YT_CHANNEL",
+        "views": 35,
+        "watch_time_hours": 0.30000000000000004,
+        "pct": 0.1
+      },
+      {
+        "source": "NO_LINK_OTHER",
+        "views": 24,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "RELATED_VIDEO",
+        "views": 22,
+        "watch_time_hours": 0.0,
+        "pct": 0.1
+      },
+      {
+        "source": "PLAYLIST",
+        "views": 8,
+        "watch_time_hours": 0.1,
+        "pct": 0.0
+      },
+      {
+        "source": "SUBSCRIBER",
+        "views": 7,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "HASHTAGS",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "YT_OTHER_PAGE",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "END_SCREEN",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      }
     ]
   },
   "devices_monthly": {
@@ -11877,6 +15395,820 @@
         "views": 1165,
         "watch_time_hours": 23.799999999999997,
         "pct": 1.3
+      }
+    ],
+    "2021-05": [
+      {
+        "device": "DESKTOP",
+        "views": 5,
+        "watch_time_hours": 0.0,
+        "pct": 100.0
+      }
+    ],
+    "2021-06": [
+      {
+        "device": "MOBILE",
+        "views": 6502,
+        "watch_time_hours": 26.3,
+        "pct": 47.6
+      },
+      {
+        "device": "TABLET",
+        "views": 3294,
+        "watch_time_hours": 13.700000000000003,
+        "pct": 24.1
+      },
+      {
+        "device": "TV",
+        "views": 2583,
+        "watch_time_hours": 10.6,
+        "pct": 18.9
+      },
+      {
+        "device": "DESKTOP",
+        "views": 1284,
+        "watch_time_hours": 5.300000000000001,
+        "pct": 9.4
+      }
+    ],
+    "2021-07": [
+      {
+        "device": "DESKTOP",
+        "views": 21,
+        "watch_time_hours": 0.0,
+        "pct": 58.3
+      },
+      {
+        "device": "MOBILE",
+        "views": 11,
+        "watch_time_hours": 0.0,
+        "pct": 30.6
+      },
+      {
+        "device": "TV",
+        "views": 3,
+        "watch_time_hours": 0.0,
+        "pct": 8.3
+      },
+      {
+        "device": "TABLET",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 2.8
+      }
+    ],
+    "2021-08": [
+      {
+        "device": "DESKTOP",
+        "views": 19,
+        "watch_time_hours": 0.0,
+        "pct": 44.2
+      },
+      {
+        "device": "MOBILE",
+        "views": 15,
+        "watch_time_hours": 0.0,
+        "pct": 34.9
+      },
+      {
+        "device": "TV",
+        "views": 8,
+        "watch_time_hours": 0.0,
+        "pct": 18.6
+      },
+      {
+        "device": "TABLET",
+        "views": 1,
+        "watch_time_hours": 0.0,
+        "pct": 2.3
+      }
+    ],
+    "2021-09": [
+      {
+        "device": "TV",
+        "views": 802357,
+        "watch_time_hours": 3349.5999999999995,
+        "pct": 41.7
+      },
+      {
+        "device": "MOBILE",
+        "views": 709112,
+        "watch_time_hours": 2961.3999999999996,
+        "pct": 36.9
+      },
+      {
+        "device": "TABLET",
+        "views": 269434,
+        "watch_time_hours": 1124.9,
+        "pct": 14.0
+      },
+      {
+        "device": "DESKTOP",
+        "views": 140993,
+        "watch_time_hours": 591.1999999999999,
+        "pct": 7.3
+      }
+    ],
+    "2021-10": [
+      {
+        "device": "TV",
+        "views": 464412,
+        "watch_time_hours": 1938.8000000000002,
+        "pct": 40.3
+      },
+      {
+        "device": "MOBILE",
+        "views": 360635,
+        "watch_time_hours": 1476.0000000000002,
+        "pct": 31.3
+      },
+      {
+        "device": "DESKTOP",
+        "views": 182082,
+        "watch_time_hours": 757.8000000000001,
+        "pct": 15.8
+      },
+      {
+        "device": "TABLET",
+        "views": 144594,
+        "watch_time_hours": 605.0999999999999,
+        "pct": 12.6
+      }
+    ],
+    "2021-11": [
+      {
+        "device": "TV",
+        "views": 228886,
+        "watch_time_hours": 955.4,
+        "pct": 39.0
+      },
+      {
+        "device": "MOBILE",
+        "views": 194546,
+        "watch_time_hours": 805.4000000000001,
+        "pct": 33.1
+      },
+      {
+        "device": "DESKTOP",
+        "views": 90000,
+        "watch_time_hours": 374.70000000000005,
+        "pct": 15.3
+      },
+      {
+        "device": "TABLET",
+        "views": 73990,
+        "watch_time_hours": 309.5,
+        "pct": 12.6
+      }
+    ],
+    "2021-12": [
+      {
+        "device": "MOBILE",
+        "views": 60989,
+        "watch_time_hours": 254.20000000000002,
+        "pct": 50.5
+      },
+      {
+        "device": "TV",
+        "views": 29890,
+        "watch_time_hours": 125.0,
+        "pct": 24.7
+      },
+      {
+        "device": "TABLET",
+        "views": 15616,
+        "watch_time_hours": 65.00000000000001,
+        "pct": 12.9
+      },
+      {
+        "device": "DESKTOP",
+        "views": 14358,
+        "watch_time_hours": 60.699999999999996,
+        "pct": 11.9
+      }
+    ],
+    "2022-01": [
+      {
+        "device": "MOBILE",
+        "views": 7880,
+        "watch_time_hours": 35.90000000000002,
+        "pct": 47.9
+      },
+      {
+        "device": "TV",
+        "views": 4309,
+        "watch_time_hours": 18.20000000000001,
+        "pct": 26.2
+      },
+      {
+        "device": "DESKTOP",
+        "views": 2517,
+        "watch_time_hours": 11.299999999999999,
+        "pct": 15.3
+      },
+      {
+        "device": "TABLET",
+        "views": 1761,
+        "watch_time_hours": 7.699999999999998,
+        "pct": 10.7
+      }
+    ],
+    "2022-02": [
+      {
+        "device": "MOBILE",
+        "views": 85628,
+        "watch_time_hours": 353.5,
+        "pct": 40.8
+      },
+      {
+        "device": "TV",
+        "views": 59677,
+        "watch_time_hours": 249.5,
+        "pct": 28.4
+      },
+      {
+        "device": "TABLET",
+        "views": 46263,
+        "watch_time_hours": 193.0,
+        "pct": 22.0
+      },
+      {
+        "device": "DESKTOP",
+        "views": 18405,
+        "watch_time_hours": 77.60000000000001,
+        "pct": 8.8
+      }
+    ],
+    "2022-03": [
+      {
+        "device": "MOBILE",
+        "views": 1841816,
+        "watch_time_hours": 7422.499999999999,
+        "pct": 63.0
+      },
+      {
+        "device": "TV",
+        "views": 486211,
+        "watch_time_hours": 2029.1999999999998,
+        "pct": 16.6
+      },
+      {
+        "device": "TABLET",
+        "views": 314936,
+        "watch_time_hours": 1314.3,
+        "pct": 10.8
+      },
+      {
+        "device": "DESKTOP",
+        "views": 281860,
+        "watch_time_hours": 1167.8999999999999,
+        "pct": 9.6
+      }
+    ],
+    "2022-04": [
+      {
+        "device": "DESKTOP",
+        "views": 843827,
+        "watch_time_hours": 3498.300000000001,
+        "pct": 49.0
+      },
+      {
+        "device": "MOBILE",
+        "views": 558676,
+        "watch_time_hours": 2257.3,
+        "pct": 32.5
+      },
+      {
+        "device": "TV",
+        "views": 229635,
+        "watch_time_hours": 959.0000000000001,
+        "pct": 13.3
+      },
+      {
+        "device": "TABLET",
+        "views": 88951,
+        "watch_time_hours": 369.1,
+        "pct": 5.2
+      }
+    ],
+    "2022-05": [
+      {
+        "device": "MOBILE",
+        "views": 150177,
+        "watch_time_hours": 762.5,
+        "pct": 76.1
+      },
+      {
+        "device": "TABLET",
+        "views": 46460,
+        "watch_time_hours": 235.4,
+        "pct": 23.5
+      },
+      {
+        "device": "DESKTOP",
+        "views": 480,
+        "watch_time_hours": 4.600000000000001,
+        "pct": 0.2
+      },
+      {
+        "device": "TV",
+        "views": 246,
+        "watch_time_hours": 2.2,
+        "pct": 0.1
+      }
+    ],
+    "2022-06": [
+      {
+        "device": "MOBILE",
+        "views": 380907,
+        "watch_time_hours": 1593.6000000000001,
+        "pct": 57.4
+      },
+      {
+        "device": "TABLET",
+        "views": 168551,
+        "watch_time_hours": 716.9,
+        "pct": 25.4
+      },
+      {
+        "device": "DESKTOP",
+        "views": 113664,
+        "watch_time_hours": 474.3,
+        "pct": 17.1
+      },
+      {
+        "device": "TV",
+        "views": 948,
+        "watch_time_hours": 5.399999999999999,
+        "pct": 0.1
+      }
+    ],
+    "2022-07": [
+      {
+        "device": "MOBILE",
+        "views": 724037,
+        "watch_time_hours": 2978.699999999999,
+        "pct": 65.4
+      },
+      {
+        "device": "TABLET",
+        "views": 336105,
+        "watch_time_hours": 1402.2999999999997,
+        "pct": 30.4
+      },
+      {
+        "device": "DESKTOP",
+        "views": 46692,
+        "watch_time_hours": 197.8999999999999,
+        "pct": 4.2
+      },
+      {
+        "device": "TV",
+        "views": 291,
+        "watch_time_hours": 4.199999999999999,
+        "pct": 0.0
+      }
+    ],
+    "2022-08": [
+      {
+        "device": "MOBILE",
+        "views": 5134,
+        "watch_time_hours": 24.599999999999994,
+        "pct": 91.1
+      },
+      {
+        "device": "TABLET",
+        "views": 221,
+        "watch_time_hours": 1.2000000000000004,
+        "pct": 3.9
+      },
+      {
+        "device": "DESKTOP",
+        "views": 217,
+        "watch_time_hours": 2.1000000000000005,
+        "pct": 3.8
+      },
+      {
+        "device": "TV",
+        "views": 66,
+        "watch_time_hours": 0.4,
+        "pct": 1.2
+      }
+    ],
+    "2022-09": [
+      {
+        "device": "MOBILE",
+        "views": 5601,
+        "watch_time_hours": 35.6,
+        "pct": 72.3
+      },
+      {
+        "device": "TABLET",
+        "views": 1809,
+        "watch_time_hours": 13.1,
+        "pct": 23.4
+      },
+      {
+        "device": "DESKTOP",
+        "views": 283,
+        "watch_time_hours": 2.6000000000000005,
+        "pct": 3.7
+      },
+      {
+        "device": "TV",
+        "views": 52,
+        "watch_time_hours": 0.5,
+        "pct": 0.7
+      }
+    ],
+    "2022-10": [
+      {
+        "device": "MOBILE",
+        "views": 65247,
+        "watch_time_hours": 273.70000000000005,
+        "pct": 48.3
+      },
+      {
+        "device": "DESKTOP",
+        "views": 63065,
+        "watch_time_hours": 262.0,
+        "pct": 46.6
+      },
+      {
+        "device": "TABLET",
+        "views": 6825,
+        "watch_time_hours": 31.9,
+        "pct": 5.0
+      },
+      {
+        "device": "TV",
+        "views": 66,
+        "watch_time_hours": 0.6,
+        "pct": 0.0
+      }
+    ],
+    "2022-11": [
+      {
+        "device": "MOBILE",
+        "views": 16232,
+        "watch_time_hours": 67.60000000000001,
+        "pct": 48.1
+      },
+      {
+        "device": "DESKTOP",
+        "views": 16097,
+        "watch_time_hours": 67.89999999999992,
+        "pct": 47.7
+      },
+      {
+        "device": "TABLET",
+        "views": 1394,
+        "watch_time_hours": 5.799999999999999,
+        "pct": 4.1
+      },
+      {
+        "device": "TV",
+        "views": 40,
+        "watch_time_hours": 0.1,
+        "pct": 0.1
+      }
+    ],
+    "2022-12": [
+      {
+        "device": "MOBILE",
+        "views": 1221,
+        "watch_time_hours": 7.300000000000002,
+        "pct": 85.1
+      },
+      {
+        "device": "DESKTOP",
+        "views": 137,
+        "watch_time_hours": 2.0000000000000004,
+        "pct": 9.5
+      },
+      {
+        "device": "TV",
+        "views": 41,
+        "watch_time_hours": 0.6000000000000001,
+        "pct": 2.9
+      },
+      {
+        "device": "TABLET",
+        "views": 36,
+        "watch_time_hours": 0.1,
+        "pct": 2.5
+      }
+    ],
+    "2023-01": [
+      {
+        "device": "MOBILE",
+        "views": 2482,
+        "watch_time_hours": 10.899999999999995,
+        "pct": 87.2
+      },
+      {
+        "device": "DESKTOP",
+        "views": 289,
+        "watch_time_hours": 3.1000000000000014,
+        "pct": 10.2
+      },
+      {
+        "device": "TV",
+        "views": 44,
+        "watch_time_hours": 0.6000000000000001,
+        "pct": 1.5
+      },
+      {
+        "device": "TABLET",
+        "views": 31,
+        "watch_time_hours": 0.1,
+        "pct": 1.1
+      }
+    ],
+    "2023-02": [
+      {
+        "device": "MOBILE",
+        "views": 619,
+        "watch_time_hours": 4.1000000000000005,
+        "pct": 59.7
+      },
+      {
+        "device": "DESKTOP",
+        "views": 346,
+        "watch_time_hours": 2.900000000000001,
+        "pct": 33.4
+      },
+      {
+        "device": "TABLET",
+        "views": 54,
+        "watch_time_hours": 0.4,
+        "pct": 5.2
+      },
+      {
+        "device": "TV",
+        "views": 18,
+        "watch_time_hours": 0.30000000000000004,
+        "pct": 1.7
+      }
+    ],
+    "2023-03": [
+      {
+        "device": "MOBILE",
+        "views": 729,
+        "watch_time_hours": 4.800000000000001,
+        "pct": 65.7
+      },
+      {
+        "device": "DESKTOP",
+        "views": 316,
+        "watch_time_hours": 2.600000000000001,
+        "pct": 28.5
+      },
+      {
+        "device": "TV",
+        "views": 33,
+        "watch_time_hours": 0.7,
+        "pct": 3.0
+      },
+      {
+        "device": "TABLET",
+        "views": 32,
+        "watch_time_hours": 0.2,
+        "pct": 2.9
+      }
+    ],
+    "2023-04": [
+      {
+        "device": "MOBILE",
+        "views": 743,
+        "watch_time_hours": 5.500000000000002,
+        "pct": 69.4
+      },
+      {
+        "device": "DESKTOP",
+        "views": 270,
+        "watch_time_hours": 2.3000000000000007,
+        "pct": 25.2
+      },
+      {
+        "device": "TV",
+        "views": 41,
+        "watch_time_hours": 0.30000000000000004,
+        "pct": 3.8
+      },
+      {
+        "device": "TABLET",
+        "views": 17,
+        "watch_time_hours": 0.0,
+        "pct": 1.6
+      }
+    ],
+    "2023-05": [
+      {
+        "device": "TV",
+        "views": 3961,
+        "watch_time_hours": 24.000000000000007,
+        "pct": 60.8
+      },
+      {
+        "device": "MOBILE",
+        "views": 2152,
+        "watch_time_hours": 12.800000000000002,
+        "pct": 33.0
+      },
+      {
+        "device": "DESKTOP",
+        "views": 350,
+        "watch_time_hours": 2.9000000000000017,
+        "pct": 5.4
+      },
+      {
+        "device": "TABLET",
+        "views": 55,
+        "watch_time_hours": 0.0,
+        "pct": 0.8
+      }
+    ],
+    "2023-06": [
+      {
+        "device": "MOBILE",
+        "views": 1716,
+        "watch_time_hours": 12.1,
+        "pct": 65.2
+      },
+      {
+        "device": "TV",
+        "views": 439,
+        "watch_time_hours": 2.5000000000000004,
+        "pct": 16.7
+      },
+      {
+        "device": "DESKTOP",
+        "views": 377,
+        "watch_time_hours": 2.800000000000001,
+        "pct": 14.3
+      },
+      {
+        "device": "TABLET",
+        "views": 98,
+        "watch_time_hours": 0.4,
+        "pct": 3.7
+      }
+    ],
+    "2023-07": [
+      {
+        "device": "MOBILE",
+        "views": 1309,
+        "watch_time_hours": 8.600000000000001,
+        "pct": 78.5
+      },
+      {
+        "device": "DESKTOP",
+        "views": 256,
+        "watch_time_hours": 2.2000000000000006,
+        "pct": 15.4
+      },
+      {
+        "device": "TABLET",
+        "views": 52,
+        "watch_time_hours": 0.2,
+        "pct": 3.1
+      },
+      {
+        "device": "TV",
+        "views": 50,
+        "watch_time_hours": 1.0,
+        "pct": 3.0
+      }
+    ],
+    "2023-08": [
+      {
+        "device": "MOBILE",
+        "views": 4150,
+        "watch_time_hours": 19.8,
+        "pct": 78.2
+      },
+      {
+        "device": "DESKTOP",
+        "views": 738,
+        "watch_time_hours": 3.5000000000000004,
+        "pct": 13.9
+      },
+      {
+        "device": "TV",
+        "views": 286,
+        "watch_time_hours": 1.1,
+        "pct": 5.4
+      },
+      {
+        "device": "TABLET",
+        "views": 130,
+        "watch_time_hours": 0.5,
+        "pct": 2.5
+      }
+    ],
+    "2023-09": [
+      {
+        "device": "MOBILE",
+        "views": 19006,
+        "watch_time_hours": 82.20000000000002,
+        "pct": 73.9
+      },
+      {
+        "device": "TV",
+        "views": 3578,
+        "watch_time_hours": 12.599999999999994,
+        "pct": 13.9
+      },
+      {
+        "device": "DESKTOP",
+        "views": 2108,
+        "watch_time_hours": 8.699999999999998,
+        "pct": 8.2
+      },
+      {
+        "device": "TABLET",
+        "views": 1037,
+        "watch_time_hours": 4.3,
+        "pct": 4.0
+      }
+    ],
+    "2023-10": [
+      {
+        "device": "MOBILE",
+        "views": 9067,
+        "watch_time_hours": 36.99999999999999,
+        "pct": 61.6
+      },
+      {
+        "device": "TV",
+        "views": 3043,
+        "watch_time_hours": 10.9,
+        "pct": 20.7
+      },
+      {
+        "device": "DESKTOP",
+        "views": 2284,
+        "watch_time_hours": 9.6,
+        "pct": 15.5
+      },
+      {
+        "device": "TABLET",
+        "views": 336,
+        "watch_time_hours": 1.0999999999999999,
+        "pct": 2.3
+      }
+    ],
+    "2023-11": [
+      {
+        "device": "MOBILE",
+        "views": 16074,
+        "watch_time_hours": 65.70000000000002,
+        "pct": 59.5
+      },
+      {
+        "device": "TV",
+        "views": 5291,
+        "watch_time_hours": 19.1,
+        "pct": 19.6
+      },
+      {
+        "device": "DESKTOP",
+        "views": 4834,
+        "watch_time_hours": 18.800000000000004,
+        "pct": 17.9
+      },
+      {
+        "device": "TABLET",
+        "views": 797,
+        "watch_time_hours": 3.2000000000000015,
+        "pct": 3.0
+      }
+    ],
+    "2023-12": [
+      {
+        "device": "MOBILE",
+        "views": 35879,
+        "watch_time_hours": 129.49999999999997,
+        "pct": 97.0
+      },
+      {
+        "device": "TABLET",
+        "views": 927,
+        "watch_time_hours": 3.2000000000000006,
+        "pct": 2.5
+      },
+      {
+        "device": "DESKTOP",
+        "views": 157,
+        "watch_time_hours": 1.2,
+        "pct": 0.4
+      },
+      {
+        "device": "TV",
+        "views": 38,
+        "watch_time_hours": 0.30000000000000004,
+        "pct": 0.1
       }
     ]
   }
