@@ -844,21 +844,31 @@ def build_kpis(monthly, bsos_monthly):
     }
 
 # ── Influencers ───────────────────────────────────────────────────────────────
-INFLUENCER_URL = "https://cars24-influencer-dashboard.pages.dev/live_data.json"
+# All 3 countries are served by the same centralized influencer dashboard
+# (cars24-influencer-dashboard.pages.dev) — one live JSON endpoint per country.
+INFLUENCER_URL     = "https://cars24-influencer-dashboard.pages.dev/live_data.json"
+AU_INFLUENCER_URL  = "https://cars24-influencer-dashboard.pages.dev/au_live_data.json"
+UAE_INFLUENCER_URL = "https://cars24-influencer-dashboard.pages.dev/uae_live_data.json"
 
-def build_influencers():
-    """Fetch live influencer data from the Cars24 influencer dashboard."""
+def fetch_dashboard_influencers(url, label="Influencers"):
+    """Fetch live influencer campaign data from one country endpoint of the
+    Cars24 influencer dashboard. All 3 endpoints share the same row schema
+    (name, followers, views, likes/comments/shares/saves, cost, cpv,
+    liveMonth, monthOrder, engRate, link/videoLink/profileLink) — AU's feed
+    just doesn't populate "cost" (still null on every row as of this
+    integration), so has_cost lets callers show "not tracked" instead of a
+    misleading ₹0 spend."""
     raw = None
     # Try requests first (better SSL handling), fall back to urllib with certifi
     try:
         import requests
-        resp = requests.get(INFLUENCER_URL, timeout=20, headers={"User-Agent": "Cars24-Dashboard/1.0"})
+        resp = requests.get(url, timeout=20, headers={"User-Agent": "Cars24-Dashboard/1.0"})
         resp.raise_for_status()
         raw = resp.json()
     except ImportError:
         pass
     except Exception as e:
-        print(f"  ⚠ Influencer fetch (requests) failed: {e}")
+        print(f"  ⚠ {label} fetch (requests) failed: {e}")
 
     if raw is None:
         import urllib.request, ssl
@@ -870,19 +880,19 @@ def build_influencers():
             ctx.check_hostname = False
             ctx.verify_mode = ssl.CERT_NONE
         try:
-            req = urllib.request.Request(INFLUENCER_URL, headers={"User-Agent": "Cars24-Dashboard/1.0"})
+            req = urllib.request.Request(url, headers={"User-Agent": "Cars24-Dashboard/1.0"})
             with urllib.request.urlopen(req, timeout=20, context=ctx) as resp:
                 raw = json.loads(resp.read())
         except Exception as e:
-            print(f"  ⚠ Influencer fetch failed: {e}"); return {}
+            print(f"  ⚠ {label} fetch failed: {e}"); return {}
 
     rows = raw.get("rows", [])
     if not rows:
-        print("  ⚠ Influencer dashboard: 0 rows"); return {}
+        print(f"  ⚠ {label}: 0 rows"); return {}
 
-    # Platform detection from link URL
+    # Platform detection from link URL (AU uses "profileLink" instead of "link")
     for r in rows:
-        lnk = (r.get("link") or "") + (r.get("videoLink") or "")
+        lnk = (r.get("link") or "") + (r.get("videoLink") or "") + (r.get("profileLink") or "")
         if "instagram.com" in lnk:
             r["platform"] = "Instagram"
         elif "youtube.com" in lnk or "youtu.be" in lnk:
@@ -891,8 +901,9 @@ def build_influencers():
             r["platform"] = "Other"
 
     # Summary KPIs
+    has_cost    = any(r.get("cost") for r in rows)
     total_views = sum(r.get("views") or 0 for r in rows)
-    total_cost  = sum(r.get("cost")  or 0 for r in rows)
+    total_cost  = sum(r.get("cost")  or 0 for r in rows) if has_cost else None
     valid_cpv   = [r["cpv"]     for r in rows if r.get("cpv")     and r["cpv"] > 0]
     valid_eng   = [r["engRate"] for r in rows if r.get("engRate") and r["engRate"] > 0]
 
@@ -915,12 +926,12 @@ def build_influencers():
             "campaigns":  v["campaigns"],
             "views":      v["views"],
             "views_lakh": round(v["views"] / 1e5, 2),
-            "cost":       v["cost"],
+            "cost":       v["cost"] if has_cost else None,
             "avg_cpv":    round(sum(v["cpvs"]) / len(v["cpvs"]), 3) if v["cpvs"] else None,
             "avg_eng":    round(sum(v["engs"]) / len(v["engs"]), 2) if v["engs"] else None,
         })
 
-    print(f"  ✓ Influencers: {len(rows)} campaigns · {len(monthly_rows)} months")
+    print(f"  ✓ {label}: {len(rows)} campaigns · {len(monthly_rows)} months" + ("" if has_cost else " (source has no cost data)"))
     return {
         "kpis": {
             "total_campaigns":  len(rows),
@@ -933,58 +944,23 @@ def build_influencers():
         "monthly":      monthly_rows,
         "rows":         rows,
         "refreshed_at": raw.get("refreshedAt", ""),
+        "has_cost":     has_cost,
     }
 
-# ── Influencers (Australia) ────────────────────────────────────────────────────
+def build_influencers():
+    return fetch_dashboard_influencers(INFLUENCER_URL, "Influencers")
+
+# ── Influencers (Australia / UAE) ──────────────────────────────────────────────
+# Both now come from the same centralized dashboard as India (previously AU read
+# a separate Google Sheet via fetch_influencers_au.py, and UAE was fetched live
+# client-side straight from its Google Sheet — both replaced now that the
+# dashboard has live per-country feeds). fetch_influencers_au.py / the old
+# UAE gviz fetch are left in place as a fallback, just no longer wired in.
 def build_influencers_au():
-    """AU influencer data from fetch_influencers_au.py's two CSVs:
-    "Pan Australia POA - Instagram" gives per-post creator detail (name,
-    followers, views) + one total AUD spend per month (mirrors UAE's
-    "Pan UAE POA - Instagram", though AU's Likes/Comments/Shares/Saves
-    columns aren't populated there yet, so engagement rate isn't
-    available for AU the way it is for UAE), and "Reachouts" gives a
-    handful of separate creator partnerships (name, followers, agreed
-    cost, CPV) still being negotiated. Currency conversion to INR
-    happens client-side."""
-    p = DATA / "influencers_au.csv"
-    if not p.exists():
-        return {"rows": [], "monthly": [], "creators": []}
-    df = pd.read_csv(p)
-    if df.empty:
-        return {"rows": [], "monthly": [], "creators": []}
+    return fetch_dashboard_influencers(AU_INFLUENCER_URL, "AU Influencers")
 
-    month_key = pd.to_datetime(df["month"], format="%B %Y").dt.strftime("%Y-%m")
-    df = df.assign(month_key=month_key)
-    rows = [{"month": r.month_key, "label": mlabel(r.month_key), "creator": ss(r.creator),
-             "followers": ss(r.followers), "video_link": ss(r.video_link), "status": ss(r.status),
-             "views": sf(r.views)}
-            for r in df.itertuples()]
-
-    monthly = []
-    for mk, grp in df.groupby("month_key", sort=True):
-        cost_vals = grp["cost_aud"].dropna()
-        cost_aud = sf(cost_vals.iloc[0]) if len(cost_vals) else None
-        monthly.append({
-            "month": mk, "label": mlabel(mk),
-            "posts": int(len(grp)),
-            "views": int(grp["views"].sum()),
-            "cost_aud": cost_aud,
-        })
-    monthly.sort(key=lambda r: r["month"])
-
-    creators = []
-    cp = DATA / "influencers_au_creators.csv"
-    if cp.exists():
-        cdf = pd.read_csv(cp)
-        creators = [{
-            "platform": ss(r.platform), "category": ss(r.category), "creator": ss(r.creator),
-            "followers": ss(r.followers), "link": ss(r.link),
-            "recent_views": sf(r.recent_views), "status": ss(r.status),
-            "cost_aud": sf(r.cost_aud), "cpv_aud": sf(r.cpv_aud),
-        } for r in cdf.itertuples()]
-
-    print(f"  ✓ AU influencers: {len(rows)} posts across {len(monthly)} months, {len(creators)} creator partnerships")
-    return {"rows": rows, "monthly": monthly, "creators": creators}
+def build_influencers_uae():
+    return fetch_dashboard_influencers(UAE_INFLUENCER_URL, "UAE Influencers")
 
 # ── YouTube ───────────────────────────────────────────────────────────────────
 YT_CHANNEL_KEYS = [
@@ -1588,6 +1564,7 @@ if __name__ == "__main__":
     instagram      = build_instagram()
     influencers    = build_influencers()
     influencers_au = build_influencers_au()
+    influencers_uae = build_influencers_uae()
     linkedin       = build_linkedin()
     linkedin_competitors = build_linkedin_competitors()
     gsc_au         = build_gsc_country("au", "gsc_daily_au.csv", "au_")
@@ -1614,6 +1591,7 @@ if __name__ == "__main__":
         "instagram":          instagram,
         "influencers":        influencers,
         "influencers_au":     influencers_au,
+        "influencers_uae":    influencers_uae,
         "linkedin":           linkedin,
         "linkedin_competitors": linkedin_competitors,
         "gsc_au":             gsc_au,

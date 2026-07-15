@@ -689,11 +689,7 @@ const BSOS_SHEET_AUS='https://docs.google.com/spreadsheets/d/1oXgpR60cC22qQOzjMS
 const BSOS_GIDS_UAE={monthly:38589749,weekly:1728471007,daily:1692430578};
 const BSOS_GIDS_AUS={monthly:1193590955,weekly:131010752};
 const AED_TO_INR=23.3; // approx market rate — all UAE influencer spend/CPV figures are shown converted to INR
-const AUD_TO_INR=56.5; // approx market rate — for AU influencer spend/CPV figures once that tab is connected
-const AU_INF_SHEET='https://docs.google.com/spreadsheets/d/1VDcKBUNwFacleZFdN_By-qAeroheo3mlqOItat1ZQM8/edit';
-const AU_INF_GIDS={poa:713202607,reachouts:87462823};
-const UAE_INF_SHEET='https://docs.google.com/spreadsheets/d/1_DEKX02I3Dh41B8nBtwPR1G-_4nt98WgDILZjzg3sp4/edit';
-const UAE_INF_GID=211709974;
+const AUD_TO_INR=56.5; // approx market rate — for AU influencer spend/CPV figures
 const BN={Cars24:'Cars24',Spinny:'Spinny',CarWale:'CarWale',Cardekho:'CarDekho',MFC:'Mahindra First Choice',MTV:'Maruti True Value',OLX:'OLX Auto',Autotrader:'Autotrader',Carma:'Carma',Carsales:'carsales.com',Easyauto123:'EasyAuto123',AlbaCars:'Alba Cars',Automall:'Automall',Dubizzle:'Dubizzle',Kavak:'Kavak',RMAMotors:'RMA Motors'};
 const CC=['#4736FE','#00C951','#FF4F01','#E91E8C','#F59E0B','#7C3AED','#0EA5E9','#059669','#FF6B6B','#9CA3AF'];
 
@@ -3945,425 +3941,247 @@ function initLI(){
   renderLI('lic-cars24_arabia','cars24_arabia','Cars24 Arabia');
 }
 
-function initAUInf(){
-  const el=document.getElementById('au-inf-content');if(!el)return;
-  const inf=D.influencers_au;
-  if(!inf||!inf.rows?.length){
-    el.innerHTML=`<div class="ph"><div class="ph-mark">👥</div><div class="ph-title">Australia influencer data not connected yet</div><div class="ph-body">Share the Google Sheet with Australia's influencer campaign data to populate this section.</div></div>`;return;
+// Shared by AU + UAE — both now read from the same centralized influencer
+// dashboard (cars24-influencer-dashboard.pages.dev) as India, one JSON feed
+// per country (see build_influencers_au/_uae in build_data.py). AU's feed
+// just doesn't populate "cost" yet, so cfg.hasCost gates every
+// cost/CPV-dependent tile, column and card so it reads "not tracked" instead
+// of a misleading ₹0.
+function initCountryInfTab(prefix,infData,cfg){
+  const ck=prefix.replace(/-/g,'');
+  const el=document.getElementById(prefix+'inf-content');if(!el)return;
+  if(!infData||!infData.rows?.length){
+    el.innerHTML=`<div class="ph"><div class="ph-mark">👥</div><div class="ph-title">${cfg.countryLabel} influencer data loading…</div><div class="ph-body">Run <code>python3 build_data.py</code> to fetch live data from the influencer dashboard.</div></div>`;return;
   }
-  const allRows=inf.rows||[];
-  const allMonthly=(inf.monthly||[]).slice();
-  const monthsDesc=[...allMonthly].reverse();
-  const latestMonth=monthsDesc[0]?.month;
-  let curMode='inr'; // 'inr' | 'local' — toggled by the currency pills below
+
+  const allRows=infData.rows||[];
+  const allMonthly=(infData.monthly||[]).slice().sort((a,b)=>a.monthOrder-b.monthOrder);
+  let curMode='inr'; // 'inr' | 'local' — toggled by the currency pills below (cost-tracking countries only)
 
   const fv=v=>{if(v==null||isNaN(v))return'—';if(v>=1e6)return(v/1e6).toFixed(2)+'M';if(v>=1e3)return(v/1e3).toFixed(1)+'K';return Math.round(v).toLocaleString();};
-  // Formatters take the RAW AUD value and convert/format based on curMode
   const fc=v=>{
-    if(v==null||isNaN(v))return'—';
-    if(curMode==='inr'){const r=v*AUD_TO_INR;if(r>=1e7)return'₹'+(r/1e7).toFixed(2)+'Cr';if(r>=1e5)return'₹'+(r/1e5).toFixed(2)+'L';if(r>=1e3)return'₹'+(r/1e3).toFixed(1)+'K';return'₹'+Math.round(r).toLocaleString();}
-    if(v>=1e6)return'A$'+(v/1e6).toFixed(2)+'M';if(v>=1e3)return'A$'+(v/1e3).toFixed(1)+'K';return'A$'+Math.round(v).toLocaleString();
+    if(!cfg.hasCost||v==null||isNaN(v))return'—';
+    if(curMode==='inr'){const r=v*cfg.rate;if(r>=1e7)return'₹'+(r/1e7).toFixed(2)+'Cr';if(r>=1e5)return'₹'+(r/1e5).toFixed(2)+'L';if(r>=1e3)return'₹'+(r/1e3).toFixed(1)+'K';return'₹'+Math.round(r).toLocaleString();}
+    if(v>=1e6)return cfg.symbol+(v/1e6).toFixed(2)+'M';if(v>=1e3)return cfg.symbol+(v/1e3).toFixed(1)+'K';return cfg.symbol+Math.round(v).toLocaleString();
   };
-  const fcpv=v=>{if(v==null||isNaN(v))return'—';return curMode==='inr'?'₹'+Number(v*AUD_TO_INR).toFixed(2):'A$'+Number(v).toFixed(2);};
-
-  el.innerHTML=`
-    <div class="inf-period-bar" style="gap:12px">
-      <span class="fl">PERIOD</span>
-      <div style="position:relative;display:inline-block">
-        <select id="au-inf-sel" style="appearance:none;-webkit-appearance:none;background:var(--card);border:2px solid var(--blue);border-radius:8px;padding:7px 36px 7px 14px;font:700 13px var(--font);color:var(--ink);cursor:pointer;min-width:160px;outline:none">
-          <option value="all">All Time</option>
-          ${monthsDesc.map(m=>`<option value="mo:${m.month}"${m.month===latestMonth?' selected':''}>${m.label}</option>`).join('')}
-        </select>
-        <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--blue);font-size:10px">▼</span>
-      </div>
-      <span class="fl" style="margin-left:10px">CURRENCY</span>
-      <div class="pp-wrap" id="au-inf-currency">
-        <button class="pp active" data-c="inr" type="button">₹ INR</button>
-        <button class="pp" data-c="local" type="button">A$ AUD</button>
-      </div>
-    </div>
-
-    <div class="inf-kpi-strip" id="au-inf-kpis"></div>
-
-    <p style="font-size:12px;color:var(--grey);margin:0 0 10px">Per-creator detail is sourced from "Pan Australia POA - Instagram" — creator, followers, views per campaign and one total spend figure per month; likes/comments and engagement rate aren't populated in this sheet yet (unlike UAE's equivalent tab). The ${inf.creators?.length||0} entries below are from "Reachouts" — separate deals still being negotiated, not yet live campaigns.</p>
-
-    ${inf.creators?.length?`<div class="card">
-      <div class="sh"><span class="kicker">🎯 Creator Partnerships</span><span class="title">Agreed Deals</span><span class="desc">Negotiated cost + CPV, based on estimated reach. Status reflects where the deal stands.</span></div>
-      <div class="card-actions"><a class="card-act-btn" href="${AU_INF_SHEET}?gid=${AU_INF_GIDS.reachouts}#gid=${AU_INF_GIDS.reachouts}" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('au-inf-creators-tbl','au_influencer_creators.csv')">⬇ CSV</button></div>
-      <div class="tw" id="au-inf-creators-tbl"></div>
-    </div>`:''}
-
-    <div class="card">
-      <div class="sh"><span class="kicker">📈 Monthly trend</span><span class="title">Views Over Time</span><span class="desc">Total influencer views per month across all AU campaigns.</span></div>
-      <div class="card-actions"><a class="card-act-btn" href="${AU_INF_SHEET}?gid=${AU_INF_GIDS.poa}#gid=${AU_INF_GIDS.poa}" target="_blank" rel="noopener">📄 View sheet</a></div>
-      <div class="cw tall"><canvas id="au-inf-chart-trend"></canvas></div>
-    </div>
-
-    <div class="card">
-      <div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance Table</span><span class="desc">Posts, views, spend and blended CPV per month.</span></div>
-      <div class="card-actions"><a class="card-act-btn" href="${AU_INF_SHEET}?gid=${AU_INF_GIDS.poa}#gid=${AU_INF_GIDS.poa}" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('au-inf-mom-tbl','au_influencer_monthly.csv')">⬇ CSV</button></div>
-      <div class="tw" id="au-inf-mom-tbl"></div>
-    </div>
-
-    <div class="g2" style="margin-bottom:0">
-      <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">🏆 Top creators</span><span class="title">Top 10 by Views</span></div>
-        <div class="card-actions"><a class="card-act-btn" href="${AU_INF_SHEET}?gid=${AU_INF_GIDS.poa}#gid=${AU_INF_GIDS.poa}" target="_blank" rel="noopener">📄 View sheet</a></div>
-        <div class="tw" id="au-inf-top-views"></div>
-      </div>
-      <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">📉 Cost efficiency</span><span class="title">Blended CPV by Month</span><span class="desc">Total spend ÷ total views. Lower = more efficient.</span></div>
-        <div class="cw tall" style="height:260px"><canvas id="au-inf-chart-cpv"></canvas></div>
-      </div>
-    </div>`;
-
-  function renderAUKPIs(val){
-    const monthKey=val==='all'?null:val.replace('mo:','');
-    const monthsSel=monthKey?allMonthly.filter(m=>m.month===monthKey):allMonthly;
-    const rowsSel=monthKey?allRows.filter(r=>r.month===monthKey):allRows;
-    const tv=rowsSel.reduce((s,r)=>s+r.views,0);
-    const costAud=monthsSel.reduce((s,m)=>s+(m.cost_aud||0),0);
-    const hasCost=monthsSel.some(m=>m.cost_aud!=null);
-    const tc=hasCost?costAud:null;
-    const bcpv=(tc!=null&&tv>0)?(tc/tv):null;
-    document.getElementById('au-inf-kpis').innerHTML=`
-      <div class="ink"><span class="ink-icon">📅</span><div class="ink-lbl">Active Months</div><div class="ink-val">${monthsSel.length}</div><div class="ink-sub">months with live posts</div></div>
-      <div class="ink mint"><span class="ink-icon">📝</span><div class="ink-lbl">Posts</div><div class="ink-val">${rowsSel.length}</div><div class="ink-sub">total in period</div></div>
-      <div class="ink grn"><span class="ink-icon">👁️</span><div class="ink-lbl">Total Views</div><div class="ink-val">${fv(tv)}</div><div class="ink-sub">plays in period</div></div>
-      <div class="ink or"><span class="ink-icon">💸</span><div class="ink-lbl">Total Spend</div><div class="ink-val">${fc(tc)}</div><div class="ink-sub">budget in period</div></div>
-      <div class="ink pur"><span class="ink-icon">📉</span><div class="ink-lbl">Blended CPV</div><div class="ink-val">${fcpv(bcpv)}</div><div class="ink-sub">spend ÷ views</div></div>`;
-  }
-
-  function renderAUStatic(){
-    // Creator partnerships table
-    const creatorsEl=document.getElementById('au-inf-creators-tbl');
-    if(creatorsEl&&inf.creators?.length){
-      const cth=`<th>Creator</th><th>Category</th><th class="nr">Followers</th><th class="nr">Recent Views</th><th>Status</th><th class="nr ch">Cost</th><th class="nr ch">CPV</th>`;
-      const crows=inf.creators.map((c,i)=>{
-        return`<tr class="${i===0?'lat':''}">
-          <td><a href="${c.link||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${c.creator}</a><br><span style="font-size:11px;color:var(--grey)">${c.platform}</span></td>
-          <td>${c.category||'—'}</td>
-          <td class="nr">${c.followers||'—'}</td>
-          <td class="nr">${fv(c.recent_views)}</td>
-          <td>${c.status||'—'}</td>
-          <td class="nr cc"><strong>${fc(c.cost_aud)}</strong></td>
-          <td class="nr cc">${fcpv(c.cpv_aud)}</td>
-        </tr>`;
-      }).join('');
-      creatorsEl.innerHTML=tbl(cth,crows);
-    }
-
-    // Trend chart
-    if(charts.auInfTrend)charts.auInfTrend.destroy();
-    const tcx=document.getElementById('au-inf-chart-trend').getContext('2d');
-    charts.auInfTrend=new Chart(tcx,{type:'bar',data:{
-      labels:allMonthly.map(m=>m.label),
-      datasets:[{label:'Total Views',data:allMonthly.map(m=>m.views/1000),backgroundColor:allMonthly.map((_,i)=>i===allMonthly.length-1?'rgba(71,54,254,.75)':'rgba(71,54,254,.22)'),borderRadius:6}]
-    },options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.parsed.y?.toFixed(1)}K views`}}},
-      scales:{y:{title:{display:true,text:'Views (K)'},ticks:{callback:v=>v+'K'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
-
-    // MoM table
-    const mth=`<th>Month</th><th class="nr ch">Posts</th><th class="nr">Total Views</th><th class="nr ch">Total Spend</th><th class="nr ch">Blended CPV</th>`;
-    document.getElementById('au-inf-mom-tbl').innerHTML=tbl(mth,[...allMonthly].reverse().map((m,i)=>{
-      const bcpv=(m.cost_aud!=null&&m.views>0)?(m.cost_aud/m.views):null;
-      return`<tr class="${i===0?'lat':''}">
-        <td><strong>${m.label}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td>
-        <td class="nr cc"><strong>${m.posts}</strong></td>
-        <td class="nr">${fv(m.views)}</td>
-        <td class="nr cc">${fc(m.cost_aud)}</td>
-        <td class="nr cc">${fcpv(bcpv)}</td>
-      </tr>`;
-    }).join(''));
-
-    // Top 10 creators by views
-    const top10V=[...allRows].sort((a,b)=>b.views-a.views).slice(0,10);
-    document.getElementById('au-inf-top-views').innerHTML=tbl(
-      `<th>#</th><th>Creator</th><th class="nr">Followers</th><th class="nr ch">Views</th>`,
-      top10V.map((r,i)=>`<tr class="${i===0?'lat':''}">
-        <td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td>
-        <td><a href="${r.video_link||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.creator}</a><br><span style="font-size:11px;color:var(--grey)">${r.label}</span></td>
-        <td class="nr">${r.followers||'—'}</td>
-        <td class="nr cc"><strong>${fv(r.views)}</strong></td>
-      </tr>`).join(''));
-
-    // CPV by month chart
-    if(charts.auInfCpv)charts.auInfCpv.destroy();
-    const ccx=document.getElementById('au-inf-chart-cpv').getContext('2d');
-    const cpvSym=curMode==='inr'?'₹':'A$';
-    const bcpvData=allMonthly.map(m=>{
-      if(m.cost_aud==null||!m.views)return null;
-      const raw=m.cost_aud/m.views;
-      return parseFloat((curMode==='inr'?raw*AUD_TO_INR:raw).toFixed(2));
-    });
-    charts.auInfCpv=new Chart(ccx,{type:'bar',data:{
-      labels:allMonthly.map(m=>m.label),
-      datasets:[{label:`Blended CPV (${cpvSym})`,data:bcpvData,backgroundColor:bcpvData.map((_,i)=>i===allMonthly.length-1?'rgba(71,54,254,.85)':'rgba(71,54,254,.28)'),borderRadius:6}]
-    },options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y==null?'No spend logged':`${cpvSym}${c.parsed.y.toFixed(2)}`}}},
-      scales:{y:{title:{display:true,text:`Blended CPV (${cpvSym})`},ticks:{callback:v=>cpvSym+v},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
-  }
-
-  const sel=document.getElementById('au-inf-sel');
-  sel.addEventListener('change',()=>renderAUKPIs(sel.value));
-  document.querySelectorAll('#au-inf-currency .pp').forEach(btn=>btn.addEventListener('click',()=>{
-    document.querySelectorAll('#au-inf-currency .pp').forEach(b=>b.classList.toggle('active',b===btn));
-    curMode=btn.dataset.c;
-    renderAUKPIs(sel.value);
-    renderAUStatic();
-  }));
-  renderAUKPIs(sel.value);
-  renderAUStatic();
-}
-
-async function initUAEInf(){
-  const el=document.getElementById('uae-inf-content');if(!el)return;
-  el.innerHTML=`<div class="ph"><div class="ph-mark">⏳</div><div class="ph-title">Loading UAE influencer data…</div><div class="ph-body">Fetching live from Google Sheets</div></div>`;
-
-  const SHEET_ID='1_DEKX02I3Dh41B8nBtwPR1G-_4nt98WgDILZjzg3sp4', GID='211709974';
-  const MO={'january':1,'february':2,'march':3,'april':4,'may':5,'june':6,'july':7,'august':8,'september':9,'october':10,'november':11,'december':12};
-  let allRows=[];
-
-  try{
-    const res=await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?gid=${GID}&tqx=out:json`);
-    const txt=await res.text();
-    const m=txt.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);?\s*$/);
-    if(!m)throw new Error('Unexpected sheet response');
-    const tbl=JSON.parse(m[1]).table;
-    const hmap={};
-    tbl.cols.forEach((c,i)=>{const k=(c.label||c.id||'').toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/_+$/,'');if(k)hmap[k]=i;});
-    const gv=(row,k)=>{const i=hmap[k]??-1;return i>=0&&row.c[i]?row.c[i].v:null;};
-    const money=v=>{if(v==null)return 0;const n=parseFloat(String(v).replace(/[^\d.]/g,''));return isNaN(n)?0:n;};
-    allRows=tbl.rows.map(row=>{
-      if(!row||!row.c)return null;
-      const name   =gv(row,'name')||gv(row,'creator_name')||gv(row,'creator')||gv(row,'influencer');
-      const views  =+(gv(row,'views')||gv(row,'total_views')||0);
-      const likes  =+(gv(row,'likes')||gv(row,'total_likes')||0);
-      const comments=+(gv(row,'comments')||gv(row,'total_comments')||0);
-      const shares =+(gv(row,'shares')||gv(row,'total_shares')||0);
-      const saves  =+(gv(row,'saves')||0);
-      // "Avg Views" holds the actual per-post cost and "Final Cost" holds CPV —
-      // verified directly against the sheet, a mislabeling in the source data
-      // (not this parser) that's been consistent across every row checked.
-      // Kept in raw AED here — converted to INR only at display time (fc/fcpv),
-      // since the currency toggle needs both.
-      const cost   =money(gv(row,'avg_views')||gv(row,'creator_cost_aed')||gv(row,'cost'));
-      const month  =String(gv(row,'live_month')||gv(row,'month')||'').trim();
-      const link   =gv(row,'video_live_link')||gv(row,'post_url')||gv(row,'url')||'';
-      // month is "March 2026" — MO only maps bare month names, so it must be
-      // split from the year first, else every row collapses to moNum=0
-      // (MO["march 2026"] is undefined) and all months merge into one bucket.
-      const [moNameRaw,moYearRaw]=month.toLowerCase().split(' ');
-      const moNum  =(parseInt(moYearRaw,10)||0)*100+(MO[moNameRaw]||0);
-      const eng    =views>0?((likes+comments+saves)/views*100):null;
-      const cpv    =views>0&&cost>0?(cost/views):null;
-      return name?{name,views,likes,comments,shares,saves,cost,month,link,moNum,eng,cpv}:null;
-    }).filter(Boolean);
-  }catch(e){
-    el.innerHTML=`<div class="ph"><div class="ph-mark">⚠️</div><div class="ph-title">Could not load UAE influencer data</div><div class="ph-body">${e.message}</div></div>`;return;
-  }
-
-  if(!allRows.length){el.innerHTML=`<div class="ph"><div class="ph-mark">📊</div><div class="ph-title">No data found in UAE influencer sheet</div></div>`;return;}
-
-  // Monthly aggregates
-  const moMap={};
-  allRows.forEach(r=>{
-    if(!moMap[r.moNum])moMap[r.moNum]={moNum:r.moNum,month:r.month,views:0,likes:0,comments:0,cost:0,campaigns:0};
-    moMap[r.moNum].views+=r.views;moMap[r.moNum].likes+=r.likes;moMap[r.moNum].comments+=r.comments;
-    moMap[r.moNum].cost+=r.cost;moMap[r.moNum].campaigns++;
-  });
-  const allMonthly=Object.values(moMap).sort((a,b)=>a.moNum-b.moNum);
-  allMonthly.forEach(m=>{
-    const mrows=allRows.filter(r=>r.moNum===m.moNum);
-    const ers=mrows.filter(r=>r.eng>0).map(r=>r.eng);
-    m.avg_eng=ers.length?ers.reduce((a,b)=>a+b)/ers.length:null;
-  });
-
-  const monthsDesc=[...allMonthly].reverse();
-  const latestMO=monthsDesc[0]?.moNum;
-  let curMode='inr'; // 'inr' | 'local' — toggled by the currency pills below
-
-  // Formatters take the RAW AED value and convert/format based on curMode
-  const fv=v=>{if(v==null||isNaN(v))return'—';if(v>=1e6)return(v/1e6).toFixed(2)+'M';if(v>=1e3)return(v/1e3).toFixed(1)+'K';return Math.round(v).toLocaleString();};
-  const fc=v=>{
-    if(v==null||isNaN(v))return'—';
-    if(curMode==='inr'){const r=v*AED_TO_INR;if(r>=1e7)return'₹'+(r/1e7).toFixed(2)+'Cr';if(r>=1e5)return'₹'+(r/1e5).toFixed(2)+'L';if(r>=1e3)return'₹'+(r/1e3).toFixed(1)+'K';return'₹'+Math.round(r).toLocaleString();}
-    if(v>=1e6)return'AED '+(v/1e6).toFixed(2)+'M';if(v>=1e3)return'AED '+(v/1e3).toFixed(1)+'K';return'AED '+Math.round(v).toLocaleString();
+  const fcpv=v=>{
+    if(!cfg.hasCost||v==null||isNaN(v))return'—';
+    return curMode==='inr'?'₹'+Number(v*cfg.rate).toFixed(2):cfg.symbol+Number(v).toFixed(2);
   };
-  const fcpv=v=>{if(v==null||isNaN(v))return'—';return curMode==='inr'?'₹'+Number(v*AED_TO_INR).toFixed(2):'AED '+Number(v).toFixed(3);};
+
+  const uniqMO=[...new Set(allRows.map(r=>r.monthOrder))].sort((a,b)=>a-b);
+  const moLabel={};allRows.forEach(r=>{moLabel[r.monthOrder]=r.liveMonth;});
+  const monthsDesc=[...uniqMO].reverse();
+  const latestMO=monthsDesc[0];
 
   el.innerHTML=`
     <div class="inf-ext-banner">
-      <div class="inf-ext-txt"><strong>Cars24 Arabia Influencer Tracker</strong> &nbsp;·&nbsp; Full campaign analytics, creator profiles &amp; live Google Sheets sync</div>
-      <a class="inf-ext-link" href="https://cars24arabia-influencer-tracker.netlify.app/" target="_blank">Open Full Dashboard ↗</a>
+      <div class="inf-ext-txt"><strong>Cars24 Influencer Dashboard</strong> &nbsp;·&nbsp; ${cfg.countryLabel} campaigns, live-synced${cfg.hasCost?'':' (spend/CPV not tracked in this feed yet)'}</div>
+      <a class="inf-ext-link" href="https://cars24-influencer-dashboard.pages.dev/" target="_blank">Open Full Dashboard ↗</a>
     </div>
 
-    <div class="inf-period-bar" style="gap:12px">
-      <span class="fl">PERIOD</span>
-      <div style="position:relative;display:inline-block">
-        <select id="uae-inf-sel" style="appearance:none;-webkit-appearance:none;background:var(--card);border:2px solid var(--blue);border-radius:8px;padding:7px 36px 7px 14px;font:700 13px var(--font);color:var(--ink);cursor:pointer;min-width:160px;outline:none">
-          <option value="all">All Time</option>
-          ${monthsDesc.map(m=>`<option value="mo:${m.moNum}"${m.moNum===latestMO?' selected':''}>${m.month}</option>`).join('')}
+    <div class="card">
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+        <div><span class="kicker">📊 Key Metrics</span><span class="title">Influencer Performance Overview</span></div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          ${cfg.hasCost?`<div class="pp-wrap" id="${prefix}inf-currency">
+            <button class="pp active" data-c="inr" type="button">₹ INR</button>
+            <button class="pp" data-c="local" type="button">${cfg.symbol.trim()}</button>
+          </div>`:''}
+          <select class="inf-sel" id="${prefix}inf-kpi-sel">
+            <option value="all">All Time</option>
+            ${monthsDesc.map(mo=>`<option value="mo:${mo}"${mo===latestMO?' selected':''}>${moLabel[mo]||mo}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="inf-kpi-strip" id="${prefix}inf-kpis"></div>
+    </div>
+
+    <div class="card">
+      <div class="sh"><span class="kicker">📈 Monthly trend</span><span class="title">Views Over Time</span><span class="desc">Total influencer video views per month across all ${cfg.countryLabel} campaigns.</span></div>
+      <div class="cw tall"><canvas id="${prefix}inf-chart-trend"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+        <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance Table</span><span class="desc">Views, likes, comments${cfg.hasCost?', spend and blended CPV':''} per month.</span></div>
+        <select class="inf-sel" id="${prefix}inf-tbl-sel">
+          <option value="all" selected>All Time</option>
+          ${monthsDesc.map(mo=>`<option value="mo:${mo}">${moLabel[mo]||mo}</option>`).join('')}
         </select>
-        <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--blue);font-size:10px">▼</span>
       </div>
-      <span class="fl" style="margin-left:10px">CURRENCY</span>
-      <div class="pp-wrap" id="uae-inf-currency">
-        <button class="pp active" data-c="inr" type="button">₹ INR</button>
-        <button class="pp" data-c="local" type="button">AED</button>
-      </div>
-    </div>
-
-    <div class="inf-kpi-strip" id="uae-inf-kpis"></div>
-
-    <div class="card">
-      <div class="sh"><span class="kicker">📈 Monthly trend</span><span class="title">Views Over Time</span><span class="desc">Total influencer views per month across all UAE campaigns.</span></div>
-      <div class="card-actions"><a class="card-act-btn" href="${UAE_INF_SHEET}?gid=${UAE_INF_GID}#gid=${UAE_INF_GID}" target="_blank" rel="noopener">📄 View sheet</a></div>
-      <div class="cw tall"><canvas id="uae-inf-chart-trend"></canvas></div>
-    </div>
-
-    <div class="card">
-      <div class="sh"><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Performance Table</span><span class="desc">Views, likes, comments, spend and blended CPV per month.</span></div>
-      <div class="card-actions"><a class="card-act-btn" href="${UAE_INF_SHEET}?gid=${UAE_INF_GID}#gid=${UAE_INF_GID}" target="_blank" rel="noopener">📄 View sheet</a><button class="card-act-btn" type="button" onclick="downloadTableCSV('uae-inf-mom-tbl','uae_influencer_monthly.csv')">⬇ CSV</button></div>
-      <div class="tw" id="uae-inf-mom-tbl"></div>
+      <div class="tw" id="${prefix}inf-mom-tbl"></div>
     </div>
 
     <div class="g2" style="margin-bottom:0">
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">🏆 Top creators</span><span class="title">Top 10 by Views</span></div>
-        <div class="card-actions"><a class="card-act-btn" href="${UAE_INF_SHEET}?gid=${UAE_INF_GID}#gid=${UAE_INF_GID}" target="_blank" rel="noopener">📄 View sheet</a></div>
-        <div class="tw" id="uae-inf-top-views"></div>
+        <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div><span class="kicker">🏆 Top creators</span><span class="title">Top 10 by Views</span><span class="desc">Highest-performing influencers in selected period.</span></div>
+          <select class="inf-sel" id="${prefix}inf-topv-sel">
+            <option value="all" selected>All Time</option>
+            ${monthsDesc.map(mo=>`<option value="mo:${mo}">${moLabel[mo]||mo}</option>`).join('')}
+          </select>
+        </div>
+        <div class="tw" id="${prefix}inf-top-views-tbl"></div>
       </div>
-      <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">📉 Cost efficiency</span><span class="title">Blended CPV by Month</span><span class="desc">Total spend ÷ total views. Lower = more efficient.</span></div>
-        <div class="cw tall" style="height:260px"><canvas id="uae-inf-chart-cpv"></canvas></div>
-      </div>
+      ${cfg.hasCost?`<div class="card" style="margin:0">
+        <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div><span class="kicker">📉 Cost efficiency</span><span class="title">Blended CPV by Month</span><span class="desc">Total spend ÷ total views each month. Lower = more efficient.</span></div>
+          <select class="inf-sel" id="${prefix}inf-cpv-sel">
+            <option value="all" selected>All Time</option>
+            ${monthsDesc.map(mo=>`<option value="mo:${mo}">${moLabel[mo]||mo}</option>`).join('')}
+          </select>
+        </div>
+        <div class="cw tall" style="height:260px"><canvas id="${prefix}inf-chart-cpv"></canvas></div>
+      </div>`:`<div class="card" style="margin:0">
+        <div class="sh"><span class="kicker">⚡ Best engagement</span><span class="title">Top 10 by Engagement Rate</span><span class="desc">(likes + comments + saves) ÷ views</span></div>
+        <div class="tw" id="${prefix}inf-top-eng-tbl"></div>
+      </div>`}
     </div>
 
-    <div class="g2" style="margin-top:14px">
+    ${cfg.hasCost?`<div class="g2" style="margin-top:14px">
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">⚡ Best engagement</span><span class="title">Top 10 by Engagement Rate</span><span class="desc">(likes + comments + saves) ÷ views</span></div>
-        <div class="card-actions"><a class="card-act-btn" href="${UAE_INF_SHEET}?gid=${UAE_INF_GID}#gid=${UAE_INF_GID}" target="_blank" rel="noopener">📄 View sheet</a></div>
-        <div class="tw" id="uae-inf-top-eng"></div>
+        <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div><span class="kicker">⚡ Best engagement</span><span class="title">Top 10 by Engagement Rate</span><span class="desc">Highest (likes + comments + saves) ÷ views in period.</span></div>
+          <select class="inf-sel" id="${prefix}inf-tope-sel">
+            <option value="all" selected>All Time</option>
+            ${monthsDesc.map(mo=>`<option value="mo:${mo}">${moLabel[mo]||mo}</option>`).join('')}
+          </select>
+        </div>
+        <div class="tw" id="${prefix}inf-top-eng-tbl"></div>
       </div>
       <div class="card" style="margin:0">
-        <div class="sh"><span class="kicker">💰 Lowest CPV</span><span class="title">Top 10 Most Efficient Creators</span><span class="desc">Lowest CPV (min 5K views)</span></div>
-        <div class="card-actions"><a class="card-act-btn" href="${UAE_INF_SHEET}?gid=${UAE_INF_GID}#gid=${UAE_INF_GID}" target="_blank" rel="noopener">📄 View sheet</a></div>
-        <div class="tw" id="uae-inf-low-cpv"></div>
+        <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+          <div><span class="kicker">💰 Lowest CPV</span><span class="title">Top 10 Most Efficient Creators</span><span class="desc">Lowest blended CPV (min 5K views) in period.</span></div>
+          <select class="inf-sel" id="${prefix}inf-topl-sel">
+            <option value="all" selected>All Time</option>
+            ${monthsDesc.map(mo=>`<option value="mo:${mo}">${moLabel[mo]||mo}</option>`).join('')}
+          </select>
+        </div>
+        <div class="tw" id="${prefix}inf-low-cpv-tbl"></div>
       </div>
-    </div>`;
+    </div>`:''}`;
 
-  function renderUAEKPIs(val){
-    const rows=val==='all'?allRows:allRows.filter(r=>r.moNum===parseInt(val.replace('mo:',''),10));
-    const tv=rows.reduce((s,r)=>s+r.views,0);
-    const tc=rows.reduce((s,r)=>s+r.cost,0);
-    const ers=rows.filter(r=>r.eng>0).map(r=>r.eng);
-    const bcpv=tv>0?(tc/tv):null;
-    const avgEng=ers.length?(ers.reduce((a,b)=>a+b)/ers.length):null;
-    const uniqC=new Set(rows.map(r=>r.name)).size;
-    const mons=new Set(rows.map(r=>r.moNum)).size;
-    document.getElementById('uae-inf-kpis').innerHTML=`
-      <div class="ink"><span class="ink-icon">📅</span><div class="ink-lbl">Active Months</div><div class="ink-val">${mons}</div><div class="ink-sub">months with live creators</div></div>
-      <div class="ink mint"><span class="ink-icon">👥</span><div class="ink-lbl">Creators</div><div class="ink-val">${uniqC}</div><div class="ink-sub">total across campaign</div></div>
-      <div class="ink grn"><span class="ink-icon">👁️</span><div class="ink-lbl">Total Views</div><div class="ink-val">${fv(tv)}</div><div class="ink-sub">plays in period</div></div>
-      <div class="ink or"><span class="ink-icon">💸</span><div class="ink-lbl">Total Spend</div><div class="ink-val">${fc(tc)}</div><div class="ink-sub">budget in period</div></div>
-      <div class="ink pur"><span class="ink-icon">📉</span><div class="ink-lbl">Blended CPV</div><div class="ink-val">${fcpv(bcpv)}</div><div class="ink-sub">spend ÷ views</div></div>
+  function renderKPIs(val){
+    const rows=val==='all'?allRows:allRows.filter(r=>r.monthOrder===parseInt(val.replace('mo:',''),10));
+    const totalViews=rows.reduce((s,r)=>s+(r.views||0),0);
+    const totalCost =cfg.hasCost?rows.reduce((s,r)=>s+(r.cost||0),0):null;
+    const validEng  =rows.filter(r=>r.engRate>0).map(r=>r.engRate);
+    const blendedCPV=(cfg.hasCost&&totalViews>0)?(totalCost/totalViews):null;
+    const avgEng=validEng.length?(validEng.reduce((a,b)=>a+b)/validEng.length):null;
+    const uniqCreators=new Set(rows.map(r=>r.name)).size;
+    const activeMonths=new Set(rows.map(r=>r.monthOrder)).size;
+    document.getElementById(prefix+'inf-kpis').innerHTML=`
+      <div class="ink"><span class="ink-icon">📅</span><div class="ink-lbl">Active Months</div><div class="ink-val">${activeMonths}</div><div class="ink-sub">months with live creators</div></div>
+      <div class="ink mint"><span class="ink-icon">👥</span><div class="ink-lbl">Creators</div><div class="ink-val">${uniqCreators}</div><div class="ink-sub">total across campaign</div></div>
+      <div class="ink grn"><span class="ink-icon">👁️</span><div class="ink-lbl">Total Views</div><div class="ink-val">${fv(totalViews)}</div><div class="ink-sub">plays in period</div></div>
+      <div class="ink or"><span class="ink-icon">💸</span><div class="ink-lbl">Total Spend</div><div class="ink-val">${fc(totalCost)}</div><div class="ink-sub">${cfg.hasCost?'budget in period':'not tracked yet'}</div></div>
+      <div class="ink pur"><span class="ink-icon">📉</span><div class="ink-lbl">Blended CPV</div><div class="ink-val">${fcpv(blendedCPV)}</div><div class="ink-sub">spend ÷ views</div></div>
       <div class="ink"><span class="ink-icon">⚡</span><div class="ink-lbl">Engagement</div><div class="ink-val">${avgEng!=null?avgEng.toFixed(2)+'%':'—'}</div><div class="ink-sub">(likes+cmts+saves)/views</div></div>`;
   }
 
-  function renderUAEStatic(){
-    // Trend chart
-    if(charts.uaeInfTrend)charts.uaeInfTrend.destroy();
-    const tc=document.getElementById('uae-inf-chart-trend').getContext('2d');
-    charts.uaeInfTrend=new Chart(tc,{type:'bar',data:{
+  function renderCharts(){
+    if(charts[ck+'InfTrend'])charts[ck+'InfTrend'].destroy();
+    const tc=document.getElementById(prefix+'inf-chart-trend').getContext('2d');
+    charts[ck+'InfTrend']=new Chart(tc,{type:'bar',data:{
       labels:allMonthly.map(m=>m.month),
       datasets:[{label:'Total Views',data:allMonthly.map(m=>m.views/1000),backgroundColor:allMonthly.map((_,i)=>i===allMonthly.length-1?'rgba(71,54,254,.75)':'rgba(71,54,254,.22)'),borderRadius:6}]
     },options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.parsed.y?.toFixed(1)}K views`}}},
-      scales:{y:{title:{display:true,text:'Views (K)'},ticks:{callback:v=>v+'K'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
-
-    // MoM table
-    const mth=`<th>Month</th><th class="nr ch">Live Videos</th><th class="nr">Total Views</th><th class="nr">Likes</th><th class="nr">Comments</th><th class="nr ch">Total Spend</th><th class="nr ch">Blended CPV</th><th class="nr">Avg Eng %</th>`;
-    document.getElementById('uae-inf-mom-tbl').innerHTML=tbl(mth,[...allMonthly].reverse().map((m,i)=>{
-      const bcpv=m.views>0?(m.cost/m.views):null;
-      return`<tr class="${i===0?'lat':''}">
-        <td><strong>${m.month}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td>
-        <td class="nr cc"><strong>${m.campaigns}</strong></td>
-        <td class="nr">${fv(m.views)}</td>
-        <td class="nr">${fv(m.likes)}</td>
-        <td class="nr">${fv(m.comments)}</td>
-        <td class="nr cc">${fc(m.cost)}</td>
-        <td class="nr cc">${fcpv(bcpv)}</td>
-        <td class="nr">${m.avg_eng!=null?m.avg_eng.toFixed(2)+'%':'—'}</td>
-      </tr>`;
-    }).join(''));
-
-    // Top 10 Views
-    const top10V=[...allRows].sort((a,b)=>b.views-a.views).slice(0,10);
-    document.getElementById('uae-inf-top-views').innerHTML=tbl(
-      `<th>#</th><th>Creator</th><th class="nr ch">Views</th><th class="nr">Spend</th><th class="nr ch">CPV</th><th class="nr">Eng %</th>`,
-      top10V.map((r,i)=>`<tr class="${i===0?'lat':''}">
-        <td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td>
-        <td><a href="${r.link||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.name}</a><br><span style="font-size:11px;color:var(--grey)">${r.month}</span></td>
-        <td class="nr cc"><strong>${fv(r.views)}</strong></td>
-        <td class="nr">${fc(r.cost)}</td>
-        <td class="nr cc">${fcpv(r.cpv)}</td>
-        <td class="nr">${r.eng!=null?r.eng.toFixed(2)+'%':'—'}</td>
-      </tr>`).join(''));
-
-    // CPV by month chart
-    if(charts.uaeInfCpv)charts.uaeInfCpv.destroy();
-    const cc=document.getElementById('uae-inf-chart-cpv').getContext('2d');
-    const cpvSym=curMode==='inr'?'₹':'AED ';
-    const bcpvData=allMonthly.map(m=>{
-      if(!(m.views>0))return null;
-      const raw=m.cost/m.views;
-      return parseFloat((curMode==='inr'?raw*AED_TO_INR:raw).toFixed(curMode==='inr'?2:3));
-    });
-    charts.uaeInfCpv=new Chart(cc,{type:'bar',data:{
-      labels:allMonthly.map(m=>m.month),
-      datasets:[{label:`Blended CPV (${cpvSym.trim()})`,data:bcpvData,backgroundColor:bcpvData.map((_,i)=>i===allMonthly.length-1?'rgba(71,54,254,.85)':'rgba(71,54,254,.28)'),borderRadius:6}]
-    },options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${cpvSym}${c.parsed.y}`}}},
-      scales:{y:{title:{display:true,text:`Blended CPV (${cpvSym.trim()})`},ticks:{callback:v=>cpvSym+v},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
-
-    // Top 10 Engagement
-    const top10E=[...allRows].filter(r=>r.eng>0).sort((a,b)=>b.eng-a.eng).slice(0,10);
-    document.getElementById('uae-inf-top-eng').innerHTML=tbl(
-      `<th>#</th><th>Creator</th><th class="nr ch">Eng Rate</th><th class="nr">Views</th><th class="nr">Likes</th><th class="nr">Comments</th>`,
-      top10E.map((r,i)=>`<tr class="${i===0?'lat':''}">
-        <td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td>
-        <td><a href="${r.link||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.name}</a><br><span style="font-size:11px;color:var(--grey)">${r.month}</span></td>
-        <td class="nr cc"><strong>${r.eng.toFixed(2)}%</strong></td>
-        <td class="nr">${fv(r.views)}</td>
-        <td class="nr">${fv(r.likes)}</td>
-        <td class="nr">${fv(r.comments)}</td>
-      </tr>`).join(''));
-
-    // Lowest CPV (min 5K views)
-    const lowCPV=[...allRows].filter(r=>r.views>=5000&&r.cpv>0).sort((a,b)=>a.cpv-b.cpv).slice(0,10);
-    document.getElementById('uae-inf-low-cpv').innerHTML=tbl(
-      `<th>#</th><th>Creator</th><th class="nr ch">CPV</th><th class="nr">Views</th><th class="nr">Spend</th><th class="nr">Eng %</th>`,
-      lowCPV.map((r,i)=>`<tr class="${i===0?'lat':''}">
-        <td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td>
-        <td><a href="${r.link||'#'}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.name}</a><br><span style="font-size:11px;color:var(--grey)">${r.month}</span></td>
-        <td class="nr cc"><strong>${fcpv(r.cpv)}</strong></td>
-        <td class="nr">${fv(r.views)}</td>
-        <td class="nr">${fc(r.cost)}</td>
-        <td class="nr">${r.eng!=null?r.eng.toFixed(2)+'%':'—'}</td>
-      </tr>`).join(''));
+      scales:{y:{title:{display:true,text:'Views (K)'},ticks:{callback:v=>v+'K'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}
+    }});
+    if(!cfg.hasCost)return;
+    function renderCPVChart(val){
+      const mons=val==='all'?allMonthly:allMonthly.filter(m=>m.monthOrder===(val.startsWith('mo:')?parseInt(val.replace('mo:',''),10):null));
+      const cpvSym=curMode==='inr'?'₹':cfg.symbol;
+      const bcpvData=mons.map(m=>{
+        const mRows=allRows.filter(r=>r.monthOrder===m.monthOrder);
+        const mv=mRows.reduce((s,r)=>s+(r.views||0),0);
+        const mc=mRows.reduce((s,r)=>s+(r.cost||0),0);
+        if(!(mv>0))return null;
+        const raw=mc/mv;
+        return parseFloat((curMode==='inr'?raw*cfg.rate:raw).toFixed(2));
+      });
+      if(charts[ck+'InfCpv'])charts[ck+'InfCpv'].destroy();
+      const cc=document.getElementById(prefix+'inf-chart-cpv');
+      if(cc)charts[ck+'InfCpv']=new Chart(cc.getContext('2d'),{type:'bar',data:{
+        labels:mons.map(m=>m.month),
+        datasets:[{label:`Blended CPV (${cpvSym})`,data:bcpvData,backgroundColor:bcpvData.map((_,i)=>i===mons.length-1?'rgba(71,54,254,.85)':'rgba(71,54,254,.28)'),borderRadius:6}]
+      },options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y==null?'No spend logged':`${cpvSym}${c.parsed.y.toFixed(2)}`}}},
+        scales:{y:{title:{display:true,text:`Blended CPV (${cpvSym})`},ticks:{callback:v=>cpvSym+v},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}
+      }});
+    }
+    const cpvSel=document.getElementById(prefix+'inf-cpv-sel');
+    if(cpvSel)cpvSel.addEventListener('change',e=>renderCPVChart(e.target.value));
+    renderCPVChart('all');
   }
 
-  document.getElementById('uae-inf-sel').addEventListener('change',function(){renderUAEKPIs(this.value);});
-  document.querySelectorAll('#uae-inf-currency .pp').forEach(btn=>btn.addEventListener('click',()=>{
-    document.querySelectorAll('#uae-inf-currency .pp').forEach(b=>b.classList.toggle('active',b===btn));
-    curMode=btn.dataset.c;
-    renderUAEKPIs(document.getElementById('uae-inf-sel').value);
-    renderUAEStatic();
-  }));
-  renderUAEKPIs('mo:'+latestMO);
-  renderUAEStatic();
+  function _rows(val){return val==='all'?allRows:allRows.filter(r=>r.monthOrder===parseInt(val.replace('mo:',''),10));}
+  function _mons(val){return val==='all'?allMonthly:allMonthly.filter(m=>m.monthOrder===parseInt(val.replace('mo:',''),10));}
+  const linkOf=r=>r.link||r.videoLink||r.profileLink||'#';
+
+  function renderMomTable(val){
+    const rows=_rows(val),mons=[..._mons(val)].reverse();
+    const mth=`<th>Month</th><th class="nr ch">Live Videos</th><th class="nr ch">Total Views</th><th class="nr">Likes</th><th class="nr">Comments</th>${cfg.hasCost?'<th class="nr ch">Total Spend</th><th class="nr ch">Blended CPV</th>':''}<th class="nr">Avg Eng %</th>`;
+    const tbRows=mons.map((m,i)=>{
+      const mR=rows.filter(r=>r.monthOrder===m.monthOrder);
+      const mv=mR.reduce((s,r)=>s+(r.views||0),0),mc=mR.reduce((s,r)=>s+(r.cost||0),0);
+      return`<tr class="${i===0?'lat':''}"><td><strong>${m.month}</strong>${i===0?' <span class="badge bb">Latest</span>':''}</td><td class="nr cc"><strong>${m.campaigns}</strong></td><td class="nr cc"><strong>${fv(mv)}</strong></td><td class="nr">${fv(mR.reduce((s,r)=>s+(r.likes||0),0))}</td><td class="nr">${fv(mR.reduce((s,r)=>s+(r.comments||0),0))}</td>${cfg.hasCost?`<td class="nr cc">${fc(mc)}</td><td class="nr cc">${mv>0?fcpv(mc/mv):'—'}</td>`:''}<td class="nr">${m.avg_eng!=null?m.avg_eng.toFixed(2)+'%':'—'}</td></tr>`;
+    }).join('');
+    document.getElementById(prefix+'inf-mom-tbl').innerHTML=mons.length?tbl(mth,tbRows):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
+  }
+
+  function renderTopViews(val){
+    const rows=_rows(val);
+    const top=[...rows].sort((a,b)=>(b.views||0)-(a.views||0)).slice(0,10);
+    const th=`<th>#</th><th>Creator</th><th class="nr ch">Views</th>${cfg.hasCost?'<th class="nr">Spend</th><th class="nr ch">CPV</th>':''}<th class="nr">Eng %</th>`;
+    document.getElementById(prefix+'inf-top-views-tbl').innerHTML=top.length?tbl(th,top.map((r,i)=>`<tr class="${i===0?'lat':''}"><td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td><td><a href="${linkOf(r)}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.name}</a><br><span style="font-size:11px;color:var(--grey)">${r.liveMonth||''}</span></td><td class="nr cc"><strong>${fv(r.views)}</strong></td>${cfg.hasCost?`<td class="nr">${fc(r.cost)}</td><td class="nr cc">${fcpv(r.cpv)}</td>`:''}<td class="nr">${r.engRate!=null?r.engRate.toFixed(2)+'%':'—'}</td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
+  }
+
+  function renderTopEng(val){
+    const rows=_rows(val).filter(r=>r.engRate>0).sort((a,b)=>(b.engRate||0)-(a.engRate||0)).slice(0,10);
+    const th=`<th>#</th><th>Creator</th><th class="nr ch">Eng Rate</th><th class="nr">Views</th><th class="nr">Likes</th><th class="nr">Comments</th>`;
+    document.getElementById(prefix+'inf-top-eng-tbl').innerHTML=rows.length?tbl(th,rows.map((r,i)=>`<tr class="${i===0?'lat':''}"><td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td><td><a href="${linkOf(r)}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.name}</a><br><span style="font-size:11px;color:var(--grey)">${r.liveMonth||''}</span></td><td class="nr cc"><strong>${r.engRate!=null?r.engRate.toFixed(2)+'%':'—'}</strong></td><td class="nr">${fv(r.views)}</td><td class="nr">${fv(r.likes)}</td><td class="nr">${fv(r.comments)}</td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No data for selected period.</p>';
+  }
+
+  function renderLowCPV(val){
+    const rows=_rows(val).filter(r=>r.cpv>0&&r.views>=5000).sort((a,b)=>(a.cpv||999)-(b.cpv||999)).slice(0,10);
+    const th=`<th>#</th><th>Creator</th><th class="nr ch">CPV</th><th class="nr">Views</th><th class="nr">Spend</th><th class="nr">Eng %</th>`;
+    document.getElementById(prefix+'inf-low-cpv-tbl').innerHTML=rows.length?tbl(th,rows.map((r,i)=>`<tr class="${i===0?'lat':''}"><td style="color:var(--grey);font-weight:800;font-size:13px">${i+1}</td><td><a href="${linkOf(r)}" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none;font-size:13px">${r.name}</a><br><span style="font-size:11px;color:var(--grey)">${r.liveMonth||''}</span></td><td class="nr cc"><strong style="color:#22C55E">${fcpv(r.cpv)}</strong></td><td class="nr">${fv(r.views)}</td><td class="nr">${fc(r.cost)}</td><td class="nr">${r.engRate!=null?r.engRate.toFixed(2)+'%':'—'}</td></tr>`).join('')):'<p style="padding:20px;color:var(--grey);font-size:13px">No campaigns with ≥5K views in period.</p>';
+  }
+
+  document.getElementById(prefix+'inf-kpi-sel').addEventListener('change',function(){renderKPIs(this.value);});
+  document.getElementById(prefix+'inf-tbl-sel').addEventListener('change',function(){renderMomTable(this.value);});
+  document.getElementById(prefix+'inf-topv-sel').addEventListener('change',function(){renderTopViews(this.value);});
+  if(cfg.hasCost){
+    document.getElementById(prefix+'inf-tope-sel').addEventListener('change',function(){renderTopEng(this.value);});
+    document.getElementById(prefix+'inf-topl-sel').addEventListener('change',function(){renderLowCPV(this.value);});
+    document.querySelectorAll('#'+prefix+'inf-currency .pp').forEach(btn=>btn.addEventListener('click',()=>{
+      document.querySelectorAll('#'+prefix+'inf-currency .pp').forEach(b=>b.classList.toggle('active',b===btn));
+      curMode=btn.dataset.c;
+      renderKPIs(document.getElementById(prefix+'inf-kpi-sel').value);
+      renderMomTable(document.getElementById(prefix+'inf-tbl-sel').value);
+      renderTopViews(document.getElementById(prefix+'inf-topv-sel').value);
+      renderLowCPV(document.getElementById(prefix+'inf-topl-sel').value);
+      renderCharts();
+    }));
+  }
+
+  renderKPIs('mo:'+latestMO);
+  renderMomTable('all');
+  renderTopViews('all');
+  renderTopEng('all');
+  if(cfg.hasCost)renderLowCPV('all');
+  renderCharts();
   scanTw(el);
+}
+
+function initAUInf(){
+  initCountryInfTab('au-',D.influencers_au,{countryLabel:'Australia',hasCost:false,symbol:'A$ ',rate:AUD_TO_INR});
+}
+function initUAEInf(){
+  initCountryInfTab('uae-',D.influencers_uae,{countryLabel:'UAE',hasCost:true,symbol:'AED ',rate:AED_TO_INR});
 }
 
 const lazyInit={kw:initTab2,bsos:initTab3,gi:initTab4,inf:initInf,yt:initYT,ig:initIG,li:initLI,'au-inf':initAUInf,'uae-inf':initUAEInf,'au-ig':()=>renderIG('igc-au','cars24_au','Cars24 Australia'),'uae-ig':()=>renderIG('igc-uae','cars24_uae','Cars24 UAE'),'yt-tamil':()=>renderYT('ytc-tamil','cars24_tamil','Cars24 Tamil'),
