@@ -4,9 +4,15 @@ One-time OAuth setup for YouTube Analytics API.
 Run this once per account to save a refresh token to .env.
 
 Usage:
-  python3 setup_youtube_auth.py              # sets YT_REFRESH_TOKEN (Cars24 AU)
+  python3 setup_youtube_auth.py --account au   # sets YT_REFRESH_TOKEN_AU
   python3 setup_youtube_auth.py --account uae  # sets YT_REFRESH_TOKEN_UAE
-  python3 setup_youtube_auth.py --account au   # sets YT_REFRESH_TOKEN_AU (same as default)
+
+IMPORTANT (brand accounts): if the Google account you sign in with can see
+more than one YouTube channel, Google shows a channel picker after the
+account screen. Pick the exact channel this token is for (e.g. "Cars24
+Australia") — the Analytics API only answers for the channel the token was
+scoped to, so choosing the wrong one (or a personal channel) causes a 403
+and silently falls back to public metrics.
 
 Prerequisites:
   1. Go to https://console.cloud.google.com/
@@ -29,7 +35,7 @@ ENV_FILE = Path(".env")
 
 ACCOUNT_CONFIG = {
     "au": {
-        "token_key": "YT_REFRESH_TOKEN",
+        "token_key": "YT_REFRESH_TOKEN_AU",
         "login_hint": "vipul.setia@cars24.com",
         "label": "Cars24 AU",
     },

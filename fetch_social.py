@@ -90,6 +90,7 @@ YT_TOKEN_KEYS = {
     "cars24_insider":   "YT_REFRESH_TOKEN_INSIDER",
     "cars24_tamil":     "YT_REFRESH_TOKEN_TAMIL",      # Cars24.tamil@cars24.com
     "cars24_malayalam": "YT_REFRESH_TOKEN_MALAYALAM",  # vipul.setia@cars24.com
+    "cars24_au":        "YT_REFRESH_TOKEN_AU",         # vipul.setia@cars24.com (owner) — pick "Cars24 Australia" channel at auth
 }
 
 def get_yt_credentials(channel_key: str = None):
