@@ -274,13 +274,13 @@
     },
     {
       "source": "YT_CHANNEL",
-      "views": 1764,
+      "views": 1766,
       "watch_time_hours": 6.5,
       "pct": 19.0
     },
     {
       "source": "YT_SEARCH",
-      "views": 730,
+      "views": 731,
       "watch_time_hours": 7.7,
       "pct": 7.9
     },
@@ -739,27 +739,27 @@
     "2026-07": [
       {
         "source": "YT_CHANNEL",
-        "views": 32,
+        "views": 34,
         "watch_time_hours": 0.0,
-        "pct": 59.3
+        "pct": 59.6
       },
       {
         "source": "YT_SEARCH",
-        "views": 15,
+        "views": 16,
         "watch_time_hours": 0.1,
-        "pct": 27.8
+        "pct": 28.1
       },
       {
         "source": "SHORTS",
         "views": 4,
         "watch_time_hours": 0.0,
-        "pct": 7.4
+        "pct": 7.0
       },
       {
         "source": "SUBSCRIBER",
         "views": 3,
         "watch_time_hours": 0.0,
-        "pct": 5.6
+        "pct": 5.3
       },
       {
         "source": "NO_LINK_OTHER",
@@ -772,15 +772,15 @@
   "devices": [
     {
       "device": "MOBILE",
-      "views": 8042,
+      "views": 8043,
       "watch_time_hours": 58.2,
       "pct": 86.8
     },
     {
       "device": "TV",
-      "views": 866,
+      "views": 868,
       "watch_time_hours": 4.0,
-      "pct": 9.3
+      "pct": 9.4
     },
     {
       "device": "DESKTOP",
@@ -1033,21 +1033,21 @@
     "2026-07": [
       {
         "device": "MOBILE",
-        "views": 39,
+        "views": 40,
         "watch_time_hours": 0.1,
-        "pct": 75.0
+        "pct": 72.7
       },
       {
         "device": "TV",
-        "views": 11,
+        "views": 13,
         "watch_time_hours": 0.0,
-        "pct": 21.2
+        "pct": 23.6
       },
       {
         "device": "DESKTOP",
         "views": 2,
         "watch_time_hours": 0.0,
-        "pct": 3.8
+        "pct": 3.6
       }
     ]
   },
@@ -1126,15 +1126,15 @@
       "published": "2025-11-12",
       "url": "https://www.youtube.com/watch?v=3brGUNO5-wI",
       "thumbnail": "https://i.ytimg.com/vi/3brGUNO5-wI/default.jpg",
-      "views": 902,
-      "watch_time_hours": 7.3,
+      "views": 904,
+      "watch_time_hours": 7.33,
       "avg_duration_sec": 36.0,
-      "avg_view_pct": 23.8,
+      "avg_view_pct": 23.9,
       "subs_gained": 4,
       "likes": 17,
       "comments": 1,
       "shares": 16,
-      "engagement_rate": 3.77,
+      "engagement_rate": 3.76,
       "is_short": false
     },
     {
@@ -1143,10 +1143,10 @@
       "published": "2025-11-03",
       "url": "https://www.youtube.com/watch?v=Ex7HTIFgkHE",
       "thumbnail": "https://i.ytimg.com/vi/Ex7HTIFgkHE/default.jpg",
-      "views": 308,
+      "views": 309,
       "watch_time_hours": 1.37,
       "avg_duration_sec": 22.0,
-      "avg_view_pct": 32.7,
+      "avg_view_pct": 32.6,
       "subs_gained": 1,
       "likes": 7,
       "comments": 0,
@@ -1210,7 +1210,7 @@
       "title": "ZERO Road Tax on Private Roads! #cars24tamil",
       "published": "2025-10-31",
       "url": "https://www.youtube.com/watch?v=YhPHEJ1gV2U",
-      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=CMTz3dIG&rs=AOn4CLAx35KEB8K0HufVtaK0ESZYbF-H_A",
+      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=COCx4tIG&rs=AOn4CLAnK2tQS_xwkksrChds8SMLGS-xjA",
       "views": 54,
       "watch_time_hours": 0.32,
       "avg_duration_sec": 35.0,
