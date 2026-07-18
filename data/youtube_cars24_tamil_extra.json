@@ -274,7 +274,7 @@
     },
     {
       "source": "YT_CHANNEL",
-      "views": 1768,
+      "views": 1770,
       "watch_time_hours": 6.5,
       "pct": 19.1
     },
@@ -739,27 +739,27 @@
     "2026-07": [
       {
         "source": "YT_CHANNEL",
-        "views": 36,
+        "views": 38,
         "watch_time_hours": 0.0,
-        "pct": 60.0
+        "pct": 61.3
       },
       {
         "source": "YT_SEARCH",
         "views": 17,
         "watch_time_hours": 0.2,
-        "pct": 28.3
+        "pct": 27.4
       },
       {
         "source": "SHORTS",
         "views": 4,
         "watch_time_hours": 0.0,
-        "pct": 6.7
+        "pct": 6.5
       },
       {
         "source": "SUBSCRIBER",
         "views": 3,
         "watch_time_hours": 0.0,
-        "pct": 5.0
+        "pct": 4.8
       },
       {
         "source": "NO_LINK_OTHER",
@@ -772,7 +772,7 @@
   "devices": [
     {
       "device": "MOBILE",
-      "views": 8044,
+      "views": 8046,
       "watch_time_hours": 58.3,
       "pct": 86.8
     },
@@ -1033,21 +1033,21 @@
     "2026-07": [
       {
         "device": "MOBILE",
-        "views": 41,
+        "views": 43,
         "watch_time_hours": 0.2,
-        "pct": 70.7
+        "pct": 71.7
       },
       {
         "device": "TV",
         "views": 15,
         "watch_time_hours": 0.0,
-        "pct": 25.9
+        "pct": 25.0
       },
       {
         "device": "DESKTOP",
         "views": 2,
         "watch_time_hours": 0.0,
-        "pct": 3.4
+        "pct": 3.3
       }
     ]
   },
@@ -1177,15 +1177,15 @@
       "published": "2025-11-03",
       "url": "https://www.youtube.com/watch?v=-EdYrm3Vt5k",
       "thumbnail": "https://i.ytimg.com/vi/-EdYrm3Vt5k/default.jpg",
-      "views": 156,
+      "views": 158,
       "watch_time_hours": 0.6,
       "avg_duration_sec": 25.0,
-      "avg_view_pct": 48.5,
+      "avg_view_pct": 48.2,
       "subs_gained": 1,
       "likes": 6,
       "comments": 1,
       "shares": 0,
-      "engagement_rate": 4.49,
+      "engagement_rate": 4.43,
       "is_short": true
     },
     {
@@ -1210,7 +1210,7 @@
       "title": "ZERO Road Tax on Private Roads! #cars24tamil",
       "published": "2025-10-31",
       "url": "https://www.youtube.com/watch?v=YhPHEJ1gV2U",
-      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=CIjQ59IG&rs=AOn4CLDTiVYBCJOGHpjGZyH5hT-LafzCOQ",
+      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=CITs7NIG&rs=AOn4CLCyqYL67AZlGDAuyeH59CKkmhViDQ",
       "views": 54,
       "watch_time_hours": 0.32,
       "avg_duration_sec": 35.0,
