@@ -965,22 +965,59 @@ def build_influencers_uae():
 # ── Refresh log ────────────────────────────────────────────────────────────────
 REFRESH_LOG = DATA / "refresh_log.json"
 
+# Which YouTube channels / Instagram accounts belong to each country, so the
+# refresh log can show each tab its OWN market's numbers (not a global sum).
+YT_BY_COUNTRY = {
+    "in":  ["cars24_india", "teambhp", "cars24_insider", "cars24_malayalam", "cars24_tamil"],
+    "au":  ["cars24_au"],
+    "uae": ["cars24_uae"],
+}
+IG_BY_COUNTRY = {
+    "in":  ["cars24_india", "teambhp"],
+    "au":  ["cars24_au"],
+    "uae": ["cars24_uae"],
+}
+
+def _latest_index(gi_monthly):
+    vals = [r.get("Cars24") for r in (gi_monthly or []) if r.get("Cars24") is not None]
+    return vals[-1] if vals else None
+
 def build_refresh_log(payload):
-    """Append one headline-snapshot row per refresh to data/refresh_log.json (a
-    persisted, committed archive) so the dashboard can show a "Data Refresh Log"
-    of when each pull ran and how the top-line numbers moved. One row per calendar
-    day (a same-day rebuild updates that day's row); capped to the last 120 days.
-    The full list is embedded in data.json so the frontend needs no extra fetch."""
+    """Append one snapshot row per refresh to data/refresh_log.json (a persisted,
+    committed archive) so the dashboard's "Data Refresh Log" can show, per country
+    and per section, when each pull ran and how that tab's own numbers moved.
+    One row per calendar day (a same-day rebuild updates that day's row); capped to
+    the last 120 days. Embedded in data.json so the frontend needs no extra fetch."""
     yt = payload.get("youtube", {})
     ig = payload.get("instagram", {})
     kp = payload.get("kpis", {})
+    au, uae = payload.get("gsc_au", {}), payload.get("gsc_uae", {})
+
+    def block(cc, imp, sos, index, inf_n):
+        return {
+            "yt_views":     sum((yt.get(k, {}).get("snapshot", {}).get("total_views") or 0) for k in YT_BY_COUNTRY[cc]),
+            "yt_subs":      sum((yt.get(k, {}).get("snapshot", {}).get("subscribers")  or 0) for k in YT_BY_COUNTRY[cc]),
+            "ig_followers": sum((ig.get(k, {}).get("snapshot", {}).get("followers")    or 0) for k in IG_BY_COUNTRY[cc]),
+            "impressions":  imp,
+            "sos":          sos,
+            "index":        index,
+            "inf":          inf_n,
+        }
+    au_bsos  = (au.get("bsos", {})  or {}).get("monthly") or []
+    uae_bsos = (uae.get("bsos", {}) or {}).get("monthly") or []
+    au_imp   = (au.get("monthly_impressions")  or [{}])[-1].get("impressions")
+    uae_imp  = (uae.get("monthly_impressions") or [{}])[-1].get("impressions")
     entry = {
-        "ts":            datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "yt_views":      sum((c.get("snapshot", {}).get("total_views") or 0) for c in yt.values()),
-        "yt_subs":       sum((c.get("snapshot", {}).get("subscribers")  or 0) for c in yt.values()),
-        "ig_followers":  sum((a.get("snapshot", {}).get("followers")    or 0) for a in ig.values()),
-        "impressions":   kp.get("curr_imp") or 0,
-        "sos":           kp.get("c24_sos"),
+        "ts": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "in":  block("in",  kp.get("curr_imp"), kp.get("c24_sos"),
+                     _latest_index(payload.get("google_index", {}).get("monthly")),
+                     len(payload.get("influencers", {}).get("rows", []))),
+        "au":  block("au",  au_imp,  au_bsos[-1].get("Cars24") if au_bsos else None,
+                     _latest_index((au.get("gindex", {})  or {}).get("monthly")),
+                     len(payload.get("influencers_au", {}).get("rows", []))),
+        "uae": block("uae", uae_imp, uae_bsos[-1].get("Cars24") if uae_bsos else None,
+                     _latest_index((uae.get("gindex", {}) or {}).get("monthly")),
+                     len(payload.get("influencers_uae", {}).get("rows", []))),
     }
     logs = []
     if REFRESH_LOG.exists():
