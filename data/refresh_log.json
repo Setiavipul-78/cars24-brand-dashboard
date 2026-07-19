@@ -1,12 +1,34 @@
 {
   "logs": [
     {
-      "ts": "2026-07-19T08:51:14Z",
-      "yt_views": 1143234013,
-      "yt_subs": 1017954,
-      "ig_followers": 614867,
-      "impressions": 1549657,
-      "sos": 20.0
+      "ts": "2026-07-19T09:07:02Z",
+      "in": {
+        "yt_views": 1120703748,
+        "yt_subs": 1013581,
+        "ig_followers": 554067,
+        "impressions": 1549657,
+        "sos": 20.0,
+        "index": 98.0,
+        "inf": 190
+      },
+      "au": {
+        "yt_views": 810768,
+        "yt_subs": 963,
+        "ig_followers": 12617,
+        "impressions": 38282,
+        "sos": 1.9,
+        "index": 86.5,
+        "inf": 154
+      },
+      "uae": {
+        "yt_views": 21719497,
+        "yt_subs": 3410,
+        "ig_followers": 48183,
+        "impressions": 66990,
+        "sos": 6.8,
+        "index": 84.3,
+        "inf": 17
+      }
     }
   ]
 }
