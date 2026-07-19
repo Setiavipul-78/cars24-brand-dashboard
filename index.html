@@ -735,6 +735,9 @@ const sf=v=>{if(v==null)return null;try{const f=parseFloat(v);return isNaN(f)?nu
 const fP=v=>v==null?'—':`${v.toFixed(1)}%`;
 const fM=v=>v==null?'—':`${v>0?'+':''}${v.toFixed(1)}%`;
 function numFmt(n){if(n==null)return'—';if(n>=1e7)return(n/1e7).toFixed(1)+'Cr';if(n>=1e5)return(n/1e5).toFixed(2)+'L';if(n>=1e3)return(n/1e3).toFixed(1)+'K';return n.toLocaleString();}
+// Correct English pluralisation for region labels — "City"→"Cities" (consonant+y→ies),
+// "Region"→"Regions". Used everywhere instead of naively appending 's' (which gave "Citys").
+function plural(w){return /[^aeiou]y$/i.test(w)?w.slice(0,-1)+'ies':w+'s';}
 
 function badge(v,isPp=false){
   if(v==null)return'<span class="badge bf">—</span>';
@@ -1213,7 +1216,12 @@ function initKeywordsTab(prefix,kw){
   if(!kw||!kw.monthly?.length)return;
 
   const matrix=kw.cat_matrix||[],catMonths=kw.cat_months||[],cats=kw.categories||[];
-  const allCats=cats.map(c=>c.category);
+  // Hide India-only business lines that don't operate in AU/UAE — Challan (traffic
+  // fines), PDI (pre-delivery inspection), ELITE (premium vertical). They only pick
+  // up stray incidental impressions abroad (~0.00L / 0.0%) and are pure noise here.
+  // Genuinely-small-but-real categories (e.g. Customer Care) are intentionally kept.
+  const IN_ONLY_CATS=new Set(['Cars24 Challan','Challan','PDI','ELITE','Elite']);
+  const allCats=cats.map(c=>c.category).filter(c=>!IN_ONLY_CATS.has(c));
 
   function mLbl(m){try{const[y,mo]=m.split('-');return['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+mo-1]+"'"+y.slice(2);}catch{return m;}}
 
@@ -1263,7 +1271,7 @@ function initKeywordsTab(prefix,kw){
   document.getElementById(id('tbl-cat-mom')).innerHTML=tbl(momTh,momRows);
 
   // Category Trends line chart
-  const topCats=cats.slice(0,6).map(c=>c.category);
+  const topCats=allCats.slice(0,6);
   if(topCats.length&&catMonths.length){
     const c4=document.getElementById(id('chart-cat-trends')).getContext('2d');
     charts[id('catTr')]=new Chart(c4,{type:'line',data:{labels:catMonths.map(m=>mLbl(m)),datasets:topCats.map((cat,i)=>{const row=matrix.find(r=>r.category===cat)||{};return{label:cat,data:catMonths.map(m=>row[m]!=null?(row[m]/1e5):null),borderColor:CC[i],backgroundColor:'transparent',borderWidth:2,tension:0.3,pointRadius:2,spanGaps:true};})},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{ticks:{callback:v=>v.toFixed(1)+'L'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
@@ -1342,7 +1350,7 @@ function countrySosTabHtml(prefix,cfg){
   ${hasRegions?`
   <div class="card">
     <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
-      <div><span class="kicker">📅 ${regionLabel} Growth</span><span class="title">Cars24 SoS Growth — All ${regionLabel}s (Month-on-Month)</span><span class="desc">Green cell = higher than 6 months ago.</span></div>
+      <div><span class="kicker">📅 ${regionLabel} Growth</span><span class="title">Cars24 SoS Growth — All ${plural(regionLabel)} (Month-on-Month)</span><span class="desc">Green cell = higher than 6 months ago.</span></div>
       <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
         <div class="pp-wrap" id="pp-${p}region-growth">
           <button class="pp active" data-p="default" type="button">Last 6 Months</button>
@@ -1359,7 +1367,7 @@ function countrySosTabHtml(prefix,cfg){
     </div>
     <div class="card-actions">${sheetLink(bsosGids?.monthly)}<button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-region-growth','sos_region_growth.csv')">⬇ CSV</button></div>
     <div class="tw tbl-compact" id="${p}tbl-region-growth" style="margin-bottom:10px"></div>
-    <div class="fb"><span class="fl">${regionLabel}s</span><div class="ms-dd" id="${p}ms-region-growth"></div></div>
+    <div class="fb"><span class="fl">${plural(regionLabel)}</span><div class="ms-dd" id="${p}ms-region-growth"></div></div>
     <div class="cw"><canvas id="${p}chart-region-growth"></canvas></div>
   </div>
 
@@ -1381,7 +1389,7 @@ function countrySosTabHtml(prefix,cfg){
     </div>
     <div class="card-actions">${sheetLink(bsosGids?.monthly)}<button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-region-snap','sos_region_battle.csv')">⬇ CSV</button></div>
     <div class="tw" id="${p}tbl-region-snap" style="margin-bottom:10px"></div>
-    <div class="fb"><span class="fl">${regionLabel}s</span><div class="ms-dd" id="${p}ms-region-battle"></div></div>
+    <div class="fb"><span class="fl">${plural(regionLabel)}</span><div class="ms-dd" id="${p}ms-region-battle"></div></div>
     <div class="cw"><canvas id="${p}chart-region-battle"></canvas></div>
   </div>`:''}`;
 }
@@ -1538,7 +1546,7 @@ function initCountrySosTab(prefix,paneId,bsosData,cfg){
       return{label:rk,data:vals,borderColor:REGION_PALETTE[i%REGION_PALETTE.length],backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:3,pointStyle:POINT_STYLES[i%POINT_STYLES.length]};
     })},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5},padding:8,usePointStyle:true}}},scales:{y:{ticks:{callback:v=>v.toFixed(1)+'%'},grid:{color:'#E5E3F8'}},x:{grid:{display:false}}}}});
   }
-  buildMultiSelect(p+'ms-region-growth',regionKeys,regionGrowthDefault,rk=>rk,vals=>{regionGrowthSel=vals;renderRegionGrowthChart();},'All '+regionLabel.toLowerCase()+'s');
+  buildMultiSelect(p+'ms-region-growth',regionKeys,regionGrowthDefault,rk=>rk,vals=>{regionGrowthSel=vals;renderRegionGrowthChart();},'All '+plural(regionLabel.toLowerCase()));
   renderRegionGrowthChart();
 
   // TABLE 4: Region-level Cars24 vs gapBrand — Month/Week toggle (no Day: no region has daily data)
@@ -1600,7 +1608,7 @@ function initCountrySosTab(prefix,paneId,bsosData,cfg){
       return{label:rk,data:vals,borderColor:REGION_PALETTE[i%REGION_PALETTE.length],backgroundColor:'transparent',tension:0.3,spanGaps:true,borderWidth:2,pointRadius:3,pointStyle:POINT_STYLES[i%POINT_STYLES.length]};
     })},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5},padding:8,usePointStyle:true}}},scales:{y:{ticks:{callback:v=>(v>0?'+':'')+v.toFixed(1)+'pp'},grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:16,maxRotation:45}}}}});
   }
-  buildMultiSelect(p+'ms-region-battle',regionKeys,regionBattleDefault,rk=>rk,vals=>{regionBattleSel=vals;renderRegionBattleChart();},'All '+regionLabel.toLowerCase()+'s');
+  buildMultiSelect(p+'ms-region-battle',regionKeys,regionBattleDefault,rk=>rk,vals=>{regionBattleSel=vals;renderRegionBattleChart();},'All '+plural(regionLabel.toLowerCase()));
 
   function avgGapFor(rk,gran,from,to){
     const dateCol=GRAN_DATECOL[gran];
@@ -1866,8 +1874,8 @@ function countryGiTabHtml(prefix,cfg){
   </div>
 
   <div class="card">
-    <div class="sh"><span class="kicker">🗺 ${regionLabel}-level · Monthly</span><span class="title">${regionLabel} Branded Search Trend</span><span class="desc">Compare ${regionLabel.toLowerCase()}s' trajectory against the national trend, month by month.</span></div>
-    <div class="fb"><span class="fl">${regionLabel}s</span><div class="ms-dd" id="${p}ms-idx-region"></div></div>
+    <div class="sh"><span class="kicker">🗺 ${regionLabel}-level · Monthly</span><span class="title">${regionLabel} Branded Search Trend</span><span class="desc">Compare ${plural(regionLabel.toLowerCase())}' trajectory against the national trend, month by month.</span></div>
+    <div class="fb"><span class="fl">${plural(regionLabel)}</span><div class="ms-dd" id="${p}ms-idx-region"></div></div>
     <div class="cw tall"><canvas id="${p}chart-idx-region"></canvas></div>
   </div>
 
@@ -1921,7 +1929,7 @@ function countryGiTabHtml(prefix,cfg){
     </div>
     <div class="card-actions">${regionGid?`<a class="card-act-btn" href="${GI_SHEET}?gid=${regionGid}#gid=${regionGid}" target="_blank" rel="noopener">📄 View sheet</a>`:''}<button class="card-act-btn" type="button" onclick="downloadTableCSV('${p}tbl-gi-region-cmp','gindex_region_brand_vs_generic.csv')">⬇ CSV</button></div>
     <div class="tw" id="${p}tbl-gi-region-cmp" style="margin-bottom:10px"></div>
-    <div class="fb"><span class="fl">${regionLabel}s</span><div class="ms-dd" id="${p}ms-gi-region-cmp"></div></div>
+    <div class="fb"><span class="fl">${plural(regionLabel)}</span><div class="ms-dd" id="${p}ms-gi-region-cmp"></div></div>
     <div class="cw"><canvas id="${p}chart-gi-region-cmp"></canvas></div>
   </div>`:''}`;
 }
@@ -1988,7 +1996,7 @@ function initCountryGiTab(prefix,paneId,gindexData,cfg){
     <div class="kh kh-blue"><div class="kl"><span class="ki">📡</span>Latest Index (${latest.label})</div><div class="kv">${fIdx(latest.Cars24)}</div><div class="ks">${isAtPeak?'⭐ All-time peak':'Below peak'} · ${fPct(sinceStartPct)} since ${first.label}</div></div>
     <div class="kh ${(ytdGrowth||0)>=0?'kh-green':'kh-red'}"><div class="kl"><span class="ki">${(ytdGrowth||0)>=0?'📈':'📉'}</span>${latestYear} YTD Growth</div><div class="kv">${fPct(ytdGrowth)}</div><div class="ks">vs full-year ${latestYear-1}${ytdTrend?' · '+ytdTrend:''}</div></div>
     <div class="kh ${(rolling12Growth||0)>=0?'kh-green':'kh-red'}"><div class="kl"><span class="ki">${(rolling12Growth||0)>=0?'📈':'📉'}</span>Rolling 12-Mo Demand</div><div class="kv">${fPct(rolling12Growth)}</div><div class="ks">vs prior 12 months</div></div>
-    <div class="kh kh-purple"><div class="kl"><span class="ki">🗺</span>${regionLabel}s at All-Time High</div><div class="kv">${regionsAtPeak}<span style="font-size:16px;color:rgba(255,255,255,.6)">/${regionKeys.length}</span></div><div class="ks">in ${latest.label}</div></div>`;
+    <div class="kh kh-purple"><div class="kl"><span class="ki">🗺</span>${plural(regionLabel)} at All-Time High</div><div class="kv">${regionsAtPeak}<span style="font-size:16px;color:rgba(255,255,255,.6)">/${regionKeys.length}</span></div><div class="ks">in ${latest.label}</div></div>`;
 
   renderGiVsGscCompare({giMonthly:giM,gscMonthly:(cfg&&cfg.gscMonthly)||[],tblId:p+'tbl-gi-vs-gsc',chartId:p+'chart-gi-vs-gsc',ckey:p+'giVsGsc',prefix:p+'gi-vs-gsc',insightId:p+'gi-vs-gsc-insight',countryLabel:(cfg&&cfg.countryLabel)||regionLabel});
 
@@ -2024,7 +2032,7 @@ function initCountryGiTab(prefix,paneId,gindexData,cfg){
     });
     charts[ck]=new Chart(ctx.getContext('2d'),{type:'line',data:{labels:giM.map(r=>r.label),datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{boxWidth:10,font:{size:10.5},padding:8}}},scales:{y:{grid:{color:'#E5E3F8'}},x:{grid:{display:false},ticks:{maxTicksLimit:14,maxRotation:45}}}}});
   }
-  buildMultiSelect(p+'ms-idx-region',regionKeys,regionKeys,rk=>rk,vals=>{idxRegionSel=vals;renderIdxRegionChart();},'All '+regionLabel.toLowerCase()+'s');
+  buildMultiSelect(p+'ms-idx-region',regionKeys,regionKeys,rk=>rk,vals=>{idxRegionSel=vals;renderIdxRegionChart();},'All '+plural(regionLabel.toLowerCase()));
   renderIdxRegionChart();
 
   function renderIdxMatrix(){
