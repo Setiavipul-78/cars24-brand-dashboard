@@ -102,6 +102,9 @@ code{font-family:ui-monospace,monospace;font-size:11.5px;background:#F0EEFF;padd
 .sh .kicker{font-size:10px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:1.2px;display:block;margin-bottom:2px}
 .sh .title{font-size:15.5px;font-weight:800;color:var(--ink);letter-spacing:-.3px;display:block;margin-bottom:4px}
 .sh .desc{font-size:12.5px;color:var(--grey);line-height:1.55}
+/* "What this metric means" definition line — plain-language, always visible */
+.mdef{display:block;font-size:12px;line-height:1.5;color:var(--blue-med,#2B2098);background:var(--blue-lt,#EEF0FF);border-radius:7px;padding:6px 10px;margin:2px 0 8px}
+.mdef b{font-weight:800}
 
 /* Filter bar */
 .fb{display:flex;align-items:center;gap:10px;margin-bottom:13px;flex-wrap:wrap}
@@ -360,7 +363,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
   <div class="g2" style="gap:10px;margin-bottom:10px;align-items:stretch">
     <div class="card" style="margin:0;display:flex;flex-direction:column">
       <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
-        <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Impressions Table</span></div>
+        <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Impressions Table</span><span class="mdef">ℹ <b>Brand Search Impressions</b> = how many times Cars24-brand keywords (cars24, cars 24, card24…) appeared in Google Search results — a proxy for brand awareness &amp; search demand.</span></div>
         <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
           <div class="pp-wrap" id="pp-imp">
             <button class="pp active" data-p="all">All</button>
@@ -446,7 +449,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
 
           <!-- Category Breakdown with month dropdown -->
           <div class="card">
-            <div class="sh"><span class="kicker">🍩 Category Breakdown</span><span class="title">Keyword Volume by Category</span><span class="desc">How search impressions split across intent categories for the selected period.</span></div>
+            <div class="sh"><span class="kicker">🍩 Category Breakdown</span><span class="title">Keyword Volume by Category</span><span class="mdef">ℹ <b>Keyword Volume</b> = total Google-search impressions for Cars24-brand keywords, grouped by the search intent behind each term (Buy, Sell, City, Customer Care, etc.).</span><span class="desc">How search impressions split across intent categories for the selected period.</span></div>
             <div class="fb">
               <span class="fl">Month</span>
               <select class="ctrl-sel" id="cat-period-sel"></select>
@@ -481,7 +484,7 @@ th.ratio-hi{background:#FFF1DE!important;color:#B5650A!important}
           <!-- TABLE 1: Monthly benchmark — table + chart, one shared filter (mirrors Brand Search Impressions) -->
           <div class="card">
             <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
-              <div><span class="kicker">📈 Monthly Benchmark</span><span class="title">Share of Searches — Cars24 vs Competitors</span><span class="desc">Blue column = Cars24. Gap column = Cars24 pp minus Spinny pp. Green = Cars24 leads.</span></div>
+              <div><span class="kicker">📈 Monthly Benchmark</span><span class="title">Share of Searches — Cars24 vs Competitors</span><span class="mdef">ℹ <b>Share of Search (SoS)</b> = of every branded search across all tracked competitors in the category, the % that is for Cars24. Higher = Cars24 owns more of the category's total search demand.</span><span class="desc">Blue column = Cars24. Gap column = Cars24 pp minus Spinny pp. Green = Cars24 leads.</span></div>
               <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
                 <div class="ms-dd" id="ms-sos"></div>
                 <select class="ctrl-sel" id="sos-m-period-sel"></select>
@@ -969,7 +972,7 @@ function searchTabHtml(prefix, gscUrl, sourceLabel){
   <div class="g2" style="gap:10px;margin-bottom:10px;align-items:stretch">
     <div class="card" style="margin:0;display:flex;flex-direction:column">
       <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
-        <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Impressions Table</span></div>
+        <div><span class="kicker">📅 Month-on-Month</span><span class="title">Monthly Impressions Table</span><span class="mdef">ℹ <b>Brand Search Impressions</b> = how many times Cars24-brand keywords (cars24, cars 24, card24…) appeared in Google Search results — a proxy for brand awareness &amp; search demand.</span></div>
         <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
           <div class="pp-wrap" id="${p}pp-imp">
             <button class="pp active" data-p="all">All</button>
@@ -1220,7 +1223,7 @@ function keywordsTabHtml(prefix,gscUrl){
   <div class="tab-actions"><a class="card-act-btn" href="${gscUrl}" target="_blank" rel="noopener">📄 View in Search Console</a><button class="card-act-btn" type="button" onclick="downloadAllTablesCSV('keyword_volume_${p}all.csv',[{title:'Category Breakdown',tblWrapperId:'${p}tbl-cats'},{title:'Category Volume by Month',tblWrapperId:'${p}tbl-cat-mom'}])">⬇ Download all tables (CSV)</button></div>
 
   <div class="card">
-    <div class="sh"><span class="kicker">🍩 Category Breakdown</span><span class="title">Keyword Volume by Category</span><span class="desc">How search impressions split across intent categories for the selected period.</span></div>
+    <div class="sh"><span class="kicker">🍩 Category Breakdown</span><span class="title">Keyword Volume by Category</span><span class="mdef">ℹ <b>Keyword Volume</b> = total Google-search impressions for Cars24-brand keywords, grouped by the search intent behind each term (Buy, Sell, City, Customer Care, etc.).</span><span class="desc">How search impressions split across intent categories for the selected period.</span></div>
     <div class="fb">
       <span class="fl">Month</span>
       <select class="ctrl-sel" id="${p}cat-period-sel"></select>
@@ -1337,7 +1340,7 @@ function countrySosTabHtml(prefix,cfg){
 
   <div class="card">
     <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
-      <div><span class="kicker">📈 Monthly Benchmark</span><span class="title">Share of Searches — Cars24 vs Competitors</span><span class="desc">Blue column = Cars24. Gap column = Cars24 pp minus ${gapBrand} pp. Green = Cars24 leads.</span></div>
+      <div><span class="kicker">📈 Monthly Benchmark</span><span class="title">Share of Searches — Cars24 vs Competitors</span><span class="mdef">ℹ <b>Share of Search (SoS)</b> = of every branded search across all tracked competitors in the market, the % that is for Cars24. Higher = Cars24 owns more of the category's total search demand.</span><span class="desc">Blue column = Cars24. Gap column = Cars24 pp minus ${gapBrand} pp. Green = Cars24 leads.</span></div>
       <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
         <div class="ms-dd" id="${p}ms-sos"></div>
         <select class="ctrl-sel" id="${p}sos-m-period-sel"></select>
@@ -1877,7 +1880,7 @@ function countryGiTabHtml(prefix,cfg){
 
   <div class="card">
     <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
-      <div><span class="kicker">📈 National · Monthly</span><span class="title">Branded Search Trend</span><span class="desc" id="${p}gi-national-desc"></span></div>
+      <div><span class="kicker">📈 National · Monthly</span><span class="title">Branded Search Trend</span><span class="mdef">ℹ <b>Cars24 Index</b> = a 0–100 measure of relative branded-search interest over time (Google Trends style; 100 = this series' own all-time peak). It tracks demand momentum, not absolute search volume.</span><span class="desc" id="${p}gi-national-desc"></span></div>
       <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
         <select class="ctrl-sel" id="${p}gi-national-period-sel"></select>
         <div class="pp-wrap" id="pp-${p}gi-national"><button class="pp" data-p="12m" type="button">Last 12 Months</button><button class="pp" data-p="compare" type="button">Compare ▾</button></div>
@@ -2650,7 +2653,7 @@ function initTab4(){
 
     <div class="card">
       <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:8px">
-        <div><span class="kicker">📈 National · Monthly</span><span class="title">Branded Search Trend</span><span class="desc">Monthly index, Jan'23 – ${latest.label} (100 = all-time peak).</span></div>
+        <div><span class="kicker">📈 National · Monthly</span><span class="title">Branded Search Trend</span><span class="mdef">ℹ <b>Cars24 Index</b> = a 0–100 measure of relative branded-search interest over time (Google Trends style; 100 = this series' own all-time peak). It tracks demand momentum, not absolute search volume.</span><span class="desc">Monthly index, Jan'23 – ${latest.label} (100 = all-time peak).</span></div>
         <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
           <select class="ctrl-sel" id="gi-national-period-sel"></select>
           <div class="pp-wrap" id="pp-gi-national"><button class="pp" data-p="12m" type="button">Last 12 Months</button><button class="pp" data-p="compare" type="button">Compare ▾</button></div>
@@ -2994,7 +2997,7 @@ function renderYT(containerId,key,channelName){
     ${isPublic?`<div style="background:#EEF0FF;border:1px solid #C7C1FF;border-radius:8px;padding:10px 14px;font-size:12px;color:#4736FE;margin-bottom:14px">ℹ️ Video-level public data — views = cumulative views of videos published that month, not monthly channel traffic.</div>`:''}
     <div class="card">
       <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
-        <div><span class="kicker">📊 Key Metrics</span><span class="title">Performance Overview — ${YT_URLS[key]?`<a href="${YT_URLS[key]}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--blue)">${channelName}</a>`:channelName}</span></div>
+        <div><span class="kicker">📊 Key Metrics</span><span class="title">Performance Overview — ${YT_URLS[key]?`<a href="${YT_URLS[key]}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--blue)">${channelName}</a>`:channelName}</span><span class="mdef">ℹ <b>Organic Views</b> = views from non-paid sources (search, suggested, browse — excludes ad-driven views). <b>Watch Time</b> = total hours watched. <b>Retention</b> = avg % of each video viewers actually watch. <b>Net Subs</b> = subscribers gained − lost.</span></div>
         <select class="inf-sel" id="yt-kpi-sel-${key}">
           <option value="all">All Time</option>
           ${monthOpts(monthsDesc,true)}
@@ -3359,7 +3362,7 @@ function renderIG(containerId,key,handleName){
   el.innerHTML=`
     <div class="card">
       <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
-        <div><span class="kicker">📊 Key Metrics</span><span class="title">Performance Overview — ${IG_URLS[key]?`<a href="${IG_URLS[key]}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1.5px solid #E91E8C">${handleName}</a>`:handleName}</span></div>
+        <div><span class="kicker">📊 Key Metrics</span><span class="title">Performance Overview — ${IG_URLS[key]?`<a href="${IG_URLS[key]}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1.5px solid #E91E8C">${handleName}</a>`:handleName}</span><span class="mdef">ℹ <b>Views</b> = total plays of posts published that month. <b>Reach</b> = unique accounts that saw them. <b>Engagement</b> = likes + comments + saves + shares; <b>Engagement Rate</b> = engagement ÷ reach.</span></div>
         <select class="inf-sel" id="ig-kpi-sel-${key}">
           <option value="all">All Time</option>
           ${monthOpts(monthsDesc,true)}
@@ -3842,7 +3845,7 @@ function initInf(){
 
     <div class="card">
       <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
-        <div><span class="kicker">📊 Key Metrics</span><span class="title">Influencer Performance Overview</span></div>
+        <div><span class="kicker">📊 Key Metrics</span><span class="title">Influencer Performance Overview</span><span class="mdef">ℹ <b>CPV (Cost-Per-View)</b> = total spend ÷ total views — lower is more efficient. <b>Blended CPV</b> averages that across all creators in the period. <b>Engagement Rate</b> = (likes + comments + saves) ÷ views.</span></div>
         <select class="inf-sel" id="inf-kpi-sel">
           <option value="all">All Time</option>
           ${monthsDesc.map(mo=>`<option value="mo:${mo}"${mo===latestMO?' selected':''}>${moLabel[mo]||mo}</option>`).join('')}
@@ -4076,7 +4079,7 @@ function initCountryInfTab(prefix,infData,cfg){
 
     <div class="card">
       <div class="sh" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
-        <div><span class="kicker">📊 Key Metrics</span><span class="title">Influencer Performance Overview</span></div>
+        <div><span class="kicker">📊 Key Metrics</span><span class="title">Influencer Performance Overview</span><span class="mdef">ℹ <b>CPV (Cost-Per-View)</b> = total spend ÷ total views — lower is more efficient. <b>Blended CPV</b> averages that across all creators in the period. <b>Engagement Rate</b> = (likes + comments + saves) ÷ views.</span></div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
           ${cfg.hasCost?`<div class="pp-wrap" id="${prefix}inf-currency">
             <button class="pp active" data-c="inr" type="button">₹ INR</button>
