@@ -7,7 +7,7 @@ Run: python3 build_data.py
 import json, math, sys, calendar
 import pandas as pd
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 
 DATA = Path("data")
 OUT  = Path("data.json")
@@ -962,6 +962,42 @@ def build_influencers_au():
 def build_influencers_uae():
     return fetch_dashboard_influencers(UAE_INFLUENCER_URL, "UAE Influencers")
 
+# ── Refresh log ────────────────────────────────────────────────────────────────
+REFRESH_LOG = DATA / "refresh_log.json"
+
+def build_refresh_log(payload):
+    """Append one headline-snapshot row per refresh to data/refresh_log.json (a
+    persisted, committed archive) so the dashboard can show a "Data Refresh Log"
+    of when each pull ran and how the top-line numbers moved. One row per calendar
+    day (a same-day rebuild updates that day's row); capped to the last 120 days.
+    The full list is embedded in data.json so the frontend needs no extra fetch."""
+    yt = payload.get("youtube", {})
+    ig = payload.get("instagram", {})
+    kp = payload.get("kpis", {})
+    entry = {
+        "ts":            datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "yt_views":      sum((c.get("snapshot", {}).get("total_views") or 0) for c in yt.values()),
+        "yt_subs":       sum((c.get("snapshot", {}).get("subscribers")  or 0) for c in yt.values()),
+        "ig_followers":  sum((a.get("snapshot", {}).get("followers")    or 0) for a in ig.values()),
+        "impressions":   kp.get("curr_imp") or 0,
+        "sos":           kp.get("c24_sos"),
+    }
+    logs = []
+    if REFRESH_LOG.exists():
+        try:
+            logs = json.loads(REFRESH_LOG.read_text()).get("logs", [])
+        except (json.JSONDecodeError, OSError):
+            logs = []
+    today = entry["ts"][:10]
+    if logs and logs[-1].get("ts", "")[:10] == today:
+        logs[-1] = entry           # same-day rebuild → update today's row
+    else:
+        logs.append(entry)
+    logs = logs[-120:]             # keep ~4 months of daily history
+    REFRESH_LOG.write_text(json.dumps({"logs": logs}, indent=2))
+    print(f"  ✓ Refresh log: {len(logs)} days ({logs[0]['ts'][:10]} → {logs[-1]['ts'][:10]})")
+    return logs
+
 # ── YouTube ───────────────────────────────────────────────────────────────────
 YT_CHANNEL_KEYS = [
     "cars24_india", "teambhp", "cars24_insider", "cars24_malayalam",
@@ -1597,6 +1633,9 @@ if __name__ == "__main__":
         "gsc_au":             gsc_au,
         "gsc_uae":            gsc_uae,
     }
+
+    payload["refresh_log"] = build_refresh_log(payload)
+    payload["_meta"]["built_iso"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     with open(OUT, "w") as f:
         json.dump(payload, f, indent=2, default=str)
