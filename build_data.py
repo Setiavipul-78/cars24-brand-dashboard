@@ -533,6 +533,9 @@ def build_country_extras(key):
         gindex = {
             "monthly": build_gindex_simple("gindex_aus_monthly.csv"),
             "regions": build_gindex_regions("gindex_aus_region_monthly.csv"),
+            # populated only once AUS (Generic) diverges from Brand — until then the
+            # file doesn't exist and this is {}, so the comparison stays hidden.
+            "regions_generic": build_gindex_regions("gindex_aus_region_generic_monthly.csv"),
         }
     else:
         return {"bsos": {}, "gindex": {}}

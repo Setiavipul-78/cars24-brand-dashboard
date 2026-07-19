@@ -307,6 +307,57 @@ def build_uae_gindex(token):
     print(f"  ✓ gindex_uae_city_generic_monthly.csv: {len(city_generic_rows)} rows across {sorted(generic.keys())}")
 
 
+# ── AUS (Brand) / AUS (Generic): same side-by-side block layout as UAE (national
+# "AUS" block + NSW/QLD/VIC regions). The Generic tab was seeded as a copy of
+# Brand, so Category is only exposed once real generic data actually diverges —
+# otherwise the Brand-vs-Category comparison would show a meaningless flat-zero
+# gap. Replaces the old single-block "AUS" + "AUS-Regions" fetches (those tabs
+# were renamed to "AUS (Brand)", which is why AU's index had frozen). ──────────
+def build_aus_gindex(token):
+    brand = parse_uae_gindex_blocks(token, "AUS (Brand)")
+    generic = parse_uae_gindex_blocks(token, "AUS (Generic)")
+
+    nat_brand = brand.pop("AUS", None)
+    if nat_brand is None:
+        raise ValidationError("AUS (Brand): no national 'AUS' block found")
+    nat_generic = generic.pop("AUS", None)
+    gen_by_month = dict(nat_generic or [])
+
+    # Real category data, or still a duplicate of Brand?
+    real_generic = bool(nat_generic) and any(gen_by_month.get(m) != idx for m, idx in nat_brand)
+
+    if real_generic:
+        nat_rows = [{"month": m, "Cars24": idx, "Category": gen_by_month.get(m)} for m, idx in nat_brand]
+        cols = ["month", "Cars24", "Category"]
+    else:
+        nat_rows = [{"month": m, "Cars24": idx} for m, idx in nat_brand]
+        cols = ["month", "Cars24"]
+        print("  ⚠ AUS (Generic) is identical to Brand — treating as not-yet-populated; "
+              "Category omitted (Brand-vs-Category comparison will appear once it diverges)")
+    nat_rows.sort(key=lambda r: r["month"])
+    path = DATA / "gindex_aus_monthly.csv"
+    check_row_count(len(nat_rows), path, "Google Index AUS national")
+    write_csv(path, cols, nat_rows)
+    print(f"  ✓ gindex_aus_monthly.csv: {len(nat_rows)} months"
+          f"{' brand+category' if real_generic else ' (brand only)'} "
+          f"({nat_rows[0]['month']} → {nat_rows[-1]['month']})")
+
+    region_rows = [{"region": r, "month": m, "index": idx} for r, data in brand.items() for m, idx in data]
+    region_rows.sort(key=lambda r: (r["region"], r["month"]))
+    path = DATA / "gindex_aus_region_monthly.csv"
+    check_row_count(len(region_rows), path, "Google Index AUS region brand")
+    write_csv(path, ["region", "month", "index"], region_rows)
+    print(f"  ✓ gindex_aus_region_monthly.csv: {len(region_rows)} rows across {sorted(brand.keys())}")
+
+    if real_generic:
+        gen_rows = [{"region": r, "month": m, "index": idx} for r, data in generic.items() for m, idx in data]
+        gen_rows.sort(key=lambda r: (r["region"], r["month"]))
+        path = DATA / "gindex_aus_region_generic_monthly.csv"
+        check_row_count(len(gen_rows), path, "Google Index AUS region generic")
+        write_csv(path, ["region", "month", "index"], gen_rows)
+        print(f"  ✓ gindex_aus_region_generic_monthly.csv: {len(gen_rows)} rows across {sorted(generic.keys())}")
+
+
 def main():
     load_env()
     token = get_token()
@@ -335,17 +386,11 @@ def main():
     except (ValidationError, ValueError, KeyError) as e:
         print(f"  ✗ Google Index UAE fetch failed validation, existing CSVs left untouched: {e}")
 
-    print("  Fetching Google Index (AUS pan)…")
+    print("  Fetching Google Index (AUS brand + generic, national + regions)…")
     try:
-        build_pan_simple(token, "AUS", "gindex_aus_monthly.csv")
+        build_aus_gindex(token)
     except (ValidationError, ValueError, KeyError) as e:
-        print(f"  ✗ Google Index AUS fetch failed validation, existing CSV left untouched: {e}")
-
-    print("  Fetching Google Index (AUS regions)…")
-    try:
-        build_region_blocks(token, "AUS-Regions", "gindex_aus_region_monthly.csv")
-    except (ValidationError, ValueError, KeyError) as e:
-        print(f"  ✗ Google Index AUS regions fetch failed validation, existing CSV left untouched: {e}")
+        print(f"  ✗ Google Index AUS fetch failed validation, existing CSVs left untouched: {e}")
 
 
 if __name__ == "__main__":
