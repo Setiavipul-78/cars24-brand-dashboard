@@ -274,13 +274,13 @@
     },
     {
       "source": "YT_CHANNEL",
-      "views": 1778,
+      "views": 1781,
       "watch_time_hours": 6.5,
-      "pct": 19.1
+      "pct": 19.2
     },
     {
       "source": "YT_SEARCH",
-      "views": 733,
+      "views": 734,
       "watch_time_hours": 7.8,
       "pct": 7.9
     },
@@ -739,13 +739,13 @@
     "2026-07": [
       {
         "source": "YT_CHANNEL",
-        "views": 46,
+        "views": 49,
         "watch_time_hours": 0.0,
-        "pct": 63.9
+        "pct": 64.5
       },
       {
         "source": "YT_SEARCH",
-        "views": 18,
+        "views": 19,
         "watch_time_hours": 0.2,
         "pct": 25.0
       },
@@ -753,13 +753,13 @@
         "source": "SHORTS",
         "views": 5,
         "watch_time_hours": 0.0,
-        "pct": 6.9
+        "pct": 6.6
       },
       {
         "source": "SUBSCRIBER",
         "views": 3,
         "watch_time_hours": 0.0,
-        "pct": 4.2
+        "pct": 3.9
       },
       {
         "source": "NO_LINK_OTHER",
@@ -772,8 +772,8 @@
   "devices": [
     {
       "device": "MOBILE",
-      "views": 8054,
-      "watch_time_hours": 58.3,
+      "views": 8058,
+      "watch_time_hours": 58.4,
       "pct": 86.8
     },
     {
@@ -1033,21 +1033,21 @@
     "2026-07": [
       {
         "device": "MOBILE",
-        "views": 51,
+        "views": 55,
         "watch_time_hours": 0.2,
-        "pct": 72.9
+        "pct": 74.3
       },
       {
         "device": "TV",
         "views": 15,
         "watch_time_hours": 0.0,
-        "pct": 21.4
+        "pct": 20.3
       },
       {
         "device": "DESKTOP",
         "views": 4,
         "watch_time_hours": 0.0,
-        "pct": 5.7
+        "pct": 5.4
       }
     ]
   },
@@ -1126,7 +1126,7 @@
       "published": "2025-11-12",
       "url": "https://www.youtube.com/watch?v=3brGUNO5-wI",
       "thumbnail": "https://i.ytimg.com/vi/3brGUNO5-wI/default.jpg",
-      "views": 911,
+      "views": 912,
       "watch_time_hours": 7.43,
       "avg_duration_sec": 36.0,
       "avg_view_pct": 24.0,
@@ -1143,15 +1143,15 @@
       "published": "2025-11-03",
       "url": "https://www.youtube.com/watch?v=Ex7HTIFgkHE",
       "thumbnail": "https://i.ytimg.com/vi/Ex7HTIFgkHE/default.jpg",
-      "views": 311,
+      "views": 312,
       "watch_time_hours": 1.38,
       "avg_duration_sec": 22.0,
-      "avg_view_pct": 32.6,
+      "avg_view_pct": 32.5,
       "subs_gained": 1,
       "likes": 7,
       "comments": 0,
       "shares": 0,
-      "engagement_rate": 2.25,
+      "engagement_rate": 2.24,
       "is_short": false
     },
     {
@@ -1177,7 +1177,7 @@
       "published": "2025-11-03",
       "url": "https://www.youtube.com/watch?v=-EdYrm3Vt5k",
       "thumbnail": "https://i.ytimg.com/vi/-EdYrm3Vt5k/default.jpg",
-      "views": 158,
+      "views": 159,
       "watch_time_hours": 0.6,
       "avg_duration_sec": 25.0,
       "avg_view_pct": 48.2,
@@ -1185,7 +1185,7 @@
       "likes": 6,
       "comments": 1,
       "shares": 0,
-      "engagement_rate": 4.43,
+      "engagement_rate": 4.4,
       "is_short": true
     },
     {
@@ -1194,15 +1194,15 @@
       "published": "2025-11-04",
       "url": "https://www.youtube.com/watch?v=dCh9a0gjtIw",
       "thumbnail": "https://i.ytimg.com/vi/dCh9a0gjtIw/default.jpg",
-      "views": 139,
+      "views": 140,
       "watch_time_hours": 0.35,
       "avg_duration_sec": 15.0,
-      "avg_view_pct": 27.3,
+      "avg_view_pct": 27.1,
       "subs_gained": 0,
       "likes": 2,
       "comments": 0,
       "shares": 0,
-      "engagement_rate": 1.44,
+      "engagement_rate": 1.43,
       "is_short": true
     },
     {
@@ -1210,7 +1210,7 @@
       "title": "ZERO Road Tax on Private Roads! #cars24tamil",
       "published": "2025-10-31",
       "url": "https://www.youtube.com/watch?v=YhPHEJ1gV2U",
-      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=COCa8tIG&rs=AOn4CLA9fxhjxCJzsTq66hHbvb26OvrCXg",
+      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=CPDZ99IG&rs=AOn4CLAnPJY9V62n6I0TJT4RF3_qSfesyA",
       "views": 54,
       "watch_time_hours": 0.32,
       "avg_duration_sec": 35.0,
