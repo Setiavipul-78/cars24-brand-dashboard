@@ -2,41 +2,41 @@
   "age": [
     {
       "key": "13-17",
-      "value": 43
+      "value": 45
     },
     {
       "key": "18-24",
-      "value": 1000
+      "value": 1001
     },
     {
       "key": "25-34",
-      "value": 4237
+      "value": 4235
     },
     {
       "key": "35-44",
-      "value": 3806
+      "value": 3809
     },
     {
       "key": "45-54",
-      "value": 2184
+      "value": 2187
     },
     {
       "key": "55-64",
-      "value": 943
+      "value": 944
     },
     {
       "key": "65+",
-      "value": 409
+      "value": 410
     }
   ],
   "gender": [
     {
       "key": "F",
-      "value": 3965
+      "value": 3968
     },
     {
       "key": "M",
-      "value": 7183
+      "value": 7189
     },
     {
       "key": "U",
@@ -46,7 +46,7 @@
   "city": [
     {
       "key": "Sydney, New South Wales",
-      "value": 2556
+      "value": 2558
     },
     {
       "key": "Bendigo, Victoria",
@@ -70,7 +70,7 @@
     },
     {
       "key": "Perth, Western Australia",
-      "value": 183
+      "value": 184
     },
     {
       "key": "Craigieburn, Victoria",
@@ -126,7 +126,7 @@
     },
     {
       "key": "Mount Cottrell, Victoria",
-      "value": 33
+      "value": 34
     },
     {
       "key": "Brisbane, Queensland",
@@ -138,7 +138,7 @@
     },
     {
       "key": "Adelaide, South Australia",
-      "value": 245
+      "value": 244
     },
     {
       "key": "Canberra, Australian Capital Territory",
@@ -268,7 +268,7 @@
     },
     {
       "key": "NZ",
-      "value": 28
+      "value": 29
     },
     {
       "key": "SA",
@@ -288,7 +288,7 @@
     },
     {
       "key": "GB",
-      "value": 35
+      "value": 34
     },
     {
       "key": "ID",
@@ -304,7 +304,7 @@
     },
     {
       "key": "US",
-      "value": 54
+      "value": 55
     },
     {
       "key": "GH",
@@ -320,7 +320,7 @@
     },
     {
       "key": "IN",
-      "value": 1066
+      "value": 1068
     },
     {
       "key": "ZA",
@@ -339,11 +339,11 @@
       "value": 35
     },
     {
-      "key": "IT",
+      "key": "GR",
       "value": 5
     },
     {
-      "key": "GR",
+      "key": "IT",
       "value": 5
     },
     {
@@ -368,7 +368,7 @@
     },
     {
       "key": "AU",
-      "value": 10645
+      "value": 10651
     },
     {
       "key": "LB",
