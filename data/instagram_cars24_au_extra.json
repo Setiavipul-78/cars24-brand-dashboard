@@ -6,15 +6,15 @@
     },
     {
       "key": "18-24",
-      "value": 1001
+      "value": 1002
     },
     {
       "key": "25-34",
-      "value": 4238
+      "value": 4237
     },
     {
       "key": "35-44",
-      "value": 3811
+      "value": 3815
     },
     {
       "key": "45-54",
@@ -22,31 +22,31 @@
     },
     {
       "key": "55-64",
-      "value": 947
+      "value": 946
     },
     {
       "key": "65+",
-      "value": 411
+      "value": 413
     }
   ],
   "gender": [
     {
       "key": "F",
-      "value": 3974
+      "value": 3975
     },
     {
       "key": "M",
-      "value": 7191
+      "value": 7193
     },
     {
       "key": "U",
-      "value": 1474
+      "value": 1476
     }
   ],
   "city": [
     {
       "key": "Sydney, New South Wales",
-      "value": 2550
+      "value": 2552
     },
     {
       "key": "Bendigo, Victoria",
@@ -94,7 +94,7 @@
     },
     {
       "key": "Gold Coast, Queensland",
-      "value": 299
+      "value": 298
     },
     {
       "key": "Abu Dhabi, Abu Dhabi",
@@ -106,7 +106,7 @@
     },
     {
       "key": "Melbourne, Victoria",
-      "value": 3500
+      "value": 3502
     },
     {
       "key": "Gurugram, Haryana",
@@ -141,12 +141,12 @@
       "value": 245
     },
     {
-      "key": "Laverton North, Victoria",
-      "value": 20
-    },
-    {
       "key": "Canberra, Australian Capital Territory",
       "value": 63
+    },
+    {
+      "key": "Mount Duneed, Victoria",
+      "value": 20
     },
     {
       "key": "Mackay, Queensland",
@@ -193,16 +193,16 @@
       "value": 70
     },
     {
-      "key": "Sharjah, Emirate of Sharjah",
-      "value": 24
-    },
-    {
       "key": "Mumbai, Maharashtra",
       "value": 24
     },
     {
+      "key": "Sharjah, Emirate of Sharjah",
+      "value": 24
+    },
+    {
       "key": "Wallan, Victoria",
-      "value": 20
+      "value": 21
     },
     {
       "key": "Bangalore, Karnataka",
@@ -339,11 +339,11 @@
       "value": 35
     },
     {
-      "key": "GR",
+      "key": "IT",
       "value": 5
     },
     {
-      "key": "IT",
+      "key": "GR",
       "value": 5
     },
     {
@@ -368,7 +368,7 @@
     },
     {
       "key": "AU",
-      "value": 10659
+      "value": 10664
     },
     {
       "key": "LB",
