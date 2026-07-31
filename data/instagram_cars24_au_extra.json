@@ -6,19 +6,19 @@
     },
     {
       "key": "18-24",
-      "value": 1002
+      "value": 1003
     },
     {
       "key": "25-34",
-      "value": 4231
+      "value": 4228
     },
     {
       "key": "35-44",
-      "value": 3824
+      "value": 3829
     },
     {
       "key": "45-54",
-      "value": 2186
+      "value": 2188
     },
     {
       "key": "55-64",
@@ -26,7 +26,7 @@
     },
     {
       "key": "65+",
-      "value": 416
+      "value": 418
     }
   ],
   "gender": [
@@ -36,17 +36,17 @@
     },
     {
       "key": "M",
-      "value": 7199
+      "value": 7203
     },
     {
       "key": "U",
-      "value": 1478
+      "value": 1481
     }
   ],
   "city": [
     {
       "key": "Sydney, New South Wales",
-      "value": 2539
+      "value": 2543
     },
     {
       "key": "Bendigo, Victoria",
@@ -102,7 +102,7 @@
     },
     {
       "key": "Melbourne, Victoria",
-      "value": 3530
+      "value": 3532
     },
     {
       "key": "Gurugram, Haryana",
@@ -130,11 +130,11 @@
     },
     {
       "key": "Greenvale, Victoria",
-      "value": 22
+      "value": 21
     },
     {
       "key": "Adelaide, South Australia",
-      "value": 243
+      "value": 242
     },
     {
       "key": "Canberra, Australian Capital Territory",
@@ -145,12 +145,12 @@
       "value": 18
     },
     {
-      "key": "Mount Duneed, Victoria",
+      "key": "Mackay, Queensland",
       "value": 19
     },
     {
-      "key": "Mackay, Queensland",
-      "value": 20
+      "key": "Mount Duneed, Victoria",
+      "value": 19
     },
     {
       "key": "Marsden Park, New South Wales",
@@ -251,6 +251,10 @@
       "value": 11
     },
     {
+      "key": "PT",
+      "value": 4
+    },
+    {
       "key": "FJ",
       "value": 8
     },
@@ -260,7 +264,7 @@
     },
     {
       "key": "JP",
-      "value": 6
+      "value": 7
     },
     {
       "key": "NZ",
@@ -316,7 +320,7 @@
     },
     {
       "key": "IN",
-      "value": 1068
+      "value": 1067
     },
     {
       "key": "ZA",
@@ -332,14 +336,14 @@
     },
     {
       "key": "IR",
-      "value": 34
-    },
-    {
-      "key": "GR",
-      "value": 5
+      "value": 35
     },
     {
       "key": "IT",
+      "value": 5
+    },
+    {
+      "key": "GR",
       "value": 5
     },
     {
@@ -359,16 +363,12 @@
       "value": 27
     },
     {
-      "key": "ES",
-      "value": 4
-    },
-    {
       "key": "TH",
       "value": 17
     },
     {
       "key": "AU",
-      "value": 10673
+      "value": 10678
     },
     {
       "key": "LB",
