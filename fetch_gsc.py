@@ -40,7 +40,11 @@ COUNTRIES = {
               "full_start": date(2023, 11, 1)},
     "au":    {"site": "sc-domain:cars24.com.au",  "country": "aus", "csv": "gsc_daily_au.csv",
               "full_start": date(2025, 1, 1)},
-    "uae":   {"site": "sc-domain:cars24.ae",      "country": "are", "csv": "gsc_daily_uae.csv",
+    # UAE: no country filter — show ALL branded searches on cars24.ae (matches
+    # Search Console's default headline, ~71k vs ~66k when scoped to are-only).
+    # The extra impressions are UAE-brand searches from outside the country
+    # (expats/diaspora), which the business wants counted as real demand.
+    "uae":   {"site": "sc-domain:cars24.ae",      "country": None,  "csv": "gsc_daily_uae.csv",
               "full_start": date(2025, 1, 1)},
 }
 

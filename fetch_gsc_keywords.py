@@ -35,7 +35,9 @@ COUNTRIES = {
               "full_months_back": 16},
     "au":    {"site": "sc-domain:cars24.com.au",  "country": "aus", "prefix": "au_",
               "full_months_back": 16},
-    "uae":   {"site": "sc-domain:cars24.ae",      "country": "are", "prefix": "uae_",
+    # UAE: no country filter, to match the impressions view (Search Console
+    # default / all countries) — see fetch_gsc.py for the rationale.
+    "uae":   {"site": "sc-domain:cars24.ae",      "country": None,  "prefix": "uae_",
               "full_months_back": 16},
 }
 
