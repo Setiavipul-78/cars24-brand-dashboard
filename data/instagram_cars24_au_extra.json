@@ -6,7 +6,7 @@
     },
     {
       "key": "18-24",
-      "value": 1009
+      "value": 1008
     },
     {
       "key": "25-34",
@@ -14,15 +14,15 @@
     },
     {
       "key": "35-44",
-      "value": 3843
+      "value": 3842
     },
     {
       "key": "45-54",
-      "value": 2190
+      "value": 2195
     },
     {
       "key": "55-64",
-      "value": 949
+      "value": 950
     },
     {
       "key": "65+",
@@ -32,11 +32,11 @@
   "gender": [
     {
       "key": "F",
-      "value": 3989
+      "value": 3988
     },
     {
       "key": "M",
-      "value": 7214
+      "value": 7219
     },
     {
       "key": "U",
@@ -46,11 +46,11 @@
   "city": [
     {
       "key": "Sydney, New South Wales",
-      "value": 2555
+      "value": 2557
     },
     {
       "key": "Bendigo, Victoria",
-      "value": 42
+      "value": 41
     },
     {
       "key": "Plumpton, Victoria, Victoria",
@@ -58,23 +58,23 @@
     },
     {
       "key": "Kurunjang, Victoria",
-      "value": 25
+      "value": 24
     },
     {
       "key": "Geelong, Victoria",
-      "value": 104
+      "value": 103
     },
     {
       "key": "Pakenham, Victoria",
-      "value": 38
+      "value": 40
     },
     {
       "key": "Perth, Western Australia",
-      "value": 189
+      "value": 188
     },
     {
       "key": "Craigieburn, Victoria",
-      "value": 44
+      "value": 42
     },
     {
       "key": "Pune, Maharashtra",
@@ -82,7 +82,7 @@
     },
     {
       "key": "Wollongong, New South Wales",
-      "value": 72
+      "value": 73
     },
     {
       "key": "Ahmedabad, Gujarat",
@@ -94,23 +94,23 @@
     },
     {
       "key": "Gold Coast, Queensland",
-      "value": 297
+      "value": 298
     },
     {
       "key": "Abu Dhabi, Abu Dhabi",
-      "value": 25
+      "value": 24
     },
     {
       "key": "Sunshine Coast, Queensland",
-      "value": 130
+      "value": 127
     },
     {
       "key": "Melbourne, Victoria",
-      "value": 3526
+      "value": 3528
     },
     {
       "key": "Gurugram, Haryana",
-      "value": 86
+      "value": 84
     },
     {
       "key": "Delhi, Delhi",
@@ -118,23 +118,19 @@
     },
     {
       "key": "Mickleham, Victoria",
-      "value": 54
+      "value": 57
     },
     {
       "key": "Ipswich, Queensland",
-      "value": 70
+      "value": 76
     },
     {
       "key": "Mount Cottrell, Victoria",
-      "value": 35
+      "value": 32
     },
     {
       "key": "Brisbane, Queensland",
       "value": 567
-    },
-    {
-      "key": "Greenvale, Victoria",
-      "value": 20
     },
     {
       "key": "Adelaide, South Australia",
@@ -142,7 +138,7 @@
     },
     {
       "key": "Canberra, Australian Capital Territory",
-      "value": 65
+      "value": 66
     },
     {
       "key": "Officer, Victoria",
@@ -150,7 +146,7 @@
     },
     {
       "key": "Mount Duneed, Victoria",
-      "value": 20
+      "value": 21
     },
     {
       "key": "Marsden Park, New South Wales",
@@ -158,19 +154,19 @@
     },
     {
       "key": "Chennai, Tamil Nadu",
-      "value": 30
+      "value": 29
     },
     {
       "key": "Shepparton, Victoria",
-      "value": 20
-    },
-    {
-      "key": "Townsville, Queensland",
-      "value": 30
+      "value": 19
     },
     {
       "key": "Cairns, Queensland",
-      "value": 32
+      "value": 31
+    },
+    {
+      "key": "Townsville, Queensland",
+      "value": 31
     },
     {
       "key": "Warrnambool, Victoria",
@@ -182,7 +178,7 @@
     },
     {
       "key": "Werribee South, Victoria",
-      "value": 27
+      "value": 28
     },
     {
       "key": "Rockbank, Victoria",
@@ -206,15 +202,19 @@
     },
     {
       "key": "Bangalore, Karnataka",
-      "value": 59
+      "value": 58
     },
     {
       "key": "Hyderabad, Telangana",
-      "value": 26
+      "value": 25
     },
     {
       "key": "Newcastle, New South Wales",
-      "value": 40
+      "value": 41
+    },
+    {
+      "key": "Mildura, Victoria",
+      "value": 18
     },
     {
       "key": "Eynesbury, Victoria",
@@ -222,7 +222,7 @@
     },
     {
       "key": "Melton South, Victoria",
-      "value": 32
+      "value": 33
     }
   ],
   "country": [
@@ -232,7 +232,7 @@
     },
     {
       "key": "NP",
-      "value": 6
+      "value": 7
     },
     {
       "key": "BD",
@@ -251,16 +251,12 @@
       "value": 11
     },
     {
-      "key": "PT",
-      "value": 4
-    },
-    {
       "key": "FJ",
       "value": 8
     },
     {
       "key": "JO",
-      "value": 5
+      "value": 6
     },
     {
       "key": "JP",
@@ -268,11 +264,11 @@
     },
     {
       "key": "NZ",
-      "value": 28
+      "value": 29
     },
     {
       "key": "SA",
-      "value": 14
+      "value": 13
     },
     {
       "key": "BR",
@@ -292,7 +288,7 @@
     },
     {
       "key": "GB",
-      "value": 34
+      "value": 35
     },
     {
       "key": "ID",
@@ -300,7 +296,7 @@
     },
     {
       "key": "IE",
-      "value": 9
+      "value": 10
     },
     {
       "key": "CA",
@@ -324,7 +320,7 @@
     },
     {
       "key": "IN",
-      "value": 1067
+      "value": 1066
     },
     {
       "key": "ZA",
@@ -341,6 +337,10 @@
     {
       "key": "IR",
       "value": 36
+    },
+    {
+      "key": "IT",
+      "value": 4
     },
     {
       "key": "GR",
@@ -368,7 +368,7 @@
     },
     {
       "key": "AU",
-      "value": 10700
+      "value": 10699
     },
     {
       "key": "LB",
@@ -380,7 +380,7 @@
     },
     {
       "key": "PH",
-      "value": 25
+      "value": 28
     },
     {
       "key": "NG",
@@ -388,7 +388,7 @@
     },
     {
       "key": "PK",
-      "value": 41
+      "value": 40
     },
     {
       "key": "ZW",
