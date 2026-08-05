@@ -79,3 +79,17 @@ jobs:
           git commit -m "Auto-refresh: $(date -u '+%Y-%m-%d %H:%M UTC')"
           git pull --rebase origin main
           git push
+
+      # Deploy the public dashboard to Cloudflare Pages (cars24-brand-dashboard.pages.dev).
+      # Copies ONLY the public files into a clean folder — never the repo root, so
+      # nothing sensitive is ever uploaded. Runs even if a fetch token had issues,
+      # so the live site always reflects whatever refreshed successfully.
+      - name: Deploy to Cloudflare Pages
+        if: always()
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          rm -rf _pages && mkdir -p _pages
+          cp index.html data.json favicon.svg favicon.png favicon_32.png favicon_64.png privacy.html _pages/
+          npx --yes wrangler@latest pages deploy _pages \
+            --project-name=cars24-brand-dashboard --branch=main --commit-dirty=true
