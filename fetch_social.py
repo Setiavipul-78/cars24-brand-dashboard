@@ -1215,7 +1215,7 @@ def _li_headers():
     return {
         "Authorization":              f"Bearer {tok}",
         "X-Restli-Protocol-Version":  "2.0.0",
-        "LinkedIn-Version":           "202401",
+        "LinkedIn-Version":           "202508",
     }
 
 def _li_get(path: str, params: dict = None):
@@ -1412,13 +1412,29 @@ def fetch_all_linkedin():
         try:
             data = fetch_li_org(key, org_id)
 
-            if data["followers_rows"]:
-                write_csv(DATA / f"linkedin_{key}_followers.csv", data["followers_rows"])
+            # Anti-regression guard: the LinkedIn Community Management API parsing
+            # is mid-migration to the /rest v202508 format, and a partial/failed
+            # parse can yield an all-zero series. Never overwrite a good committed
+            # CSV with one whose numbers are entirely zero.
+            def _has_signal(rows, *cols):
+                for r in rows:
+                    for c in cols:
+                        try:
+                            if float(r.get(c) or 0) != 0:
+                                return True
+                        except (TypeError, ValueError):
+                            pass
+                return False
 
-            if data["visitor_rows"]:
+            if data["followers_rows"] and _has_signal(data["followers_rows"], "Total Followers", "New Followers"):
+                write_csv(DATA / f"linkedin_{key}_followers.csv", data["followers_rows"])
+            elif data["followers_rows"]:
+                print(f"    ⚠ {key} followers all-zero — keeping existing CSV (not overwriting)")
+
+            if data["visitor_rows"] and _has_signal(data["visitor_rows"], "Total Page Views", "Unique Visitors (total)"):
                 write_csv(DATA / f"linkedin_{key}_visitors.csv", data["visitor_rows"])
 
-            if data["content_rows"]:
+            if data["content_rows"] and _has_signal(data["content_rows"], "Impressions", "Likes", "Comments"):
                 write_csv(DATA / f"linkedin_{key}_content.csv", data["content_rows"])
 
             if not any(data.values()):
