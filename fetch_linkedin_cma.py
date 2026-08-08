@@ -154,9 +154,17 @@ def _urn_id(v):
 
 # ── CSV writing ───────────────────────────────────────────────────────────────
 def _write_demo(key, aud, dim, rows):
-    rows = [(c, int(v)) for c, v in rows if v]
+    rows = [(str(c), int(v)) for c, v in rows if v]
     if not rows:
         return
+    # Anti-regression: industry/location labels come from URN lookups that can be
+    # rate-limited; an unresolved label shows as a bare numeric id. If too many
+    # are unresolved, keep the existing (good-label) CSV instead of overwriting it.
+    if dim in ("industry", "location"):
+        unresolved = sum(1 for c, _ in rows if c.strip().isdigit())
+        if unresolved > len(rows) * 0.25:
+            print(f"    ⚠ {key} {aud} {dim}: {unresolved}/{len(rows)} labels unresolved — keeping existing CSV")
+            return
     rows.sort(key=lambda x: x[1], reverse=True)
     with open(DATA / f"linkedin_{key}_{aud}_by_{dim}.csv", "w", newline="") as f:
         w = csv.writer(f); w.writerow(["category", "value"]); w.writerows(rows)
