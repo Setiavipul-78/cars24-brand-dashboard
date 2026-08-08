@@ -1478,7 +1478,14 @@ if __name__ == "__main__":
         print("═══ fetch_social.py ═══")
         fetch_all_youtube()
         fetch_all_instagram()
-        fetch_all_linkedin()
+        # LinkedIn: Community Management API (/rest v202508). The old /v2
+        # fetch_all_linkedin() returned all-zeros against the current API and is
+        # kept only as dead code; the CMA fetcher writes demographics + totals.
+        try:
+            import fetch_linkedin_cma
+            fetch_linkedin_cma.main()
+        except Exception as e:
+            print(f"  ! LinkedIn CMA fetch error: {e}")
 
         print("\n── Google Search Console ────────────────────────────")
         try:

@@ -1446,12 +1446,24 @@ def build_linkedin_competitors():
 
 def build_linkedin():
     result = {}
+    # Live totals + content aggregates from the Community Management API fetch
+    # (fetch_linkedin_cma.py). Present once LinkedIn is authed; drives the real
+    # follower/page-view/content snapshot for all 3 pages.
+    li_totals = {}
+    _lt = DATA / "linkedin_totals.json"
+    if _lt.exists():
+        try:
+            li_totals = json.loads(_lt.read_text())
+        except Exception:
+            li_totals = {}
+
     for key, name in LI_PAGES.items():
         fol_p = DATA / f"linkedin_{key}_followers.csv"
         con_p = DATA / f"linkedin_{key}_content.csv"
         vis_p = DATA / f"linkedin_{key}_visitors.csv"
+        demo_p = DATA / f"linkedin_{key}_followers_by_seniority.csv"  # API-fetched demographics
 
-        if not fol_p.exists() and not con_p.exists():
+        if not fol_p.exists() and not con_p.exists() and not demo_p.exists() and key not in li_totals:
             continue
 
         fol_demo = {dim: _li_load_demo_csv(DATA / f"linkedin_{key}_followers_by_{dim}.csv") for dim in LI_DEMO_DIMS}
@@ -1469,6 +1481,17 @@ def build_linkedin():
             "follower_demographics_monthly": {m: {**d, "label": mlabel(m)} for m, d in fol_demo_history.items()},
             "visitor_demographics_monthly":  {m: {**d, "label": mlabel(m)} for m, d in vis_demo_history.items()},
         }
+
+        # Real snapshot from the live API fetch (total followers, page views,
+        # content aggregates) — authoritative over the CSV-reconstructed number.
+        lt = li_totals.get(key)
+        if lt:
+            if lt.get("total_followers"):
+                page_data["snapshot"]["followers"] = int(lt["total_followers"])
+            if lt.get("total_views"):
+                page_data["snapshot"]["page_views"] = int(lt["total_views"])
+            if lt.get("content"):
+                page_data["snapshot"]["content"] = lt["content"]
 
         # ── Followers CSV ──────────────────────────────────────────────────
         if fol_p.exists():
@@ -1491,8 +1514,12 @@ def build_linkedin():
                         # Reconstruct a cumulative running total: this CSV reports NEW
                         # followers gained per day, not a running total, so anchor the
                         # last day to a known real total and walk backwards.
+                        lt_total = (li_totals.get(key) or {}).get("total_followers")
                         known = LI_KNOWN_TOTAL_FOLLOWERS.get(key)
-                        if known:
+                        if lt_total:
+                            # anchor the last CSV day to the authoritative live API total
+                            running_end = int(lt_total)
+                        elif known:
                             known_total, known_date = known
                             known_ts = pd.Timestamp(known_date)
                             gains_after = df.loc[df[date_col] > known_ts, "_gain"].sum()
@@ -1615,7 +1642,11 @@ def build_linkedin():
             except Exception as e:
                 print(f"  ⚠ LinkedIn {key} content: {e}")
 
-        if page_data["monthly"] or page_data["posts"]:
+        # Keep the page if it has ANY real data — trend, posts, live snapshot, or
+        # demographics (Arabia/AU currently have demographics + snapshot but no
+        # daily-trend/posts export, and must still show up).
+        if (page_data["monthly"] or page_data["posts"] or page_data["snapshot"]
+                or any(page_data["follower_demographics"].values())):
             page_data["monthly"].sort(key=lambda x: x["month"])
             result[key] = page_data
 
