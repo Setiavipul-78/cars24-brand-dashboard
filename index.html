@@ -1257,10 +1257,11 @@ function initKeywordsTab(prefix,kw){
   const matrix=kw.cat_matrix||[],catMonths=kw.cat_months||[],cats=kw.categories||[];
   // Hide India-only business lines that don't operate in AU/UAE — Challan (traffic
   // fines), PDI (pre-delivery inspection), ELITE (premium vertical). They only pick
-  // up stray incidental impressions abroad (~0.00L / 0.0%) and are pure noise here.
-  // Genuinely-small-but-real categories (e.g. Customer Care) are intentionally kept.
+  // up stray incidental impressions abroad (~0.00L / 0.0%) and are pure noise there.
+  // ONLY applied to the country tabs (prefix set); India (prefix '') keeps them —
+  // Challan is a real, sizeable India category (~18L impressions).
   const IN_ONLY_CATS=new Set(['Cars24 Challan','Challan','PDI','ELITE','Elite']);
-  const allCats=cats.map(c=>c.category).filter(c=>!IN_ONLY_CATS.has(c));
+  const allCats=cats.map(c=>c.category).filter(c=>!prefix||!IN_ONLY_CATS.has(c));
 
   function mLbl(m){try{const[y,mo]=m.split('-');return['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+mo-1]+"'"+y.slice(2);}catch{return m;}}
 
