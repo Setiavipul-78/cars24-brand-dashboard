@@ -1,127 +1,130 @@
 region,month,index
-Abu Dhabi,2023-01,97.3
-Abu Dhabi,2023-02,94.5
-Abu Dhabi,2023-03,98.2
-Abu Dhabi,2023-04,90.4
-Abu Dhabi,2023-05,100.0
-Abu Dhabi,2023-06,79.6
-Abu Dhabi,2023-07,82.8
-Abu Dhabi,2023-08,92.7
-Abu Dhabi,2023-09,98.1
-Abu Dhabi,2023-10,87.2
-Abu Dhabi,2023-11,84.3
-Abu Dhabi,2023-12,84.1
-Abu Dhabi,2024-01,95.6
-Abu Dhabi,2024-02,84.3
-Abu Dhabi,2024-03,85.7
-Abu Dhabi,2024-04,75.6
-Abu Dhabi,2024-05,86.1
-Abu Dhabi,2024-06,70.8
-Abu Dhabi,2024-07,71.4
-Abu Dhabi,2024-08,75.0
-Abu Dhabi,2024-09,77.8
-Abu Dhabi,2024-10,73.5
-Abu Dhabi,2024-11,66.5
-Abu Dhabi,2024-12,68.1
-Abu Dhabi,2025-01,81.8
-Abu Dhabi,2025-02,72.6
-Abu Dhabi,2025-03,79.9
-Abu Dhabi,2025-04,74.1
-Abu Dhabi,2025-05,72.4
-Abu Dhabi,2025-06,62.2
-Abu Dhabi,2025-07,70.9
-Abu Dhabi,2025-08,78.3
-Abu Dhabi,2025-09,72.3
-Abu Dhabi,2025-10,70.3
-Abu Dhabi,2025-11,63.7
-Abu Dhabi,2025-12,60.3
-Abu Dhabi,2026-01,63.0
-Abu Dhabi,2026-02,53.7
-Abu Dhabi,2026-03,45.0
-Abu Dhabi,2026-04,49.2
-Abu Dhabi,2026-05,50.6
-Abu Dhabi,2026-06,52.5
-Dubai,2023-01,100.0
-Dubai,2023-02,90.9
-Dubai,2023-03,99.3
-Dubai,2023-04,89.4
-Dubai,2023-05,97.6
-Dubai,2023-06,86.5
-Dubai,2023-07,86.0
-Dubai,2023-08,94.6
-Dubai,2023-09,93.3
-Dubai,2023-10,85.9
-Dubai,2023-11,83.0
-Dubai,2023-12,78.9
-Dubai,2024-01,86.4
-Dubai,2024-02,78.3
-Dubai,2024-03,77.8
-Dubai,2024-04,64.6
-Dubai,2024-05,85.9
-Dubai,2024-06,72.4
-Dubai,2024-07,77.6
-Dubai,2024-08,76.2
-Dubai,2024-09,75.0
-Dubai,2024-10,73.4
-Dubai,2024-11,66.4
-Dubai,2024-12,65.2
-Dubai,2025-01,76.3
-Dubai,2025-02,68.8
-Dubai,2025-03,71.9
-Dubai,2025-04,68.3
-Dubai,2025-05,71.6
-Dubai,2025-06,63.2
-Dubai,2025-07,67.4
-Dubai,2025-08,69.0
-Dubai,2025-09,66.6
-Dubai,2025-10,67.0
-Dubai,2025-11,60.8
-Dubai,2025-12,62.4
-Dubai,2026-01,62.5
-Dubai,2026-02,52.6
-Dubai,2026-03,39.6
-Dubai,2026-04,40.7
-Dubai,2026-05,41.2
-Dubai,2026-06,45.9
-Sharjah,2023-01,92.0
-Sharjah,2023-02,87.7
+Abu Dhabi,2023-01,100.0
+Abu Dhabi,2023-02,90.9
+Abu Dhabi,2023-03,99.3
+Abu Dhabi,2023-04,89.4
+Abu Dhabi,2023-05,97.6
+Abu Dhabi,2023-06,86.5
+Abu Dhabi,2023-07,86.0
+Abu Dhabi,2023-08,94.6
+Abu Dhabi,2023-09,93.3
+Abu Dhabi,2023-10,85.9
+Abu Dhabi,2023-11,83.0
+Abu Dhabi,2023-12,78.9
+Abu Dhabi,2024-01,86.4
+Abu Dhabi,2024-02,78.3
+Abu Dhabi,2024-03,77.8
+Abu Dhabi,2024-04,64.6
+Abu Dhabi,2024-05,85.9
+Abu Dhabi,2024-06,72.4
+Abu Dhabi,2024-07,77.6
+Abu Dhabi,2024-08,76.2
+Abu Dhabi,2024-09,75.0
+Abu Dhabi,2024-10,73.4
+Abu Dhabi,2024-11,66.4
+Abu Dhabi,2024-12,65.2
+Abu Dhabi,2025-01,76.3
+Abu Dhabi,2025-02,68.8
+Abu Dhabi,2025-03,71.9
+Abu Dhabi,2025-04,68.3
+Abu Dhabi,2025-05,71.6
+Abu Dhabi,2025-06,63.2
+Abu Dhabi,2025-07,67.4
+Abu Dhabi,2025-08,69.0
+Abu Dhabi,2025-09,66.6
+Abu Dhabi,2025-10,67.0
+Abu Dhabi,2025-11,60.8
+Abu Dhabi,2025-12,62.4
+Abu Dhabi,2026-01,62.5
+Abu Dhabi,2026-02,52.6
+Abu Dhabi,2026-03,39.6
+Abu Dhabi,2026-04,40.7
+Abu Dhabi,2026-05,41.2
+Abu Dhabi,2026-06,45.9
+Abu Dhabi,2026-07,44.6
+Dubai,2023-01,92.0
+Dubai,2023-02,87.7
+Dubai,2023-03,100.0
+Dubai,2023-04,99.1
+Dubai,2023-05,91.2
+Dubai,2023-06,88.6
+Dubai,2023-07,91.9
+Dubai,2023-08,90.0
+Dubai,2023-09,99.1
+Dubai,2023-10,94.7
+Dubai,2023-11,88.4
+Dubai,2023-12,87.1
+Dubai,2024-01,93.2
+Dubai,2024-02,84.9
+Dubai,2024-03,88.3
+Dubai,2024-04,75.9
+Dubai,2024-05,95.2
+Dubai,2024-06,83.4
+Dubai,2024-07,81.2
+Dubai,2024-08,80.2
+Dubai,2024-09,79.6
+Dubai,2024-10,77.9
+Dubai,2024-11,68.4
+Dubai,2024-12,68.6
+Dubai,2025-01,72.9
+Dubai,2025-02,70.2
+Dubai,2025-03,79.0
+Dubai,2025-04,77.5
+Dubai,2025-05,75.2
+Dubai,2025-06,67.7
+Dubai,2025-07,69.4
+Dubai,2025-08,72.5
+Dubai,2025-09,73.7
+Dubai,2025-10,72.7
+Dubai,2025-11,64.5
+Dubai,2025-12,67.3
+Dubai,2026-01,69.8
+Dubai,2026-02,63.1
+Dubai,2026-03,55.1
+Dubai,2026-04,53.6
+Dubai,2026-05,54.7
+Dubai,2026-06,56.6
+Dubai,2026-07,54.3
+Sharjah,2023-01,98.2
+Sharjah,2023-02,91.0
 Sharjah,2023-03,100.0
-Sharjah,2023-04,99.1
-Sharjah,2023-05,91.2
-Sharjah,2023-06,88.6
-Sharjah,2023-07,91.9
-Sharjah,2023-08,90.0
-Sharjah,2023-09,99.1
-Sharjah,2023-10,94.7
-Sharjah,2023-11,88.4
-Sharjah,2023-12,87.1
-Sharjah,2024-01,93.2
-Sharjah,2024-02,84.9
-Sharjah,2024-03,88.3
-Sharjah,2024-04,75.9
-Sharjah,2024-05,95.2
-Sharjah,2024-06,83.4
-Sharjah,2024-07,81.2
-Sharjah,2024-08,80.2
-Sharjah,2024-09,79.6
-Sharjah,2024-10,77.9
-Sharjah,2024-11,68.4
-Sharjah,2024-12,68.6
-Sharjah,2025-01,72.9
-Sharjah,2025-02,70.2
-Sharjah,2025-03,79.0
-Sharjah,2025-04,77.5
-Sharjah,2025-05,75.2
-Sharjah,2025-06,67.7
-Sharjah,2025-07,69.4
-Sharjah,2025-08,72.5
-Sharjah,2025-09,73.7
-Sharjah,2025-10,72.7
-Sharjah,2025-11,64.5
-Sharjah,2025-12,67.3
-Sharjah,2026-01,69.8
-Sharjah,2026-02,63.1
-Sharjah,2026-03,55.1
-Sharjah,2026-04,53.6
-Sharjah,2026-05,54.7
-Sharjah,2026-06,56.6
+Sharjah,2023-04,90.8
+Sharjah,2023-05,95.3
+Sharjah,2023-06,84.1
+Sharjah,2023-07,84.5
+Sharjah,2023-08,91.2
+Sharjah,2023-09,93.5
+Sharjah,2023-10,85.9
+Sharjah,2023-11,82.9
+Sharjah,2023-12,81.0
+Sharjah,2024-01,88.7
+Sharjah,2024-02,79.7
+Sharjah,2024-03,80.3
+Sharjah,2024-04,68.6
+Sharjah,2024-05,85.9
+Sharjah,2024-06,73.3
+Sharjah,2024-07,77.5
+Sharjah,2024-08,76.2
+Sharjah,2024-09,76.1
+Sharjah,2024-10,74.1
+Sharjah,2024-11,66.8
+Sharjah,2024-12,66.9
+Sharjah,2025-01,76.8
+Sharjah,2025-02,70.6
+Sharjah,2025-03,77.9
+Sharjah,2025-04,73.5
+Sharjah,2025-05,73.8
+Sharjah,2025-06,65.1
+Sharjah,2025-07,69.6
+Sharjah,2025-08,72.2
+Sharjah,2025-09,76.6
+Sharjah,2025-10,76.2
+Sharjah,2025-11,63.0
+Sharjah,2025-12,65.1
+Sharjah,2026-01,66.2
+Sharjah,2026-02,56.4
+Sharjah,2026-03,47.0
+Sharjah,2026-04,48.0
+Sharjah,2026-05,48.1
+Sharjah,2026-06,51.0
+Sharjah,2026-07,50.1
