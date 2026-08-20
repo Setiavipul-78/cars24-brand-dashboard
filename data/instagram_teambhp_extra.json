@@ -2,27 +2,27 @@
   "age": [
     {
       "key": "13-17",
-      "value": 464
+      "value": 458
     },
     {
       "key": "18-24",
-      "value": 11071
+      "value": 11067
     },
     {
       "key": "25-34",
-      "value": 51288
+      "value": 51272
     },
     {
       "key": "35-44",
-      "value": 35707
+      "value": 35708
     },
     {
       "key": "45-54",
-      "value": 7339
+      "value": 7340
     },
     {
       "key": "55-64",
-      "value": 1339
+      "value": 1337
     },
     {
       "key": "65+",
@@ -32,69 +32,69 @@
   "gender": [
     {
       "key": "F",
-      "value": 2146
+      "value": 2144
     },
     {
       "key": "M",
-      "value": 91611
+      "value": 91591
     },
     {
       "key": "U",
-      "value": 14067
+      "value": 14063
     }
   ],
   "city": [
     {
       "key": "Thane, Maharashtra",
-      "value": 1117
+      "value": 1113
     },
     {
       "key": "Hoskote, Karnataka",
-      "value": 322
+      "value": 323
     },
     {
       "key": "Coimbatore, Tamil Nadu",
-      "value": 1435
+      "value": 1432
     },
     {
       "key": "Bhubaneswar, Odisha",
-      "value": 296
+      "value": 290
     },
     {
       "key": "Kochi, Kerala",
-      "value": 2071
+      "value": 2078
     },
     {
       "key": "Kolkata, West Bengal",
-      "value": 1338
+      "value": 1339
     },
     {
       "key": "Bhopal, Madhya Pradesh",
-      "value": 325
+      "value": 328
     },
     {
       "key": "Lingampalle, Telangana",
-      "value": 306
+      "value": 304
     },
     {
       "key": "Mangalore, Karnataka",
-      "value": 339
+      "value": 336
     },
     {
       "key": "Mysore, Karnataka",
-      "value": 565
+      "value": 562
     },
     {
       "key": "Pune, Maharashtra",
-      "value": 3099
+      "value": 3080
     },
     {
       "key": "Lucknow, Uttar Pradesh",
-      "value": 487
+      "value": 485
     },
     {
       "key": "Navi Mumbai (New Mumbai), Maharashtra",
-      "value": 822
+      "value": 831
     },
     {
       "key": "Ahmedabad, Gujarat",
@@ -102,11 +102,11 @@
     },
     {
       "key": "Ludhiana, Punjab region",
-      "value": 305
+      "value": 303
     },
     {
       "key": "Madurai, Tamil Nadu",
-      "value": 409
+      "value": 400
     },
     {
       "key": "Baiyyappanahalli, Karnataka",
@@ -114,15 +114,15 @@
     },
     {
       "key": "Jigani, Karnataka",
-      "value": 365
+      "value": 366
     },
     {
       "key": "Indore, Madhya Pradesh",
-      "value": 417
+      "value": 416
     },
     {
       "key": "Abu Dhabi, Abu Dhabi",
-      "value": 367
+      "value": 366
     },
     {
       "key": "Nashik, Maharashtra",
@@ -130,39 +130,39 @@
     },
     {
       "key": "Dulapalli, Telangana",
-      "value": 287
+      "value": 285
     },
     {
       "key": "Sarjapur, Karnataka",
-      "value": 348
+      "value": 345
     },
     {
       "key": "Gurugram, Haryana",
-      "value": 1900
+      "value": 1904
     },
     {
       "key": "Delhi, Delhi",
-      "value": 4117
+      "value": 4119
     },
     {
       "key": "Tirur, Kerala",
-      "value": 305
+      "value": 310
     },
     {
       "key": "Chanda Nagar, Telangana",
-      "value": 1353
+      "value": 1359
     },
     {
       "key": "Gauhati, Assam",
-      "value": 321
+      "value": 326
     },
     {
       "key": "Ghaziabad, Uttar Pradesh",
-      "value": 554
+      "value": 558
     },
     {
       "key": "Jaipur, Rajasthan",
-      "value": 608
+      "value": 604
     },
     {
       "key": "Vadodara, Gujarat",
@@ -170,19 +170,19 @@
     },
     {
       "key": "Pimpri, Maharashtra",
-      "value": 1718
+      "value": 1715
     },
     {
       "key": "Calicut, Kerala",
-      "value": 396
+      "value": 401
     },
     {
       "key": "Faridabad, Haryana",
-      "value": 454
+      "value": 452
     },
     {
       "key": "Chennai, Tamil Nadu",
-      "value": 6989
+      "value": 6972
     },
     {
       "key": "Surat, Gujarat",
@@ -190,53 +190,57 @@
     },
     {
       "key": "Greater Noida, Uttar Pradesh",
-      "value": 447
+      "value": 445
     },
     {
       "key": "Nagpur, Maharashtra",
-      "value": 535
+      "value": 534
     },
     {
       "key": "Thiruvananthapuram, Kerala",
-      "value": 910
+      "value": 913
     },
     {
       "key": "Dubai, Dubai",
-      "value": 1131
+      "value": 1129
     },
     {
       "key": "Mumbai, Maharashtra",
-      "value": 5202
+      "value": 5194
     },
     {
       "key": "Bangalore, Karnataka",
-      "value": 13342
+      "value": 13330
     },
     {
       "key": "Noida, Uttar Pradesh",
-      "value": 687
+      "value": 693
     },
     {
       "key": "Visakhapatnam, Andhra Pradesh",
-      "value": 369
+      "value": 364
     },
     {
       "key": "Hyderabad, Telangana",
-      "value": 1830
+      "value": 1836
     }
   ],
   "country": [
     {
       "key": "DE",
-      "value": 452
+      "value": 456
     },
     {
       "key": "BD",
-      "value": 73
+      "value": 74
     },
     {
       "key": "NP",
       "value": 77
+    },
+    {
+      "key": "TW",
+      "value": 27
     },
     {
       "key": "RU",
@@ -252,7 +256,7 @@
     },
     {
       "key": "BH",
-      "value": 126
+      "value": 125
     },
     {
       "key": "FR",
@@ -260,11 +264,11 @@
     },
     {
       "key": "NZ",
-      "value": 100
+      "value": 99
     },
     {
       "key": "SA",
-      "value": 500
+      "value": 498
     },
     {
       "key": "BR",
@@ -272,19 +276,19 @@
     },
     {
       "key": "QA",
-      "value": 293
+      "value": 290
     },
     {
       "key": "SE",
-      "value": 50
+      "value": 51
     },
     {
       "key": "MA",
-      "value": 29
+      "value": 30
     },
     {
       "key": "SG",
-      "value": 113
+      "value": 114
     },
     {
       "key": "KE",
@@ -296,11 +300,11 @@
     },
     {
       "key": "GB",
-      "value": 938
+      "value": 936
     },
     {
       "key": "IE",
-      "value": 136
+      "value": 137
     },
     {
       "key": "OM",
@@ -312,7 +316,7 @@
     },
     {
       "key": "US",
-      "value": 1225
+      "value": 1224
     },
     {
       "key": "EG",
@@ -320,11 +324,11 @@
     },
     {
       "key": "AE",
-      "value": 2068
+      "value": 2065
     },
     {
       "key": "IN",
-      "value": 97980
+      "value": 97958
     },
     {
       "key": "KR",
@@ -360,7 +364,7 @@
     },
     {
       "key": "KW",
-      "value": 165
+      "value": 163
     },
     {
       "key": "ES",
@@ -373,10 +377,6 @@
     {
       "key": "AU",
       "value": 394
-    },
-    {
-      "key": "PH",
-      "value": 27
     },
     {
       "key": "VN",
