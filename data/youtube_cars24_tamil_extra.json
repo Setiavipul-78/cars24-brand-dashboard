@@ -270,17 +270,17 @@
       "source": "SHORTS",
       "views": 6176,
       "watch_time_hours": 40.3,
-      "pct": 65.4
+      "pct": 65.3
     },
     {
       "source": "YT_CHANNEL",
-      "views": 1893,
-      "watch_time_hours": 6.8,
-      "pct": 20.0
+      "views": 1901,
+      "watch_time_hours": 6.9,
+      "pct": 20.1
     },
     {
       "source": "YT_SEARCH",
-      "views": 748,
+      "views": 749,
       "watch_time_hours": 7.9,
       "pct": 7.9
     },
@@ -771,33 +771,33 @@
     "2026-08": [
       {
         "source": "YT_CHANNEL",
-        "views": 78,
+        "views": 86,
         "watch_time_hours": 0.1,
-        "pct": 67.2
+        "pct": 68.8
       },
       {
         "source": "SHORTS",
         "views": 26,
         "watch_time_hours": 0.0,
-        "pct": 22.4
+        "pct": 20.8
       },
       {
         "source": "YT_SEARCH",
-        "views": 8,
+        "views": 9,
         "watch_time_hours": 0.0,
-        "pct": 6.9
+        "pct": 7.2
       },
       {
         "source": "PLAYLIST",
         "views": 3,
         "watch_time_hours": 0.0,
-        "pct": 2.6
+        "pct": 2.4
       },
       {
         "source": "YT_OTHER_PAGE",
         "views": 1,
         "watch_time_hours": 0.0,
-        "pct": 0.9
+        "pct": 0.8
       },
       {
         "source": "NO_LINK_OTHER",
@@ -810,15 +810,15 @@
   "devices": [
     {
       "device": "MOBILE",
-      "views": 8185,
+      "views": 8189,
       "watch_time_hours": 58.7,
-      "pct": 86.7
+      "pct": 86.6
     },
     {
       "device": "TV",
-      "views": 898,
-      "watch_time_hours": 4.0,
-      "pct": 9.5
+      "views": 903,
+      "watch_time_hours": 4.1,
+      "pct": 9.6
     },
     {
       "device": "DESKTOP",
@@ -1091,21 +1091,21 @@
     "2026-08": [
       {
         "device": "MOBILE",
-        "views": 97,
+        "views": 101,
         "watch_time_hours": 0.1,
-        "pct": 83.6
+        "pct": 80.8
       },
       {
         "device": "TV",
-        "views": 18,
+        "views": 23,
         "watch_time_hours": 0.0,
-        "pct": 15.5
+        "pct": 18.4
       },
       {
         "device": "DESKTOP",
         "views": 1,
         "watch_time_hours": 0.0,
-        "pct": 0.9
+        "pct": 0.8
       }
     ]
   },
@@ -1184,15 +1184,15 @@
       "published": "2025-11-12",
       "url": "https://www.youtube.com/watch?v=3brGUNO5-wI",
       "thumbnail": "https://i.ytimg.com/vi/3brGUNO5-wI/default.jpg",
-      "views": 962,
-      "watch_time_hours": 7.65,
+      "views": 968,
+      "watch_time_hours": 7.67,
       "avg_duration_sec": 35.0,
-      "avg_view_pct": 23.5,
+      "avg_view_pct": 23.4,
       "subs_gained": 4,
       "likes": 16,
       "comments": 1,
       "shares": 17,
-      "engagement_rate": 3.53,
+      "engagement_rate": 3.51,
       "is_short": false
     },
     {
@@ -1201,7 +1201,7 @@
       "published": "2025-11-03",
       "url": "https://www.youtube.com/watch?v=Ex7HTIFgkHE",
       "thumbnail": "https://i.ytimg.com/vi/Ex7HTIFgkHE/default.jpg",
-      "views": 332,
+      "views": 333,
       "watch_time_hours": 1.43,
       "avg_duration_sec": 22.0,
       "avg_view_pct": 32.4,
@@ -1209,7 +1209,7 @@
       "likes": 7,
       "comments": 0,
       "shares": 0,
-      "engagement_rate": 2.11,
+      "engagement_rate": 2.1,
       "is_short": false
     },
     {
@@ -1218,15 +1218,15 @@
       "published": "2025-11-07",
       "url": "https://www.youtube.com/watch?v=EeV4-ScHwr4",
       "thumbnail": "https://i.ytimg.com/vi/EeV4-ScHwr4/default.jpg",
-      "views": 302,
+      "views": 304,
       "watch_time_hours": 0.75,
       "avg_duration_sec": 13.0,
-      "avg_view_pct": 27.6,
+      "avg_view_pct": 27.7,
       "subs_gained": 1,
       "likes": 5,
       "comments": 0,
       "shares": 0,
-      "engagement_rate": 1.66,
+      "engagement_rate": 1.64,
       "is_short": true
     },
     {
@@ -1268,7 +1268,7 @@
       "title": "ZERO Road Tax on Private Roads! #cars24tamil",
       "published": "2025-10-31",
       "url": "https://www.youtube.com/watch?v=YhPHEJ1gV2U",
-      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=CPT1n9QG&rs=AOn4CLBKPj8VHJdfcHzss4fu6nlCqN4G9g",
+      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=CJyUpdQG&rs=AOn4CLBKKfL1IoFJS6k7aDl6mO8hWs6yjg",
       "views": 54,
       "watch_time_hours": 0.32,
       "avg_duration_sec": 35.0,
