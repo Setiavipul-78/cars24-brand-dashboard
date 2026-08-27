@@ -268,19 +268,19 @@
   "traffic_sources": [
     {
       "source": "SHORTS",
-      "views": 6177,
+      "views": 6179,
       "watch_time_hours": 40.3,
-      "pct": 65.2
+      "pct": 65.1
     },
     {
       "source": "YT_CHANNEL",
-      "views": 1912,
+      "views": 1932,
       "watch_time_hours": 6.9,
-      "pct": 20.2
+      "pct": 20.3
     },
     {
       "source": "YT_SEARCH",
-      "views": 750,
+      "views": 752,
       "watch_time_hours": 7.9,
       "pct": 7.9
     },
@@ -771,33 +771,33 @@
     "2026-08": [
       {
         "source": "YT_CHANNEL",
-        "views": 97,
+        "views": 117,
         "watch_time_hours": 0.1,
-        "pct": 69.8
+        "pct": 71.8
       },
       {
         "source": "SHORTS",
-        "views": 27,
+        "views": 29,
         "watch_time_hours": 0.0,
-        "pct": 19.4
+        "pct": 17.8
       },
       {
         "source": "YT_SEARCH",
-        "views": 10,
+        "views": 12,
         "watch_time_hours": 0.0,
-        "pct": 7.2
+        "pct": 7.4
       },
       {
         "source": "PLAYLIST",
         "views": 4,
         "watch_time_hours": 0.0,
-        "pct": 2.9
+        "pct": 2.5
       },
       {
         "source": "YT_OTHER_PAGE",
         "views": 1,
         "watch_time_hours": 0.0,
-        "pct": 0.7
+        "pct": 0.6
       },
       {
         "source": "NO_LINK_OTHER",
@@ -810,13 +810,13 @@
   "devices": [
     {
       "device": "MOBILE",
-      "views": 8193,
-      "watch_time_hours": 58.7,
+      "views": 8216,
+      "watch_time_hours": 58.8,
       "pct": 86.6
     },
     {
       "device": "TV",
-      "views": 912,
+      "views": 913,
       "watch_time_hours": 4.1,
       "pct": 9.6
     },
@@ -824,7 +824,7 @@
       "device": "DESKTOP",
       "views": 232,
       "watch_time_hours": 1.8,
-      "pct": 2.5
+      "pct": 2.4
     },
     {
       "device": "TABLET",
@@ -1091,21 +1091,21 @@
     "2026-08": [
       {
         "device": "MOBILE",
-        "views": 105,
+        "views": 128,
         "watch_time_hours": 0.1,
-        "pct": 75.5
+        "pct": 78.5
       },
       {
         "device": "TV",
-        "views": 32,
+        "views": 33,
         "watch_time_hours": 0.0,
-        "pct": 23.0
+        "pct": 20.2
       },
       {
         "device": "DESKTOP",
         "views": 2,
         "watch_time_hours": 0.0,
-        "pct": 1.4
+        "pct": 1.2
       }
     ]
   },
@@ -1116,15 +1116,15 @@
       "published": "2025-10-30",
       "url": "https://www.youtube.com/watch?v=_FQJ75t6Kdw",
       "thumbnail": "https://i.ytimg.com/vi/_FQJ75t6Kdw/default.jpg",
-      "views": 3069,
+      "views": 3073,
       "watch_time_hours": 29.9,
       "avg_duration_sec": 61.0,
       "avg_view_pct": 41.6,
       "subs_gained": 26,
-      "likes": 116,
+      "likes": 117,
       "comments": 3,
       "shares": 5,
-      "engagement_rate": 4.04,
+      "engagement_rate": 4.07,
       "is_short": false
     },
     {
@@ -1133,7 +1133,7 @@
       "published": "2025-10-28",
       "url": "https://www.youtube.com/watch?v=9lh_XZLp6zA",
       "thumbnail": "https://i.ytimg.com/vi/9lh_XZLp6zA/default.jpg",
-      "views": 1610,
+      "views": 1613,
       "watch_time_hours": 5.7,
       "avg_duration_sec": 31.0,
       "avg_view_pct": 50.2,
@@ -1150,15 +1150,15 @@
       "published": "2025-10-29",
       "url": "https://www.youtube.com/watch?v=LmmZwh8Hltw",
       "thumbnail": "https://i.ytimg.com/vi/LmmZwh8Hltw/default.jpg",
-      "views": 1505,
-      "watch_time_hours": 12.78,
-      "avg_duration_sec": 44.0,
+      "views": 1509,
+      "watch_time_hours": 12.8,
+      "avg_duration_sec": 43.0,
       "avg_view_pct": 35.2,
       "subs_gained": 6,
       "likes": 60,
       "comments": 4,
       "shares": 1,
-      "engagement_rate": 4.32,
+      "engagement_rate": 4.31,
       "is_short": false
     },
     {
@@ -1167,15 +1167,15 @@
       "published": "2025-11-01",
       "url": "https://www.youtube.com/watch?v=rZJxAv_-kII",
       "thumbnail": "https://i.ytimg.com/vi/rZJxAv_-kII/default.jpg",
-      "views": 1284,
-      "watch_time_hours": 5.62,
+      "views": 1286,
+      "watch_time_hours": 5.63,
       "avg_duration_sec": 27.0,
       "avg_view_pct": 23.3,
       "subs_gained": 3,
       "likes": 19,
       "comments": 2,
       "shares": 0,
-      "engagement_rate": 1.64,
+      "engagement_rate": 1.63,
       "is_short": false
     },
     {
@@ -1184,15 +1184,15 @@
       "published": "2025-11-12",
       "url": "https://www.youtube.com/watch?v=3brGUNO5-wI",
       "thumbnail": "https://i.ytimg.com/vi/3brGUNO5-wI/default.jpg",
-      "views": 975,
-      "watch_time_hours": 7.68,
+      "views": 978,
+      "watch_time_hours": 7.7,
       "avg_duration_sec": 35.0,
       "avg_view_pct": 23.2,
       "subs_gained": 4,
       "likes": 16,
       "comments": 1,
       "shares": 17,
-      "engagement_rate": 3.49,
+      "engagement_rate": 3.48,
       "is_short": false
     },
     {
@@ -1201,7 +1201,7 @@
       "published": "2025-11-03",
       "url": "https://www.youtube.com/watch?v=Ex7HTIFgkHE",
       "thumbnail": "https://i.ytimg.com/vi/Ex7HTIFgkHE/default.jpg",
-      "views": 333,
+      "views": 335,
       "watch_time_hours": 1.43,
       "avg_duration_sec": 22.0,
       "avg_view_pct": 32.4,
@@ -1209,7 +1209,7 @@
       "likes": 7,
       "comments": 0,
       "shares": 0,
-      "engagement_rate": 2.1,
+      "engagement_rate": 2.09,
       "is_short": false
     },
     {
@@ -1218,7 +1218,7 @@
       "published": "2025-11-07",
       "url": "https://www.youtube.com/watch?v=EeV4-ScHwr4",
       "thumbnail": "https://i.ytimg.com/vi/EeV4-ScHwr4/default.jpg",
-      "views": 307,
+      "views": 309,
       "watch_time_hours": 0.77,
       "avg_duration_sec": 13.0,
       "avg_view_pct": 27.5,
@@ -1226,7 +1226,7 @@
       "likes": 5,
       "comments": 0,
       "shares": 0,
-      "engagement_rate": 1.63,
+      "engagement_rate": 1.62,
       "is_short": true
     },
     {
@@ -1235,7 +1235,7 @@
       "published": "2025-11-03",
       "url": "https://www.youtube.com/watch?v=-EdYrm3Vt5k",
       "thumbnail": "https://i.ytimg.com/vi/-EdYrm3Vt5k/default.jpg",
-      "views": 172,
+      "views": 173,
       "watch_time_hours": 0.62,
       "avg_duration_sec": 24.0,
       "avg_view_pct": 46.9,
@@ -1243,7 +1243,7 @@
       "likes": 6,
       "comments": 1,
       "shares": 0,
-      "engagement_rate": 4.07,
+      "engagement_rate": 4.05,
       "is_short": true
     },
     {
@@ -1252,15 +1252,15 @@
       "published": "2025-11-04",
       "url": "https://www.youtube.com/watch?v=dCh9a0gjtIw",
       "thumbnail": "https://i.ytimg.com/vi/dCh9a0gjtIw/default.jpg",
-      "views": 152,
-      "watch_time_hours": 0.38,
-      "avg_duration_sec": 15.0,
-      "avg_view_pct": 27.0,
+      "views": 155,
+      "watch_time_hours": 0.4,
+      "avg_duration_sec": 16.0,
+      "avg_view_pct": 27.8,
       "subs_gained": 0,
       "likes": 2,
       "comments": 0,
       "shares": 0,
-      "engagement_rate": 1.32,
+      "engagement_rate": 1.29,
       "is_short": true
     },
     {
@@ -1268,7 +1268,7 @@
       "title": "ZERO Road Tax on Private Roads! #cars24tamil",
       "published": "2025-10-31",
       "url": "https://www.youtube.com/watch?v=YhPHEJ1gV2U",
-      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=CMyputQG&rs=AOn4CLCouzGx57yc9hW3gqWevpA9YOatQg",
+      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=CJzvwdQG&rs=AOn4CLBG7e09kOBcSdnDJW5-xgZ5xwBtUw",
       "views": 54,
       "watch_time_hours": 0.32,
       "avg_duration_sec": 35.0,
