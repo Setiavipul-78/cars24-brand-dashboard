@@ -268,15 +268,15 @@
   "traffic_sources": [
     {
       "source": "SHORTS",
-      "views": 6179,
+      "views": 6181,
       "watch_time_hours": 40.3,
-      "pct": 65.1
+      "pct": 65.0
     },
     {
       "source": "YT_CHANNEL",
-      "views": 1932,
+      "views": 1937,
       "watch_time_hours": 6.9,
-      "pct": 20.3
+      "pct": 20.4
     },
     {
       "source": "YT_SEARCH",
@@ -771,27 +771,27 @@
     "2026-08": [
       {
         "source": "YT_CHANNEL",
-        "views": 117,
+        "views": 122,
         "watch_time_hours": 0.1,
         "pct": 71.8
       },
       {
         "source": "SHORTS",
-        "views": 29,
+        "views": 31,
         "watch_time_hours": 0.0,
-        "pct": 17.8
+        "pct": 18.2
       },
       {
         "source": "YT_SEARCH",
         "views": 12,
         "watch_time_hours": 0.0,
-        "pct": 7.4
+        "pct": 7.1
       },
       {
         "source": "PLAYLIST",
         "views": 4,
         "watch_time_hours": 0.0,
-        "pct": 2.5
+        "pct": 2.4
       },
       {
         "source": "YT_OTHER_PAGE",
@@ -810,7 +810,7 @@
   "devices": [
     {
       "device": "MOBILE",
-      "views": 8216,
+      "views": 8223,
       "watch_time_hours": 58.8,
       "pct": 86.6
     },
@@ -1091,15 +1091,15 @@
     "2026-08": [
       {
         "device": "MOBILE",
-        "views": 128,
+        "views": 135,
         "watch_time_hours": 0.1,
-        "pct": 78.5
+        "pct": 79.4
       },
       {
         "device": "TV",
         "views": 33,
         "watch_time_hours": 0.0,
-        "pct": 20.2
+        "pct": 19.4
       },
       {
         "device": "DESKTOP",
@@ -1133,15 +1133,15 @@
       "published": "2025-10-28",
       "url": "https://www.youtube.com/watch?v=9lh_XZLp6zA",
       "thumbnail": "https://i.ytimg.com/vi/9lh_XZLp6zA/default.jpg",
-      "views": 1613,
+      "views": 1614,
       "watch_time_hours": 5.7,
       "avg_duration_sec": 31.0,
-      "avg_view_pct": 50.2,
+      "avg_view_pct": 50.1,
       "subs_gained": 5,
       "likes": 26,
       "comments": 2,
       "shares": 5,
-      "engagement_rate": 2.05,
+      "engagement_rate": 2.04,
       "is_short": false
     },
     {
@@ -1150,7 +1150,7 @@
       "published": "2025-10-29",
       "url": "https://www.youtube.com/watch?v=LmmZwh8Hltw",
       "thumbnail": "https://i.ytimg.com/vi/LmmZwh8Hltw/default.jpg",
-      "views": 1509,
+      "views": 1510,
       "watch_time_hours": 12.8,
       "avg_duration_sec": 43.0,
       "avg_view_pct": 35.2,
@@ -1158,7 +1158,7 @@
       "likes": 60,
       "comments": 4,
       "shares": 1,
-      "engagement_rate": 4.31,
+      "engagement_rate": 4.3,
       "is_short": false
     },
     {
@@ -1184,7 +1184,7 @@
       "published": "2025-11-12",
       "url": "https://www.youtube.com/watch?v=3brGUNO5-wI",
       "thumbnail": "https://i.ytimg.com/vi/3brGUNO5-wI/default.jpg",
-      "views": 978,
+      "views": 981,
       "watch_time_hours": 7.7,
       "avg_duration_sec": 35.0,
       "avg_view_pct": 23.2,
@@ -1192,7 +1192,7 @@
       "likes": 16,
       "comments": 1,
       "shares": 17,
-      "engagement_rate": 3.48,
+      "engagement_rate": 3.47,
       "is_short": false
     },
     {
@@ -1201,15 +1201,15 @@
       "published": "2025-11-03",
       "url": "https://www.youtube.com/watch?v=Ex7HTIFgkHE",
       "thumbnail": "https://i.ytimg.com/vi/Ex7HTIFgkHE/default.jpg",
-      "views": 335,
-      "watch_time_hours": 1.43,
+      "views": 337,
+      "watch_time_hours": 1.45,
       "avg_duration_sec": 22.0,
-      "avg_view_pct": 32.4,
+      "avg_view_pct": 32.3,
       "subs_gained": 1,
       "likes": 7,
       "comments": 0,
       "shares": 0,
-      "engagement_rate": 2.09,
+      "engagement_rate": 2.08,
       "is_short": false
     },
     {
@@ -1268,7 +1268,7 @@
       "title": "ZERO Road Tax on Private Roads! #cars24tamil",
       "published": "2025-10-31",
       "url": "https://www.youtube.com/watch?v=YhPHEJ1gV2U",
-      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=CJzvwdQG&rs=AOn4CLBG7e09kOBcSdnDJW5-xgZ5xwBtUw",
+      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=CNiwx9QG&rs=AOn4CLCauPHDiNIjH8ub3LCyqtZBGDHmmA",
       "views": 54,
       "watch_time_hours": 0.32,
       "avg_duration_sec": 35.0,
