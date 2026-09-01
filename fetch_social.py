@@ -1215,7 +1215,7 @@ def _li_headers():
     return {
         "Authorization":              f"Bearer {tok}",
         "X-Restli-Protocol-Version":  "2.0.0",
-        "LinkedIn-Version":           "202508",
+        "LinkedIn-Version":           "202608",
     }
 
 def _li_get(path: str, params: dict = None):
@@ -1413,7 +1413,7 @@ def fetch_all_linkedin():
             data = fetch_li_org(key, org_id)
 
             # Anti-regression guard: the LinkedIn Community Management API parsing
-            # is mid-migration to the /rest v202508 format, and a partial/failed
+            # is mid-migration to the /rest v202608 format, and a partial/failed
             # parse can yield an all-zero series. Never overwrite a good committed
             # CSV with one whose numbers are entirely zero.
             def _has_signal(rows, *cols):
@@ -1478,7 +1478,7 @@ if __name__ == "__main__":
         print("═══ fetch_social.py ═══")
         fetch_all_youtube()
         fetch_all_instagram()
-        # LinkedIn: Community Management API (/rest v202508). The old /v2
+        # LinkedIn: Community Management API (/rest v202608). The old /v2
         # fetch_all_linkedin() returned all-zeros against the current API and is
         # kept only as dead code; the CMA fetcher writes demographics + totals.
         try:

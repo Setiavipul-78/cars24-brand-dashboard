@@ -74,7 +74,7 @@ def li_get(tok, path, params=None):
     r = requests.get(f"{API_BASE}{path}",
         headers={"Authorization": f"Bearer {tok}",
                  "X-Restli-Protocol-Version": "2.0.0",
-                 "LinkedIn-Version": "202508"},
+                 "LinkedIn-Version": "202608"},
         params=params or {}, timeout=15)
     r.raise_for_status()
     return r.json()

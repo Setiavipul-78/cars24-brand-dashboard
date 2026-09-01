@@ -32,7 +32,10 @@ import requests
 
 DATA = Path("data")
 REST = "https://api.linkedin.com/rest"
-LI_VERSION = "202508"
+# LinkedIn retires dated API versions ~yearly. This is a sensible default;
+# _resolve_version() auto-detects the newest active one at runtime so the fetch
+# self-heals when a version ages out (as 202401 → 202508 → 202608 have).
+LI_VERSION = "202608"
 
 LI_PAGES = {
     "cars24":        "10429660",   # Cars24 India
@@ -59,6 +62,32 @@ def _headers():
         "LinkedIn-Version": LI_VERSION,
         "X-Restli-Protocol-Version": "2.0.0",
     }
+
+
+def _resolve_version():
+    """Pick the newest active LinkedIn API version (they retire dated versions
+    ~yearly). Probe from the current month backwards; set LI_VERSION to the first
+    that responds 200, so the fetch keeps working after a version ages out."""
+    global LI_VERSION
+    import datetime
+    today = datetime.date.today()
+    y, m = today.year, today.month
+    for _ in range(15):
+        ver = f"{y}{m:02d}"
+        try:
+            r = requests.get(f"{REST}/seniorities",
+                             headers={"Authorization": f"Bearer {os.environ['LI_ACCESS_TOKEN']}",
+                                      "LinkedIn-Version": ver, "X-Restli-Protocol-Version": "2.0.0"},
+                             params={"count": 1}, timeout=15)
+            if r.status_code == 200:
+                LI_VERSION = ver
+                return ver
+        except requests.RequestException:
+            pass
+        m -= 1
+        if m == 0:
+            m = 12; y -= 1
+    return LI_VERSION
 
 
 def _get(path, params=None, retries=5):
@@ -102,16 +131,21 @@ def _paginated_labels(kind):
     if _cache[kind] is not None:
         return _cache[kind]
     out, start, endpoint = {}, 0, _LABEL_ENDPOINT[kind]
-    while start <= 500:
-        d = _get(f"/{endpoint}", {"start": start, "count": 50})
-        for el in d.get("elements", []):
-            nm = el.get("name", {}).get("localized", {}).get("en_US")
-            if el.get("id") is not None and nm:
-                out[str(el["id"])] = nm
-        pg = d.get("paging", {})
-        if not d.get("elements") or start + pg.get("count", 0) >= pg.get("total", len(out)):
-            break
-        start += 50
+    try:
+        while start <= 500:
+            d = _get(f"/{endpoint}", {"start": start, "count": 50})
+            for el in d.get("elements", []):
+                nm = el.get("name", {}).get("localized", {}).get("en_US")
+                if el.get("id") is not None and nm:
+                    out[str(el["id"])] = nm
+            pg = d.get("paging", {})
+            if not d.get("elements") or start + pg.get("count", 0) >= pg.get("total", len(out)):
+                break
+            start += 50
+    except Exception:
+        # throttled/unavailable — return whatever resolved; don't crash the fetch
+        # (the demographic guard keeps existing good CSVs rather than degrading them)
+        return out
     _cache[kind] = out
     return out
 
@@ -160,7 +194,7 @@ def _write_demo(key, aud, dim, rows):
     # Anti-regression: industry/location labels come from URN lookups that can be
     # rate-limited; an unresolved label shows as a bare numeric id. If too many
     # are unresolved, keep the existing (good-label) CSV instead of overwriting it.
-    if dim in ("industry", "location"):
+    if dim in ("industry", "location", "seniority", "job_function"):
         unresolved = sum(1 for c, _ in rows if c.strip().isdigit())
         if unresolved > len(rows) * 0.25:
             print(f"    ⚠ {key} {aud} {dim}: {unresolved}/{len(rows)} labels unresolved — keeping existing CSV")
@@ -220,7 +254,8 @@ def main():
         print("  ! LI_ACCESS_TOKEN not set — run setup_linkedin_auth.py"); return {}
     DATA.mkdir(exist_ok=True)
     _load_label_cache()
-    print("── LinkedIn (Community Management API /rest 202508) ──")
+    ver = _resolve_version()
+    print(f"── LinkedIn (Community Management API /rest {ver}) ──")
 
     # Pass 1 — pull raw stats for every org (2 stat calls each), collect URN ids.
     raw, ind_ids, geo_ids = {}, set(), set()
