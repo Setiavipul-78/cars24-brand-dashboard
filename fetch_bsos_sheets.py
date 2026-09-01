@@ -204,7 +204,7 @@ def build_monthly(token):
 
 # ── City-level daily ─────────────────────────────────────────────────────────
 def build_city_daily(token):
-    rows_raw = fetch_values(token, SHEET_CITY, f"{CITY_TAB}!A1:I8000")
+    rows_raw = fetch_values(token, SHEET_CITY, f"{CITY_TAB}!A1:I40000")
     hdr_idx = find_header_row(rows_raw, "Brandstack City")
     header = rows_raw[hdr_idx]
     if len(header) < 2 or str(header[1]).strip().lower() != "date":
