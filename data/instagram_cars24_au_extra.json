@@ -6,47 +6,47 @@
     },
     {
       "key": "18-24",
-      "value": 1019
+      "value": 1021
     },
     {
       "key": "25-34",
-      "value": 4260
+      "value": 4263
     },
     {
       "key": "35-44",
-      "value": 3939
+      "value": 3946
     },
     {
       "key": "45-54",
-      "value": 2253
+      "value": 2260
     },
     {
       "key": "55-64",
-      "value": 992
+      "value": 996
     },
     {
       "key": "65+",
-      "value": 453
+      "value": 454
     }
   ],
   "gender": [
     {
       "key": "F",
-      "value": 4064
+      "value": 4072
     },
     {
       "key": "M",
-      "value": 7394
+      "value": 7409
     },
     {
       "key": "U",
-      "value": 1500
+      "value": 1501
     }
   ],
   "city": [
     {
       "key": "Sydney, New South Wales",
-      "value": 2592
+      "value": 2604
     },
     {
       "key": "Bendigo, Victoria",
@@ -54,11 +54,11 @@
     },
     {
       "key": "Plumpton, Victoria, Victoria",
-      "value": 23
+      "value": 22
     },
     {
       "key": "Kurunjang, Victoria",
-      "value": 21
+      "value": 22
     },
     {
       "key": "Geelong, Victoria",
@@ -66,19 +66,19 @@
     },
     {
       "key": "Pakenham, Victoria",
-      "value": 44
+      "value": 45
     },
     {
       "key": "Perth, Western Australia",
-      "value": 197
+      "value": 194
     },
     {
       "key": "Craigieburn, Victoria",
-      "value": 46
+      "value": 47
     },
     {
       "key": "Eden Park, Victoria",
-      "value": 19
+      "value": 20
     },
     {
       "key": "Pune, Maharashtra",
@@ -86,39 +86,39 @@
     },
     {
       "key": "Wollongong, New South Wales",
-      "value": 76
-    },
-    {
-      "key": "Ahmedabad, Gujarat",
-      "value": 47
-    },
-    {
-      "key": "Ballarat, Victoria",
-      "value": 49
-    },
-    {
-      "key": "Gold Coast, Queensland",
-      "value": 303
-    },
-    {
-      "key": "Abu Dhabi, Abu Dhabi",
-      "value": 25
-    },
-    {
-      "key": "Sunshine Coast, Queensland",
-      "value": 126
-    },
-    {
-      "key": "Melbourne, Victoria",
-      "value": 3599
-    },
-    {
-      "key": "Gurugram, Haryana",
       "value": 81
     },
     {
+      "key": "Ahmedabad, Gujarat",
+      "value": 45
+    },
+    {
+      "key": "Ballarat, Victoria",
+      "value": 46
+    },
+    {
+      "key": "Gold Coast, Queensland",
+      "value": 295
+    },
+    {
+      "key": "Abu Dhabi, Abu Dhabi",
+      "value": 22
+    },
+    {
+      "key": "Sunshine Coast, Queensland",
+      "value": 129
+    },
+    {
+      "key": "Melbourne, Victoria",
+      "value": 3615
+    },
+    {
+      "key": "Gurugram, Haryana",
+      "value": 79
+    },
+    {
       "key": "Delhi, Delhi",
-      "value": 92
+      "value": 94
     },
     {
       "key": "Mickleham, Victoria",
@@ -126,7 +126,7 @@
     },
     {
       "key": "Ipswich, Queensland",
-      "value": 80
+      "value": 82
     },
     {
       "key": "Mount Cottrell, Victoria",
@@ -134,15 +134,23 @@
     },
     {
       "key": "Brisbane, Queensland",
-      "value": 580
+      "value": 588
     },
     {
       "key": "Adelaide, South Australia",
-      "value": 249
+      "value": 248
     },
     {
       "key": "Canberra, Australian Capital Territory",
-      "value": 76
+      "value": 78
+    },
+    {
+      "key": "Mackay, Queensland",
+      "value": 18
+    },
+    {
+      "key": "Officer, Victoria",
+      "value": 18
     },
     {
       "key": "Mount Duneed, Victoria",
@@ -153,32 +161,24 @@
       "value": 24
     },
     {
-      "key": "Toowoomba, Queensland",
-      "value": 20
-    },
-    {
       "key": "Chennai, Tamil Nadu",
-      "value": 30
+      "value": 29
     },
     {
       "key": "Cairns, Queensland",
-      "value": 31
+      "value": 33
     },
     {
       "key": "Townsville, Queensland",
       "value": 34
     },
     {
-      "key": "Warrnambool, Victoria",
+      "key": "Sunbury, Victoria",
       "value": 20
     },
     {
-      "key": "Sunbury, Victoria",
-      "value": 18
-    },
-    {
       "key": "Werribee South, Victoria",
-      "value": 32
+      "value": 31
     },
     {
       "key": "Rockbank, Victoria",
@@ -186,7 +186,7 @@
     },
     {
       "key": "Dubai, Dubai",
-      "value": 73
+      "value": 75
     },
     {
       "key": "Sharjah, Emirate of Sharjah",
@@ -202,27 +202,27 @@
     },
     {
       "key": "Bangalore, Karnataka",
-      "value": 58
+      "value": 57
     },
     {
       "key": "Box Hill, New South Wales",
-      "value": 20
+      "value": 19
     },
     {
       "key": "Hyderabad, Telangana",
-      "value": 25
+      "value": 24
     },
     {
       "key": "Newcastle, New South Wales",
-      "value": 41
+      "value": 39
     },
     {
       "key": "Eynesbury, Victoria",
-      "value": 29
+      "value": 30
     },
     {
       "key": "Melton South, Victoria",
-      "value": 31
+      "value": 30
     }
   ],
   "country": [
@@ -260,7 +260,7 @@
     },
     {
       "key": "JO",
-      "value": 6
+      "value": 5
     },
     {
       "key": "JP",
@@ -272,7 +272,7 @@
     },
     {
       "key": "SA",
-      "value": 14
+      "value": 15
     },
     {
       "key": "BR",
@@ -284,7 +284,7 @@
     },
     {
       "key": "SG",
-      "value": 13
+      "value": 14
     },
     {
       "key": "KE",
@@ -296,15 +296,15 @@
     },
     {
       "key": "ID",
-      "value": 53
+      "value": 52
     },
     {
       "key": "IE",
-      "value": 12
+      "value": 11
     },
     {
       "key": "CA",
-      "value": 17
+      "value": 18
     },
     {
       "key": "US",
@@ -320,11 +320,11 @@
     },
     {
       "key": "AE",
-      "value": 150
+      "value": 149
     },
     {
       "key": "IN",
-      "value": 1077
+      "value": 1081
     },
     {
       "key": "ZA",
@@ -336,7 +336,7 @@
     },
     {
       "key": "IQ",
-      "value": 7
+      "value": 8
     },
     {
       "key": "IR",
@@ -344,19 +344,15 @@
     },
     {
       "key": "IT",
-      "value": 6
+      "value": 5
     },
     {
       "key": "GR",
-      "value": 6
+      "value": 7
     },
     {
       "key": "CN",
       "value": 14
-    },
-    {
-      "key": "KW",
-      "value": 4
     },
     {
       "key": "MY",
@@ -367,12 +363,16 @@
       "value": 27
     },
     {
+      "key": "ES",
+      "value": 4
+    },
+    {
       "key": "TH",
       "value": 16
     },
     {
       "key": "AU",
-      "value": 10954
+      "value": 10978
     },
     {
       "key": "LB",
@@ -384,7 +384,7 @@
     },
     {
       "key": "PH",
-      "value": 25
+      "value": 24
     },
     {
       "key": "NG",
@@ -392,19 +392,19 @@
     },
     {
       "key": "PK",
-      "value": 40
+      "value": 39
     },
     {
       "key": "NL",
-      "value": 7
+      "value": 6
     },
     {
       "key": "TR",
-      "value": 32
+      "value": 30
     },
     {
       "key": "LK",
-      "value": 11
+      "value": 10
     }
   ]
 }

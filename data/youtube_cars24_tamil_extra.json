@@ -274,9 +274,9 @@
     },
     {
       "source": "YT_CHANNEL",
-      "views": 1969,
+      "views": 1972,
       "watch_time_hours": 7.3,
-      "pct": 20.6
+      "pct": 20.7
     },
     {
       "source": "YT_SEARCH",
@@ -805,6 +805,14 @@
         "watch_time_hours": 0.0,
         "pct": 0.0
       }
+    ],
+    "2026-09": [
+      {
+        "source": "YT_CHANNEL",
+        "views": 3,
+        "watch_time_hours": 0.0,
+        "pct": 100.0
+      }
     ]
   },
   "devices": [
@@ -816,7 +824,7 @@
     },
     {
       "device": "TV",
-      "views": 931,
+      "views": 934,
       "watch_time_hours": 4.3,
       "pct": 9.8
     },
@@ -1107,6 +1115,14 @@
         "watch_time_hours": 0.1,
         "pct": 2.4
       }
+    ],
+    "2026-09": [
+      {
+        "device": "TV",
+        "views": 3,
+        "watch_time_hours": 0.0,
+        "pct": 100.0
+      }
     ]
   },
   "top_videos": [
@@ -1184,7 +1200,7 @@
       "published": "2025-11-12",
       "url": "https://www.youtube.com/watch?v=3brGUNO5-wI",
       "thumbnail": "https://i.ytimg.com/vi/3brGUNO5-wI/default.jpg",
-      "views": 991,
+      "views": 993,
       "watch_time_hours": 7.78,
       "avg_duration_sec": 35.0,
       "avg_view_pct": 23.1,
@@ -1192,7 +1208,7 @@
       "likes": 16,
       "comments": 1,
       "shares": 17,
-      "engagement_rate": 3.43,
+      "engagement_rate": 3.42,
       "is_short": false
     },
     {
@@ -1218,15 +1234,15 @@
       "published": "2025-11-07",
       "url": "https://www.youtube.com/watch?v=EeV4-ScHwr4",
       "thumbnail": "https://i.ytimg.com/vi/EeV4-ScHwr4/default.jpg",
-      "views": 315,
-      "watch_time_hours": 0.8,
+      "views": 316,
+      "watch_time_hours": 0.82,
       "avg_duration_sec": 14.0,
       "avg_view_pct": 28.5,
       "subs_gained": 1,
       "likes": 5,
       "comments": 0,
       "shares": 0,
-      "engagement_rate": 1.59,
+      "engagement_rate": 1.58,
       "is_short": true
     },
     {
@@ -1268,7 +1284,7 @@
       "title": "ZERO Road Tax on Private Roads! #cars24tamil",
       "published": "2025-10-31",
       "url": "https://www.youtube.com/watch?v=YhPHEJ1gV2U",
-      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=CLi05dQG&rs=AOn4CLA9F8TXPU2xzJtlSC-Q1w1PS3X4Iw",
+      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=CLjX6tQG&rs=AOn4CLD1eqau-baR20Gkbr6QjzYrXGbyBQ",
       "views": 54,
       "watch_time_hours": 0.32,
       "avg_duration_sec": 35.0,
