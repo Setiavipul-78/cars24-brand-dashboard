@@ -6,47 +6,47 @@
     },
     {
       "key": "18-24",
-      "value": 1021
+      "value": 1023
     },
     {
       "key": "25-34",
-      "value": 4263
+      "value": 4265
     },
     {
       "key": "35-44",
-      "value": 3946
+      "value": 3945
     },
     {
       "key": "45-54",
-      "value": 2260
+      "value": 2262
     },
     {
       "key": "55-64",
-      "value": 996
+      "value": 998
     },
     {
       "key": "65+",
-      "value": 454
+      "value": 457
     }
   ],
   "gender": [
     {
       "key": "F",
-      "value": 4072
+      "value": 4074
     },
     {
       "key": "M",
-      "value": 7409
+      "value": 7416
     },
     {
       "key": "U",
-      "value": 1501
+      "value": 1502
     }
   ],
   "city": [
     {
       "key": "Sydney, New South Wales",
-      "value": 2604
+      "value": 2608
     },
     {
       "key": "Bendigo, Victoria",
@@ -94,7 +94,7 @@
     },
     {
       "key": "Ballarat, Victoria",
-      "value": 46
+      "value": 47
     },
     {
       "key": "Gold Coast, Queensland",
@@ -106,7 +106,7 @@
     },
     {
       "key": "Sunshine Coast, Queensland",
-      "value": 129
+      "value": 130
     },
     {
       "key": "Melbourne, Victoria",
@@ -118,11 +118,11 @@
     },
     {
       "key": "Delhi, Delhi",
-      "value": 94
+      "value": 93
     },
     {
       "key": "Mickleham, Victoria",
-      "value": 59
+      "value": 60
     },
     {
       "key": "Ipswich, Queensland",
@@ -138,15 +138,11 @@
     },
     {
       "key": "Adelaide, South Australia",
-      "value": 248
+      "value": 249
     },
     {
       "key": "Canberra, Australian Capital Territory",
       "value": 78
-    },
-    {
-      "key": "Mackay, Queensland",
-      "value": 18
     },
     {
       "key": "Officer, Victoria",
@@ -173,6 +169,10 @@
       "value": 34
     },
     {
+      "key": "Warrnambool, Victoria",
+      "value": 19
+    },
+    {
       "key": "Sunbury, Victoria",
       "value": 20
     },
@@ -186,7 +186,7 @@
     },
     {
       "key": "Dubai, Dubai",
-      "value": 75
+      "value": 76
     },
     {
       "key": "Sharjah, Emirate of Sharjah",
@@ -227,6 +227,10 @@
   ],
   "country": [
     {
+      "key": "RS",
+      "value": 4
+    },
+    {
       "key": "DE",
       "value": 10
     },
@@ -243,16 +247,12 @@
       "value": 6
     },
     {
-      "key": "HK",
-      "value": 9
-    },
-    {
       "key": "TW",
       "value": 9
     },
     {
-      "key": "PT",
-      "value": 4
+      "key": "HK",
+      "value": 9
     },
     {
       "key": "FJ",
@@ -320,7 +320,7 @@
     },
     {
       "key": "AE",
-      "value": 149
+      "value": 150
     },
     {
       "key": "IN",
@@ -372,7 +372,7 @@
     },
     {
       "key": "AU",
-      "value": 10978
+      "value": 10987
     },
     {
       "key": "LB",
