@@ -268,21 +268,21 @@
   "traffic_sources": [
     {
       "source": "SHORTS",
-      "views": 6186,
+      "views": 6188,
       "watch_time_hours": 40.3,
-      "pct": 64.7
+      "pct": 64.6
     },
     {
       "source": "YT_CHANNEL",
-      "views": 1984,
+      "views": 1997,
       "watch_time_hours": 7.3,
-      "pct": 20.7
+      "pct": 20.8
     },
     {
       "source": "YT_SEARCH",
-      "views": 758,
-      "watch_time_hours": 7.9,
-      "pct": 7.9
+      "views": 762,
+      "watch_time_hours": 8.0,
+      "pct": 8.0
     },
     {
       "source": "SUBSCRIBER",
@@ -809,24 +809,30 @@
     "2026-09": [
       {
         "source": "YT_CHANNEL",
-        "views": 15,
+        "views": 28,
         "watch_time_hours": 0.0,
-        "pct": 83.3
+        "pct": 75.7
       },
       {
         "source": "YT_SEARCH",
-        "views": 2,
+        "views": 6,
         "watch_time_hours": 0.0,
-        "pct": 11.1
+        "pct": 16.2
       },
       {
         "source": "SHORTS",
-        "views": 1,
+        "views": 3,
         "watch_time_hours": 0.0,
-        "pct": 5.6
+        "pct": 8.1
       },
       {
         "source": "NO_LINK_OTHER",
+        "views": 0,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "PLAYLIST",
         "views": 0,
         "watch_time_hours": 0.0,
         "pct": 0.0
@@ -836,15 +842,15 @@
   "devices": [
     {
       "device": "MOBILE",
-      "views": 8255,
+      "views": 8263,
       "watch_time_hours": 58.9,
-      "pct": 86.4
+      "pct": 86.3
     },
     {
       "device": "TV",
-      "views": 936,
+      "views": 947,
       "watch_time_hours": 4.3,
-      "pct": 9.8
+      "pct": 9.9
     },
     {
       "device": "DESKTOP",
@@ -856,7 +862,7 @@
       "device": "TABLET",
       "views": 129,
       "watch_time_hours": 0.7,
-      "pct": 1.4
+      "pct": 1.3
     }
   ],
   "devices_monthly": {
@@ -1137,15 +1143,15 @@
     "2026-09": [
       {
         "device": "MOBILE",
-        "views": 13,
+        "views": 21,
         "watch_time_hours": 0.0,
-        "pct": 72.2
+        "pct": 56.8
       },
       {
         "device": "TV",
-        "views": 5,
+        "views": 16,
         "watch_time_hours": 0.0,
-        "pct": 27.8
+        "pct": 43.2
       }
     ]
   },
@@ -1155,9 +1161,9 @@
       "title": "Maruti Eeco's Under Seat Engine! #cars24tamil",
       "published": "2025-10-30",
       "url": "https://www.youtube.com/watch?v=_FQJ75t6Kdw",
-      "thumbnail": "https://i.ytimg.com/vi/_FQJ75t6Kdw/default.jpg",
-      "views": 3073,
-      "watch_time_hours": 29.9,
+      "thumbnail": "https://i9.ytimg.com/vi/_FQJ75t6Kdw/default.jpg?sqp=CLjj_9QG&rs=AOn4CLAHA0GcCNZtpCzGI9ePOHDYX9wz9Q",
+      "views": 3075,
+      "watch_time_hours": 29.93,
       "avg_duration_sec": 61.0,
       "avg_view_pct": 41.6,
       "subs_gained": 26,
@@ -1172,8 +1178,8 @@
       "title": "Congestion TAX in Karnataka?!? \ud83d\ude28 #cars24Tamil",
       "published": "2025-10-28",
       "url": "https://www.youtube.com/watch?v=9lh_XZLp6zA",
-      "thumbnail": "https://i.ytimg.com/vi/9lh_XZLp6zA/default.jpg",
-      "views": 1619,
+      "thumbnail": "https://i9.ytimg.com/vi/9lh_XZLp6zA/default.jpg?sqp=CLjj_9QG&rs=AOn4CLCS7aSTfxOHmt6x3Q0HqaVpOrJNIw",
+      "views": 1621,
       "watch_time_hours": 5.73,
       "avg_duration_sec": 31.0,
       "avg_view_pct": 50.1,
@@ -1189,8 +1195,8 @@
       "title": "Why Liquor Shops on Highways? \ud83d\ude35\u200d\ud83d\udcab #cars24Tamil",
       "published": "2025-10-29",
       "url": "https://www.youtube.com/watch?v=LmmZwh8Hltw",
-      "thumbnail": "https://i.ytimg.com/vi/LmmZwh8Hltw/default.jpg",
-      "views": 1511,
+      "thumbnail": "https://i9.ytimg.com/vi/LmmZwh8Hltw/default.jpg?sqp=CLjj_9QG&rs=AOn4CLB5J8lfC-s72pNYbSg3yDLvxglwdw",
+      "views": 1514,
       "watch_time_hours": 12.8,
       "avg_duration_sec": 43.0,
       "avg_view_pct": 35.2,
@@ -1198,7 +1204,7 @@
       "likes": 60,
       "comments": 4,
       "shares": 1,
-      "engagement_rate": 4.3,
+      "engagement_rate": 4.29,
       "is_short": false
     },
     {
@@ -1206,8 +1212,8 @@
       "title": "Maruti Ignis - India's BEST Hatchback? #cars24tamil",
       "published": "2025-11-01",
       "url": "https://www.youtube.com/watch?v=rZJxAv_-kII",
-      "thumbnail": "https://i.ytimg.com/vi/rZJxAv_-kII/default.jpg",
-      "views": 1293,
+      "thumbnail": "https://i9.ytimg.com/vi/rZJxAv_-kII/default.jpg?sqp=CLjj_9QG&rs=AOn4CLBePShl3Plht3BfOgVzWS3EQ6M7KQ",
+      "views": 1296,
       "watch_time_hours": 5.75,
       "avg_duration_sec": 27.0,
       "avg_view_pct": 23.6,
@@ -1223,16 +1229,16 @@
       "title": "How to Do Your Car\u2019s KYV (Know Your Vehicle)? #cars24tamil",
       "published": "2025-11-12",
       "url": "https://www.youtube.com/watch?v=3brGUNO5-wI",
-      "thumbnail": "https://i.ytimg.com/vi/3brGUNO5-wI/default.jpg",
-      "views": 997,
+      "thumbnail": "https://i9.ytimg.com/vi/3brGUNO5-wI/default.jpg?sqp=CLjj_9QG&rs=AOn4CLBOzV22S2MsyC8VqRqU_OTfZ_01DQ",
+      "views": 1002,
       "watch_time_hours": 7.8,
       "avg_duration_sec": 35.0,
-      "avg_view_pct": 23.1,
+      "avg_view_pct": 23.0,
       "subs_gained": 5,
       "likes": 16,
       "comments": 1,
       "shares": 17,
-      "engagement_rate": 3.41,
+      "engagement_rate": 3.39,
       "is_short": false
     },
     {
@@ -1240,16 +1246,16 @@
       "title": "Maruti Zen Estilo - Why Maruti? #cars24tamil",
       "published": "2025-11-03",
       "url": "https://www.youtube.com/watch?v=Ex7HTIFgkHE",
-      "thumbnail": "https://i.ytimg.com/vi/Ex7HTIFgkHE/default.jpg",
-      "views": 345,
+      "thumbnail": "https://i9.ytimg.com/vi/Ex7HTIFgkHE/default.jpg?sqp=CLjj_9QG&rs=AOn4CLBkGTE2QYXKoR5zuTspsXiW5Z6D7Q",
+      "views": 346,
       "watch_time_hours": 1.47,
       "avg_duration_sec": 22.0,
-      "avg_view_pct": 32.5,
+      "avg_view_pct": 32.4,
       "subs_gained": 1,
       "likes": 7,
       "comments": 0,
       "shares": 0,
-      "engagement_rate": 2.03,
+      "engagement_rate": 2.02,
       "is_short": false
     },
     {
@@ -1257,8 +1263,8 @@
       "title": "Harshad Mehta's LS400! #cars24tamil",
       "published": "2025-11-07",
       "url": "https://www.youtube.com/watch?v=EeV4-ScHwr4",
-      "thumbnail": "https://i.ytimg.com/vi/EeV4-ScHwr4/default.jpg",
-      "views": 319,
+      "thumbnail": "https://i9.ytimg.com/vi/EeV4-ScHwr4/default.jpg?sqp=CLjj_9QG&rs=AOn4CLDUj4dEX89dy8U17uxlFMdXSxN0Ug",
+      "views": 320,
       "watch_time_hours": 0.82,
       "avg_duration_sec": 14.0,
       "avg_view_pct": 28.4,
@@ -1266,7 +1272,7 @@
       "likes": 5,
       "comments": 0,
       "shares": 0,
-      "engagement_rate": 1.57,
+      "engagement_rate": 1.56,
       "is_short": true
     },
     {
@@ -1274,16 +1280,16 @@
       "title": "Correct Way To Hold The Steering Wheel #cars24",
       "published": "2025-11-03",
       "url": "https://www.youtube.com/watch?v=-EdYrm3Vt5k",
-      "thumbnail": "https://i.ytimg.com/vi/-EdYrm3Vt5k/default.jpg",
-      "views": 180,
+      "thumbnail": "https://i9.ytimg.com/vi/-EdYrm3Vt5k/default.jpg?sqp=CLjj_9QG&rs=AOn4CLBKjnIg_6UcCUoOSIM0y6upk5F1jA",
+      "views": 182,
       "watch_time_hours": 0.68,
       "avg_duration_sec": 25.0,
-      "avg_view_pct": 49.3,
+      "avg_view_pct": 49.0,
       "subs_gained": 1,
       "likes": 6,
       "comments": 1,
       "shares": 0,
-      "engagement_rate": 3.89,
+      "engagement_rate": 3.85,
       "is_short": true
     },
     {
@@ -1291,7 +1297,7 @@
       "title": "Rear Underside Protection Device! #cars24",
       "published": "2025-11-04",
       "url": "https://www.youtube.com/watch?v=dCh9a0gjtIw",
-      "thumbnail": "https://i.ytimg.com/vi/dCh9a0gjtIw/default.jpg",
+      "thumbnail": "https://i9.ytimg.com/vi/dCh9a0gjtIw/default.jpg?sqp=CLjj_9QG&rs=AOn4CLAsXVEhqWdwzxKyIOeEOHwbbqKtag",
       "views": 159,
       "watch_time_hours": 0.42,
       "avg_duration_sec": 16.0,
@@ -1308,7 +1314,7 @@
       "title": "ZERO Road Tax on Private Roads! #cars24tamil",
       "published": "2025-10-31",
       "url": "https://www.youtube.com/watch?v=YhPHEJ1gV2U",
-      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=CPjl-tQG&rs=AOn4CLAOZ-LnQifVJ1Ekcl8VTF-sj2cuQw",
+      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=CLjj_9QG&rs=AOn4CLBqt8yGbBPQEI0G0jN3xkLY4LQFNw",
       "views": 54,
       "watch_time_hours": 0.32,
       "avg_duration_sec": 35.0,
