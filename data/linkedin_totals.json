@@ -1,41 +1,41 @@
 {
  "cars24": {
-  "total_followers": 468442,
-  "total_views": 610324,
+  "total_followers": 468483,
+  "total_views": 609207,
   "content": {
-   "impressions": 2237659,
-   "unique_impressions": 1142781,
-   "clicks": 453683,
-   "likes": 21290,
-   "comments": 2553,
+   "impressions": 2239197,
+   "unique_impressions": 1143583,
+   "clicks": 453700,
+   "likes": 21320,
+   "comments": 2564,
    "shares": 86,
-   "engagement_rate": 0.2134
+   "engagement_rate": 0.2133
   }
  },
  "cars24_arabia": {
-  "total_followers": 36685,
-  "total_views": 46427,
+  "total_followers": 36689,
+  "total_views": 46040,
   "content": {
-   "impressions": 151276,
-   "unique_impressions": 76495,
-   "clicks": 11543,
-   "likes": 1549,
+   "impressions": 150517,
+   "unique_impressions": 76127,
+   "clicks": 11513,
+   "likes": 1547,
    "comments": 51,
    "shares": 14,
-   "engagement_rate": 0.087
+   "engagement_rate": 0.0872
   }
  },
  "cars24_au": {
-  "total_followers": 57702,
-  "total_views": 27059,
+  "total_followers": 57705,
+  "total_views": 26985,
   "content": {
-   "impressions": 113425,
-   "unique_impressions": 62463,
-   "clicks": 23031,
-   "likes": 1583,
+   "impressions": 113830,
+   "unique_impressions": 62718,
+   "clicks": 23150,
+   "likes": 1582,
    "comments": 42,
    "shares": 28,
-   "engagement_rate": 0.2176
+   "engagement_rate": 0.2179
   }
  }
 }

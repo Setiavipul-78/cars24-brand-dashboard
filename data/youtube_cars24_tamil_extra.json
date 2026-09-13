@@ -268,13 +268,13 @@
   "traffic_sources": [
     {
       "source": "SHORTS",
-      "views": 6187,
+      "views": 6185,
       "watch_time_hours": 40.3,
       "pct": 64.5
     },
     {
       "source": "YT_CHANNEL",
-      "views": 2008,
+      "views": 2007,
       "watch_time_hours": 7.4,
       "pct": 20.9
     },
@@ -809,21 +809,15 @@
     "2026-09": [
       {
         "source": "YT_CHANNEL",
-        "views": 39,
+        "views": 38,
         "watch_time_hours": 0.1,
-        "pct": 79.6
+        "pct": 82.6
       },
       {
         "source": "YT_SEARCH",
         "views": 8,
         "watch_time_hours": 0.0,
-        "pct": 16.3
-      },
-      {
-        "source": "SHORTS",
-        "views": 2,
-        "watch_time_hours": 0.0,
-        "pct": 4.1
+        "pct": 17.4
       },
       {
         "source": "NO_LINK_OTHER",
@@ -833,6 +827,12 @@
       },
       {
         "source": "PLAYLIST",
+        "views": 0,
+        "watch_time_hours": 0.0,
+        "pct": 0.0
+      },
+      {
+        "source": "SHORTS",
         "views": 0,
         "watch_time_hours": 0.0,
         "pct": 0.0
@@ -848,7 +848,7 @@
     },
     {
       "device": "TV",
-      "views": 951,
+      "views": 948,
       "watch_time_hours": 4.3,
       "pct": 9.9
     },
@@ -1145,13 +1145,13 @@
         "device": "MOBILE",
         "views": 29,
         "watch_time_hours": 0.0,
-        "pct": 59.2
+        "pct": 63.0
       },
       {
         "device": "TV",
-        "views": 20,
+        "views": 17,
         "watch_time_hours": 0.0,
-        "pct": 40.8
+        "pct": 37.0
       }
     ]
   },
@@ -1161,7 +1161,7 @@
       "title": "Maruti Eeco's Under Seat Engine! #cars24tamil",
       "published": "2025-10-30",
       "url": "https://www.youtube.com/watch?v=_FQJ75t6Kdw",
-      "thumbnail": "https://i9.ytimg.com/vi/_FQJ75t6Kdw/default.jpg?sqp=CLDhlNUG&rs=AOn4CLBEO6Ms7TGBqgWGV7narkgaK0jlhg",
+      "thumbnail": "https://i9.ytimg.com/vi/_FQJ75t6Kdw/default.jpg?sqp=CJilmtUG&rs=AOn4CLAd74zDDLPO3geZ1Toqpl7n5Oudyw",
       "views": 3076,
       "watch_time_hours": 29.93,
       "avg_duration_sec": 61.0,
@@ -1178,8 +1178,8 @@
       "title": "Congestion TAX in Karnataka?!? \ud83d\ude28 #cars24Tamil",
       "published": "2025-10-28",
       "url": "https://www.youtube.com/watch?v=9lh_XZLp6zA",
-      "thumbnail": "https://i9.ytimg.com/vi/9lh_XZLp6zA/default.jpg?sqp=CLDhlNUG&rs=AOn4CLDP3vunCadf3ZPfCUgwf8kgrY_1Ig",
-      "views": 1621,
+      "thumbnail": "https://i9.ytimg.com/vi/9lh_XZLp6zA/default.jpg?sqp=CJilmtUG&rs=AOn4CLD_GxYi24bDrm0gZnKpd-ED1GK_jA",
+      "views": 1620,
       "watch_time_hours": 5.73,
       "avg_duration_sec": 31.0,
       "avg_view_pct": 50.1,
@@ -1195,8 +1195,8 @@
       "title": "Why Liquor Shops on Highways? \ud83d\ude35\u200d\ud83d\udcab #cars24Tamil",
       "published": "2025-10-29",
       "url": "https://www.youtube.com/watch?v=LmmZwh8Hltw",
-      "thumbnail": "https://i9.ytimg.com/vi/LmmZwh8Hltw/default.jpg?sqp=CLDhlNUG&rs=AOn4CLBhjFXv5pRgToXBHIDxaqi-QWm32g",
-      "views": 1514,
+      "thumbnail": "https://i9.ytimg.com/vi/LmmZwh8Hltw/default.jpg?sqp=CJilmtUG&rs=AOn4CLB1eX55Qr7B6_zC6lhdcgrMe7Uqng",
+      "views": 1512,
       "watch_time_hours": 12.8,
       "avg_duration_sec": 43.0,
       "avg_view_pct": 35.2,
@@ -1204,7 +1204,7 @@
       "likes": 60,
       "comments": 4,
       "shares": 1,
-      "engagement_rate": 4.29,
+      "engagement_rate": 4.3,
       "is_short": false
     },
     {
@@ -1212,7 +1212,7 @@
       "title": "Maruti Ignis - India's BEST Hatchback? #cars24tamil",
       "published": "2025-11-01",
       "url": "https://www.youtube.com/watch?v=rZJxAv_-kII",
-      "thumbnail": "https://i9.ytimg.com/vi/rZJxAv_-kII/default.jpg?sqp=CLDhlNUG&rs=AOn4CLDKzQ_Lngwb250n4fI3AIyrCbZj_Q",
+      "thumbnail": "https://i9.ytimg.com/vi/rZJxAv_-kII/default.jpg?sqp=CJilmtUG&rs=AOn4CLC5SXeQCo24zasZovMoYejIr-nr5Q",
       "views": 1297,
       "watch_time_hours": 5.75,
       "avg_duration_sec": 27.0,
@@ -1229,7 +1229,7 @@
       "title": "How to Do Your Car\u2019s KYV (Know Your Vehicle)? #cars24tamil",
       "published": "2025-11-12",
       "url": "https://www.youtube.com/watch?v=3brGUNO5-wI",
-      "thumbnail": "https://i9.ytimg.com/vi/3brGUNO5-wI/default.jpg?sqp=CLDhlNUG&rs=AOn4CLAXdkpF84AwkSZ08-Z1iHMa9llT-g",
+      "thumbnail": "https://i9.ytimg.com/vi/3brGUNO5-wI/default.jpg?sqp=CJilmtUG&rs=AOn4CLAj3-rJILailwnT2VMILIef4nFEOQ",
       "views": 1006,
       "watch_time_hours": 7.87,
       "avg_duration_sec": 35.0,
@@ -1246,7 +1246,7 @@
       "title": "Maruti Zen Estilo - Why Maruti? #cars24tamil",
       "published": "2025-11-03",
       "url": "https://www.youtube.com/watch?v=Ex7HTIFgkHE",
-      "thumbnail": "https://i9.ytimg.com/vi/Ex7HTIFgkHE/default.jpg?sqp=CLDhlNUG&rs=AOn4CLAAXcZtHsF2hIIddyv5xYqHuvCo5A",
+      "thumbnail": "https://i9.ytimg.com/vi/Ex7HTIFgkHE/default.jpg?sqp=CJilmtUG&rs=AOn4CLBJCJ62tYnzbBmJ6EC4n3j5D6ePNA",
       "views": 348,
       "watch_time_hours": 1.47,
       "avg_duration_sec": 22.0,
@@ -1263,7 +1263,7 @@
       "title": "Harshad Mehta's LS400! #cars24tamil",
       "published": "2025-11-07",
       "url": "https://www.youtube.com/watch?v=EeV4-ScHwr4",
-      "thumbnail": "https://i9.ytimg.com/vi/EeV4-ScHwr4/default.jpg?sqp=CLDhlNUG&rs=AOn4CLDQNhj4Rtq8OQwNLouKwJc4b_HmvQ",
+      "thumbnail": "https://i9.ytimg.com/vi/EeV4-ScHwr4/default.jpg?sqp=CJilmtUG&rs=AOn4CLAnm_wxS4awLuklVm-NYTy2yr4TWw",
       "views": 322,
       "watch_time_hours": 0.82,
       "avg_duration_sec": 14.0,
@@ -1280,7 +1280,7 @@
       "title": "Correct Way To Hold The Steering Wheel #cars24",
       "published": "2025-11-03",
       "url": "https://www.youtube.com/watch?v=-EdYrm3Vt5k",
-      "thumbnail": "https://i9.ytimg.com/vi/-EdYrm3Vt5k/default.jpg?sqp=CLDhlNUG&rs=AOn4CLB-8--lf7FuIR2WScj7W_89ZX69Dw",
+      "thumbnail": "https://i9.ytimg.com/vi/-EdYrm3Vt5k/default.jpg?sqp=CJilmtUG&rs=AOn4CLCMjk9eT5f2v1iIzI_0brNLiS3OHg",
       "views": 182,
       "watch_time_hours": 0.68,
       "avg_duration_sec": 25.0,
@@ -1297,7 +1297,7 @@
       "title": "Rear Underside Protection Device! #cars24",
       "published": "2025-11-04",
       "url": "https://www.youtube.com/watch?v=dCh9a0gjtIw",
-      "thumbnail": "https://i9.ytimg.com/vi/dCh9a0gjtIw/default.jpg?sqp=CLDhlNUG&rs=AOn4CLAIGkrIuBnZADtxsXC-aptv73s87A",
+      "thumbnail": "https://i9.ytimg.com/vi/dCh9a0gjtIw/default.jpg?sqp=CJilmtUG&rs=AOn4CLAH-dswm3ZfGvH61emZS4sr0KGxcw",
       "views": 161,
       "watch_time_hours": 0.42,
       "avg_duration_sec": 16.0,
@@ -1314,7 +1314,7 @@
       "title": "ZERO Road Tax on Private Roads! #cars24tamil",
       "published": "2025-10-31",
       "url": "https://www.youtube.com/watch?v=YhPHEJ1gV2U",
-      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=CLDhlNUG&rs=AOn4CLCE92RIF8yPvXle1ikL4DDzcrXm0g",
+      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=CJilmtUG&rs=AOn4CLBGoYAhfsImTASwr3yswJfQZBk9pw",
       "views": 54,
       "watch_time_hours": 0.32,
       "avg_duration_sec": 35.0,
