@@ -6,7 +6,7 @@
     },
     {
       "key": "18-24",
-      "value": 1024
+      "value": 1018
     },
     {
       "key": "25-34",
@@ -14,15 +14,15 @@
     },
     {
       "key": "35-44",
-      "value": 3992
+      "value": 3998
     },
     {
       "key": "45-54",
-      "value": 2282
+      "value": 2281
     },
     {
       "key": "55-64",
-      "value": 1012
+      "value": 1013
     },
     {
       "key": "65+",
@@ -32,21 +32,21 @@
   "gender": [
     {
       "key": "F",
-      "value": 4104
+      "value": 4106
     },
     {
       "key": "M",
-      "value": 7475
+      "value": 7468
     },
     {
       "key": "U",
-      "value": 1508
+      "value": 1513
     }
   ],
   "city": [
     {
       "key": "Sydney, New South Wales",
-      "value": 2614
+      "value": 2613
     },
     {
       "key": "Bendigo, Victoria",
@@ -70,7 +70,7 @@
     },
     {
       "key": "Perth, Western Australia",
-      "value": 188
+      "value": 187
     },
     {
       "key": "Craigieburn, Victoria",
@@ -86,7 +86,7 @@
     },
     {
       "key": "Wollongong, New South Wales",
-      "value": 81
+      "value": 80
     },
     {
       "key": "Ahmedabad, Gujarat",
@@ -182,11 +182,11 @@
     },
     {
       "key": "Rockbank, Victoria",
-      "value": 38
+      "value": 37
     },
     {
       "key": "Dubai, Dubai",
-      "value": 75
+      "value": 76
     },
     {
       "key": "Sharjah, Emirate of Sharjah",
@@ -255,6 +255,10 @@
       "value": 9
     },
     {
+      "key": "PT",
+      "value": 4
+    },
+    {
       "key": "FJ",
       "value": 7
     },
@@ -320,11 +324,11 @@
     },
     {
       "key": "AE",
-      "value": 151
+      "value": 153
     },
     {
       "key": "IN",
-      "value": 1074
+      "value": 1073
     },
     {
       "key": "ZA",
@@ -341,10 +345,6 @@
     {
       "key": "IR",
       "value": 38
-    },
-    {
-      "key": "IT",
-      "value": 5
     },
     {
       "key": "GR",
@@ -372,11 +372,11 @@
     },
     {
       "key": "AU",
-      "value": 11081
+      "value": 11078
     },
     {
       "key": "LB",
-      "value": 5
+      "value": 6
     },
     {
       "key": "VN",
@@ -384,7 +384,7 @@
     },
     {
       "key": "PH",
-      "value": 25
+      "value": 26
     },
     {
       "key": "NG",
