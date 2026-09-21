@@ -14,15 +14,15 @@
     },
     {
       "key": "35-44",
-      "value": 3998
+      "value": 4004
     },
     {
       "key": "45-54",
-      "value": 2298
+      "value": 2299
     },
     {
       "key": "55-64",
-      "value": 1018
+      "value": 1020
     },
     {
       "key": "65+",
@@ -32,21 +32,21 @@
   "gender": [
     {
       "key": "F",
-      "value": 4119
+      "value": 4123
     },
     {
       "key": "M",
-      "value": 7485
+      "value": 7489
     },
     {
       "key": "U",
-      "value": 1519
+      "value": 1520
     }
   ],
   "city": [
     {
       "key": "Sydney, New South Wales",
-      "value": 2610
+      "value": 2613
     },
     {
       "key": "Bendigo, Victoria",
@@ -70,7 +70,7 @@
     },
     {
       "key": "Perth, Western Australia",
-      "value": 188
+      "value": 187
     },
     {
       "key": "Craigieburn, Victoria",
@@ -90,7 +90,7 @@
     },
     {
       "key": "Ballarat, Victoria",
-      "value": 44
+      "value": 45
     },
     {
       "key": "Gold Coast, Queensland",
@@ -106,11 +106,11 @@
     },
     {
       "key": "Melbourne, Victoria",
-      "value": 3676
+      "value": 3684
     },
     {
       "key": "Gurugram, Haryana",
-      "value": 80
+      "value": 81
     },
     {
       "key": "Delhi, Delhi",
@@ -130,22 +130,22 @@
     },
     {
       "key": "Brisbane, Queensland",
-      "value": 596
+      "value": 597
     },
     {
       "key": "Adelaide, South Australia",
-      "value": 251
+      "value": 250
     },
     {
       "key": "Canberra, Australian Capital Territory",
       "value": 78
     },
     {
-      "key": "Officer, Victoria",
+      "key": "Mackay, Queensland",
       "value": 19
     },
     {
-      "key": "Mackay, Queensland",
+      "key": "Officer, Victoria",
       "value": 19
     },
     {
@@ -324,7 +324,7 @@
     },
     {
       "key": "IN",
-      "value": 1073
+      "value": 1074
     },
     {
       "key": "ZA",
@@ -372,7 +372,7 @@
     },
     {
       "key": "AU",
-      "value": 11102
+      "value": 11111
     },
     {
       "key": "LB",
@@ -392,7 +392,7 @@
     },
     {
       "key": "PK",
-      "value": 40
+      "value": 39
     },
     {
       "key": "NL",
