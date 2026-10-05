@@ -84,6 +84,25 @@ def fetch_values(token, sheet_id, rng):
     return r.json().get("values", [])
 
 
+def parse_sheet_date(raw, fmts):
+    """Parse a sheet date cell, tolerating both abbreviated ('Jan 1, 2025')
+    and full ('January 1, 2025') month names — Google Sheets can emit either
+    depending on the column's locale/format. `fmts` lists the accepted
+    strptime patterns in priority order; raises ValidationError if none match."""
+    s = str(raw).strip()
+    for fmt in fmts:
+        try:
+            return datetime.strptime(s, fmt).date()
+        except ValueError:
+            continue
+    raise ValidationError(f"unrecognized date {raw!r} (tried {fmts})")
+
+
+# Accepted date formats: abbreviated month first (historical), then full month.
+DMY_FMTS = ["%b %d, %Y", "%B %d, %Y"]   # 'Jan 1, 2025' / 'January 1, 2025'
+MY_FMTS  = ["%b %Y", "%B %Y"]           # 'Jan 2025'     / 'January 2025'
+
+
 def pct(raw):
     """Parse a sheet cell like '16.8%' -> 16.8 (float). Blank/None -> None."""
     if raw is None or str(raw).strip() == "":
@@ -165,7 +184,7 @@ def build_daily(token):
     parsed = fetch_all_india_tab(token, "Day", "Date")
     rows = []
     for date_raw, vals in parsed:
-        d = datetime.strptime(date_raw, "%b %d, %Y").date()
+        d = parse_sheet_date(date_raw, DMY_FMTS)
         rows.append({"date": d.isoformat(), **vals})
     rows.sort(key=lambda r: r["date"])
     path = DATA / "bsos_pan_india_daily.csv"
@@ -178,7 +197,7 @@ def build_weekly(token):
     parsed = fetch_all_india_tab(token, "Week", "Week of")
     rows = []
     for date_raw, vals in parsed:
-        ws = datetime.strptime(date_raw, "%b %d, %Y").date()
+        ws = parse_sheet_date(date_raw, DMY_FMTS)
         we = ws + timedelta(days=6)
         label = f"{ws.strftime('%d %b')} – {we.strftime('%d %b %Y')}"
         rows.append({"week_start": ws.isoformat(), "week": label, **vals})
@@ -193,7 +212,7 @@ def build_monthly(token):
     parsed = fetch_all_india_tab(token, "Month", "Month")
     rows = []
     for date_raw, vals in parsed:
-        m = datetime.strptime(date_raw, "%b %Y").date()
+        m = parse_sheet_date(date_raw, MY_FMTS)
         rows.append({"month": f"{m.year:04d}-{m.month:02d}", **vals})
     rows.sort(key=lambda r: r["month"])
     path = DATA / "bsos_pan_monthly.csv"
@@ -217,7 +236,7 @@ def build_city_daily(token):
         if len(r) < 2 or not r[0].strip() or not r[1].strip():
             continue
         city = r[0].strip()
-        d = datetime.strptime(r[1].strip(), "%b %d, %Y").date()
+        d = parse_sheet_date(r[1], DMY_FMTS)
         vals = {}
         for i, brand in brand_cols.items():
             vals[brand] = pct(r[i]) if i < len(r) else None
