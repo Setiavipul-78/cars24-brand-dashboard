@@ -2,93 +2,98 @@
   "geo": [
     {
       "city": "Chennai",
-      "views": 126696,
-      "watch_time_hours": 840.8
+      "views": 155544,
+      "watch_time_hours": 1009.2
     },
     {
       "city": "Coimbatore",
-      "views": 28049,
-      "watch_time_hours": 189.6
+      "views": 35195,
+      "watch_time_hours": 233.7
     },
     {
       "city": "Bengaluru",
-      "views": 15345,
-      "watch_time_hours": 103.3
+      "views": 18134,
+      "watch_time_hours": 120.2
     },
     {
       "city": "Madurai",
-      "views": 11334,
-      "watch_time_hours": 76.0
+      "views": 14120,
+      "watch_time_hours": 92.0
     },
     {
       "city": "Hosur",
-      "views": 5421,
-      "watch_time_hours": 36.6
+      "views": 6791,
+      "watch_time_hours": 45.1
     },
     {
       "city": "Salem",
-      "views": 2012,
-      "watch_time_hours": 14.4
+      "views": 2342,
+      "watch_time_hours": 16.3
     },
     {
       "city": "Kochi",
-      "views": 1561,
-      "watch_time_hours": 10.1
+      "views": 1822,
+      "watch_time_hours": 11.5
     },
     {
       "city": "Singapore",
-      "views": 1323,
-      "watch_time_hours": 8.9
+      "views": 1701,
+      "watch_time_hours": 11.5
     },
     {
       "city": "Tiruchirappalli",
-      "views": 1317,
-      "watch_time_hours": 7.7
+      "views": 1605,
+      "watch_time_hours": 9.3
     },
     {
       "city": "Erode",
-      "views": 1242,
-      "watch_time_hours": 8.4
+      "views": 1543,
+      "watch_time_hours": 10.1
     },
     {
       "city": "Dubai",
-      "views": 1104,
-      "watch_time_hours": 7.4
+      "views": 1288,
+      "watch_time_hours": 8.6
     },
     {
       "city": "Hyderabad",
-      "views": 1062,
-      "watch_time_hours": 9.0
+      "views": 1277,
+      "watch_time_hours": 10.3
     },
     {
       "city": "Puducherry",
-      "views": 888,
-      "watch_time_hours": 5.9
+      "views": 1113,
+      "watch_time_hours": 7.3
     },
     {
       "city": "Maraimalai Nagar",
-      "views": 773,
-      "watch_time_hours": 5.2
+      "views": 836,
+      "watch_time_hours": 5.7
     },
     {
       "city": "Nagercoil",
-      "views": 634,
-      "watch_time_hours": 4.3
-    },
-    {
-      "city": "Tiruppur",
-      "views": 621,
-      "watch_time_hours": 3.7
+      "views": 827,
+      "watch_time_hours": 5.6
     },
     {
       "city": "Tirunelveli",
-      "views": 600,
+      "views": 790,
+      "watch_time_hours": 6.2
+    },
+    {
+      "city": "Tiruppur",
+      "views": 764,
       "watch_time_hours": 4.4
     },
     {
       "city": "Vellore",
-      "views": 536,
-      "watch_time_hours": 3.6
+      "views": 616,
+      "watch_time_hours": 4.1
+    },
+    {
+      "city": "Salem",
+      "views": 544,
+      "watch_time_hours": 3.4
     },
     {
       "city": "Colombo",
@@ -96,34 +101,29 @@
       "watch_time_hours": 3.6
     },
     {
-      "city": "Salem",
-      "views": 436,
-      "watch_time_hours": 2.8
-    },
-    {
       "city": "Abu Dhabi",
-      "views": 430,
-      "watch_time_hours": 2.8
+      "views": 519,
+      "watch_time_hours": 3.3
     },
     {
       "city": "Thoothukudi",
-      "views": 357,
-      "watch_time_hours": 2.6
+      "views": 470,
+      "watch_time_hours": 3.2
     },
     {
       "city": "Thiruvananthapuram",
-      "views": 330,
-      "watch_time_hours": 1.9
+      "views": 386,
+      "watch_time_hours": 2.1
     },
     {
       "city": "Mumbai",
-      "views": 319,
-      "watch_time_hours": 2.0
+      "views": 375,
+      "watch_time_hours": 2.4
     },
     {
       "city": "Thanjavur",
-      "views": 275,
-      "watch_time_hours": 1.8
+      "views": 320,
+      "watch_time_hours": 1.9
     }
   ],
   "geo_monthly": {
@@ -214,93 +214,103 @@
     "2026-10": [
       {
         "city": "Chennai",
-        "views": 124193,
-        "watch_time_hours": 822.0
+        "views": 153041,
+        "watch_time_hours": 990.5
       },
       {
         "city": "Coimbatore",
-        "views": 27144,
-        "watch_time_hours": 182.0
+        "views": 34290,
+        "watch_time_hours": 226.2
       },
       {
         "city": "Bengaluru",
-        "views": 14785,
-        "watch_time_hours": 99.8
+        "views": 17574,
+        "watch_time_hours": 116.7
       },
       {
         "city": "Madurai",
-        "views": 10988,
-        "watch_time_hours": 72.8
+        "views": 13774,
+        "watch_time_hours": 88.8
       },
       {
         "city": "Hosur",
-        "views": 5421,
-        "watch_time_hours": 36.6
+        "views": 6791,
+        "watch_time_hours": 45.1
       },
       {
         "city": "Salem",
-        "views": 1771,
-        "watch_time_hours": 12.2
+        "views": 2101,
+        "watch_time_hours": 14.1
       },
       {
         "city": "Kochi",
-        "views": 1510,
-        "watch_time_hours": 9.8
-      },
-      {
-        "city": "Tiruchirappalli",
-        "views": 1317,
-        "watch_time_hours": 7.7
+        "views": 1771,
+        "watch_time_hours": 11.2
       },
       {
         "city": "Singapore",
-        "views": 1291,
-        "watch_time_hours": 8.6
+        "views": 1669,
+        "watch_time_hours": 11.2
+      },
+      {
+        "city": "Tiruchirappalli",
+        "views": 1605,
+        "watch_time_hours": 9.3
       },
       {
         "city": "Erode",
-        "views": 1242,
-        "watch_time_hours": 8.4
+        "views": 1543,
+        "watch_time_hours": 10.1
       },
       {
         "city": "Dubai",
-        "views": 1104,
-        "watch_time_hours": 7.4
+        "views": 1288,
+        "watch_time_hours": 8.6
       },
       {
         "city": "Hyderabad",
-        "views": 1062,
-        "watch_time_hours": 9.0
+        "views": 1277,
+        "watch_time_hours": 10.3
       },
       {
         "city": "Puducherry",
-        "views": 888,
-        "watch_time_hours": 5.9
+        "views": 1113,
+        "watch_time_hours": 7.3
       },
       {
         "city": "Maraimalai Nagar",
-        "views": 773,
-        "watch_time_hours": 5.2
+        "views": 836,
+        "watch_time_hours": 5.7
       },
       {
         "city": "Nagercoil",
-        "views": 634,
-        "watch_time_hours": 4.3
-      },
-      {
-        "city": "Tiruppur",
-        "views": 621,
-        "watch_time_hours": 3.7
+        "views": 827,
+        "watch_time_hours": 5.6
       },
       {
         "city": "Tirunelveli",
-        "views": 600,
+        "views": 790,
+        "watch_time_hours": 6.2
+      },
+      {
+        "city": "Tiruppur",
+        "views": 764,
         "watch_time_hours": 4.4
       },
       {
         "city": "Vellore",
-        "views": 536,
-        "watch_time_hours": 3.6
+        "views": 616,
+        "watch_time_hours": 4.1
+      },
+      {
+        "city": "Salem",
+        "views": 544,
+        "watch_time_hours": 3.4
+      },
+      {
+        "city": "Abu Dhabi",
+        "views": 519,
+        "watch_time_hours": 3.3
       },
       {
         "city": "Colombo",
@@ -308,34 +318,24 @@
         "watch_time_hours": 3.5
       },
       {
-        "city": "Salem",
-        "views": 436,
-        "watch_time_hours": 2.8
-      },
-      {
-        "city": "Abu Dhabi",
-        "views": 430,
-        "watch_time_hours": 2.8
-      },
-      {
         "city": "Thoothukudi",
-        "views": 357,
-        "watch_time_hours": 2.6
+        "views": 470,
+        "watch_time_hours": 3.2
       },
       {
         "city": "Thiruvananthapuram",
-        "views": 330,
-        "watch_time_hours": 1.9
+        "views": 386,
+        "watch_time_hours": 2.1
       },
       {
         "city": "Mumbai",
-        "views": 319,
-        "watch_time_hours": 2.0
+        "views": 375,
+        "watch_time_hours": 2.4
       },
       {
         "city": "Thanjavur",
-        "views": 275,
-        "watch_time_hours": 1.8
+        "views": 320,
+        "watch_time_hours": 1.9
       }
     ]
   },
@@ -358,17 +358,17 @@
     {
       "age_group": "age18-24",
       "gender": "male",
-      "viewer_pct": 16.1
+      "viewer_pct": 16.0
     },
     {
       "age_group": "age25-34",
       "gender": "female",
-      "viewer_pct": 0.8
+      "viewer_pct": 0.7
     },
     {
       "age_group": "age25-34",
       "gender": "male",
-      "viewer_pct": 47.9
+      "viewer_pct": 47.7
     },
     {
       "age_group": "age25-34",
@@ -383,7 +383,7 @@
     {
       "age_group": "age35-44",
       "gender": "male",
-      "viewer_pct": 22.7
+      "viewer_pct": 22.8
     },
     {
       "age_group": "age35-44",
@@ -398,7 +398,7 @@
     {
       "age_group": "age45-54",
       "gender": "male",
-      "viewer_pct": 7.0
+      "viewer_pct": 7.1
     },
     {
       "age_group": "age55-64",
@@ -408,7 +408,7 @@
     {
       "age_group": "age55-64",
       "gender": "male",
-      "viewer_pct": 2.1
+      "viewer_pct": 2.0
     },
     {
       "age_group": "age65-",
@@ -535,7 +535,7 @@
       {
         "age_group": "age25-34",
         "gender": "male",
-        "viewer_pct": 48.0
+        "viewer_pct": 47.8
       },
       {
         "age_group": "age25-34",
@@ -550,7 +550,7 @@
       {
         "age_group": "age35-44",
         "gender": "male",
-        "viewer_pct": 22.7
+        "viewer_pct": 22.8
       },
       {
         "age_group": "age35-44",
@@ -565,7 +565,7 @@
       {
         "age_group": "age45-54",
         "gender": "male",
-        "viewer_pct": 7.0
+        "viewer_pct": 7.1
       },
       {
         "age_group": "age55-64",
@@ -575,7 +575,7 @@
       {
         "age_group": "age55-64",
         "gender": "male",
-        "viewer_pct": 2.1
+        "viewer_pct": 2.0
       },
       {
         "age_group": "age65-",
@@ -592,80 +592,80 @@
   "traffic_sources": [
     {
       "source": "SHORTS",
-      "views": 134522,
-      "watch_time_hours": 907.0,
-      "pct": 52.4
+      "views": 153011,
+      "watch_time_hours": 1022.7,
+      "pct": 48.6
     },
     {
       "source": "SUBSCRIBER",
-      "views": 100561,
-      "watch_time_hours": 656.3,
-      "pct": 39.1
+      "views": 135441,
+      "watch_time_hours": 855.2,
+      "pct": 43.1
     },
     {
       "source": "YT_CHANNEL",
-      "views": 10773,
-      "watch_time_hours": 68.3,
+      "views": 13338,
+      "watch_time_hours": 85.5,
       "pct": 4.2
     },
     {
       "source": "YT_SEARCH",
-      "views": 8198,
-      "watch_time_hours": 54.5,
-      "pct": 3.2
+      "views": 9409,
+      "watch_time_hours": 61.3,
+      "pct": 3.0
     },
     {
       "source": "YT_OTHER_PAGE",
-      "views": 1659,
-      "watch_time_hours": 14.7,
+      "views": 1906,
+      "watch_time_hours": 17.0,
       "pct": 0.6
     },
     {
       "source": "EXT_URL",
-      "views": 418,
-      "watch_time_hours": 5.6,
-      "pct": 0.2
+      "views": 470,
+      "watch_time_hours": 6.4,
+      "pct": 0.1
     },
     {
       "source": "SHORTS_CONTENT_LINKS",
-      "views": 355,
-      "watch_time_hours": 4.4,
+      "views": 448,
+      "watch_time_hours": 5.3,
       "pct": 0.1
     },
     {
       "source": "NOTIFICATION",
-      "views": 261,
-      "watch_time_hours": 3.1,
+      "views": 390,
+      "watch_time_hours": 4.7,
       "pct": 0.1
     },
     {
       "source": "PLAYLIST",
-      "views": 76,
+      "views": 81,
       "watch_time_hours": 0.8,
       "pct": 0.0
     },
     {
-      "source": "NO_LINK_OTHER",
-      "views": 34,
+      "source": "SOUND_PAGE",
+      "views": 18,
       "watch_time_hours": 0.1,
       "pct": 0.0
     },
     {
-      "source": "SOUND_PAGE",
+      "source": "NO_LINK_OTHER",
       "views": 12,
       "watch_time_hours": 0.1,
       "pct": 0.0
     },
     {
       "source": "HASHTAGS",
-      "views": 6,
+      "views": 8,
       "watch_time_hours": 0.1,
       "pct": 0.0
     },
     {
       "source": "RELATED_VIDEO",
-      "views": 3,
-      "watch_time_hours": 0.0,
+      "views": 4,
+      "watch_time_hours": 0.1,
       "pct": 0.0
     }
   ],
@@ -1183,79 +1183,79 @@
     "2026-10": [
       {
         "source": "SHORTS",
-        "views": 128337,
-        "watch_time_hours": 866.6000000000001,
-        "pct": 51.9
+        "views": 146826,
+        "watch_time_hours": 982.3000000000002,
+        "pct": 48.1
       },
       {
         "source": "SUBSCRIBER",
-        "views": 100108,
-        "watch_time_hours": 647.5,
-        "pct": 40.5
+        "views": 134988,
+        "watch_time_hours": 846.4000000000001,
+        "pct": 44.3
       },
       {
         "source": "YT_CHANNEL",
-        "views": 8766,
-        "watch_time_hours": 60.5,
-        "pct": 3.5
+        "views": 11331,
+        "watch_time_hours": 77.70000000000002,
+        "pct": 3.7
       },
       {
         "source": "YT_SEARCH",
-        "views": 7434,
-        "watch_time_hours": 46.4,
-        "pct": 3.0
+        "views": 8645,
+        "watch_time_hours": 53.1,
+        "pct": 2.8
       },
       {
         "source": "YT_OTHER_PAGE",
-        "views": 1586,
-        "watch_time_hours": 14.0,
+        "views": 1833,
+        "watch_time_hours": 16.4,
         "pct": 0.6
       },
       {
         "source": "SHORTS_CONTENT_LINKS",
-        "views": 355,
-        "watch_time_hours": 4.3999999999999995,
+        "views": 448,
+        "watch_time_hours": 5.3,
         "pct": 0.1
       },
       {
         "source": "EXT_URL",
-        "views": 354,
-        "watch_time_hours": 4.3999999999999995,
+        "views": 406,
+        "watch_time_hours": 5.199999999999999,
         "pct": 0.1
       },
       {
         "source": "NOTIFICATION",
-        "views": 249,
-        "watch_time_hours": 2.9,
+        "views": 378,
+        "watch_time_hours": 4.4,
         "pct": 0.1
       },
       {
         "source": "PLAYLIST",
-        "views": 47,
+        "views": 52,
         "watch_time_hours": 0.6,
         "pct": 0.0
       },
       {
-        "source": "NO_LINK_OTHER",
-        "views": 33,
-        "watch_time_hours": 0.1,
+        "source": "SOUND_PAGE",
+        "views": 16,
+        "watch_time_hours": 0.0,
         "pct": 0.0
       },
       {
-        "source": "SOUND_PAGE",
-        "views": 10,
+        "source": "NO_LINK_OTHER",
+        "views": 11,
         "watch_time_hours": 0.0,
         "pct": 0.0
       },
       {
         "source": "HASHTAGS",
-        "views": 6,
+        "views": 8,
         "watch_time_hours": 0.0,
         "pct": 0.0
       },
       {
         "source": "RELATED_VIDEO",
-        "views": 3,
+        "views": 4,
         "watch_time_hours": 0.0,
         "pct": 0.0
       }
@@ -1264,26 +1264,26 @@
   "devices": [
     {
       "device": "MOBILE",
-      "views": 236692,
-      "watch_time_hours": 1550.3,
-      "pct": 92.2
+      "views": 290131,
+      "watch_time_hours": 1863.2,
+      "pct": 92.3
     },
     {
       "device": "DESKTOP",
-      "views": 10694,
-      "watch_time_hours": 65.1,
+      "views": 13256,
+      "watch_time_hours": 79.1,
       "pct": 4.2
     },
     {
       "device": "TV",
-      "views": 5839,
-      "watch_time_hours": 68.3,
-      "pct": 2.3
+      "views": 6923,
+      "watch_time_hours": 80.4,
+      "pct": 2.2
     },
     {
       "device": "TABLET",
-      "views": 3403,
-      "watch_time_hours": 28.8,
+      "views": 3928,
+      "watch_time_hours": 33.6,
       "pct": 1.3
     }
   ],
@@ -1579,27 +1579,27 @@
     "2026-10": [
       {
         "device": "MOBILE",
-        "views": 228421,
-        "watch_time_hours": 1491.1999999999998,
+        "views": 281860,
+        "watch_time_hours": 1804.1000000000001,
         "pct": 92.5
       },
       {
         "device": "DESKTOP",
-        "views": 10459,
-        "watch_time_hours": 63.099999999999994,
-        "pct": 4.2
+        "views": 13021,
+        "watch_time_hours": 77.1,
+        "pct": 4.3
       },
       {
         "device": "TV",
-        "views": 4891,
-        "watch_time_hours": 63.8,
+        "views": 5975,
+        "watch_time_hours": 75.89999999999999,
         "pct": 2.0
       },
       {
         "device": "TABLET",
-        "views": 3274,
-        "watch_time_hours": 28.000000000000004,
-        "pct": 1.3
+        "views": 3799,
+        "watch_time_hours": 32.800000000000004,
+        "pct": 1.2
       }
     ]
   },
@@ -1610,15 +1610,15 @@
       "published": "2026-10-11",
       "url": "https://www.youtube.com/watch?v=lx2xB-KkRvw",
       "thumbnail": "https://i.ytimg.com/vi/lx2xB-KkRvw/default.jpg",
-      "views": 75860,
-      "watch_time_hours": 558.13,
-      "avg_duration_sec": 56.0,
-      "avg_view_pct": 62.9,
-      "subs_gained": 249,
-      "likes": 1984,
-      "comments": 54,
-      "shares": 179,
-      "engagement_rate": 2.92,
+      "views": 81069,
+      "watch_time_hours": 592.4,
+      "avg_duration_sec": 55.0,
+      "avg_view_pct": 62.7,
+      "subs_gained": 255,
+      "likes": 2130,
+      "comments": 55,
+      "shares": 189,
+      "engagement_rate": 2.93,
       "is_short": false
     },
     {
@@ -1627,33 +1627,16 @@
       "published": "2026-10-16",
       "url": "https://www.youtube.com/watch?v=3RkldBOEV7U",
       "thumbnail": "https://i.ytimg.com/vi/3RkldBOEV7U/default.jpg",
-      "views": 42687,
-      "watch_time_hours": 224.27,
+      "views": 45325,
+      "watch_time_hours": 236.22,
       "avg_duration_sec": 38.0,
       "avg_view_pct": 72.5,
-      "subs_gained": 128,
-      "likes": 1175,
+      "subs_gained": 132,
+      "likes": 1221,
       "comments": 8,
-      "shares": 20,
-      "engagement_rate": 2.82,
+      "shares": 21,
+      "engagement_rate": 2.76,
       "is_short": true
-    },
-    {
-      "id": "4C2Bd6J0-jU",
-      "title": "\ud83e\udd2f 3 Reasons 1.0L Turbo Petrol Engines Are So Powerful! \ud83d\udee0\ufe0f #cars24tamil",
-      "published": "2026-10-12",
-      "url": "https://www.youtube.com/watch?v=4C2Bd6J0-jU",
-      "thumbnail": "https://i.ytimg.com/vi/4C2Bd6J0-jU/default.jpg",
-      "views": 32311,
-      "watch_time_hours": 234.45,
-      "avg_duration_sec": 48.0,
-      "avg_view_pct": 49.4,
-      "subs_gained": 160,
-      "likes": 938,
-      "comments": 25,
-      "shares": 25,
-      "engagement_rate": 3.06,
-      "is_short": false
     },
     {
       "id": "LL_pWduQyak",
@@ -1661,15 +1644,32 @@
       "published": "2026-10-20",
       "url": "https://www.youtube.com/watch?v=LL_pWduQyak",
       "thumbnail": "https://i.ytimg.com/vi/LL_pWduQyak/default.jpg",
-      "views": 23768,
-      "watch_time_hours": 144.63,
+      "views": 43113,
+      "watch_time_hours": 252.7,
       "avg_duration_sec": 41.0,
-      "avg_view_pct": 60.9,
-      "subs_gained": 74,
-      "likes": 770,
-      "comments": 9,
-      "shares": 6,
-      "engagement_rate": 3.3,
+      "avg_view_pct": 61.0,
+      "subs_gained": 121,
+      "likes": 1308,
+      "comments": 18,
+      "shares": 14,
+      "engagement_rate": 3.11,
+      "is_short": false
+    },
+    {
+      "id": "4C2Bd6J0-jU",
+      "title": "\ud83e\udd2f 3 Reasons 1.0L Turbo Petrol Engines Are So Powerful! \ud83d\udee0\ufe0f #cars24tamil",
+      "published": "2026-10-12",
+      "url": "https://www.youtube.com/watch?v=4C2Bd6J0-jU",
+      "thumbnail": "https://i.ytimg.com/vi/4C2Bd6J0-jU/default.jpg",
+      "views": 35139,
+      "watch_time_hours": 250.98,
+      "avg_duration_sec": 48.0,
+      "avg_view_pct": 49.1,
+      "subs_gained": 168,
+      "likes": 1010,
+      "comments": 26,
+      "shares": 28,
+      "engagement_rate": 3.03,
       "is_short": false
     },
     {
@@ -1678,15 +1678,15 @@
       "published": "2026-10-18",
       "url": "https://www.youtube.com/watch?v=fwiM8s-XX4w",
       "thumbnail": "https://i.ytimg.com/vi/fwiM8s-XX4w/default.jpg",
-      "views": 21620,
-      "watch_time_hours": 161.8,
-      "avg_duration_sec": 59.0,
-      "avg_view_pct": 63.5,
-      "subs_gained": 88,
-      "likes": 850,
+      "views": 27666,
+      "watch_time_hours": 203.78,
+      "avg_duration_sec": 58.0,
+      "avg_view_pct": 62.6,
+      "subs_gained": 99,
+      "likes": 1009,
       "comments": 10,
-      "shares": 30,
-      "engagement_rate": 4.12,
+      "shares": 36,
+      "engagement_rate": 3.81,
       "is_short": false
     },
     {
@@ -1695,15 +1695,15 @@
       "published": "2026-10-19",
       "url": "https://www.youtube.com/watch?v=n1emD0jn-Lg",
       "thumbnail": "https://i.ytimg.com/vi/n1emD0jn-Lg/default.jpg",
-      "views": 17010,
-      "watch_time_hours": 107.47,
-      "avg_duration_sec": 42.0,
-      "avg_view_pct": 47.6,
-      "subs_gained": 42,
-      "likes": 472,
-      "comments": 17,
-      "shares": 15,
-      "engagement_rate": 2.96,
+      "views": 19931,
+      "watch_time_hours": 126.72,
+      "avg_duration_sec": 43.0,
+      "avg_view_pct": 47.9,
+      "subs_gained": 50,
+      "likes": 582,
+      "comments": 19,
+      "shares": 16,
+      "engagement_rate": 3.1,
       "is_short": false
     },
     {
@@ -1712,15 +1712,32 @@
       "published": "2026-10-14",
       "url": "https://www.youtube.com/watch?v=vQ3fuOVRDFU",
       "thumbnail": "https://i.ytimg.com/vi/vQ3fuOVRDFU/default.jpg",
-      "views": 13703,
-      "watch_time_hours": 62.53,
+      "views": 14746,
+      "watch_time_hours": 66.63,
       "avg_duration_sec": 32.0,
-      "avg_view_pct": 49.2,
-      "subs_gained": 33,
-      "likes": 365,
+      "avg_view_pct": 49.0,
+      "subs_gained": 36,
+      "likes": 384,
       "comments": 2,
       "shares": 1,
-      "engagement_rate": 2.69,
+      "engagement_rate": 2.62,
+      "is_short": false
+    },
+    {
+      "id": "9jPsRW5d8lo",
+      "title": "\ud83e\udd2f Hyundai 1.5L Diesel Engine: Best in Segment? \ud83d\udee0\ufe0f #cars24tamil",
+      "published": "2026-10-21",
+      "url": "https://www.youtube.com/watch?v=9jPsRW5d8lo",
+      "thumbnail": "https://i.ytimg.com/vi/9jPsRW5d8lo/default.jpg",
+      "views": 10190,
+      "watch_time_hours": 61.57,
+      "avg_duration_sec": 43.0,
+      "avg_view_pct": 54.0,
+      "subs_gained": 33,
+      "likes": 351,
+      "comments": 17,
+      "shares": 15,
+      "engagement_rate": 3.76,
       "is_short": false
     },
     {
@@ -1729,15 +1746,32 @@
       "published": "2026-10-10",
       "url": "https://www.youtube.com/watch?v=P_a78FNVknk",
       "thumbnail": "https://i.ytimg.com/vi/P_a78FNVknk/default.jpg",
-      "views": 7032,
-      "watch_time_hours": 71.98,
+      "views": 8791,
+      "watch_time_hours": 87.3,
       "avg_duration_sec": 73.0,
-      "avg_view_pct": 49.2,
-      "subs_gained": 28,
-      "likes": 319,
-      "comments": 5,
-      "shares": 24,
-      "engagement_rate": 4.95,
+      "avg_view_pct": 49.0,
+      "subs_gained": 35,
+      "likes": 369,
+      "comments": 7,
+      "shares": 29,
+      "engagement_rate": 4.61,
+      "is_short": false
+    },
+    {
+      "id": "HcNRcAhbJH0",
+      "title": "25 km/l Mileage & 0-100 in Under 10s?! #cars24tamil",
+      "published": "2026-10-09",
+      "url": "https://www.youtube.com/watch?v=HcNRcAhbJH0",
+      "thumbnail": "https://i.ytimg.com/vi/HcNRcAhbJH0/default.jpg",
+      "views": 7437,
+      "watch_time_hours": 46.12,
+      "avg_duration_sec": 44.0,
+      "avg_view_pct": 57.9,
+      "subs_gained": 46,
+      "likes": 300,
+      "comments": 12,
+      "shares": 21,
+      "engagement_rate": 4.48,
       "is_short": false
     },
     {
@@ -1746,15 +1780,15 @@
       "published": "2026-10-17",
       "url": "https://www.youtube.com/watch?v=itcJDD-I-WI",
       "thumbnail": "https://i.ytimg.com/vi/itcJDD-I-WI/default.jpg",
-      "views": 6263,
-      "watch_time_hours": 33.12,
+      "views": 7005,
+      "watch_time_hours": 36.93,
       "avg_duration_sec": 33.0,
-      "avg_view_pct": 61.2,
-      "subs_gained": 16,
-      "likes": 245,
+      "avg_view_pct": 61.6,
+      "subs_gained": 17,
+      "likes": 263,
       "comments": 2,
       "shares": 2,
-      "engagement_rate": 3.98,
+      "engagement_rate": 3.81,
       "is_short": true
     },
     {
@@ -1763,15 +1797,15 @@
       "published": "2026-10-15",
       "url": "https://www.youtube.com/watch?v=OWz1YkeEbZg",
       "thumbnail": "https://i.ytimg.com/vi/OWz1YkeEbZg/default.jpg",
-      "views": 4363,
-      "watch_time_hours": 30.08,
-      "avg_duration_sec": 49.0,
+      "views": 4759,
+      "watch_time_hours": 32.12,
+      "avg_duration_sec": 50.0,
       "avg_view_pct": 52.1,
-      "subs_gained": 25,
-      "likes": 177,
+      "subs_gained": 26,
+      "likes": 183,
       "comments": 6,
-      "shares": 19,
-      "engagement_rate": 4.63,
+      "shares": 20,
+      "engagement_rate": 4.39,
       "is_short": false
     },
     {
@@ -1779,7 +1813,7 @@
       "title": "Maruti Eeco's Under Seat Engine! #cars24tamil",
       "published": "2025-10-30",
       "url": "https://www.youtube.com/watch?v=_FQJ75t6Kdw",
-      "thumbnail": "https://i9.ytimg.com/vi/_FQJ75t6Kdw/default.jpg?sqp=COiT7dYG&rs=AOn4CLBsvvgIU_mDX8mDx5K_9S9LdTD8Xg",
+      "thumbnail": "https://i9.ytimg.com/vi/_FQJ75t6Kdw/default.jpg?sqp=COCo8tYG&rs=AOn4CLCIHTT32HDGRKVb4nG2Veh_jcgdcQ",
       "views": 3076,
       "watch_time_hours": 29.93,
       "avg_duration_sec": 61.0,
@@ -1792,28 +1826,11 @@
       "is_short": false
     },
     {
-      "id": "HcNRcAhbJH0",
-      "title": "25 km/l Mileage & 0-100 in Under 10s?! #cars24tamil",
-      "published": "2026-10-09",
-      "url": "https://www.youtube.com/watch?v=HcNRcAhbJH0",
-      "thumbnail": "https://i.ytimg.com/vi/HcNRcAhbJH0/default.jpg",
-      "views": 2734,
-      "watch_time_hours": 20.35,
-      "avg_duration_sec": 46.0,
-      "avg_view_pct": 59.9,
-      "subs_gained": 30,
-      "likes": 139,
-      "comments": 9,
-      "shares": 9,
-      "engagement_rate": 5.74,
-      "is_short": false
-    },
-    {
       "id": "9lh_XZLp6zA",
       "title": "Congestion TAX in Karnataka?!? \ud83d\ude28 #cars24Tamil",
       "published": "2025-10-28",
       "url": "https://www.youtube.com/watch?v=9lh_XZLp6zA",
-      "thumbnail": "https://i9.ytimg.com/vi/9lh_XZLp6zA/default.jpg?sqp=COiT7dYG&rs=AOn4CLAqkawR8fG5nODSadgJO09iAqbZ0A",
+      "thumbnail": "https://i9.ytimg.com/vi/9lh_XZLp6zA/default.jpg?sqp=COCo8tYG&rs=AOn4CLD6uLPeixwv-7Qi7WdJnYfLeHVbug",
       "views": 1620,
       "watch_time_hours": 5.73,
       "avg_duration_sec": 31.0,
@@ -1830,7 +1847,7 @@
       "title": "Why Liquor Shops on Highways? \ud83d\ude35\u200d\ud83d\udcab #cars24Tamil",
       "published": "2025-10-29",
       "url": "https://www.youtube.com/watch?v=LmmZwh8Hltw",
-      "thumbnail": "https://i9.ytimg.com/vi/LmmZwh8Hltw/default.jpg?sqp=COiT7dYG&rs=AOn4CLBbaqMrdHU3C40MossdqXzDUZa6FA",
+      "thumbnail": "https://i9.ytimg.com/vi/LmmZwh8Hltw/default.jpg?sqp=COCo8tYG&rs=AOn4CLCMKIFxHnRTfVkkNQ7o6kVAujc8Vw",
       "views": 1512,
       "watch_time_hours": 12.8,
       "avg_duration_sec": 43.0,
@@ -1847,7 +1864,7 @@
       "title": "Maruti Ignis - India's BEST Hatchback? #cars24tamil",
       "published": "2025-11-01",
       "url": "https://www.youtube.com/watch?v=rZJxAv_-kII",
-      "thumbnail": "https://i9.ytimg.com/vi/rZJxAv_-kII/default.jpg?sqp=COiT7dYG&rs=AOn4CLB98Kf0ZWD_VyhloW2TP68E0bLnVQ",
+      "thumbnail": "https://i9.ytimg.com/vi/rZJxAv_-kII/default.jpg?sqp=COCo8tYG&rs=AOn4CLDBcZJ7MJAs50cFpwwtwjIkkEWsXQ",
       "views": 1297,
       "watch_time_hours": 5.75,
       "avg_duration_sec": 27.0,
@@ -1864,7 +1881,7 @@
       "title": "How to Do Your Car\u2019s KYV (Know Your Vehicle)? #cars24tamil",
       "published": "2025-11-12",
       "url": "https://www.youtube.com/watch?v=3brGUNO5-wI",
-      "thumbnail": "https://i9.ytimg.com/vi/3brGUNO5-wI/default.jpg?sqp=COiT7dYG&rs=AOn4CLBZTGmDdlzxcGKmANCFvUWxE4RQMw",
+      "thumbnail": "https://i9.ytimg.com/vi/3brGUNO5-wI/default.jpg?sqp=COCo8tYG&rs=AOn4CLD8EbjmWlorkDFs7R8BAAA59z5tOg",
       "views": 1007,
       "watch_time_hours": 7.87,
       "avg_duration_sec": 35.0,
@@ -1881,7 +1898,7 @@
       "title": "Maruti Zen Estilo - Why Maruti? #cars24tamil",
       "published": "2025-11-03",
       "url": "https://www.youtube.com/watch?v=Ex7HTIFgkHE",
-      "thumbnail": "https://i9.ytimg.com/vi/Ex7HTIFgkHE/default.jpg?sqp=COiT7dYG&rs=AOn4CLDbN-0K0GUrb1jr-3QR2t8tBmMHjw",
+      "thumbnail": "https://i9.ytimg.com/vi/Ex7HTIFgkHE/default.jpg?sqp=COCo8tYG&rs=AOn4CLBpx8dcn3uEGuwxBbKBMVjZNH_k5A",
       "views": 349,
       "watch_time_hours": 1.47,
       "avg_duration_sec": 22.0,
@@ -1898,7 +1915,7 @@
       "title": "Harshad Mehta's LS400! #cars24tamil",
       "published": "2025-11-07",
       "url": "https://www.youtube.com/watch?v=EeV4-ScHwr4",
-      "thumbnail": "https://i9.ytimg.com/vi/EeV4-ScHwr4/default.jpg?sqp=COiT7dYG&rs=AOn4CLC_nbn6umjtEozXuwAcZfUMpIVSvw",
+      "thumbnail": "https://i9.ytimg.com/vi/EeV4-ScHwr4/default.jpg?sqp=COCo8tYG&rs=AOn4CLB7IWsGclw_77lRIWdIpw4SCrZ7Hw",
       "views": 322,
       "watch_time_hours": 0.82,
       "avg_duration_sec": 14.0,
@@ -1915,7 +1932,7 @@
       "title": "Correct Way To Hold The Steering Wheel #cars24",
       "published": "2025-11-03",
       "url": "https://www.youtube.com/watch?v=-EdYrm3Vt5k",
-      "thumbnail": "https://i9.ytimg.com/vi/-EdYrm3Vt5k/default.jpg?sqp=COiT7dYG&rs=AOn4CLCYJVyLOuMQwPPJZ_aPGuWZe5pRkg",
+      "thumbnail": "https://i9.ytimg.com/vi/-EdYrm3Vt5k/default.jpg?sqp=COCo8tYG&rs=AOn4CLCcg2VfEGESkbWxtBosiaWdb2fiFA",
       "views": 182,
       "watch_time_hours": 0.68,
       "avg_duration_sec": 25.0,
@@ -1932,7 +1949,7 @@
       "title": "Rear Underside Protection Device! #cars24",
       "published": "2025-11-04",
       "url": "https://www.youtube.com/watch?v=dCh9a0gjtIw",
-      "thumbnail": "https://i9.ytimg.com/vi/dCh9a0gjtIw/default.jpg?sqp=COiT7dYG&rs=AOn4CLBiZSnX2tUvNdhtMcAniXX_2KL4mA",
+      "thumbnail": "https://i9.ytimg.com/vi/dCh9a0gjtIw/default.jpg?sqp=COCo8tYG&rs=AOn4CLC_Uwe-Nbn6-AAK6qFIMTB9nNpkxA",
       "views": 161,
       "watch_time_hours": 0.42,
       "avg_duration_sec": 16.0,
@@ -1949,7 +1966,7 @@
       "title": "ZERO Road Tax on Private Roads! #cars24tamil",
       "published": "2025-10-31",
       "url": "https://www.youtube.com/watch?v=YhPHEJ1gV2U",
-      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=COiT7dYG&rs=AOn4CLAS5nPzQZgtTjwOB1AVIPSjTHFMrQ",
+      "thumbnail": "https://i9.ytimg.com/vi/YhPHEJ1gV2U/default.jpg?sqp=COCo8tYG&rs=AOn4CLBWIr14oTX7y-BFTMfT9rjcUvnhjA",
       "views": 54,
       "watch_time_hours": 0.32,
       "avg_duration_sec": 35.0,
