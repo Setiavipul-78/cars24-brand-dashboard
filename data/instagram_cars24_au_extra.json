@@ -2,7 +2,7 @@
   "age": [
     {
       "key": "13-17",
-      "value": 40
+      "value": 39
     },
     {
       "key": "18-24",
@@ -10,19 +10,19 @@
     },
     {
       "key": "25-34",
-      "value": 4374
+      "value": 4379
     },
     {
       "key": "35-44",
-      "value": 4208
+      "value": 4213
     },
     {
       "key": "45-54",
-      "value": 2419
+      "value": 2421
     },
     {
       "key": "55-64",
-      "value": 1099
+      "value": 1101
     },
     {
       "key": "65+",
@@ -32,21 +32,21 @@
   "gender": [
     {
       "key": "F",
-      "value": 4290
+      "value": 4296
     },
     {
       "key": "M",
-      "value": 7847
+      "value": 7855
     },
     {
       "key": "U",
-      "value": 1548
+      "value": 1547
     }
   ],
   "city": [
     {
       "key": "Sydney, New South Wales",
-      "value": 2755
+      "value": 2760
     },
     {
       "key": "Bendigo, Victoria",
@@ -70,7 +70,7 @@
     },
     {
       "key": "Perth, Western Australia",
-      "value": 200
+      "value": 199
     },
     {
       "key": "Craigieburn, Victoria",
@@ -106,7 +106,7 @@
     },
     {
       "key": "Melbourne, Victoria",
-      "value": 3823
+      "value": 3828
     },
     {
       "key": "Gurugram, Haryana",
@@ -122,19 +122,19 @@
     },
     {
       "key": "Ipswich, Queensland",
-      "value": 88
+      "value": 89
     },
     {
       "key": "Mount Cottrell, Victoria",
-      "value": 38
+      "value": 39
     },
     {
       "key": "Brisbane, Queensland",
-      "value": 636
+      "value": 637
     },
     {
       "key": "Adelaide, South Australia",
-      "value": 258
+      "value": 257
     },
     {
       "key": "Laverton North, Victoria",
@@ -162,7 +162,7 @@
     },
     {
       "key": "Chennai, Tamil Nadu",
-      "value": 29
+      "value": 30
     },
     {
       "key": "Cairns, Queensland",
@@ -210,7 +210,7 @@
     },
     {
       "key": "Hyderabad, Telangana",
-      "value": 24
+      "value": 22
     },
     {
       "key": "Newcastle, New South Wales",
@@ -232,7 +232,7 @@
     },
     {
       "key": "NP",
-      "value": 11
+      "value": 12
     },
     {
       "key": "BD",
@@ -268,7 +268,7 @@
     },
     {
       "key": "SA",
-      "value": 16
+      "value": 17
     },
     {
       "key": "BR",
@@ -280,7 +280,7 @@
     },
     {
       "key": "SG",
-      "value": 17
+      "value": 18
     },
     {
       "key": "KE",
@@ -324,7 +324,7 @@
     },
     {
       "key": "IN",
-      "value": 1088
+      "value": 1086
     },
     {
       "key": "ZA",
@@ -368,11 +368,11 @@
     },
     {
       "key": "TH",
-      "value": 18
+      "value": 17
     },
     {
       "key": "AU",
-      "value": 11657
+      "value": 11669
     },
     {
       "key": "LB",

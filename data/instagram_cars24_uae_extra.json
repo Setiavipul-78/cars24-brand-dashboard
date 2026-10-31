@@ -2,27 +2,27 @@
   "age": [
     {
       "key": "13-17",
-      "value": 368
+      "value": 367
     },
     {
       "key": "18-24",
-      "value": 2671
+      "value": 2667
     },
     {
       "key": "25-34",
-      "value": 19349
+      "value": 19359
     },
     {
       "key": "35-44",
-      "value": 20641
+      "value": 20653
     },
     {
       "key": "45-54",
-      "value": 6940
+      "value": 6954
     },
     {
       "key": "55-64",
-      "value": 1492
+      "value": 1497
     },
     {
       "key": "65+",
@@ -32,15 +32,15 @@
   "gender": [
     {
       "key": "F",
-      "value": 8314
+      "value": 8318
     },
     {
       "key": "M",
-      "value": 35459
+      "value": 35488
     },
     {
       "key": "U",
-      "value": 8183
+      "value": 8186
     }
   ],
   "city": [
@@ -53,8 +53,12 @@
       "value": 78
     },
     {
+      "key": "Kolkata, West Bengal",
+      "value": 75
+    },
+    {
       "key": " Al Lusayli, Dubai",
-      "value": 226
+      "value": 227
     },
     {
       "key": "Lagos, Lagos State",
@@ -82,7 +86,7 @@
     },
     {
       "key": "Madinat Zayed, Abu Dhabi",
-      "value": 271
+      "value": 272
     },
     {
       "key": "Karachi, Sindh",
@@ -90,7 +94,7 @@
     },
     {
       "key": "Al Ain, Abu Dhabi",
-      "value": 1204
+      "value": 1208
     },
     {
       "key": "Accra, Greater Accra Region",
@@ -106,7 +110,7 @@
     },
     {
       "key": "Al Ajman, Emirate of Ajman",
-      "value": 1857
+      "value": 1856
     },
     {
       "key": "Jeddah, Makkah Region",
@@ -126,7 +130,7 @@
     },
     {
       "key": "Abu Dhabi, Abu Dhabi",
-      "value": 7128
+      "value": 7132
     },
     {
       "key": "Gurugram, Haryana",
@@ -134,7 +138,7 @@
     },
     {
       "key": "Delhi, Delhi",
-      "value": 296
+      "value": 294
     },
     {
       "key": "Lahore, Punjab",
@@ -143,10 +147,6 @@
     {
       "key": "Muscat, Muscat Governorate",
       "value": 99
-    },
-    {
-      "key": "Damascus, Damascus Governorate",
-      "value": 75
     },
     {
       "key": "Amman, Amman Governorate",
@@ -190,7 +190,7 @@
     },
     {
       "key": "Dubai, Dubai",
-      "value": 17390
+      "value": 17415
     },
     {
       "key": "Mumbai, Maharashtra",
@@ -198,7 +198,7 @@
     },
     {
       "key": "Sharjah, Emirate of Sharjah",
-      "value": 4956
+      "value": 4963
     },
     {
       "key": "Fujairah, Fujairah",
@@ -251,8 +251,12 @@
       "value": 124
     },
     {
+      "key": "YE",
+      "value": 43
+    },
+    {
       "key": "FR",
-      "value": 65
+      "value": 66
     },
     {
       "key": "LY",
@@ -280,7 +284,7 @@
     },
     {
       "key": "DZ",
-      "value": 199
+      "value": 198
     },
     {
       "key": "KE",
@@ -292,7 +296,7 @@
     },
     {
       "key": "GB",
-      "value": 373
+      "value": 372
     },
     {
       "key": "CA",
@@ -304,7 +308,7 @@
     },
     {
       "key": "US",
-      "value": 505
+      "value": 503
     },
     {
       "key": "GH",
@@ -316,7 +320,7 @@
     },
     {
       "key": "AE",
-      "value": 36406
+      "value": 36447
     },
     {
       "key": "UZ",
@@ -376,7 +380,7 @@
     },
     {
       "key": "LB",
-      "value": 155
+      "value": 154
     },
     {
       "key": "PH",
@@ -393,10 +397,6 @@
     {
       "key": "PK",
       "value": 922
-    },
-    {
-      "key": "NL",
-      "value": 43
     },
     {
       "key": "TR",
