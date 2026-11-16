@@ -2,8 +2,8 @@
   "geo": [
     {
       "city": "Bengaluru",
-      "views": 83864,
-      "watch_time_hours": 2468.8
+      "views": 83929,
+      "watch_time_hours": 2470.0
     },
     {
       "city": "Delhi",
@@ -22,8 +22,8 @@
     },
     {
       "city": "Mumbai",
-      "views": 41481,
-      "watch_time_hours": 1231.2
+      "views": 41511,
+      "watch_time_hours": 1231.6
     },
     {
       "city": "Kolkata",
@@ -1527,8 +1527,8 @@
     "2026-11": [
       {
         "city": "Bengaluru",
-        "views": 7872,
-        "watch_time_hours": 136.1
+        "views": 7937,
+        "watch_time_hours": 137.3
       },
       {
         "city": "Hyderabad",
@@ -1542,8 +1542,8 @@
       },
       {
         "city": "Mumbai",
-        "views": 3330,
-        "watch_time_hours": 65.0
+        "views": 3360,
+        "watch_time_hours": 65.5
       },
       {
         "city": "Delhi",
@@ -2396,7 +2396,7 @@
       {
         "age_group": "age25-34",
         "gender": "male",
-        "viewer_pct": 54.0
+        "viewer_pct": 53.9
       },
       {
         "age_group": "age35-44",
@@ -2406,7 +2406,7 @@
       {
         "age_group": "age35-44",
         "gender": "male",
-        "viewer_pct": 19.7
+        "viewer_pct": 19.8
       },
       {
         "age_group": "age45-54",
@@ -2416,7 +2416,7 @@
       {
         "age_group": "age45-54",
         "gender": "male",
-        "viewer_pct": 4.0
+        "viewer_pct": 3.9
       },
       {
         "age_group": "age55-64",
@@ -2428,56 +2428,56 @@
   "traffic_sources": [
     {
       "source": "SUBSCRIBER",
-      "views": 759874,
-      "watch_time_hours": 19938.4,
+      "views": 760636,
+      "watch_time_hours": 19949.4,
       "pct": 82.7
     },
     {
       "source": "RELATED_VIDEO",
-      "views": 45988,
-      "watch_time_hours": 2638.8,
+      "views": 46008,
+      "watch_time_hours": 2639.5,
       "pct": 5.0
     },
     {
       "source": "YT_SEARCH",
-      "views": 41092,
-      "watch_time_hours": 1080.8,
+      "views": 41382,
+      "watch_time_hours": 1086.2,
       "pct": 4.5
     },
     {
       "source": "NO_LINK_OTHER",
-      "views": 20613,
-      "watch_time_hours": 717.4,
+      "views": 20659,
+      "watch_time_hours": 718.6,
       "pct": 2.2
     },
     {
       "source": "YT_CHANNEL",
-      "views": 15869,
-      "watch_time_hours": 524.6,
+      "views": 15883,
+      "watch_time_hours": 525.4,
       "pct": 1.7
     },
     {
       "source": "YT_OTHER_PAGE",
-      "views": 15367,
-      "watch_time_hours": 793.8,
+      "views": 15383,
+      "watch_time_hours": 794.4,
       "pct": 1.7
     },
     {
       "source": "SHORTS",
-      "views": 10453,
+      "views": 10454,
       "watch_time_hours": 29.5,
       "pct": 1.1
     },
     {
       "source": "EXT_URL",
-      "views": 3781,
-      "watch_time_hours": 138.6,
+      "views": 3799,
+      "watch_time_hours": 139.3,
       "pct": 0.4
     },
     {
       "source": "PLAYLIST",
-      "views": 2271,
-      "watch_time_hours": 139.8,
+      "views": 2274,
+      "watch_time_hours": 140.2,
       "pct": 0.2
     },
     {
@@ -3385,44 +3385,44 @@
     "2026-11": [
       {
         "source": "SUBSCRIBER",
-        "views": 63461,
-        "watch_time_hours": 979.8000000000001,
-        "pct": 87.8
+        "views": 64223,
+        "watch_time_hours": 990.7,
+        "pct": 87.4
       },
       {
         "source": "YT_SEARCH",
-        "views": 3864,
-        "watch_time_hours": 66.6,
-        "pct": 5.3
+        "views": 4154,
+        "watch_time_hours": 72.0,
+        "pct": 5.7
       },
       {
         "source": "NO_LINK_OTHER",
-        "views": 2102,
-        "watch_time_hours": 49.8,
+        "views": 2148,
+        "watch_time_hours": 50.9,
         "pct": 2.9
       },
       {
         "source": "RELATED_VIDEO",
-        "views": 967,
-        "watch_time_hours": 55.9,
+        "views": 987,
+        "watch_time_hours": 56.5,
         "pct": 1.3
       },
       {
         "source": "YT_OTHER_PAGE",
-        "views": 725,
-        "watch_time_hours": 39.2,
+        "views": 741,
+        "watch_time_hours": 39.7,
         "pct": 1.0
       },
       {
         "source": "YT_CHANNEL",
-        "views": 633,
-        "watch_time_hours": 16.599999999999998,
+        "views": 647,
+        "watch_time_hours": 17.299999999999997,
         "pct": 0.9
       },
       {
         "source": "EXT_URL",
-        "views": 224,
-        "watch_time_hours": 8.3,
+        "views": 242,
+        "watch_time_hours": 9.0,
         "pct": 0.3
       },
       {
@@ -3433,13 +3433,13 @@
       },
       {
         "source": "PLAYLIST",
-        "views": 111,
-        "watch_time_hours": 6.099999999999999,
+        "views": 114,
+        "watch_time_hours": 6.399999999999999,
         "pct": 0.2
       },
       {
         "source": "SHORTS",
-        "views": 52,
+        "views": 53,
         "watch_time_hours": 0.30000000000000004,
         "pct": 0.1
       },
@@ -3454,26 +3454,26 @@
   "devices": [
     {
       "device": "MOBILE",
-      "views": 583543,
-      "watch_time_hours": 14071.0,
+      "views": 584385,
+      "watch_time_hours": 14084.2,
       "pct": 63.7
     },
     {
       "device": "DESKTOP",
-      "views": 159676,
-      "watch_time_hours": 4381.3,
+      "views": 159888,
+      "watch_time_hours": 4384.8,
       "pct": 17.4
     },
     {
       "device": "TV",
-      "views": 137233,
-      "watch_time_hours": 5742.7,
+      "views": 137324,
+      "watch_time_hours": 5745.3,
       "pct": 15.0
     },
     {
       "device": "TABLET",
-      "views": 35240,
-      "watch_time_hours": 1819.6,
+      "views": 35262,
+      "watch_time_hours": 1820.6,
       "pct": 3.8
     }
   ],
@@ -3781,27 +3781,27 @@
     "2026-11": [
       {
         "device": "MOBILE",
-        "views": 49873,
-        "watch_time_hours": 691.4000000000001,
+        "views": 50715,
+        "watch_time_hours": 704.6,
         "pct": 69.1
       },
       {
         "device": "DESKTOP",
-        "views": 13606,
-        "watch_time_hours": 213.9,
-        "pct": 18.9
+        "views": 13818,
+        "watch_time_hours": 217.5,
+        "pct": 18.8
       },
       {
         "device": "TV",
-        "views": 7001,
-        "watch_time_hours": 229.70000000000005,
+        "views": 7092,
+        "watch_time_hours": 232.30000000000004,
         "pct": 9.7
       },
       {
         "device": "TABLET",
-        "views": 1697,
-        "watch_time_hours": 91.8,
-        "pct": 2.4
+        "views": 1719,
+        "watch_time_hours": 92.8,
+        "pct": 2.3
       }
     ]
   },
@@ -3812,12 +3812,12 @@
       "published": "2026-10-23",
       "url": "https://www.youtube.com/watch?v=iYUNdXYHcqM",
       "thumbnail": "https://i.ytimg.com/vi/iYUNdXYHcqM/default.jpg",
-      "views": 160511,
-      "watch_time_hours": 2298.55,
+      "views": 160768,
+      "watch_time_hours": 2302.48,
       "avg_duration_sec": 168.0,
       "avg_view_pct": 33.2,
       "subs_gained": 199,
-      "likes": 861,
+      "likes": 863,
       "comments": 61,
       "shares": 126,
       "engagement_rate": 0.65,
@@ -3829,15 +3829,15 @@
       "published": "2026-08-25",
       "url": "https://www.youtube.com/watch?v=XWktHAMAB_g",
       "thumbnail": "https://i.ytimg.com/vi/XWktHAMAB_g/default.jpg",
-      "views": 104969,
-      "watch_time_hours": 2654.98,
+      "views": 105116,
+      "watch_time_hours": 2657.7,
       "avg_duration_sec": 193.0,
       "avg_view_pct": 33.3,
-      "subs_gained": 207,
+      "subs_gained": 208,
       "likes": 1173,
       "comments": 66,
       "shares": 132,
-      "engagement_rate": 1.31,
+      "engagement_rate": 1.3,
       "is_short": false
     },
     {
@@ -3846,8 +3846,8 @@
       "published": "2026-05-15",
       "url": "https://www.youtube.com/watch?v=dlcFoU2FrOA",
       "thumbnail": "https://i.ytimg.com/vi/dlcFoU2FrOA/default.jpg",
-      "views": 78892,
-      "watch_time_hours": 2253.78,
+      "views": 78937,
+      "watch_time_hours": 2254.48,
       "avg_duration_sec": 105.0,
       "avg_view_pct": 49.8,
       "subs_gained": 568,
@@ -3863,12 +3863,12 @@
       "published": "2026-10-06",
       "url": "https://www.youtube.com/watch?v=dTg4YD4ZuEw",
       "thumbnail": "https://i.ytimg.com/vi/dTg4YD4ZuEw/default.jpg",
-      "views": 63987,
-      "watch_time_hours": 1144.4,
+      "views": 64136,
+      "watch_time_hours": 1147.57,
       "avg_duration_sec": 140.0,
-      "avg_view_pct": 32.2,
+      "avg_view_pct": 32.3,
       "subs_gained": 98,
-      "likes": 519,
+      "likes": 520,
       "comments": 54,
       "shares": 48,
       "engagement_rate": 0.97,
@@ -3880,15 +3880,15 @@
       "published": "2026-09-15",
       "url": "https://www.youtube.com/watch?v=Ltbhjiuz5BU",
       "thumbnail": "https://i.ytimg.com/vi/Ltbhjiuz5BU/default.jpg",
-      "views": 60034,
-      "watch_time_hours": 1161.12,
+      "views": 60152,
+      "watch_time_hours": 1163.27,
       "avg_duration_sec": 147.0,
       "avg_view_pct": 38.4,
       "subs_gained": 136,
-      "likes": 669,
+      "likes": 668,
       "comments": 48,
       "shares": 38,
-      "engagement_rate": 1.26,
+      "engagement_rate": 1.25,
       "is_short": false
     },
     {
@@ -3897,12 +3897,12 @@
       "published": "2026-09-29",
       "url": "https://www.youtube.com/watch?v=hNz_l_KR3Pc",
       "thumbnail": "https://i.ytimg.com/vi/hNz_l_KR3Pc/default.jpg",
-      "views": 38679,
-      "watch_time_hours": 807.13,
+      "views": 38682,
+      "watch_time_hours": 807.45,
       "avg_duration_sec": 179.0,
       "avg_view_pct": 35.8,
       "subs_gained": 63,
-      "likes": 360,
+      "likes": 361,
       "comments": 23,
       "shares": 37,
       "engagement_rate": 1.09,
@@ -3914,8 +3914,8 @@
       "published": "2026-03-06",
       "url": "https://www.youtube.com/watch?v=E30R0qAIYM0",
       "thumbnail": "https://i.ytimg.com/vi/E30R0qAIYM0/default.jpg",
-      "views": 38263,
-      "watch_time_hours": 2450.6,
+      "views": 38279,
+      "watch_time_hours": 2450.83,
       "avg_duration_sec": 236.0,
       "avg_view_pct": 39.1,
       "subs_gained": 228,
@@ -3931,8 +3931,8 @@
       "published": "2026-05-29",
       "url": "https://www.youtube.com/watch?v=oowCqHcWSfs",
       "thumbnail": "https://i.ytimg.com/vi/oowCqHcWSfs/default.jpg",
-      "views": 31852,
-      "watch_time_hours": 1556.6,
+      "views": 31856,
+      "watch_time_hours": 1556.72,
       "avg_duration_sec": 177.0,
       "avg_view_pct": 36.5,
       "subs_gained": 255,
@@ -3948,15 +3948,15 @@
       "published": "2026-11-06",
       "url": "https://www.youtube.com/watch?v=Ds8POmEEcZc",
       "thumbnail": "https://i.ytimg.com/vi/Ds8POmEEcZc/default.jpg",
-      "views": 30323,
-      "watch_time_hours": 524.68,
+      "views": 30652,
+      "watch_time_hours": 529.3,
       "avg_duration_sec": 173.0,
-      "avg_view_pct": 41.0,
-      "subs_gained": 30,
-      "likes": 245,
+      "avg_view_pct": 40.9,
+      "subs_gained": 31,
+      "likes": 246,
       "comments": 24,
       "shares": 25,
-      "engagement_rate": 0.97,
+      "engagement_rate": 0.96,
       "is_short": false
     },
     {
@@ -3965,8 +3965,8 @@
       "published": "2026-07-14",
       "url": "https://www.youtube.com/watch?v=profyv540G0",
       "thumbnail": "https://i.ytimg.com/vi/profyv540G0/default.jpg",
-      "views": 28738,
-      "watch_time_hours": 1130.57,
+      "views": 28740,
+      "watch_time_hours": 1130.63,
       "avg_duration_sec": 141.0,
       "avg_view_pct": 32.8,
       "subs_gained": 155,
@@ -3982,8 +3982,8 @@
       "published": "2026-04-10",
       "url": "https://www.youtube.com/watch?v=e1JP20OrZZ4",
       "thumbnail": "https://i.ytimg.com/vi/e1JP20OrZZ4/default.jpg",
-      "views": 28359,
-      "watch_time_hours": 1689.38,
+      "views": 28364,
+      "watch_time_hours": 1689.52,
       "avg_duration_sec": 216.0,
       "avg_view_pct": 34.8,
       "subs_gained": 139,
@@ -3999,8 +3999,8 @@
       "published": "2026-01-23",
       "url": "https://www.youtube.com/watch?v=m7biwKzMyms",
       "thumbnail": "https://i.ytimg.com/vi/m7biwKzMyms/default.jpg",
-      "views": 25895,
-      "watch_time_hours": 1137.62,
+      "views": 25915,
+      "watch_time_hours": 1137.77,
       "avg_duration_sec": 166.0,
       "avg_view_pct": 41.5,
       "subs_gained": 160,
@@ -4016,8 +4016,8 @@
       "published": "2026-09-22",
       "url": "https://www.youtube.com/watch?v=2Glw8s3z1hw",
       "thumbnail": "https://i.ytimg.com/vi/2Glw8s3z1hw/default.jpg",
-      "views": 24548,
-      "watch_time_hours": 469.43,
+      "views": 24549,
+      "watch_time_hours": 469.48,
       "avg_duration_sec": 160.0,
       "avg_view_pct": 46.9,
       "subs_gained": 50,
@@ -4033,15 +4033,15 @@
       "published": "2026-06-19",
       "url": "https://www.youtube.com/watch?v=ACNUUSToKAs",
       "thumbnail": "https://i.ytimg.com/vi/ACNUUSToKAs/default.jpg",
-      "views": 22418,
-      "watch_time_hours": 1079.87,
+      "views": 22446,
+      "watch_time_hours": 1080.53,
       "avg_duration_sec": 184.0,
       "avg_view_pct": 45.9,
       "subs_gained": 165,
       "likes": 786,
       "comments": 136,
       "shares": 122,
-      "engagement_rate": 4.66,
+      "engagement_rate": 4.65,
       "is_short": false
     },
     {
@@ -4084,8 +4084,8 @@
       "published": "2026-10-30",
       "url": "https://www.youtube.com/watch?v=fy3ifLt6b_4",
       "thumbnail": "https://i.ytimg.com/vi/fy3ifLt6b_4/default.jpg",
-      "views": 14293,
-      "watch_time_hours": 282.9,
+      "views": 14299,
+      "watch_time_hours": 283.2,
       "avg_duration_sec": 229.0,
       "avg_view_pct": 39.9,
       "subs_gained": 7,
@@ -4101,7 +4101,7 @@
       "published": "2025-12-12",
       "url": "https://www.youtube.com/watch?v=iPdumiSoh2E",
       "thumbnail": "https://i.ytimg.com/vi/iPdumiSoh2E/default.jpg",
-      "views": 10483,
+      "views": 10484,
       "watch_time_hours": 423.43,
       "avg_duration_sec": 147.0,
       "avg_view_pct": 36.3,
@@ -4118,8 +4118,8 @@
       "published": "2025-12-30",
       "url": "https://www.youtube.com/watch?v=PxA78OFphUE",
       "thumbnail": "https://i.ytimg.com/vi/PxA78OFphUE/default.jpg",
-      "views": 9592,
-      "watch_time_hours": 364.72,
+      "views": 9618,
+      "watch_time_hours": 365.27,
       "avg_duration_sec": 157.0,
       "avg_view_pct": 40.3,
       "subs_gained": 66,
@@ -4152,7 +4152,7 @@
       "published": "2026-09-09",
       "url": "https://www.youtube.com/watch?v=qAwAcmj5_TA",
       "thumbnail": "https://i.ytimg.com/vi/qAwAcmj5_TA/default.jpg",
-      "views": 8394,
+      "views": 8398,
       "watch_time_hours": 71.17,
       "avg_duration_sec": 131.0,
       "avg_view_pct": 31.9,
@@ -4169,8 +4169,8 @@
       "published": "2026-10-13",
       "url": "https://www.youtube.com/watch?v=qFGyTrGpg5E",
       "thumbnail": "https://i.ytimg.com/vi/qFGyTrGpg5E/default.jpg",
-      "views": 8151,
-      "watch_time_hours": 61.78,
+      "views": 8156,
+      "watch_time_hours": 61.92,
       "avg_duration_sec": 116.0,
       "avg_view_pct": 48.3,
       "subs_gained": 7,
@@ -4203,8 +4203,8 @@
       "published": "2026-03-13",
       "url": "https://www.youtube.com/watch?v=0A19GJ8Ua8I",
       "thumbnail": "https://i.ytimg.com/vi/0A19GJ8Ua8I/default.jpg",
-      "views": 7404,
-      "watch_time_hours": 314.78,
+      "views": 7410,
+      "watch_time_hours": 314.82,
       "avg_duration_sec": 154.0,
       "avg_view_pct": 45.5,
       "subs_gained": 60,
@@ -4220,8 +4220,8 @@
       "published": "2026-08-05",
       "url": "https://www.youtube.com/watch?v=3IciJ8Deuvs",
       "thumbnail": "https://i.ytimg.com/vi/3IciJ8Deuvs/default.jpg",
-      "views": 7234,
-      "watch_time_hours": 246.95,
+      "views": 7237,
+      "watch_time_hours": 247.1,
       "avg_duration_sec": 124.0,
       "avg_view_pct": 44.5,
       "subs_gained": 37,
@@ -4254,8 +4254,8 @@
       "published": "2026-05-08",
       "url": "https://www.youtube.com/watch?v=rfmB0oIKaKo",
       "thumbnail": "https://i.ytimg.com/vi/rfmB0oIKaKo/default.jpg",
-      "views": 4992,
-      "watch_time_hours": 275.48,
+      "views": 4994,
+      "watch_time_hours": 275.63,
       "avg_duration_sec": 200.0,
       "avg_view_pct": 37.7,
       "subs_gained": 48,
@@ -4271,7 +4271,7 @@
       "published": "2026-07-28",
       "url": "https://www.youtube.com/watch?v=tozl2JoL4yE",
       "thumbnail": "https://i.ytimg.com/vi/tozl2JoL4yE/default.jpg",
-      "views": 4857,
+      "views": 4859,
       "watch_time_hours": 215.37,
       "avg_duration_sec": 162.0,
       "avg_view_pct": 43.8,
@@ -4279,7 +4279,7 @@
       "likes": 180,
       "comments": 4,
       "shares": 29,
-      "engagement_rate": 4.39,
+      "engagement_rate": 4.38,
       "is_short": false
     },
     {
@@ -4288,7 +4288,7 @@
       "published": "2026-07-21",
       "url": "https://www.youtube.com/watch?v=uzGSjgG-bqU",
       "thumbnail": "https://i.ytimg.com/vi/uzGSjgG-bqU/default.jpg",
-      "views": 4838,
+      "views": 4839,
       "watch_time_hours": 148.8,
       "avg_duration_sec": 111.0,
       "avg_view_pct": 44.2,
@@ -4305,8 +4305,8 @@
       "published": "2026-08-18",
       "url": "https://www.youtube.com/watch?v=_LSUYogSAvo",
       "thumbnail": "https://i.ytimg.com/vi/_LSUYogSAvo/default.jpg",
-      "views": 4246,
-      "watch_time_hours": 216.92,
+      "views": 4254,
+      "watch_time_hours": 217.27,
       "avg_duration_sec": 190.0,
       "avg_view_pct": 48.6,
       "subs_gained": 12,
@@ -4356,15 +4356,15 @@
       "published": "2026-04-17",
       "url": "https://www.youtube.com/watch?v=08sdKVW_-p0",
       "thumbnail": "https://i.ytimg.com/vi/08sdKVW_-p0/default.jpg",
-      "views": 3006,
-      "watch_time_hours": 124.22,
+      "views": 3007,
+      "watch_time_hours": 124.35,
       "avg_duration_sec": 149.0,
       "avg_view_pct": 31.3,
       "subs_gained": 15,
       "likes": 99,
       "comments": 8,
       "shares": 17,
-      "engagement_rate": 4.13,
+      "engagement_rate": 4.12,
       "is_short": false
     },
     {
@@ -4424,15 +4424,15 @@
       "published": "2026-02-18",
       "url": "https://www.youtube.com/watch?v=X1E_xXXF4GM",
       "thumbnail": "https://i.ytimg.com/vi/X1E_xXXF4GM/default.jpg",
-      "views": 2081,
-      "watch_time_hours": 121.82,
+      "views": 2090,
+      "watch_time_hours": 122.12,
       "avg_duration_sec": 225.0,
-      "avg_view_pct": 11.0,
+      "avg_view_pct": 11.1,
       "subs_gained": 7,
       "likes": 56,
       "comments": 15,
       "shares": 18,
-      "engagement_rate": 4.28,
+      "engagement_rate": 4.26,
       "is_short": false
     },
     {
@@ -4492,7 +4492,7 @@
       "published": "2026-02-27",
       "url": "https://www.youtube.com/watch?v=fZSxFvdP4iE",
       "thumbnail": "https://i.ytimg.com/vi/fZSxFvdP4iE/default.jpg",
-      "views": 1737,
+      "views": 1738,
       "watch_time_hours": 55.07,
       "avg_duration_sec": 115.0,
       "avg_view_pct": 38.8,
@@ -4500,7 +4500,7 @@
       "likes": 67,
       "comments": 3,
       "shares": 14,
-      "engagement_rate": 4.84,
+      "engagement_rate": 4.83,
       "is_short": false
     },
     {
@@ -4526,7 +4526,7 @@
       "published": "2026-05-20",
       "url": "https://www.youtube.com/watch?v=zqGPqJGZOZ8",
       "thumbnail": "https://i.ytimg.com/vi/zqGPqJGZOZ8/default.jpg",
-      "views": 1699,
+      "views": 1700,
       "watch_time_hours": 5.55,
       "avg_duration_sec": 25.0,
       "avg_view_pct": 38.9,
@@ -4577,8 +4577,8 @@
       "published": "2025-12-19",
       "url": "https://www.youtube.com/watch?v=eZFdjUwKOyM",
       "thumbnail": "https://i.ytimg.com/vi/eZFdjUwKOyM/default.jpg",
-      "views": 1545,
-      "watch_time_hours": 31.7,
+      "views": 1546,
+      "watch_time_hours": 31.72,
       "avg_duration_sec": 81.0,
       "avg_view_pct": 44.5,
       "subs_gained": 4,
@@ -4628,15 +4628,15 @@
       "published": "2026-03-11",
       "url": "https://www.youtube.com/watch?v=FidPrcYsArc",
       "thumbnail": "https://i.ytimg.com/vi/FidPrcYsArc/default.jpg",
-      "views": 1041,
-      "watch_time_hours": 8.13,
-      "avg_duration_sec": 52.0,
-      "avg_view_pct": 30.0,
+      "views": 1050,
+      "watch_time_hours": 8.3,
+      "avg_duration_sec": 53.0,
+      "avg_view_pct": 30.3,
       "subs_gained": 2,
       "likes": 48,
       "comments": 2,
       "shares": 2,
-      "engagement_rate": 5.0,
+      "engagement_rate": 4.95,
       "is_short": false
     },
     {
@@ -4696,15 +4696,15 @@
       "published": "2026-03-25",
       "url": "https://www.youtube.com/watch?v=ibXdgxe1Npw",
       "thumbnail": "https://i.ytimg.com/vi/ibXdgxe1Npw/default.jpg",
-      "views": 612,
-      "watch_time_hours": 3.93,
+      "views": 616,
+      "watch_time_hours": 3.97,
       "avg_duration_sec": 42.0,
       "avg_view_pct": 51.8,
       "subs_gained": 2,
       "likes": 16,
       "comments": 1,
       "shares": 1,
-      "engagement_rate": 2.94,
+      "engagement_rate": 2.92,
       "is_short": false
     },
     {
