@@ -6,23 +6,23 @@
     },
     {
       "key": "18-24",
-      "value": 1057
+      "value": 1064
     },
     {
       "key": "25-34",
-      "value": 4400
+      "value": 4435
     },
     {
       "key": "35-44",
-      "value": 4277
+      "value": 4302
     },
     {
       "key": "45-54",
-      "value": 2449
+      "value": 2453
     },
     {
       "key": "55-64",
-      "value": 1141
+      "value": 1142
     },
     {
       "key": "65+",
@@ -32,21 +32,21 @@
   "gender": [
     {
       "key": "F",
-      "value": 4358
+      "value": 4375
     },
     {
       "key": "M",
-      "value": 7953
+      "value": 8003
     },
     {
       "key": "U",
-      "value": 1562
+      "value": 1567
     }
   ],
   "city": [
     {
       "key": "Sydney, New South Wales",
-      "value": 2819
+      "value": 2825
     },
     {
       "key": "Bendigo, Victoria",
@@ -62,7 +62,7 @@
     },
     {
       "key": "Geelong, Victoria",
-      "value": 117
+      "value": 118
     },
     {
       "key": "Pakenham, Victoria",
@@ -102,7 +102,7 @@
     },
     {
       "key": "Melbourne, Victoria",
-      "value": 3842
+      "value": 3845
     },
     {
       "key": "Gurugram, Haryana",
@@ -126,7 +126,7 @@
     },
     {
       "key": "Brisbane, Queensland",
-      "value": 641
+      "value": 642
     },
     {
       "key": "Adelaide, South Australia",
@@ -153,10 +153,6 @@
       "value": 24
     },
     {
-      "key": "Ravenhall, Victoria",
-      "value": 20
-    },
-    {
       "key": "Toowoomba, Queensland",
       "value": 21
     },
@@ -170,11 +166,11 @@
     },
     {
       "key": "Townsville, Queensland",
-      "value": 47
+      "value": 48
     },
     {
       "key": "Sunbury, Victoria",
-      "value": 24
+      "value": 25
     },
     {
       "key": "Truganina, Victoria",
@@ -203,6 +199,10 @@
     {
       "key": "Wallan, Victoria",
       "value": 21
+    },
+    {
+      "key": "Bengaluru, Karnataka",
+      "value": 56
     },
     {
       "key": "Box Hill, New South Wales",
@@ -243,11 +243,11 @@
       "value": 5
     },
     {
-      "key": "HK",
+      "key": "TW",
       "value": 10
     },
     {
-      "key": "TW",
+      "key": "HK",
       "value": 10
     },
     {
@@ -288,7 +288,7 @@
     },
     {
       "key": "GB",
-      "value": 33
+      "value": 34
     },
     {
       "key": "ID",
@@ -316,7 +316,7 @@
     },
     {
       "key": "EG",
-      "value": 10
+      "value": 9
     },
     {
       "key": "AE",
@@ -324,7 +324,7 @@
     },
     {
       "key": "IN",
-      "value": 1053
+      "value": 1108
     },
     {
       "key": "ZA",
@@ -372,7 +372,7 @@
     },
     {
       "key": "AU",
-      "value": 11851
+      "value": 11868
     },
     {
       "key": "LB",
@@ -384,7 +384,7 @@
     },
     {
       "key": "PH",
-      "value": 30
+      "value": 31
     },
     {
       "key": "NG",
@@ -400,7 +400,7 @@
     },
     {
       "key": "TR",
-      "value": 30
+      "value": 29
     },
     {
       "key": "LK",
